@@ -19,7 +19,7 @@ As for the boxes you use in order to write content to a file, these are instance
 ### Terminal
 A Terminal object is actually an instance of **ConsoleControl**, available at: https://github.com/dwmkerr/consolecontrol.
 
-The terminal tab control can be accessed via `Interface` -> `Show Terminal Tab`.
+The terminal tab control can be accessed via `Interface` (or right click) -> `Show Terminal Tab`, or `Ctrl` + `B`.
 
 ![image](https://imgur.com/Ig1lm2o.png)
 
