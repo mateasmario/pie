@@ -135,7 +135,7 @@ namespace pie
         public void SaveAs()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            
+
             saveFileDialog.InitialDirectory = @"C:\";
             saveFileDialog.Filter = "Text documents (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.ShowDialog();
@@ -154,8 +154,27 @@ namespace pie
             }
         }
 
-        // [Method] Opens a new file and replaces text and path (in openedFilePaths) for selected tab
-        public void Open()
+        // [Method] Opens a file (without openFileDialog), given just a path
+        public void Open(string fileName)
+        {
+            if (tabControl.Pages.Count == 0)
+                NewTab();
+
+            int openedTabIndex = tabControl.SelectedIndex;
+
+            string fileContent = System.IO.File.ReadAllText(fileName);
+
+            FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
+            fastColoredTextBox.Text = fileContent;
+
+            openedFilePaths[openedTabIndex] = fileName;
+            tabControl.SelectedPage.Text = fileName;
+
+            SetBuildAndRunOptions(true);
+        }
+
+        // [Method] Opens a new file and replaces text and path (in openedFilePaths) for selected tab (with openFileDialog)
+        public void OpenPath()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = @"C:\";
@@ -163,20 +182,7 @@ namespace pie
 
             if (openFileDialog.FileName != "")
             {
-                if (tabControl.Pages.Count == 0)
-                    NewTab();
-
-                int openedTabIndex = tabControl.SelectedIndex;
-
-                string fileContent = System.IO.File.ReadAllText(openFileDialog.FileName);
-
-                FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
-                fastColoredTextBox.Text = fileContent;
-
-                openedFilePaths[openedTabIndex] = openFileDialog.FileName;
-                tabControl.SelectedPage.Text = openFileDialog.FileName;
-
-                SetBuildAndRunOptions(true);
+                Open(openFileDialog.FileName);
             }
         }
 
@@ -380,7 +386,17 @@ namespace pie
         {
             buildTabControl.Hide();
 
-            NewTab();
+            string[] args = Environment.GetCommandLineArgs();
+
+            if (args.Length == 2)
+            {
+                string path = args[1];
+                Open(path);
+            }
+            else
+            {
+                NewTab();
+            }
         }
 
         // [Event] Triggered when a new tab is opened/closed
@@ -453,7 +469,7 @@ namespace pie
         // [Event] "Open" button pressed in upper menu
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Open();
+            OpenPath();
         }
 
         // [Generic Event] Used mostly for tab control and actions on opened files. Called by other event listeners
