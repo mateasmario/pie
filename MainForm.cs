@@ -18,6 +18,20 @@ namespace pie
 {
     public partial class MainForm : Form
     {
+        const int WM_CONTEXTMENU = 0x007B;
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_CONTEXTMENU)
+            {
+                m.Result = IntPtr.Zero;
+                Close();
+            }
+            else
+            {
+                base.WndProc(ref m);
+            }
+        }
+
         // [Field] Paths of the opened files
         public List<String> openedFilePaths;
         public bool darkMode;
@@ -73,6 +87,22 @@ namespace pie
                 {
                     SetBuildAndRunOptions(true);
                 }
+            }
+        }
+
+        // [Method] Closes the currently selected *terminal* tab
+        public void CloseTerminalTab()
+        {
+            KryptonPage selectedKryptonPage = buildTabControl.SelectedPage;
+
+            ConsoleControl.ConsoleControl consoleControl = (ConsoleControl.ConsoleControl)selectedKryptonPage.Controls["ConsoleControl"];
+            consoleControl.Dispose();
+
+            buildTabControl.Pages.Remove(selectedKryptonPage);
+
+            if (buildTabControl.Pages.Count == 0)
+            {
+                ShowTerminalTabControl();
             }
         }
 
@@ -150,6 +180,35 @@ namespace pie
             }
         }
 
+        public void NewTerminalTab(string process)
+        {
+            KryptonPage kryptonPage = new KryptonPage();
+
+            buildTabControl.Pages.Add(kryptonPage);
+            
+            ConsoleControl.ConsoleControl consoleControl = new ConsoleControl.ConsoleControl();
+            consoleControl.Name = "ConsoleControl";
+
+            consoleControl.Parent = kryptonPage;
+
+            if (process == "cmd.exe")
+            {
+                kryptonPage.Text = "Command Prompt";
+                kryptonPage.ImageSmall = Properties.Resources.terminal__2_;
+            }
+            else if (process == "powershell.exe")
+            {
+                kryptonPage.Text = "Powershell";
+                kryptonPage.ImageSmall = Properties.Resources.powershell__1_;
+            }
+
+            consoleControl.Dock = DockStyle.Fill;
+
+            consoleControl.StartProcess(process, "");
+
+            buildTabControl.SelectedPage = kryptonPage;
+        }
+
         public void SetBuildAndRunOptions(bool status)
         {
             if (status == true)
@@ -218,6 +277,11 @@ namespace pie
         // [Method] Opens terminal tab control
         public void ShowTerminalTabControl()
         {
+            if (buildTabControl.Pages.Count == 0)
+            {
+                NewTerminalTab("cmd.exe");
+            }
+
             if (terminalTabControlOpened == false)
             {
                 buildTabControl.Show();
@@ -315,9 +379,6 @@ namespace pie
         private void Form1_Load(object sender, EventArgs e)
         {
             buildTabControl.Hide();
-
-            terminal.StartProcess("cmd.exe", "");
-            powershell.StartProcess("powershell.exe", "");
 
             NewTab();
         }
@@ -472,11 +533,12 @@ namespace pie
         // [Event] Triggered when Form is closed
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            terminal.StopProcess();
-            terminal.Dispose();
-
-            powershell.StopProcess();
-            powershell.Dispose();
+            // Dispose terminals from opened terminal tabs
+            foreach (KryptonPage kryptonPage in buildTabControl.Pages)
+            {
+                ConsoleControl.ConsoleControl consoleControl = (ConsoleControl.ConsoleControl)kryptonPage.Controls["ConsoleControl"];
+                consoleControl.Dispose();
+            }
         }
 
         // [Event] Triggered when clicking "Show Build Tab" from the upper menu
@@ -599,6 +661,42 @@ namespace pie
         private void pullFromRemoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ExecuteGitCommand("git pull");
+        }
+
+        private void buildTabControl_TabCountChanged(object sender, EventArgs e)
+        {
+            if (buildTabControl.Pages.Count == 0)
+            {
+                kryptonContextMenuItem18.Enabled = false;
+            }
+            else
+            {
+                kryptonContextMenuItem18.Enabled = true;
+            }
+        }
+
+        // [Event] Closes the currently opened terminal (accessed via Terminal tab control
+        private void kryptonContextMenuItem18_Click(object sender, EventArgs e)
+        {
+            CloseTerminalTab();
+        }
+
+        // [Event] Opens a new cmd terminal (accessed via Terminal tab control)
+        private void kryptonContextMenuItem16_Click(object sender, EventArgs e)
+        {
+            NewTerminalTab("cmd.exe");
+        }
+
+        // [Event] Opens a new PowerShell terminal (accessed via Terminal tab control)
+        private void kryptonContextMenuItem17_Click(object sender, EventArgs e)
+        {
+            NewTerminalTab("powershell.exe");
+        }
+
+        // [Event] Close remaining processes after form gets closed
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
