@@ -17,6 +17,8 @@ pie is built in C# using Microsoft's .NET Winforms technology. The main controls
 As for the boxes you write your file content, these are instances of **FastColoredTextBox**, available at: https://github.com/PavelTorgashov/FastColoredTextBox. FastColoredTextbox isn't as advanced as professional editors such as Visual Studio Code or IntelliJ, as it doesn't provide autocomplete features or advanced code highlighting, but it is still better than having none of these features at all.
 
 ### Terminal
+A Terminal object is actually an instance of **ConsoleControl**, available at: https://github.com/dwmkerr/consolecontrol.
+
 The terminal tab control can be accessed via `Interface` -> `Show Terminal Tab`.
 
 ![image](https://imgur.com/Ig1lm2o.png)
