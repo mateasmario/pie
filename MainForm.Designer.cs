@@ -91,26 +91,17 @@
             this.kryptonContextMenuItems7 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuHeading6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             this.buildTabControl = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
-            this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.terminal = new ConsoleControl.ConsoleControl();
-            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.powershell = new ConsoleControl.ConsoleControl();
+            this.kryptonContextMenu2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
+            this.kryptonContextMenuItems9 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
+            this.kryptonContextMenuItem16 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem17 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem18 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildTabControl)).BeginInit();
             this.buildTabControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
-            this.kryptonPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
-            this.kryptonPage2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tab2
-            // 
-            // 
-            // tab1
-            // 
             // 
             // menuStrip1
             // 
@@ -530,68 +521,44 @@
             // buildTabControl
             // 
             this.buildTabControl.Bar.BarOrientation = ComponentFactory.Krypton.Toolkit.VisualOrientation.Bottom;
-            this.buildTabControl.Button.CloseButtonAction = ComponentFactory.Krypton.Navigator.CloseButtonAction.None;
-            this.buildTabControl.Button.CloseButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
             this.buildTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buildTabControl.KryptonContextMenu = this.kryptonContextMenu2;
             this.buildTabControl.Location = new System.Drawing.Point(0, 381);
             this.buildTabControl.Name = "buildTabControl";
-            this.buildTabControl.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
-            this.kryptonPage1,
-            this.kryptonPage2});
-            this.buildTabControl.SelectedIndex = 0;
             this.buildTabControl.Size = new System.Drawing.Size(1020, 214);
             this.buildTabControl.TabIndex = 3;
             this.buildTabControl.Text = "kryptonNavigator1";
+            this.buildTabControl.TabCountChanged += new System.EventHandler(this.buildTabControl_TabCountChanged);
             // 
-            // kryptonPage1
+            // kryptonContextMenu2
             // 
-            this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage1.Controls.Add(this.terminal);
-            this.kryptonPage1.Flags = 65534;
-            this.kryptonPage1.ImageSmall = global::pie.Properties.Resources.terminal__2_;
-            this.kryptonPage1.LastVisibleSet = true;
-            this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(1018, 187);
-            this.kryptonPage1.Text = "Command Prompt";
-            this.kryptonPage1.ToolTipTitle = "Page ToolTip";
-            this.kryptonPage1.UniqueName = "56A7629712BD436FB3BA0A65D6AA22D3";
+            this.kryptonContextMenu2.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
+            this.kryptonContextMenuItems9});
             // 
-            // terminal
+            // kryptonContextMenuItems9
             // 
-            this.terminal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.terminal.IsInputEnabled = true;
-            this.terminal.Location = new System.Drawing.Point(0, 0);
-            this.terminal.Name = "terminal";
-            this.terminal.SendKeyboardCommandsToProcess = false;
-            this.terminal.ShowDiagnostics = false;
-            this.terminal.Size = new System.Drawing.Size(1018, 187);
-            this.terminal.TabIndex = 0;
+            this.kryptonContextMenuItems9.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
+            this.kryptonContextMenuItem16,
+            this.kryptonContextMenuItem17,
+            this.kryptonContextMenuItem18});
             // 
-            // kryptonPage2
+            // kryptonContextMenuItem16
             // 
-            this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage2.Controls.Add(this.powershell);
-            this.kryptonPage2.Flags = 65534;
-            this.kryptonPage2.ImageSmall = global::pie.Properties.Resources.powershell__1_;
-            this.kryptonPage2.LastVisibleSet = true;
-            this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(1018, 187);
-            this.kryptonPage2.Text = "PowerShell";
-            this.kryptonPage2.ToolTipTitle = "Page ToolTip";
-            this.kryptonPage2.UniqueName = "98ACC4DD90E846BB04BE8064A623C773";
+            this.kryptonContextMenuItem16.Image = global::pie.Properties.Resources.terminal__2_;
+            this.kryptonContextMenuItem16.Text = "New Command Prompt Tab";
+            this.kryptonContextMenuItem16.Click += new System.EventHandler(this.kryptonContextMenuItem16_Click);
             // 
-            // powershell
+            // kryptonContextMenuItem17
             // 
-            this.powershell.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.powershell.IsInputEnabled = true;
-            this.powershell.Location = new System.Drawing.Point(0, 0);
-            this.powershell.Name = "powershell";
-            this.powershell.SendKeyboardCommandsToProcess = false;
-            this.powershell.ShowDiagnostics = false;
-            this.powershell.Size = new System.Drawing.Size(1018, 187);
-            this.powershell.TabIndex = 1;
+            this.kryptonContextMenuItem17.Image = global::pie.Properties.Resources.powershell__1_;
+            this.kryptonContextMenuItem17.Text = "New PowerShell Tab";
+            this.kryptonContextMenuItem17.Click += new System.EventHandler(this.kryptonContextMenuItem17_Click);
+            // 
+            // kryptonContextMenuItem18
+            // 
+            this.kryptonContextMenuItem18.Enabled = false;
+            this.kryptonContextMenuItem18.Text = "Close Current Tab";
+            this.kryptonContextMenuItem18.Click += new System.EventHandler(this.kryptonContextMenuItem18_Click);
             // 
             // MainForm
             // 
@@ -606,6 +573,7 @@
             this.Name = "MainForm";
             this.Text = "pie";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -613,10 +581,6 @@
             this.tabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.buildTabControl)).EndInit();
             this.buildTabControl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
-            this.kryptonPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
-            this.kryptonPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -664,8 +628,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem15;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading6;
         private ComponentFactory.Krypton.Navigator.KryptonNavigator buildTabControl;
-        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
-        private ConsoleControl.ConsoleControl terminal;
         private System.Windows.Forms.ToolStripMenuItem showBuildToolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem javaClassclassToolStripMenuItem;
@@ -688,8 +650,11 @@
         private System.Windows.Forms.ToolStripMenuItem remoteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pushToRemoteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pullFromRemoteToolStripMenuItem;
-        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
-        private ConsoleControl.ConsoleControl powershell;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenu kryptonContextMenu2;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems9;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem16;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem17;
+        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem18;
     }
 }
 
