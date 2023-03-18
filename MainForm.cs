@@ -668,6 +668,7 @@ namespace pie
             if (buildTabControl.Pages.Count == 0)
             {
                 kryptonContextMenuItem18.Enabled = false;
+                ShowTerminalTabControl();
             }
             else
             {
