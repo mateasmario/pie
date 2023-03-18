@@ -1,6 +1,8 @@
 # pie
 Lightweight text editor with some third-party features, capable of replacing Notepad.
 
+![image](https://imgur.com/7PmVmWT.png)
+
 ### Short Introduction
 pie is a combination between a text-editor (like Notepad) and an over-simplified IDE, that allows super-fast modification of code files (or other types of files), whenever you don't feel the need to wait for a big IDE to open.
 
@@ -24,3 +26,7 @@ The `Run` tab allows you to choose what type of file to run (either interpret a 
 Finally, the `Git` tab allows you to run common git commands such as `git add .`, `git commit -m ""` (with a special dialogue that allows you to write a custom commit message), and so on.
 
 pie **doesn't** provide any compilers or interpreters. It tries to run the default commands (`javac`, `java`, `gcc`, `py`, ...), meaning that you already need to have these tools installed on your system. Thus meaning, you won't need to worry that the IDE's build tools is going to wrongly mix up with your already-installed tools.
+
+### Code highlights
+In order to enable code highlight features, right click in your text editor and select the preferred language from the `Code Formatting` category.
+
