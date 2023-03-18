@@ -1,0 +1,546 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nevron.Nov.Host.WinBase</name>
+    </assembly>
+    <members>
+        <member name="T:Nevron.Nov.Windows.NHostWinBaseLoadAssemblyType">
+            <summary>
+            Dummy type used to explicitly load the Nevron.Nov.WinHost.Base assembly
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Windows.NHostWinBaseLoadAssemblyType.Dispose">
+            <summary>
+            Disposes this object.
+            </summary>
+        </member>
+        <member name="T:Nevron.Nov.Windows.OLE.NOleDataObjectProvider">
+            <summary>
+            Represents an OLE IDataObject provider, the purpose of which is to provide an OLE IDataObject interface implementation that is backed by an NDataObject.
+            An instance of this class is adapting the NDataObject passed for Windows native Drad-And-Drop requests and Clipboard Set operations.
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.#ctor(Nevron.Nov.UI.NDataObject)">
+            <summary>
+            Initializer constructor
+            </summary>
+            <param name="dataObject"></param>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.DAdvise(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.ADVF,System.Runtime.InteropServices.ComTypes.IAdviseSink,System.Int32@)">
+            <summary>
+            
+            </summary>
+            <param name="pFormatetc"></param>
+            <param name="advf"></param>
+            <param name="adviseSink"></param>
+            <param name="connection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.DUnadvise(System.Int32)">
+            <summary>
+            Destroys a notification connection that had been previously established.
+            </summary>
+            <param name="connection"></param>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.EnumDAdvise(System.Runtime.InteropServices.ComTypes.IEnumSTATDATA@)">
+            <summary>
+            
+            </summary>
+            <param name="enumAdvise"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.EnumFormatEtc(System.Runtime.InteropServices.ComTypes.DATADIR)">
+            <summary>
+            Creates an object for enumerating the FORMATETC structures for a data object
+            </summary>
+            <param name="direction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.GetCanonicalFormatEtc(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.FORMATETC@)">
+            <summary>
+            Provides a standard FORMATETC structure that is logically equivalent to a more complex structure. 
+            </summary>
+            <param name="formaetctIn"></param>
+            <param name="formatetcOut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.GetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)">
+            <summary>
+            Obtains data from a source data object. 
+            This method, which is called by a data consumer, renders the data described in the specified FORMATETC structure and transfers it through the specified STGMEDIUM structure. 
+            The caller then assumes responsibility for releasing the STGMEDIUM.
+            </summary>
+            <param name="formatetc"></param>
+            <param name="medium"></param>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.GetDataHere(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)">
+            <summary>
+            Obtains data from a source data object. This method, which is called by a data consumer, 
+            differs from the GetData method in that the caller must allocate and free the specified storage medium.
+            </summary>
+            <param name="formatetc"></param>
+            <param name="medium"></param>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.QueryGetData(System.Runtime.InteropServices.ComTypes.FORMATETC@)">
+            <summary>
+            Determines whether the data object is capable of rendering the data described in the FORMATETC structure. 
+            Objects	attempting a paste or drop operation can call this method before calling GetData to get an indication of whether the operation may be successful.
+            </summary>
+            <param name="formatetc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.SetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@,System.Boolean)">
+            <summary>
+            Transfers data to the object that implements this method. This method is called by an object that contains a data source.
+            </summary>
+            <param name="formatIn"></param>
+            <param name="medium"></param>
+            <param name="release"></param>
+        </member>
+        <member name="T:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.NOleFormatIterator">
+            <summary>
+            Represents an OLE format iterator
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.NOleFormatIterator.#ctor(Nevron.Nov.UI.NDataObject)">
+            <summary>
+            Initializer constructor.
+            </summary>
+            <param name="dataObject"></param>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.NOleFormatIterator.#ctor(Nevron.Nov.Windows.OLE.NOleDataObjectProvider.NOleFormatIterator)">
+            <summary>
+            Copy constructor.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.NOleFormatIterator.Clone(System.Runtime.InteropServices.ComTypes.IEnumFORMATETC@)">
+            <summary>
+            Creates a new iterator that contains the same enumeration state as the current iterator.
+            </summary>
+            <param name="ppenum">When this method returns, contains a reference to the newly created iterator. This parameter is passed uninitialized.</param>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.NOleFormatIterator.Next(System.Int32,System.Runtime.InteropServices.ComTypes.FORMATETC[],System.Int32[])">
+            <summary>
+            Retrieves a specified number of items in the enumeration sequence.
+            </summary>
+            <param name="count">The number of FORMATETC referencesto return in rgelt</param>
+            <param name="rgelt">When this method returns, contains a reference to the enumerated FORMATETC references. This parameter is passed uninitialized.</param>
+            <param name="fetched">When this method returns, contains a reference to the actual number of referencesenumerated in rgelt. This parameter is passed uninitialized.</param>
+            <returns>S_OK if the pceltFetched parameter equals the celt parameter; otherwise, S_FALSE.</returns>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.NOleFormatIterator.Reset">
+            <summary>
+            Resets the enumeration sequence to the beginning
+            </summary>
+            <returns>An HRESULT with the value S_OK.</returns>
+        </member>
+        <member name="M:Nevron.Nov.Windows.OLE.NOleDataObjectProvider.NOleFormatIterator.Skip(System.Int32)">
+            <summary>
+            Skips a specified number of items in the enumeration sequence.
+            </summary>
+            <param name="count">The number of elements to skip in the enumeration.</param>
+            <returns>S_OK if the number of elements skipped equals the celt parameter; otherwise, S_FALSE</returns>
+        </member>
+        <member name="T:Nevron.Nov.Windows.NMultimediaTimer">
+            <summary>
+            Represents a multimedia timer
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Windows.NMultimediaTimer.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Windows.NMultimediaTimer.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Windows.NMultimediaTimer.Interval">
+            <summary>
+            Gets / sets the interval
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Windows.NMultimediaTimer.Resolution">
+            <summary>
+            Gets or sets the resolution
+            </summary>
+            <remarks>
+            Note minimum resolution is 0, meaning highest possible resolution.
+            </remarks>
+        </member>
+        <member name="P:Nevron.Nov.Windows.NMultimediaTimer.IsRunning">
+            <summary>
+            Gets whether the timer is running
+            </summary>
+        </member>
+        <member name="E:Nevron.Nov.Windows.NMultimediaTimer.Tick">
+            <summary>
+            The timer event
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Windows.NMultimediaTimer.Start">
+            <summary>
+            Starts the timer
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Windows.NMultimediaTimer.Stop">
+            <summary>
+            Stops the timer
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Windows.NMultimediaTimer.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nevron.Nov.Windows.POINTS">
+            <summary>
+            A point with short coordinates.
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Windows.POINTS.#ctor(System.Int16,System.Int16)">
+            <summary>
+            Initializing constructor.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:Nevron.Nov.Windows.POINTS.#ctor(Nevron.Nov.Graphics.NPoint)">
+            <summary>
+            Initializing constructor.
+            </summary>
+            <param name="pt"></param>
+        </member>
+        <member name="F:Nevron.Nov.Windows.POINTS.X">
+            <summary>
+            X coordinate.
+            </summary>
+        </member>
+        <member name="F:Nevron.Nov.Windows.POINTS.Y">
+            <summary>
+            Y coordinate.
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Internal.rpth.ToString">
+            <summary>
+            Provides a string version of this object.
+            </summary>
+            <returns>
+            A string version of this object.
+            </returns>
+        </member>
+        <member name="M:Nevron.Nov.Internal.EWth.ToString">
+            <summary>
+            Returns a string that represents this NFileDialogCustomPlace instance.
+            </summary>
+            <returns>
+            A string that represents this NFileDialogCustomPlace instance.
+            </returns>
+        </member>
+        <member name="M:Nevron.Nov.Internal.hbdG.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Internal.xSdI.IntegratedSecurity">
+            <summary>
+            Gets/Sets a boolean value that indicates whether UserId and Password are specified in the connection(when false) 
+            or whether the current Windows account credentials are used for authentication (when true).
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Internal.xSdI.UserID">
+            <summary>
+            Gets or sets the user ID to be used when connecting to SQL Server.
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Internal.xSdI.Password">
+            <summary>
+            Gets or sets the password for the SQL Server account.
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Internal.xSdI.DataSource">
+            <summary>
+            Gets or sets the name or network address of the instance of SQL Server to connect to.
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Internal.xSdI.InitialCatalog">
+            <summary>
+            Gets or sets the name of the database associated with the connection.
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Internal.ntdI`1.IsOpen">
+            <summary>
+            Checks whether the connection is opened.
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Internal.ntdI`1.GetSchema(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="ptdI"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Internal.ntdI`1.Close">
+            <summary>
+            Closes the connection.
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Internal.KfEI.Equals(System.Object)">
+            <summary>
+            Overriden to check whether two cursor definititions are equal or not
+            </summary>
+            <param name="MfEI"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Internal.KfEI.GetHashCode">
+            <summary>
+            Overriden because equal was overriden
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Internal.UUAI.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Internal.lIbI.Dispose">
+            <summary>
+            Disposes the internally created bitmap
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Internal.xGEI.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Internal.YSbI.IsReadOnly">
+            <summary>
+            Returns true
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Internal.YSbI.SetData(Nevron.Nov.UI.NDataFormat,System.Object)">
+            <summary>
+            Throws an invalid operation exception
+            </summary>
+            <param name="btbI"></param>
+            <param name="CtbI"></param>
+        </member>
+        <member name="M:Nevron.Nov.Internal.YSbI.ContainsData(Nevron.Nov.UI.NDataFormat)">
+            <summary>
+            Queries whether data can be obtained in the specified format.
+            </summary>
+            <param name="dtbI"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Internal.YSbI.GetFormats">
+            <summary>
+            Gets a list of the formats in which data can be obtained.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Internal.YSbI.GetData(Nevron.Nov.UI.NDataFormat)">
+            <summary>
+            Gets a data object in the specified format. 
+            Returns null, if data in the specified format does not exists or its retrieval failed.  
+            Returns a format specific object instance in case the data was successfully retrived.
+            </summary>
+            <param name="EtbI"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Nevron.Nov.Internal.WIKI.ErrorCode">
+            <summary>
+            Gets the HRESULT of the error.
+            </summary>
+        </member>
+        <member name="T:Nevron.Nov.GraphicsGL.NGLColorFormat">
+            <summary>Defines the ColorFormat component of a GraphicsMode.</summary>
+            <remarks>
+            <para>A ColorFormat contains Red, Green, Blue and Alpha components that descibe
+            the allocated bits per pixel for the corresponding color.</para>
+            </remarks>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.#ctor(System.Int32)">
+            <summary>
+            Constructs a new ColorFormat with the specified aggregate bits per pixel.
+            </summary>
+            <param name="bpp">The bits per pixel sum for the Red, Green, Blue and Alpha color channels.</param>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructs a new ColorFormat with the specified bits per pixel for
+            the Red, Green, Blue and Alpha color channels.
+            </summary>
+            <param name="red">Bits per pixel for the Red color channel.</param>
+            <param name="green">Bits per pixel for the Green color channel.</param>
+            <param name="blue">Bits per pixel for the Blue color channel.</param>
+            <param name="alpha">Bits per pixel for the Alpha color channel.</param>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A System.Int32 with the hash code of this instance.</returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that describes this instance.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that describes this instance.</returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.op_Implicit(System.Int32)~Nevron.Nov.GraphicsGL.NGLColorFormat">
+            <summary>
+            Converts the specified bpp into a new ColorFormat.
+            </summary>
+            <param name="bpp">The bits per pixel to convert.</param>
+            <returns>A ColorFormat with the specified bits per pixel.</returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.CompareTo(Nevron.Nov.GraphicsGL.NGLColorFormat)">
+            <summary>
+            Compares two instances.
+            </summary>
+            <param name="other">The other instance.</param>
+            <returns>
+            Zero if this instance is equal to other;
+            a positive value  if this instance is greater than other;
+            a negative value otherwise.
+            </returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.Equals(Nevron.Nov.GraphicsGL.NGLColorFormat)">
+            <summary>
+            Compares whether this ColorFormat structure is equal to the specified ColorFormat.
+            </summary>
+            <param name="other">The ColorFormat structure to compare to.</param>
+            <returns>True if both ColorFormat structures contain the same components; false otherwise.</returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="obj">Another object to compare to.</param>
+            <returns>True if this instance is equal to obj; false otherwise.</returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.op_Equality(Nevron.Nov.GraphicsGL.NGLColorFormat,Nevron.Nov.GraphicsGL.NGLColorFormat)">
+            <summary>
+            Compares two instances for equality.
+            </summary>
+            <param name="left">The left operand.</param>
+            <param name="right">The right operand.</param>
+            <returns>True if both instances are equal; false otherwise.</returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.op_Inequality(Nevron.Nov.GraphicsGL.NGLColorFormat,Nevron.Nov.GraphicsGL.NGLColorFormat)">
+            <summary>
+            Compares two instances for inequality.
+            </summary>
+            <param name="left">The left operand.</param>
+            <param name="right">The right operand.</param>
+            <returns>True if both instances are not equal; false otherwise.</returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.op_GreaterThan(Nevron.Nov.GraphicsGL.NGLColorFormat,Nevron.Nov.GraphicsGL.NGLColorFormat)">
+            <summary>
+            Compares two instances for inequality.
+            </summary>
+            <param name="left">The left operand.</param>
+            <param name="right">The right operand.</param>
+            <returns>True if left is greater than right; false otherwise.</returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.op_GreaterThanOrEqual(Nevron.Nov.GraphicsGL.NGLColorFormat,Nevron.Nov.GraphicsGL.NGLColorFormat)">
+            <summary>
+            Compares two instances for inequality.
+            </summary>
+            <param name="left">The left operand.</param>
+            <param name="right">The right operand.</param>
+            <returns>True if left is greater than or equal to right; false otherwise.</returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.op_LessThan(Nevron.Nov.GraphicsGL.NGLColorFormat,Nevron.Nov.GraphicsGL.NGLColorFormat)">
+            <summary>
+            Compares two instances for inequality.
+            </summary>
+            <param name="left">The left operand.</param>
+            <param name="right">The right operand.</param>
+            <returns>True if left is less than right; false otherwise.</returns>
+        </member>
+        <member name="M:Nevron.Nov.GraphicsGL.NGLColorFormat.op_LessThanOrEqual(Nevron.Nov.GraphicsGL.NGLColorFormat,Nevron.Nov.GraphicsGL.NGLColorFormat)">
+            <summary>
+            Compares two instances for inequality.
+            </summary>
+            <param name="left">The left operand.</param>
+            <param name="right">The right operand.</param>
+            <returns>True if left is less than or equal to right; false otherwise.</returns>
+        </member>
+        <member name="T:Nevron.Nov.Data.NCLRDataTableDataTableAdapter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.RowCount">
+            <summary>
+            Gets the count of rows in the data table
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.FieldCount">
+            <summary>
+            Gets the count of fields in the data table
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.CanAddRow">
+            <summary>
+            Determines whether the data table supports the AddRow operation
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.CanInsertRow">
+            <summary>
+            Determines whether the data table supports the InsertRow operation
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.CanRemoveRow">
+            <summary>
+            Determines whether the data table supports the RemoveRow operation
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.CanAddField">
+            <summary>
+            Determines whether the data table supports the AddField operation
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.CanInsertField">
+            <summary>
+            Determines whether the data table supports the InsertField operation
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.CanRemoveField">
+            <summary>
+            Determines whether the data table supports the RemoveField operation
+            </summary>
+        </member>
+        <member name="P:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.CanRenameField">
+            <summary>
+            Determines whether the data table supports the SetFieldName operation
+            </summary>
+        </member>
+        <member name="M:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.GetValue(System.Int32,System.Int32)">
+            <summary>
+            Gets the value for a given [row:field]
+            </summary>
+            <param name="row"></param>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.GetFieldIndex(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="fieldName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nevron.Nov.Data.NCLRDataTableDataTableAdapter.GetFieldInfo(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
