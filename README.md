@@ -16,8 +16,19 @@ pie is built in C# using Microsoft's .NET Winforms technology. The main controls
 ### Simple, but powerful code editor
 As for the boxes you write your file content, these are instances of **FastColoredTextBox**, available at: https://github.com/PavelTorgashov/FastColoredTextBox. FastColoredTextbox isn't as advanced as professional editors such as Visual Studio Code or IntelliJ, as it doesn't provide autocomplete features or advanced code highlighting, but it is still better than having none of these features at all.
 
+### Terminal
+The terminal tab control can be accessed via `Interface` -> `Show Terminal Tab`.
+
+![image](https://imgur.com/Ig1lm2o.png)
+
+Right click the tab control (either a tab or the empty slots next to the tab) to open the context menu.
+
+![image](https://imgur.com/rhu7qVB.png)
+
 ### Build, Run and Git functionalities
-You can use both the terminal (`Interface` -> `Show Terminal Tab`) or the integrated commands (from `Build`, `Run` and `Git` tabs in the upper menu), in order to run some common commands. 
+You can use both the terminal or the integrated commands (from `Build`, `Run` and `Git` tabs in the upper menu), in order to run some common commands.
+
+![image](https://imgur.com/zYc0plN.png)
 
 Through the `Build` tab, you are able to compile Java or C source files. 
 
@@ -25,8 +36,11 @@ The `Run` tab allows you to choose what type of file to run (either interpret a 
 
 Finally, the `Git` tab allows you to run common git commands such as `git add .`, `git commit -m ""` (with a special dialogue that allows you to write a custom commit message), and so on.
 
+![image](https://imgur.com/X8G3Eld.png)
+
 pie **doesn't** provide any compilers or interpreters. It tries to run the default commands (`javac`, `java`, `gcc`, `py`, ...), meaning that you already need to have these tools installed on your system. Thus meaning, you won't need to worry that the IDE's build tools is going to wrongly mix up with your already-installed tools.
 
 ### Code highlights
 In order to enable code highlight features, right click in your text editor and select the preferred language from the `Code Formatting` category.
 
+![image](https://imgur.com/DcM92xJ.png)
