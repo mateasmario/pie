@@ -1,7 +1,6 @@
 ﻿using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using FastColoredTextBoxNS;
-using Manina.Windows.Forms;
 using pie.Services;
 using System;
 using System.Collections.Generic;

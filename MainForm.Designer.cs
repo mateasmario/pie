@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.tab2 = new Manina.Windows.Forms.Tab();
-            this.tab1 = new Manina.Windows.Forms.Tab();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,17 +108,9 @@
             // 
             // tab2
             // 
-            this.tab2.Location = new System.Drawing.Point(0, 24);
-            this.tab2.Name = "tab2";
-            this.tab2.Size = new System.Drawing.Size(1020, 548);
-            this.tab2.Text = "tab2";
             // 
             // tab1
             // 
-            this.tab1.Location = new System.Drawing.Point(0, 24);
-            this.tab1.Name = "tab1";
-            this.tab1.Size = new System.Drawing.Size(1020, 548);
-            this.tab1.Text = "tab1";
             // 
             // menuStrip1
             // 
@@ -633,8 +623,6 @@
         }
 
         #endregion
-        private Manina.Windows.Forms.Tab tab2;
-        private Manina.Windows.Forms.Tab tab1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private ComponentFactory.Krypton.Docking.KryptonDockableNavigator tabControl;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenu kryptonContextMenu1;
