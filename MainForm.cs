@@ -96,7 +96,7 @@ namespace pie
             KryptonPage selectedKryptonPage = buildTabControl.SelectedPage;
 
             ConsoleControl.ConsoleControl consoleControl = (ConsoleControl.ConsoleControl)selectedKryptonPage.Controls["ConsoleControl"];
-            consoleControl.Dispose();
+            consoleControl.StopProcess();
 
             buildTabControl.Pages.Remove(selectedKryptonPage);
 
@@ -537,7 +537,7 @@ namespace pie
             foreach (KryptonPage kryptonPage in buildTabControl.Pages)
             {
                 ConsoleControl.ConsoleControl consoleControl = (ConsoleControl.ConsoleControl)kryptonPage.Controls["ConsoleControl"];
-                consoleControl.Dispose();
+                consoleControl.StopProcess();
             }
         }
 
