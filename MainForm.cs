@@ -11,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -250,6 +251,9 @@ namespace pie
         }
 
         // [Method] Turns Dark Mode on/off
+        // Additional: Instead of just modifying the existent FCTB's background color, it completely removes it and adds a new one
+        // Additional: in case the code had a language format (e.g. CSharp). Some of the colors may be kept same as in the light
+        // Additional: mode and may not be visible in the dark mode.
         public void ToggleDarkMode()
         {
             if (darkMode == false)
@@ -259,8 +263,24 @@ namespace pie
                 foreach (KryptonPage kryptonPage in tabControl.Pages)
                 {
                     FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)kryptonPage.Controls["FastColoredTextBox"];
+                    string content = fastColoredTextBox.Text;
+                    Language language = fastColoredTextBox.Language;
+
+                    kryptonPage.Controls.Remove(fastColoredTextBox);
+
+                    fastColoredTextBox = new FastColoredTextBox();
+                    fastColoredTextBox.Name = "FastColoredTextBox";
+                    fastColoredTextBox.KeyDown += keyDownEvents;
+                    fastColoredTextBox.AutoCompleteBrackets = true;
+
+                    kryptonPage.Controls.Add(fastColoredTextBox);
+                    fastColoredTextBox.Dock = DockStyle.Fill;
+
                     fastColoredTextBox.BackColor = Color.FromArgb(23, 23, 23);
                     fastColoredTextBox.ForeColor = Color.White;
+
+                    fastColoredTextBox.Language = language;
+                    fastColoredTextBox.Text = content;
                 }
 
                 darkModeToolStripMenuItem.Checked = true;
@@ -272,8 +292,25 @@ namespace pie
                 foreach (KryptonPage kryptonPage in tabControl.Pages)
                 {
                     FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)kryptonPage.Controls["FastColoredTextBox"];
+
+                    string content = fastColoredTextBox.Text;
+                    Language language = fastColoredTextBox.Language;
+
+                    kryptonPage.Controls.Remove(fastColoredTextBox);
+
+                    fastColoredTextBox = new FastColoredTextBox();
+                    fastColoredTextBox.Name = "FastColoredTextBox";
+                    fastColoredTextBox.KeyDown += keyDownEvents;
+                    fastColoredTextBox.AutoCompleteBrackets = true;
+
+                    kryptonPage.Controls.Add(fastColoredTextBox);
+                    fastColoredTextBox.Dock = DockStyle.Fill;
+
                     fastColoredTextBox.BackColor = Color.White;
                     fastColoredTextBox.ForeColor = Color.Black;
+
+                    fastColoredTextBox.Language = language;
+                    fastColoredTextBox.Text = content;
                 }
 
                 darkModeToolStripMenuItem.Checked = false;
