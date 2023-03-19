@@ -19,6 +19,8 @@ namespace pie
 {
     public partial class MainForm : Form
     {
+        public string[] Args;
+
         const int WM_CONTEXTMENU = 0x007B;
         protected override void WndProc(ref Message m)
         {
@@ -32,6 +34,19 @@ namespace pie
                 base.WndProc(ref m);
             }
         }
+
+        public delegate void ProcessParametersDelegate(string[] args);
+
+        public void ProcessParameters(string[] args)
+        {
+            NewTab();
+
+            if (args.Length == 2)
+            {
+                Open(args[1].ToString());
+            }
+        }
+
 
         // [Field] Paths of the opened files
         public List<String> openedFilePaths;
