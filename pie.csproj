@@ -85,10 +85,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\CustomFastColoredTextBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Classes\CustomSyntaxHighlighter.cs" />
     <Compile Include="GitCommitMessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,9 +101,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ParsingService.cs" />
-    <EmbeddedResource Include="Classes\CustomFastColoredTextBox.resx">
-      <DependentUpon>CustomFastColoredTextBox.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GitCommitMessageForm.resx">
       <DependentUpon>GitCommitMessageForm.cs</DependentUpon>
     </EmbeddedResource>
