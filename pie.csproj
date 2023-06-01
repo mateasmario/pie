@@ -70,6 +70,7 @@
     <Reference Include="Nevron.Nov.Schedule, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="Nevron.Nov.Text, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="Nevron.Nov.WinFormControls, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -84,6 +85,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CustomFastColoredTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Classes\CustomSyntaxHighlighter.cs" />
     <Compile Include="GitCommitMessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +105,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ParsingService.cs" />
+    <EmbeddedResource Include="Classes\CustomFastColoredTextBox.resx">
+      <DependentUpon>CustomFastColoredTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GitCommitMessageForm.resx">
       <DependentUpon>GitCommitMessageForm.cs</DependentUpon>
     </EmbeddedResource>

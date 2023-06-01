@@ -27,3 +27,4 @@ E:\dev\winforms\pie\obj\Debug\pie.csproj.CoreCompileInputs.cache
 E:\dev\winforms\pie\obj\Debug\pie.csproj.CopyComplete
 E:\dev\winforms\pie\obj\Debug\pie.exe
 E:\dev\winforms\pie\obj\Debug\pie.pdb
+E:\dev\winforms\pie\obj\Debug\pie.Classes.CustomFastColoredTextBox.resources

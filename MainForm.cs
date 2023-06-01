@@ -1,6 +1,7 @@
 ﻿using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using FastColoredTextBoxNS;
+using pie.Classes;
 using pie.Services;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace pie
             if (m.Msg == WM_CONTEXTMENU)
             {
                 m.Result = IntPtr.Zero;
-                Close();
+                //Close();
             }
             else
             {
@@ -69,7 +70,7 @@ namespace pie
             KryptonPage kryptonPage = new KryptonPage();
             kryptonPage.Text = "Untitled";
 
-            FastColoredTextBox fastColoredTextBox = new FastColoredTextBox();
+            CustomFastColoredTextBox fastColoredTextBox = new CustomFastColoredTextBox();
             fastColoredTextBox.Name = "FastColoredTextBox";
             fastColoredTextBox.KeyDown += keyDownEvents;
             fastColoredTextBox.AutoCompleteBrackets = true;
@@ -136,7 +137,7 @@ namespace pie
                 string chosenPath = openedFilePaths[tabControl.SelectedIndex];
 
                 TextWriter txt = new StreamWriter(chosenPath);
-                FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
+                CustomFastColoredTextBox fastColoredTextBox = (CustomFastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
                 txt.Write(fastColoredTextBox.Text);
                 txt.Close();
 
@@ -161,7 +162,7 @@ namespace pie
                 String chosenPath = saveFileDialog.FileName;
 
                 TextWriter txt = new StreamWriter(chosenPath);
-                FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
+                CustomFastColoredTextBox fastColoredTextBox = (CustomFastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
                 txt.Write(fastColoredTextBox.Text);
                 txt.Close();
 
@@ -180,7 +181,7 @@ namespace pie
 
             string fileContent = System.IO.File.ReadAllText(fileName);
 
-            FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
+            CustomFastColoredTextBox fastColoredTextBox = (CustomFastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
             fastColoredTextBox.Text = fileContent;
 
             openedFilePaths[openedTabIndex] = fileName;
@@ -277,13 +278,13 @@ namespace pie
                 
                 foreach (KryptonPage kryptonPage in tabControl.Pages)
                 {
-                    FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)kryptonPage.Controls["FastColoredTextBox"];
+                    CustomFastColoredTextBox fastColoredTextBox = (CustomFastColoredTextBox)kryptonPage.Controls["FastColoredTextBox"];
                     string content = fastColoredTextBox.Text;
                     Language language = fastColoredTextBox.Language;
 
                     kryptonPage.Controls.Remove(fastColoredTextBox);
 
-                    fastColoredTextBox = new FastColoredTextBox();
+                    fastColoredTextBox = new CustomFastColoredTextBox();
                     fastColoredTextBox.Name = "FastColoredTextBox";
                     fastColoredTextBox.KeyDown += keyDownEvents;
                     fastColoredTextBox.AutoCompleteBrackets = true;
@@ -306,14 +307,14 @@ namespace pie
 
                 foreach (KryptonPage kryptonPage in tabControl.Pages)
                 {
-                    FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)kryptonPage.Controls["FastColoredTextBox"];
+                    CustomFastColoredTextBox fastColoredTextBox = (CustomFastColoredTextBox)kryptonPage.Controls["FastColoredTextBox"];
 
                     string content = fastColoredTextBox.Text;
                     Language language = fastColoredTextBox.Language;
 
                     kryptonPage.Controls.Remove(fastColoredTextBox);
 
-                    fastColoredTextBox = new FastColoredTextBox();
+                    fastColoredTextBox = new CustomFastColoredTextBox();
                     fastColoredTextBox.Name = "FastColoredTextBox";
                     fastColoredTextBox.KeyDown += keyDownEvents;
                     fastColoredTextBox.AutoCompleteBrackets = true;
@@ -556,8 +557,8 @@ namespace pie
         private void codeFormatting(object sender, EventArgs e)
         {
             KryptonContextMenuItem kryptonContextMenuItem = (KryptonContextMenuItem)sender;
-            FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
-
+            CustomFastColoredTextBox fastColoredTextBox = (CustomFastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
+            
             string content = fastColoredTextBox.Text;
 
             switch(kryptonContextMenuItem.Text)
