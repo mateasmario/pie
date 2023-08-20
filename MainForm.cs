@@ -83,8 +83,14 @@ namespace pie
                 fastColoredTextBox.ForeColor = Color.White;
             }
 
-            tabControl.Pages.Add(kryptonPage);
+            int index = 0;
 
+            if (tabControl.Pages.Count > 1)
+            {
+                index = Globals.getLastSelectedTabIndex() + 1;
+            }
+
+            tabControl.Pages.Insert(index, kryptonPage);
             tabControl.SelectedPage = kryptonPage;
 
             openedFilePaths.Add(null);
@@ -93,16 +99,29 @@ namespace pie
         // [Method] Closes the currently selected tab
         public void CloseTab()
         {
-            if (tabControl.Pages.Count > 0)
-            {
-                KryptonPage selectedKryptonPage = tabControl.SelectedPage;
-                openedFilePaths.RemoveAt(tabControl.SelectedIndex);
-                tabControl.Pages.Remove(selectedKryptonPage);
+            KryptonPage selectedKryptonPage = tabControl.SelectedPage;
+            openedFilePaths.RemoveAt(tabControl.SelectedIndex);
+            tabControl.Pages.Remove(selectedKryptonPage);
 
-                if (tabControl.SelectedIndex >= 0 && openedFilePaths[tabControl.SelectedIndex] != null)
+            if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < openedFilePaths.Count && openedFilePaths[tabControl.SelectedIndex] != null)
+            {
+                SetBuildAndRunOptions(true);
+            }
+
+            if (tabControl.Pages.Count > 1)
+            {
+                tabControl.SelectedIndex = Globals.getLastSelectedTabIndex() - 1;
+
+                if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
                 {
-                    SetBuildAndRunOptions(true);
+                    tabControl.SelectedIndex--;
                 }
+
+                Globals.setLastSelectedTabIndex(tabControl.SelectedIndex);
+            }
+            else
+            {
+                NewTab();
             }
         }
 
@@ -646,6 +665,11 @@ namespace pie
         // [Event] Triggered when a tab is changed
         private void tabControl_SelectedPageChanged(object sender, EventArgs e)
         {
+            if (tabControl.SelectedIndex != tabControl.Pages.Count-1)
+            {
+                Globals.setLastSelectedTabIndex(tabControl.SelectedIndex);
+            }
+
             if (tabControl.Pages.Count == openedFilePaths.Count)
             {
                 if (tabControl.SelectedIndex == -1 || openedFilePaths[tabControl.SelectedIndex] == null)
@@ -766,6 +790,24 @@ namespace pie
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        // [Event] Triggers when user clicks the tab control
+        private void tabControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && tabControl.SelectedIndex == tabControl.Pages.Count-1)
+            {
+                int index = Globals.getLastSelectedTabIndex();
+                tabControl.SelectedIndex = index;
+            }
+        }
+
+        private void tabControl_Click(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
+            {
+                NewTab();
+            }
         }
     }
 }

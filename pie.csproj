@@ -135,6 +135,10 @@
     <Content Include="Console.ico" />
     <Content Include="icons8-pie-64.ico" />
     <Content Include="pie %284%29.ico" />
+    <None Include="Resources\add %281%29.png" />
+    <None Include="Resources\plus %282%29.png" />
+    <None Include="Resources\plus %281%29.png" />
+    <None Include="Resources\plus.png" />
     <None Include="Resources\powershell %281%29.png" />
     <None Include="Resources\merge.png" />
     <None Include="Resources\running.png" />

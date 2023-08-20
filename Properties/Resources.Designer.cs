@@ -103,6 +103,16 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add__1_ {
+            get {
+                object obj = ResourceManager.GetObject("add (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap c_sharp {
             get {
                 object obj = ResourceManager.GetObject("c-sharp", resourceCulture);
@@ -216,6 +226,36 @@ namespace pie.Properties {
         internal static System.Drawing.Bitmap play_button__1_ {
             get {
                 object obj = ResourceManager.GetObject("play-button (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap plus {
+            get {
+                object obj = ResourceManager.GetObject("plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap plus__1_ {
+            get {
+                object obj = ResourceManager.GetObject("plus (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap plus__2_ {
+            get {
+                object obj = ResourceManager.GetObject("plus (2)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
