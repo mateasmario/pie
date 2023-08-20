@@ -99,29 +99,32 @@ namespace pie
         // [Method] Closes the currently selected tab
         public void CloseTab()
         {
-            KryptonPage selectedKryptonPage = tabControl.SelectedPage;
-            openedFilePaths.RemoveAt(tabControl.SelectedIndex);
-            tabControl.Pages.Remove(selectedKryptonPage);
-
-            if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < openedFilePaths.Count && openedFilePaths[tabControl.SelectedIndex] != null)
+            if (tabControl.SelectedIndex != tabControl.Pages.Count - 1)
             {
-                SetBuildAndRunOptions(true);
-            }
+                KryptonPage selectedKryptonPage = tabControl.SelectedPage;
+                openedFilePaths.RemoveAt(tabControl.SelectedIndex);
+                tabControl.Pages.Remove(selectedKryptonPage);
 
-            if (tabControl.Pages.Count > 1)
-            {
-                tabControl.SelectedIndex = Globals.getLastSelectedTabIndex() - 1;
-
-                if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
+                if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < openedFilePaths.Count && openedFilePaths[tabControl.SelectedIndex] != null)
                 {
-                    tabControl.SelectedIndex--;
+                    SetBuildAndRunOptions(true);
                 }
 
-                Globals.setLastSelectedTabIndex(tabControl.SelectedIndex);
-            }
-            else
-            {
-                NewTab();
+                if (tabControl.Pages.Count > 1)
+                {
+                    tabControl.SelectedIndex = Globals.getLastSelectedTabIndex() - 1;
+
+                    if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
+                    {
+                        tabControl.SelectedIndex--;
+                    }
+
+                    Globals.setLastSelectedTabIndex(tabControl.SelectedIndex);
+                }
+                else
+                {
+                    NewTab();
+                }
             }
         }
 
@@ -795,10 +798,13 @@ namespace pie
         // [Event] Triggers when user clicks the tab control
         private void tabControl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && tabControl.SelectedIndex == tabControl.Pages.Count-1)
+            if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
             {
-                int index = Globals.getLastSelectedTabIndex();
-                tabControl.SelectedIndex = index;
+                if (e.Button == MouseButtons.Right)
+                {
+                    int index = Globals.getLastSelectedTabIndex();
+                    tabControl.SelectedIndex = index;
+                }
             }
         }
 
