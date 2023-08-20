@@ -38,7 +38,7 @@ The `Run` tab allows you to choose what type of file to run (either interpret a 
 
 Finally, the `Git` tab allows you to run common git commands such as `git add .`, `git commit -m ""` (with a special dialogue that allows you to write a custom commit message), and so on.
 
-![image](https://imgur.com/X8G3Eld.png)
+![image](https://i.imgur.com/Hug2ydu.png)
 
 pie **doesn't** provide any compilers or interpreters. It tries to run the default commands (`javac`, `java`, `gcc`, `py`, ...), meaning that you already need to have these tools installed on your system. Thus meaning, you won't need to worry that the IDE's build tools is going to wrongly mix up with your already-installed tools.
 
