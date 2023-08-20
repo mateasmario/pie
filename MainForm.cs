@@ -1,19 +1,13 @@
 ﻿using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
-using FastColoredTextBoxNS;
 using pie.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using ScintillaNET;
+
 
 namespace pie
 {
@@ -63,25 +57,200 @@ namespace pie
             openedFilePaths = new List<String>();
         }
 
+        public Scintilla CreateNewTextArea()
+        {
+            Scintilla TextArea = new Scintilla();
+            TextArea.StyleResetDefault();
+            TextArea.KeyDown += keyDownEvents;
+            TextArea.KeyPress += TextArea_KeyPress;
+            TextArea.MouseDown += TextArea_MouseDown;
+            TextArea.WrapMode = WrapMode.None;
+            TextArea.IndentationGuides = IndentView.LookBoth;
+            TextArea.SetSelectionBackColor(true, Color.FromArgb(255, 230, 162));
+            TextArea.CaretLineBackColor = IntToColor(0xe6effa);
+            TextArea.UsePopup(false);
+
+            TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
+            TextArea.Styles[ScintillaNET.Style.Default].Size = 10;
+            TextArea.Styles[ScintillaNET.Style.Default].BackColor = Color.White;
+            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = Color.Black;
+            TextArea.StyleClearAll();
+
+            ScintillaLexerService.ConfigureLexer("python", TextArea);
+
+            InitNumberMargin(TextArea);
+            InitBookmarkMargin(TextArea);
+            InitCodeFolding(TextArea);
+            
+
+            TextArea.Dock = DockStyle.Fill;
+
+            return TextArea;
+        }
+
+        private void TextArea_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right) {
+                kryptonContextMenu1.Show(sender);
+            }
+        }
+
+        private void TextArea_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar < 32)
+            {
+                // Prevent control characters from getting inserted into the text buffer
+                e.Handled = true;
+                return;
+            }
+        }
+
+        #region Numbers, Bookmarks, Code Folding
+
+        /// <summary>
+        /// the background color of the text area
+        /// </summary>
+        private const int BACK_COLOR = 0xbbcee6;
+
+        /// <summary>
+        /// default text color of the text area
+        /// </summary>
+        private const int FORE_COLOR = 0x000000;
+
+        /// <summary>
+        /// change this to whatever margin you want the line numbers to show in
+        /// </summary>
+        private const int NUMBER_MARGIN = 5;
+
+        /// <summary>
+        /// change this to whatever margin you want the bookmarks/breakpoints to show in
+        /// </summary>
+        private const int BOOKMARK_MARGIN = 2;
+        private const int BOOKMARK_MARKER = 2;
+
+        /// <summary>
+        /// change this to whatever margin you want the code folding tree (+/-) to show in
+        /// </summary>
+        private const int FOLDING_MARGIN = 3;
+
+        /// <summary>
+        /// set this true to show circular buttons for code folding (the [+] and [-] buttons on the margin)
+        /// </summary>
+        private const bool CODEFOLDING_CIRCULAR = true;
+
+        public static Color IntToColor(int rgb)
+        {
+            return Color.FromArgb(255, (byte)(rgb >> 16), (byte)(rgb >> 8), (byte)rgb);
+        }
+
+        private void InitNumberMargin(Scintilla TextArea)
+        {
+
+            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = IntToColor(BACK_COLOR);
+            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = IntToColor(FORE_COLOR);
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = IntToColor(FORE_COLOR);
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = IntToColor(BACK_COLOR);
+
+            var nums = TextArea.Margins[NUMBER_MARGIN];
+            nums.Width = 20;
+            nums.Type = MarginType.Number;
+            nums.Sensitive = true;
+            nums.Mask = 0;
+
+            TextArea.MarginClick += TextArea_MarginClick;
+        }
+
+        private void InitBookmarkMargin(Scintilla TextArea)
+        {
+
+            //TextArea.SetFoldMarginColor(true, IntToColor(BACK_COLOR));
+
+            var margin = TextArea.Margins[BOOKMARK_MARGIN];
+            margin.Width = 20;
+            margin.Sensitive = true;
+            margin.Type = MarginType.Symbol;
+            margin.Mask = (1 << BOOKMARK_MARKER);
+            //margin.Cursor = MarginCursor.Arrow;
+
+            var marker = TextArea.Markers[BOOKMARK_MARKER];
+            marker.Symbol = MarkerSymbol.Circle;
+            marker.SetBackColor(IntToColor(0xFF003B));
+            marker.SetForeColor(IntToColor(0x000000));
+            marker.SetAlpha(100);
+
+        }
+
+        private void InitCodeFolding(Scintilla TextArea)
+        {
+
+            TextArea.SetFoldMarginColor(true, IntToColor(BACK_COLOR));
+            TextArea.SetFoldMarginHighlightColor(true, IntToColor(BACK_COLOR));
+
+            // Enable code folding
+            TextArea.SetProperty("fold", "1");
+            TextArea.SetProperty("fold.compact", "1");
+
+            // Configure a margin to display folding symbols
+            TextArea.Margins[FOLDING_MARGIN].Type = MarginType.Symbol;
+            TextArea.Margins[FOLDING_MARGIN].Mask = Marker.MaskFolders;
+            TextArea.Margins[FOLDING_MARGIN].Sensitive = true;
+            TextArea.Margins[FOLDING_MARGIN].Width = 20;
+
+            // Set colors for all folding markers
+            for (int i = 25; i <= 31; i++)
+            {
+                TextArea.Markers[i].SetForeColor(IntToColor(BACK_COLOR)); // styles for [+] and [-]
+                TextArea.Markers[i].SetBackColor(IntToColor(FORE_COLOR)); // styles for [+] and [-]
+            }
+
+            // Configure folding markers with respective symbols
+            TextArea.Markers[Marker.Folder].Symbol = CODEFOLDING_CIRCULAR ? MarkerSymbol.CirclePlus : MarkerSymbol.BoxPlus;
+            TextArea.Markers[Marker.FolderOpen].Symbol = CODEFOLDING_CIRCULAR ? MarkerSymbol.CircleMinus : MarkerSymbol.BoxMinus;
+            TextArea.Markers[Marker.FolderEnd].Symbol = CODEFOLDING_CIRCULAR ? MarkerSymbol.CirclePlusConnected : MarkerSymbol.BoxPlusConnected;
+            TextArea.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
+            TextArea.Markers[Marker.FolderOpenMid].Symbol = CODEFOLDING_CIRCULAR ? MarkerSymbol.CircleMinusConnected : MarkerSymbol.BoxMinusConnected;
+            TextArea.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
+            TextArea.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+
+            // Enable automatic folding
+            TextArea.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
+
+        }
+
+        private void TextArea_MarginClick(object sender, MarginClickEventArgs e)
+        {
+            Scintilla TextArea = (Scintilla)sender;
+
+            if (e.Margin == BOOKMARK_MARGIN)
+            {
+                // Do we have a marker for this line?
+                const uint mask = (1 << BOOKMARK_MARKER);
+                var line = TextArea.Lines[TextArea.LineFromPosition(e.Position)];
+                if ((line.MarkerGet() & mask) > 0)
+                {
+                    // Remove existing bookmark
+                    line.MarkerDelete(BOOKMARK_MARKER);
+                }
+                else
+                {
+                    // Add bookmark
+                    line.MarkerAdd(BOOKMARK_MARKER);
+                }
+            }
+        }
+
+        #endregion
+
+
         // [Method] Creates a new tab and selects the new tab
         public void NewTab()
         {
             KryptonPage kryptonPage = new KryptonPage();
             kryptonPage.Text = "Untitled";
 
-            FastColoredTextBox fastColoredTextBox = new FastColoredTextBox();
-            fastColoredTextBox.Name = "FastColoredTextBox";
-            fastColoredTextBox.KeyDown += keyDownEvents;
-            fastColoredTextBox.AutoCompleteBrackets = true;
+            Scintilla TextArea = CreateNewTextArea();
 
-            kryptonPage.Controls.Add(fastColoredTextBox);
-            fastColoredTextBox.Dock = DockStyle.Fill;
-
-            if (darkMode == true)
-            {
-                fastColoredTextBox.BackColor = Color.FromArgb(23, 23, 23);
-                fastColoredTextBox.ForeColor = Color.White;
-            }
+            kryptonPage.Controls.Add(TextArea);
 
             int index = 0;
 
@@ -158,11 +327,14 @@ namespace pie
                 string chosenPath = openedFilePaths[tabControl.SelectedIndex];
 
                 TextWriter txt = new StreamWriter(chosenPath);
-                FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
-                txt.Write(fastColoredTextBox.Text);
+                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+                txt.Write(TextArea.Text);
                 txt.Close();
 
                 tabControl.SelectedPage.Text = chosenPath;
+
+                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(openedFilePaths[tabControl.SelectedIndex]));
+                ScintillaLexerService.SetLexer(extension, TextArea);
             }
 
             SetBuildAndRunOptions(true);
@@ -183,12 +355,15 @@ namespace pie
                 String chosenPath = saveFileDialog.FileName;
 
                 TextWriter txt = new StreamWriter(chosenPath);
-                FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
-                txt.Write(fastColoredTextBox.Text);
+                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+                txt.Write(TextArea.Text);
                 txt.Close();
 
                 openedFilePaths[tabControl.SelectedIndex] = chosenPath;
                 tabControl.SelectedPage.Text = chosenPath;
+
+                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(openedFilePaths[tabControl.SelectedIndex]));
+                ScintillaLexerService.SetLexer(extension, TextArea);
             }
         }
 
@@ -202,11 +377,14 @@ namespace pie
 
             string fileContent = System.IO.File.ReadAllText(fileName);
 
-            FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
-            fastColoredTextBox.Text = fileContent;
+            Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+            TextArea.Text = fileContent;
 
             openedFilePaths[openedTabIndex] = fileName;
             tabControl.SelectedPage.Text = fileName;
+
+            string extension = ParsingService.GetFileExtension(fileName);
+            ScintillaLexerService.SetLexer(extension, TextArea);
 
             SetBuildAndRunOptions(true);
         }
@@ -285,73 +463,6 @@ namespace pie
                 workingDirectoryToolStripMenuItem.Enabled = false;
                 stagingAreaToolStripMenuItem.Enabled = false;
                 remoteToolStripMenuItem.Enabled = false;
-            }
-        }
-
-        // [Method] Turns Dark Mode on/off
-        // Additional: Instead of just modifying the existent FCTB's background color, it completely removes it and adds a new one
-        // Additional: in case the code had a language format (e.g. CSharp). Some of the colors may be kept same as in the light
-        // Additional: mode and may not be visible in the dark mode.
-        public void ToggleDarkMode()
-        {
-            if (darkMode == false)
-            {
-                darkMode = true;
-                
-                foreach (KryptonPage kryptonPage in tabControl.Pages)
-                {
-                    FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)kryptonPage.Controls["FastColoredTextBox"];
-                    string content = fastColoredTextBox.Text;
-                    Language language = fastColoredTextBox.Language;
-
-                    kryptonPage.Controls.Remove(fastColoredTextBox);
-
-                    fastColoredTextBox = new FastColoredTextBox();
-                    fastColoredTextBox.Name = "FastColoredTextBox";
-                    fastColoredTextBox.KeyDown += keyDownEvents;
-                    fastColoredTextBox.AutoCompleteBrackets = true;
-
-                    kryptonPage.Controls.Add(fastColoredTextBox);
-                    fastColoredTextBox.Dock = DockStyle.Fill;
-
-                    fastColoredTextBox.BackColor = Color.FromArgb(23, 23, 23);
-                    fastColoredTextBox.ForeColor = Color.White;
-
-                    fastColoredTextBox.Language = language;
-                    fastColoredTextBox.Text = content;
-                }
-
-                darkModeToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                darkMode = false;
-
-                foreach (KryptonPage kryptonPage in tabControl.Pages)
-                {
-                    FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)kryptonPage.Controls["FastColoredTextBox"];
-
-                    string content = fastColoredTextBox.Text;
-                    Language language = fastColoredTextBox.Language;
-
-                    kryptonPage.Controls.Remove(fastColoredTextBox);
-
-                    fastColoredTextBox = new FastColoredTextBox();
-                    fastColoredTextBox.Name = "FastColoredTextBox";
-                    fastColoredTextBox.KeyDown += keyDownEvents;
-                    fastColoredTextBox.AutoCompleteBrackets = true;
-
-                    kryptonPage.Controls.Add(fastColoredTextBox);
-                    fastColoredTextBox.Dock = DockStyle.Fill;
-
-                    fastColoredTextBox.BackColor = Color.White;
-                    fastColoredTextBox.ForeColor = Color.Black;
-
-                    fastColoredTextBox.Language = language;
-                    fastColoredTextBox.Text = content;
-                }
-
-                darkModeToolStripMenuItem.Checked = false;
             }
         }
 
@@ -483,15 +594,6 @@ namespace pie
 
                 saveFileToolStripMenuItem.Enabled = false;
                 saveAsToolStripMenuItem.Enabled = false;
-
-                kryptonContextMenuItem5.Enabled = false;
-                kryptonContextMenuItem6.Enabled = false;
-                kryptonContextMenuItem7.Enabled = false;
-                kryptonContextMenuItem8.Enabled = false;
-                kryptonContextMenuItem9.Enabled = false;
-                kryptonContextMenuItem10.Enabled = false;
-                kryptonContextMenuItem11.Enabled = false;
-                kryptonContextMenuItem12.Enabled = false;
             }
             else
             {
@@ -499,15 +601,6 @@ namespace pie
 
                 saveFileToolStripMenuItem.Enabled = true;
                 saveAsToolStripMenuItem.Enabled = true;
-
-                kryptonContextMenuItem5.Enabled = true;
-                kryptonContextMenuItem6.Enabled = true;
-                kryptonContextMenuItem7.Enabled = true;
-                kryptonContextMenuItem8.Enabled = true;
-                kryptonContextMenuItem9.Enabled = true;
-                kryptonContextMenuItem10.Enabled = true;
-                kryptonContextMenuItem11.Enabled = true;
-                kryptonContextMenuItem12.Enabled = true;
             }
         }
 
@@ -566,53 +659,6 @@ namespace pie
             {
                 ShowTerminalTabControl();
             }
-        }
-
-
-        // [Event] "Dark Mode" button from "Design" button located in the upper menu
-        private void darkModeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToggleDarkMode();
-        }
-
-        // [Generic Event] Used for changing the language of the FastColoredTextBox of the selected tab. Called by other event listeners
-        private void codeFormatting(object sender, EventArgs e)
-        {
-            KryptonContextMenuItem kryptonContextMenuItem = (KryptonContextMenuItem)sender;
-            FastColoredTextBox fastColoredTextBox = (FastColoredTextBox)tabControl.SelectedPage.Controls["FastColoredTextBox"];
-            
-            string content = fastColoredTextBox.Text;
-
-            switch(kryptonContextMenuItem.Text)
-            {
-                case "JS":
-                    fastColoredTextBox.Language = Language.JS;
-                    break;
-                case "HTML":
-                    fastColoredTextBox.Language = Language.HTML;
-                    break;
-                case "C#":
-                    fastColoredTextBox.Language = Language.CSharp;
-                    break;
-                case "XML":
-                    fastColoredTextBox.Language = Language.XML;
-                    break;
-                case "VB":
-                    fastColoredTextBox.Language = Language.VB;
-                    break;
-                case "Lua":
-                    fastColoredTextBox.Language = Language.Lua;
-                    break;
-                case "PHP":
-                    fastColoredTextBox.Language = Language.PHP;
-                    break;
-                case "SQL":
-                    fastColoredTextBox.Language = Language.SQL;
-                    break;
-            }
-
-            fastColoredTextBox.Clear();
-            fastColoredTextBox.Text = content;
         }
 
         // [Event] Triggered when clicking "Show Terminal Tab" from the context menu
