@@ -43,6 +43,4 @@ Finally, the `Git` tab allows you to run common git commands such as `git add .`
 pie **doesn't** provide any compilers or interpreters. It tries to run the default commands (`javac`, `java`, `gcc`, `py`, ...), meaning that you already need to have these tools installed on your system. Thus meaning, you won't need to worry that the IDE's build tools is going to wrongly mix up with your already-installed tools.
 
 ### ![arrow-right](https://user-images.githubusercontent.com/39602100/226106727-60b84260-3f49-44eb-a36d-a76d1ae2e2c1.png) Code highlights
-In order to enable code highlight features, right click in your text editor and select the preferred language from the `Code Formatting` category.
-
-![image](https://imgur.com/DcM92xJ.png)
+pie automatically highlights the code in your files. At this moment, it supports some basic ScintillaNET user-submitted highlights, available here: https://github.com/jacobslusser/ScintillaNET/wiki/User-Submitted-Recipes
