@@ -195,7 +195,7 @@ namespace pie
         // [Method] Opens a file (without openFileDialog), given just a path
         public void Open(string fileName)
         {
-            if (tabControl.Pages.Count == 0)
+            if (tabControl.Pages.Count <= 1)
                 NewTab();
 
             int openedTabIndex = tabControl.SelectedIndex;
