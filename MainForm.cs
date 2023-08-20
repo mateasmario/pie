@@ -83,8 +83,6 @@ namespace pie
 
             InitNumberMargin(TextArea);
             InitBookmarkMargin(TextArea);
-            InitCodeFolding(TextArea);
-            
 
             TextArea.Dock = DockStyle.Fill;
 

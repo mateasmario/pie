@@ -107,12 +107,6 @@ namespace pie.Services
             }
             else if (language == "python")
             {
-                // Reset the styles
-                scintilla.StyleResetDefault();
-                scintilla.Styles[Style.Default].Font = "Consolas";
-                scintilla.Styles[Style.Default].Size = 10;
-                scintilla.StyleClearAll(); // i.e. Apply to all
-
                 // Set the lexer
                 scintilla.Lexer = Lexer.Python;
 
