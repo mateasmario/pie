@@ -1,7 +1,7 @@
 # ![pie (2)](https://user-images.githubusercontent.com/39602100/226106760-a2dca0ad-8435-452b-9bb8-0b29a985d9a4.png) pie
 Lightweight text editor with some third-party features, capable of replacing Notepad.
 
-![image](https://imgur.com/7PmVmWT.png)
+![image](https://i.imgur.com/QUWQX4f.png)
 
 ### ![arrow-right](https://user-images.githubusercontent.com/39602100/226106727-60b84260-3f49-44eb-a36d-a76d1ae2e2c1.png) Short Introduction
 pie is a combination between a text-editor (like Notepad) and an over-simplified IDE, that allows super-fast modification of code files (or other types of files), whenever you don't feel the need to wait for a big IDE to open.
@@ -14,14 +14,14 @@ pie also has several Build, Run & Git shortcuts integrated, making your life eas
 pie is built in C# using Microsoft's .NET Winforms technology. The main controls use the **Krypton Suite**, available at: https://github.com/ComponentFactory/Krypton. Without Krypton, pie wouldn't be as awesome as it is now.
 
 ### ![arrow-right](https://user-images.githubusercontent.com/39602100/226106727-60b84260-3f49-44eb-a36d-a76d1ae2e2c1.png) Simple, but powerful code editor
-As for the boxes you use in order to write content to a file, these are instances of **FastColoredTextBox**, available at: https://github.com/PavelTorgashov/FastColoredTextBox. FastColoredTextbox isn't as advanced as professional editors such as Visual Studio Code or IntelliJ, as it doesn't provide autocomplete features or advanced code highlighting, but it is still better than having none of these features at all.
+As for the boxes you use in order to write content to a file, these were at the beginning instances of **FastColoredTextBox**, available at: https://github.com/PavelTorgashov/FastColoredTextBox. FastColoredTextbox isn't as advanced as professional editors such as Visual Studio Code or IntelliJ, as it doesn't provide autocomplete features or advanced code highlighting, but it is still better than having none of these features at all. Later, I have upgraded to **ScintilaNET**, a .NET implementation of the well-known Scintilla, available at: https://github.com/jacobslusser/ScintillaNET.
 
 ### ![arrow-right](https://user-images.githubusercontent.com/39602100/226106727-60b84260-3f49-44eb-a36d-a76d1ae2e2c1.png) Terminal
 A Terminal object is actually an instance of **ConsoleControl**, available at: https://github.com/dwmkerr/consolecontrol.
 
 The terminal tab control can be accessed via `Interface` (or right click somewhere in your editor) -> `Show Terminal Tab`, or `Ctrl` + `B`.
 
-![image](https://imgur.com/Ig1lm2o.png)
+![image](https://i.imgur.com/9CxdGle.png)
 
 Right click the tab control (either a tab or the empty slots next to the tab) to open the context menu.
 
