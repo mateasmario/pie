@@ -92,5 +92,10 @@ namespace pie.Services
                 return path.Substring(0, indexOfDot);
             }
         }
+
+        public static string GetFileExtension(string fileName)
+        {
+            return fileName.Substring(fileName.LastIndexOf('.')+1);
+        }
     }
 }

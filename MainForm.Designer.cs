@@ -36,7 +36,6 @@
             this.saveFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.darkModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showBuildToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,16 +63,6 @@
             this.kryptonContextMenuItems3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuHeading3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
-            this.kryptonContextMenuItems5 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.kryptonContextMenuItem5 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem7 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem8 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem9 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem10 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem11 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem12 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuHeading7 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             this.kryptonContextMenuItems8 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem15 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
@@ -162,18 +151,10 @@
             // designToolStripMenuItem
             // 
             this.designToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.darkModeToolStripMenuItem,
             this.showBuildToolsToolStripMenuItem});
             this.designToolStripMenuItem.Name = "designToolStripMenuItem";
             this.designToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.designToolStripMenuItem.Text = "Interface";
-            // 
-            // darkModeToolStripMenuItem
-            // 
-            this.darkModeToolStripMenuItem.Name = "darkModeToolStripMenuItem";
-            this.darkModeToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.darkModeToolStripMenuItem.Text = "Dark Mode";
-            this.darkModeToolStripMenuItem.Click += new System.EventHandler(this.darkModeToolStripMenuItem_Click);
             // 
             // showBuildToolsToolStripMenuItem
             // 
@@ -383,8 +364,6 @@
             this.kryptonContextMenu1.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
             this.kryptonContextMenuHeading1,
             this.kryptonContextMenuItems3,
-            this.kryptonContextMenuHeading3,
-            this.kryptonContextMenuItems5,
             this.kryptonContextMenuHeading7,
             this.kryptonContextMenuItems8});
             // 
@@ -408,71 +387,6 @@
             // 
             this.kryptonContextMenuItem3.Text = "Close Current Tab";
             this.kryptonContextMenuItem3.Click += new System.EventHandler(this.kryptonContextMenuItem3_Click);
-            // 
-            // kryptonContextMenuHeading3
-            // 
-            this.kryptonContextMenuHeading3.ExtraText = "";
-            this.kryptonContextMenuHeading3.Text = "Code Formatting";
-            // 
-            // kryptonContextMenuItems5
-            // 
-            this.kryptonContextMenuItems5.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
-            this.kryptonContextMenuItem5,
-            this.kryptonContextMenuItem6,
-            this.kryptonContextMenuItem7,
-            this.kryptonContextMenuItem8,
-            this.kryptonContextMenuItem9,
-            this.kryptonContextMenuItem10,
-            this.kryptonContextMenuItem11,
-            this.kryptonContextMenuItem12});
-            // 
-            // kryptonContextMenuItem5
-            // 
-            this.kryptonContextMenuItem5.Image = global::pie.Properties.Resources.rsz_1rsz_unofficial_javascript_logo_2svg;
-            this.kryptonContextMenuItem5.Text = "JS";
-            this.kryptonContextMenuItem5.Click += new System.EventHandler(this.codeFormatting);
-            // 
-            // kryptonContextMenuItem6
-            // 
-            this.kryptonContextMenuItem6.Image = global::pie.Properties.Resources.html_5;
-            this.kryptonContextMenuItem6.Text = "HTML";
-            this.kryptonContextMenuItem6.Click += new System.EventHandler(this.codeFormatting);
-            // 
-            // kryptonContextMenuItem7
-            // 
-            this.kryptonContextMenuItem7.Image = global::pie.Properties.Resources.c_sharp;
-            this.kryptonContextMenuItem7.Text = "C#";
-            this.kryptonContextMenuItem7.Click += new System.EventHandler(this.codeFormatting);
-            // 
-            // kryptonContextMenuItem8
-            // 
-            this.kryptonContextMenuItem8.Image = global::pie.Properties.Resources.xml;
-            this.kryptonContextMenuItem8.Text = "XML";
-            this.kryptonContextMenuItem8.Click += new System.EventHandler(this.codeFormatting);
-            // 
-            // kryptonContextMenuItem9
-            // 
-            this.kryptonContextMenuItem9.Image = global::pie.Properties.Resources.visual_basic;
-            this.kryptonContextMenuItem9.Text = "VB";
-            this.kryptonContextMenuItem9.Click += new System.EventHandler(this.codeFormatting);
-            // 
-            // kryptonContextMenuItem10
-            // 
-            this.kryptonContextMenuItem10.Image = global::pie.Properties.Resources.rsz_lua_logo;
-            this.kryptonContextMenuItem10.Text = "Lua";
-            this.kryptonContextMenuItem10.Click += new System.EventHandler(this.codeFormatting);
-            // 
-            // kryptonContextMenuItem11
-            // 
-            this.kryptonContextMenuItem11.Image = global::pie.Properties.Resources.php;
-            this.kryptonContextMenuItem11.Text = "PHP";
-            this.kryptonContextMenuItem11.Click += new System.EventHandler(this.codeFormatting);
-            // 
-            // kryptonContextMenuItem12
-            // 
-            this.kryptonContextMenuItem12.Image = global::pie.Properties.Resources.rsz_png_transparent_microsoft_sql_server_microsoft_azure_sql_database_microsoft_text_logo_microsoft_azure;
-            this.kryptonContextMenuItem12.Text = "SQL";
-            this.kryptonContextMenuItem12.Click += new System.EventHandler(this.codeFormatting);
             // 
             // kryptonContextMenuHeading7
             // 
@@ -631,17 +545,7 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading3;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems5;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem5;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem6;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem7;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem8;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem9;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem10;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem11;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem12;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem13;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems4;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem4;
@@ -651,7 +555,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems6;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems7;
         private System.Windows.Forms.ToolStripMenuItem designToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem darkModeToolStripMenuItem;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading7;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems8;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem15;

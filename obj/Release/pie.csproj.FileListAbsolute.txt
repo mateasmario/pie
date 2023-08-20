@@ -27,3 +27,8 @@ E:\dev\winforms\pie\obj\Release\pie.csproj.CoreCompileInputs.cache
 E:\dev\winforms\pie\obj\Release\pie.csproj.CopyComplete
 E:\dev\winforms\pie\obj\Release\pie.exe
 E:\dev\winforms\pie\obj\Release\pie.pdb
+E:\dev\winforms\pie\bin\Release\x64\Lexilla.dll
+E:\dev\winforms\pie\bin\Release\x64\Scintilla.dll
+E:\dev\winforms\pie\bin\Release\x86\Lexilla.dll
+E:\dev\winforms\pie\bin\Release\x86\Scintilla.dll
+E:\dev\winforms\pie\bin\Release\Scintilla.NET.dll
