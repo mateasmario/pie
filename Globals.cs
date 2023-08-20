@@ -10,6 +10,7 @@ namespace pie
     {
         private static string commitMessage;
         private static int lastSelectedTabIndex;
+        private static int maxLineNumberCharLength;
 
         public static string getCommitMessage()
         {
@@ -29,6 +30,16 @@ namespace pie
         public static void setLastSelectedTabIndex(int lastSelectedTabIndexNew)
         {
             lastSelectedTabIndex = lastSelectedTabIndexNew;
+        }
+
+        public static int getMaxLineNumberCharLength()
+        {
+            return maxLineNumberCharLength;
+        }
+
+        public static void setMaxLineNumberCharLength(int maxLineNumberCharLengthNew)
+        {
+            maxLineNumberCharLength = maxLineNumberCharLengthNew;
         }
     }
 }
