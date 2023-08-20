@@ -7,7 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using ScintillaNET;
-
+using ComponentFactory.Krypton.Docking;
 
 namespace pie
 {
@@ -44,6 +44,7 @@ namespace pie
 
         // [Field] Paths of the opened files
         public List<String> openedFilePaths;
+        public List<bool> openedFileChanges;
         public bool darkMode;
         public bool terminalTabControlOpened;
 
@@ -55,6 +56,7 @@ namespace pie
             this.MinimumSize = new System.Drawing.Size(1036, 634);
 
             openedFilePaths = new List<String>();
+            openedFileChanges = new List<bool>();
         }
 
         public Scintilla CreateNewTextArea()
@@ -64,6 +66,7 @@ namespace pie
             TextArea.KeyDown += keyDownEvents;
             TextArea.KeyPress += TextArea_KeyPress;
             TextArea.MouseDown += TextArea_MouseDown;
+            TextArea.TextChanged += TextArea_TextChanged;
             TextArea.WrapMode = WrapMode.None;
             TextArea.IndentationGuides = IndentView.LookBoth;
             TextArea.SetSelectionBackColor(true, Color.FromArgb(255, 230, 162));
@@ -88,6 +91,25 @@ namespace pie
             return TextArea;
         }
 
+        private void TextArea_TextChanged(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)sender;
+
+            // Did the number of characters in the line number display change?
+            // i.e. nnn VS nn, or nnnn VS nn, etc...
+            var maxLineNumberCharLength = scintilla.Lines.Count.ToString().Length;
+            if (maxLineNumberCharLength == Globals.getMaxLineNumberCharLength())
+                return;
+
+            // Calculate the width required to display the last line number
+            // and include some padding for good measure.
+            const int padding = 2;
+            scintilla.Margins[0].Width = scintilla.TextWidth(Style.LineNumber, new string('9', maxLineNumberCharLength + 1)) + padding;
+            Globals.setMaxLineNumberCharLength(maxLineNumberCharLength);
+
+            openedFileChanges[tabControl.SelectedIndex] = true;
+        }
+
         private void TextArea_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right) {
@@ -103,6 +125,8 @@ namespace pie
                 e.Handled = true;
                 return;
             }
+
+            openedFileChanges[tabControl.SelectedIndex] = true;
         }
 
         #region Numbers, Bookmarks, Code Folding
@@ -151,12 +175,7 @@ namespace pie
             TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = IntToColor(FORE_COLOR);
             TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = IntToColor(BACK_COLOR);
 
-            var nums = TextArea.Margins[NUMBER_MARGIN];
-            nums.Width = 20;
-            nums.Type = MarginType.Number;
-            nums.Sensitive = true;
-            nums.Mask = 0;
-
+            TextArea.Margins[0].Width = 16;
             TextArea.MarginClick += TextArea_MarginClick;
         }
 
@@ -262,7 +281,8 @@ namespace pie
             tabControl.Pages.Insert(index, kryptonPage);
             tabControl.SelectedPage = kryptonPage;
 
-            openedFilePaths.Add(null);
+            openedFilePaths.Insert(index, null);
+            openedFileChanges.Insert(index, false);
         }
 
         // [Method] Closes the currently selected tab
@@ -270,30 +290,53 @@ namespace pie
         {
             if (tabControl.SelectedIndex != tabControl.Pages.Count - 1)
             {
-                KryptonPage selectedKryptonPage = tabControl.SelectedPage;
-                openedFilePaths.RemoveAt(tabControl.SelectedIndex);
-                tabControl.Pages.Remove(selectedKryptonPage);
-
-                if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < openedFilePaths.Count && openedFilePaths[tabControl.SelectedIndex] != null)
+                if (openedFileChanges[tabControl.SelectedIndex] == true)
                 {
-                    SetBuildAndRunOptions(true);
-                }
-
-                if (tabControl.Pages.Count > 1)
-                {
-                    tabControl.SelectedIndex = Globals.getLastSelectedTabIndex() - 1;
-
-                    if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
+                    DialogResult dialogResult = MessageBox.Show("Save file before closing it?", "Save file", MessageBoxButtons.YesNoCancel);
+                    if (dialogResult == DialogResult.Yes)
                     {
-                        tabControl.SelectedIndex--;
+                        Save();
+                        CloseTabAfterWarning();
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        CloseTabAfterWarning();
                     }
 
-                    Globals.setLastSelectedTabIndex(tabControl.SelectedIndex);
                 }
                 else
                 {
-                    NewTab();
+                    CloseTabAfterWarning();
                 }
+            }
+        }
+
+        public void CloseTabAfterWarning()
+        {
+            KryptonPage selectedKryptonPage = tabControl.SelectedPage;
+            openedFilePaths.RemoveAt(tabControl.SelectedIndex);
+            openedFileChanges.RemoveAt(tabControl.SelectedIndex);
+            tabControl.Pages.Remove(selectedKryptonPage);
+
+            if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < openedFilePaths.Count && openedFilePaths[tabControl.SelectedIndex] != null)
+            {
+                SetBuildAndRunOptions(true);
+            }
+
+            if (tabControl.Pages.Count > 1)
+            {
+                tabControl.SelectedIndex = Globals.getLastSelectedTabIndex() - 1;
+
+                if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
+                {
+                    tabControl.SelectedIndex--;
+                }
+
+                Globals.setLastSelectedTabIndex(tabControl.SelectedIndex);
+            }
+            else
+            {
+                NewTab();
             }
         }
 
@@ -337,6 +380,7 @@ namespace pie
                 ScintillaLexerService.SetLexer(extension, TextArea);
             }
 
+            openedFileChanges[openedTabIndex] = false;
             SetBuildAndRunOptions(true);
         }
 
@@ -371,7 +415,9 @@ namespace pie
         public void Open(string fileName)
         {
             if (tabControl.Pages.Count == 1)
+            {
                 NewTab();
+            }
 
             int openedTabIndex = tabControl.SelectedIndex;
 

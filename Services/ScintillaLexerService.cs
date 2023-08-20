@@ -312,7 +312,7 @@ namespace pie.Services
                     ConfigureLexer("c", scintilla);
                     break;
                 case "java":
-                    ConfigureLexer("", scintilla);
+                    ConfigureLexer("c", scintilla);
                     break;
                 case "lua":
                     ConfigureLexer("lua", scintilla);
