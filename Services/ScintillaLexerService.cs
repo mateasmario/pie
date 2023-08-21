@@ -40,13 +40,6 @@ namespace pie.Services
                 var numericChars = "0123456789";
                 var accentedChars = "ŠšŒœŸÿÀàÁáÂâÃãÄäÅåÆæÇçÈèÉéÊêËëÌìÍíÎîÏïÐðÑñÒòÓóÔôÕõÖØøÙùÚúÛûÜüÝýÞþßö";
 
-                // Configuring the default style with properties
-                // we have common to every lexer style saves time.
-                scintilla.StyleResetDefault();
-                scintilla.Styles[Style.Default].Font = "Consolas";
-                scintilla.Styles[Style.Default].Size = 10;
-                scintilla.StyleClearAll();
-
                 // Configure the Lua lexer styles
                 scintilla.Styles[Style.Lua.Default].ForeColor = Color.Silver;
                 scintilla.Styles[Style.Lua.Comment].ForeColor = Color.Green;
@@ -193,17 +186,8 @@ namespace pie.Services
             }
             else if (language == "xml")
             {
-                // Reset the styles
-                scintilla.StyleResetDefault();
-                scintilla.Styles[Style.Default].Font = "Consolas";
-                scintilla.Styles[Style.Default].Size = 10;
-                scintilla.StyleClearAll();
-
                 // Set the XML Lexer
                 scintilla.Lexer = Lexer.Xml;
-
-                // Show line numbers
-                scintilla.Margins[0].Width = 20;
 
                 // Enable folding
                 scintilla.SetProperty("fold", "1");
@@ -238,11 +222,6 @@ namespace pie.Services
                 scintilla.AutomaticFold = AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change;
 
                 // Set the Styles
-                scintilla.StyleResetDefault();
-                // I like fixed font for XML
-                scintilla.Styles[Style.Default].Font = "Courier";
-                scintilla.Styles[Style.Default].Size = 10;
-                scintilla.StyleClearAll();
                 scintilla.Styles[Style.Xml.Attribute].ForeColor = Color.Red;
                 scintilla.Styles[Style.Xml.Entity].ForeColor = Color.Red;
                 scintilla.Styles[Style.Xml.Comment].ForeColor = Color.Green;
@@ -253,21 +232,10 @@ namespace pie.Services
             }
             else if (language == "mssql")
             {
-                // Reset the styles
-                scintilla.StyleResetDefault();
-                scintilla.Styles[Style.Default].Font = "Courier New";
-                scintilla.Styles[Style.Default].Size = 10;
-                scintilla.StyleClearAll();
-
                 // Set the SQL Lexer
                 scintilla.Lexer = Lexer.Sql;
 
-                // Show line numbers
-                scintilla.Margins[0].Width = 20;
-
                 // Set the Styles
-                scintilla.Styles[Style.LineNumber].ForeColor = Color.FromArgb(255, 128, 128, 128);  //Dark Gray
-                scintilla.Styles[Style.LineNumber].BackColor = Color.FromArgb(255, 228, 228, 228);  //Light Gray
                 scintilla.Styles[Style.Sql.Comment].ForeColor = Color.Green;
                 scintilla.Styles[Style.Sql.CommentLine].ForeColor = Color.Green;
                 scintilla.Styles[Style.Sql.CommentLineDoc].ForeColor = Color.Green;
