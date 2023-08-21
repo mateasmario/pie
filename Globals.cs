@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+using pie.Classes;
 
 namespace pie
 {
@@ -11,6 +10,10 @@ namespace pie
         private static string commitMessage;
         private static int lastSelectedTabIndex;
         private static int maxLineNumberCharLength;
+        private static List<BuildCommand> buildCommands;
+        private static List<ToolStripMenuItem> buildCommandToolStripMenuItems;
+        private static string addBuildCommandName;
+        private static string addBuildCommandCmd;
 
         public static string getCommitMessage()
         {
@@ -40,6 +43,46 @@ namespace pie
         public static void setMaxLineNumberCharLength(int maxLineNumberCharLengthNew)
         {
             maxLineNumberCharLength = maxLineNumberCharLengthNew;
+        }
+
+        public static List<BuildCommand> getBuildCommands()
+        {
+            return buildCommands;
+        }
+
+        public static void setBuildCommands(List<BuildCommand> buildCommandsNew)
+        {
+            buildCommands = buildCommandsNew;
+        }
+
+        public static List<ToolStripMenuItem> getBuildCommandsToolstripMenuItems()
+        {
+            return buildCommandToolStripMenuItems;
+        }
+
+        public static void setBuildCommandsToolstripMenuItems(List<ToolStripMenuItem> buildCommandToolStripMenuItemsNew)
+        {
+            buildCommandToolStripMenuItems = buildCommandToolStripMenuItemsNew;
+        }
+
+        public static string getAddBuildCommandName()
+        {
+            return addBuildCommandName;
+        }
+
+        public static void setAddBuildCommandName(string addBuildCommandNameNew)
+        {
+            addBuildCommandName = addBuildCommandNameNew;
+        }
+
+        public static string getAddBuildCommandCmd()
+        {
+            return addBuildCommandCmd;
+        }
+
+        public static void setAddBuildCommandCmd(string addBuildCommandCmdNew)
+        {
+            addBuildCommandCmd = addBuildCommandCmdNew;
         }
     }
 }
