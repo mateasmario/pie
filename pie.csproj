@@ -91,6 +91,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddBuildCommandForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddBuildCommandForm.Designer.cs">
+      <DependentUpon>AddBuildCommandForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\BuildCommand.cs" />
     <Compile Include="GitCommitMessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,15 +111,28 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BuildCommandsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuildCommandsForm.Designer.cs">
+      <DependentUpon>BuildCommandsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BuildCommandService.cs" />
     <Compile Include="Services\ParsingService.cs" />
     <Compile Include="Services\ScintillaLexerService.cs" />
+    <EmbeddedResource Include="AddBuildCommandForm.resx">
+      <DependentUpon>AddBuildCommandForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GitCommitMessageForm.resx">
       <DependentUpon>GitCommitMessageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BuildCommandsForm.resx">
+      <DependentUpon>BuildCommandsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

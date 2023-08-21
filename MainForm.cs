@@ -8,6 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 using ScintillaNET;
 using ComponentFactory.Krypton.Docking;
+using pie.Classes;
 
 namespace pie
 {
@@ -298,7 +299,6 @@ namespace pie
                     {
                         CloseTabAfterWarning();
                     }
-
                 }
                 else
                 {
@@ -476,36 +476,22 @@ namespace pie
 
         public void SetBuildAndRunOptions(bool status)
         {
-            if (status == true)
+            toolStripMenuItem2.Enabled = status;
+            toolStripMenuItem3.Enabled = status;
+
+            foreach (ToolStripMenuItem toolStripMenuItem in Globals.getBuildCommandsToolstripMenuItems())
             {
-                toolStripMenuItem2.Enabled = true;
-                toolStripMenuItem3.Enabled = true;
-                toolStripMenuItem4.Enabled = true;
-
-                javaClassclassToolStripMenuItem.Enabled = true;
-                pythonScriptpyToolStripMenuItem.Enabled = true;
-                perlScriptplToolStripMenuItem.Enabled = true;
-                renderHTMLFilehtmlToolStripMenuItem.Enabled = true;
-
-                workingDirectoryToolStripMenuItem.Enabled = true;
-                stagingAreaToolStripMenuItem.Enabled = true;
-                remoteToolStripMenuItem.Enabled = true;
+                toolStripMenuItem.Enabled = status;
             }
-            else
-            {
-                toolStripMenuItem2.Enabled = false;
-                toolStripMenuItem3.Enabled = false;
-                toolStripMenuItem4.Enabled = false;
 
-                javaClassclassToolStripMenuItem.Enabled = false;
-                pythonScriptpyToolStripMenuItem.Enabled = false;
-                perlScriptplToolStripMenuItem.Enabled = false;
-                renderHTMLFilehtmlToolStripMenuItem.Enabled = false;
+            javaClassclassToolStripMenuItem.Enabled = status;
+            pythonScriptpyToolStripMenuItem.Enabled = status;
+            perlScriptplToolStripMenuItem.Enabled = status;
+            renderHTMLFilehtmlToolStripMenuItem.Enabled = status;
 
-                workingDirectoryToolStripMenuItem.Enabled = false;
-                stagingAreaToolStripMenuItem.Enabled = false;
-                remoteToolStripMenuItem.Enabled = false;
-            }
+            workingDirectoryToolStripMenuItem.Enabled = status;
+            stagingAreaToolStripMenuItem.Enabled = status;
+            remoteToolStripMenuItem.Enabled = status;
         }
 
         // [Method] Opens terminal tab control
@@ -556,9 +542,17 @@ namespace pie
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "cmd.exe";
 
-            if (type == "Java Source (.java) with JDK")
+            if (type == "Java Source (.java)")
             {
                 startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(javac " + openedFilePaths[tabControl.SelectedIndex] + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
+            }
+            else if (type == "C/C++ Source (.c, .cpp) with GCC Compiler")
+            {
+                startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(gcc -Wall " + openedFilePaths[tabControl.SelectedIndex] + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
+            }
+            else if (type == "C/C++ Source (.c, .cpp)")
+            {
+                startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(gcc -Wall " + openedFilePaths[tabControl.SelectedIndex] + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
             }
 
             try
@@ -612,6 +606,26 @@ namespace pie
         // [Event] Form Loading
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Load Build Commands from configuration file
+            List<BuildCommand> buildCommands = BuildCommandService.GetBuildCommandsFromFile("pie.config");
+            List<ToolStripMenuItem> buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
+
+            foreach (BuildCommand buildCommand in buildCommands)
+            {
+                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
+                toolStripMenuItem.Text = buildCommand.getName();
+                toolStripMenuItem.Tag = buildCommand.getCommand();
+
+                toolStripMenuItem.Click += ToolStripMenuItem_Click;
+
+                buildToolStripMenuItem1.DropDownItems.Add(toolStripMenuItem);
+                buildCommandToolStripMenuItems.Add(toolStripMenuItem);
+            }
+
+            Globals.setBuildCommands(buildCommands);
+            Globals.setBuildCommandsToolstripMenuItems(buildCommandToolStripMenuItems);
+
+            // Do other visual processing
             buildTabControl.Hide();
 
             string[] args = Environment.GetCommandLineArgs();
@@ -624,6 +638,26 @@ namespace pie
             else
             {
                 NewTab();
+            }
+        }
+
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "cmd.exe";
+            string scriptName = ParsingService.GetFileName(openedFilePaths[tabControl.SelectedIndex]);
+            string command = (string)((ToolStripMenuItem)sender).Tag;
+            command = command.Replace("$FILE", scriptName);
+            startInfo.Arguments = "/K (echo ^[Pie^] Running started.)&(" + command + ")&(echo ^[Pie^] Running finished.)&(pause)&(exit)";
+           
+            try
+            {
+                startInfo.WorkingDirectory = ParsingService.GetFolderName(openedFilePaths[tabControl.SelectedIndex]);
+                Process.Start(startInfo);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Please open a file before launching any run command.", "Build Error");
             }
         }
 
@@ -903,6 +937,12 @@ namespace pie
             {
                 NewTab();
             }
+        }
+
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BuildCommandsForm buildCommandsForm = new BuildCommandsForm();
+            buildCommandsForm.ShowDialog();
         }
     }
 }
