@@ -62,7 +62,6 @@ namespace pie
         public Scintilla CreateNewTextArea()
         {
             Scintilla TextArea = new Scintilla();
-            TextArea.StyleResetDefault();
             TextArea.KeyDown += keyDownEvents;
             TextArea.KeyPress += TextArea_KeyPress;
             TextArea.MouseDown += TextArea_MouseDown;
@@ -73,16 +72,15 @@ namespace pie
             TextArea.CaretLineBackColor = IntToColor(0xe6effa);
             TextArea.UsePopup(false);
 
+            TextArea.StyleResetDefault();
             TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
-            TextArea.Styles[ScintillaNET.Style.Default].Size = 10;
+            TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
             TextArea.Styles[ScintillaNET.Style.Default].BackColor = Color.White;
             TextArea.Styles[ScintillaNET.Style.Default].ForeColor = Color.Black;
             TextArea.StyleClearAll();
 
-            ScintillaLexerService.ConfigureLexer("python", TextArea);
-
             InitNumberMargin(TextArea);
-            InitBookmarkMargin(TextArea);
+            //InitBookmarkMargin(TextArea);
 
             TextArea.Dock = DockStyle.Fill;
 
@@ -173,7 +171,7 @@ namespace pie
             TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = IntToColor(FORE_COLOR);
             TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = IntToColor(BACK_COLOR);
 
-            TextArea.Margins[0].Width = 16;
+            TextArea.Margins[0].Width = 24;
             TextArea.MarginClick += TextArea_MarginClick;
         }
 
