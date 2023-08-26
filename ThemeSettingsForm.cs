@@ -167,5 +167,10 @@ namespace pie
         {
             SetTextBoxes(Globals.getDefaultColorDictionary());
         }
+
+        private void user1TextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
