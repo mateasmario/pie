@@ -91,7 +91,7 @@ namespace pie
                 buildCommands += buildCommand.getCommand() + Environment.NewLine;
             }
 
-            File.WriteAllText("pie.config", buildCommands);
+            File.WriteAllText("build-commands.config", buildCommands);
 
             DialogResult dialogResult = MessageBox.Show("Close pie and reopen it manually, in order for the changes to take effect?", "Build Commands", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)

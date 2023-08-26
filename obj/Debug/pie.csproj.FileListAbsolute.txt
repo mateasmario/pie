@@ -34,3 +34,4 @@ E:\dev\winforms\pie\bin\Debug\x86\Scintilla.dll
 E:\dev\winforms\pie\bin\Debug\Scintilla.NET.dll
 E:\dev\winforms\pie\obj\Debug\pie.BuildCommandsForm.resources
 E:\dev\winforms\pie\obj\Debug\pie.AddBuildCommandForm.resources
+E:\dev\winforms\pie\obj\Debug\pie.ThemeSettingsForm.resources

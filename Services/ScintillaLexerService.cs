@@ -1,33 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ScintillaNET;
+using System.IO;
 
 namespace pie.Services
 {
     internal class ScintillaLexerService
     {
+        public static Color ConvertHexToColor(string value)
+        {
+            ColorConverter converter = new ColorConverter();
+            Color color = (Color)converter.ConvertFromString("#FF" + value);
+            return color;
+        }
+
         public static void ConfigureLexer(string language, Scintilla scintilla)
         {
+            Dictionary<string, string> configColorDictionary = Globals.getConfigColorDictionary();
+
             if (language == "c")
             {
                 scintilla.Lexer = Lexer.Cpp;
-                scintilla.Styles[ScintillaNET.Style.Cpp.Default].ForeColor = Color.Silver;
-                scintilla.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = Color.FromArgb(0, 128, 0); // Green
-                scintilla.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = Color.FromArgb(0, 128, 0); // Green
-                scintilla.Styles[ScintillaNET.Style.Cpp.CommentLineDoc].ForeColor = Color.FromArgb(128, 128, 128); // Gray
-                scintilla.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = Color.Olive;
-                scintilla.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = Color.Blue;
-                scintilla.Styles[ScintillaNET.Style.Cpp.Word2].ForeColor = Color.Blue;
-                scintilla.Styles[ScintillaNET.Style.Cpp.String].ForeColor = Color.FromArgb(163, 21, 21); // Red
-                scintilla.Styles[ScintillaNET.Style.Cpp.Character].ForeColor = Color.FromArgb(163, 21, 21); // Red
-                scintilla.Styles[ScintillaNET.Style.Cpp.Verbatim].ForeColor = Color.FromArgb(163, 21, 21); // Red
-                scintilla.Styles[ScintillaNET.Style.Cpp.StringEol].BackColor = Color.Pink;
-                scintilla.Styles[ScintillaNET.Style.Cpp.Operator].ForeColor = Color.Purple;
-                scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = Color.Maroon;
+                scintilla.Styles[ScintillaNET.Style.Cpp.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.CommentLineDoc].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Verbatim].ForeColor = ConvertHexToColor(configColorDictionary["Verbatim"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.StringEol].BackColor = ConvertHexToColor(configColorDictionary["StringEol"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = ConvertHexToColor(configColorDictionary["Preprocessor"]);
 
                 scintilla.SetKeywords(0, "abstract as base break case catch checked continue default delegate do else event explicit extern false finally fixed for foreach goto if implicit in interface internal is lock namespace new null object operator out override params private protected public readonly ref return sealed sizeof stackalloc switch this throw true try typeof unchecked unsafe using virtual while");
                 scintilla.SetKeywords(1, "bool byte char class const decimal double enum float int long sbyte short static string struct uint ulong ushort void");
@@ -41,20 +48,20 @@ namespace pie.Services
                 var accentedChars = "ŠšŒœŸÿÀàÁáÂâÃãÄäÅåÆæÇçÈèÉéÊêËëÌìÍíÎîÏïÐðÑñÒòÓóÔôÕõÖØøÙùÚúÛûÜüÝýÞþßö";
 
                 // Configure the Lua lexer styles
-                scintilla.Styles[Style.Lua.Default].ForeColor = Color.Silver;
-                scintilla.Styles[Style.Lua.Comment].ForeColor = Color.Green;
-                scintilla.Styles[Style.Lua.CommentLine].ForeColor = Color.Green;
-                scintilla.Styles[Style.Lua.Number].ForeColor = Color.Olive;
-                scintilla.Styles[Style.Lua.Word].ForeColor = Color.Blue;
-                scintilla.Styles[Style.Lua.Word2].ForeColor = Color.BlueViolet;
-                scintilla.Styles[Style.Lua.Word3].ForeColor = Color.DarkSlateBlue;
-                scintilla.Styles[Style.Lua.Word4].ForeColor = Color.DarkSlateBlue;
-                scintilla.Styles[Style.Lua.String].ForeColor = Color.Red;
-                scintilla.Styles[Style.Lua.Character].ForeColor = Color.Red;
-                scintilla.Styles[Style.Lua.LiteralString].ForeColor = Color.Red;
-                scintilla.Styles[Style.Lua.StringEol].BackColor = Color.Pink;
-                scintilla.Styles[Style.Lua.Operator].ForeColor = Color.Purple;
-                scintilla.Styles[Style.Lua.Preprocessor].ForeColor = Color.Maroon;
+                scintilla.Styles[Style.Lua.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
+                scintilla.Styles[Style.Lua.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+                scintilla.Styles[Style.Lua.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
+                scintilla.Styles[Style.Lua.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
+                scintilla.Styles[Style.Lua.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
+                scintilla.Styles[Style.Lua.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
+                scintilla.Styles[Style.Lua.Word3].ForeColor = ConvertHexToColor(configColorDictionary["Word3"]);
+                scintilla.Styles[Style.Lua.Word4].ForeColor = ConvertHexToColor(configColorDictionary["Word4"]);
+                scintilla.Styles[Style.Lua.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
+                scintilla.Styles[Style.Lua.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
+                scintilla.Styles[Style.Lua.LiteralString].ForeColor = ConvertHexToColor(configColorDictionary["LiteralString"]);
+                scintilla.Styles[Style.Lua.StringEol].BackColor = ConvertHexToColor(configColorDictionary["StringEol"]);
+                scintilla.Styles[Style.Lua.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
+                scintilla.Styles[Style.Lua.Preprocessor].ForeColor = ConvertHexToColor(configColorDictionary["Preprocessor"]);
                 scintilla.Lexer = Lexer.Lua;
                 scintilla.WordChars = alphaChars + numericChars + accentedChars;
 
@@ -146,29 +153,29 @@ namespace pie.Services
                 scintilla.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
 
                 // Set the styles
-                scintilla.Styles[Style.Python.Default].ForeColor = Color.FromArgb(0x80, 0x80, 0x80);
-                scintilla.Styles[Style.Python.CommentLine].ForeColor = Color.FromArgb(0x00, 0x7F, 0x00);
+                scintilla.Styles[Style.Python.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
+                scintilla.Styles[Style.Python.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
                 scintilla.Styles[Style.Python.CommentLine].Italic = true;
-                scintilla.Styles[Style.Python.Number].ForeColor = Color.FromArgb(0x00, 0x7F, 0x7F);
-                scintilla.Styles[Style.Python.String].ForeColor = Color.FromArgb(0x7F, 0x00, 0x7F);
-                scintilla.Styles[Style.Python.Character].ForeColor = Color.FromArgb(0x7F, 0x00, 0x7F);
-                scintilla.Styles[Style.Python.Word].ForeColor = Color.FromArgb(0x00, 0x00, 0x7F);
+                scintilla.Styles[Style.Python.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
+                scintilla.Styles[Style.Python.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
+                scintilla.Styles[Style.Python.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
+                scintilla.Styles[Style.Python.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
                 scintilla.Styles[Style.Python.Word].Bold = true;
-                scintilla.Styles[Style.Python.Triple].ForeColor = Color.FromArgb(0x7F, 0x00, 0x00);
-                scintilla.Styles[Style.Python.TripleDouble].ForeColor = Color.FromArgb(0x7F, 0x00, 0x00);
-                scintilla.Styles[Style.Python.ClassName].ForeColor = Color.FromArgb(0x00, 0x00, 0xFF);
+                scintilla.Styles[Style.Python.Triple].ForeColor = ConvertHexToColor(configColorDictionary["Triple"]);
+                scintilla.Styles[Style.Python.TripleDouble].ForeColor = ConvertHexToColor(configColorDictionary["TripleDouble"]);
+                scintilla.Styles[Style.Python.ClassName].ForeColor = ConvertHexToColor(configColorDictionary["ClassName"]);
                 scintilla.Styles[Style.Python.ClassName].Bold = true;
-                scintilla.Styles[Style.Python.DefName].ForeColor = Color.FromArgb(0x00, 0x7F, 0x7F);
+                scintilla.Styles[Style.Python.DefName].ForeColor = ConvertHexToColor(configColorDictionary["DefName"]);
                 scintilla.Styles[Style.Python.DefName].Bold = true;
                 scintilla.Styles[Style.Python.Operator].Bold = true;
                 // scintilla.Styles[Style.Python.Identifier] ... your keywords styled here
-                scintilla.Styles[Style.Python.CommentBlock].ForeColor = Color.FromArgb(0x7F, 0x7F, 0x7F);
+                scintilla.Styles[Style.Python.CommentBlock].ForeColor = ConvertHexToColor(configColorDictionary["CommentBlock"]);
                 scintilla.Styles[Style.Python.CommentBlock].Italic = true;
-                scintilla.Styles[Style.Python.StringEol].ForeColor = Color.FromArgb(0x00, 0x00, 0x00);
+                scintilla.Styles[Style.Python.StringEol].ForeColor = ConvertHexToColor(configColorDictionary["StringEol"]);
                 scintilla.Styles[Style.Python.StringEol].BackColor = Color.FromArgb(0xE0, 0xC0, 0xE0);
                 scintilla.Styles[Style.Python.StringEol].FillLine = true;
-                scintilla.Styles[Style.Python.Word2].ForeColor = Color.FromArgb(0x40, 0x70, 0x90);
-                scintilla.Styles[Style.Python.Decorator].ForeColor = Color.FromArgb(0x80, 0x50, 0x00);
+                scintilla.Styles[Style.Python.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
+                scintilla.Styles[Style.Python.Decorator].ForeColor = ConvertHexToColor(configColorDictionary["Decorator"]);
 
                 // Important for Python
                 scintilla.ViewWhitespace = WhitespaceMode.VisibleAlways;
@@ -222,13 +229,13 @@ namespace pie.Services
                 scintilla.AutomaticFold = AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change;
 
                 // Set the Styles
-                scintilla.Styles[Style.Xml.Attribute].ForeColor = Color.Red;
-                scintilla.Styles[Style.Xml.Entity].ForeColor = Color.Red;
-                scintilla.Styles[Style.Xml.Comment].ForeColor = Color.Green;
-                scintilla.Styles[Style.Xml.Tag].ForeColor = Color.Blue;
-                scintilla.Styles[Style.Xml.TagEnd].ForeColor = Color.Blue;
-                scintilla.Styles[Style.Xml.DoubleString].ForeColor = Color.DeepPink;
-                scintilla.Styles[Style.Xml.SingleString].ForeColor = Color.DeepPink;
+                scintilla.Styles[Style.Xml.Attribute].ForeColor = ConvertHexToColor(configColorDictionary["Attribute"]);
+                scintilla.Styles[Style.Xml.Entity].ForeColor = ConvertHexToColor(configColorDictionary["Entity"]);
+                scintilla.Styles[Style.Xml.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+                scintilla.Styles[Style.Xml.Tag].ForeColor = ConvertHexToColor(configColorDictionary["Tag"]);
+                scintilla.Styles[Style.Xml.TagEnd].ForeColor = ConvertHexToColor(configColorDictionary["TagEnd"]);
+                scintilla.Styles[Style.Xml.DoubleString].ForeColor = ConvertHexToColor(configColorDictionary["DoubleString"]);
+                scintilla.Styles[Style.Xml.SingleString].ForeColor = ConvertHexToColor(configColorDictionary["SingleString"]);
             }
             else if (language == "mssql")
             {
@@ -236,17 +243,17 @@ namespace pie.Services
                 scintilla.Lexer = Lexer.Sql;
 
                 // Set the Styles
-                scintilla.Styles[Style.Sql.Comment].ForeColor = Color.Green;
-                scintilla.Styles[Style.Sql.CommentLine].ForeColor = Color.Green;
-                scintilla.Styles[Style.Sql.CommentLineDoc].ForeColor = Color.Green;
-                scintilla.Styles[Style.Sql.Number].ForeColor = Color.Maroon;
-                scintilla.Styles[Style.Sql.Word].ForeColor = Color.Blue;
-                scintilla.Styles[Style.Sql.Word2].ForeColor = Color.Fuchsia;
-                scintilla.Styles[Style.Sql.User1].ForeColor = Color.Gray;
-                scintilla.Styles[Style.Sql.User2].ForeColor = Color.FromArgb(255, 00, 128, 192);    //Medium Blue-Green
-                scintilla.Styles[Style.Sql.String].ForeColor = Color.Red;
-                scintilla.Styles[Style.Sql.Character].ForeColor = Color.Red;
-                scintilla.Styles[Style.Sql.Operator].ForeColor = Color.Black;
+                scintilla.Styles[Style.Sql.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+                scintilla.Styles[Style.Sql.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
+                scintilla.Styles[Style.Sql.CommentLineDoc].ForeColor = ConvertHexToColor(configColorDictionary["CommentLineDoc"]);
+                scintilla.Styles[Style.Sql.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
+                scintilla.Styles[Style.Sql.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
+                scintilla.Styles[Style.Sql.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
+                scintilla.Styles[Style.Sql.User1].ForeColor = ConvertHexToColor(configColorDictionary["User1"]);
+                scintilla.Styles[Style.Sql.User2].ForeColor = ConvertHexToColor(configColorDictionary["User2"]);
+                scintilla.Styles[Style.Sql.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
+                scintilla.Styles[Style.Sql.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
+                scintilla.Styles[Style.Sql.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
 
                 // Set keyword lists
                 // Word = 0
@@ -292,6 +299,61 @@ namespace pie.Services
                     ConfigureLexer("mssql", scintilla);
                     break;
             }
+        }
+
+        public static void InitializeDefaultColorDictionary()
+        {
+            Dictionary<string, string> colorDictionary = new Dictionary<string, string>();
+
+            colorDictionary["Default"] = "C0C0C0";
+            colorDictionary["Comment"] = "008000";
+            colorDictionary["CommentLine"] = "008000";
+            colorDictionary["CommentLineDoc"] = "008000";
+            colorDictionary["Number"] = "808000";
+            colorDictionary["Word"] = "0000FF";
+            colorDictionary["Word2"] = "8A2BE2";
+            colorDictionary["Word3"] = "483D8B";
+            colorDictionary["Word4"] = "48ED8B";
+            colorDictionary["String"] = "A31515";
+            colorDictionary["LiteralString"] = "A31515";
+            colorDictionary["Character"] = "A31515";
+            colorDictionary["Verbatim"] = "A31515";
+            colorDictionary["StringEol"] = "FFC0CB";
+            colorDictionary["Operator"] = "800080";
+            colorDictionary["Preprocessor"] = "800080";
+            colorDictionary["Triple"] = "7f0000";
+            colorDictionary["TripleDouble"] = "7f0000";
+            colorDictionary["ClassName"] = "0000FF";
+            colorDictionary["DefName"] = "007F7F";
+            colorDictionary["CommentBlock"] = "7F7F7F";
+            colorDictionary["Decorator"] = "805000";
+            colorDictionary["Attribute"] = "FF0000";
+            colorDictionary["Entity"] = "FF0000";
+            colorDictionary["Tag"] = "0000FF";
+            colorDictionary["TagEnd"] = "0000FF";
+            colorDictionary["DoubleString"] = "FF1493";
+            colorDictionary["SingleString"] = "FF1493";
+            colorDictionary["User1"] = "808080";
+            colorDictionary["User2"] = "FF0080";
+            colorDictionary["Background"] = "FFFFFF";
+            colorDictionary["Fore"] = "000000";
+            colorDictionary["CaretLine"] = "E6EFFA";
+
+            Globals.setDefaultColorDictionary(colorDictionary);
+        }
+
+        public static void InitializeConfigColorDictionary(string file)
+        {
+            Dictionary<string, string> configColorDictionary = new Dictionary<string, string>();
+            IEnumerable<string> lines = File.ReadLines(file);
+
+            foreach (string line in lines)
+            {
+                string[] splitLine = line.Split(':');
+                configColorDictionary[splitLine[0]] = splitLine[1];
+            }
+
+            Globals.setConfigColorDictionary(configColorDictionary);
         }
     }
 }

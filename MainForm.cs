@@ -70,14 +70,14 @@ namespace pie
             TextArea.WrapMode = WrapMode.None;
             TextArea.IndentationGuides = IndentView.LookBoth;
             TextArea.SetSelectionBackColor(true, Color.FromArgb(255, 230, 162));
-            TextArea.CaretLineBackColor = IntToColor(0xe6effa);
+            TextArea.CaretLineBackColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["CaretLine"]);
             TextArea.UsePopup(false);
 
             TextArea.StyleResetDefault();
             TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
             TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
-            TextArea.Styles[ScintillaNET.Style.Default].BackColor = Color.White;
-            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = Color.Black;
+            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Fore"]);
+            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Background"]);
             TextArea.StyleClearAll();
 
             InitNumberMargin(TextArea);
@@ -619,7 +619,7 @@ namespace pie
         private void Form1_Load(object sender, EventArgs e)
         {
             // Load Build Commands from configuration file
-            List<BuildCommand> buildCommands = BuildCommandService.GetBuildCommandsFromFile("pie.config");
+            List<BuildCommand> buildCommands = BuildCommandService.GetBuildCommandsFromFile("build-commands.config");
             List<ToolStripMenuItem> buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
 
             foreach (BuildCommand buildCommand in buildCommands)
@@ -636,6 +636,9 @@ namespace pie
 
             Globals.setBuildCommands(buildCommands);
             Globals.setBuildCommandsToolstripMenuItems(buildCommandToolStripMenuItems);
+
+            ScintillaLexerService.InitializeDefaultColorDictionary();
+            ScintillaLexerService.InitializeConfigColorDictionary("theme-settings.config");
 
             // Do other visual processing
             buildTabControl.Hide();
@@ -962,6 +965,22 @@ namespace pie
             {
                 this.Close();
             }
+        }
+
+        private void themeSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThemeSettingsForm themeSettingsForm = new ThemeSettingsForm();
+            themeSettingsForm.ShowDialog();
+
+            if (Globals.getCloseAfterApplyingChanges())
+            {
+                this.Close();
+            }
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

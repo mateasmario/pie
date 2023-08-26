@@ -15,6 +15,8 @@ namespace pie
         private static string addBuildCommandName;
         private static string addBuildCommandCmd;
         private static bool closeAfterApplyingChanges;
+        private static Dictionary<string, string> defaultColorDictionary;
+        private static Dictionary<string, string> configColorDictionary;
 
         public static string getCommitMessage()
         {
@@ -94,6 +96,26 @@ namespace pie
         public static void setCloseAfterApplyingChanges(bool closeAfterApplyingChangesNew)
         {
             closeAfterApplyingChanges = closeAfterApplyingChangesNew;
+        }
+
+        public static void setDefaultColorDictionary(Dictionary<string, string> defaultColorDictionaryNew)
+        {
+            defaultColorDictionary = defaultColorDictionaryNew;
+        }
+
+        public static Dictionary<string, string> getDefaultColorDictionary()
+        {
+            return defaultColorDictionary;
+        }
+
+        public static void setConfigColorDictionary(Dictionary<string, string> configColorDictionaryNew)
+        {
+            configColorDictionary = configColorDictionaryNew;
+        }
+
+        public static Dictionary<string, string> getConfigColorDictionary()
+        {
+            return configColorDictionary;
         }
     }
 }
