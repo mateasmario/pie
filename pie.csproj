@@ -122,6 +122,12 @@
     <Compile Include="Services\BuildCommandService.cs" />
     <Compile Include="Services\ParsingService.cs" />
     <Compile Include="Services\ScintillaLexerService.cs" />
+    <Compile Include="ThemeSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThemeSettingsForm.Designer.cs">
+      <DependentUpon>ThemeSettingsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddBuildCommandForm.resx">
       <DependentUpon>AddBuildCommandForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,6 +150,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ThemeSettingsForm.resx">
+      <DependentUpon>ThemeSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -162,6 +171,8 @@
     <Content Include="Console.ico" />
     <Content Include="icons8-pie-64.ico" />
     <Content Include="pie %284%29.ico" />
+    <None Include="Resources\color-wheel %281%29.png" />
+    <None Include="Resources\color-wheel.png" />
     <None Include="Resources\add %281%29.png" />
     <None Include="Resources\plus %282%29.png" />
     <None Include="Resources\plus %281%29.png" />
