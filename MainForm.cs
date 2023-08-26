@@ -282,6 +282,18 @@ namespace pie
             openedFileChanges.Insert(index, false);
         }
 
+        public void CloseApp()
+        {
+            int tabCount = tabControl.Pages.Count;
+
+            while(tabCount > 1)
+            {
+                CloseTab();
+                tabCount--;
+            }
+            Environment.Exit(0);
+        }
+
         // [Method] Closes the currently selected tab
         public void CloseTab()
         {
@@ -752,6 +764,8 @@ namespace pie
                 ConsoleControl.ConsoleControl consoleControl = (ConsoleControl.ConsoleControl)kryptonPage.Controls["ConsoleControl"];
                 consoleControl.StopProcess();
             }
+
+            CloseApp();
         }
 
         // [Event] Triggered when clicking "Show Build Tab" from the upper menu
@@ -943,6 +957,11 @@ namespace pie
         {
             BuildCommandsForm buildCommandsForm = new BuildCommandsForm();
             buildCommandsForm.ShowDialog();
+
+            if (Globals.getCloseAfterApplyingChanges())
+            {
+                this.Close();
+            }
         }
     }
 }

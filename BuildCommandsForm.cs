@@ -30,6 +30,8 @@ namespace pie
                 tempCommands.Add(buildCommand);
                 kryptonListBox2.Items.Add(buildCommand.getName());
             }
+
+            Globals.setCloseAfterApplyingChanges(false);
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
@@ -94,12 +96,10 @@ namespace pie
             DialogResult dialogResult = MessageBox.Show("Close pie and reopen it manually, in order for the changes to take effect?", "Build Commands", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                Application.Exit();
+                Globals.setCloseAfterApplyingChanges(true);
             }
-            else if (dialogResult == DialogResult.No)
-            {
-                this.Close();
-            }
+
+            this.Close();
         }
     }
 }
