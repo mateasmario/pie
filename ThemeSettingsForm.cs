@@ -18,8 +18,13 @@ namespace pie
             InitializeComponent();
         }
 
-        private bool ProcessColors(string key, string value)
+        private bool ProcessColors(bool finalResult, string key, string value)
         {
+            if (!finalResult)
+            {
+                return false;
+            }
+
             if (value.Length != 6)
             {
                 MessageBox.Show("Invalid color format for " + key + ". HEX value should have a length of 6 characters.", "Theme Settings - pie");
@@ -82,32 +87,33 @@ namespace pie
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
             bool finalResult = true;
+            bool canSave = true;
 
-            finalResult = ProcessColors("Default", defaultTextBox.Text);
-            finalResult = ProcessColors("Comment", commentTextBox.Text);
-            finalResult = ProcessColors("Number", numberTextBox.Text);
-            finalResult = ProcessColors("Word", wordTextBox.Text);
-            finalResult = ProcessColors("Word2", word2TextBox.Text);
-            finalResult = ProcessColors("Word3", word3TextBox.Text);
-            finalResult = ProcessColors("Word4", word4TextBox.Text);
-            finalResult = ProcessColors("String", stringTextBox.Text);
-            finalResult = ProcessColors("Character", characterTextBox.Text);
-            finalResult = ProcessColors("StringEol", stringEOLTextBox.Text);
-            finalResult = ProcessColors("Operator", operatorTextBox.Text);
-            finalResult = ProcessColors("Preprocessor", preprocessorTextBox.Text);
-            finalResult = ProcessColors("Triple", tripleTextBox.Text);
-            finalResult = ProcessColors("ClassName", claassNameTextBox.Text);
-            finalResult = ProcessColors("DefName", defNameTextBox.Text);
-            finalResult = ProcessColors("CommentBlock", commentBlockTextBox.Text);
-            finalResult = ProcessColors("Decorator", decoratorTextBox.Text);
-            finalResult = ProcessColors("Attribute", attributeTextBox.Text);
-            finalResult = ProcessColors("Tag", tagTextBox.Text);
-            finalResult = ProcessColors("SingleString", singleStringTextBox.Text);
-            finalResult = ProcessColors("User1", user1TextBox.Text);
-            finalResult = ProcessColors("User2", user2TextBox.Text);
-            finalResult = ProcessColors("Background", backgroundTextBox.Text);
-            finalResult = ProcessColors("Fore", foreTextBox.Text);
-            finalResult = ProcessColors("CaretLine", caretLineTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Default", defaultTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Comment", commentTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Number", numberTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Word", wordTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Word2", word2TextBox.Text);
+            finalResult = ProcessColors(finalResult, "Word3", word3TextBox.Text);
+            finalResult = ProcessColors(finalResult, "Word4", word4TextBox.Text);
+            finalResult = ProcessColors(finalResult, "String", stringTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Character", characterTextBox.Text);
+            finalResult = ProcessColors(finalResult, "StringEol", stringEOLTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Operator", operatorTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Preprocessor", preprocessorTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Triple", tripleTextBox.Text);
+            finalResult = ProcessColors(finalResult, "ClassName", claassNameTextBox.Text);
+            finalResult = ProcessColors(finalResult, "DefName", defNameTextBox.Text);
+            finalResult = ProcessColors(finalResult, "CommentBlock", commentBlockTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Decorator", decoratorTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Attribute", attributeTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Tag", tagTextBox.Text);
+            finalResult = ProcessColors(finalResult, "SingleString", singleStringTextBox.Text);
+            finalResult = ProcessColors(finalResult, "User1", user1TextBox.Text);
+            finalResult = ProcessColors(finalResult, "User2", user2TextBox.Text);
+            finalResult = ProcessColors(finalResult, "Background", backgroundTextBox.Text);
+            finalResult = ProcessColors(finalResult, "Fore", foreTextBox.Text);
+            finalResult = ProcessColors(finalResult, "CaretLine", caretLineTextBox.Text);
 
             if (finalResult)
             {
