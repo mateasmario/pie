@@ -14,6 +14,7 @@ namespace pie
         private static List<ToolStripMenuItem> buildCommandToolStripMenuItems;
         private static string addBuildCommandName;
         private static string addBuildCommandCmd;
+        private static bool closeAfterApplyingChanges;
 
         public static string getCommitMessage()
         {
@@ -83,6 +84,16 @@ namespace pie
         public static void setAddBuildCommandCmd(string addBuildCommandCmdNew)
         {
             addBuildCommandCmd = addBuildCommandCmdNew;
+        }
+
+        public static bool getCloseAfterApplyingChanges()
+        {
+            return closeAfterApplyingChanges;
+        }
+
+        public static void setCloseAfterApplyingChanges(bool closeAfterApplyingChangesNew)
+        {
+            closeAfterApplyingChanges = closeAfterApplyingChangesNew;
         }
     }
 }
