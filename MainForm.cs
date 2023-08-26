@@ -291,7 +291,7 @@ namespace pie
                 CloseTab();
                 tabCount--;
             }
-            Environment.Exit(0);
+            Application.Exit();
         }
 
         // [Method] Closes the currently selected tab

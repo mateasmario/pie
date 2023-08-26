@@ -81,18 +81,30 @@
             this.foreTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel17 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.caretLineTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonDockableNavigator1 = new ComponentFactory.Krypton.Docking.KryptonDockableNavigator();
+            this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableNavigator1)).BeginInit();
+            this.kryptonDockableNavigator1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
+            this.kryptonPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
+            this.kryptonPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).BeginInit();
+            this.kryptonPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // defaultTextBox
             // 
-            this.defaultTextBox.Location = new System.Drawing.Point(12, 33);
+            this.defaultTextBox.Location = new System.Drawing.Point(19, 34);
             this.defaultTextBox.Name = "defaultTextBox";
             this.defaultTextBox.Size = new System.Drawing.Size(194, 23);
             this.defaultTextBox.TabIndex = 0;
             // 
             // kryptonLabel1
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(9, 12);
+            this.kryptonLabel1.Location = new System.Drawing.Point(16, 13);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(50, 20);
             this.kryptonLabel1.TabIndex = 1;
@@ -100,7 +112,7 @@
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(238, 12);
+            this.kryptonLabel2.Location = new System.Drawing.Point(245, 13);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(64, 20);
             this.kryptonLabel2.TabIndex = 3;
@@ -108,14 +120,14 @@
             // 
             // commentTextBox
             // 
-            this.commentTextBox.Location = new System.Drawing.Point(241, 33);
+            this.commentTextBox.Location = new System.Drawing.Point(248, 34);
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.Size = new System.Drawing.Size(194, 23);
             this.commentTextBox.TabIndex = 2;
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(9, 66);
+            this.kryptonLabel3.Location = new System.Drawing.Point(16, 67);
             this.kryptonLabel3.Name = "kryptonLabel3";
             this.kryptonLabel3.Size = new System.Drawing.Size(41, 20);
             this.kryptonLabel3.TabIndex = 5;
@@ -123,14 +135,14 @@
             // 
             // wordTextBox
             // 
-            this.wordTextBox.Location = new System.Drawing.Point(12, 87);
+            this.wordTextBox.Location = new System.Drawing.Point(19, 88);
             this.wordTextBox.Name = "wordTextBox";
             this.wordTextBox.Size = new System.Drawing.Size(194, 23);
             this.wordTextBox.TabIndex = 4;
             // 
             // word2Label
             // 
-            this.word2Label.Location = new System.Drawing.Point(238, 66);
+            this.word2Label.Location = new System.Drawing.Point(245, 67);
             this.word2Label.Name = "word2Label";
             this.word2Label.Size = new System.Drawing.Size(48, 20);
             this.word2Label.TabIndex = 7;
@@ -138,14 +150,14 @@
             // 
             // word2TextBox
             // 
-            this.word2TextBox.Location = new System.Drawing.Point(241, 87);
+            this.word2TextBox.Location = new System.Drawing.Point(248, 88);
             this.word2TextBox.Name = "word2TextBox";
             this.word2TextBox.Size = new System.Drawing.Size(194, 23);
             this.word2TextBox.TabIndex = 6;
             // 
             // kryptonLabel5
             // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(467, 12);
+            this.kryptonLabel5.Location = new System.Drawing.Point(474, 13);
             this.kryptonLabel5.Name = "kryptonLabel5";
             this.kryptonLabel5.Size = new System.Drawing.Size(55, 20);
             this.kryptonLabel5.TabIndex = 9;
@@ -153,14 +165,14 @@
             // 
             // numberTextBox
             // 
-            this.numberTextBox.Location = new System.Drawing.Point(470, 33);
+            this.numberTextBox.Location = new System.Drawing.Point(477, 34);
             this.numberTextBox.Name = "numberTextBox";
             this.numberTextBox.Size = new System.Drawing.Size(194, 23);
             this.numberTextBox.TabIndex = 8;
             // 
             // kryptonLabel6
             // 
-            this.kryptonLabel6.Location = new System.Drawing.Point(467, 66);
+            this.kryptonLabel6.Location = new System.Drawing.Point(474, 67);
             this.kryptonLabel6.Name = "kryptonLabel6";
             this.kryptonLabel6.Size = new System.Drawing.Size(48, 20);
             this.kryptonLabel6.TabIndex = 11;
@@ -168,14 +180,14 @@
             // 
             // word3TextBox
             // 
-            this.word3TextBox.Location = new System.Drawing.Point(470, 87);
+            this.word3TextBox.Location = new System.Drawing.Point(477, 88);
             this.word3TextBox.Name = "word3TextBox";
             this.word3TextBox.Size = new System.Drawing.Size(194, 23);
             this.word3TextBox.TabIndex = 10;
             // 
             // kryptonLabel7
             // 
-            this.kryptonLabel7.Location = new System.Drawing.Point(696, 12);
+            this.kryptonLabel7.Location = new System.Drawing.Point(703, 13);
             this.kryptonLabel7.Name = "kryptonLabel7";
             this.kryptonLabel7.Size = new System.Drawing.Size(43, 20);
             this.kryptonLabel7.TabIndex = 13;
@@ -183,14 +195,14 @@
             // 
             // stringTextBox
             // 
-            this.stringTextBox.Location = new System.Drawing.Point(699, 33);
+            this.stringTextBox.Location = new System.Drawing.Point(706, 34);
             this.stringTextBox.Name = "stringTextBox";
             this.stringTextBox.Size = new System.Drawing.Size(194, 23);
             this.stringTextBox.TabIndex = 12;
             // 
             // kryptonLabel8
             // 
-            this.kryptonLabel8.Location = new System.Drawing.Point(697, 66);
+            this.kryptonLabel8.Location = new System.Drawing.Point(704, 67);
             this.kryptonLabel8.Name = "kryptonLabel8";
             this.kryptonLabel8.Size = new System.Drawing.Size(48, 20);
             this.kryptonLabel8.TabIndex = 14;
@@ -198,21 +210,21 @@
             // 
             // word4TextBox
             // 
-            this.word4TextBox.Location = new System.Drawing.Point(699, 87);
+            this.word4TextBox.Location = new System.Drawing.Point(706, 88);
             this.word4TextBox.Name = "word4TextBox";
             this.word4TextBox.Size = new System.Drawing.Size(194, 23);
             this.word4TextBox.TabIndex = 15;
             // 
             // commentBlockTextBox
             // 
-            this.commentBlockTextBox.Location = new System.Drawing.Point(699, 195);
+            this.commentBlockTextBox.Location = new System.Drawing.Point(706, 196);
             this.commentBlockTextBox.Name = "commentBlockTextBox";
             this.commentBlockTextBox.Size = new System.Drawing.Size(194, 23);
             this.commentBlockTextBox.TabIndex = 31;
             // 
             // kryptonLabel9
             // 
-            this.kryptonLabel9.Location = new System.Drawing.Point(697, 174);
+            this.kryptonLabel9.Location = new System.Drawing.Point(704, 175);
             this.kryptonLabel9.Name = "kryptonLabel9";
             this.kryptonLabel9.Size = new System.Drawing.Size(94, 20);
             this.kryptonLabel9.TabIndex = 30;
@@ -220,7 +232,7 @@
             // 
             // kryptonLabel10
             // 
-            this.kryptonLabel10.Location = new System.Drawing.Point(696, 120);
+            this.kryptonLabel10.Location = new System.Drawing.Point(703, 121);
             this.kryptonLabel10.Name = "kryptonLabel10";
             this.kryptonLabel10.Size = new System.Drawing.Size(81, 20);
             this.kryptonLabel10.TabIndex = 29;
@@ -228,14 +240,14 @@
             // 
             // preprocessorTextBox
             // 
-            this.preprocessorTextBox.Location = new System.Drawing.Point(699, 141);
+            this.preprocessorTextBox.Location = new System.Drawing.Point(706, 142);
             this.preprocessorTextBox.Name = "preprocessorTextBox";
             this.preprocessorTextBox.Size = new System.Drawing.Size(194, 23);
             this.preprocessorTextBox.TabIndex = 28;
             // 
             // kryptonLabel11
             // 
-            this.kryptonLabel11.Location = new System.Drawing.Point(467, 174);
+            this.kryptonLabel11.Location = new System.Drawing.Point(474, 175);
             this.kryptonLabel11.Name = "kryptonLabel11";
             this.kryptonLabel11.Size = new System.Drawing.Size(62, 20);
             this.kryptonLabel11.TabIndex = 27;
@@ -243,14 +255,14 @@
             // 
             // defNameTextBox
             // 
-            this.defNameTextBox.Location = new System.Drawing.Point(470, 195);
+            this.defNameTextBox.Location = new System.Drawing.Point(477, 196);
             this.defNameTextBox.Name = "defNameTextBox";
             this.defNameTextBox.Size = new System.Drawing.Size(194, 23);
             this.defNameTextBox.TabIndex = 26;
             // 
             // kryptonLabel12
             // 
-            this.kryptonLabel12.Location = new System.Drawing.Point(467, 120);
+            this.kryptonLabel12.Location = new System.Drawing.Point(474, 121);
             this.kryptonLabel12.Name = "kryptonLabel12";
             this.kryptonLabel12.Size = new System.Drawing.Size(60, 20);
             this.kryptonLabel12.TabIndex = 25;
@@ -258,14 +270,14 @@
             // 
             // operatorTextBox
             // 
-            this.operatorTextBox.Location = new System.Drawing.Point(470, 141);
+            this.operatorTextBox.Location = new System.Drawing.Point(477, 142);
             this.operatorTextBox.Name = "operatorTextBox";
             this.operatorTextBox.Size = new System.Drawing.Size(194, 23);
             this.operatorTextBox.TabIndex = 24;
             // 
             // kryptonLabel13
             // 
-            this.kryptonLabel13.Location = new System.Drawing.Point(238, 174);
+            this.kryptonLabel13.Location = new System.Drawing.Point(245, 175);
             this.kryptonLabel13.Name = "kryptonLabel13";
             this.kryptonLabel13.Size = new System.Drawing.Size(71, 20);
             this.kryptonLabel13.TabIndex = 23;
@@ -273,14 +285,14 @@
             // 
             // claassNameTextBox
             // 
-            this.claassNameTextBox.Location = new System.Drawing.Point(241, 195);
+            this.claassNameTextBox.Location = new System.Drawing.Point(248, 196);
             this.claassNameTextBox.Name = "claassNameTextBox";
             this.claassNameTextBox.Size = new System.Drawing.Size(194, 23);
             this.claassNameTextBox.TabIndex = 22;
             // 
             // kryptonLabel14
             // 
-            this.kryptonLabel14.Location = new System.Drawing.Point(9, 174);
+            this.kryptonLabel14.Location = new System.Drawing.Point(16, 175);
             this.kryptonLabel14.Name = "kryptonLabel14";
             this.kryptonLabel14.Size = new System.Drawing.Size(41, 20);
             this.kryptonLabel14.TabIndex = 21;
@@ -288,14 +300,14 @@
             // 
             // tripleTextBox
             // 
-            this.tripleTextBox.Location = new System.Drawing.Point(12, 195);
+            this.tripleTextBox.Location = new System.Drawing.Point(19, 196);
             this.tripleTextBox.Name = "tripleTextBox";
             this.tripleTextBox.Size = new System.Drawing.Size(194, 23);
             this.tripleTextBox.TabIndex = 20;
             // 
             // kryptonLabel15
             // 
-            this.kryptonLabel15.Location = new System.Drawing.Point(238, 120);
+            this.kryptonLabel15.Location = new System.Drawing.Point(245, 121);
             this.kryptonLabel15.Name = "kryptonLabel15";
             this.kryptonLabel15.Size = new System.Drawing.Size(68, 20);
             this.kryptonLabel15.TabIndex = 19;
@@ -303,14 +315,14 @@
             // 
             // stringEOLTextBox
             // 
-            this.stringEOLTextBox.Location = new System.Drawing.Point(241, 141);
+            this.stringEOLTextBox.Location = new System.Drawing.Point(248, 142);
             this.stringEOLTextBox.Name = "stringEOLTextBox";
             this.stringEOLTextBox.Size = new System.Drawing.Size(194, 23);
             this.stringEOLTextBox.TabIndex = 18;
             // 
             // kryptonLabel16
             // 
-            this.kryptonLabel16.Location = new System.Drawing.Point(9, 120);
+            this.kryptonLabel16.Location = new System.Drawing.Point(16, 121);
             this.kryptonLabel16.Name = "kryptonLabel16";
             this.kryptonLabel16.Size = new System.Drawing.Size(63, 20);
             this.kryptonLabel16.TabIndex = 17;
@@ -318,89 +330,90 @@
             // 
             // characterTextBox
             // 
-            this.characterTextBox.Location = new System.Drawing.Point(12, 141);
+            this.characterTextBox.Location = new System.Drawing.Point(19, 142);
             this.characterTextBox.Name = "characterTextBox";
             this.characterTextBox.Size = new System.Drawing.Size(194, 23);
             this.characterTextBox.TabIndex = 16;
             // 
             // kryptonLabel18
             // 
-            this.kryptonLabel18.Location = new System.Drawing.Point(696, 228);
+            this.kryptonLabel18.Location = new System.Drawing.Point(474, 13);
             this.kryptonLabel18.Name = "kryptonLabel18";
-            this.kryptonLabel18.Size = new System.Drawing.Size(160, 20);
+            this.kryptonLabel18.Size = new System.Drawing.Size(187, 20);
             this.kryptonLabel18.TabIndex = 45;
-            this.kryptonLabel18.Values.Text = "SingleString / DoubleString";
+            this.kryptonLabel18.Values.Text = "XML SingleString / DoubleString";
             // 
             // singleStringTextBox
             // 
-            this.singleStringTextBox.Location = new System.Drawing.Point(699, 249);
+            this.singleStringTextBox.Location = new System.Drawing.Point(477, 34);
             this.singleStringTextBox.Name = "singleStringTextBox";
             this.singleStringTextBox.Size = new System.Drawing.Size(194, 23);
             this.singleStringTextBox.TabIndex = 44;
             // 
             // kryptonLabel20
             // 
-            this.kryptonLabel20.Location = new System.Drawing.Point(467, 228);
+            this.kryptonLabel20.Location = new System.Drawing.Point(245, 13);
             this.kryptonLabel20.Name = "kryptonLabel20";
-            this.kryptonLabel20.Size = new System.Drawing.Size(31, 20);
+            this.kryptonLabel20.Size = new System.Drawing.Size(114, 20);
             this.kryptonLabel20.TabIndex = 41;
-            this.kryptonLabel20.Values.Text = "Tag";
+            this.kryptonLabel20.Values.Text = "XML Tag / Tag End";
             // 
             // tagTextBox
             // 
-            this.tagTextBox.Location = new System.Drawing.Point(470, 249);
+            this.tagTextBox.Location = new System.Drawing.Point(248, 34);
             this.tagTextBox.Name = "tagTextBox";
             this.tagTextBox.Size = new System.Drawing.Size(194, 23);
             this.tagTextBox.TabIndex = 40;
             // 
             // kryptonLabel21
             // 
-            this.kryptonLabel21.Location = new System.Drawing.Point(238, 282);
+            this.kryptonLabel21.Location = new System.Drawing.Point(245, 67);
             this.kryptonLabel21.Name = "kryptonLabel21";
-            this.kryptonLabel21.Size = new System.Drawing.Size(42, 20);
+            this.kryptonLabel21.Size = new System.Drawing.Size(67, 20);
             this.kryptonLabel21.TabIndex = 39;
-            this.kryptonLabel21.Values.Text = "User2";
+            this.kryptonLabel21.Values.Text = "SQL User2";
             // 
             // user2TextBox
             // 
-            this.user2TextBox.Location = new System.Drawing.Point(241, 303);
+            this.user2TextBox.Location = new System.Drawing.Point(248, 88);
             this.user2TextBox.Name = "user2TextBox";
             this.user2TextBox.Size = new System.Drawing.Size(194, 23);
             this.user2TextBox.TabIndex = 38;
             // 
             // kryptonLabel22
             // 
-            this.kryptonLabel22.Location = new System.Drawing.Point(9, 282);
+            this.kryptonLabel22.Location = new System.Drawing.Point(16, 67);
             this.kryptonLabel22.Name = "kryptonLabel22";
-            this.kryptonLabel22.Size = new System.Drawing.Size(42, 20);
+            this.kryptonLabel22.Size = new System.Drawing.Size(67, 20);
             this.kryptonLabel22.TabIndex = 37;
-            this.kryptonLabel22.Values.Text = "User1";
+            this.kryptonLabel22.Values.Text = "SQL User1";
             // 
             // user1TextBox
             // 
-            this.user1TextBox.Location = new System.Drawing.Point(12, 303);
+            this.user1TextBox.Location = new System.Drawing.Point(19, 88);
             this.user1TextBox.Name = "user1TextBox";
             this.user1TextBox.Size = new System.Drawing.Size(194, 23);
             this.user1TextBox.TabIndex = 36;
+            this.user1TextBox.TextChanged += new System.EventHandler(this.user1TextBox_TextChanged);
             // 
             // kryptonLabel23
             // 
-            this.kryptonLabel23.Location = new System.Drawing.Point(238, 228);
+            this.kryptonLabel23.Location = new System.Drawing.Point(16, 13);
             this.kryptonLabel23.Name = "kryptonLabel23";
-            this.kryptonLabel23.Size = new System.Drawing.Size(59, 20);
+            this.kryptonLabel23.Size = new System.Drawing.Size(129, 20);
             this.kryptonLabel23.TabIndex = 35;
-            this.kryptonLabel23.Values.Text = "Attribute";
+            this.kryptonLabel23.Values.Text = "XML Entity / Attribute";
             // 
             // attributeTextBox
             // 
-            this.attributeTextBox.Location = new System.Drawing.Point(241, 249);
+            this.attributeTextBox.Location = new System.Drawing.Point(19, 34);
             this.attributeTextBox.Name = "attributeTextBox";
             this.attributeTextBox.Size = new System.Drawing.Size(194, 23);
             this.attributeTextBox.TabIndex = 34;
             // 
             // kryptonLabel24
             // 
-            this.kryptonLabel24.Location = new System.Drawing.Point(9, 228);
+            this.kryptonLabel24.Location = new System.Drawing.Point(16, 229);
             this.kryptonLabel24.Name = "kryptonLabel24";
             this.kryptonLabel24.Size = new System.Drawing.Size(65, 20);
             this.kryptonLabel24.TabIndex = 33;
@@ -408,14 +421,14 @@
             // 
             // decoratorTextBox
             // 
-            this.decoratorTextBox.Location = new System.Drawing.Point(12, 249);
+            this.decoratorTextBox.Location = new System.Drawing.Point(19, 250);
             this.decoratorTextBox.Name = "decoratorTextBox";
             this.decoratorTextBox.Size = new System.Drawing.Size(194, 23);
             this.decoratorTextBox.TabIndex = 32;
             // 
             // kryptonLabel19
             // 
-            this.kryptonLabel19.Location = new System.Drawing.Point(467, 282);
+            this.kryptonLabel19.Location = new System.Drawing.Point(16, 121);
             this.kryptonLabel19.Name = "kryptonLabel19";
             this.kryptonLabel19.Size = new System.Drawing.Size(76, 20);
             this.kryptonLabel19.TabIndex = 43;
@@ -423,14 +436,14 @@
             // 
             // backgroundTextBox
             // 
-            this.backgroundTextBox.Location = new System.Drawing.Point(470, 303);
+            this.backgroundTextBox.Location = new System.Drawing.Point(19, 142);
             this.backgroundTextBox.Name = "backgroundTextBox";
             this.backgroundTextBox.Size = new System.Drawing.Size(194, 23);
             this.backgroundTextBox.TabIndex = 42;
             // 
             // kryptonButton3
             // 
-            this.kryptonButton3.Location = new System.Drawing.Point(836, 430);
+            this.kryptonButton3.Location = new System.Drawing.Point(952, 430);
             this.kryptonButton3.Name = "kryptonButton3";
             this.kryptonButton3.Size = new System.Drawing.Size(66, 25);
             this.kryptonButton3.TabIndex = 46;
@@ -439,7 +452,7 @@
             // 
             // kryptonButton1
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(717, 430);
+            this.kryptonButton1.Location = new System.Drawing.Point(833, 430);
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.Size = new System.Drawing.Size(113, 25);
             this.kryptonButton1.TabIndex = 47;
@@ -448,7 +461,7 @@
             // 
             // kryptonLabel4
             // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(696, 282);
+            this.kryptonLabel4.Location = new System.Drawing.Point(16, 13);
             this.kryptonLabel4.Name = "kryptonLabel4";
             this.kryptonLabel4.Size = new System.Drawing.Size(35, 20);
             this.kryptonLabel4.TabIndex = 49;
@@ -456,14 +469,14 @@
             // 
             // foreTextBox
             // 
-            this.foreTextBox.Location = new System.Drawing.Point(699, 303);
+            this.foreTextBox.Location = new System.Drawing.Point(19, 34);
             this.foreTextBox.Name = "foreTextBox";
             this.foreTextBox.Size = new System.Drawing.Size(194, 23);
             this.foreTextBox.TabIndex = 48;
             // 
             // kryptonLabel17
             // 
-            this.kryptonLabel17.Location = new System.Drawing.Point(9, 336);
+            this.kryptonLabel17.Location = new System.Drawing.Point(16, 67);
             this.kryptonLabel17.Name = "kryptonLabel17";
             this.kryptonLabel17.Size = new System.Drawing.Size(65, 20);
             this.kryptonLabel17.TabIndex = 51;
@@ -471,77 +484,143 @@
             // 
             // caretLineTextBox
             // 
-            this.caretLineTextBox.Location = new System.Drawing.Point(12, 357);
+            this.caretLineTextBox.Location = new System.Drawing.Point(19, 88);
             this.caretLineTextBox.Name = "caretLineTextBox";
             this.caretLineTextBox.Size = new System.Drawing.Size(194, 23);
             this.caretLineTextBox.TabIndex = 50;
+            // 
+            // kryptonDockableNavigator1
+            // 
+            this.kryptonDockableNavigator1.Bar.BarOrientation = ComponentFactory.Krypton.Toolkit.VisualOrientation.Left;
+            this.kryptonDockableNavigator1.Bar.ItemOrientation = ComponentFactory.Krypton.Toolkit.ButtonOrientation.FixedTop;
+            this.kryptonDockableNavigator1.Bar.TabStyle = ComponentFactory.Krypton.Toolkit.TabStyle.StandardProfile;
+            this.kryptonDockableNavigator1.Button.CloseButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
+            this.kryptonDockableNavigator1.Button.ContextButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
+            this.kryptonDockableNavigator1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonDockableNavigator1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonDockableNavigator1.Name = "kryptonDockableNavigator1";
+            this.kryptonDockableNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
+            this.kryptonPage1,
+            this.kryptonPage2,
+            this.kryptonPage3});
+            this.kryptonDockableNavigator1.SelectedIndex = 0;
+            this.kryptonDockableNavigator1.Size = new System.Drawing.Size(1028, 424);
+            this.kryptonDockableNavigator1.TabIndex = 52;
+            this.kryptonDockableNavigator1.Text = "kryptonDockableNavigator1";
+            // 
+            // kryptonPage1
+            // 
+            this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage1.Controls.Add(this.kryptonLabel4);
+            this.kryptonPage1.Controls.Add(this.caretLineTextBox);
+            this.kryptonPage1.Controls.Add(this.kryptonLabel17);
+            this.kryptonPage1.Controls.Add(this.foreTextBox);
+            this.kryptonPage1.Controls.Add(this.kryptonLabel19);
+            this.kryptonPage1.Controls.Add(this.backgroundTextBox);
+            this.kryptonPage1.Flags = 65534;
+            this.kryptonPage1.LastVisibleSet = true;
+            this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage1.Name = "kryptonPage1";
+            this.kryptonPage1.Size = new System.Drawing.Size(915, 422);
+            this.kryptonPage1.Text = "General";
+            this.kryptonPage1.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage1.UniqueName = "6CA046398D1C4158C1AC81C429D241D6";
+            // 
+            // kryptonPage2
+            // 
+            this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel1);
+            this.kryptonPage2.Controls.Add(this.defaultTextBox);
+            this.kryptonPage2.Controls.Add(this.commentTextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel2);
+            this.kryptonPage2.Controls.Add(this.wordTextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel3);
+            this.kryptonPage2.Controls.Add(this.word2TextBox);
+            this.kryptonPage2.Controls.Add(this.word2Label);
+            this.kryptonPage2.Controls.Add(this.numberTextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel5);
+            this.kryptonPage2.Controls.Add(this.word3TextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel6);
+            this.kryptonPage2.Controls.Add(this.stringTextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel24);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel7);
+            this.kryptonPage2.Controls.Add(this.decoratorTextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel8);
+            this.kryptonPage2.Controls.Add(this.commentBlockTextBox);
+            this.kryptonPage2.Controls.Add(this.word4TextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel9);
+            this.kryptonPage2.Controls.Add(this.characterTextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel10);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel16);
+            this.kryptonPage2.Controls.Add(this.preprocessorTextBox);
+            this.kryptonPage2.Controls.Add(this.stringEOLTextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel11);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel15);
+            this.kryptonPage2.Controls.Add(this.defNameTextBox);
+            this.kryptonPage2.Controls.Add(this.tripleTextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel12);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel14);
+            this.kryptonPage2.Controls.Add(this.operatorTextBox);
+            this.kryptonPage2.Controls.Add(this.claassNameTextBox);
+            this.kryptonPage2.Controls.Add(this.kryptonLabel13);
+            this.kryptonPage2.Flags = 65534;
+            this.kryptonPage2.LastVisibleSet = true;
+            this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage2.Name = "kryptonPage2";
+            this.kryptonPage2.Size = new System.Drawing.Size(915, 422);
+            this.kryptonPage2.Text = "Lexer";
+            this.kryptonPage2.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage2.UniqueName = "77071D986B0C49E57A8625E048AF2FED";
+            // 
+            // kryptonPage3
+            // 
+            this.kryptonPage3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage3.Controls.Add(this.kryptonLabel23);
+            this.kryptonPage3.Controls.Add(this.attributeTextBox);
+            this.kryptonPage3.Controls.Add(this.tagTextBox);
+            this.kryptonPage3.Controls.Add(this.kryptonLabel21);
+            this.kryptonPage3.Controls.Add(this.kryptonLabel18);
+            this.kryptonPage3.Controls.Add(this.user2TextBox);
+            this.kryptonPage3.Controls.Add(this.kryptonLabel20);
+            this.kryptonPage3.Controls.Add(this.kryptonLabel22);
+            this.kryptonPage3.Controls.Add(this.singleStringTextBox);
+            this.kryptonPage3.Controls.Add(this.user1TextBox);
+            this.kryptonPage3.Flags = 65534;
+            this.kryptonPage3.LastVisibleSet = true;
+            this.kryptonPage3.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage3.Name = "kryptonPage3";
+            this.kryptonPage3.Size = new System.Drawing.Size(909, 422);
+            this.kryptonPage3.Text = "Language-specific";
+            this.kryptonPage3.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage3.UniqueName = "C4F63FE08C0B4463F5AC89D40217EE68";
             // 
             // ThemeSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(910, 467);
-            this.Controls.Add(this.kryptonLabel17);
-            this.Controls.Add(this.caretLineTextBox);
-            this.Controls.Add(this.kryptonLabel4);
-            this.Controls.Add(this.foreTextBox);
+            this.ClientSize = new System.Drawing.Size(1028, 461);
+            this.Controls.Add(this.kryptonDockableNavigator1);
             this.Controls.Add(this.kryptonButton1);
             this.Controls.Add(this.kryptonButton3);
-            this.Controls.Add(this.kryptonLabel18);
-            this.Controls.Add(this.singleStringTextBox);
-            this.Controls.Add(this.kryptonLabel19);
-            this.Controls.Add(this.backgroundTextBox);
-            this.Controls.Add(this.kryptonLabel20);
-            this.Controls.Add(this.tagTextBox);
-            this.Controls.Add(this.kryptonLabel21);
-            this.Controls.Add(this.user2TextBox);
-            this.Controls.Add(this.kryptonLabel22);
-            this.Controls.Add(this.user1TextBox);
-            this.Controls.Add(this.kryptonLabel23);
-            this.Controls.Add(this.attributeTextBox);
-            this.Controls.Add(this.kryptonLabel24);
-            this.Controls.Add(this.decoratorTextBox);
-            this.Controls.Add(this.commentBlockTextBox);
-            this.Controls.Add(this.kryptonLabel9);
-            this.Controls.Add(this.kryptonLabel10);
-            this.Controls.Add(this.preprocessorTextBox);
-            this.Controls.Add(this.kryptonLabel11);
-            this.Controls.Add(this.defNameTextBox);
-            this.Controls.Add(this.kryptonLabel12);
-            this.Controls.Add(this.operatorTextBox);
-            this.Controls.Add(this.kryptonLabel13);
-            this.Controls.Add(this.claassNameTextBox);
-            this.Controls.Add(this.kryptonLabel14);
-            this.Controls.Add(this.tripleTextBox);
-            this.Controls.Add(this.kryptonLabel15);
-            this.Controls.Add(this.stringEOLTextBox);
-            this.Controls.Add(this.kryptonLabel16);
-            this.Controls.Add(this.characterTextBox);
-            this.Controls.Add(this.word4TextBox);
-            this.Controls.Add(this.kryptonLabel8);
-            this.Controls.Add(this.kryptonLabel7);
-            this.Controls.Add(this.stringTextBox);
-            this.Controls.Add(this.kryptonLabel6);
-            this.Controls.Add(this.word3TextBox);
-            this.Controls.Add(this.kryptonLabel5);
-            this.Controls.Add(this.numberTextBox);
-            this.Controls.Add(this.word2Label);
-            this.Controls.Add(this.word2TextBox);
-            this.Controls.Add(this.kryptonLabel3);
-            this.Controls.Add(this.wordTextBox);
-            this.Controls.Add(this.kryptonLabel2);
-            this.Controls.Add(this.commentTextBox);
-            this.Controls.Add(this.kryptonLabel1);
-            this.Controls.Add(this.defaultTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ThemeSettingsForm";
             this.Text = "Theme Settings - pie";
             this.Load += new System.EventHandler(this.ThemeSettingsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableNavigator1)).EndInit();
+            this.kryptonDockableNavigator1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
+            this.kryptonPage1.ResumeLayout(false);
+            this.kryptonPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
+            this.kryptonPage2.ResumeLayout(false);
+            this.kryptonPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).EndInit();
+            this.kryptonPage3.ResumeLayout(false);
+            this.kryptonPage3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -599,5 +678,9 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox foreTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel17;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox caretLineTextBox;
+        private ComponentFactory.Krypton.Docking.KryptonDockableNavigator kryptonDockableNavigator1;
+        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
+        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
+        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage3;
     }
 }
