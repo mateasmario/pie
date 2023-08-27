@@ -69,7 +69,7 @@ namespace pie
             TextArea.TextChanged += TextArea_TextChanged;
             TextArea.WrapMode = WrapMode.None;
             TextArea.IndentationGuides = IndentView.LookBoth;
-            TextArea.SetSelectionBackColor(true, Color.FromArgb(255, 230, 162));
+            TextArea.SetSelectionBackColor(true, ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Selection"]));
             TextArea.CaretLineBackColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["CaretLine"]);
             TextArea.UsePopup(false);
 
@@ -80,8 +80,11 @@ namespace pie
             TextArea.Styles[ScintillaNET.Style.Default].BackColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Background"]);
             TextArea.StyleClearAll();
 
+            TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
+
             InitNumberMargin(TextArea);
             //InitBookmarkMargin(TextArea);
+            InitCodeFolding(TextArea);
 
             TextArea.Dock = DockStyle.Fill;
 
@@ -129,16 +132,6 @@ namespace pie
         #region Numbers, Bookmarks, Code Folding
 
         /// <summary>
-        /// the background color of the text area
-        /// </summary>
-        private const int BACK_COLOR = 0xbbcee6;
-
-        /// <summary>
-        /// default text color of the text area
-        /// </summary>
-        private const int FORE_COLOR = 0x000000;
-
-        /// <summary>
         /// change this to whatever margin you want the line numbers to show in
         /// </summary>
         private const int NUMBER_MARGIN = 5;
@@ -159,18 +152,13 @@ namespace pie
         /// </summary>
         private const bool CODEFOLDING_CIRCULAR = true;
 
-        public static Color IntToColor(int rgb)
-        {
-            return Color.FromArgb(255, (byte)(rgb >> 16), (byte)(rgb >> 8), (byte)rgb);
-        }
-
         private void InitNumberMargin(Scintilla TextArea)
         {
 
-            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = IntToColor(BACK_COLOR);
-            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = IntToColor(FORE_COLOR);
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = IntToColor(FORE_COLOR);
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = IntToColor(BACK_COLOR);
+            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = ParsingService.IntToColor(0xbbcee6);
+            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = ParsingService.IntToColor(0x000000);
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = ParsingService.IntToColor(0x000000);
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = ParsingService.IntToColor(0xbbcee6);
 
             TextArea.Margins[0].Width = 24;
             TextArea.MarginClick += TextArea_MarginClick;
@@ -190,8 +178,8 @@ namespace pie
 
             var marker = TextArea.Markers[BOOKMARK_MARKER];
             marker.Symbol = MarkerSymbol.Circle;
-            marker.SetBackColor(IntToColor(0xFF003B));
-            marker.SetForeColor(IntToColor(0x000000));
+            marker.SetBackColor(ParsingService.IntToColor(0xFF003B));
+            marker.SetForeColor(ParsingService.IntToColor(0x000000));
             marker.SetAlpha(100);
 
         }
@@ -199,8 +187,8 @@ namespace pie
         private void InitCodeFolding(Scintilla TextArea)
         {
 
-            TextArea.SetFoldMarginColor(true, IntToColor(BACK_COLOR));
-            TextArea.SetFoldMarginHighlightColor(true, IntToColor(BACK_COLOR));
+            TextArea.SetFoldMarginColor(true, ParsingService.IntToColor(0xd1dded));
+            TextArea.SetFoldMarginHighlightColor(true, ParsingService.IntToColor(0xd1dded));
 
             // Enable code folding
             TextArea.SetProperty("fold", "1");
@@ -215,8 +203,8 @@ namespace pie
             // Set colors for all folding markers
             for (int i = 25; i <= 31; i++)
             {
-                TextArea.Markers[i].SetForeColor(IntToColor(BACK_COLOR)); // styles for [+] and [-]
-                TextArea.Markers[i].SetBackColor(IntToColor(FORE_COLOR)); // styles for [+] and [-]
+                TextArea.Markers[i].SetForeColor(ParsingService.IntToColor(0xd1dded)); // styles for [+] and [-]
+                TextArea.Markers[i].SetBackColor(ParsingService.IntToColor(0x000000)); // styles for [+] and [-]
             }
 
             // Configure folding markers with respective symbols

@@ -8,6 +8,11 @@ namespace pie.Services
 {
     internal class ScintillaLexerService
     {
+        public static string ConvertColorToHex(Color c)
+        {
+            return $"{c.R:X2}{c.G:X2}{c.B:X2}";
+        }
+
         public static Color ConvertHexToColor(string value)
         {
             ColorConverter converter = new ColorConverter();
@@ -80,6 +85,7 @@ namespace pie.Services
                 scintilla.SetProperty("fold", "1");
                 scintilla.SetProperty("fold.compact", "1");
 
+                /*
                 // Configure a margin to display folding symbols
                 scintilla.Margins[2].Type = MarginType.Symbol;
                 scintilla.Margins[2].Mask = Marker.MaskFolders;
@@ -92,6 +98,7 @@ namespace pie.Services
                     scintilla.Markers[i].SetForeColor(SystemColors.ControlLightLight);
                     scintilla.Markers[i].SetBackColor(SystemColors.ControlDark);
                 }
+                */
 
                 // Configure folding markers with respective symbols
                 scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
@@ -125,6 +132,7 @@ namespace pie.Services
                 scintilla.SetProperty("tab.timmy.whinge.level", "1");
                 scintilla.SetProperty("fold", "1");
 
+                /*
                 // Use margin 2 for fold markers
                 scintilla.Margins[2].Type = MarginType.Symbol;
                 scintilla.Margins[2].Mask = Marker.MaskFolders;
@@ -137,6 +145,7 @@ namespace pie.Services
                     scintilla.Markers[i].SetForeColor(SystemColors.ControlLightLight);
                     scintilla.Markers[i].SetBackColor(SystemColors.ControlDark);
                 }
+                */
 
                 // Style the folder markers
                 scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
@@ -201,6 +210,7 @@ namespace pie.Services
                 scintilla.SetProperty("fold.compact", "1");
                 scintilla.SetProperty("fold.html", "1");
 
+                /*
                 // Use Margin 2 for fold markers
                 scintilla.Margins[2].Type = MarginType.Symbol;
                 scintilla.Margins[2].Mask = Marker.MaskFolders;
@@ -213,6 +223,7 @@ namespace pie.Services
                     scintilla.Markers[i].SetForeColor(SystemColors.ControlLightLight);
                     scintilla.Markers[i].SetBackColor(SystemColors.ControlDark);
                 }
+                */
 
                 // Style the folder markers
                 scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
@@ -338,6 +349,7 @@ namespace pie.Services
             colorDictionary["Background"] = "FFFFFF";
             colorDictionary["Fore"] = "000000";
             colorDictionary["CaretLine"] = "E6EFFA";
+            colorDictionary["Selection"] = "FFE6A2";
 
             Globals.setDefaultColorDictionary(colorDictionary);
         }
