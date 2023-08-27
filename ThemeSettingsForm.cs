@@ -157,11 +157,6 @@ namespace pie
             TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = ParsingService.IntToColor(0x000000);
             TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = ParsingService.IntToColor(0xbbcee6);
             TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = ParsingService.IntToColor(0x000000);
-             // Enable code folding
-            TextArea.SetProperty("fold", "1");
-            TextArea.SetProperty("fold.compact", "1");
-
-            // Configure a margin to display folding symbols
             TextArea.Margins[3].Type = MarginType.Symbol;
             TextArea.Margins[3].Mask = Marker.MaskFolders;
             TextArea.Margins[3].Sensitive = true;
@@ -180,12 +175,28 @@ namespace pie
 
         }
 
+        private void ResetMargins(Scintilla TextArea)
+        {
+            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = ParsingService.IntToColor(0xbbcee6);
+            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = ParsingService.IntToColor(0x000000);
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = ParsingService.IntToColor(0xbbcee6);
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = ParsingService.IntToColor(0x000000);
+            TextArea.Margins[3].Type = MarginType.Symbol;
+            TextArea.Margins[3].Mask = Marker.MaskFolders;
+            TextArea.Margins[3].Sensitive = true;
+            TextArea.Margins[3].Width = 20;
+            TextArea.SetFoldMarginColor(true, ParsingService.IntToColor(0xd1dded));
+            TextArea.SetFoldMarginHighlightColor(true, ParsingService.IntToColor(0xd1dded));
+        }
+
         private void foreButton_SelectedColorChanged(object sender, ComponentFactory.Krypton.Toolkit.ColorEventArgs e)
         {
             ScintillaNET.Scintilla TextArea = (ScintillaNET.Scintilla)kryptonPanel1.Controls[0];
             KryptonColorButton kryptonColorButton = (KryptonColorButton)sender;
             TextArea.Styles[ScintillaNET.Style.Default].ForeColor = kryptonColorButton.SelectedColor;
             TextArea.StyleClearAll();
+
+            ResetMargins(TextArea);
         }
 
         private void backgroundButton_SelectedColorChanged(object sender, ColorEventArgs e)
@@ -194,6 +205,8 @@ namespace pie
             KryptonColorButton kryptonColorButton = (KryptonColorButton)sender;
             TextArea.Styles[ScintillaNET.Style.Default].BackColor = kryptonColorButton.SelectedColor;
             TextArea.StyleClearAll();
+
+            ResetMargins(TextArea);
         }
 
         private void selectionButton_SelectedColorChanged(object sender, ColorEventArgs e)
@@ -202,6 +215,8 @@ namespace pie
             KryptonColorButton kryptonColorButton = (KryptonColorButton)sender;
             TextArea.SetSelectionBackColor(true, kryptonColorButton.SelectedColor);
             TextArea.StyleClearAll();
+
+            ResetMargins(TextArea);
         }
 
         private void caretLineButton_SelectedColorChanged(object sender, ColorEventArgs e)
@@ -210,6 +225,8 @@ namespace pie
             KryptonColorButton kryptonColorButton = (KryptonColorButton)sender;
             TextArea.CaretLineBackColor = kryptonColorButton.SelectedColor;
             TextArea.StyleClearAll();
+
+            ResetMargins(TextArea);
         }
     }
 }
