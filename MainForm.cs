@@ -631,6 +631,9 @@ namespace pie
             // Do other visual processing
             buildTabControl.Hide();
 
+            tabControl.AllowPageDrag = false;
+            tabControl.AllowPageReorder = false;
+
             string[] args = Environment.GetCommandLineArgs();
 
             if (args.Length == 2)

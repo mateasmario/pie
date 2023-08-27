@@ -163,15 +163,15 @@
             // showBuildToolsToolStripMenuItem
             // 
             this.showBuildToolsToolStripMenuItem.Name = "showBuildToolsToolStripMenuItem";
-            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
             this.showBuildToolsToolStripMenuItem.Click += new System.EventHandler(this.showBuildToolsToolStripMenuItem_Click);
             // 
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.preferencesToolStripMenuItem.Text = "Manage Build Commands";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.preferencesToolStripMenuItem.Text = "Build Commands";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // themeSettingsToolStripMenuItem
@@ -179,7 +179,7 @@
             this.themeSettingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.color_wheel__1_;
             this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
-            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.themeSettingsToolStripMenuItem.Text = "Theme Settings";
             this.themeSettingsToolStripMenuItem.Click += new System.EventHandler(this.themeSettingsToolStripMenuItem_Click);
             // 
