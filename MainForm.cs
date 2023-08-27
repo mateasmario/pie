@@ -77,6 +77,7 @@ namespace pie
             TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
             TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
             TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Fore"]);
+            TextArea.CaretForeColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Fore"]);
             TextArea.Styles[ScintillaNET.Style.Default].BackColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Background"]);
             TextArea.StyleClearAll();
 
