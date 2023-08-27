@@ -132,6 +132,9 @@ namespace pie
 
         private void ThemeSettingsForm_Load(object sender, EventArgs e)
         {
+            kryptonDockableNavigator1.AllowPageDrag = false;
+            kryptonDockableNavigator1.AllowPageReorder = false;
+
             ScintillaNET.Scintilla TextArea = new ScintillaNET.Scintilla();
             TextArea.Parent = kryptonPanel1;
             kryptonPanel1.Controls.Add(TextArea);
