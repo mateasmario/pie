@@ -8,7 +8,6 @@ E:\dev\winforms\pie\bin\Release\ComponentFactory.Krypton.Toolkit.dll
 E:\dev\winforms\pie\bin\Release\ComponentFactory.Krypton.Workspace.dll
 E:\dev\winforms\pie\bin\Release\ConsoleControl.dll
 E:\dev\winforms\pie\bin\Release\ConsoleControlAPI.dll
-E:\dev\winforms\pie\bin\Release\FastColoredTextBox.dll
 E:\dev\winforms\pie\bin\Release\ComponentFactory.Krypton.Docking.pdb
 E:\dev\winforms\pie\bin\Release\ComponentFactory.Krypton.Navigator.pdb
 E:\dev\winforms\pie\bin\Release\ComponentFactory.Krypton.Ribbon.pdb
@@ -16,7 +15,6 @@ E:\dev\winforms\pie\bin\Release\ComponentFactory.Krypton.Toolkit.pdb
 E:\dev\winforms\pie\bin\Release\ComponentFactory.Krypton.Workspace.pdb
 E:\dev\winforms\pie\bin\Release\ConsoleControl.xml
 E:\dev\winforms\pie\bin\Release\ConsoleControlAPI.xml
-E:\dev\winforms\pie\bin\Release\FastColoredTextBox.xml
 E:\dev\winforms\pie\obj\Release\pie.csproj.AssemblyReference.cache
 E:\dev\winforms\pie\obj\Release\pie.csproj.SuggestedBindingRedirects.cache
 E:\dev\winforms\pie\obj\Release\pie.GitCommitMessageForm.resources
