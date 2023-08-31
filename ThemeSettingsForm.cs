@@ -92,7 +92,7 @@ namespace pie
         {
             ProcessFileWithNewColors();
 
-            DialogResult dialogResult = MessageBox.Show("Close pie and reopen it manually, in order for the changes to take effect?", "Build Commands", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Close pie and reopen it manually, in order for the changes to take effect?", "Theme Settings", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 Globals.setCloseAfterApplyingChanges(true);
