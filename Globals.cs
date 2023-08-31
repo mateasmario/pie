@@ -17,6 +17,7 @@ namespace pie
         private static bool closeAfterApplyingChanges;
         private static Dictionary<string, string> defaultColorDictionary;
         private static Dictionary<string, string> configColorDictionary;
+        private static bool findReplacePanelToggled;
 
         public static string getCommitMessage()
         {
@@ -116,6 +117,16 @@ namespace pie
         public static Dictionary<string, string> getConfigColorDictionary()
         {
             return configColorDictionary;
+        }
+
+        public static bool getFindReplacePanelToggled()
+        {
+            return findReplacePanelToggled;
+        }
+
+        public static void setFindReplacePanelToggled(bool findReplacePanelToggledNew)
+        {
+            findReplacePanelToggled = findReplacePanelToggledNew;
         }
     }
 }

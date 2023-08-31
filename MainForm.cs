@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using ScintillaNET;
 using ComponentFactory.Krypton.Docking;
 using pie.Classes;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace pie
 {
@@ -271,20 +272,28 @@ namespace pie
             openedFileChanges.Insert(index, false);
         }
 
-        public void CloseApp()
+        public bool CloseApp()
         {
             int tabCount = tabControl.Pages.Count;
 
+            bool closeStatus = false;
+
             while(tabCount > 1)
             {
-                CloseTab();
+                closeStatus = CloseTab();
+
+                if (!closeStatus)
+                {
+                    return false;
+                } 
+
                 tabCount--;
             }
-            Application.Exit();
+            return true;
         }
 
         // [Method] Closes the currently selected tab
-        public void CloseTab()
+        public bool CloseTab()
         {
             if (tabControl.SelectedIndex != tabControl.Pages.Count - 1)
             {
@@ -300,12 +309,18 @@ namespace pie
                     {
                         CloseTabAfterWarning();
                     }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
                     CloseTabAfterWarning();
                 }
             }
+
+            return true;
         }
 
         public void CloseTabAfterWarning()
@@ -604,6 +619,21 @@ namespace pie
             }
         }
 
+        private void ShowFindReplacePanel()
+        {
+            if (Globals.getFindReplacePanelToggled())
+            {
+                findPanel.Hide();
+                Globals.setFindReplacePanelToggled(false);
+            }
+            else
+            {
+                findPanel.Show();
+                Globals.setFindReplacePanelToggled(true);
+                kryptonTextBox1.Focus();
+            }
+        }
+
         // [Event] Form Loading
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -628,6 +658,10 @@ namespace pie
 
             ScintillaLexerService.InitializeDefaultColorDictionary();
             ScintillaLexerService.InitializeConfigColorDictionary("theme-settings.config");
+
+            findPanel.Location = new Point((this.Width - findPanel.Width) / 2, findPanel.Location.Y);
+            findPanel.Hide();
+            Globals.setFindReplacePanelToggled(false);
 
             // Do other visual processing
             buildTabControl.Hide();
@@ -742,6 +776,10 @@ namespace pie
             {
                 ShowTerminalTabControl();
             }
+            else if (e.KeyCode == Keys.F && e.Modifiers == Keys.Control)
+            {
+                ShowFindReplacePanel();
+            }
         }
 
         // [Event] Triggered when clicking "Show Terminal Tab" from the context menu
@@ -760,7 +798,16 @@ namespace pie
                 consoleControl.StopProcess();
             }
 
-            CloseApp();
+            bool closeStatus = CloseApp();
+
+            if (closeStatus)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
 
         // [Event] Triggered when clicking "Show Build Tab" from the upper menu
@@ -973,6 +1020,89 @@ namespace pie
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            findPanel.Location = new Point((this.Width - findPanel.Width) / 2, findPanel.Location.Y);
+        }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+            Find(TextArea);
+        }
+
+        private void Find(Scintilla scintilla)
+        {
+            String text = kryptonTextBox1.Text;
+
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            // Remove all uses of our indicator
+            scintilla.IndicatorCurrent = 8;
+            scintilla.IndicatorClearRange(0, scintilla.TextLength);
+
+            scintilla.TargetStart = 0;
+            scintilla.TargetEnd = scintilla.TextLength;
+            scintilla.SearchFlags = SearchFlags.None;
+
+            int index = -1;
+
+            if ((index = scintilla.SearchInTarget(text)) != -1)
+            {
+                scintilla.SetSelection(index, index + kryptonTextBox1.Text.Length);
+                scintilla.SetSelectionBackColor(true, ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Selection"]));
+            }
+        }
+
+        private void HighlightWord(string text, Scintilla scintilla)
+        {
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            // Remove all uses of our indicator
+            scintilla.IndicatorCurrent = 8;
+            scintilla.IndicatorClearRange(0, scintilla.TextLength);
+
+            // Update indicator appearance
+            scintilla.Indicators[8].Style = IndicatorStyle.StraightBox;
+            scintilla.Indicators[8].Under = true;
+            scintilla.Indicators[8].ForeColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Selection"]);
+            scintilla.Indicators[8].OutlineAlpha = 255;
+            scintilla.Indicators[8].Alpha = 100;
+
+            // Search the document
+            scintilla.TargetStart = 0;
+            scintilla.TargetEnd = scintilla.TextLength;
+            scintilla.SearchFlags = SearchFlags.None;
+            while (scintilla.SearchInTarget(text) != -1)
+            {
+                // Mark the search results with the current indicator
+                scintilla.IndicatorFillRange(scintilla.TargetStart, scintilla.TargetEnd - scintilla.TargetStart);
+
+                // Search the remainder of the document
+                scintilla.TargetStart = scintilla.TargetEnd;
+                scintilla.TargetEnd = scintilla.TextLength;
+            }
+        }
+
+        private void ClearHighlights(Scintilla scintilla)
+        {
+            scintilla.IndicatorClearRange(0, scintilla.TextLength);
+        }
+
+        private void kryptonButton3_Click(object sender, EventArgs e)
+        {
+            Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+            ClearHighlights(TextArea);
+        }
+
+        private void kryptonButton2_Click(object sender, EventArgs e)
+        {
+            Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+            HighlightWord(kryptonTextBox1.Text, TextArea);
         }
     }
 }
