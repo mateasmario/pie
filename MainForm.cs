@@ -317,29 +317,26 @@ namespace pie
         // [Method] Closes the currently selected tab
         public bool CloseTab()
         {
-            if (tabControl.SelectedIndex != tabControl.Pages.Count - 1)
+            if (openedFileChanges[tabControl.SelectedIndex] == true)
             {
-                if (openedFileChanges[tabControl.SelectedIndex] == true)
+                DialogResult dialogResult = MessageBox.Show("Save file before closing it?", "Save file", MessageBoxButtons.YesNoCancel);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    DialogResult dialogResult = MessageBox.Show("Save file before closing it?", "Save file", MessageBoxButtons.YesNoCancel);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        Save();
-                        CloseTabAfterWarning();
-                    }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        CloseTabAfterWarning();
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    Save();
+                    CloseTabAfterWarning();
                 }
-                else
+                else if (dialogResult == DialogResult.No)
                 {
                     CloseTabAfterWarning();
                 }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                CloseTabAfterWarning();
             }
 
             return true;
@@ -664,7 +661,18 @@ namespace pie
         private void Form1_Load(object sender, EventArgs e)
         {
             // Load Build Commands from configuration file
-            List<BuildCommand> buildCommands = BuildCommandService.GetBuildCommandsFromFile("build-commands.config");
+            List<BuildCommand> buildCommands = null;
+
+            try
+            {
+                buildCommands = BuildCommandService.GetBuildCommandsFromFile("build-commands.config");
+            } catch(FileNotFoundException ex)
+            {
+                MessageBox.Show("Cannot access Build Commands config file. Check if 'build-commands.config' exists in your main pie directory. If not, try reinstalling the app.", "pie");
+                Application.Exit();
+                return;
+            }
+
             List<ToolStripMenuItem> buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
 
             foreach (BuildCommand buildCommand in buildCommands)
@@ -683,7 +691,16 @@ namespace pie
             Globals.buildCommandToolStripMenuItems = buildCommandToolStripMenuItems;
 
             ScintillaLexerService.InitializeDefaultColorDictionary();
-            ScintillaLexerService.InitializeConfigColorDictionary("theme-settings.config");
+
+            try {
+                ScintillaLexerService.InitializeConfigColorDictionary("theme-settings.config");
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("Cannot access Theme Settings config file. Check if 'theme-settings.config' exists in your main pie directory. If not, try reinstalling the app.", "pie");
+                Application.Exit();
+                return;
+            }
 
             ResetFindPanelLocation();
             findPanel.Hide();
@@ -819,25 +836,29 @@ namespace pie
         // [Generic Event] Used mostly for tab control and actions on opened files. Called by other event listeners
         private void keyDownEvents(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
+            if (tabControl.SelectedIndex != tabControl.Pages.Count - 1)
             {
-                NewTab();
-            }
-            else if (e.KeyCode == Keys.W && e.Modifiers == Keys.Control)
-            {
-                CloseTab();
-            }
-            else if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
-            {
-                Save();
-            }
-            else if (e.KeyCode == Keys.B && e.Modifiers == Keys.Control)
-            {
-                ShowTerminalTabControl();
-            }
-            else if (e.KeyCode == Keys.F && e.Modifiers == Keys.Control)
-            {
-                ShowFindReplacePanel();
+
+                if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
+                {
+                    NewTab();
+                }
+                else if (e.KeyCode == Keys.W && e.Modifiers == Keys.Control)
+                {
+                    CloseTab();
+                }
+                else if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
+                {
+                    Save();
+                }
+                else if (e.KeyCode == Keys.B && e.Modifiers == Keys.Control)
+                {
+                    ShowTerminalTabControl();
+                }
+                else if (e.KeyCode == Keys.F && e.Modifiers == Keys.Control)
+                {
+                    ShowFindReplacePanel();
+                }
             }
         }
 

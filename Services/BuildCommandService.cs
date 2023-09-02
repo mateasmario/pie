@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using pie.Classes;
 using System.IO;
+using System.Windows.Forms;
 
 namespace pie.Services
 {
@@ -10,8 +11,8 @@ namespace pie.Services
         public static List<BuildCommand> GetBuildCommandsFromFile(string file)
         {
             List<BuildCommand> buildCommands = new List<BuildCommand>();
-            IEnumerable<string> lines = File.ReadLines(file);
 
+            IEnumerable<String> lines = File.ReadLines(file);
             int rowNum = 0;
 
             BuildCommand buildCommand = null;
