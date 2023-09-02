@@ -24,7 +24,7 @@ namespace pie
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            Globals.setCommitMessage(kryptonRichTextBox1.Text);
+            Globals.commitMessage = kryptonRichTextBox1.Text;
             this.Close();
         }
     }

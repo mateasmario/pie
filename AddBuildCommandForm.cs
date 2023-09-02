@@ -25,8 +25,8 @@ namespace pie
             }
             else
             {
-                Globals.setAddBuildCommandName(kryptonTextBox1.Text);
-                Globals.setAddBuildCommandCmd(kryptonTextBox2.Text);
+                Globals.addBuildCommandName = kryptonTextBox1.Text;
+                Globals.addBuildCommandCmd = kryptonTextBox2.Text;
 
                 this.Close();
             }
@@ -34,8 +34,8 @@ namespace pie
 
         private void AddBuildCommandForm_Load(object sender, EventArgs e)
         {
-            Globals.setAddBuildCommandName(null);
-            Globals.setAddBuildCommandCmd(null);
+            Globals.addBuildCommandName = null;
+            Globals.addBuildCommandCmd = null;
         }
     }
 }

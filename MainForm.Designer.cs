@@ -88,10 +88,11 @@
             this.kryptonContextMenuItem17 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem18 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.findPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.replaceTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.findTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -116,7 +117,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(1020, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -352,31 +352,20 @@
             // 
             // tabControl
             // 
-            this.tabControl.Button.ButtonDisplayLogic = ComponentFactory.Krypton.Navigator.ButtonDisplayLogic.Context;
             this.tabControl.Button.CloseButtonAction = ComponentFactory.Krypton.Navigator.CloseButtonAction.None;
             this.tabControl.Button.CloseButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
             this.tabControl.Button.ContextButtonAction = ComponentFactory.Krypton.Navigator.ContextButtonAction.None;
             this.tabControl.Button.ContextButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
-            this.tabControl.Button.ContextMenuMapImage = ComponentFactory.Krypton.Navigator.MapKryptonPageImage.Small;
-            this.tabControl.Button.ContextMenuMapText = ComponentFactory.Krypton.Navigator.MapKryptonPageText.TextTitle;
             this.tabControl.Button.NextButtonAction = ComponentFactory.Krypton.Navigator.DirectionButtonAction.None;
             this.tabControl.Button.NextButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
             this.tabControl.Button.PreviousButtonAction = ComponentFactory.Krypton.Navigator.DirectionButtonAction.None;
             this.tabControl.Button.PreviousButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Group.GroupBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
-            this.tabControl.Group.GroupBorderStyle = ComponentFactory.Krypton.Toolkit.PaletteBorderStyle.ControlClient;
-            this.tabControl.Header.HeaderStyleBar = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
-            this.tabControl.Header.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Primary;
-            this.tabControl.Header.HeaderStyleSecondary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.tabControl.KryptonContextMenu = this.kryptonContextMenu1;
             this.tabControl.Location = new System.Drawing.Point(0, 24);
             this.tabControl.Name = "tabControl";
-            this.tabControl.NavigatorMode = ComponentFactory.Krypton.Navigator.NavigatorMode.BarTabGroup;
-            this.tabControl.PageBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
             this.tabControl.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1});
-            this.tabControl.Panel.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.PanelClient;
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1020, 357);
             this.tabControl.TabIndex = 2;
@@ -443,7 +432,6 @@
             this.kryptonPage1.Text = "";
             this.kryptonPage1.TextDescription = "";
             this.kryptonPage1.TextTitle = "";
-            this.kryptonPage1.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "E9D081B0A6964933EA81724511F8E430";
             // 
@@ -491,37 +479,11 @@
             // 
             // buildTabControl
             // 
-            this.buildTabControl.Bar.BarMapExtraText = ComponentFactory.Krypton.Navigator.MapKryptonPageText.None;
-            this.buildTabControl.Bar.BarMapImage = ComponentFactory.Krypton.Navigator.MapKryptonPageImage.Small;
-            this.buildTabControl.Bar.BarMapText = ComponentFactory.Krypton.Navigator.MapKryptonPageText.TextTitle;
             this.buildTabControl.Bar.BarOrientation = ComponentFactory.Krypton.Toolkit.VisualOrientation.Bottom;
-            this.buildTabControl.Bar.CheckButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.buildTabControl.Bar.ItemSizing = ComponentFactory.Krypton.Navigator.BarItemSizing.SameHeight;
-            this.buildTabControl.Bar.TabBorderStyle = ComponentFactory.Krypton.Toolkit.TabBorderStyle.RoundedOutsizeMedium;
-            this.buildTabControl.Bar.TabStyle = ComponentFactory.Krypton.Toolkit.TabStyle.HighProfile;
-            this.buildTabControl.Button.ButtonDisplayLogic = ComponentFactory.Krypton.Navigator.ButtonDisplayLogic.Context;
-            this.buildTabControl.Button.CloseButtonAction = ComponentFactory.Krypton.Navigator.CloseButtonAction.RemovePageAndDispose;
-            this.buildTabControl.Button.CloseButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
-            this.buildTabControl.Button.ContextButtonAction = ComponentFactory.Krypton.Navigator.ContextButtonAction.SelectPage;
-            this.buildTabControl.Button.ContextButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
-            this.buildTabControl.Button.ContextMenuMapImage = ComponentFactory.Krypton.Navigator.MapKryptonPageImage.Small;
-            this.buildTabControl.Button.ContextMenuMapText = ComponentFactory.Krypton.Navigator.MapKryptonPageText.TextTitle;
-            this.buildTabControl.Button.NextButtonAction = ComponentFactory.Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.buildTabControl.Button.NextButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
-            this.buildTabControl.Button.PreviousButtonAction = ComponentFactory.Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.buildTabControl.Button.PreviousButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
             this.buildTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buildTabControl.Group.GroupBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
-            this.buildTabControl.Group.GroupBorderStyle = ComponentFactory.Krypton.Toolkit.PaletteBorderStyle.ControlClient;
-            this.buildTabControl.Header.HeaderStyleBar = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
-            this.buildTabControl.Header.HeaderStylePrimary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Primary;
-            this.buildTabControl.Header.HeaderStyleSecondary = ComponentFactory.Krypton.Toolkit.HeaderStyle.Secondary;
             this.buildTabControl.KryptonContextMenu = this.kryptonContextMenu2;
             this.buildTabControl.Location = new System.Drawing.Point(0, 381);
             this.buildTabControl.Name = "buildTabControl";
-            this.buildTabControl.NavigatorMode = ComponentFactory.Krypton.Navigator.NavigatorMode.BarTabGroup;
-            this.buildTabControl.PageBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlClient;
-            this.buildTabControl.Panel.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.PanelClient;
             this.buildTabControl.Size = new System.Drawing.Size(1020, 214);
             this.buildTabControl.TabIndex = 3;
             this.buildTabControl.Text = "kryptonNavigator1";
@@ -561,49 +523,64 @@
             // 
             this.findPanel.Controls.Add(this.kryptonButton3);
             this.findPanel.Controls.Add(this.kryptonButton2);
+            this.findPanel.Controls.Add(this.replaceTextBox);
             this.findPanel.Controls.Add(this.kryptonButton1);
-            this.findPanel.Controls.Add(this.kryptonTextBox1);
-            this.findPanel.Location = new System.Drawing.Point(222, 54);
+            this.findPanel.Controls.Add(this.findTextBox);
+            this.findPanel.Location = new System.Drawing.Point(257, 53);
             this.findPanel.Name = "findPanel";
-            this.findPanel.Size = new System.Drawing.Size(583, 65);
+            this.findPanel.Size = new System.Drawing.Size(491, 94);
             this.findPanel.TabIndex = 0;
+            this.findPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseDown);
+            this.findPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseMove);
+            this.findPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseUp);
+            // 
+            // kryptonButton3
+            // 
+            this.kryptonButton3.Location = new System.Drawing.Point(370, 61);
+            this.kryptonButton3.Name = "kryptonButton3";
+            this.kryptonButton3.Size = new System.Drawing.Size(114, 25);
+            this.kryptonButton3.TabIndex = 5;
+            this.kryptonButton3.Values.Text = "Replace all";
+            this.kryptonButton3.Click += new System.EventHandler(this.kryptonButton3_Click);
+            this.kryptonButton3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // kryptonButton2
+            // 
+            this.kryptonButton2.Location = new System.Drawing.Point(370, 34);
+            this.kryptonButton2.Name = "kryptonButton2";
+            this.kryptonButton2.Size = new System.Drawing.Size(114, 25);
+            this.kryptonButton2.TabIndex = 4;
+            this.kryptonButton2.Values.Text = "Find and Replace";
+            this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
+            this.kryptonButton2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // replaceTextBox
+            // 
+            this.replaceTextBox.Location = new System.Drawing.Point(7, 34);
+            this.replaceTextBox.Name = "replaceTextBox";
+            this.replaceTextBox.Size = new System.Drawing.Size(358, 23);
+            this.replaceTextBox.TabIndex = 3;
+            this.replaceTextBox.Text = "Replace...";
+            this.replaceTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // kryptonButton1
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(466, 35);
+            this.kryptonButton1.Location = new System.Drawing.Point(370, 7);
             this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(103, 25);
+            this.kryptonButton1.Size = new System.Drawing.Size(114, 25);
             this.kryptonButton1.TabIndex = 2;
             this.kryptonButton1.Values.Text = "Find";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             this.kryptonButton1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
-            // kryptonTextBox1
+            // findTextBox
             // 
-            this.kryptonTextBox1.Location = new System.Drawing.Point(8, 9);
-            this.kryptonTextBox1.Name = "kryptonTextBox1";
-            this.kryptonTextBox1.Size = new System.Drawing.Size(561, 23);
-            this.kryptonTextBox1.TabIndex = 0;
-            this.kryptonTextBox1.Text = "Find...";
-            this.kryptonTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
-            // 
-            // kryptonButton2
-            // 
-            this.kryptonButton2.Location = new System.Drawing.Point(248, 35);
-            this.kryptonButton2.Name = "kryptonButton2";
-            this.kryptonButton2.Size = new System.Drawing.Size(103, 25);
-            this.kryptonButton2.TabIndex = 3;
-            this.kryptonButton2.Values.Text = "Highlight all";
-            this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
-            // 
-            // kryptonButton3
-            // 
-            this.kryptonButton3.Location = new System.Drawing.Point(357, 35);
-            this.kryptonButton3.Name = "kryptonButton3";
-            this.kryptonButton3.Size = new System.Drawing.Size(103, 25);
-            this.kryptonButton3.TabIndex = 4;
-            this.kryptonButton3.Values.Text = "Clear highlights";
-            this.kryptonButton3.Click += new System.EventHandler(this.kryptonButton3_Click);
+            this.findTextBox.Location = new System.Drawing.Point(7, 7);
+            this.findTextBox.Name = "findTextBox";
+            this.findTextBox.Size = new System.Drawing.Size(358, 23);
+            this.findTextBox.TabIndex = 0;
+            this.findTextBox.Text = "Find...";
+            this.findTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // MainForm
             // 
@@ -699,9 +676,10 @@
         private System.Windows.Forms.ToolStripMenuItem themeSettingsToolStripMenuItem;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel findPanel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox findTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton3;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox replaceTextBox;
     }
 }
 
