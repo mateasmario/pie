@@ -720,7 +720,17 @@ namespace pie
             if (args.Length == 2)
             {
                 string path = args[1];
-                Open(path);
+
+                if (File.Exists(path))
+                {
+                    Open(path);
+                }
+                else
+                {
+                    MessageBox.Show("pie could not open " + path + ". Are you sure the file exists?", "pie");
+                    Application.Exit();
+                    return;
+                }
             }
             else
             {

@@ -12,7 +12,7 @@ namespace pie.Services
         {
             List<BuildCommand> buildCommands = new List<BuildCommand>();
 
-            IEnumerable<String> lines = File.ReadLines(file);
+            IEnumerable<String> lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + file);
             int rowNum = 0;
 
             BuildCommand buildCommand = null;
