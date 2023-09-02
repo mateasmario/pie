@@ -358,7 +358,7 @@ namespace pie.Services
         public static void InitializeConfigColorDictionary(string file)
         {
             Dictionary<string, string> configColorDictionary = new Dictionary<string, string>();
-            IEnumerable<string> lines = File.ReadLines(file);
+            IEnumerable<string> lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + file);
 
             foreach (string line in lines)
             {
