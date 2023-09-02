@@ -35,7 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>pie %284%29.ico</ApplicationIcon>
+    <ApplicationIcon>pie.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ComponentFactory.Krypton.Docking">
@@ -168,6 +172,7 @@
     <Content Include="Console.ico" />
     <Content Include="icons8-pie-64.ico" />
     <Content Include="pie %284%29.ico" />
+    <Content Include="pie.ico" />
     <None Include="Resources\icons8-horizontal-line-80.png" />
     <None Include="Resources\icons8-horizontal-line-16.png" />
     <None Include="Resources\icons8-horizontal-line-30.png" />
