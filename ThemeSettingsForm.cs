@@ -95,7 +95,7 @@ namespace pie
             DialogResult dialogResult = MessageBox.Show("Close pie and reopen it manually, in order for the changes to take effect?", "Theme Settings", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                Globals.setCloseAfterApplyingChanges(true);
+                Globals.closeAfterApplyingChanges = true;
             }
 
             this.Close();
@@ -143,16 +143,16 @@ namespace pie
             TextArea.StyleResetDefault();
             TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
             TextArea.Styles[ScintillaNET.Style.Default].Size = 10;
-            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Fore"]);
-            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Background"]);
+            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Fore"]);
+            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Background"]);
             TextArea.StyleClearAll();
             TextArea.BorderStyle = ScintillaNET.BorderStyle.FixedSingle;
             TextArea.ReadOnly = true;
             TextArea.Margins[0].Width = 24;
-            TextArea.SetSelectionBackColor(true, ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["Selection"]));
-            TextArea.CaretLineBackColor = ScintillaLexerService.ConvertHexToColor(Globals.getConfigColorDictionary()["CaretLine"]);
+            TextArea.SetSelectionBackColor(true, ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Selection"]));
+            TextArea.CaretLineBackColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["CaretLine"]);
             TextArea.WrapMode = ScintillaNET.WrapMode.Char;
-            SetTextBoxes(Globals.getConfigColorDictionary());
+            SetTextBoxes(Globals.configColorDictionary);
             TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = ParsingService.IntToColor(0xbbcee6);
             TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = ParsingService.IntToColor(0x000000);
             TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = ParsingService.IntToColor(0xbbcee6);
@@ -167,7 +167,7 @@ namespace pie
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            SetTextBoxes(Globals.getDefaultColorDictionary());
+            SetTextBoxes(Globals.defaultColorDictionary);
         }
 
         private void user1TextBox_TextChanged(object sender, EventArgs e)

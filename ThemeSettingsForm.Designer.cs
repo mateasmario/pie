@@ -134,7 +134,7 @@
             // 
             // caretLineButton
             // 
-            this.caretLineButton.Location = new System.Drawing.Point(40, 158);
+            this.caretLineButton.Location = new System.Drawing.Point(40, 187);
             this.caretLineButton.Name = "caretLineButton";
             this.caretLineButton.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.caretLineButton.Size = new System.Drawing.Size(151, 25);
@@ -144,7 +144,7 @@
             // 
             // selectionButton
             // 
-            this.selectionButton.Location = new System.Drawing.Point(40, 125);
+            this.selectionButton.Location = new System.Drawing.Point(40, 154);
             this.selectionButton.Name = "selectionButton";
             this.selectionButton.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.selectionButton.Size = new System.Drawing.Size(151, 25);
@@ -154,7 +154,7 @@
             // 
             // backgroundButton
             // 
-            this.backgroundButton.Location = new System.Drawing.Point(40, 92);
+            this.backgroundButton.Location = new System.Drawing.Point(40, 121);
             this.backgroundButton.Name = "backgroundButton";
             this.backgroundButton.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.backgroundButton.Size = new System.Drawing.Size(151, 25);
@@ -164,7 +164,7 @@
             // 
             // foreButton
             // 
-            this.foreButton.Location = new System.Drawing.Point(40, 59);
+            this.foreButton.Location = new System.Drawing.Point(40, 88);
             this.foreButton.Name = "foreButton";
             this.foreButton.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             this.foreButton.Size = new System.Drawing.Size(151, 25);
@@ -174,7 +174,7 @@
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Location = new System.Drawing.Point(240, 28);
+            this.kryptonPanel1.Location = new System.Drawing.Point(241, 88);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(404, 187);
             this.kryptonPanel1.TabIndex = 52;

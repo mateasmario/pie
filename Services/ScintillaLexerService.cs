@@ -22,7 +22,7 @@ namespace pie.Services
 
         public static void ConfigureLexer(string language, Scintilla scintilla)
         {
-            Dictionary<string, string> configColorDictionary = Globals.getConfigColorDictionary();
+            Dictionary<string, string> configColorDictionary = Globals.configColorDictionary;
 
             if (language == "c")
             {
@@ -351,7 +351,7 @@ namespace pie.Services
             colorDictionary["CaretLine"] = "E6EFFA";
             colorDictionary["Selection"] = "FFE6A2";
 
-            Globals.setDefaultColorDictionary(colorDictionary);
+            Globals.defaultColorDictionary = colorDictionary;
         }
 
         public static void InitializeConfigColorDictionary(string file)
@@ -365,7 +365,7 @@ namespace pie.Services
                 configColorDictionary[splitLine[0]] = splitLine[1];
             }
 
-            Globals.setConfigColorDictionary(configColorDictionary);
+            Globals.configColorDictionary = configColorDictionary;
         }
     }
 }

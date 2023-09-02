@@ -25,13 +25,13 @@ namespace pie
         {
             tempCommands = new List<BuildCommand>();
             
-            foreach(BuildCommand buildCommand in Globals.getBuildCommands())
+            foreach(BuildCommand buildCommand in Globals.buildCommands)
             {
                 tempCommands.Add(buildCommand);
                 kryptonListBox2.Items.Add(buildCommand.getName());
             }
 
-            Globals.setCloseAfterApplyingChanges(false);
+            Globals.closeAfterApplyingChanges = false;
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
@@ -64,11 +64,11 @@ namespace pie
             AddBuildCommandForm addBuildCommandForm = new AddBuildCommandForm();
             addBuildCommandForm.ShowDialog();
 
-            if (Globals.getAddBuildCommandName() != null)
+            if (Globals.addBuildCommandName != null)
             {
                 BuildCommand buildCommand = new BuildCommand();
-                buildCommand.setName(Globals.getAddBuildCommandName());
-                buildCommand.setCommand(Globals.getAddBuildCommandCmd());
+                buildCommand.setName(Globals.addBuildCommandName);
+                buildCommand.setCommand(Globals.addBuildCommandCmd);
 
                 if (kryptonListBox2.Items.Contains(buildCommand.getName()))
                 {
@@ -96,7 +96,7 @@ namespace pie
             DialogResult dialogResult = MessageBox.Show("Close pie and reopen it manually, in order for the changes to take effect?", "Build Commands", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                Globals.setCloseAfterApplyingChanges(true);
+                Globals.closeAfterApplyingChanges = true;
             }
 
             this.Close();
