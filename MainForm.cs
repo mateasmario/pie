@@ -52,6 +52,7 @@ namespace pie
         public List<String> openedFilePaths;
         public List<bool> openedFileChanges;
         public List<TabType> tabTypes;
+        public List<int> markdownRenderedContent;
         public bool darkMode;
         public bool terminalTabControlOpened;
 
@@ -65,6 +66,7 @@ namespace pie
             openedFilePaths = new List<String>();
             openedFileChanges = new List<bool>();
             tabTypes = new List<TabType>();
+            markdownRenderedContent = new List<int>();
         }
 
         public Scintilla CreateNewTextArea()
@@ -73,7 +75,6 @@ namespace pie
             TextArea.KeyDown += keyDownEvents;
             TextArea.KeyPress += TextArea_KeyPress;
             TextArea.MouseDown += TextArea_MouseDown;
-            TextArea.KeyUp += keyUpEvents;
             TextArea.TextChanged += TextArea_TextChanged;
             TextArea.UpdateUI += TextArea_UpdateUI;
             TextArea.WrapMode = WrapMode.None;
@@ -101,7 +102,7 @@ namespace pie
             return TextArea;
         }
 
-        public Scintilla CreateNewRenderTab()
+        private Scintilla CreateNewRenderTab()
         {
             Scintilla TextArea = new Scintilla();
             TextArea.KeyDown += keyDownEvents;
@@ -132,6 +133,141 @@ namespace pie
             TextArea.Dock = DockStyle.Fill;
 
             return TextArea;
+        }
+
+        private void RemoveSuggestedActions()
+        {
+            if (((KryptonContextMenuHeading)kryptonContextMenu1.Items[2]).Text == "Suggested Actions")
+            {
+                kryptonContextMenu1.Items.RemoveAt(3);
+                kryptonContextMenu1.Items.RemoveAt(2);
+            }
+        }
+
+        private void FillContextMenu(String extension)
+        {
+            // Remove old "Suggested Actions" item list
+            RemoveSuggestedActions();
+
+            // Add new "Suggested Actions" header + items
+            if (extension == "c" || extension == "cpp")
+            {
+                KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
+                kryptonContextMenuHeading.Text = "Suggested Actions";
+                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+
+                KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
+                KryptonContextMenuItem item1 = new KryptonContextMenuItem();
+                item1.Text = "Build C/C++ Source";
+                item1.Click += Item1_Click;
+                kryptonContextMenuItems.Items.Add(item1);
+                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+            }
+            else if (extension == "java")
+            {
+                KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
+                kryptonContextMenuHeading.Text = "Suggested Actions";
+                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+
+                KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
+                KryptonContextMenuItem item1 = new KryptonContextMenuItem();
+                item1.Text = "Build Java Source";
+                item1.Click += Item1_Click1;
+                kryptonContextMenuItems.Items.Add(item1);
+
+                KryptonContextMenuItem item2 = new KryptonContextMenuItem();
+                item2.Text = "Run as Java Class";
+                item2.Click += Item2_Click;
+                kryptonContextMenuItems.Items.Add(item2);
+                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+            }
+            else if (extension == "py")
+            {
+                KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
+                kryptonContextMenuHeading.Text = "Suggested Actions";
+                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+
+                KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
+                KryptonContextMenuItem item1 = new KryptonContextMenuItem();
+                item1.Text = "Run Python Script";
+                item1.Click += Item1_Click2;
+                kryptonContextMenuItems.Items.Add(item1);
+                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+            }
+            else if (extension == "pl")
+            {
+                KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
+                kryptonContextMenuHeading.Text = "Suggested Actions";
+                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+
+                KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
+                KryptonContextMenuItem item1 = new KryptonContextMenuItem();
+                item1.Text = "Run Perl Script";
+                item1.Click += Item1_Click3; ;
+                kryptonContextMenuItems.Items.Add(item1);
+                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+            }
+            else if (extension == "html")
+            {
+                KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
+                kryptonContextMenuHeading.Text = "Suggested Actions";
+                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+
+                KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
+                KryptonContextMenuItem item1 = new KryptonContextMenuItem();
+                item1.Text = "Render HTML";
+                item1.Click += Item1_Click4;
+                kryptonContextMenuItems.Items.Add(item1);
+                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+            }
+            else if (extension == "md")
+            {
+                KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
+                kryptonContextMenuHeading.Text = "Suggested Actions";
+                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+
+                KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
+                KryptonContextMenuItem item1 = new KryptonContextMenuItem();
+                item1.Text = "Render Markdown";
+                item1.Click += Item1_Click5;
+                kryptonContextMenuItems.Items.Add(item1);
+                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+            }
+        }
+
+        private void Item1_Click5(object sender, EventArgs e)
+        {
+            ExecuteRunCommand("Render Markdown (.md)");
+        }
+
+        private void Item1_Click4(object sender, EventArgs e)
+        {
+            ExecuteRunCommand("Render HTML (.html)");
+        }
+
+        private void Item1_Click3(object sender, EventArgs e)
+        {
+            ExecuteRunCommand("Perl Script (.pl)");
+        }
+
+        private void Item1_Click2(object sender, EventArgs e)
+        {
+            ExecuteRunCommand("Python Script (.py)");
+        }
+
+        private void Item2_Click(object sender, EventArgs e)
+        {
+            ExecuteRunCommand("Java Class (.class)");
+        }
+
+        private void Item1_Click1(object sender, EventArgs e)
+        {
+            ExecuteBuildCommand("Java Source (.java)");
+        }
+
+        private void Item1_Click(object sender, EventArgs e)
+        {
+            ExecuteBuildCommand("C/C++ Source (.c, .cpp)");
         }
 
         private void TextArea_UpdateUI(object sender, UpdateUIEventArgs e)
@@ -194,11 +330,6 @@ namespace pie
         }
 
         #region Numbers, Bookmarks, Code Folding
-
-        /// <summary>
-        /// change this to whatever margin you want the line numbers to show in
-        /// </summary>
-        private const int NUMBER_MARGIN = 5;
 
         /// <summary>
         /// change this to whatever margin you want the bookmarks/breakpoints to show in
@@ -323,6 +454,8 @@ namespace pie
             }
             else
             {
+                tabControl.KryptonContextMenu = kryptonContextMenu3;
+
                 if (tabType == TabType.RENDER_HTML)
                 {
                     kryptonPage.ImageSmall = Properties.Resources.html_5__1_;
@@ -349,12 +482,14 @@ namespace pie
                 }
 
                 IKeyboardHandler keyboardHandler = new PieKeyboardHandler(this);
+                IContextMenuHandler contextMenuHandler = new PieContextMenuHandler(this, kryptonContextMenu3);
                 chromiumWebBrowser.KeyboardHandler = keyboardHandler;
+                chromiumWebBrowser.MenuHandler = contextMenuHandler;
+                chromiumWebBrowser.FrameLoadEnd += ChromiumWebBrowser_FrameLoadEnd;
+                chromiumWebBrowser.JavascriptMessageReceived += ChromiumWebBrowser_JavascriptMessageReceived;
 
                 kryptonPage.Controls.Add(chromiumWebBrowser);
             }
-
-
 
             int index = 0;
 
@@ -368,7 +503,33 @@ namespace pie
 
             openedFilePaths.Insert(index, null);
             tabTypes.Insert(index, tabType);
+            markdownRenderedContent.Insert(index, -1);
             openedFileChanges.Insert(index, false);
+        }
+
+        private void ChromiumWebBrowser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
+        {
+            ChromiumWebBrowser browser = (ChromiumWebBrowser)sender;
+
+            browser.ExecuteScriptAsync(@"
+                    document.addEventListener('click', function(e) {
+                        var parent = e.target.parentElement;
+
+                        CefSharp.PostMessage(parent.outerHTML);
+                    }, false);
+                ");
+
+        }
+
+        private void ChromiumWebBrowser_JavascriptMessageReceived(object sender, JavascriptMessageReceivedEventArgs e)
+        {
+            if (e.Message != null)
+            {
+                this.Invoke(new Action(() =>
+                {
+                    kryptonContextMenu3.Close();
+                }));
+            }
         }
 
         public bool CloseApp()
@@ -428,13 +589,18 @@ namespace pie
         public void CloseTabAfterWarning()
         {
             KryptonPage selectedKryptonPage = tabControl.SelectedPage;
+
             openedFilePaths.RemoveAt(tabControl.SelectedIndex);
             openedFileChanges.RemoveAt(tabControl.SelectedIndex);
+            tabTypes.RemoveAt(tabControl.SelectedIndex);
+            markdownRenderedContent.RemoveAt(tabControl.SelectedIndex);
+
             tabControl.Pages.Remove(selectedKryptonPage);
 
             if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < openedFilePaths.Count && openedFilePaths[tabControl.SelectedIndex] != null)
             {
-                SetBuildAndRunOptions(true);
+                DeactivateBuildAndRunOptions();
+                ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]));
             }
 
             if (tabControl.Pages.Count > 1)
@@ -447,6 +613,15 @@ namespace pie
                 }
 
                 Globals.lastSelectedTabIndex = tabControl.SelectedIndex;
+
+                for (int i = 0; i < markdownRenderedContent.Count; i++)
+                {
+                    if (markdownRenderedContent[i] == tabControl.SelectedIndex)
+                    {
+                        tabControl.SelectedIndex = i;
+                        CloseTab();
+                    }
+                }
             }
             else
             {
@@ -495,7 +670,8 @@ namespace pie
             }
 
             openedFileChanges[openedTabIndex] = false;
-            SetBuildAndRunOptions(true);
+            DeactivateBuildAndRunOptions();
+            ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]));
         }
 
         // [Method] Saves text stored in selected tab at a user-specified location
@@ -546,7 +722,8 @@ namespace pie
             string extension = ParsingService.GetFileExtension(fileName);
             ScintillaLexerService.SetLexer(extension, TextArea);
 
-            SetBuildAndRunOptions(true);
+            DeactivateBuildAndRunOptions();
+            ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]));
 
             if (tabControl.Pages.Count == 2)
             {
@@ -597,25 +774,66 @@ namespace pie
             buildTabControl.SelectedPage = kryptonPage;
         }
 
-        public void SetBuildAndRunOptions(bool status)
+        public void ActivateSpecificBuildAndRunOptions(String extension)
         {
-            toolStripMenuItem2.Enabled = status;
-            toolStripMenuItem3.Enabled = status;
+            FillContextMenu(extension);
+
+            if (extension == "c" || extension == "cpp")
+            {
+                toolStripMenuItem3.Enabled = true;
+            }
+            else if (extension == "java")
+            {
+                toolStripMenuItem2.Enabled = true;
+                javaClassclassToolStripMenuItem.Enabled = true;
+            }
+            else if (extension == "class")
+            {
+                javaClassclassToolStripMenuItem.Enabled = true;
+            }
+            else if (extension == "py")
+            {
+                pythonScriptpyToolStripMenuItem.Enabled = true;
+            }
+            else if (extension == "pl")
+            {
+                perlScriptplToolStripMenuItem.Enabled = true;
+            }
+            else if (extension == "html")
+            {
+                renderHTMLFilehtmlToolStripMenuItem.Enabled = true;
+            }
+            else if (extension == "md")
+            {
+                renderMarkdownmdToolStripMenuItem.Enabled = true;
+            }
+
+            workingDirectoryToolStripMenuItem.Enabled = true;
+            stagingAreaToolStripMenuItem.Enabled = true;
+            remoteToolStripMenuItem.Enabled = true;
+        }
+
+        public void DeactivateBuildAndRunOptions()
+        {
+            RemoveSuggestedActions();
+
+            toolStripMenuItem2.Enabled = false;
+            toolStripMenuItem3.Enabled = false;
 
             foreach (ToolStripMenuItem toolStripMenuItem in Globals.buildCommandToolStripMenuItems)
             {
-                toolStripMenuItem.Enabled = status;
+                toolStripMenuItem.Enabled = false;
             }
 
-            javaClassclassToolStripMenuItem.Enabled = status;
-            pythonScriptpyToolStripMenuItem.Enabled = status;
-            perlScriptplToolStripMenuItem.Enabled = status;
-            renderHTMLFilehtmlToolStripMenuItem.Enabled = status;
-            renderMarkdownmdToolStripMenuItem.Enabled = status;
+            javaClassclassToolStripMenuItem.Enabled = false;
+            pythonScriptpyToolStripMenuItem.Enabled = false;
+            perlScriptplToolStripMenuItem.Enabled = false;
+            renderHTMLFilehtmlToolStripMenuItem.Enabled = false;
+            renderMarkdownmdToolStripMenuItem.Enabled = false;
 
-            workingDirectoryToolStripMenuItem.Enabled = status;
-            stagingAreaToolStripMenuItem.Enabled = status;
-            remoteToolStripMenuItem.Enabled = status;
+            workingDirectoryToolStripMenuItem.Enabled = false;
+            stagingAreaToolStripMenuItem.Enabled = false;
+            remoteToolStripMenuItem.Enabled = false;
         }
 
         // [Method] Opens terminal tab control
@@ -669,10 +887,6 @@ namespace pie
             if (type == "Java Source (.java)")
             {
                 startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(javac " + openedFilePaths[tabControl.SelectedIndex] + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
-            }
-            else if (type == "C/C++ Source (.c, .cpp) with GCC Compiler")
-            {
-                startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(gcc -Wall " + openedFilePaths[tabControl.SelectedIndex] + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
             }
             else if (type == "C/C++ Source (.c, .cpp)")
             {
@@ -730,13 +944,15 @@ namespace pie
             }
             else if (type == "Render Markdown (.md)")
             {
+                int index = tabControl.SelectedIndex;
+
                 Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
 
                 if (ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]) == "md")
                 {
-                    var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
-                    string result = Markdown.ToHtml(TextArea.Text, pipeline);
+                    string result = ConvertMarkdownToHtml(TextArea.Text);
                     NewTab(TabType.RENDER_MD, result);
+                    markdownRenderedContent[tabControl.SelectedIndex] = index;
                 }
                 else
                 {
@@ -757,10 +973,19 @@ namespace pie
             }
         }
 
+        private string ConvertMarkdownToHtml(string text)
+        {
+            var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+            string result = Markdown.ToHtml(text, pipeline);
+
+            return result;
+        }
+
         private void ShowFindReplacePanel()
         {
             if (Globals.findReplacePanelToggled)
             {
+                kryptonContextMenuItem6.Checked = false;
                 findPanel.Hide();
                 Globals.findReplacePanelToggled = false;
 
@@ -769,6 +994,7 @@ namespace pie
             }
             else
             {
+                kryptonContextMenuItem6.Checked = true;
                 ResetFindPanelLocation();
                 findPanel.Show();
                 Globals.findReplacePanelToggled = true;
@@ -1065,18 +1291,24 @@ namespace pie
 
             if (tabControl.SelectedIndex != tabControl.Pages.Count-1 && (tabControl.Pages.Count == openedFilePaths.Count+1))
             {
-                if (tabControl.SelectedIndex == -1 || openedFilePaths[tabControl.SelectedIndex] == null)
+                if (tabTypes[tabControl.SelectedIndex] == TabType.CODE)
                 {
-                    SetBuildAndRunOptions(false);
+                    tabControl.KryptonContextMenu = kryptonContextMenu1;
+
+                    DeactivateBuildAndRunOptions();
+                    if (tabControl.SelectedIndex != -1 && openedFilePaths[tabControl.SelectedIndex] != null)
+                    {
+                        ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]));
+                    }
                 }
                 else
                 {
-                    SetBuildAndRunOptions(true);
+                    tabControl.KryptonContextMenu = kryptonContextMenu3;
                 }
             }
             else
             {
-                SetBuildAndRunOptions(false);
+                DeactivateBuildAndRunOptions();
             }
         }
 
@@ -1324,12 +1556,10 @@ namespace pie
 
         private void findPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            KryptonPanel panel = (KryptonPanel)sender;
-
             if (Globals.mouseDown)
             {
-                panel.Location = new Point(
-                    (panel.Location.X - Globals.lastLocation.X) + e.X, (panel.Location.Y - Globals.lastLocation.Y) + e.Y);
+                findPanel.Location = new Point(
+                    (findPanel.Location.X - Globals.lastLocation.X) + e.X, (findPanel.Location.Y - Globals.lastLocation.Y) + e.Y);
 
                 this.Update();
             }
@@ -1391,8 +1621,38 @@ namespace pie
             aboutForm.ShowDialog();
         }
 
-        private void keyUpEvents(object sender, KeyEventArgs e)
+        private void kryptonContextMenuItem6_Click(object sender, EventArgs e)
         {
+            ShowFindReplacePanel();
+        }
+
+        private void kryptonContextMenuItem10_Click(object sender, EventArgs e)
+        {
+            if (tabTypes[tabControl.SelectedIndex] == TabType.RENDER_HTML)
+            {
+                ChromiumWebBrowser chromiumWebBrowser = (ChromiumWebBrowser)tabControl.SelectedPage.Controls[0];
+                chromiumWebBrowser.Load(chromiumWebBrowser.Address);
+            }
+            else if (tabTypes[tabControl.SelectedIndex] == TabType.RENDER_MD)
+            {
+                int renderedFromIndex = markdownRenderedContent[tabControl.SelectedIndex];
+                Scintilla TextArea = (Scintilla)tabControl.Pages[renderedFromIndex].Controls[0];
+
+                string htmlContent = ConvertMarkdownToHtml(TextArea.Text);
+
+                ChromiumWebBrowser chromiumWebBrowser = (ChromiumWebBrowser)tabControl.Pages[tabControl.SelectedIndex].Controls[0];
+                chromiumWebBrowser.LoadHtml(htmlContent);
+            }
+        }
+
+        private void kryptonContextMenuItem7_Click(object sender, EventArgs e)
+        {
+            NewTab(TabType.CODE, null);
+        }
+
+        private void kryptonContextMenuItem8_Click(object sender, EventArgs e)
+        {
+            CloseTab();
         }
     }
 }

@@ -133,6 +133,7 @@
       <DependentUpon>AddBuildCommandForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\BuildCommand.cs" />
+    <Compile Include="Classes\PieContextMenuHandler.cs" />
     <Compile Include="Classes\PieKeyboardHandler.cs" />
     <Compile Include="Enums\TabType.cs" />
     <Compile Include="GitCommitMessageForm.cs">
@@ -212,6 +213,8 @@
     <Content Include="icons8-pie-64.ico" />
     <Content Include="pie %284%29.ico" />
     <Content Include="pie.ico" />
+    <None Include="Resources\image %2813%29.png" />
+    <None Include="Resources\search %282%29.png" />
     <None Include="Resources\image %2812%29.png" />
     <None Include="Resources\image %2810%29.png" />
     <None Include="Resources\image %289%29.png" />
