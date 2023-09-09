@@ -39,6 +39,7 @@
             this.showBuildToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.themeSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutPieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +48,7 @@
             this.pythonScriptpyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.perlScriptplToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renderHTMLFilehtmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderMarkdownmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.workingDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createARepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -162,7 +164,8 @@
             this.designToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showBuildToolsToolStripMenuItem,
             this.preferencesToolStripMenuItem,
-            this.themeSettingsToolStripMenuItem});
+            this.themeSettingsToolStripMenuItem,
+            this.aboutPieToolStripMenuItem});
             this.designToolStripMenuItem.Name = "designToolStripMenuItem";
             this.designToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.designToolStripMenuItem.Text = "Interface";
@@ -189,6 +192,14 @@
             this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.themeSettingsToolStripMenuItem.Text = "Theme Settings";
             this.themeSettingsToolStripMenuItem.Click += new System.EventHandler(this.themeSettingsToolStripMenuItem_Click);
+            // 
+            // aboutPieToolStripMenuItem
+            // 
+            this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info__1_;
+            this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
+            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.aboutPieToolStripMenuItem.Text = "About pie";
+            this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
             // 
             // buildToolStripMenuItem1
             // 
@@ -224,7 +235,8 @@
             this.javaClassclassToolStripMenuItem,
             this.pythonScriptpyToolStripMenuItem,
             this.perlScriptplToolStripMenuItem,
-            this.renderHTMLFilehtmlToolStripMenuItem});
+            this.renderHTMLFilehtmlToolStripMenuItem,
+            this.renderMarkdownmdToolStripMenuItem});
             this.runToolStripMenuItem.Image = global::pie.Properties.Resources.running;
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
             this.runToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
@@ -234,7 +246,7 @@
             // 
             this.javaClassclassToolStripMenuItem.Enabled = false;
             this.javaClassclassToolStripMenuItem.Name = "javaClassclassToolStripMenuItem";
-            this.javaClassclassToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.javaClassclassToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.javaClassclassToolStripMenuItem.Text = "Java Class (.class)";
             this.javaClassclassToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
             // 
@@ -242,7 +254,7 @@
             // 
             this.pythonScriptpyToolStripMenuItem.Enabled = false;
             this.pythonScriptpyToolStripMenuItem.Name = "pythonScriptpyToolStripMenuItem";
-            this.pythonScriptpyToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.pythonScriptpyToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.pythonScriptpyToolStripMenuItem.Text = "Python Script (.py)";
             this.pythonScriptpyToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
             // 
@@ -250,7 +262,7 @@
             // 
             this.perlScriptplToolStripMenuItem.Enabled = false;
             this.perlScriptplToolStripMenuItem.Name = "perlScriptplToolStripMenuItem";
-            this.perlScriptplToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.perlScriptplToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.perlScriptplToolStripMenuItem.Text = "Perl Script (.pl)";
             this.perlScriptplToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
             // 
@@ -258,9 +270,17 @@
             // 
             this.renderHTMLFilehtmlToolStripMenuItem.Enabled = false;
             this.renderHTMLFilehtmlToolStripMenuItem.Name = "renderHTMLFilehtmlToolStripMenuItem";
-            this.renderHTMLFilehtmlToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.renderHTMLFilehtmlToolStripMenuItem.Text = "Render HTML file (.html)";
+            this.renderHTMLFilehtmlToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.renderHTMLFilehtmlToolStripMenuItem.Text = "Render HTML (.html)";
             this.renderHTMLFilehtmlToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
+            // 
+            // renderMarkdownmdToolStripMenuItem
+            // 
+            this.renderMarkdownmdToolStripMenuItem.Enabled = false;
+            this.renderMarkdownmdToolStripMenuItem.Name = "renderMarkdownmdToolStripMenuItem";
+            this.renderMarkdownmdToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.renderMarkdownmdToolStripMenuItem.Text = "Render Markdown (.md)";
+            this.renderMarkdownmdToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
             // 
             // gitToolStripMenuItem
             // 
@@ -374,6 +394,7 @@
             this.tabControl.TabCountChanged += new System.EventHandler(this.tabControl_TabCountChanged);
             this.tabControl.Click += new System.EventHandler(this.tabControl_Click);
             this.tabControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            this.tabControl.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyUpEvents);
             this.tabControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl_MouseDown);
             // 
             // kryptonContextMenu1
@@ -680,6 +701,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton3;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox replaceTextBox;
+        private System.Windows.Forms.ToolStripMenuItem renderMarkdownmdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutPieToolStripMenuItem;
     }
 }
 

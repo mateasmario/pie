@@ -83,6 +83,26 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap html_5__1_ {
+            get {
+                object obj = ResourceManager.GetObject("html_5__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap info__1_ {
+            get {
+                object obj = ResourceManager.GetObject("info (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap java__1_ {
             get {
                 object obj = ResourceManager.GetObject("java (1)", resourceCulture);
@@ -96,6 +116,16 @@ namespace pie.Properties {
         internal static System.Drawing.Bitmap letter_c {
             get {
                 object obj = ResourceManager.GetObject("letter-c", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap markdown {
+            get {
+                object obj = ResourceManager.GetObject("markdown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
