@@ -10,6 +10,10 @@ using ScintillaNET;
 using ComponentFactory.Krypton.Docking;
 using pie.Classes;
 using ComponentFactory.Krypton.Toolkit;
+using Markdig;
+using pie.Enums;
+using CefSharp.WinForms;
+using CefSharp;
 
 namespace pie
 {
@@ -35,7 +39,7 @@ namespace pie
 
         public void ProcessParameters(string[] args)
         {
-            NewTab();
+            NewTab(TabType.CODE, null);
 
             if (args.Length == 2)
             {
@@ -47,6 +51,7 @@ namespace pie
         // [Field] Paths of the opened files
         public List<String> openedFilePaths;
         public List<bool> openedFileChanges;
+        public List<TabType> tabTypes;
         public bool darkMode;
         public bool terminalTabControlOpened;
 
@@ -59,9 +64,44 @@ namespace pie
 
             openedFilePaths = new List<String>();
             openedFileChanges = new List<bool>();
+            tabTypes = new List<TabType>();
         }
 
         public Scintilla CreateNewTextArea()
+        {
+            Scintilla TextArea = new Scintilla();
+            TextArea.KeyDown += keyDownEvents;
+            TextArea.KeyPress += TextArea_KeyPress;
+            TextArea.MouseDown += TextArea_MouseDown;
+            TextArea.KeyUp += keyUpEvents;
+            TextArea.TextChanged += TextArea_TextChanged;
+            TextArea.UpdateUI += TextArea_UpdateUI;
+            TextArea.WrapMode = WrapMode.None;
+            TextArea.IndentationGuides = IndentView.LookBoth;
+            TextArea.SetSelectionBackColor(true, ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Selection"]));
+            TextArea.CaretLineBackColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["CaretLine"]);
+            TextArea.UsePopup(false);
+
+            TextArea.StyleResetDefault();
+            TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
+            TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
+            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Fore"]);
+            TextArea.CaretForeColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Fore"]);
+            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Background"]);
+            TextArea.StyleClearAll();
+
+            TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
+
+            InitNumberMargin(TextArea);
+            //InitBookmarkMargin(TextArea);
+            InitCodeFolding(TextArea);
+
+            TextArea.Dock = DockStyle.Fill;
+
+            return TextArea;
+        }
+
+        public Scintilla CreateNewRenderTab()
         {
             Scintilla TextArea = new Scintilla();
             TextArea.KeyDown += keyDownEvents;
@@ -271,14 +311,50 @@ namespace pie
 
 
         // [Method] Creates a new tab and selects the new tab
-        public void NewTab()
+        public void NewTab(TabType tabType, String renderContent)
         {
             KryptonPage kryptonPage = new KryptonPage();
             kryptonPage.Text = "Untitled";
 
-            Scintilla TextArea = CreateNewTextArea();
+            if (tabType == TabType.CODE)
+            {
+                Scintilla TextArea = CreateNewTextArea();
+                kryptonPage.Controls.Add(TextArea);
+            }
+            else
+            {
+                if (tabType == TabType.RENDER_HTML)
+                {
+                    kryptonPage.ImageSmall = Properties.Resources.html_5__1_;
+                }
+                else if (tabType == TabType.RENDER_MD)
+                {
+                    kryptonPage.ImageSmall = Properties.Resources.markdown;
+                }
 
-            kryptonPage.Controls.Add(TextArea);
+                kryptonPage.Text = openedFilePaths[tabControl.SelectedIndex];
+
+                ChromiumWebBrowser chromiumWebBrowser = new ChromiumWebBrowser();
+                chromiumWebBrowser.Parent = this;
+                this.Controls.Add(chromiumWebBrowser);
+                chromiumWebBrowser.Dock = DockStyle.Fill;
+
+                if (tabType == TabType.RENDER_HTML)
+                {
+                    chromiumWebBrowser.Load(renderContent);
+                }
+                else if (tabType == TabType.RENDER_MD)
+                {
+                    chromiumWebBrowser.LoadHtml(renderContent);
+                }
+
+                IKeyboardHandler keyboardHandler = new PieKeyboardHandler(this);
+                chromiumWebBrowser.KeyboardHandler = keyboardHandler;
+
+                kryptonPage.Controls.Add(chromiumWebBrowser);
+            }
+
+
 
             int index = 0;
 
@@ -291,6 +367,7 @@ namespace pie
             tabControl.SelectedPage = kryptonPage;
 
             openedFilePaths.Insert(index, null);
+            tabTypes.Insert(index, tabType);
             openedFileChanges.Insert(index, false);
         }
 
@@ -311,13 +388,19 @@ namespace pie
 
                 tabCount--;
             }
+
             return true;
         }
 
         // [Method] Closes the currently selected tab
         public bool CloseTab()
         {
-            if (openedFileChanges[tabControl.SelectedIndex] == true)
+            if (tabTypes[tabControl.SelectedIndex] == TabType.RENDER_HTML || tabTypes[tabControl.SelectedIndex] == TabType.RENDER_MD)
+            {
+                ChromiumWebBrowser chromiumWebBrowser = (ChromiumWebBrowser)tabControl.SelectedPage.Controls[0];
+                CloseTabAfterWarning();
+            }
+            else if (openedFileChanges[tabControl.SelectedIndex] == true)
             {
                 DialogResult dialogResult = MessageBox.Show("Save file before closing it?", "Save file", MessageBoxButtons.YesNoCancel);
                 if (dialogResult == DialogResult.Yes)
@@ -367,7 +450,7 @@ namespace pie
             }
             else
             {
-                NewTab();
+                NewTab(TabType.CODE, null);
             }
         }
 
@@ -447,7 +530,7 @@ namespace pie
         {
             if (tabControl.Pages.Count == 1)
             {
-                NewTab();
+                NewTab(TabType.CODE, null);
             }
 
             int openedTabIndex = tabControl.SelectedIndex;
@@ -464,6 +547,11 @@ namespace pie
             ScintillaLexerService.SetLexer(extension, TextArea);
 
             SetBuildAndRunOptions(true);
+
+            if (tabControl.Pages.Count == 2)
+            {
+                openedFileChanges[tabControl.SelectedIndex] = false;
+            }
         }
 
         // [Method] Opens a new file and replaces text and path (in openedFilePaths) for selected tab (with openFileDialog)
@@ -475,7 +563,7 @@ namespace pie
 
             if (openFileDialog.FileName != "")
             {
-                NewTab();
+                NewTab(TabType.CODE, null);
                 Open(openFileDialog.FileName);
             }
         }
@@ -523,6 +611,7 @@ namespace pie
             pythonScriptpyToolStripMenuItem.Enabled = status;
             perlScriptplToolStripMenuItem.Enabled = status;
             renderHTMLFilehtmlToolStripMenuItem.Enabled = status;
+            renderMarkdownmdToolStripMenuItem.Enabled = status;
 
             workingDirectoryToolStripMenuItem.Enabled = status;
             stagingAreaToolStripMenuItem.Enabled = status;
@@ -626,6 +715,36 @@ namespace pie
 
                 startInfo.Arguments = "/K (echo ^[Pie^] Running started.)&(perl " + scriptName + ")&(echo ^[Pie^] Running finished.)&(pause)&(exit)";
             }
+            else if (type == "Render HTML (.html)")
+            {
+                if (ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]) == "html")
+                {
+                    NewTab(TabType.RENDER_HTML, openedFilePaths[tabControl.SelectedIndex]);
+                }
+                else
+                {
+                    MessageBox.Show("pie can only render files with the .html extension.", "pie");
+                }
+
+                return;
+            }
+            else if (type == "Render Markdown (.md)")
+            {
+                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+
+                if (ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]) == "md")
+                {
+                    var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+                    string result = Markdown.ToHtml(TextArea.Text, pipeline);
+                    NewTab(TabType.RENDER_MD, result);
+                }
+                else
+                {
+                    MessageBox.Show("pie can only render files with the .md extension.", "pie");
+                }
+
+                return;
+            }
 
             try
             {
@@ -662,6 +781,7 @@ namespace pie
         {
             // Load Build Commands from configuration file
             List<BuildCommand> buildCommands = null;
+            Cef.Initialize(new CefSettings());
 
             try
             {
@@ -734,7 +854,7 @@ namespace pie
             }
             else
             {
-                NewTab();
+                NewTab(TabType.CODE, null);
             }
         }
 
@@ -810,13 +930,13 @@ namespace pie
         // [Event] "New Tab" button pressed in kryptonContextMenu
         private void kryptonContextMenuItem2_Click(object sender, EventArgs e)
         {
-            NewTab();
+            NewTab(TabType.CODE, null);
         }
 
         // [Event] "New" button pressed in upper menu => create new tab
         private void newFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewTab();
+            NewTab(TabType.CODE, null);
         }
 
         // [Event] "Close Current Tab" button pressed in kryptonContextMenu
@@ -851,7 +971,7 @@ namespace pie
 
                 if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
                 {
-                    NewTab();
+                    NewTab(TabType.CODE, null);
                 }
                 else if (e.KeyCode == Keys.W && e.Modifiers == Keys.Control)
                 {
@@ -892,6 +1012,7 @@ namespace pie
 
             if (closeStatus)
             {
+                Cef.Shutdown();
                 Application.Exit();
             }
             else
@@ -942,7 +1063,7 @@ namespace pie
                 Globals.lastSelectedTabIndex = tabControl.SelectedIndex;
             }
 
-            if (tabControl.Pages.Count == openedFilePaths.Count)
+            if (tabControl.SelectedIndex != tabControl.Pages.Count-1 && (tabControl.Pages.Count == openedFilePaths.Count+1))
             {
                 if (tabControl.SelectedIndex == -1 || openedFilePaths[tabControl.SelectedIndex] == null)
                 {
@@ -1081,7 +1202,7 @@ namespace pie
         {
             if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
             {
-                NewTab();
+                NewTab(TabType.CODE, null);
             }
         }
 
@@ -1262,6 +1383,16 @@ namespace pie
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
 
             ReplaceAll(TextArea, findTextBox.Text, replaceTextBox.Text);
+        }
+
+        private void aboutPieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm aboutForm = new AboutForm();
+            aboutForm.ShowDialog();
+        }
+
+        private void keyUpEvents(object sender, KeyEventArgs e)
+        {
         }
     }
 }
