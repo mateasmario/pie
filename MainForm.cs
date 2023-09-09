@@ -455,6 +455,8 @@ namespace pie
             else
             {
                 tabControl.KryptonContextMenu = kryptonContextMenu3;
+                ToggleTerminalTabControl(false);
+                ToggleFindReplacePanel(false);
 
                 if (tabType == TabType.RENDER_HTML)
                 {
@@ -671,7 +673,10 @@ namespace pie
 
             openedFileChanges[openedTabIndex] = false;
             DeactivateBuildAndRunOptions();
-            ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]));
+
+            if (openedFilePaths[tabControl.SelectedIndex] != null) {
+                ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]));
+            }
         }
 
         // [Method] Saves text stored in selected tab at a user-specified location
@@ -846,18 +851,27 @@ namespace pie
 
             if (terminalTabControlOpened == false)
             {
+                ToggleTerminalTabControl(true);
+            }
+            else
+            {
+                ToggleTerminalTabControl(false);
+            }
+        }
+
+        public void ToggleTerminalTabControl(bool status)
+        {
+            if (status)
+            {
                 buildTabControl.Show();
-                terminalTabControlOpened = true;
-                kryptonContextMenuItem15.Checked = true;
-                showBuildToolsToolStripMenuItem.Checked = true;
             }
             else
             {
                 buildTabControl.Hide();
-                terminalTabControlOpened = false;
-                kryptonContextMenuItem15.Checked = false;
-                showBuildToolsToolStripMenuItem.Checked = false;
             }
+            terminalTabControlOpened = status;
+            kryptonContextMenuItem15.Checked = status;
+            showBuildToolsToolStripMenuItem.Checked = status;
         }
 
         // [Method] Used for Git commands
@@ -985,21 +999,35 @@ namespace pie
         {
             if (Globals.findReplacePanelToggled)
             {
-                kryptonContextMenuItem6.Checked = false;
-                findPanel.Hide();
-                Globals.findReplacePanelToggled = false;
-
-                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-                ClearHighlights(TextArea);
+                ToggleFindReplacePanel(false);
             }
             else
             {
-                kryptonContextMenuItem6.Checked = true;
+                ToggleFindReplacePanel(true);
+            }
+        }
+
+        private void ToggleFindReplacePanel(bool status)
+        {
+            if (status)
+            {
                 ResetFindPanelLocation();
                 findPanel.Show();
-                Globals.findReplacePanelToggled = true;
                 findTextBox.Focus();
             }
+            else
+            {
+                findPanel.Hide();
+
+                if (tabTypes[tabControl.SelectedIndex] == TabType.CODE)
+                {
+                    Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+                    ClearHighlights(TextArea);
+                }
+            }
+
+            kryptonContextMenuItem6.Checked = status;
+            Globals.findReplacePanelToggled = status;
         }
 
         // [Event] Form Loading
@@ -1203,17 +1231,19 @@ namespace pie
                 {
                     CloseTab();
                 }
-                else if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
-                {
-                    Save();
-                }
-                else if (e.KeyCode == Keys.B && e.Modifiers == Keys.Control)
-                {
-                    ShowTerminalTabControl();
-                }
-                else if (e.KeyCode == Keys.F && e.Modifiers == Keys.Control)
-                {
-                    ShowFindReplacePanel();
+                else if (tabTypes[tabControl.SelectedIndex] == TabType.CODE) {
+                    if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
+                    {
+                        Save();
+                    }
+                    else if (e.KeyCode == Keys.B && e.Modifiers == Keys.Control)
+                    {
+                        ShowTerminalTabControl();
+                    }
+                    else if (e.KeyCode == Keys.F && e.Modifiers == Keys.Control)
+                    {
+                        ShowFindReplacePanel();
+                    }
                 }
             }
         }
@@ -1304,6 +1334,8 @@ namespace pie
                 else
                 {
                     tabControl.KryptonContextMenu = kryptonContextMenu3;
+                    ToggleTerminalTabControl(false);
+                    ToggleFindReplacePanel(false);
                 }
             }
             else
