@@ -45,6 +45,26 @@ namespace pie.Services
                 scintilla.SetKeywords(0, "abstract as base break case catch checked continue default delegate do else event explicit extern false finally fixed for foreach goto if implicit in interface internal is lock namespace new null object operator out override params private protected public readonly ref return sealed sizeof stackalloc switch this throw true try typeof unchecked unsafe using virtual while");
                 scintilla.SetKeywords(1, "bool byte char class const decimal double enum float int long sbyte short static string struct uint ulong ushort void");
             }
+            else if (language == "java")
+            {
+                scintilla.Lexer = Lexer.Cpp;
+                scintilla.Styles[ScintillaNET.Style.Cpp.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.CommentLineDoc].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Verbatim].ForeColor = ConvertHexToColor(configColorDictionary["Verbatim"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.StringEol].BackColor = ConvertHexToColor(configColorDictionary["StringEol"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
+                scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = ConvertHexToColor(configColorDictionary["Preprocessor"]);
+
+                scintilla.SetKeywords(0, "abstract break case catch continue default do else extern false finally for native super extends final native transient volatile implements synchronized if instanceof import package interface new null private protected public record return sizeof switch this throw throws true try while");
+                scintilla.SetKeywords(1, "boolean Boolean byte Byte char Character class double Double enum float Float int Integer long Long short Short static String void");
+            }
             else if (language == "lua")
             {
                 // Extracted from the Lua Scintilla lexer and SciTE .properties file
@@ -293,7 +313,7 @@ namespace pie.Services
                     ConfigureLexer("c", scintilla);
                     break;
                 case "java":
-                    ConfigureLexer("c", scintilla);
+                    ConfigureLexer("java", scintilla);
                     break;
                 case "lua":
                     ConfigureLexer("lua", scintilla);

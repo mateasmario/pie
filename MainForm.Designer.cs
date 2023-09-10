@@ -198,7 +198,7 @@
             // themeSettingsToolStripMenuItem
             // 
             this.themeSettingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.color_wheel__1_;
+            this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.color_wheel;
             this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
             this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.themeSettingsToolStripMenuItem.Text = "Theme Settings";
@@ -206,7 +206,7 @@
             // 
             // aboutPieToolStripMenuItem
             // 
-            this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info__1_;
+            this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info;
             this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
             this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.aboutPieToolStripMenuItem.Text = "About pie";
@@ -217,7 +217,7 @@
             this.buildToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2,
             this.toolStripMenuItem3});
-            this.buildToolStripMenuItem1.Image = global::pie.Properties.Resources.settings__1_;
+            this.buildToolStripMenuItem1.Image = global::pie.Properties.Resources.settings;
             this.buildToolStripMenuItem1.Name = "buildToolStripMenuItem1";
             this.buildToolStripMenuItem1.Size = new System.Drawing.Size(62, 20);
             this.buildToolStripMenuItem1.Text = "Build";
@@ -225,7 +225,7 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Enabled = false;
-            this.toolStripMenuItem2.Image = global::pie.Properties.Resources.java__1_;
+            this.toolStripMenuItem2.Image = global::pie.Properties.Resources.java;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(199, 22);
             this.toolStripMenuItem2.Text = "Java Source (.java)";
@@ -401,6 +401,7 @@
             this.tabControl.Size = new System.Drawing.Size(1020, 357);
             this.tabControl.TabIndex = 2;
             this.tabControl.Text = "kryptonDockableNavigator1";
+            this.tabControl.ToolTips.AllowPageToolTips = true;
             this.tabControl.SelectedPageChanged += new System.EventHandler(this.tabControl_SelectedPageChanged);
             this.tabControl.TabCountChanged += new System.EventHandler(this.tabControl_TabCountChanged);
             this.tabControl.Click += new System.EventHandler(this.tabControl_Click);
@@ -449,13 +450,13 @@
             // 
             // kryptonContextMenuItem6
             // 
-            this.kryptonContextMenuItem6.Image = global::pie.Properties.Resources.search__2_;
+            this.kryptonContextMenuItem6.Image = global::pie.Properties.Resources.search;
             this.kryptonContextMenuItem6.Text = "Find and Replace";
             this.kryptonContextMenuItem6.Click += new System.EventHandler(this.kryptonContextMenuItem6_Click);
             // 
             // kryptonContextMenuItem15
             // 
-            this.kryptonContextMenuItem15.Image = global::pie.Properties.Resources.terminal__2_;
+            this.kryptonContextMenuItem15.Image = global::pie.Properties.Resources.terminal;
             this.kryptonContextMenuItem15.Text = "Show Terminal Tab";
             this.kryptonContextMenuItem15.Click += new System.EventHandler(this.kryptonContextMenuItem15_Click);
             // 
@@ -463,7 +464,7 @@
             // 
             this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
             this.kryptonPage1.Flags = 65534;
-            this.kryptonPage1.ImageSmall = global::pie.Properties.Resources.add__1_;
+            this.kryptonPage1.ImageSmall = global::pie.Properties.Resources.add;
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
@@ -471,7 +472,7 @@
             this.kryptonPage1.Text = "";
             this.kryptonPage1.TextDescription = "";
             this.kryptonPage1.TextTitle = "";
-            this.kryptonPage1.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage1.ToolTipTitle = "Add New Tab";
             this.kryptonPage1.UniqueName = "E9D081B0A6964933EA81724511F8E430";
             // 
             // kryptonContextMenuItems1
@@ -542,13 +543,13 @@
             // 
             // kryptonContextMenuItem16
             // 
-            this.kryptonContextMenuItem16.Image = global::pie.Properties.Resources.terminal__2_;
+            this.kryptonContextMenuItem16.Image = global::pie.Properties.Resources.terminal;
             this.kryptonContextMenuItem16.Text = "New Command Prompt Tab";
             this.kryptonContextMenuItem16.Click += new System.EventHandler(this.kryptonContextMenuItem16_Click);
             // 
             // kryptonContextMenuItem17
             // 
-            this.kryptonContextMenuItem17.Image = global::pie.Properties.Resources.powershell__1_;
+            this.kryptonContextMenuItem17.Image = global::pie.Properties.Resources.powershell;
             this.kryptonContextMenuItem17.Text = "New PowerShell Tab";
             this.kryptonContextMenuItem17.Click += new System.EventHandler(this.kryptonContextMenuItem17_Click);
             // 
@@ -582,7 +583,7 @@
             this.kryptonHeader1.TabIndex = 6;
             this.kryptonHeader1.Values.Description = "";
             this.kryptonHeader1.Values.Heading = "Find & Replace";
-            this.kryptonHeader1.Values.Image = global::pie.Properties.Resources.search__2_;
+            this.kryptonHeader1.Values.Image = global::pie.Properties.Resources.search;
             this.kryptonHeader1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseDown);
             this.kryptonHeader1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseMove);
             this.kryptonHeader1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseUp);
