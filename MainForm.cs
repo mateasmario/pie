@@ -7,7 +7,6 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using ScintillaNET;
-using ComponentFactory.Krypton.Docking;
 using pie.Classes;
 using ComponentFactory.Krypton.Toolkit;
 using Markdig;
@@ -49,10 +48,7 @@ namespace pie
 
 
         // [Field] Paths of the opened files
-        public List<String> openedFilePaths;
-        public List<bool> openedFileChanges;
-        public List<TabType> tabTypes;
-        public List<int> markdownRenderedContent;
+        public List<TabInfo> tabInfos;
         public bool darkMode;
         public bool terminalTabControlOpened;
 
@@ -63,10 +59,7 @@ namespace pie
 
             this.MinimumSize = new System.Drawing.Size(1036, 634);
 
-            openedFilePaths = new List<String>();
-            openedFileChanges = new List<bool>();
-            tabTypes = new List<TabType>();
-            markdownRenderedContent = new List<int>();
+            tabInfos = new List<TabInfo>();
         }
 
         public Scintilla CreateNewTextArea()
@@ -127,7 +120,6 @@ namespace pie
             TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
 
             InitNumberMargin(TextArea);
-            //InitBookmarkMargin(TextArea);
             InitCodeFolding(TextArea);
 
             TextArea.Dock = DockStyle.Fill;
@@ -301,7 +293,7 @@ namespace pie
             scintilla.Margins[0].Width = scintilla.TextWidth(Style.LineNumber, new string('9', maxLineNumberCharLength + 1)) + padding;
             Globals.maxLineNumberCharLength = maxLineNumberCharLength;
 
-            openedFileChanges[tabControl.SelectedIndex] = true;
+            tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
         }
 
         private void TextArea_MouseDown(object sender, MouseEventArgs e)
@@ -326,7 +318,7 @@ namespace pie
                 return;
             }
 
-            openedFileChanges[tabControl.SelectedIndex] = true;
+            tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
         }
 
         #region Numbers, Bookmarks, Code Folding
@@ -442,10 +434,13 @@ namespace pie
 
 
         // [Method] Creates a new tab and selects the new tab
-        public void NewTab(TabType tabType, String renderContent)
+        public void NewTab(TabType tabType, String path)
         {
             KryptonPage kryptonPage = new KryptonPage();
             kryptonPage.Text = "Untitled";
+            kryptonPage.ToolTipTitle = kryptonPage.Text;
+
+            string openedFilePath = null;
 
             if (tabType == TabType.CODE)
             {
@@ -458,16 +453,8 @@ namespace pie
                 ToggleTerminalTabControl(false);
                 ToggleFindReplacePanel(false);
 
-                if (tabType == TabType.RENDER_HTML)
-                {
-                    kryptonPage.ImageSmall = Properties.Resources.html_5__1_;
-                }
-                else if (tabType == TabType.RENDER_MD)
-                {
-                    kryptonPage.ImageSmall = Properties.Resources.markdown;
-                }
-
-                kryptonPage.Text = openedFilePaths[tabControl.SelectedIndex];
+                kryptonPage.Text = tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
+                kryptonPage.ToolTipTitle = kryptonPage.Text;
 
                 ChromiumWebBrowser chromiumWebBrowser = new ChromiumWebBrowser();
                 chromiumWebBrowser.Parent = this;
@@ -476,11 +463,16 @@ namespace pie
 
                 if (tabType == TabType.RENDER_HTML)
                 {
-                    chromiumWebBrowser.Load(renderContent);
+                    openedFilePath = path;
+
+                    chromiumWebBrowser.Load(path);
                 }
                 else if (tabType == TabType.RENDER_MD)
                 {
-                    chromiumWebBrowser.LoadHtml(renderContent);
+                    openedFilePath = path;
+
+                    string result = ConvertMarkdownToHtml(path);
+                    chromiumWebBrowser.LoadHtml(result);
                 }
 
                 IKeyboardHandler keyboardHandler = new PieKeyboardHandler(this);
@@ -503,10 +495,13 @@ namespace pie
             tabControl.Pages.Insert(index, kryptonPage);
             tabControl.SelectedPage = kryptonPage;
 
-            openedFilePaths.Insert(index, null);
-            tabTypes.Insert(index, tabType);
-            markdownRenderedContent.Insert(index, -1);
-            openedFileChanges.Insert(index, false);
+            TabInfo tabInfo = new TabInfo(openedFilePath, false, tabType);
+            tabInfos.Insert(index, tabInfo);
+            
+            if (openedFilePath != null)
+            {
+                UpdateFormTitle();
+            }
         }
 
         private void ChromiumWebBrowser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
@@ -558,12 +553,12 @@ namespace pie
         // [Method] Closes the currently selected tab
         public bool CloseTab()
         {
-            if (tabTypes[tabControl.SelectedIndex] == TabType.RENDER_HTML || tabTypes[tabControl.SelectedIndex] == TabType.RENDER_MD)
+            if (tabInfos[tabControl.SelectedIndex].getTabType() == TabType.RENDER_HTML || tabInfos[tabControl.SelectedIndex].getTabType() == TabType.RENDER_MD)
             {
                 ChromiumWebBrowser chromiumWebBrowser = (ChromiumWebBrowser)tabControl.SelectedPage.Controls[0];
                 CloseTabAfterWarning();
             }
-            else if (openedFileChanges[tabControl.SelectedIndex] == true)
+            else if (tabInfos[tabControl.SelectedIndex].getOpenedFileChanges())
             {
                 DialogResult dialogResult = MessageBox.Show("Save file before closing it?", "Save file", MessageBoxButtons.YesNoCancel);
                 if (dialogResult == DialogResult.Yes)
@@ -585,6 +580,11 @@ namespace pie
                 CloseTabAfterWarning();
             }
 
+            if (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
+            {
+                UpdateFormTitle();
+            }
+
             return true;
         }
 
@@ -592,17 +592,14 @@ namespace pie
         {
             KryptonPage selectedKryptonPage = tabControl.SelectedPage;
 
-            openedFilePaths.RemoveAt(tabControl.SelectedIndex);
-            openedFileChanges.RemoveAt(tabControl.SelectedIndex);
-            tabTypes.RemoveAt(tabControl.SelectedIndex);
-            markdownRenderedContent.RemoveAt(tabControl.SelectedIndex);
+            tabInfos.RemoveAt(tabControl.SelectedIndex);
 
             tabControl.Pages.Remove(selectedKryptonPage);
 
-            if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < openedFilePaths.Count && openedFilePaths[tabControl.SelectedIndex] != null)
+            if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < tabInfos.Count && tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
             {
                 DeactivateBuildAndRunOptions();
-                ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]));
+                ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
             }
 
             if (tabControl.Pages.Count > 1)
@@ -615,15 +612,6 @@ namespace pie
                 }
 
                 Globals.lastSelectedTabIndex = tabControl.SelectedIndex;
-
-                for (int i = 0; i < markdownRenderedContent.Count; i++)
-                {
-                    if (markdownRenderedContent[i] == tabControl.SelectedIndex)
-                    {
-                        tabControl.SelectedIndex = i;
-                        CloseTab();
-                    }
-                }
             }
             else
             {
@@ -652,13 +640,13 @@ namespace pie
         public void Save()
         {
             int openedTabIndex = tabControl.SelectedIndex;
-            if (openedFilePaths[openedTabIndex] == null)
+            if (tabInfos[openedTabIndex].getOpenedFilePath() == null)
             {
                 SaveAs();
             }
             else
             {
-                string chosenPath = openedFilePaths[tabControl.SelectedIndex];
+                string chosenPath = tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
 
                 TextWriter txt = new StreamWriter(chosenPath);
                 Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
@@ -667,15 +655,16 @@ namespace pie
 
                 tabControl.SelectedPage.Text = chosenPath;
 
-                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(openedFilePaths[tabControl.SelectedIndex]));
+                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
                 ScintillaLexerService.SetLexer(extension, TextArea);
+                UpdateFormTitle();
             }
 
-            openedFileChanges[openedTabIndex] = false;
+            tabInfos[openedTabIndex].setOpenedFileChanges(false);
             DeactivateBuildAndRunOptions();
 
-            if (openedFilePaths[tabControl.SelectedIndex] != null) {
-                ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]));
+            if (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null) {
+                ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
             }
         }
 
@@ -698,11 +687,13 @@ namespace pie
                 txt.Write(TextArea.Text);
                 txt.Close();
 
-                openedFilePaths[tabControl.SelectedIndex] = chosenPath;
+                tabInfos[tabControl.SelectedIndex].setOpenedFilePath(chosenPath);
                 tabControl.SelectedPage.Text = chosenPath;
+                tabControl.SelectedPage.ToolTipTitle = tabControl.SelectedPage.Text;
 
-                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(openedFilePaths[tabControl.SelectedIndex]));
+                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
                 ScintillaLexerService.SetLexer(extension, TextArea);
+                UpdateFormTitle();
             }
         }
 
@@ -721,18 +712,21 @@ namespace pie
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
             TextArea.Text = fileContent;
 
-            openedFilePaths[openedTabIndex] = fileName;
+            tabInfos[openedTabIndex].setOpenedFilePath(fileName);
             tabControl.SelectedPage.Text = fileName;
+            tabControl.SelectedPage.ToolTipTitle = tabControl.SelectedPage.Text;
 
             string extension = ParsingService.GetFileExtension(fileName);
+
             ScintillaLexerService.SetLexer(extension, TextArea);
 
             DeactivateBuildAndRunOptions();
-            ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]));
+            ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+            UpdateFormTitle();
 
-            if (tabControl.Pages.Count == 2)
+            if (tabControl.Pages.Count >= 2)
             {
-                openedFileChanges[tabControl.SelectedIndex] = false;
+                tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(false);
             }
         }
 
@@ -764,12 +758,12 @@ namespace pie
             if (process == "cmd.exe")
             {
                 kryptonPage.Text = "Command Prompt";
-                kryptonPage.ImageSmall = Properties.Resources.terminal__2_;
+                kryptonPage.ImageSmall = Properties.Resources.terminal;
             }
             else if (process == "powershell.exe")
             {
                 kryptonPage.Text = "Powershell";
-                kryptonPage.ImageSmall = Properties.Resources.powershell__1_;
+                kryptonPage.ImageSmall = Properties.Resources.powershell;
             }
 
             consoleControl.Dock = DockStyle.Fill;
@@ -883,7 +877,7 @@ namespace pie
 
             try
             {
-                startInfo.WorkingDirectory = ParsingService.GetFolderName(openedFilePaths[tabControl.SelectedIndex]);
+                startInfo.WorkingDirectory = ParsingService.GetFolderName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                 Process.Start(startInfo);
             }
             catch (NullReferenceException)
@@ -900,16 +894,16 @@ namespace pie
 
             if (type == "Java Source (.java)")
             {
-                startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(javac " + openedFilePaths[tabControl.SelectedIndex] + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
+                startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(javac " + tabInfos[tabControl.SelectedIndex].getOpenedFilePath() + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
             }
             else if (type == "C/C++ Source (.c, .cpp)")
             {
-                startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(gcc -Wall " + openedFilePaths[tabControl.SelectedIndex] + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
+                startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(gcc -Wall " + tabInfos[tabControl.SelectedIndex].getOpenedFilePath() + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
             }
 
             try
             {
-                startInfo.WorkingDirectory = ParsingService.GetFolderName(openedFilePaths[tabControl.SelectedIndex]);
+                startInfo.WorkingDirectory = ParsingService.GetFolderName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                 Process.Start(startInfo);
             }
             catch (NullReferenceException)
@@ -926,28 +920,28 @@ namespace pie
 
             if (type == "Java Class (.class)")
             {
-                string className = ParsingService.GetFileName(openedFilePaths[tabControl.SelectedIndex]);
+                string className = ParsingService.GetFileName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                 className = ParsingService.RemoveFileExtension(className);
 
                 startInfo.Arguments = "/K (echo ^[Pie^] Running started.)&(java " + className + ")&(echo ^[Pie^] Running finished.)&(pause)&(exit)";
             }
             else if (type == "Python Script (.py)")
             {
-                string scriptName = ParsingService.GetFileName(openedFilePaths[tabControl.SelectedIndex]);
+                string scriptName = ParsingService.GetFileName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
 
                 startInfo.Arguments = "/K (echo ^[Pie^] Running started.)&(py " + scriptName + ")&(echo ^[Pie^] Running finished.)&(pause)&(exit)";
             }
             else if (type == "Perl Script (.pl)")
             {
-                string scriptName = ParsingService.GetFileName(openedFilePaths[tabControl.SelectedIndex]);
+                string scriptName = ParsingService.GetFileName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
 
                 startInfo.Arguments = "/K (echo ^[Pie^] Running started.)&(perl " + scriptName + ")&(echo ^[Pie^] Running finished.)&(pause)&(exit)";
             }
             else if (type == "Render HTML (.html)")
             {
-                if (ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]) == "html")
+                if (ParsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "html")
                 {
-                    NewTab(TabType.RENDER_HTML, openedFilePaths[tabControl.SelectedIndex]);
+                    NewTab(TabType.RENDER_HTML, tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                 }
                 else
                 {
@@ -962,11 +956,9 @@ namespace pie
 
                 Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
 
-                if (ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]) == "md")
+                if (ParsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "md")
                 {
-                    string result = ConvertMarkdownToHtml(TextArea.Text);
-                    NewTab(TabType.RENDER_MD, result);
-                    markdownRenderedContent[tabControl.SelectedIndex] = index;
+                    NewTab(TabType.RENDER_MD, tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                 }
                 else
                 {
@@ -978,7 +970,7 @@ namespace pie
 
             try
             {
-                startInfo.WorkingDirectory = ParsingService.GetFolderName(openedFilePaths[tabControl.SelectedIndex]);
+                startInfo.WorkingDirectory = ParsingService.GetFolderName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                 Process.Start(startInfo);
             }
             catch (NullReferenceException)
@@ -987,10 +979,12 @@ namespace pie
             }
         }
 
-        private string ConvertMarkdownToHtml(string text)
+        private string ConvertMarkdownToHtml(string path)
         {
+            string content = ParsingService.GetContentFromFile(path);
+
             var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
-            string result = Markdown.ToHtml(text, pipeline);
+            string result = Markdown.ToHtml(content, pipeline);
 
             return result;
         }
@@ -1019,7 +1013,7 @@ namespace pie
             {
                 findPanel.Hide();
 
-                if (tabTypes[tabControl.SelectedIndex] == TabType.CODE)
+                if (tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
                 {
                     Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
                     ClearHighlights(TextArea);
@@ -1146,14 +1140,14 @@ namespace pie
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "cmd.exe";
-            string scriptName = ParsingService.GetFileName(openedFilePaths[tabControl.SelectedIndex]);
+            string scriptName = ParsingService.GetFileName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
             string command = (string)((ToolStripMenuItem)sender).Tag;
             command = command.Replace("$FILE", scriptName);
             startInfo.Arguments = "/K (echo ^[Pie^] Running started.)&(" + command + ")&(echo ^[Pie^] Running finished.)&(pause)&(exit)";
            
             try
             {
-                startInfo.WorkingDirectory = ParsingService.GetFolderName(openedFilePaths[tabControl.SelectedIndex]);
+                startInfo.WorkingDirectory = ParsingService.GetFolderName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                 Process.Start(startInfo);
             }
             catch (NullReferenceException)
@@ -1231,7 +1225,7 @@ namespace pie
                 {
                     CloseTab();
                 }
-                else if (tabTypes[tabControl.SelectedIndex] == TabType.CODE) {
+                else if (tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE) {
                     if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
                     {
                         Save();
@@ -1319,16 +1313,21 @@ namespace pie
                 Globals.lastSelectedTabIndex = tabControl.SelectedIndex;
             }
 
-            if (tabControl.SelectedIndex != tabControl.Pages.Count-1 && (tabControl.Pages.Count == openedFilePaths.Count+1))
+            if (tabControl.SelectedIndex != tabControl.Pages.Count-1 && (tabControl.Pages.Count == tabInfos.Count+1))
             {
-                if (tabTypes[tabControl.SelectedIndex] == TabType.CODE)
+                if (tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
                 {
                     tabControl.KryptonContextMenu = kryptonContextMenu1;
 
                     DeactivateBuildAndRunOptions();
-                    if (tabControl.SelectedIndex != -1 && openedFilePaths[tabControl.SelectedIndex] != null)
+                    if (tabControl.SelectedIndex != -1 && tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
                     {
-                        ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(openedFilePaths[tabControl.SelectedIndex]));
+                        ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+                        UpdateFormTitle();
+                    }
+                    else
+                    {
+                        UpdateFormTitle("Untitled");
                     }
                 }
                 else
@@ -1336,12 +1335,26 @@ namespace pie
                     tabControl.KryptonContextMenu = kryptonContextMenu3;
                     ToggleTerminalTabControl(false);
                     ToggleFindReplacePanel(false);
+
+                    UpdateFormTitle();
+
                 }
             }
             else
             {
                 DeactivateBuildAndRunOptions();
+                UpdateFormTitle("Untitled");
             }
+        }
+
+        private void UpdateFormTitle()
+        {
+            this.Text = "pie [" + tabInfos[tabControl.SelectedIndex].getOpenedFilePath() + "]";
+        }
+
+        private void UpdateFormTitle(String customTitle)
+        {
+            this.Text = "pie [" + customTitle + "]";
         }
 
         // [Event] Triggered when user presses one of the buttons in the "Git" tab
@@ -1361,7 +1374,7 @@ namespace pie
         {
             try
             {
-                string path = ParsingService.GetFolderName(openedFilePaths[tabControl.SelectedIndex]);
+                string path = ParsingService.GetFolderName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
 
                 var dir = new DirectoryInfo(path + ".git");
                 if (dir.Exists)
@@ -1660,17 +1673,14 @@ namespace pie
 
         private void kryptonContextMenuItem10_Click(object sender, EventArgs e)
         {
-            if (tabTypes[tabControl.SelectedIndex] == TabType.RENDER_HTML)
+            if (tabInfos[tabControl.SelectedIndex].getTabType() == TabType.RENDER_HTML)
             {
                 ChromiumWebBrowser chromiumWebBrowser = (ChromiumWebBrowser)tabControl.SelectedPage.Controls[0];
                 chromiumWebBrowser.Load(chromiumWebBrowser.Address);
             }
-            else if (tabTypes[tabControl.SelectedIndex] == TabType.RENDER_MD)
+            else if (tabInfos[tabControl.SelectedIndex].getTabType() == TabType.RENDER_MD)
             {
-                int renderedFromIndex = markdownRenderedContent[tabControl.SelectedIndex];
-                Scintilla TextArea = (Scintilla)tabControl.Pages[renderedFromIndex].Controls[0];
-
-                string htmlContent = ConvertMarkdownToHtml(TextArea.Text);
+                string htmlContent = ConvertMarkdownToHtml(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
 
                 ChromiumWebBrowser chromiumWebBrowser = (ChromiumWebBrowser)tabControl.Pages[tabControl.SelectedIndex].Controls[0];
                 chromiumWebBrowser.LoadHtml(htmlContent);
