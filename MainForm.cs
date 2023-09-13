@@ -449,6 +449,12 @@ namespace pie
             }
             else
             {
+                if (Globals.firstBrowserTab)
+                {
+                    Cef.Initialize(new CefSettings());
+                    Globals.firstBrowserTab = false;
+                }
+
                 tabControl.KryptonContextMenu = kryptonContextMenu3;
                 ToggleTerminalTabControl(false);
                 ToggleFindReplacePanel(false);
@@ -595,6 +601,7 @@ namespace pie
             tabInfos.RemoveAt(tabControl.SelectedIndex);
 
             tabControl.Pages.Remove(selectedKryptonPage);
+            selectedKryptonPage.Dispose();
 
             if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < tabInfos.Count && tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
             {
@@ -1029,7 +1036,6 @@ namespace pie
         {
             // Load Build Commands from configuration file
             List<BuildCommand> buildCommands = null;
-            Cef.Initialize(new CefSettings());
 
             try
             {
@@ -1057,6 +1063,7 @@ namespace pie
 
             Globals.buildCommands = buildCommands;
             Globals.buildCommandToolStripMenuItems = buildCommandToolStripMenuItems;
+            Globals.firstBrowserTab = true;
 
             ScintillaLexerService.InitializeDefaultColorDictionary();
 

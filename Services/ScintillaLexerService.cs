@@ -28,52 +28,60 @@ namespace pie.Services
             if (language == "c")
             {
                 scintilla.Lexer = Lexer.Cpp;
-                scintilla.Styles[ScintillaNET.Style.Cpp.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.CommentLineDoc].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Verbatim].ForeColor = ConvertHexToColor(configColorDictionary["Verbatim"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.StringEol].BackColor = ConvertHexToColor(configColorDictionary["StringEol"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = ConvertHexToColor(configColorDictionary["Preprocessor"]);
+                AddCppStyles(scintilla);
 
-                scintilla.SetKeywords(0, "abstract as base break case catch checked continue default delegate do else event explicit extern false finally fixed for foreach goto if implicit in interface internal is lock namespace new null object operator out override params private protected public readonly ref return sealed sizeof stackalloc switch this throw true try typeof unchecked unsafe using virtual while");
-                scintilla.SetKeywords(1, "bool byte char class const decimal double enum float int long sbyte short static string struct uint ulong ushort void");
+                scintilla.SetKeywords(0, "alignof and and_eq bitand bitor break case catch compl const_cast continue default delete do dynamic_cast else false for goto if namespace new not not_eq nullptr operator or or_eq reinterpret_cast return sizeof static_assert static_cast switch this throw true try typedef typeid using while xor xor_eq NULL");
+                scintilla.SetKeywords(1, "alignas asm auto bool char char16_t char32_t class clock_t const constexpr decltype double enum explicit export extern final float friend inline int int8_t int16_t int32_t int64_t int_fast8_t int_fast16_t int_fast32_t int_fast64_t intmax_t intptr_t long mutable noexcept override private protected ptrdiff_t public register short signed size_t ssize_t static struct template thread_local time_t typename uint8_t uint16_t uint32_t uint64_t uint_fast8_t uint_fast16_t uint_fast32_t uint_fast64_t uintmax_t uintptr_t union unsigned virtual void volatile wchar_t");
+                scintilla.SetKeywords(2, "a addindex addtogroup anchor arg attention author authors b brief bug c callergraph callgraph category cite class code cond copybrief copydetails copydoc copyright date def defgroup deprecated details diafile dir docbookonly dontinclude dot dotfile e else elseif em endcode endcond enddocbookonly enddot endhtmlonly endif endinternal endlatexonly endlink endmanonly endmsc endparblock endrtfonly endsecreflist enduml endverbatim endxmlonly enum example exception extends f$ f[ f] file fn f{ f} headerfile hidecallergraph hidecallgraph hideinitializer htmlinclude htmlonly idlexcept if ifnot image implements include includelineno ingroup interface internal invariant latexinclude latexonly li line link mainpage manonly memberof msc mscfile n name namespace nosubgrouping note overload p package page par paragraph param parblock post pre private privatesection property protected protectedsection protocol public publicsection pure ref refitem related relatedalso relates relatesalso remark remarks result return returns retval rtfonly sa secreflist section see short showinitializer since skip skipline snippet startuml struct subpage subsection subsubsection tableofcontents test throw throws todo tparam typedef union until var verbatim verbinclude version vhdlflow warning weakgroup xmlonly xrefitem");
+            }
+            else if (language == "cs")
+            {
+                scintilla.Lexer = Lexer.Cpp;
+                AddCppStyles(scintilla);
+
+                scintilla.SetKeywords(0, "abstract add alias as ascending async await base break case catch checked continue default delegate descending do dynamic else event explicit extern false finally fixed for foreach from get global goto group if implicit in interface internal into is join let lock namespace new null object operator orderby out override params partial private protected public readonly ref remove return sealed select set sizeof stackalloc switch this throw true try typeof unchecked unsafe using value virtual where while yield");
+                scintilla.SetKeywords(1, "bool byte char class const decimal double enum float int long sbyte short static string struct uint ulong ushort var void");
             }
             else if (language == "java")
             {
                 scintilla.Lexer = Lexer.Cpp;
-                scintilla.Styles[ScintillaNET.Style.Cpp.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.CommentLineDoc].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Verbatim].ForeColor = ConvertHexToColor(configColorDictionary["Verbatim"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.StringEol].BackColor = ConvertHexToColor(configColorDictionary["StringEol"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
-                scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = ConvertHexToColor(configColorDictionary["Preprocessor"]);
+                AddCppStyles(scintilla);
 
                 scintilla.SetKeywords(0, "abstract break case catch continue default do else extern false finally for native super extends final native transient volatile implements synchronized if instanceof import package interface new null private protected public record return sizeof switch this throw throws true try while");
                 scintilla.SetKeywords(1, "boolean Boolean byte Byte char Character class double Double enum float Float int Integer long Long short Short static String void");
             }
+            else if (language == "js")
+            {
+                scintilla.Lexer = Lexer.Cpp;
+                AddCppStyles(scintilla);
+
+                scintilla.SetKeywords(0, "abstract async await boolean break byte case catch char class const continue debugger default delete do double else enum export extends final finally float for from function goto if implements import in instanceof int interface let long native new null of package private protected public return short static super switch synchronized this throw throws transient try typeof var void volatile while with true false prototype yield");
+                scintilla.SetKeywords(1, "Array Date eval hasOwnProperty Infinity isFinite isNaN isPrototypeOf Math NaN Number Object prototype String toString undefined valueOf");
+                scintilla.SetKeywords(2, "alert all anchor anchors area assign blur button checkbox clearInterval clearTimeout clientInformation close closed confirm constructor crypto decodeURI decodeURIComponent defaultStatus document element elements embed embeds encodeURI encodeURIComponent escape event fileUpload focus form forms frame innerHeight innerWidth layer layers link location mimeTypes navigate navigator frames frameRate hidden history image images offscreenBuffering onblur onclick onerror onfocus onkeydown onkeypress onkeyup onmouseover onload onmouseup onmousedown onsubmit open opener option outerHeight outerWidth packages pageXOffset pageYOffset parent parseFloat parseInt password pkcs11 plugin prompt propertyIsEnum radio reset screenX screenY scroll secure select self setInterval setTimeout status submit taint text textarea top unescape untaint window");
+            }
+            else if (language == "json")
+            {
+                scintilla.Lexer = Lexer.Json;
+
+                scintilla.Styles[Style.Json.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
+                scintilla.Styles[Style.Json.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
+                scintilla.Styles[Style.Json.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
+                scintilla.Styles[Style.Json.StringEol].ForeColor = ConvertHexToColor(configColorDictionary["StringEol"]);
+                scintilla.Styles[Style.Json.LineComment].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
+                scintilla.Styles[Style.Json.BlockComment].ForeColor = ConvertHexToColor(configColorDictionary["CommentBlock"]);
+                scintilla.Styles[Style.Json.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
+                scintilla.Styles[Style.Json.Keyword].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
+                scintilla.Styles[Style.Json.Uri].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
+
+                scintilla.SetProperty("lexer.json.allow.comments", "1");
+                scintilla.SetProperty("lexer.json.escape.sequence", "1");
+            }
             else if (language == "lua")
             {
-                // Extracted from the Lua Scintilla lexer and SciTE .properties file
-
                 var alphaChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 var numericChars = "0123456789";
                 var accentedChars = "ŠšŒœŸÿÀàÁáÂâÃãÄäÅåÆæÇçÈèÉéÊêËëÌìÍíÎîÏïÐðÑñÒòÓóÔôÕõÖØøÙùÚúÛûÜüÝýÞþßö";
 
-                // Configure the Lua lexer styles
                 scintilla.Styles[Style.Lua.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
                 scintilla.Styles[Style.Lua.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
                 scintilla.Styles[Style.Lua.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
@@ -91,98 +99,21 @@ namespace pie.Services
                 scintilla.Lexer = Lexer.Lua;
                 scintilla.WordChars = alphaChars + numericChars + accentedChars;
 
-                // Console.WriteLine(scintilla.DescribeKeywordSets());
-
-                // Keywords
                 scintilla.SetKeywords(0, "and break do else elseif end for function if in local nil not or repeat return then until while" + " false true" + " goto");
-                // Basic Functions
                 scintilla.SetKeywords(1, "assert collectgarbage dofile error _G getmetatable ipairs loadfile next pairs pcall print rawequal rawget rawset setmetatable tonumber tostring type _VERSION xpcall string table math coroutine io os debug" + " getfenv gcinfo load loadlib loadstring require select setfenv unpack _LOADED LUA_PATH _REQUIREDNAME package rawlen package bit32 utf8 _ENV");
-                // String Manipulation & Mathematical
                 scintilla.SetKeywords(2, "string.byte string.char string.dump string.find string.format string.gsub string.len string.lower string.rep string.sub string.upper table.concat table.insert table.remove table.sort math.abs math.acos math.asin math.atan math.atan2 math.ceil math.cos math.deg math.exp math.floor math.frexp math.ldexp math.log math.max math.min math.pi math.pow math.rad math.random math.randomseed math.sin math.sqrt math.tan" + " string.gfind string.gmatch string.match string.reverse string.pack string.packsize string.unpack table.foreach table.foreachi table.getn table.setn table.maxn table.pack table.unpack table.move math.cosh math.fmod math.huge math.log10 math.modf math.mod math.sinh math.tanh math.maxinteger math.mininteger math.tointeger math.type math.ult" + " bit32.arshift bit32.band bit32.bnot bit32.bor bit32.btest bit32.bxor bit32.extract bit32.replace bit32.lrotate bit32.lshift bit32.rrotate bit32.rshift" + " utf8.char utf8.charpattern utf8.codes utf8.codepoint utf8.len utf8.offset");
-                // Input and Output Facilities and System Facilities
                 scintilla.SetKeywords(3, "coroutine.create coroutine.resume coroutine.status coroutine.wrap coroutine.yield io.close io.flush io.input io.lines io.open io.output io.read io.tmpfile io.type io.write io.stdin io.stdout io.stderr os.clock os.date os.difftime os.execute os.exit os.getenv os.remove os.rename os.setlocale os.time os.tmpname" + " coroutine.isyieldable coroutine.running io.popen module package.loaders package.seeall package.config package.searchers package.searchpath" + " require package.cpath package.loaded package.loadlib package.path package.preload");
 
-                // Instruct the lexer to calculate folding
-                scintilla.SetProperty("fold", "1");
-                scintilla.SetProperty("fold.compact", "1");
-
-                /*
-                // Configure a margin to display folding symbols
-                scintilla.Margins[2].Type = MarginType.Symbol;
-                scintilla.Margins[2].Mask = Marker.MaskFolders;
-                scintilla.Margins[2].Sensitive = true;
-                scintilla.Margins[2].Width = 20;
-
-                // Set colors for all folding markers
-                for (int i = 25; i <= 31; i++)
-                {
-                    scintilla.Markers[i].SetForeColor(SystemColors.ControlLightLight);
-                    scintilla.Markers[i].SetBackColor(SystemColors.ControlDark);
-                }
-                */
-
-                // Configure folding markers with respective symbols
-                scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
-                scintilla.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
-                scintilla.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
-                scintilla.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
-                scintilla.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
-                scintilla.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
-                scintilla.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
-
-                // Enable automatic folding
-                scintilla.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
+                EnableFolding(scintilla);
             }
             else if (language == "python")
             {
-                // Set the lexer
                 scintilla.Lexer = Lexer.Python;
 
-                // Known lexer properties:
-                // "tab.timmy.whinge.level",
-                // "lexer.python.literals.binary",
-                // "lexer.python.strings.u",
-                // "lexer.python.strings.b",
-                // "lexer.python.strings.over.newline",
-                // "lexer.python.keywords2.no.sub.identifiers",
-                // "fold.quotes.python",
-                // "fold.compact",
-                // "fold"
-
-                // Some properties we like
                 scintilla.SetProperty("tab.timmy.whinge.level", "1");
-                scintilla.SetProperty("fold", "1");
 
-                /*
-                // Use margin 2 for fold markers
-                scintilla.Margins[2].Type = MarginType.Symbol;
-                scintilla.Margins[2].Mask = Marker.MaskFolders;
-                scintilla.Margins[2].Sensitive = true;
-                scintilla.Margins[2].Width = 20;
+                EnableFolding(scintilla);
 
-                // Reset folder markers
-                for (int i = Marker.FolderEnd; i <= Marker.FolderOpen; i++)
-                {
-                    scintilla.Markers[i].SetForeColor(SystemColors.ControlLightLight);
-                    scintilla.Markers[i].SetBackColor(SystemColors.ControlDark);
-                }
-                */
-
-                // Style the folder markers
-                scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
-                scintilla.Markers[Marker.Folder].SetBackColor(SystemColors.ControlText);
-                scintilla.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
-                scintilla.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
-                scintilla.Markers[Marker.FolderEnd].SetBackColor(SystemColors.ControlText);
-                scintilla.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
-                scintilla.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
-                scintilla.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
-                scintilla.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
-
-                // Enable automatic folding
-                scintilla.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
-
-                // Set the styles
                 scintilla.Styles[Style.Python.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
                 scintilla.Styles[Style.Python.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
                 scintilla.Styles[Style.Python.CommentLine].Italic = true;
@@ -198,7 +129,6 @@ namespace pie.Services
                 scintilla.Styles[Style.Python.DefName].ForeColor = ConvertHexToColor(configColorDictionary["DefName"]);
                 scintilla.Styles[Style.Python.DefName].Bold = true;
                 scintilla.Styles[Style.Python.Operator].Bold = true;
-                // scintilla.Styles[Style.Python.Identifier] ... your keywords styled here
                 scintilla.Styles[Style.Python.CommentBlock].ForeColor = ConvertHexToColor(configColorDictionary["CommentBlock"]);
                 scintilla.Styles[Style.Python.CommentBlock].Italic = true;
                 scintilla.Styles[Style.Python.StringEol].ForeColor = ConvertHexToColor(configColorDictionary["StringEol"]);
@@ -207,60 +137,22 @@ namespace pie.Services
                 scintilla.Styles[Style.Python.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
                 scintilla.Styles[Style.Python.Decorator].ForeColor = ConvertHexToColor(configColorDictionary["Decorator"]);
 
-                // Important for Python
                 scintilla.ViewWhitespace = WhitespaceMode.VisibleAlways;
-
-                // Keyword lists:
-                // 0 "Keywords",
-                // 1 "Highlighted identifiers"
 
                 var python2 = "and as assert break class continue def del elif else except exec finally for from global if import in is lambda not or pass print raise return try while with yield";
                 var python3 = "False None True and as assert break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield";
                 var cython = "cdef cimport cpdef";
 
                 scintilla.SetKeywords(0, python2 + " " + cython);
-                // scintilla.SetKeywords(1, "add your own keywords here");
             }
             else if (language == "xml")
             {
-                // Set the XML Lexer
                 scintilla.Lexer = Lexer.Xml;
 
-                // Enable folding
-                scintilla.SetProperty("fold", "1");
-                scintilla.SetProperty("fold.compact", "1");
                 scintilla.SetProperty("fold.html", "1");
 
-                /*
-                // Use Margin 2 for fold markers
-                scintilla.Margins[2].Type = MarginType.Symbol;
-                scintilla.Margins[2].Mask = Marker.MaskFolders;
-                scintilla.Margins[2].Sensitive = true;
-                scintilla.Margins[2].Width = 20;
+                EnableFolding(scintilla);
 
-                // Reset folder markers
-                for (int i = Marker.FolderEnd; i <= Marker.FolderOpen; i++)
-                {
-                    scintilla.Markers[i].SetForeColor(SystemColors.ControlLightLight);
-                    scintilla.Markers[i].SetBackColor(SystemColors.ControlDark);
-                }
-                */
-
-                // Style the folder markers
-                scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
-                scintilla.Markers[Marker.Folder].SetBackColor(SystemColors.ControlText);
-                scintilla.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
-                scintilla.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
-                scintilla.Markers[Marker.FolderEnd].SetBackColor(SystemColors.ControlText);
-                scintilla.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
-                scintilla.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
-                scintilla.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
-                scintilla.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
-
-                // Enable automatic folding
-                scintilla.AutomaticFold = AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change;
-
-                // Set the Styles
                 scintilla.Styles[Style.Xml.Attribute].ForeColor = ConvertHexToColor(configColorDictionary["Attribute"]);
                 scintilla.Styles[Style.Xml.Entity].ForeColor = ConvertHexToColor(configColorDictionary["Entity"]);
                 scintilla.Styles[Style.Xml.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
@@ -269,12 +161,24 @@ namespace pie.Services
                 scintilla.Styles[Style.Xml.DoubleString].ForeColor = ConvertHexToColor(configColorDictionary["DoubleString"]);
                 scintilla.Styles[Style.Xml.SingleString].ForeColor = ConvertHexToColor(configColorDictionary["SingleString"]);
             }
+            else if (language == "html")
+            {
+                scintilla.Lexer = Lexer.Html;
+
+                scintilla.Styles[Style.Html.Attribute].ForeColor = ConvertHexToColor(configColorDictionary["Attribute"]);
+                scintilla.Styles[Style.Html.Entity].ForeColor = ConvertHexToColor(configColorDictionary["Entity"]);
+                scintilla.Styles[Style.Html.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+                scintilla.Styles[Style.Html.Tag].ForeColor = ConvertHexToColor(configColorDictionary["Tag"]);
+                scintilla.Styles[Style.Html.TagEnd].ForeColor = ConvertHexToColor(configColorDictionary["TagEnd"]);
+                scintilla.Styles[Style.Html.DoubleString].ForeColor = ConvertHexToColor(configColorDictionary["DoubleString"]);
+                scintilla.Styles[Style.Html.SingleString].ForeColor = ConvertHexToColor(configColorDictionary["SingleString"]);
+
+                scintilla.SetKeywords(0, "!doctype a abbr accept accept-charset accesskey acronym action address align alink alt applet archive area article aside async audio autocomplete autofocus axis b background base basefont bdi bdo bgcolor bgsound big blink blockquote body border br button canvas caption cellpadding cellspacing center char charoff charset checkbox checked cite class classid clear code codebase codetype col colgroup color cols colspan command compact content contenteditable contextmenu coords data datafld dataformatas datalist datapagesize datasrc datetime dd declare defer del details dfn dialog dir disabled div dl draggable dropzone dt element em embed enctype event face fieldset figcaption figure file font footer for form formaction formenctype formmethod formnovalidate formtarget frame frameborder frameset h1 h2 h3 h4 h5 h6 head header headers height hgroup hidden hr href hreflang hspace html http-equiv i id iframe image img input ins isindex ismap kbd keygen label lang language leftmargin legend li link list listing longdesc main manifest map marginheight marginwidth mark marquee max maxlength media menu menuitem meta meter method min multicol multiple name nav nobr noembed noframes nohref noresize noscript noshade novalidate nowrap object ol onabort onafterprint onautocomplete onautocompleteerror onbeforeonload onbeforeprint onblur oncancel oncanplay oncanplaythrough onchange onclick onclose oncontextmenu oncuechange ondblclick ondrag ondragend ondragenter ondragleave ondragover ondragstart ondrop ondurationchange onemptied onended onerror onfocus onhashchange oninput oninvalid onkeydown onkeypress onkeyup onload onloadeddata onloadedmetadata onloadstart onmessage onmousedown onmouseenter onmouseleave onmousemove onmouseout onmouseover onmouseup onmousewheel onoffline ononline onpagehide onpageshow onpause onplay onplaying onpointercancel onpointerdown onpointerenter onpointerleave onpointerlockchange onpointerlockerror onpointermove onpointerout onpointerover onpointerup onpopstate onprogress onratechange onreadystatechange onredo onreset onresize onscroll onseeked onseeking onselect onshow onsort onstalled onstorage onsubmit onsuspend ontimeupdate ontoggle onundo onunload onvolumechange onwaiting optgroup option output p param password pattern picture placeholder plaintext pre profile progress prompt public q radio readonly rel required reset rev reversed role rows rowspan rp rt rtc ruby rules s samp sandbox scheme scope scoped script seamless section select selected shadow shape size sizes small source spacer span spellcheck src srcdoc standby start step strike strong style sub submit summary sup svg svg:svg tabindex table target tbody td template text textarea tfoot th thead time title topmargin tr track tt type u ul usemap valign value valuetype var version video vlink vspace wbr width xml xmlns xmp");
+            }
             else if (language == "mssql")
             {
-                // Set the SQL Lexer
                 scintilla.Lexer = Lexer.Sql;
 
-                // Set the Styles
                 scintilla.Styles[Style.Sql.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
                 scintilla.Styles[Style.Sql.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
                 scintilla.Styles[Style.Sql.CommentLineDoc].ForeColor = ConvertHexToColor(configColorDictionary["CommentLineDoc"]);
@@ -287,16 +191,51 @@ namespace pie.Services
                 scintilla.Styles[Style.Sql.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
                 scintilla.Styles[Style.Sql.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
 
-                // Set keyword lists
-                // Word = 0
                 scintilla.SetKeywords(0, @"add alter as authorization backup begin bigint binary bit break browse bulk by cascade case catch check checkpoint close clustered column commit compute constraint containstable continue create current cursor cursor database date datetime datetime2 datetimeoffset dbcc deallocate decimal declare default delete deny desc disk distinct distributed double drop dump else end errlvl escape except exec execute exit external fetch file fillfactor float for foreign freetext freetexttable from full function goto grant group having hierarchyid holdlock identity identity_insert identitycol if image index insert int intersect into key kill lineno load merge money national nchar nocheck nocount nolock nonclustered ntext numeric nvarchar of off offsets on open opendatasource openquery openrowset openxml option order over percent plan precision primary print proc procedure public raiserror read readtext real reconfigure references replication restore restrict return revert revoke rollback rowcount rowguidcol rule save schema securityaudit select set setuser shutdown smalldatetime smallint smallmoney sql_variant statistics table table tablesample text textsize then time timestamp tinyint to top tran transaction trigger truncate try union unique uniqueidentifier update updatetext use user values varbinary varchar varying view waitfor when where while with writetext xml go ");
-                // Word2 = 1
                 scintilla.SetKeywords(1, @"ascii cast char charindex ceiling coalesce collate contains convert current_date current_time current_timestamp current_user floor isnull max min nullif object_id session_user substring system_user tsequal ");
-                // User1 = 4
                 scintilla.SetKeywords(4, @"all and any between cross exists in inner is join left like not null or outer pivot right some unpivot ( ) * ");
-                // User2 = 5
                 scintilla.SetKeywords(5, @"sys objects sysobjects ");
             }
+        }
+
+        private static void EnableFolding(Scintilla scintilla)
+        {
+            // Enable folding
+            scintilla.SetProperty("fold", "1");
+            scintilla.SetProperty("fold.compact", "1");
+
+            // Style the folder markers
+            scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
+            scintilla.Markers[Marker.Folder].SetBackColor(SystemColors.ControlText);
+            scintilla.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
+            scintilla.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
+            scintilla.Markers[Marker.FolderEnd].SetBackColor(SystemColors.ControlText);
+            scintilla.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
+            scintilla.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
+            scintilla.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
+            scintilla.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+
+            // Enable automatic folding
+            scintilla.AutomaticFold = AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change;
+        }
+
+        private static void AddCppStyles(Scintilla scintilla)
+        {
+            Dictionary<string, string> configColorDictionary = Globals.configColorDictionary;
+
+            scintilla.Styles[ScintillaNET.Style.Cpp.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.CommentLineDoc].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.Verbatim].ForeColor = ConvertHexToColor(configColorDictionary["Verbatim"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.StringEol].BackColor = ConvertHexToColor(configColorDictionary["StringEol"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = ConvertHexToColor(configColorDictionary["Preprocessor"]);
         }
 
         public static void SetLexer(String extension, Scintilla scintilla)
@@ -310,10 +249,16 @@ namespace pie.Services
                     ConfigureLexer("c", scintilla);
                     break;
                 case "cs":
-                    ConfigureLexer("c", scintilla);
+                    ConfigureLexer("cs", scintilla);
                     break;
                 case "java":
                     ConfigureLexer("java", scintilla);
+                    break;
+                case "js":
+                    ConfigureLexer("js", scintilla);
+                    break;
+                case "json":
+                    ConfigureLexer("json", scintilla);
                     break;
                 case "lua":
                     ConfigureLexer("lua", scintilla);
@@ -325,7 +270,7 @@ namespace pie.Services
                     ConfigureLexer("xml", scintilla);
                     break;
                 case "html":
-                    ConfigureLexer("xml", scintilla);
+                    ConfigureLexer("html", scintilla);
                     break;
                 case "sql":
                     ConfigureLexer("mssql", scintilla);

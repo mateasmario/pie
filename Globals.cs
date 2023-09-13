@@ -23,5 +23,6 @@ namespace pie
         public static bool mouseDown;
         public static Point lastLocation;
         public static bool canUpdateUI;
+        public static bool firstBrowserTab;
     }
 }
