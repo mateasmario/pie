@@ -817,6 +817,12 @@ namespace pie
             workingDirectoryToolStripMenuItem.Enabled = true;
             stagingAreaToolStripMenuItem.Enabled = true;
             remoteToolStripMenuItem.Enabled = true;
+
+            // Custom Build Commands
+            foreach (ToolStripMenuItem toolStripMenuItem in Globals.buildCommandToolStripMenuItems)
+            {
+                toolStripMenuItem.Enabled = true;
+            }
         }
 
         public void DeactivateBuildAndRunOptions()
