@@ -24,5 +24,6 @@ namespace pie
         public static Point lastLocation;
         public static bool canUpdateUI;
         public static bool firstBrowserTab;
+        public static List<TabInfo> tabInfos;
     }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using ScintillaNET;
 using System.IO;
-using System.Windows.Forms;
+using AutocompleteMenuNS;
+using System.Linq;
+using ComponentFactory.Krypton.Docking;
 
 namespace pie.Services
 {
@@ -21,7 +23,13 @@ namespace pie.Services
             return color;
         }
 
-        public static void ConfigureLexer(string language, Scintilla scintilla)
+        public static void SetAutocompleteMenuKeywords(AutocompleteMenu autocompleteMenu, List<string> keywords)
+        {
+            autocompleteMenu.AppearInterval = 1;
+            autocompleteMenu.SetAutocompleteItems(keywords);
+        }
+
+        public static void ConfigureLexer(string language, Scintilla scintilla, KryptonDockableNavigator tabControl)
         {
             Dictionary<string, string> configColorDictionary = Globals.configColorDictionary;
 
@@ -30,34 +38,76 @@ namespace pie.Services
                 scintilla.Lexer = Lexer.Cpp;
                 AddCppStyles(scintilla);
 
-                scintilla.SetKeywords(0, "alignof and and_eq bitand bitor break case catch compl const_cast continue default delete do dynamic_cast else false for goto if namespace new not not_eq nullptr operator or or_eq reinterpret_cast return sizeof static_assert static_cast switch this throw true try typedef typeid using while xor xor_eq NULL");
-                scintilla.SetKeywords(1, "alignas asm auto bool char char16_t char32_t class clock_t const constexpr decltype double enum explicit export extern final float friend inline int int8_t int16_t int32_t int64_t int_fast8_t int_fast16_t int_fast32_t int_fast64_t intmax_t intptr_t long mutable noexcept override private protected ptrdiff_t public register short signed size_t ssize_t static struct template thread_local time_t typename uint8_t uint16_t uint32_t uint64_t uint_fast8_t uint_fast16_t uint_fast32_t uint_fast64_t uintmax_t uintptr_t union unsigned virtual void volatile wchar_t");
-                scintilla.SetKeywords(2, "a addindex addtogroup anchor arg attention author authors b brief bug c callergraph callgraph category cite class code cond copybrief copydetails copydoc copyright date def defgroup deprecated details diafile dir docbookonly dontinclude dot dotfile e else elseif em endcode endcond enddocbookonly enddot endhtmlonly endif endinternal endlatexonly endlink endmanonly endmsc endparblock endrtfonly endsecreflist enduml endverbatim endxmlonly enum example exception extends f$ f[ f] file fn f{ f} headerfile hidecallergraph hidecallgraph hideinitializer htmlinclude htmlonly idlexcept if ifnot image implements include includelineno ingroup interface internal invariant latexinclude latexonly li line link mainpage manonly memberof msc mscfile n name namespace nosubgrouping note overload p package page par paragraph param parblock post pre private privatesection property protected protectedsection protocol public publicsection pure ref refitem related relatedalso relates relatesalso remark remarks result return returns retval rtfonly sa secreflist section see short showinitializer since skip skipline snippet startuml struct subpage subsection subsubsection tableofcontents test throw throws todo tparam typedef union until var verbatim verbinclude version vhdlflow warning weakgroup xmlonly xrefitem");
+                string keywordSet1 = "alignof and and_eq bitand bitor break case catch compl const_cast continue default delete do dynamic_cast else false for goto if namespace new not not_eq nullptr operator or or_eq reinterpret_cast return sizeof static_assert static_cast switch this throw true try typedef typeid using while xor xor_eq NULL";
+                string keywordSet2 = "alignas asm auto bool char char16_t char32_t class clock_t const constexpr decltype double enum explicit export extern final float friend inline int int8_t int16_t int32_t int64_t int_fast8_t int_fast16_t int_fast32_t int_fast64_t intmax_t intptr_t long mutable noexcept override private protected ptrdiff_t public register short signed size_t ssize_t static struct template thread_local time_t typename uint8_t uint16_t uint32_t uint64_t uint_fast8_t uint_fast16_t uint_fast32_t uint_fast64_t uintmax_t uintptr_t union unsigned virtual void volatile wchar_t";
+                string keywordSet3 = "a addindex addtogroup anchor arg attention author authors b brief bug c callergraph callgraph category cite class code cond copybrief copydetails copydoc copyright date def defgroup deprecated details diafile dir docbookonly dontinclude dot dotfile e else elseif em endcode endcond enddocbookonly enddot endhtmlonly endif endinternal endlatexonly endlink endmanonly endmsc endparblock endrtfonly endsecreflist enduml endverbatim endxmlonly enum example exception extends f$ f[f] file fn f { f } headerfile hidecallergraph hidecallgraph hideinitializer htmlinclude htmlonly idlexcept if ifnot image implements include includelineno ingroup interface internal invariant latexinclude latexonly li line link mainpage manonly memberof msc mscfile n name namespace nosubgrouping note overload p package page par paragraph param parblock post pre private privatesection property protected protectedsection protocol public publicsection pure ref refitem related relatedalso relates relatesalso remark remarks result returns retval rtfonly sa secreflist section see short showinitializer since skip skipline snippet startuml struct subpage subsection subsubsection tableofcontents test throw throws todo tparam typedef union until var verbatim verbinclude version vhdlflow warning weakgroup xmlonly xrefitem";
+                
+                scintilla.SetKeywords(0, keywordSet1);
+                scintilla.SetKeywords(1, keywordSet2);
+                scintilla.SetKeywords(2, keywordSet3);
+
+                string combined = keywordSet1 + " " + keywordSet2 + " " + keywordSet3;
+                string[] combinedArray = combined.Split(' ');
+
+                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+
+                EnableFolding(scintilla);
             }
             else if (language == "cs")
             {
                 scintilla.Lexer = Lexer.Cpp;
                 AddCppStyles(scintilla);
 
-                scintilla.SetKeywords(0, "abstract add alias as ascending async await base break case catch checked continue default delegate descending do dynamic else event explicit extern false finally fixed for foreach from get global goto group if implicit in interface internal into is join let lock namespace new null object operator orderby out override params partial private protected public readonly ref remove return sealed select set sizeof stackalloc switch this throw true try typeof unchecked unsafe using value virtual where while yield");
-                scintilla.SetKeywords(1, "bool byte char class const decimal double enum float int long sbyte short static string struct uint ulong ushort var void");
+                string keywordSet1 = "abstract add alias as ascending async await base break case catch checked continue default delegate descending do dynamic else event explicit extern false finally fixed for foreach from get global goto group if implicit in interface internal into is join let lock namespace new null object operator orderby out override params partial private protected public readonly ref remove return sealed select set sizeof stackalloc switch this throw true try typeof unchecked unsafe using value virtual where while yield";
+                string keywordSet2 = "bool byte char class const decimal double enum float int long sbyte short static string struct uint ulong ushort var void";
+
+                scintilla.SetKeywords(0, keywordSet1);
+                scintilla.SetKeywords(1, keywordSet2);
+
+                string combined = keywordSet1 + " " + keywordSet2;
+                string[] combinedArray = combined.Split(' ');
+
+                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+
+                EnableFolding(scintilla);
             }
             else if (language == "java")
             {
                 scintilla.Lexer = Lexer.Cpp;
                 AddCppStyles(scintilla);
 
-                scintilla.SetKeywords(0, "abstract break case catch continue default do else extern false finally for native super extends final native transient volatile implements synchronized if instanceof import package interface new null private protected public record return sizeof switch this throw throws true try while");
-                scintilla.SetKeywords(1, "boolean Boolean byte Byte char Character class double Double enum float Float int Integer long Long short Short static String void");
+                string keywordSet1 = "abstract break case catch continue default do else extern false finally for native super extends final native transient volatile implements synchronized if instanceof import package interface new null private protected public record return sizeof switch this throw throws true try while";
+                string keywordSet2 = "boolean Boolean byte Byte char Character class double Double enum float Float int Integer long Long short Short static String void";
+
+                scintilla.SetKeywords(0, keywordSet1);
+                scintilla.SetKeywords(1, keywordSet2);
+
+                string combined = keywordSet1 + " " + keywordSet2;
+                string[] combinedArray = combined.Split(' ');
+
+                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+
+                EnableFolding(scintilla);
             }
             else if (language == "js")
             {
                 scintilla.Lexer = Lexer.Cpp;
                 AddCppStyles(scintilla);
 
-                scintilla.SetKeywords(0, "abstract async await boolean break byte case catch char class const continue debugger default delete do double else enum export extends final finally float for from function goto if implements import in instanceof int interface let long native new null of package private protected public return short static super switch synchronized this throw throws transient try typeof var void volatile while with true false prototype yield");
-                scintilla.SetKeywords(1, "Array Date eval hasOwnProperty Infinity isFinite isNaN isPrototypeOf Math NaN Number Object prototype String toString undefined valueOf");
-                scintilla.SetKeywords(2, "alert all anchor anchors area assign blur button checkbox clearInterval clearTimeout clientInformation close closed confirm constructor crypto decodeURI decodeURIComponent defaultStatus document element elements embed embeds encodeURI encodeURIComponent escape event fileUpload focus form forms frame innerHeight innerWidth layer layers link location mimeTypes navigate navigator frames frameRate hidden history image images offscreenBuffering onblur onclick onerror onfocus onkeydown onkeypress onkeyup onmouseover onload onmouseup onmousedown onsubmit open opener option outerHeight outerWidth packages pageXOffset pageYOffset parent parseFloat parseInt password pkcs11 plugin prompt propertyIsEnum radio reset screenX screenY scroll secure select self setInterval setTimeout status submit taint text textarea top unescape untaint window");
+                string keywordSet1 = "abstract async await boolean break byte case catch char class const continue debugger default delete do double else enum export extends final finally float for from function goto if implements import in instanceof int interface let long native new null of package private protected public return short static super switch synchronized this throw throws transient try typeof var void volatile while with true false prototype yield";
+                string keywordSet2 = "Array Date eval hasOwnProperty Infinity isFinite isNaN isPrototypeOf Math NaN Number Object prototype String toString undefined valueOf";
+                string keywordSet3 =  "alert all anchor anchors area assign blur button checkbox clearInterval clearTimeout clientInformation close closed confirm constructor crypto decodeURI decodeURIComponent defaultStatus document element elements embed embeds encodeURI encodeURIComponent escape event fileUpload focus form forms frame innerHeight innerWidth layer layers link location mimeTypes navigate navigator frames frameRate hidden history image images offscreenBuffering onblur onclick onerror onfocus onkeydown onkeypress onkeyup onmouseover onload onmouseup onmousedown onsubmit open opener option outerHeight outerWidth packages pageXOffset pageYOffset parent parseFloat parseInt password pkcs11 plugin prompt propertyIsEnum radio reset screenX screenY scroll secure select self setInterval setTimeout status submit taint text textarea top unescape untaint window";
+
+                scintilla.SetKeywords(0, keywordSet1);
+                scintilla.SetKeywords(1, keywordSet2);
+                scintilla.SetKeywords(2, keywordSet3);
+
+                string combined = keywordSet1 + " " + keywordSet2 + " " + keywordSet3;
+                string[] combinedArray = combined.Split(' ');
+
+                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+
+                EnableFolding(scintilla);
             }
             else if (language == "json")
             {
@@ -99,10 +149,20 @@ namespace pie.Services
                 scintilla.Lexer = Lexer.Lua;
                 scintilla.WordChars = alphaChars + numericChars + accentedChars;
 
-                scintilla.SetKeywords(0, "and break do else elseif end for function if in local nil not or repeat return then until while" + " false true" + " goto");
-                scintilla.SetKeywords(1, "assert collectgarbage dofile error _G getmetatable ipairs loadfile next pairs pcall print rawequal rawget rawset setmetatable tonumber tostring type _VERSION xpcall string table math coroutine io os debug" + " getfenv gcinfo load loadlib loadstring require select setfenv unpack _LOADED LUA_PATH _REQUIREDNAME package rawlen package bit32 utf8 _ENV");
-                scintilla.SetKeywords(2, "string.byte string.char string.dump string.find string.format string.gsub string.len string.lower string.rep string.sub string.upper table.concat table.insert table.remove table.sort math.abs math.acos math.asin math.atan math.atan2 math.ceil math.cos math.deg math.exp math.floor math.frexp math.ldexp math.log math.max math.min math.pi math.pow math.rad math.random math.randomseed math.sin math.sqrt math.tan" + " string.gfind string.gmatch string.match string.reverse string.pack string.packsize string.unpack table.foreach table.foreachi table.getn table.setn table.maxn table.pack table.unpack table.move math.cosh math.fmod math.huge math.log10 math.modf math.mod math.sinh math.tanh math.maxinteger math.mininteger math.tointeger math.type math.ult" + " bit32.arshift bit32.band bit32.bnot bit32.bor bit32.btest bit32.bxor bit32.extract bit32.replace bit32.lrotate bit32.lshift bit32.rrotate bit32.rshift" + " utf8.char utf8.charpattern utf8.codes utf8.codepoint utf8.len utf8.offset");
-                scintilla.SetKeywords(3, "coroutine.create coroutine.resume coroutine.status coroutine.wrap coroutine.yield io.close io.flush io.input io.lines io.open io.output io.read io.tmpfile io.type io.write io.stdin io.stdout io.stderr os.clock os.date os.difftime os.execute os.exit os.getenv os.remove os.rename os.setlocale os.time os.tmpname" + " coroutine.isyieldable coroutine.running io.popen module package.loaders package.seeall package.config package.searchers package.searchpath" + " require package.cpath package.loaded package.loadlib package.path package.preload");
+                string keywordSet1 = "and break do else elseif end for function if in local nil not or repeat return then until while" + " false true" + " goto";
+                string keywordSet2 = "assert collectgarbage dofile error _G getmetatable ipairs loadfile next pairs pcall print rawequal rawget rawset setmetatable tonumber tostring type _VERSION xpcall string table math coroutine io os debug" + " getfenv gcinfo load loadlib loadstring require select setfenv unpack _LOADED LUA_PATH _REQUIREDNAME package rawlen package bit32 utf8 _ENV";
+                string keywordSet3 = "string.byte string.char string.dump string.find string.format string.gsub string.len string.lower string.rep string.sub string.upper table.concat table.insert table.remove table.sort math.abs math.acos math.asin math.atan math.atan2 math.ceil math.cos math.deg math.exp math.floor math.frexp math.ldexp math.log math.max math.min math.pi math.pow math.rad math.random math.randomseed math.sin math.sqrt math.tan" + " string.gfind string.gmatch string.match string.reverse string.pack string.packsize string.unpack table.foreach table.foreachi table.getn table.setn table.maxn table.pack table.unpack table.move math.cosh math.fmod math.huge math.log10 math.modf math.mod math.sinh math.tanh math.maxinteger math.mininteger math.tointeger math.type math.ult" + " bit32.arshift bit32.band bit32.bnot bit32.bor bit32.btest bit32.bxor bit32.extract bit32.replace bit32.lrotate bit32.lshift bit32.rrotate bit32.rshift" + " utf8.char utf8.charpattern utf8.codes utf8.codepoint utf8.len utf8.offset";
+                string keywordSet4 = "coroutine.create coroutine.resume coroutine.status coroutine.wrap coroutine.yield io.close io.flush io.input io.lines io.open io.output io.read io.tmpfile io.type io.write io.stdin io.stdout io.stderr os.clock os.date os.difftime os.execute os.exit os.getenv os.remove os.rename os.setlocale os.time os.tmpname" + " coroutine.isyieldable coroutine.running io.popen module package.loaders package.seeall package.config package.searchers package.searchpath" + " require package.cpath package.loaded package.loadlib package.path package.preload";
+
+                scintilla.SetKeywords(0, keywordSet1);
+                scintilla.SetKeywords(1, keywordSet2);
+                scintilla.SetKeywords(2, keywordSet3);
+                scintilla.SetKeywords(3, keywordSet4);
+
+                string combined = keywordSet1 + " " + keywordSet2 + " " + keywordSet3 + " " + keywordSet4;
+                string[] combinedArray = combined.Split(' ');
+
+                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
 
                 EnableFolding(scintilla);
             }
@@ -111,8 +171,6 @@ namespace pie.Services
                 scintilla.Lexer = Lexer.Python;
 
                 scintilla.SetProperty("tab.timmy.whinge.level", "1");
-
-                EnableFolding(scintilla);
 
                 scintilla.Styles[Style.Python.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
                 scintilla.Styles[Style.Python.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
@@ -139,11 +197,19 @@ namespace pie.Services
 
                 scintilla.ViewWhitespace = WhitespaceMode.VisibleAlways;
 
-                var python2 = "and as assert break class continue def del elif else except exec finally for from global if import in is lambda not or pass print raise return try while with yield";
-                var python3 = "False None True and as assert break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield";
-                var cython = "cdef cimport cpdef";
+                string keywordSet1 = "and as assert break class continue def del elif else except exec finally for from global if import in is lambda not or pass print raise return try while with yield";
+                string keywordSet2 = "False None True and as assert break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield";
+                string keywordSet3 = "cdef cimport cpdef";
 
-                scintilla.SetKeywords(0, python2 + " " + cython);
+                scintilla.SetKeywords(0, keywordSet1 + " " + keywordSet3);
+                scintilla.SetKeywords(1, keywordSet2);
+
+                string combined = keywordSet1 + " " + keywordSet2 + " " + keywordSet3;
+                string[] combinedArray = combined.Split(' ');
+
+                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+
+                EnableFolding(scintilla);
             }
             else if (language == "xml")
             {
@@ -173,7 +239,13 @@ namespace pie.Services
                 scintilla.Styles[Style.Html.DoubleString].ForeColor = ConvertHexToColor(configColorDictionary["DoubleString"]);
                 scintilla.Styles[Style.Html.SingleString].ForeColor = ConvertHexToColor(configColorDictionary["SingleString"]);
 
-                scintilla.SetKeywords(0, "!doctype a abbr accept accept-charset accesskey acronym action address align alink alt applet archive area article aside async audio autocomplete autofocus axis b background base basefont bdi bdo bgcolor bgsound big blink blockquote body border br button canvas caption cellpadding cellspacing center char charoff charset checkbox checked cite class classid clear code codebase codetype col colgroup color cols colspan command compact content contenteditable contextmenu coords data datafld dataformatas datalist datapagesize datasrc datetime dd declare defer del details dfn dialog dir disabled div dl draggable dropzone dt element em embed enctype event face fieldset figcaption figure file font footer for form formaction formenctype formmethod formnovalidate formtarget frame frameborder frameset h1 h2 h3 h4 h5 h6 head header headers height hgroup hidden hr href hreflang hspace html http-equiv i id iframe image img input ins isindex ismap kbd keygen label lang language leftmargin legend li link list listing longdesc main manifest map marginheight marginwidth mark marquee max maxlength media menu menuitem meta meter method min multicol multiple name nav nobr noembed noframes nohref noresize noscript noshade novalidate nowrap object ol onabort onafterprint onautocomplete onautocompleteerror onbeforeonload onbeforeprint onblur oncancel oncanplay oncanplaythrough onchange onclick onclose oncontextmenu oncuechange ondblclick ondrag ondragend ondragenter ondragleave ondragover ondragstart ondrop ondurationchange onemptied onended onerror onfocus onhashchange oninput oninvalid onkeydown onkeypress onkeyup onload onloadeddata onloadedmetadata onloadstart onmessage onmousedown onmouseenter onmouseleave onmousemove onmouseout onmouseover onmouseup onmousewheel onoffline ononline onpagehide onpageshow onpause onplay onplaying onpointercancel onpointerdown onpointerenter onpointerleave onpointerlockchange onpointerlockerror onpointermove onpointerout onpointerover onpointerup onpopstate onprogress onratechange onreadystatechange onredo onreset onresize onscroll onseeked onseeking onselect onshow onsort onstalled onstorage onsubmit onsuspend ontimeupdate ontoggle onundo onunload onvolumechange onwaiting optgroup option output p param password pattern picture placeholder plaintext pre profile progress prompt public q radio readonly rel required reset rev reversed role rows rowspan rp rt rtc ruby rules s samp sandbox scheme scope scoped script seamless section select selected shadow shape size sizes small source spacer span spellcheck src srcdoc standby start step strike strong style sub submit summary sup svg svg:svg tabindex table target tbody td template text textarea tfoot th thead time title topmargin tr track tt type u ul usemap valign value valuetype var version video vlink vspace wbr width xml xmlns xmp");
+                string keywordSet1 = "!doctype a abbr accept accept-charset accesskey acronym action address align alink alt applet archive area article aside async audio autocomplete autofocus axis b background base basefont bdi bdo bgcolor bgsound big blink blockquote body border br button canvas caption cellpadding cellspacing center char charoff charset checkbox checked cite class classid clear code codebase codetype col colgroup color cols colspan command compact content contenteditable contextmenu coords data datafld dataformatas datalist datapagesize datasrc datetime dd declare defer del details dfn dialog dir disabled div dl draggable dropzone dt element em embed enctype event face fieldset figcaption figure file font footer for form formaction formenctype formmethod formnovalidate formtarget frame frameborder frameset h1 h2 h3 h4 h5 h6 head header headers height hgroup hidden hr href hreflang hspace html http-equiv i id iframe image img input ins isindex ismap kbd keygen label lang language leftmargin legend li link list listing longdesc main manifest map marginheight marginwidth mark marquee max maxlength media menu menuitem meta meter method min multicol multiple name nav nobr noembed noframes nohref noresize noscript noshade novalidate nowrap object ol onabort onafterprint onautocomplete onautocompleteerror onbeforeonload onbeforeprint onblur oncancel oncanplay oncanplaythrough onchange onclick onclose oncontextmenu oncuechange ondblclick ondrag ondragend ondragenter ondragleave ondragover ondragstart ondrop ondurationchange onemptied onended onerror onfocus onhashchange oninput oninvalid onkeydown onkeypress onkeyup onload onloadeddata onloadedmetadata onloadstart onmessage onmousedown onmouseenter onmouseleave onmousemove onmouseout onmouseover onmouseup onmousewheel onoffline ononline onpagehide onpageshow onpause onplay onplaying onpointercancel onpointerdown onpointerenter onpointerleave onpointerlockchange onpointerlockerror onpointermove onpointerout onpointerover onpointerup onpopstate onprogress onratechange onreadystatechange onredo onreset onresize onscroll onseeked onseeking onselect onshow onsort onstalled onstorage onsubmit onsuspend ontimeupdate ontoggle onundo onunload onvolumechange onwaiting optgroup option output p param password pattern picture placeholder plaintext pre profile progress prompt public q radio readonly rel required reset rev reversed role rows rowspan rp rt rtc ruby rules s samp sandbox scheme scope scoped script seamless section select selected shadow shape size sizes small source spacer span spellcheck src srcdoc standby start step strike strong style sub submit summary sup svg svg:svg tabindex table target tbody td template text textarea tfoot th thead time title topmargin tr track tt type u ul usemap valign value valuetype var version video vlink vspace wbr width xml xmlns xmp";
+
+                scintilla.SetKeywords(0, keywordSet1);
+
+                string[] combinedArray = keywordSet1.Split(' ');
+
+                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
             }
             else if (language == "mssql")
             {
@@ -191,10 +263,20 @@ namespace pie.Services
                 scintilla.Styles[Style.Sql.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
                 scintilla.Styles[Style.Sql.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
 
-                scintilla.SetKeywords(0, @"add alter as authorization backup begin bigint binary bit break browse bulk by cascade case catch check checkpoint close clustered column commit compute constraint containstable continue create current cursor cursor database date datetime datetime2 datetimeoffset dbcc deallocate decimal declare default delete deny desc disk distinct distributed double drop dump else end errlvl escape except exec execute exit external fetch file fillfactor float for foreign freetext freetexttable from full function goto grant group having hierarchyid holdlock identity identity_insert identitycol if image index insert int intersect into key kill lineno load merge money national nchar nocheck nocount nolock nonclustered ntext numeric nvarchar of off offsets on open opendatasource openquery openrowset openxml option order over percent plan precision primary print proc procedure public raiserror read readtext real reconfigure references replication restore restrict return revert revoke rollback rowcount rowguidcol rule save schema securityaudit select set setuser shutdown smalldatetime smallint smallmoney sql_variant statistics table table tablesample text textsize then time timestamp tinyint to top tran transaction trigger truncate try union unique uniqueidentifier update updatetext use user values varbinary varchar varying view waitfor when where while with writetext xml go ");
-                scintilla.SetKeywords(1, @"ascii cast char charindex ceiling coalesce collate contains convert current_date current_time current_timestamp current_user floor isnull max min nullif object_id session_user substring system_user tsequal ");
-                scintilla.SetKeywords(4, @"all and any between cross exists in inner is join left like not null or outer pivot right some unpivot ( ) * ");
-                scintilla.SetKeywords(5, @"sys objects sysobjects ");
+                string keywordSet1 = @"add alter as authorization backup begin bigint binary bit break browse bulk by cascade case catch check checkpoint close clustered column commit compute constraint containstable continue create current cursor cursor database date datetime datetime2 datetimeoffset dbcc deallocate decimal declare default delete deny desc disk distinct distributed double drop dump else end errlvl escape except exec execute exit external fetch file fillfactor float for foreign freetext freetexttable from full function goto grant group having hierarchyid holdlock identity identity_insert identitycol if image index insert int intersect into key kill lineno load merge money national nchar nocheck nocount nolock nonclustered ntext numeric nvarchar of off offsets on open opendatasource openquery openrowset openxml option order over percent plan precision primary print proc procedure public raiserror read readtext real reconfigure references replication restore restrict return revert revoke rollback rowcount rowguidcol rule save schema securityaudit select set setuser shutdown smalldatetime smallint smallmoney sql_variant statistics table table tablesample text textsize then time timestamp tinyint to top tran transaction trigger truncate try union unique uniqueidentifier update updatetext use user values varbinary varchar varying view waitfor when where while with writetext xml go ";
+                string keywordSet2 = @"ascii cast char charindex ceiling coalesce collate contains convert current_date current_time current_timestamp current_user floor isnull max min nullif object_id session_user substring system_user tsequal ";
+                string keywordSet3 = @"all and any between cross exists in inner is join left like not null or outer pivot right some unpivot ( ) * ";
+                string keywordSet4 = @"sys objects sysobjects ";
+
+                scintilla.SetKeywords(0, keywordSet1);
+                scintilla.SetKeywords(1, keywordSet2);
+                scintilla.SetKeywords(4, keywordSet3);
+                scintilla.SetKeywords(5, keywordSet4);
+
+                string combined = keywordSet1 + " " + keywordSet2 + " " + keywordSet3 + " " + keywordSet4;
+                string[] combinedArray = combined.Split(' ');
+
+                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
             }
         }
 
@@ -238,42 +320,42 @@ namespace pie.Services
             scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = ConvertHexToColor(configColorDictionary["Preprocessor"]);
         }
 
-        public static void SetLexer(String extension, Scintilla scintilla)
+        public static void SetLexer(String extension, Scintilla scintilla, KryptonDockableNavigator tabControl)
         {
             switch (extension)
             {
                 case "c":
-                    ConfigureLexer("c", scintilla);
+                    ConfigureLexer("c", scintilla, tabControl);
                     break;
                 case "cpp":
-                    ConfigureLexer("c", scintilla);
+                    ConfigureLexer("c", scintilla, tabControl);
                     break;
                 case "cs":
-                    ConfigureLexer("cs", scintilla);
+                    ConfigureLexer("cs", scintilla, tabControl);
                     break;
                 case "java":
-                    ConfigureLexer("java", scintilla);
+                    ConfigureLexer("java", scintilla, tabControl);
                     break;
                 case "js":
-                    ConfigureLexer("js", scintilla);
+                    ConfigureLexer("js", scintilla, tabControl);
                     break;
                 case "json":
-                    ConfigureLexer("json", scintilla);
+                    ConfigureLexer("json", scintilla, tabControl);
                     break;
                 case "lua":
-                    ConfigureLexer("lua", scintilla);
+                    ConfigureLexer("lua", scintilla, tabControl);
                     break;
                 case "py":
-                    ConfigureLexer("python", scintilla);
+                    ConfigureLexer("python", scintilla, tabControl);
                     break;
                 case "xml":
-                    ConfigureLexer("xml", scintilla);
+                    ConfigureLexer("xml", scintilla, tabControl);
                     break;
                 case "html":
-                    ConfigureLexer("html", scintilla);
+                    ConfigureLexer("html", scintilla, tabControl);
                     break;
                 case "sql":
-                    ConfigureLexer("mssql", scintilla);
+                    ConfigureLexer("mssql", scintilla, tabControl);
                     break;
             }
         }

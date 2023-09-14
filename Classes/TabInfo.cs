@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutocompleteMenuNS;
 
 namespace pie.Classes
 {
@@ -12,12 +13,14 @@ namespace pie.Classes
         private string openedFilePath;
         private bool openedFileChanges;
         private TabType tabType;
+        private AutocompleteMenu autocompleteMenu;
 
-        public TabInfo(string openedFilePath, bool openedFileChanges, TabType tabType)
+        public TabInfo(string openedFilePath, bool openedFileChanges, TabType tabType, AutocompleteMenu autocompleteMenu)
         {
             this.openedFilePath = openedFilePath;
             this.openedFileChanges = openedFileChanges;
             this.tabType = tabType;
+            this.autocompleteMenu = autocompleteMenu;
         }
 
         public string getOpenedFilePath()
@@ -48,6 +51,16 @@ namespace pie.Classes
         public void setTabType(TabType tabType)
         {
             this.tabType = tabType;
+        }
+
+        public AutocompleteMenu getAutocompleteMenu()
+        {
+            return autocompleteMenu;
+        }
+
+        public void setAutocompleteMenu(AutocompleteMenu autocompleteMenu)
+        {
+            this.autocompleteMenu = autocompleteMenu;
         }
     }
 }
