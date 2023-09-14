@@ -59,6 +59,9 @@
     <Win32Resource>
     </Win32Resource>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutocompleteMenu-ScintillaNET, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\AutoCompleteMenu-ScintillaNET.2.1.1\lib\net45\AutocompleteMenu-ScintillaNET.dll</HintPath>
@@ -352,6 +355,7 @@
     <EmbeddedResource Include="ThemeSettingsForm.resx">
       <DependentUpon>ThemeSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
