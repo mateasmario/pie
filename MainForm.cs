@@ -618,10 +618,15 @@ namespace pie
         {
             KryptonPage selectedKryptonPage = tabControl.SelectedPage;
 
+            tabControl.Pages.Remove(selectedKryptonPage);
+
+            if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() != TabType.CODE)
+            {
+                selectedKryptonPage.Dispose();
+            }
+
             Globals.tabInfos.RemoveAt(tabControl.SelectedIndex);
 
-            tabControl.Pages.Remove(selectedKryptonPage);
-            selectedKryptonPage.Dispose();
 
             if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < Globals.tabInfos.Count && Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
             {
