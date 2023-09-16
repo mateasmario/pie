@@ -60,6 +60,21 @@ namespace pie
             this.MinimumSize = new System.Drawing.Size(1036, 634);
 
             Globals.tabInfos = new List<TabInfo>();
+
+            menuStrip1.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
+
+            try
+            {
+                ScintillaLexerService.GetTheme("theme-settings.config");
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("Cannot access Theme Settings config file. Check if 'theme-settings.config' exists in your main pie directory. If not, try reinstalling the app.", "pie");
+                Application.Exit();
+                return;
+            }
+
+            ThemeService.SetPaletteToTheme(tabControl, menuStrip1, this.kryptonPalette1, Globals.theme);
         }
 
         public Scintilla CreateNewTextArea()
@@ -72,22 +87,22 @@ namespace pie
             TextArea.UpdateUI += TextArea_UpdateUI;
             TextArea.WrapMode = WrapMode.None;
             TextArea.IndentationGuides = IndentView.LookBoth;
-            TextArea.SetSelectionBackColor(true, ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Selection"]));
-            TextArea.CaretLineBackColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["CaretLine"]);
+            TextArea.SetSelectionBackColor(true, ThemeService.GetSelectionColor());
+            TextArea.CaretLineBackColor = ThemeService.GetCaretLineBackColor();
+
             TextArea.UsePopup(false);
 
             TextArea.StyleResetDefault();
             TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
             TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
-            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Fore"]);
-            TextArea.CaretForeColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Fore"]);
-            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Background"]);
+            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ThemeService.GetForeColor();
+            TextArea.CaretForeColor = ThemeService.GetForeColor();
+            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ThemeService.GetTextAreaBackColor();
             TextArea.StyleClearAll();
 
             TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
 
             InitNumberMargin(TextArea);
-            //InitBookmarkMargin(TextArea);
             InitCodeFolding(TextArea);
 
             TextArea.Dock = DockStyle.Fill;
@@ -100,49 +115,17 @@ namespace pie
             AutocompleteMenu autocompleteMenu = new AutocompleteMenu();
 
             Colors colors = new Colors();
-            colors.BackColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Background"]);
-            colors.ForeColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Fore"]);
-            colors.HighlightingColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Fore"]);
-            colors.SelectedBackColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["CaretLine"]);
-            colors.SelectedForeColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Fore"]);
+            colors.BackColor = ThemeService.GetTextAreaBackColor();
+            colors.ForeColor = ThemeService.GetForeColor();
+            colors.HighlightingColor = ThemeService.GetTextAreaBackColor();
+            colors.SelectedBackColor = ThemeService.GetCaretLineBackColor();
+            colors.SelectedForeColor = ThemeService.GetForeColor();
             autocompleteMenu.Colors = colors;
             autocompleteMenu.LeftPadding = 0;
 
             autocompleteMenu.TargetControlWrapper = new ScintillaWrapper(scintilla);
 
             return autocompleteMenu;
-        }
-
-        private Scintilla CreateNewRenderTab()
-        {
-            Scintilla TextArea = new Scintilla();
-            TextArea.KeyDown += keyDownEvents;
-            TextArea.KeyPress += TextArea_KeyPress;
-            TextArea.MouseDown += TextArea_MouseDown;
-            TextArea.TextChanged += TextArea_TextChanged;
-            TextArea.UpdateUI += TextArea_UpdateUI;
-            TextArea.WrapMode = WrapMode.None;
-            TextArea.IndentationGuides = IndentView.LookBoth;
-            TextArea.SetSelectionBackColor(true, ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Selection"]));
-            TextArea.CaretLineBackColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["CaretLine"]);
-            TextArea.UsePopup(false);
-
-            TextArea.StyleResetDefault();
-            TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
-            TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
-            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Fore"]);
-            TextArea.CaretForeColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Fore"]);
-            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Background"]);
-            TextArea.StyleClearAll();
-
-            TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
-
-            InitNumberMargin(TextArea);
-            InitCodeFolding(TextArea);
-
-            TextArea.Dock = DockStyle.Fill;
-
-            return TextArea;
         }
 
         private void RemoveSuggestedActions()
@@ -360,40 +343,20 @@ namespace pie
         private void InitNumberMargin(Scintilla TextArea)
         {
 
-            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = ParsingService.IntToColor(0xbbcee6);
-            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = ParsingService.IntToColor(0x000000);
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = ParsingService.IntToColor(0x000000);
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = ParsingService.IntToColor(0xbbcee6);
+            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = ThemeService.GetNumberMarginColor();
+            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = ThemeService.GetForeColor();
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = ThemeService.GetForeColor();
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = ThemeService.GetNumberMarginColor();
 
             TextArea.Margins[0].Width = 24;
             TextArea.MarginClick += TextArea_MarginClick;
         }
 
-        private void InitBookmarkMargin(Scintilla TextArea)
-        {
-
-            //TextArea.SetFoldMarginColor(true, IntToColor(BACK_COLOR));
-
-            var margin = TextArea.Margins[BOOKMARK_MARGIN];
-            margin.Width = 20;
-            margin.Sensitive = true;
-            margin.Type = MarginType.Symbol;
-            margin.Mask = (1 << BOOKMARK_MARKER);
-            //margin.Cursor = MarginCursor.Arrow;
-
-            var marker = TextArea.Markers[BOOKMARK_MARKER];
-            marker.Symbol = MarkerSymbol.Circle;
-            marker.SetBackColor(ParsingService.IntToColor(0xFF003B));
-            marker.SetForeColor(ParsingService.IntToColor(0x000000));
-            marker.SetAlpha(100);
-
-        }
-
         private void InitCodeFolding(Scintilla TextArea)
         {
 
-            TextArea.SetFoldMarginColor(true, ParsingService.IntToColor(0xd1dded));
-            TextArea.SetFoldMarginHighlightColor(true, ParsingService.IntToColor(0xd1dded));
+            TextArea.SetFoldMarginColor(true, ThemeService.GetFoldingColor());
+            TextArea.SetFoldMarginHighlightColor(true, ThemeService.GetFoldingColor());
 
             // Enable code folding
             TextArea.SetProperty("fold", "1");
@@ -408,18 +371,9 @@ namespace pie
             // Set colors for all folding markers
             for (int i = 25; i <= 31; i++)
             {
-                TextArea.Markers[i].SetForeColor(ParsingService.IntToColor(0xd1dded)); // styles for [+] and [-]
-                TextArea.Markers[i].SetBackColor(ParsingService.IntToColor(0x000000)); // styles for [+] and [-]
+                TextArea.Markers[i].SetForeColor(ThemeService.GetFoldingColor()); // styles for [+] and [-]
+                TextArea.Markers[i].SetBackColor(Color.White); // styles for [+] and [-]
             }
-
-            // Configure folding markers with respective symbols
-            TextArea.Markers[Marker.Folder].Symbol = CODEFOLDING_CIRCULAR ? MarkerSymbol.CirclePlus : MarkerSymbol.BoxPlus;
-            TextArea.Markers[Marker.FolderOpen].Symbol = CODEFOLDING_CIRCULAR ? MarkerSymbol.CircleMinus : MarkerSymbol.BoxMinus;
-            TextArea.Markers[Marker.FolderEnd].Symbol = CODEFOLDING_CIRCULAR ? MarkerSymbol.CirclePlusConnected : MarkerSymbol.BoxPlusConnected;
-            TextArea.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
-            TextArea.Markers[Marker.FolderOpenMid].Symbol = CODEFOLDING_CIRCULAR ? MarkerSymbol.CircleMinusConnected : MarkerSymbol.BoxMinusConnected;
-            TextArea.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
-            TextArea.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
 
             // Enable automatic folding
             TextArea.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
@@ -1044,12 +998,12 @@ namespace pie
             if (status)
             {
                 ResetFindPanelLocation();
-                findPanel.Show();
+                findHeaderGroup.Show();
                 findTextBox.Focus();
             }
             else
             {
-                findPanel.Hide();
+                findHeaderGroup.Hide();
 
                 if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
                 {
@@ -1096,20 +1050,8 @@ namespace pie
             Globals.buildCommandToolStripMenuItems = buildCommandToolStripMenuItems;
             Globals.firstBrowserTab = true;
 
-            ScintillaLexerService.InitializeDefaultColorDictionary();
-
-            try {
-                ScintillaLexerService.InitializeConfigColorDictionary("theme-settings.config");
-            }
-            catch (FileNotFoundException ex)
-            {
-                MessageBox.Show("Cannot access Theme Settings config file. Check if 'theme-settings.config' exists in your main pie directory. If not, try reinstalling the app.", "pie");
-                Application.Exit();
-                return;
-            }
-
             ResetFindPanelLocation();
-            findPanel.Hide();
+            findHeaderGroup.Hide();
             Globals.findReplacePanelToggled = false;
 
             // Do other visual processing
@@ -1171,7 +1113,7 @@ namespace pie
 
         private void ResetFindPanelLocation()
         {
-            findPanel.Location = new Point((this.Width - findPanel.Width) / 2, (this.Height - findPanel.Height) / 4);
+            findHeaderGroup.Location = new Point((this.Width - findHeaderGroup.Width) / 2, (this.Height - findHeaderGroup.Height) / 4);
         }
 
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1532,17 +1474,6 @@ namespace pie
             }
         }
 
-        private void themeSettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ThemeSettingsForm themeSettingsForm = new ThemeSettingsForm();
-            themeSettingsForm.ShowDialog();
-
-            if (Globals.closeAfterApplyingChanges)
-            {
-                this.Close();
-            }
-        }
-
         private void MainForm_Resize(object sender, EventArgs e)
         {
             ResetFindPanelLocation();
@@ -1577,7 +1508,7 @@ namespace pie
             if ((index = scintilla.SearchInTarget(text)) != -1)
             {
                 scintilla.SetSelection(index, index + findTextBox.Text.Length);
-                scintilla.SetSelectionBackColor(false, ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Selection"]));
+                scintilla.SetSelectionBackColor(false, ThemeService.GetSelectionColor());
                 Globals.lastSelectedIndex = index + findTextBox.Text.Length + 1;
             }
             else
@@ -1606,7 +1537,7 @@ namespace pie
             // Update indicator appearance
             scintilla.Indicators[8].Style = IndicatorStyle.StraightBox;
             scintilla.Indicators[8].Under = true;
-            scintilla.Indicators[8].ForeColor = ScintillaLexerService.ConvertHexToColor(Globals.configColorDictionary["Selection"]);
+            scintilla.Indicators[8].ForeColor = ThemeService.GetSelectionColor();
             scintilla.Indicators[8].OutlineAlpha = 255;
             scintilla.Indicators[8].Alpha = 100;
 
@@ -1641,8 +1572,8 @@ namespace pie
         {
             if (Globals.mouseDown)
             {
-                findPanel.Location = new Point(
-                    (findPanel.Location.X - Globals.lastLocation.X) + e.X, (findPanel.Location.Y - Globals.lastLocation.Y) + e.Y);
+                findHeaderGroup.Location = new Point(
+                    (findHeaderGroup.Location.X - Globals.lastLocation.X) + e.X, (findHeaderGroup.Location.Y - Globals.lastLocation.Y) + e.Y);
 
                 this.Update();
             }

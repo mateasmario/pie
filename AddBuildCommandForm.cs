@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +11,12 @@ using System.Windows.Forms;
 
 namespace pie
 {
-    public partial class AddBuildCommandForm : Form
+    public partial class AddBuildCommandForm : KryptonForm
     {
         public AddBuildCommandForm()
         {
             InitializeComponent();
+            MainForm mainForm = new MainForm();
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)

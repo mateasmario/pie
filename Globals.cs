@@ -16,8 +16,6 @@ namespace pie
         public static string addBuildCommandName;
         public static string addBuildCommandCmd;
         public static bool closeAfterApplyingChanges;
-        public static Dictionary<string, string> defaultColorDictionary;
-        public static Dictionary<string, string> configColorDictionary;
         public static bool findReplacePanelToggled;
         public static int lastSelectedIndex;
         public static bool mouseDown;
@@ -25,5 +23,6 @@ namespace pie
         public static bool canUpdateUI;
         public static bool firstBrowserTab;
         public static List<TabInfo> tabInfos;
+        public static int theme;
     }
 }

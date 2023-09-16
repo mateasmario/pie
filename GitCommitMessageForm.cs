@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace pie
 {
-    public partial class GitCommitMessageForm : Form
+    public partial class GitCommitMessageForm : KryptonForm
     {
         public GitCommitMessageForm()
         {

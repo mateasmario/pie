@@ -11,6 +11,9 @@ namespace pie.Services
 {
     internal class ScintillaLexerService
     {
+        private static Dictionary<string, Color> parserColorDictionary;
+        private static bool dictionaryInitialized = false;
+
         public static string ConvertColorToHex(Color c)
         {
             return $"{c.R:X2}{c.G:X2}{c.B:X2}";
@@ -23,6 +26,59 @@ namespace pie.Services
             return color;
         }
 
+        private static void InitializeParserDictionary()
+        {
+            parserColorDictionary = new Dictionary<string, Color>();
+
+            parserColorDictionary["Default"] = ThemeService.GetForeColor();
+            parserColorDictionary["Background"] = ThemeService.GetTextAreaBackColor();
+            parserColorDictionary["Fore"] = ThemeService.GetForeColor();
+            parserColorDictionary["CaretLine"] = ThemeService.GetCaretLineBackColor();
+            parserColorDictionary["Selection"] = ThemeService.GetSelectionColor();
+
+            if (Globals.theme == 1)
+            {
+                parserColorDictionary["Comment"] = Color.FromArgb(192, 192, 192);
+                parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
+                parserColorDictionary["Number"] = Color.FromArgb(128, 128, 0);
+                parserColorDictionary["Word"] = Color.FromArgb(0, 0, 255);
+                parserColorDictionary["Word2"] = Color.FromArgb(138, 43, 226);
+                parserColorDictionary["Word3"] = Color.FromArgb(72, 61, 139);
+                parserColorDictionary["Word4"] = Color.FromArgb(72, 237, 139);
+                parserColorDictionary["String"] = Color.FromArgb(163, 21, 21);
+                parserColorDictionary["Operator"] = Color.FromArgb(128, 0, 128);
+                parserColorDictionary["Preprocessor"] = Color.FromArgb(128, 0, 128);
+                parserColorDictionary["Triple"] = Color.FromArgb(127, 0, 0);
+                parserColorDictionary["CommentBlock"] = Color.FromArgb(127, 127, 127);
+                parserColorDictionary["Decorator"] = Color.FromArgb(128, 80, 0);
+                parserColorDictionary["Attribute"] = Color.FromArgb(171, 0, 0);
+                parserColorDictionary["Entity"] = Color.FromArgb(255, 0, 0);
+                parserColorDictionary["User1"] = Color.FromArgb(128, 128, 128);
+                parserColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
+
+            }
+            else
+            {
+                parserColorDictionary["Comment"] = Color.FromArgb(192, 192, 192);
+                parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
+                parserColorDictionary["Number"] = Color.FromArgb(128, 128, 0);
+                parserColorDictionary["Word"] = Color.FromArgb(0, 0, 255);
+                parserColorDictionary["Word2"] = Color.FromArgb(138, 43, 226);
+                parserColorDictionary["Word3"] = Color.FromArgb(72, 61, 139);
+                parserColorDictionary["Word4"] = Color.FromArgb(72, 237, 139);
+                parserColorDictionary["String"] = Color.FromArgb(163, 21, 21);
+                parserColorDictionary["Operator"] = Color.FromArgb(128, 0, 128);
+                parserColorDictionary["Preprocessor"] = Color.FromArgb(128, 0, 128);
+                parserColorDictionary["Triple"] = Color.FromArgb(127, 0, 0);
+                parserColorDictionary["CommentBlock"] = Color.FromArgb(127, 127, 127);
+                parserColorDictionary["Decorator"] = Color.FromArgb(128, 80, 0);
+                parserColorDictionary["Attribute"] = Color.FromArgb(171, 0, 0);
+                parserColorDictionary["Entity"] = Color.FromArgb(255, 0, 0);
+                parserColorDictionary["User1"] = Color.FromArgb(128, 128, 128);
+                parserColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
+            }
+        }
+
         public static void SetAutocompleteMenuKeywords(AutocompleteMenu autocompleteMenu, List<string> keywords)
         {
             autocompleteMenu.AppearInterval = 1;
@@ -31,7 +87,11 @@ namespace pie.Services
 
         public static void ConfigureLexer(string language, Scintilla scintilla, KryptonDockableNavigator tabControl)
         {
-            Dictionary<string, string> configColorDictionary = Globals.configColorDictionary;
+            if (!dictionaryInitialized) 
+            { 
+                InitializeParserDictionary();
+                dictionaryInitialized = true;
+            }
 
             if (language == "c")
             {
@@ -113,15 +173,15 @@ namespace pie.Services
             {
                 scintilla.Lexer = Lexer.Json;
 
-                scintilla.Styles[Style.Json.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
-                scintilla.Styles[Style.Json.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
-                scintilla.Styles[Style.Json.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
-                scintilla.Styles[Style.Json.StringEol].ForeColor = ConvertHexToColor(configColorDictionary["StringEol"]);
-                scintilla.Styles[Style.Json.LineComment].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
-                scintilla.Styles[Style.Json.BlockComment].ForeColor = ConvertHexToColor(configColorDictionary["CommentBlock"]);
-                scintilla.Styles[Style.Json.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
-                scintilla.Styles[Style.Json.Keyword].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
-                scintilla.Styles[Style.Json.Uri].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
+                scintilla.Styles[Style.Json.Default].ForeColor = parserColorDictionary["Default"];
+                scintilla.Styles[Style.Json.Number].ForeColor = parserColorDictionary["Number"];
+                scintilla.Styles[Style.Json.String].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Json.StringEol].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Json.LineComment].ForeColor = parserColorDictionary["CommentLine"];
+                scintilla.Styles[Style.Json.BlockComment].ForeColor = parserColorDictionary["CommentBlock"];
+                scintilla.Styles[Style.Json.Operator].ForeColor = parserColorDictionary["Operator"];
+                scintilla.Styles[Style.Json.Keyword].ForeColor = parserColorDictionary["Word"];
+                scintilla.Styles[Style.Json.Uri].ForeColor = parserColorDictionary["Word2"];
 
                 scintilla.SetProperty("lexer.json.allow.comments", "1");
                 scintilla.SetProperty("lexer.json.escape.sequence", "1");
@@ -132,20 +192,20 @@ namespace pie.Services
                 var numericChars = "0123456789";
                 var accentedChars = "ŠšŒœŸÿÀàÁáÂâÃãÄäÅåÆæÇçÈèÉéÊêËëÌìÍíÎîÏïÐðÑñÒòÓóÔôÕõÖØøÙùÚúÛûÜüÝýÞþßö";
 
-                scintilla.Styles[Style.Lua.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
-                scintilla.Styles[Style.Lua.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-                scintilla.Styles[Style.Lua.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
-                scintilla.Styles[Style.Lua.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
-                scintilla.Styles[Style.Lua.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
-                scintilla.Styles[Style.Lua.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
-                scintilla.Styles[Style.Lua.Word3].ForeColor = ConvertHexToColor(configColorDictionary["Word3"]);
-                scintilla.Styles[Style.Lua.Word4].ForeColor = ConvertHexToColor(configColorDictionary["Word4"]);
-                scintilla.Styles[Style.Lua.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
-                scintilla.Styles[Style.Lua.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
-                scintilla.Styles[Style.Lua.LiteralString].ForeColor = ConvertHexToColor(configColorDictionary["LiteralString"]);
-                scintilla.Styles[Style.Lua.StringEol].BackColor = ConvertHexToColor(configColorDictionary["StringEol"]);
-                scintilla.Styles[Style.Lua.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
-                scintilla.Styles[Style.Lua.Preprocessor].ForeColor = ConvertHexToColor(configColorDictionary["Preprocessor"]);
+                scintilla.Styles[Style.Lua.Default].ForeColor = parserColorDictionary["Default"];
+                scintilla.Styles[Style.Lua.Comment].ForeColor = parserColorDictionary["Comment"];
+                scintilla.Styles[Style.Lua.CommentLine].ForeColor = parserColorDictionary["CommentLine"];
+                scintilla.Styles[Style.Lua.Number].ForeColor = parserColorDictionary["Number"];
+                scintilla.Styles[Style.Lua.Word].ForeColor = parserColorDictionary["Word"];
+                scintilla.Styles[Style.Lua.Word2].ForeColor = parserColorDictionary["Word2"];
+                scintilla.Styles[Style.Lua.Word3].ForeColor = parserColorDictionary["Word3"];
+                scintilla.Styles[Style.Lua.Word4].ForeColor = parserColorDictionary["Word4"];
+                scintilla.Styles[Style.Lua.String].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Lua.Character].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Lua.LiteralString].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Lua.StringEol].BackColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Lua.Operator].ForeColor = parserColorDictionary["Operator"];
+                scintilla.Styles[Style.Lua.Preprocessor].ForeColor = parserColorDictionary["Preprocessor"];
                 scintilla.Lexer = Lexer.Lua;
                 scintilla.WordChars = alphaChars + numericChars + accentedChars;
 
@@ -172,28 +232,28 @@ namespace pie.Services
 
                 scintilla.SetProperty("tab.timmy.whinge.level", "1");
 
-                scintilla.Styles[Style.Python.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
-                scintilla.Styles[Style.Python.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
+                scintilla.Styles[Style.Python.Default].ForeColor = parserColorDictionary["Default"];
+                scintilla.Styles[Style.Python.CommentLine].ForeColor = parserColorDictionary["CommentLine"];
                 scintilla.Styles[Style.Python.CommentLine].Italic = true;
-                scintilla.Styles[Style.Python.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
-                scintilla.Styles[Style.Python.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
-                scintilla.Styles[Style.Python.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
-                scintilla.Styles[Style.Python.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
+                scintilla.Styles[Style.Python.Number].ForeColor = parserColorDictionary["Number"];
+                scintilla.Styles[Style.Python.String].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Python.Character].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Python.Word].ForeColor = parserColorDictionary["Word"];
                 scintilla.Styles[Style.Python.Word].Bold = true;
-                scintilla.Styles[Style.Python.Triple].ForeColor = ConvertHexToColor(configColorDictionary["Triple"]);
-                scintilla.Styles[Style.Python.TripleDouble].ForeColor = ConvertHexToColor(configColorDictionary["TripleDouble"]);
-                scintilla.Styles[Style.Python.ClassName].ForeColor = ConvertHexToColor(configColorDictionary["ClassName"]);
+                scintilla.Styles[Style.Python.Triple].ForeColor = parserColorDictionary["Triple"];
+                scintilla.Styles[Style.Python.TripleDouble].ForeColor = parserColorDictionary["Triple"];
+                scintilla.Styles[Style.Python.ClassName].ForeColor = parserColorDictionary["Word"];
                 scintilla.Styles[Style.Python.ClassName].Bold = true;
-                scintilla.Styles[Style.Python.DefName].ForeColor = ConvertHexToColor(configColorDictionary["DefName"]);
+                scintilla.Styles[Style.Python.DefName].ForeColor = parserColorDictionary["Word"];
                 scintilla.Styles[Style.Python.DefName].Bold = true;
                 scintilla.Styles[Style.Python.Operator].Bold = true;
-                scintilla.Styles[Style.Python.CommentBlock].ForeColor = ConvertHexToColor(configColorDictionary["CommentBlock"]);
+                scintilla.Styles[Style.Python.CommentBlock].ForeColor = parserColorDictionary["CommentBlock"];
                 scintilla.Styles[Style.Python.CommentBlock].Italic = true;
-                scintilla.Styles[Style.Python.StringEol].ForeColor = ConvertHexToColor(configColorDictionary["StringEol"]);
+                scintilla.Styles[Style.Python.StringEol].ForeColor = parserColorDictionary["String"];
                 scintilla.Styles[Style.Python.StringEol].BackColor = Color.FromArgb(0xE0, 0xC0, 0xE0);
                 scintilla.Styles[Style.Python.StringEol].FillLine = true;
-                scintilla.Styles[Style.Python.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
-                scintilla.Styles[Style.Python.Decorator].ForeColor = ConvertHexToColor(configColorDictionary["Decorator"]);
+                scintilla.Styles[Style.Python.Word2].ForeColor = parserColorDictionary["Word2"];
+                scintilla.Styles[Style.Python.Decorator].ForeColor = parserColorDictionary["Decorator"];
 
                 scintilla.ViewWhitespace = WhitespaceMode.VisibleAlways;
 
@@ -219,25 +279,25 @@ namespace pie.Services
 
                 EnableFolding(scintilla);
 
-                scintilla.Styles[Style.Xml.Attribute].ForeColor = ConvertHexToColor(configColorDictionary["Attribute"]);
-                scintilla.Styles[Style.Xml.Entity].ForeColor = ConvertHexToColor(configColorDictionary["Entity"]);
-                scintilla.Styles[Style.Xml.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-                scintilla.Styles[Style.Xml.Tag].ForeColor = ConvertHexToColor(configColorDictionary["Tag"]);
-                scintilla.Styles[Style.Xml.TagEnd].ForeColor = ConvertHexToColor(configColorDictionary["TagEnd"]);
-                scintilla.Styles[Style.Xml.DoubleString].ForeColor = ConvertHexToColor(configColorDictionary["DoubleString"]);
-                scintilla.Styles[Style.Xml.SingleString].ForeColor = ConvertHexToColor(configColorDictionary["SingleString"]);
+                scintilla.Styles[Style.Xml.Attribute].ForeColor = parserColorDictionary["Attribute"];
+                scintilla.Styles[Style.Xml.Entity].ForeColor = parserColorDictionary["Entity"];
+                scintilla.Styles[Style.Xml.Comment].ForeColor = parserColorDictionary["Comment"];
+                scintilla.Styles[Style.Xml.Tag].ForeColor = parserColorDictionary["Word"];
+                scintilla.Styles[Style.Xml.TagEnd].ForeColor = parserColorDictionary["Word"];
+                scintilla.Styles[Style.Xml.DoubleString].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Xml.SingleString].ForeColor = parserColorDictionary["String"];
             }
             else if (language == "html")
             {
                 scintilla.Lexer = Lexer.Html;
 
-                scintilla.Styles[Style.Html.Attribute].ForeColor = ConvertHexToColor(configColorDictionary["Attribute"]);
-                scintilla.Styles[Style.Html.Entity].ForeColor = ConvertHexToColor(configColorDictionary["Entity"]);
-                scintilla.Styles[Style.Html.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-                scintilla.Styles[Style.Html.Tag].ForeColor = ConvertHexToColor(configColorDictionary["Tag"]);
-                scintilla.Styles[Style.Html.TagEnd].ForeColor = ConvertHexToColor(configColorDictionary["TagEnd"]);
-                scintilla.Styles[Style.Html.DoubleString].ForeColor = ConvertHexToColor(configColorDictionary["DoubleString"]);
-                scintilla.Styles[Style.Html.SingleString].ForeColor = ConvertHexToColor(configColorDictionary["SingleString"]);
+                scintilla.Styles[Style.Html.Attribute].ForeColor = parserColorDictionary["Attribute"];
+                scintilla.Styles[Style.Html.Entity].ForeColor = parserColorDictionary["Entity"];
+                scintilla.Styles[Style.Html.Comment].ForeColor = parserColorDictionary["Comment"];
+                scintilla.Styles[Style.Html.Tag].ForeColor = parserColorDictionary["Word"];
+                scintilla.Styles[Style.Html.TagEnd].ForeColor = parserColorDictionary["Word"];
+                scintilla.Styles[Style.Html.DoubleString].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Html.SingleString].ForeColor = parserColorDictionary["String"];
 
                 string keywordSet1 = "!doctype a abbr accept accept-charset accesskey acronym action address align alink alt applet archive area article aside async audio autocomplete autofocus axis b background base basefont bdi bdo bgcolor bgsound big blink blockquote body border br button canvas caption cellpadding cellspacing center char charoff charset checkbox checked cite class classid clear code codebase codetype col colgroup color cols colspan command compact content contenteditable contextmenu coords data datafld dataformatas datalist datapagesize datasrc datetime dd declare defer del details dfn dialog dir disabled div dl draggable dropzone dt element em embed enctype event face fieldset figcaption figure file font footer for form formaction formenctype formmethod formnovalidate formtarget frame frameborder frameset h1 h2 h3 h4 h5 h6 head header headers height hgroup hidden hr href hreflang hspace html http-equiv i id iframe image img input ins isindex ismap kbd keygen label lang language leftmargin legend li link list listing longdesc main manifest map marginheight marginwidth mark marquee max maxlength media menu menuitem meta meter method min multicol multiple name nav nobr noembed noframes nohref noresize noscript noshade novalidate nowrap object ol onabort onafterprint onautocomplete onautocompleteerror onbeforeonload onbeforeprint onblur oncancel oncanplay oncanplaythrough onchange onclick onclose oncontextmenu oncuechange ondblclick ondrag ondragend ondragenter ondragleave ondragover ondragstart ondrop ondurationchange onemptied onended onerror onfocus onhashchange oninput oninvalid onkeydown onkeypress onkeyup onload onloadeddata onloadedmetadata onloadstart onmessage onmousedown onmouseenter onmouseleave onmousemove onmouseout onmouseover onmouseup onmousewheel onoffline ononline onpagehide onpageshow onpause onplay onplaying onpointercancel onpointerdown onpointerenter onpointerleave onpointerlockchange onpointerlockerror onpointermove onpointerout onpointerover onpointerup onpopstate onprogress onratechange onreadystatechange onredo onreset onresize onscroll onseeked onseeking onselect onshow onsort onstalled onstorage onsubmit onsuspend ontimeupdate ontoggle onundo onunload onvolumechange onwaiting optgroup option output p param password pattern picture placeholder plaintext pre profile progress prompt public q radio readonly rel required reset rev reversed role rows rowspan rp rt rtc ruby rules s samp sandbox scheme scope scoped script seamless section select selected shadow shape size sizes small source spacer span spellcheck src srcdoc standby start step strike strong style sub submit summary sup svg svg:svg tabindex table target tbody td template text textarea tfoot th thead time title topmargin tr track tt type u ul usemap valign value valuetype var version video vlink vspace wbr width xml xmlns xmp";
 
@@ -251,17 +311,17 @@ namespace pie.Services
             {
                 scintilla.Lexer = Lexer.Sql;
 
-                scintilla.Styles[Style.Sql.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-                scintilla.Styles[Style.Sql.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["CommentLine"]);
-                scintilla.Styles[Style.Sql.CommentLineDoc].ForeColor = ConvertHexToColor(configColorDictionary["CommentLineDoc"]);
-                scintilla.Styles[Style.Sql.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
-                scintilla.Styles[Style.Sql.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
-                scintilla.Styles[Style.Sql.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
-                scintilla.Styles[Style.Sql.User1].ForeColor = ConvertHexToColor(configColorDictionary["User1"]);
-                scintilla.Styles[Style.Sql.User2].ForeColor = ConvertHexToColor(configColorDictionary["User2"]);
-                scintilla.Styles[Style.Sql.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
-                scintilla.Styles[Style.Sql.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
-                scintilla.Styles[Style.Sql.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
+                scintilla.Styles[Style.Sql.Comment].ForeColor = parserColorDictionary["Comment"];
+                scintilla.Styles[Style.Sql.CommentLine].ForeColor = parserColorDictionary["CommentLine"];
+                scintilla.Styles[Style.Sql.CommentLineDoc].ForeColor = parserColorDictionary["CommentLine"];
+                scintilla.Styles[Style.Sql.Number].ForeColor = parserColorDictionary["Number"];
+                scintilla.Styles[Style.Sql.Word].ForeColor = parserColorDictionary["Word"];
+                scintilla.Styles[Style.Sql.Word2].ForeColor = parserColorDictionary["Word2"];
+                scintilla.Styles[Style.Sql.User1].ForeColor = parserColorDictionary["User1"];
+                scintilla.Styles[Style.Sql.User2].ForeColor = parserColorDictionary["User2"];
+                scintilla.Styles[Style.Sql.String].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Sql.Character].ForeColor = parserColorDictionary["String"];
+                scintilla.Styles[Style.Sql.Operator].ForeColor = parserColorDictionary["Operator"];
 
                 string keywordSet1 = @"add alter as authorization backup begin bigint binary bit break browse bulk by cascade case catch check checkpoint close clustered column commit compute constraint containstable continue create current cursor cursor database date datetime datetime2 datetimeoffset dbcc deallocate decimal declare default delete deny desc disk distinct distributed double drop dump else end errlvl escape except exec execute exit external fetch file fillfactor float for foreign freetext freetexttable from full function goto grant group having hierarchyid holdlock identity identity_insert identitycol if image index insert int intersect into key kill lineno load merge money national nchar nocheck nocount nolock nonclustered ntext numeric nvarchar of off offsets on open opendatasource openquery openrowset openxml option order over percent plan precision primary print proc procedure public raiserror read readtext real reconfigure references replication restore restrict return revert revoke rollback rowcount rowguidcol rule save schema securityaudit select set setuser shutdown smalldatetime smallint smallmoney sql_variant statistics table table tablesample text textsize then time timestamp tinyint to top tran transaction trigger truncate try union unique uniqueidentifier update updatetext use user values varbinary varchar varying view waitfor when where while with writetext xml go ";
                 string keywordSet2 = @"ascii cast char charindex ceiling coalesce collate contains convert current_date current_time current_timestamp current_user floor isnull max min nullif object_id session_user substring system_user tsequal ";
@@ -303,21 +363,19 @@ namespace pie.Services
 
         private static void AddCppStyles(Scintilla scintilla)
         {
-            Dictionary<string, string> configColorDictionary = Globals.configColorDictionary;
-
-            scintilla.Styles[ScintillaNET.Style.Cpp.Default].ForeColor = ConvertHexToColor(configColorDictionary["Default"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.CommentLineDoc].ForeColor = ConvertHexToColor(configColorDictionary["Comment"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = ConvertHexToColor(configColorDictionary["Number"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = ConvertHexToColor(configColorDictionary["Word"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.Word2].ForeColor = ConvertHexToColor(configColorDictionary["Word2"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.String].ForeColor = ConvertHexToColor(configColorDictionary["String"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.Character].ForeColor = ConvertHexToColor(configColorDictionary["Character"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.Verbatim].ForeColor = ConvertHexToColor(configColorDictionary["Verbatim"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.StringEol].BackColor = ConvertHexToColor(configColorDictionary["StringEol"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.Operator].ForeColor = ConvertHexToColor(configColorDictionary["Operator"]);
-            scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = ConvertHexToColor(configColorDictionary["Preprocessor"]);
+            scintilla.Styles[ScintillaNET.Style.Cpp.Default].ForeColor = parserColorDictionary["Default"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = parserColorDictionary["Comment"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = parserColorDictionary["Comment"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.CommentLineDoc].ForeColor = parserColorDictionary["Comment"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = parserColorDictionary["Number"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = parserColorDictionary["Word"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.Word2].ForeColor = parserColorDictionary["Word2"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.String].ForeColor = parserColorDictionary["String"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.Character].ForeColor = parserColorDictionary["String"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.Verbatim].ForeColor = parserColorDictionary["String"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.StringEol].BackColor = parserColorDictionary["String"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.Operator].ForeColor = parserColorDictionary["Operator"];
+            scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = parserColorDictionary["Preprocessor"];
         }
 
         public static void SetLexer(String extension, Scintilla scintilla, KryptonDockableNavigator tabControl)
@@ -360,60 +418,18 @@ namespace pie.Services
             }
         }
 
-        public static void InitializeDefaultColorDictionary()
+        public static void GetTheme(string file)
         {
-            Dictionary<string, string> colorDictionary = new Dictionary<string, string>();
+            string content = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + file);
 
-            colorDictionary["Default"] = "C0C0C0";
-            colorDictionary["Comment"] = "008000";
-            colorDictionary["CommentLine"] = "008000";
-            colorDictionary["CommentLineDoc"] = "008000";
-            colorDictionary["Number"] = "808000";
-            colorDictionary["Word"] = "0000FF";
-            colorDictionary["Word2"] = "8A2BE2";
-            colorDictionary["Word3"] = "483D8B";
-            colorDictionary["Word4"] = "48ED8B";
-            colorDictionary["String"] = "A31515";
-            colorDictionary["LiteralString"] = "A31515";
-            colorDictionary["Character"] = "A31515";
-            colorDictionary["Verbatim"] = "A31515";
-            colorDictionary["StringEol"] = "FFC0CB";
-            colorDictionary["Operator"] = "800080";
-            colorDictionary["Preprocessor"] = "800080";
-            colorDictionary["Triple"] = "7f0000";
-            colorDictionary["TripleDouble"] = "7f0000";
-            colorDictionary["ClassName"] = "0000FF";
-            colorDictionary["DefName"] = "007F7F";
-            colorDictionary["CommentBlock"] = "7F7F7F";
-            colorDictionary["Decorator"] = "805000";
-            colorDictionary["Attribute"] = "FF0000";
-            colorDictionary["Entity"] = "FF0000";
-            colorDictionary["Tag"] = "0000FF";
-            colorDictionary["TagEnd"] = "0000FF";
-            colorDictionary["DoubleString"] = "FF1493";
-            colorDictionary["SingleString"] = "FF1493";
-            colorDictionary["User1"] = "808080";
-            colorDictionary["User2"] = "FF0080";
-            colorDictionary["Background"] = "FFFFFF";
-            colorDictionary["Fore"] = "000000";
-            colorDictionary["CaretLine"] = "E6EFFA";
-            colorDictionary["Selection"] = "FFE6A2";
-
-            Globals.defaultColorDictionary = colorDictionary;
-        }
-
-        public static void InitializeConfigColorDictionary(string file)
-        {
-            Dictionary<string, string> configColorDictionary = new Dictionary<string, string>();
-            IEnumerable<string> lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + file);
-
-            foreach (string line in lines)
+            if (content == "1")
             {
-                string[] splitLine = line.Split(':');
-                configColorDictionary[splitLine[0]] = splitLine[1];
+                Globals.theme = 1;
             }
-
-            Globals.configColorDictionary = configColorDictionary;
+            else
+            {
+                Globals.theme = 0;
+            }
         }
     }
 }
