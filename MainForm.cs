@@ -17,7 +17,7 @@ using AutocompleteMenuNS;
 
 namespace pie
 {
-    public partial class MainForm : Form
+    public partial class MainForm : KryptonForm
     {
         public string[] Args;
 
@@ -794,7 +794,7 @@ namespace pie
             }
             else if (process == "powershell.exe")
             {
-                kryptonPage.Text = "Powershell";
+                kryptonPage.Text = "PowerShell";
                 kryptonPage.ImageSmall = Properties.Resources.powershell;
             }
 
