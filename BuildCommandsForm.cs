@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using pie.Classes;
 using System.IO;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace pie
 {
-    public partial class BuildCommandsForm : Form
+    public partial class BuildCommandsForm : KryptonForm
     {
         List<BuildCommand> tempCommands;
 
