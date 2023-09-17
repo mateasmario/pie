@@ -389,7 +389,7 @@ namespace pie
             for (int i = 25; i <= 31; i++)
             {
                 TextArea.Markers[i].SetForeColor(ThemeService.GetFoldingColor()); // styles for [+] and [-]
-                TextArea.Markers[i].SetBackColor(Color.White); // styles for [+] and [-]
+                TextArea.Markers[i].SetBackColor(ThemeService.GetForeColor()); // styles for [+] and [-]
             }
 
             // Enable automatic folding
