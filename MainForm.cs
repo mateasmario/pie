@@ -1700,14 +1700,14 @@ namespace pie
             if (Globals.theme == 0)
             {
                 Globals.theme = 1;
-                File.WriteAllText("theme-settings.config", "1");
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme-settings.config", "1");
                 themeSettingsToolStripMenuItem.Image = Properties.Resources.sun;
                 themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
             }
             else
             {
                 Globals.theme = 0;
-                File.WriteAllText("theme-settings.config", "0");
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme-settings.config", "0");
                 themeSettingsToolStripMenuItem.Image = Properties.Resources.crescent_moon;
                 themeSettingsToolStripMenuItem.Text = "Toggle Dark Mode";
             }
