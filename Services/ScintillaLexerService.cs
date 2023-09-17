@@ -26,7 +26,7 @@ namespace pie.Services
             return color;
         }
 
-        private static void InitializeParserDictionary()
+        public static void InitializeParserDictionary()
         {
             parserColorDictionary = new Dictionary<string, Color>();
 
@@ -40,40 +40,40 @@ namespace pie.Services
             {
                 parserColorDictionary["Comment"] = Color.FromArgb(192, 192, 192);
                 parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
-                parserColorDictionary["Number"] = Color.FromArgb(128, 128, 0);
-                parserColorDictionary["Word"] = Color.FromArgb(0, 0, 255);
-                parserColorDictionary["Word2"] = Color.FromArgb(138, 43, 226);
-                parserColorDictionary["Word3"] = Color.FromArgb(72, 61, 139);
-                parserColorDictionary["Word4"] = Color.FromArgb(72, 237, 139);
-                parserColorDictionary["String"] = Color.FromArgb(163, 21, 21);
-                parserColorDictionary["Operator"] = Color.FromArgb(128, 0, 128);
-                parserColorDictionary["Preprocessor"] = Color.FromArgb(128, 0, 128);
-                parserColorDictionary["Triple"] = Color.FromArgb(127, 0, 0);
-                parserColorDictionary["CommentBlock"] = Color.FromArgb(127, 127, 127);
-                parserColorDictionary["Decorator"] = Color.FromArgb(128, 80, 0);
-                parserColorDictionary["Attribute"] = Color.FromArgb(171, 0, 0);
-                parserColorDictionary["Entity"] = Color.FromArgb(255, 0, 0);
+                parserColorDictionary["Number"] = Color.FromArgb(242, 161, 39);
+                parserColorDictionary["Word"] = Color.FromArgb(60, 170, 232);
+                parserColorDictionary["Word2"] = Color.FromArgb(60, 170, 232);
+                parserColorDictionary["Word3"] = Color.FromArgb(145, 35, 247);
+                parserColorDictionary["Word4"] = Color.FromArgb(145, 35, 247);
+                parserColorDictionary["String"] = Color.FromArgb(56, 207, 172);
+                parserColorDictionary["Operator"] = Color.FromArgb(222, 2, 222);
+                parserColorDictionary["Preprocessor"] = Color.FromArgb(222, 2, 222);
+                parserColorDictionary["Triple"] = Color.FromArgb(207, 2, 2);
+                parserColorDictionary["CommentBlock"] = Color.FromArgb(153, 153, 153);
+                parserColorDictionary["Decorator"] = Color.FromArgb(230, 222, 5);
+                parserColorDictionary["Attribute"] = Color.FromArgb(222, 2, 222);
+                parserColorDictionary["Entity"] = Color.FromArgb(222, 2, 222);
                 parserColorDictionary["User1"] = Color.FromArgb(128, 128, 128);
                 parserColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
 
             }
             else
             {
-                parserColorDictionary["Comment"] = Color.FromArgb(192, 192, 192);
+                parserColorDictionary["Comment"] = Color.FromArgb(180, 180, 180);
                 parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
-                parserColorDictionary["Number"] = Color.FromArgb(128, 128, 0);
-                parserColorDictionary["Word"] = Color.FromArgb(0, 0, 255);
-                parserColorDictionary["Word2"] = Color.FromArgb(138, 43, 226);
-                parserColorDictionary["Word3"] = Color.FromArgb(72, 61, 139);
-                parserColorDictionary["Word4"] = Color.FromArgb(72, 237, 139);
-                parserColorDictionary["String"] = Color.FromArgb(163, 21, 21);
+                parserColorDictionary["Number"] = Color.FromArgb(194, 127, 25);
+                parserColorDictionary["Word"] = Color.FromArgb(50, 125, 168);
+                parserColorDictionary["Word2"] = Color.FromArgb(50, 125, 168);
+                parserColorDictionary["Word3"] = Color.FromArgb(138, 43, 226);
+                parserColorDictionary["Word4"] = Color.FromArgb(138, 43, 226);
+                parserColorDictionary["String"] = Color.FromArgb(43, 158, 131);
                 parserColorDictionary["Operator"] = Color.FromArgb(128, 0, 128);
                 parserColorDictionary["Preprocessor"] = Color.FromArgb(128, 0, 128);
                 parserColorDictionary["Triple"] = Color.FromArgb(127, 0, 0);
                 parserColorDictionary["CommentBlock"] = Color.FromArgb(127, 127, 127);
-                parserColorDictionary["Decorator"] = Color.FromArgb(128, 80, 0);
-                parserColorDictionary["Attribute"] = Color.FromArgb(171, 0, 0);
-                parserColorDictionary["Entity"] = Color.FromArgb(255, 0, 0);
+                parserColorDictionary["Decorator"] = Color.FromArgb(186, 119, 2);
+                parserColorDictionary["Attribute"] = Color.FromArgb(128, 0, 128);
+                parserColorDictionary["Entity"] = Color.FromArgb(128, 0, 128);
                 parserColorDictionary["User1"] = Color.FromArgb(128, 128, 128);
                 parserColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
             }
@@ -85,7 +85,7 @@ namespace pie.Services
             autocompleteMenu.SetAutocompleteItems(keywords);
         }
 
-        public static void ConfigureLexer(string language, Scintilla scintilla, KryptonDockableNavigator tabControl)
+        public static void ConfigureLexer(string language, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
         {
             if (!dictionaryInitialized) 
             { 
@@ -109,7 +109,7 @@ namespace pie.Services
                 string combined = keywordSet1 + " " + keywordSet2 + " " + keywordSet3;
                 string[] combinedArray = combined.Split(' ');
 
-                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+                SetAutocompleteMenuKeywords(Globals.tabInfos[index].getAutocompleteMenu(), combinedArray.ToList());
 
                 EnableFolding(scintilla);
             }
@@ -127,7 +127,7 @@ namespace pie.Services
                 string combined = keywordSet1 + " " + keywordSet2;
                 string[] combinedArray = combined.Split(' ');
 
-                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+                SetAutocompleteMenuKeywords(Globals.tabInfos[index].getAutocompleteMenu(), combinedArray.ToList());
 
                 EnableFolding(scintilla);
             }
@@ -145,7 +145,7 @@ namespace pie.Services
                 string combined = keywordSet1 + " " + keywordSet2;
                 string[] combinedArray = combined.Split(' ');
 
-                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+                SetAutocompleteMenuKeywords(Globals.tabInfos[index].getAutocompleteMenu(), combinedArray.ToList());
 
                 EnableFolding(scintilla);
             }
@@ -165,7 +165,7 @@ namespace pie.Services
                 string combined = keywordSet1 + " " + keywordSet2 + " " + keywordSet3;
                 string[] combinedArray = combined.Split(' ');
 
-                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+                SetAutocompleteMenuKeywords(Globals.tabInfos[index].getAutocompleteMenu(), combinedArray.ToList());
 
                 EnableFolding(scintilla);
             }
@@ -222,7 +222,7 @@ namespace pie.Services
                 string combined = keywordSet1 + " " + keywordSet2 + " " + keywordSet3 + " " + keywordSet4;
                 string[] combinedArray = combined.Split(' ');
 
-                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+                SetAutocompleteMenuKeywords(Globals.tabInfos[index].getAutocompleteMenu(), combinedArray.ToList());
 
                 EnableFolding(scintilla);
             }
@@ -267,7 +267,7 @@ namespace pie.Services
                 string combined = keywordSet1 + " " + keywordSet2 + " " + keywordSet3;
                 string[] combinedArray = combined.Split(' ');
 
-                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+                SetAutocompleteMenuKeywords(Globals.tabInfos[index].getAutocompleteMenu(), combinedArray.ToList());
 
                 EnableFolding(scintilla);
             }
@@ -305,7 +305,7 @@ namespace pie.Services
 
                 string[] combinedArray = keywordSet1.Split(' ');
 
-                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+                SetAutocompleteMenuKeywords(Globals.tabInfos[index].getAutocompleteMenu(), combinedArray.ToList());
             }
             else if (language == "mssql")
             {
@@ -336,7 +336,7 @@ namespace pie.Services
                 string combined = keywordSet1 + " " + keywordSet2 + " " + keywordSet3 + " " + keywordSet4;
                 string[] combinedArray = combined.Split(' ');
 
-                SetAutocompleteMenuKeywords(Globals.tabInfos[tabControl.SelectedIndex].getAutocompleteMenu(), combinedArray.ToList());
+                SetAutocompleteMenuKeywords(Globals.tabInfos[index].getAutocompleteMenu(), combinedArray.ToList());
             }
         }
 
@@ -378,42 +378,42 @@ namespace pie.Services
             scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = parserColorDictionary["Preprocessor"];
         }
 
-        public static void SetLexer(String extension, Scintilla scintilla, KryptonDockableNavigator tabControl)
+        public static void SetLexer(String extension, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
         {
             switch (extension)
             {
                 case "c":
-                    ConfigureLexer("c", scintilla, tabControl);
+                    ConfigureLexer("c", scintilla, tabControl, index);
                     break;
                 case "cpp":
-                    ConfigureLexer("c", scintilla, tabControl);
+                    ConfigureLexer("c", scintilla, tabControl, index);
                     break;
                 case "cs":
-                    ConfigureLexer("cs", scintilla, tabControl);
+                    ConfigureLexer("cs", scintilla, tabControl, index);
                     break;
                 case "java":
-                    ConfigureLexer("java", scintilla, tabControl);
+                    ConfigureLexer("java", scintilla, tabControl, index);
                     break;
                 case "js":
-                    ConfigureLexer("js", scintilla, tabControl);
+                    ConfigureLexer("js", scintilla, tabControl, index);
                     break;
                 case "json":
-                    ConfigureLexer("json", scintilla, tabControl);
+                    ConfigureLexer("json", scintilla, tabControl, index);
                     break;
                 case "lua":
-                    ConfigureLexer("lua", scintilla, tabControl);
+                    ConfigureLexer("lua", scintilla, tabControl, index);
                     break;
                 case "py":
-                    ConfigureLexer("python", scintilla, tabControl);
+                    ConfigureLexer("python", scintilla, tabControl, index);
                     break;
                 case "xml":
-                    ConfigureLexer("xml", scintilla, tabControl);
+                    ConfigureLexer("xml", scintilla, tabControl, index);
                     break;
                 case "html":
-                    ConfigureLexer("html", scintilla, tabControl);
+                    ConfigureLexer("html", scintilla, tabControl, index);
                     break;
                 case "sql":
-                    ConfigureLexer("mssql", scintilla, tabControl);
+                    ConfigureLexer("mssql", scintilla, tabControl, index);
                     break;
             }
         }

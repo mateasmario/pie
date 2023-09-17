@@ -16,11 +16,11 @@ namespace pie
         public GitCommitMessageForm()
         {
             InitializeComponent();
-        }
 
-        private void GitCommitMessageForm_Load(object sender, EventArgs e)
-        {
-
+            this.Palette = Globals.kryptonPalette;
+            kryptonPanel1.Palette = Globals.kryptonPalette;
+            kryptonRichTextBox1.Palette = Globals.kryptonPalette;
+            kryptonButton1.Palette = Globals.kryptonPalette;
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)

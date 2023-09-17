@@ -16,7 +16,15 @@ namespace pie
         public AddBuildCommandForm()
         {
             InitializeComponent();
-            MainForm mainForm = new MainForm();
+
+            this.Palette = Globals.kryptonPalette;
+            kryptonPanel1.Palette = Globals.kryptonPalette;
+            kryptonLabel1.Palette = Globals.kryptonPalette;
+            kryptonLabel2.Palette = Globals.kryptonPalette;
+            kryptonLabel3.Palette = Globals.kryptonPalette;
+            kryptonTextBox1.Palette = Globals.kryptonPalette;
+            kryptonTextBox2.Palette = Globals.kryptonPalette;
+            kryptonButton1.Palette = Globals.kryptonPalette;
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)

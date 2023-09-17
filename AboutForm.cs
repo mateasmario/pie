@@ -18,7 +18,11 @@ namespace pie
         public AboutForm()
         {
             InitializeComponent();
-            ThemeService.SetPaletteToTheme(null, null, this.kryptonPalette1, Globals.theme);
+            this.Palette = Globals.kryptonPalette;
+            kryptonPanel1.Palette = Globals.kryptonPalette;
+            kryptonLabel1.Palette = Globals.kryptonPalette;
+            kryptonLabel2.Palette = Globals.kryptonPalette;
+            kryptonLabel3.Palette = Globals.kryptonPalette;
         }
 
         private void kryptonLinkLabel1_LinkClicked(object sender, EventArgs e)
@@ -29,26 +33,6 @@ namespace pie
         private void kryptonLinkLabel2_LinkClicked(object sender, EventArgs e)
         {
             Process.Start("https://mateasmario.com");
-        }
-
-        private void AboutForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kryptonLabel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void kryptonLabel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void kryptonLabel3_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

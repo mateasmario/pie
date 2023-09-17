@@ -69,12 +69,24 @@ namespace pie
             }
             catch (FileNotFoundException ex)
             {
-                MessageBox.Show("Cannot access Theme Settings config file. Check if 'theme-settings.config' exists in your main pie directory. If not, try reinstalling the app.", "pie");
-                Application.Exit();
-                return;
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme-settings.config", "0");
+                Globals.theme = 0;
             }
 
-            ThemeService.SetPaletteToTheme(tabControl, menuStrip1, this.kryptonPalette1, Globals.theme);
+            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count-1], menuStrip1, this.kryptonPalette1, Globals.theme);
+            this.Palette = kryptonPalette1;
+            tabControl.Palette = kryptonPalette1;
+            buildTabControl.Palette = kryptonPalette1;
+            kryptonHeaderGroup1.Palette = kryptonPalette1;
+            kryptonContextMenu1.Palette = kryptonPalette1;
+            kryptonContextMenu2.Palette = kryptonPalette1;
+            kryptonContextMenu3.Palette = kryptonPalette1;
+            kryptonLabel1.Palette = kryptonPalette1;
+            findTextBox.Palette = kryptonPalette1;
+            replaceTextBox.Palette = kryptonPalette1;
+            kryptonButton1.Palette = kryptonPalette1;
+            kryptonButton2.Palette = kryptonPalette1;
+            kryptonButton3.Palette = kryptonPalette1;
         }
 
         public Scintilla CreateNewTextArea()
@@ -87,27 +99,32 @@ namespace pie
             TextArea.UpdateUI += TextArea_UpdateUI;
             TextArea.WrapMode = WrapMode.None;
             TextArea.IndentationGuides = IndentView.LookBoth;
-            TextArea.SetSelectionBackColor(true, ThemeService.GetSelectionColor());
-            TextArea.CaretLineBackColor = ThemeService.GetCaretLineBackColor();
 
             TextArea.UsePopup(false);
 
+            ColorizeTextArea(TextArea);
+
+            TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
+
+            TextArea.Dock = DockStyle.Fill;
+
+            return TextArea;
+        }
+
+        private void ColorizeTextArea(Scintilla TextArea) 
+        {
             TextArea.StyleResetDefault();
             TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
             TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
             TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ThemeService.GetForeColor();
             TextArea.CaretForeColor = ThemeService.GetForeColor();
             TextArea.Styles[ScintillaNET.Style.Default].BackColor = ThemeService.GetTextAreaBackColor();
+            TextArea.SetSelectionBackColor(true, ThemeService.GetSelectionColor());
+            TextArea.CaretLineBackColor = ThemeService.GetCaretLineBackColor();
             TextArea.StyleClearAll();
-
-            TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
 
             InitNumberMargin(TextArea);
             InitCodeFolding(TextArea);
-
-            TextArea.Dock = DockStyle.Fill;
-
-            return TextArea;
         }
 
         private AutocompleteMenu InitializeAutocompleteMenu(Scintilla scintilla)
@@ -642,7 +659,7 @@ namespace pie
                 tabControl.SelectedPage.Text = chosenPath;
 
                 string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
-                ScintillaLexerService.SetLexer(extension, TextArea, tabControl);
+                ScintillaLexerService.SetLexer(extension, TextArea, tabControl, tabControl.SelectedIndex);
                 UpdateFormTitle();
             }
 
@@ -678,7 +695,7 @@ namespace pie
                 tabControl.SelectedPage.ToolTipTitle = tabControl.SelectedPage.Text;
 
                 string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
-                ScintillaLexerService.SetLexer(extension, TextArea, tabControl);
+                ScintillaLexerService.SetLexer(extension, TextArea, tabControl, tabControl.SelectedIndex);
                 UpdateFormTitle();
             }
         }
@@ -704,7 +721,7 @@ namespace pie
 
             string extension = ParsingService.GetFileExtension(fileName);
 
-            ScintillaLexerService.SetLexer(extension, TextArea, tabControl);
+            ScintillaLexerService.SetLexer(extension, TextArea, tabControl, tabControl.SelectedIndex);
 
             DeactivateBuildAndRunOptions();
             ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
@@ -850,14 +867,16 @@ namespace pie
             if (status)
             {
                 buildTabControl.Show();
+                showBuildToolsToolStripMenuItem.Text = "Hide Terminal Tab";
+                kryptonContextMenuItem15.Text = "Hide Terminal Tab";
             }
             else
             {
                 buildTabControl.Hide();
+                showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
+                kryptonContextMenuItem15.Text = "Show Terminal Tab";
             }
             terminalTabControlOpened = status;
-            kryptonContextMenuItem15.Checked = status;
-            showBuildToolsToolStripMenuItem.Checked = status;
         }
 
         // [Method] Used for Git commands
@@ -998,12 +1017,12 @@ namespace pie
             if (status)
             {
                 ResetFindPanelLocation();
-                findHeaderGroup.Show();
+                kryptonHeaderGroup1.Show();
                 findTextBox.Focus();
             }
             else
             {
-                findHeaderGroup.Hide();
+                kryptonHeaderGroup1.Hide();
 
                 if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
                 {
@@ -1019,40 +1038,45 @@ namespace pie
         // [Event] Form Loading
         private void Form1_Load(object sender, EventArgs e)
         {
+            Globals.kryptonPalette = kryptonPalette1;
+
             // Load Build Commands from configuration file
             List<BuildCommand> buildCommands = null;
 
             try
             {
                 buildCommands = BuildCommandService.GetBuildCommandsFromFile("build-commands.config");
+                List<ToolStripMenuItem> buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
+
+                foreach (BuildCommand buildCommand in buildCommands)
+                {
+                    ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
+                    toolStripMenuItem.Text = buildCommand.getName();
+                    toolStripMenuItem.Tag = buildCommand.getCommand();
+
+                    toolStripMenuItem.Click += ToolStripMenuItem_Click;
+
+                    buildToolStripMenuItem1.DropDownItems.Add(toolStripMenuItem);
+                    buildCommandToolStripMenuItems.Add(toolStripMenuItem);
+                }
+
+                Globals.buildCommands = buildCommands;
+                Globals.buildCommandToolStripMenuItems = buildCommandToolStripMenuItems;
+                Globals.firstBrowserTab = true;
             } catch(FileNotFoundException ex)
             {
-                MessageBox.Show("Cannot access Build Commands config file. Check if 'build-commands.config' exists in your main pie directory. If not, try reinstalling the app.", "pie");
-                Application.Exit();
-                return;
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "build-commands.config", "");
             }
-
-            List<ToolStripMenuItem> buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
-
-            foreach (BuildCommand buildCommand in buildCommands)
-            {
-                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
-                toolStripMenuItem.Text = buildCommand.getName();
-                toolStripMenuItem.Tag = buildCommand.getCommand();
-
-                toolStripMenuItem.Click += ToolStripMenuItem_Click;
-
-                buildToolStripMenuItem1.DropDownItems.Add(toolStripMenuItem);
-                buildCommandToolStripMenuItems.Add(toolStripMenuItem);
-            }
-
-            Globals.buildCommands = buildCommands;
-            Globals.buildCommandToolStripMenuItems = buildCommandToolStripMenuItems;
-            Globals.firstBrowserTab = true;
 
             ResetFindPanelLocation();
-            findHeaderGroup.Hide();
+            kryptonHeaderGroup1.Hide();
             Globals.findReplacePanelToggled = false;
+
+            if (Globals.theme == 1)
+            {
+                themeSettingsToolStripMenuItem.Image = Properties.Resources.sun;
+                themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
+            }
 
             // Do other visual processing
             buildTabControl.Hide();
@@ -1113,7 +1137,7 @@ namespace pie
 
         private void ResetFindPanelLocation()
         {
-            findHeaderGroup.Location = new Point((this.Width - findHeaderGroup.Width) / 2, (this.Height - findHeaderGroup.Height) / 4);
+            kryptonHeaderGroup1.Location = new Point((this.Width - kryptonHeaderGroup1.Width) / 2, (this.Height - kryptonHeaderGroup1.Height) / 4);
         }
 
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1329,12 +1353,12 @@ namespace pie
 
         private void UpdateFormTitle()
         {
-            this.Text = "pie [" + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() + "]";
+            this.Text = Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() + " - pie";
         }
 
         private void UpdateFormTitle(String customTitle)
         {
-            this.Text = "pie [" + customTitle + "]";
+            this.Text = customTitle + " - pie";
         }
 
         // [Event] Triggered when user presses one of the buttons in the "Git" tab
@@ -1572,8 +1596,8 @@ namespace pie
         {
             if (Globals.mouseDown)
             {
-                findHeaderGroup.Location = new Point(
-                    (findHeaderGroup.Location.X - Globals.lastLocation.X) + e.X, (findHeaderGroup.Location.Y - Globals.lastLocation.Y) + e.Y);
+                kryptonHeaderGroup1.Location = new Point(
+                    (kryptonHeaderGroup1.Location.X - Globals.lastLocation.X) + e.X, (kryptonHeaderGroup1.Location.Y - Globals.lastLocation.Y) + e.Y);
 
                 this.Update();
             }
@@ -1664,6 +1688,48 @@ namespace pie
         private void kryptonContextMenuItem8_Click(object sender, EventArgs e)
         {
             CloseTab();
+        }
+
+        private void themeSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Globals.theme == 0)
+            {
+                Globals.theme = 1;
+                File.WriteAllText("theme-settings.config", "1");
+                themeSettingsToolStripMenuItem.Image = Properties.Resources.sun;
+                themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
+            }
+            else
+            {
+                Globals.theme = 0;
+                File.WriteAllText("theme-settings.config", "0");
+                themeSettingsToolStripMenuItem.Image = Properties.Resources.crescent_moon;
+                themeSettingsToolStripMenuItem.Text = "Toggle Dark Mode";
+            }
+
+            for (int i = 0; i<tabControl.Pages.Count-1; i++)
+            {
+                if (Globals.tabInfos[i].getTabType() == TabType.CODE)
+                {
+                    KryptonPage kryptonPage = tabControl.Pages[i];
+                    Scintilla scintilla = (Scintilla)kryptonPage.Controls[0];
+
+                    ScintillaLexerService.InitializeParserDictionary();
+
+                    if (Globals.tabInfos[i].getOpenedFilePath() != null)
+                    {
+                        string extension = ParsingService.GetFileExtension(Globals.tabInfos[i].getOpenedFilePath());
+                        ColorizeTextArea(scintilla);
+                        ScintillaLexerService.SetLexer(extension, scintilla, tabControl, i);
+                    }
+                    else
+                    {
+                        ColorizeTextArea(scintilla);
+                    }
+                }
+            }
+
+            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette1, Globals.theme);
         }
     }
 }
