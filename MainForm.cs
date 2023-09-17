@@ -131,6 +131,15 @@ namespace pie
         {
             AutocompleteMenu autocompleteMenu = new AutocompleteMenu();
 
+            ColorizeAutocompleteMenu(autocompleteMenu);
+
+            autocompleteMenu.TargetControlWrapper = new ScintillaWrapper(scintilla);
+
+            return autocompleteMenu;
+        }
+
+        private void ColorizeAutocompleteMenu(AutocompleteMenu autocompleteMenu)
+        {
             Colors colors = new Colors();
             colors.BackColor = ThemeService.GetTextAreaBackColor();
             colors.ForeColor = ThemeService.GetForeColor();
@@ -139,10 +148,6 @@ namespace pie
             colors.SelectedForeColor = ThemeService.GetForeColor();
             autocompleteMenu.Colors = colors;
             autocompleteMenu.LeftPadding = 0;
-
-            autocompleteMenu.TargetControlWrapper = new ScintillaWrapper(scintilla);
-
-            return autocompleteMenu;
         }
 
         private void RemoveSuggestedActions()
@@ -1720,6 +1725,7 @@ namespace pie
                     {
                         string extension = ParsingService.GetFileExtension(Globals.tabInfos[i].getOpenedFilePath());
                         ColorizeTextArea(scintilla);
+                        ColorizeAutocompleteMenu(Globals.tabInfos[i].getAutocompleteMenu());
                         ScintillaLexerService.SetLexer(extension, scintilla, tabControl, i);
                     }
                     else
