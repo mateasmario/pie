@@ -1042,11 +1042,11 @@ namespace pie
 
             // Load Build Commands from configuration file
             List<BuildCommand> buildCommands = null;
+            List<ToolStripMenuItem> buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
 
             try
             {
                 buildCommands = BuildCommandService.GetBuildCommandsFromFile("build-commands.config");
-                List<ToolStripMenuItem> buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
 
                 foreach (BuildCommand buildCommand in buildCommands)
                 {
@@ -1059,10 +1059,6 @@ namespace pie
                     buildToolStripMenuItem1.DropDownItems.Add(toolStripMenuItem);
                     buildCommandToolStripMenuItems.Add(toolStripMenuItem);
                 }
-
-                Globals.buildCommands = buildCommands;
-                Globals.buildCommandToolStripMenuItems = buildCommandToolStripMenuItems;
-                Globals.firstBrowserTab = true;
             } catch(FileNotFoundException ex)
             {
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "build-commands.config", "");
@@ -1071,6 +1067,10 @@ namespace pie
             ResetFindPanelLocation();
             kryptonHeaderGroup1.Hide();
             Globals.findReplacePanelToggled = false;
+
+            Globals.buildCommands = buildCommands;
+            Globals.buildCommandToolStripMenuItems = buildCommandToolStripMenuItems;
+            Globals.firstBrowserTab = true;
 
             if (Globals.theme == 1)
             {
