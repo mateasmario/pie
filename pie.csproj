@@ -374,6 +374,9 @@
     <Content Include="icons8-pie-64.ico" />
     <Content Include="pie %284%29.ico" />
     <Content Include="pie.ico" />
+    <None Include="Resources\day-mode.png" />
+    <None Include="Resources\crescent-moon.png" />
+    <None Include="Resources\image %2814%29.png" />
     <None Include="Resources\plus %284%29.png" />
     <None Include="Resources\plus %283%291.png" />
     <None Include="Resources\plus %283%29.png" />

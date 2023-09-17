@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 using pie.Classes;
 
 namespace pie
@@ -24,5 +25,6 @@ namespace pie
         public static bool firstBrowserTab;
         public static List<TabInfo> tabInfos;
         public static int theme;
+        public static KryptonPalette kryptonPalette;
     }
 }

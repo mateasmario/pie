@@ -1,4 +1,5 @@
 ﻿using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,8 @@ namespace pie.Services
             lightColorDictionary = new Dictionary<string, Color>();
             darkColorDictionary = new Dictionary<string, Color>();
 
-            lightColorDictionary["Primary"] = Color.White;
-            lightColorDictionary["Secondary"] = Color.WhiteSmoke;
+            lightColorDictionary["Primary"] = Color.FromArgb(240, 240, 240);
+            lightColorDictionary["Secondary"] = Color.FromArgb(227, 227, 227);
             lightColorDictionary["ButtonPressed"] = Color.Gainsboro;
             lightColorDictionary["Fore"] = Color.Black;
 
@@ -41,7 +42,7 @@ namespace pie.Services
             }
             else
             {
-                return Color.FromArgb(222, 222, 222);
+                return Color.FromArgb(192, 192, 192);
             }
         }
 
@@ -53,7 +54,7 @@ namespace pie.Services
             }
             else
             {
-                return Color.FromArgb(242, 242, 242);
+                return Color.FromArgb(225, 225, 225);
             }
         }
 
@@ -89,7 +90,7 @@ namespace pie.Services
             }
             else
             {
-                return Color.FromArgb(234, 234, 234);
+                return Color.FromArgb(225, 225, 225);
             }
         }
 
@@ -97,11 +98,11 @@ namespace pie.Services
         {
             if (Globals.theme == 1)
             {
-                return Color.FromArgb(55, 55, 55);
+                return Color.FromArgb(50, 50, 50);
             }
             else
             {
-                return Color.FromArgb(234, 234, 234);
+                return Color.FromArgb(229, 229, 229);
             }
         }
 
@@ -129,7 +130,7 @@ namespace pie.Services
             }
         }
 
-        public static void SetPaletteToTheme(KryptonDockableNavigator tabControl, MenuStrip menuStrip, KryptonPalette kryptonPalette, int theme)
+        public static void SetPaletteToTheme(KryptonDockableNavigator tabControl, KryptonPage kryptonPage, MenuStrip menuStrip, KryptonPalette kryptonPalette, int theme)
         {
             if (!dictionariesInitialized)
             {
@@ -149,7 +150,6 @@ namespace pie.Services
             }
 
             // MenuStrip & Children
-
             if (menuStrip != null)
             {
                 menuStrip.BackColor = colorDictionary["Primary"];
@@ -181,7 +181,20 @@ namespace pie.Services
                 }
             }
 
+            // Common
+            kryptonPalette.Common.StateCommon.Content.ShortText.Color1 = colorDictionary["Fore"];
+            kryptonPalette.Common.StateCommon.Content.ShortText.Color2 = colorDictionary["Fore"];
+            kryptonPalette.Common.StateCommon.Back.Color1 = colorDictionary["Secondary"];
+            kryptonPalette.Common.StateCommon.Back.Color2 = colorDictionary["Secondary"];
+            kryptonPalette.Common.StateCommon.Border.Color1 = colorDictionary["Secondary"];
+            kryptonPalette.Common.StateCommon.Border.Color2 = colorDictionary["Secondary"];
 
+            kryptonPalette.Common.StateOthers.Content.ShortText.Color1 = colorDictionary["Fore"];
+            kryptonPalette.Common.StateOthers.Content.ShortText.Color2 = colorDictionary["Fore"];
+            kryptonPalette.Common.StateOthers.Back.Color1 = colorDictionary["Secondary"];
+            kryptonPalette.Common.StateOthers.Back.Color2 = colorDictionary["Secondary"];
+            kryptonPalette.Common.StateOthers.Border.Color1 = colorDictionary["Secondary"];
+            kryptonPalette.Common.StateOthers.Border.Color2 = colorDictionary["Secondary"];
 
             // Buttons
             kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Back.Color1 = colorDictionary["Primary"];
@@ -189,6 +202,9 @@ namespace pie.Services
 
             kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Back.Color1 = colorDictionary["ButtonPressed"];
             kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Back.Color2 = colorDictionary["ButtonPressed"];
+
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Content.ShortText.Color1 = colorDictionary["Fore"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Content.ShortText.Color2 = colorDictionary["Fore"];
 
             kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.Color1 = colorDictionary["Secondary"];
             kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.Color2 = colorDictionary["Secondary"];
@@ -219,12 +235,14 @@ namespace pie.Services
             kryptonPalette.LabelStyles.LabelCommon.StateCommon.ShortText.Color2 = colorDictionary["Fore"];
 
             // PanelStyle
-            kryptonPalette.PanelStyles.PanelCommon.StateCommon.Color1 = colorDictionary["Secondary"];
-            kryptonPalette.PanelStyles.PanelCommon.StateCommon.Color2 = colorDictionary["Secondary"];
+            kryptonPalette.PanelStyles.PanelCommon.StateCommon.Color1 = colorDictionary["Primary"];
+            kryptonPalette.PanelStyles.PanelCommon.StateCommon.Color2 = colorDictionary["Primary"];
 
             // Tabs
             kryptonPalette.TabStyles.TabCommon.StateCommon.Back.Color1 = colorDictionary["Primary"];
             kryptonPalette.TabStyles.TabCommon.StateCommon.Back.Color2 = colorDictionary["Primary"];
+            kryptonPalette.TabStyles.TabCommon.StateSelected.Back.Color1 = colorDictionary["Secondary"];
+            kryptonPalette.TabStyles.TabCommon.StateSelected.Back.Color2 = colorDictionary["Secondary"];
             kryptonPalette.TabStyles.TabCommon.StateCommon.Content.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.TabStyles.TabCommon.StateCommon.Content.ShortText.Color2 = colorDictionary["Fore"];
 
@@ -237,38 +255,43 @@ namespace pie.Services
             // ContextMenu
             kryptonPalette.ContextMenu.StateCommon.ControlInner.Back.Color1 = colorDictionary["Primary"];
             kryptonPalette.ContextMenu.StateCommon.ControlInner.Back.Color2 = colorDictionary["Primary"];
+            kryptonPalette.ContextMenu.StateHighlight.ItemHighlight.Back.Color1 = colorDictionary["Secondary"];
+            kryptonPalette.ContextMenu.StateHighlight.ItemHighlight.Back.ColorStyle = PaletteColorStyle.Solid;
+
+            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Back.Color1 = colorDictionary["Primary"];
+            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Back.Color2 = colorDictionary["Primary"];
+            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Border.Color1 = colorDictionary["Primary"];
+            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Border.Color2 = colorDictionary["Primary"];
+            kryptonPalette.ContextMenu.StateCommon.ItemImageColumn.Border.Color1 = colorDictionary["Primary"];
+            kryptonPalette.ContextMenu.StateCommon.ItemImageColumn.Border.Color2 = colorDictionary["Primary"];
+            kryptonPalette.ContextMenu.StateCommon.Heading.Border.Color1 = colorDictionary["Primary"];
+            kryptonPalette.ContextMenu.StateCommon.Heading.Border.Color2 = colorDictionary["Primary"];
 
             kryptonPalette.ContextMenu.StateCommon.Heading.Back.Color1 = colorDictionary["Primary"];
             kryptonPalette.ContextMenu.StateCommon.Heading.Back.Color2 = colorDictionary["Primary"];
             kryptonPalette.ContextMenu.StateCommon.Heading.Content.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.ContextMenu.StateCommon.Heading.Content.ShortText.Color2 = colorDictionary["Fore"];
 
-
             kryptonPalette.ContextMenu.StateCommon.ItemTextStandard.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.ContextMenu.StateCommon.ItemTextStandard.ShortText.Color2 = colorDictionary["Fore"];
 
-
-            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Back.Color1 = colorDictionary["Fore"];
-            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Back.Color2 = colorDictionary["Fore"];
-
-            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Border.Color1 = colorDictionary["Secondary"];
-            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Border.Color2 = colorDictionary["Secondary"];
-
             kryptonPalette.ContextMenu.StateCommon.ItemImageColumn.Back.Color1 = colorDictionary["Primary"];
             kryptonPalette.ContextMenu.StateCommon.ItemImageColumn.Back.Color2 = colorDictionary["Primary"];
-            kryptonPalette.ContextMenu.StateCommon.ItemImageColumn.Border.Color1 = colorDictionary["Primary"];
-            kryptonPalette.ContextMenu.StateCommon.ItemImageColumn.Border.Color2 = colorDictionary["Primary"];
 
             kryptonPalette.ContextMenu.StateCommon.ItemHighlight.Back.Color1 = colorDictionary["Secondary"];
-            kryptonPalette.ContextMenu.StateCommon.ItemHighlight.Back.Color2 = colorDictionary["Secondary"];            
-            kryptonPalette.ContextMenu.StateCommon.ItemHighlight.Border.Color1 = colorDictionary["Secondary"];
-            kryptonPalette.ContextMenu.StateCommon.ItemHighlight.Border.Color2 = colorDictionary["Secondary"];
+            kryptonPalette.ContextMenu.StateCommon.ItemHighlight.Back.Color2 = colorDictionary["Secondary"];
 
             kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color2 = colorDictionary["Fore"];
 
-            kryptonPalette.ContextMenu.StateNormal.ItemHighlight.Border.Color1 = colorDictionary["Secondary"];
-            kryptonPalette.ContextMenu.StateNormal.ItemHighlight.Border.Color2 = colorDictionary["Secondary"];
+            if (theme == 1)
+            {
+                kryptonPage.ImageSmall = Properties.Resources.plus_white;
+            }
+            else
+            {
+                kryptonPage.ImageSmall = Properties.Resources.plus_blue;
+            }
         }
     }
 }

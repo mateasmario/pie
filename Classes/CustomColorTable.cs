@@ -73,5 +73,25 @@ namespace pie.Classes
         {
             get { return ThemeService.GetPrimaryColor(); }
         }
+
+        public override Color ButtonCheckedGradientBegin
+        {
+            get { return ThemeService.GetPrimaryColor(); }
+        }
+
+        public override Color ButtonCheckedGradientMiddle
+        {
+            get { return ThemeService.GetPrimaryColor(); }
+        }
+
+        public override Color ButtonCheckedGradientEnd
+        {
+            get { return ThemeService.GetPrimaryColor(); }
+        }
+
+        public override Color ButtonCheckedHighlight
+        {
+            get { return ThemeService.GetPrimaryColor(); }
+        }
     }
 }

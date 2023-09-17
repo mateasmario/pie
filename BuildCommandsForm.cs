@@ -20,6 +20,14 @@ namespace pie
         public BuildCommandsForm()
         {
             InitializeComponent();
+
+            this.Palette = Globals.kryptonPalette;
+            kryptonPanel1.Palette = Globals.kryptonPalette;
+            kryptonLabel2.Palette = Globals.kryptonPalette;
+            kryptonListBox2.Palette = Globals.kryptonPalette;
+            kryptonButton1.Palette = Globals.kryptonPalette;
+            kryptonButton2.Palette = Globals.kryptonPalette;
+            kryptonButton3.Palette = Globals.kryptonPalette;
         }
 
         private void BuildCommandsForm_Load(object sender, EventArgs e)
