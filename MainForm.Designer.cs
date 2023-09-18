@@ -37,6 +37,8 @@
             this.kryptonContextMenuItem3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuHeading7 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             this.kryptonContextMenuItems8 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
+            this.kryptonContextMenuItem6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem15 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItems2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
@@ -53,6 +55,8 @@
             this.buildTabControl = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonContextMenu2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
             this.kryptonContextMenuItems9 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
+            this.kryptonContextMenuItem16 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem17 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem18 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -69,6 +73,7 @@
             this.kryptonContextMenuItems10 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem10 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.tabControl = new ComponentFactory.Krypton.Docking.KryptonDockableNavigator();
+            this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,8 +81,13 @@
             this.saveFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showBuildToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.themeSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutPieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.javaClassclassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pythonScriptpyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,27 +109,17 @@
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.kryptonContextMenuItem6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem15 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonContextMenuItem16 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem17 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.showBuildToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.themeSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutPieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.buildTabControl)).BeginInit();
             this.buildTabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
             this.kryptonHeaderGroup1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonContextMenu1
@@ -161,6 +161,18 @@
             this.kryptonContextMenuItems8.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
             this.kryptonContextMenuItem6,
             this.kryptonContextMenuItem15});
+            // 
+            // kryptonContextMenuItem6
+            // 
+            this.kryptonContextMenuItem6.Image = global::pie.Properties.Resources.search;
+            this.kryptonContextMenuItem6.Text = "Find and Replace";
+            this.kryptonContextMenuItem6.Click += new System.EventHandler(this.kryptonContextMenuItem6_Click);
+            // 
+            // kryptonContextMenuItem15
+            // 
+            this.kryptonContextMenuItem15.Image = global::pie.Properties.Resources.terminal;
+            this.kryptonContextMenuItem15.Text = "Show Terminal Tab";
+            this.kryptonContextMenuItem15.Click += new System.EventHandler(this.kryptonContextMenuItem15_Click);
             // 
             // kryptonContextMenuItems1
             // 
@@ -230,6 +242,18 @@
             this.kryptonContextMenuItem17,
             this.kryptonContextMenuItem18});
             // 
+            // kryptonContextMenuItem16
+            // 
+            this.kryptonContextMenuItem16.Image = global::pie.Properties.Resources.terminal;
+            this.kryptonContextMenuItem16.Text = "New Command Prompt Tab";
+            this.kryptonContextMenuItem16.Click += new System.EventHandler(this.kryptonContextMenuItem16_Click);
+            // 
+            // kryptonContextMenuItem17
+            // 
+            this.kryptonContextMenuItem17.Image = global::pie.Properties.Resources.powershell;
+            this.kryptonContextMenuItem17.Text = "New PowerShell Tab";
+            this.kryptonContextMenuItem17.Click += new System.EventHandler(this.kryptonContextMenuItem17_Click);
+            // 
             // kryptonContextMenuItem18
             // 
             this.kryptonContextMenuItem18.Enabled = false;
@@ -240,6 +264,15 @@
             // 
             this.kryptonButton3.Location = new System.Drawing.Point(372, 88);
             this.kryptonButton3.Name = "kryptonButton3";
+            this.kryptonButton3.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideDefault.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideDefault.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideDefault.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideFocus.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideFocus.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideFocus.Back.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.None;
+            this.kryptonButton3.OverrideFocus.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideFocus.Border.Color2 = System.Drawing.Color.DarkGray;
             this.kryptonButton3.Size = new System.Drawing.Size(114, 25);
             this.kryptonButton3.TabIndex = 5;
             this.kryptonButton3.Values.Text = "Replace all";
@@ -250,6 +283,15 @@
             // 
             this.kryptonButton2.Location = new System.Drawing.Point(372, 61);
             this.kryptonButton2.Name = "kryptonButton2";
+            this.kryptonButton2.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideDefault.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideDefault.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideDefault.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideFocus.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideFocus.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideFocus.Back.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.None;
+            this.kryptonButton2.OverrideFocus.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideFocus.Border.Color2 = System.Drawing.Color.DarkGray;
             this.kryptonButton2.Size = new System.Drawing.Size(114, 25);
             this.kryptonButton2.TabIndex = 4;
             this.kryptonButton2.Values.Text = "Find and Replace";
@@ -269,7 +311,19 @@
             // 
             this.kryptonButton1.Location = new System.Drawing.Point(372, 34);
             this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideDefault.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideDefault.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideDefault.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideFocus.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideFocus.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideFocus.Back.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.None;
+            this.kryptonButton1.OverrideFocus.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideFocus.Border.Color2 = System.Drawing.Color.DarkGray;
             this.kryptonButton1.Size = new System.Drawing.Size(114, 25);
+            this.kryptonButton1.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonButton1.TabIndex = 2;
             this.kryptonButton1.Values.Text = "Find";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
@@ -361,6 +415,21 @@
             this.tabControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             this.tabControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl_MouseDown);
             // 
+            // kryptonPage1
+            // 
+            this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage1.Flags = 65534;
+            this.kryptonPage1.ImageSmall = global::pie.Properties.Resources.plus_blue;
+            this.kryptonPage1.LastVisibleSet = true;
+            this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage1.Name = "kryptonPage1";
+            this.kryptonPage1.Size = new System.Drawing.Size(1018, 332);
+            this.kryptonPage1.Text = "";
+            this.kryptonPage1.TextDescription = "";
+            this.kryptonPage1.TextTitle = "";
+            this.kryptonPage1.ToolTipTitle = "Add New Tab";
+            this.kryptonPage1.UniqueName = "E9D081B0A6964933EA81724511F8E430";
+            // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(5, 9);
@@ -419,12 +488,37 @@
             this.designToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.designToolStripMenuItem.Text = "Interface";
             // 
+            // showBuildToolsToolStripMenuItem
+            // 
+            this.showBuildToolsToolStripMenuItem.Image = global::pie.Properties.Resources.terminal;
+            this.showBuildToolsToolStripMenuItem.Name = "showBuildToolsToolStripMenuItem";
+            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
+            this.showBuildToolsToolStripMenuItem.Click += new System.EventHandler(this.showBuildToolsToolStripMenuItem_Click);
+            // 
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.preferencesToolStripMenuItem.Text = "Build Commands";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
+            // 
+            // themeSettingsToolStripMenuItem
+            // 
+            this.themeSettingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.crescent_moon;
+            this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
+            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.themeSettingsToolStripMenuItem.Text = "Toggle Dark Mode";
+            this.themeSettingsToolStripMenuItem.Click += new System.EventHandler(this.themeSettingsToolStripMenuItem_Click);
+            // 
+            // aboutPieToolStripMenuItem
+            // 
+            this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info;
+            this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
+            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.aboutPieToolStripMenuItem.Text = "About pie";
+            this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
             // 
             // buildToolStripMenuItem1
             // 
@@ -434,6 +528,24 @@
             this.buildToolStripMenuItem1.Name = "buildToolStripMenuItem1";
             this.buildToolStripMenuItem1.Size = new System.Drawing.Size(46, 20);
             this.buildToolStripMenuItem1.Text = "Build";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Enabled = false;
+            this.toolStripMenuItem2.Image = global::pie.Properties.Resources.java;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(199, 22);
+            this.toolStripMenuItem2.Text = "Java Source (.java)";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.buildEvent);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Enabled = false;
+            this.toolStripMenuItem3.Image = global::pie.Properties.Resources.letter_c;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(199, 22);
+            this.toolStripMenuItem3.Text = "C/C++ Source (.c, .cpp)";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.buildEvent);
             // 
             // runToolStripMenuItem
             // 
@@ -599,6 +711,7 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -628,88 +741,6 @@
             this.kryptonHeaderGroup1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseMove);
             this.kryptonHeaderGroup1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseUp);
             // 
-            // kryptonContextMenuItem6
-            // 
-            this.kryptonContextMenuItem6.Image = global::pie.Properties.Resources.search;
-            this.kryptonContextMenuItem6.Text = "Find and Replace";
-            this.kryptonContextMenuItem6.Click += new System.EventHandler(this.kryptonContextMenuItem6_Click);
-            // 
-            // kryptonContextMenuItem15
-            // 
-            this.kryptonContextMenuItem15.Image = global::pie.Properties.Resources.terminal;
-            this.kryptonContextMenuItem15.Text = "Show Terminal Tab";
-            this.kryptonContextMenuItem15.Click += new System.EventHandler(this.kryptonContextMenuItem15_Click);
-            // 
-            // kryptonPage1
-            // 
-            this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage1.Flags = 65534;
-            this.kryptonPage1.ImageSmall = global::pie.Properties.Resources.plus_blue;
-            this.kryptonPage1.LastVisibleSet = true;
-            this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(1018, 332);
-            this.kryptonPage1.Text = "";
-            this.kryptonPage1.TextDescription = "";
-            this.kryptonPage1.TextTitle = "";
-            this.kryptonPage1.ToolTipTitle = "Add New Tab";
-            this.kryptonPage1.UniqueName = "E9D081B0A6964933EA81724511F8E430";
-            // 
-            // kryptonContextMenuItem16
-            // 
-            this.kryptonContextMenuItem16.Image = global::pie.Properties.Resources.terminal;
-            this.kryptonContextMenuItem16.Text = "New Command Prompt Tab";
-            this.kryptonContextMenuItem16.Click += new System.EventHandler(this.kryptonContextMenuItem16_Click);
-            // 
-            // kryptonContextMenuItem17
-            // 
-            this.kryptonContextMenuItem17.Image = global::pie.Properties.Resources.powershell;
-            this.kryptonContextMenuItem17.Text = "New PowerShell Tab";
-            this.kryptonContextMenuItem17.Click += new System.EventHandler(this.kryptonContextMenuItem17_Click);
-            // 
-            // showBuildToolsToolStripMenuItem
-            // 
-            this.showBuildToolsToolStripMenuItem.Image = global::pie.Properties.Resources.terminal;
-            this.showBuildToolsToolStripMenuItem.Name = "showBuildToolsToolStripMenuItem";
-            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
-            this.showBuildToolsToolStripMenuItem.Click += new System.EventHandler(this.showBuildToolsToolStripMenuItem_Click);
-            // 
-            // themeSettingsToolStripMenuItem
-            // 
-            this.themeSettingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.crescent_moon;
-            this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
-            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.themeSettingsToolStripMenuItem.Text = "Toggle Dark Mode";
-            this.themeSettingsToolStripMenuItem.Click += new System.EventHandler(this.themeSettingsToolStripMenuItem_Click);
-            // 
-            // aboutPieToolStripMenuItem
-            // 
-            this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info;
-            this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
-            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aboutPieToolStripMenuItem.Text = "About pie";
-            this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Enabled = false;
-            this.toolStripMenuItem2.Image = global::pie.Properties.Resources.java;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(199, 22);
-            this.toolStripMenuItem2.Text = "Java Source (.java)";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.buildEvent);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Enabled = false;
-            this.toolStripMenuItem3.Image = global::pie.Properties.Resources.letter_c;
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(199, 22);
-            this.toolStripMenuItem3.Text = "C/C++ Source (.c, .cpp)";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.buildEvent);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -733,6 +764,7 @@
             this.buildTabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).EndInit();
@@ -741,7 +773,6 @@
             this.kryptonHeaderGroup1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).EndInit();
             this.kryptonHeaderGroup1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

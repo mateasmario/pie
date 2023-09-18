@@ -455,8 +455,8 @@ namespace pie
                 ToggleTerminalTabControl(false);
                 ToggleFindReplacePanel(false);
 
-                kryptonPage.Text = Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
-                kryptonPage.ToolTipTitle = kryptonPage.Text;
+                kryptonPage.Text = ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+                kryptonPage.ToolTipTitle = Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
 
                 ChromiumWebBrowser chromiumWebBrowser = new ChromiumWebBrowser();
                 chromiumWebBrowser.Parent = this;
@@ -661,7 +661,7 @@ namespace pie
                 txt.Write(TextArea.Text);
                 txt.Close();
 
-                tabControl.SelectedPage.Text = chosenPath;
+                tabControl.SelectedPage.Text = ParsingService.GetFileName(chosenPath);
 
                 string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
                 ScintillaLexerService.SetLexer(extension, TextArea, tabControl, tabControl.SelectedIndex);
@@ -696,8 +696,8 @@ namespace pie
                 txt.Close();
 
                 Globals.tabInfos[tabControl.SelectedIndex].setOpenedFilePath(chosenPath);
-                tabControl.SelectedPage.Text = chosenPath;
-                tabControl.SelectedPage.ToolTipTitle = tabControl.SelectedPage.Text;
+                tabControl.SelectedPage.Text = ParsingService.GetFileName(chosenPath);
+                tabControl.SelectedPage.ToolTipTitle = chosenPath;
 
                 string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
                 ScintillaLexerService.SetLexer(extension, TextArea, tabControl, tabControl.SelectedIndex);
@@ -721,8 +721,8 @@ namespace pie
             TextArea.Text = fileContent;
 
             Globals.tabInfos[openedTabIndex].setOpenedFilePath(fileName);
-            tabControl.SelectedPage.Text = fileName;
-            tabControl.SelectedPage.ToolTipTitle = tabControl.SelectedPage.Text;
+            tabControl.SelectedPage.Text = ParsingService.GetFileName(fileName);
+            tabControl.SelectedPage.ToolTipTitle = fileName;
 
             string extension = ParsingService.GetFileExtension(fileName);
 
