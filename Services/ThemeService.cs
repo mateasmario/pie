@@ -27,11 +27,13 @@ namespace pie.Services
             lightColorDictionary["Secondary"] = Color.FromArgb(227, 227, 227);
             lightColorDictionary["ButtonPressed"] = Color.Gainsboro;
             lightColorDictionary["Fore"] = Color.Black;
+            lightColorDictionary["FormBorder"] = Color.FromArgb(140, 140, 140);
 
             darkColorDictionary["Primary"] = Color.FromArgb(40, 40, 40);
-            darkColorDictionary["Secondary"] = Color.FromArgb(25, 25, 25);
-            darkColorDictionary["ButtonPressed"] = Color.FromArgb(15, 15, 15);
+            darkColorDictionary["Secondary"] = Color.FromArgb(50, 50, 50);
+            darkColorDictionary["ButtonPressed"] = Color.FromArgb(45, 45, 45);
             darkColorDictionary["Fore"] = Color.White;
+            darkColorDictionary["FormBorder"] = Color.FromArgb(115, 115, 115);
         }
 
         public static Color GetSelectionColor()
@@ -203,15 +205,26 @@ namespace pie.Services
             kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Back.Color1 = colorDictionary["ButtonPressed"];
             kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Back.Color2 = colorDictionary["ButtonPressed"];
 
+            kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Border.Color1 = colorDictionary["ButtonPressed"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Border.Color2 = colorDictionary["ButtonPressed"];
+
             kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Content.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Content.ShortText.Color2 = colorDictionary["Fore"];
 
-            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.Color1 = colorDictionary["Secondary"];
-            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.Color2 = colorDictionary["Secondary"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.Color1 = colorDictionary["ButtonPressed"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.Color2 = colorDictionary["ButtonPressed"];            
+            
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Border.Color1 = colorDictionary["ButtonPressed"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Border.Color2 = colorDictionary["ButtonPressed"];
+
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Border.ColorStyle = PaletteColorStyle.Solid;
 
             // Form
             kryptonPalette.FormStyles.FormCommon.StateCommon.Back.Color1 = colorDictionary["Primary"];
             kryptonPalette.FormStyles.FormCommon.StateCommon.Back.Color2 = colorDictionary["Primary"];
+            kryptonPalette.FormStyles.FormCommon.StateCommon.Border.Color1 = colorDictionary["FormBorder"];
+            kryptonPalette.FormStyles.FormCommon.StateCommon.Border.Color2 = colorDictionary["FormBorder"];
 
             // HeaderStyle
             kryptonPalette.HeaderStyles.HeaderDockInactive.StateCommon.Back.Color1 = colorDictionary["Secondary"];
@@ -260,8 +273,8 @@ namespace pie.Services
 
             kryptonPalette.ContextMenu.StateCommon.ControlOuter.Back.Color1 = colorDictionary["Primary"];
             kryptonPalette.ContextMenu.StateCommon.ControlOuter.Back.Color2 = colorDictionary["Primary"];
-            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Border.Color1 = colorDictionary["Primary"];
-            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Border.Color2 = colorDictionary["Primary"];
+            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Border.Color1 = colorDictionary["FormBorder"];
+            kryptonPalette.ContextMenu.StateCommon.ControlOuter.Border.Color2 = colorDictionary["FormBorder"];
             kryptonPalette.ContextMenu.StateCommon.ItemImageColumn.Border.Color1 = colorDictionary["Primary"];
             kryptonPalette.ContextMenu.StateCommon.ItemImageColumn.Border.Color2 = colorDictionary["Primary"];
             kryptonPalette.ContextMenu.StateCommon.Heading.Border.Color1 = colorDictionary["Primary"];

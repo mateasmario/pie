@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildCommandsForm));
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonListBox1 = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
@@ -80,7 +79,6 @@
             // 
             this.kryptonLabel2.Location = new System.Drawing.Point(6, 6);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.kryptonLabel2.Size = new System.Drawing.Size(149, 20);
             this.kryptonLabel2.TabIndex = 0;
             this.kryptonLabel2.Values.Text = "Custom Build Commands";
@@ -91,15 +89,35 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonListBox2.Location = new System.Drawing.Point(10, 28);
             this.kryptonListBox2.Name = "kryptonListBox2";
-            this.kryptonListBox2.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.kryptonListBox2.Size = new System.Drawing.Size(523, 246);
+            this.kryptonListBox2.StateActive.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonListBox2.StateCheckedNormal.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonListBox2.StateCheckedPressed.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonListBox2.StateCheckedTracking.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonListBox2.StateCommon.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonListBox2.StateNormal.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonListBox2.StatePressed.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.kryptonListBox2.StateTracking.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
             this.kryptonListBox2.TabIndex = 1;
             // 
             // kryptonButton1
             // 
             this.kryptonButton1.Location = new System.Drawing.Point(82, 282);
             this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton1.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideDefault.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideDefault.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideDefault.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonButton1.OverrideFocus.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideFocus.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideFocus.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideFocus.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonButton1.Size = new System.Drawing.Size(66, 25);
             this.kryptonButton1.TabIndex = 2;
             this.kryptonButton1.Values.Text = "Remove";
@@ -109,7 +127,20 @@
             // 
             this.kryptonButton2.Location = new System.Drawing.Point(10, 282);
             this.kryptonButton2.Name = "kryptonButton2";
-            this.kryptonButton2.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton2.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideDefault.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideDefault.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideDefault.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonButton2.OverrideFocus.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideFocus.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideFocus.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideFocus.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonButton2.Size = new System.Drawing.Size(66, 25);
             this.kryptonButton2.TabIndex = 3;
             this.kryptonButton2.Values.Text = "Add";
@@ -119,7 +150,20 @@
             // 
             this.kryptonButton3.Location = new System.Drawing.Point(467, 282);
             this.kryptonButton3.Name = "kryptonButton3";
-            this.kryptonButton3.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton3.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideDefault.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideDefault.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideDefault.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonButton3.OverrideFocus.Back.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideFocus.Back.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideFocus.Border.Color1 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideFocus.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonButton3.Size = new System.Drawing.Size(66, 25);
             this.kryptonButton3.TabIndex = 4;
             this.kryptonButton3.Values.Text = "Apply";
@@ -149,7 +193,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "BuildCommandsForm";
-            this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
             this.Text = "Build Commands - pie";
             this.Load += new System.EventHandler(this.BuildCommandsForm_Load);
