@@ -14,6 +14,9 @@ using pie.Enums;
 using CefSharp.WinForms;
 using CefSharp;
 using AutocompleteMenuNS;
+using LibGit2Sharp;
+using static System.Windows.Forms.ListViewItem;
+using BrightIdeasSoftware;
 
 namespace pie
 {
@@ -73,7 +76,7 @@ namespace pie
                 Globals.theme = 0;
             }
 
-            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count-1], menuStrip1, this.kryptonPalette1, Globals.theme);
+            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count-1], menuStrip1, this.kryptonPalette1, gitStagingAreaListView, Globals.theme);
             this.Palette = kryptonPalette1;
             tabControl.Palette = kryptonPalette1;
             buildTabControl.Palette = kryptonPalette1;
@@ -388,6 +391,28 @@ namespace pie
                 kryptonPage.Controls.Add(TextArea);
                 autocompleteMenu = InitializeAutocompleteMenu(TextArea);
             }
+            else if (tabType == TabType.GIT)
+            {
+                if (Globals.gitTabOpened)
+                {
+                    for (int i = 0; i<tabControl.Pages.Count-1; i++)
+                    {
+                        if (Globals.tabInfos[i].getTabType() == TabType.GIT)
+                        {
+                            tabControl.SelectedIndex = i;
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    kryptonPage.Text = "Git";
+                    kryptonPage.Controls.Add(gitPanel);
+                    gitPanel.Show();
+                    gitPanel.Dock = DockStyle.Fill;
+                    Globals.gitTabOpened = true;
+                }
+            }
             else
             {
                 if (Globals.firstBrowserTab)
@@ -445,7 +470,11 @@ namespace pie
             TabInfo tabInfo = new TabInfo(openedFilePath, false, tabType, autocompleteMenu);
             Globals.tabInfos.Insert(index, tabInfo);
             
-            if (openedFilePath != null)
+            if (tabType == TabType.GIT)
+            {
+                UpdateFormTitle("Git");
+            }
+            else if (openedFilePath != null)
             {
                 UpdateFormTitle();
             }
@@ -505,6 +534,11 @@ namespace pie
                 ChromiumWebBrowser chromiumWebBrowser = (ChromiumWebBrowser)tabControl.SelectedPage.Controls[0];
                 CloseTabAfterWarning();
             }
+            else if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.GIT)
+            {
+                Globals.gitTabOpened = false;
+                CloseTabAfterWarning();
+            }
             else if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFileChanges())
             {
                 DialogResult dialogResult = MessageBox.Show("Save file before closing it?", "Save file", MessageBoxButtons.YesNoCancel);
@@ -541,7 +575,7 @@ namespace pie
 
             tabControl.Pages.Remove(selectedKryptonPage);
 
-            if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() != TabType.CODE)
+            if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() != TabType.CODE && Globals.tabInfos[tabControl.SelectedIndex].getTabType() != TabType.GIT)
             {
                 selectedKryptonPage.Dispose();
             }
@@ -1014,6 +1048,8 @@ namespace pie
             Globals.buildCommandToolStripMenuItems = buildCommandToolStripMenuItems;
             Globals.firstBrowserTab = true;
 
+            gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
+
             if (Globals.theme == 1)
             {
                 themeSettingsToolStripMenuItem.Image = Properties.Resources.sun;
@@ -1022,12 +1058,21 @@ namespace pie
 
             // Do other visual processing
             buildTabControl.Hide();
+            gitPanel.Hide();
 
             tabControl.AllowPageDrag = false;
             tabControl.AllowPageReorder = false;
 
             findTextBox.KeyDown += FindTextBox_KeyDown;
             replaceTextBox.KeyDown += ReplaceTextBox_KeyDown;
+
+            gitStagingAreaListView.BackColor = ThemeService.GetPrimaryColor();
+            gitStagingAreaListView.ForeColor = ThemeService.GetForeColor();
+
+            kryptonButton6.Enabled = false;
+            kryptonButton7.Enabled = false;
+            kryptonButton8.Enabled = false;
+            commitMessageRichTextBox.Enabled = false;
 
             string[] args = Environment.GetCommandLineArgs();
 
@@ -1050,6 +1095,35 @@ namespace pie
             {
                 NewTab(TabType.CODE, null);
             }
+        }
+
+        private void GitStagingAreaListView_FormatRow(object sender, FormatRowEventArgs e)
+        {
+            GitFile gitFile = (GitFile)e.Model;
+            if (gitFile.Status == "Ignored")
+                e.Item.ForeColor = Globals.theme == 1 ? Color.FromArgb(179, 179, 179) : Color.FromArgb(100, 100, 100);
+            else if (gitFile.Status == "Deleted")
+                e.Item.ForeColor = Color.FromArgb(251, 77, 77);
+            else if (gitFile.Status == "New")
+                e.Item.ForeColor = Globals.theme == 1 ? Color.FromArgb(60, 170, 232) : Color.FromArgb(40, 115, 158);
+            else if (gitFile.Status == "Modified")
+                e.Item.ForeColor = Globals.theme == 1 ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
+        }
+
+        private void CenterControl(Control child, Control parent)
+        {
+            CenterControlHorizontally(child, parent);
+            CenterControlVertically(child, parent);
+        }
+
+        private void CenterControlHorizontally(Control child, Control parent)
+        {
+            child.Left = (parent.ClientSize.Width - child.Width) / 2;
+        }
+
+        private void CenterControlVertically(Control child, Control parent)
+        {
+            child.Top = (parent.ClientSize.Height - child.Height) / 2;
         }
 
         private void ReplaceTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -1279,12 +1353,26 @@ namespace pie
                 }
                 else
                 {
-                    tabControl.KryptonContextMenu = kryptonContextMenu3;
+                    if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.GIT)
+                    {
+                        tabControl.KryptonContextMenu = null;
+                    }
+                    else
+                    {
+                        tabControl.KryptonContextMenu = kryptonContextMenu3;
+                    }
+
                     ToggleTerminalTabControl(false);
                     ToggleFindReplacePanel(false);
 
-                    UpdateFormTitle();
-
+                    if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.GIT)
+                    {
+                        UpdateFormTitle("Git");
+                    }
+                    else
+                    {
+                        UpdateFormTitle();
+                    }
                 }
             }
             else
@@ -1675,7 +1763,145 @@ namespace pie
                 }
             }
 
-            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette1, Globals.theme);
+            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette1, gitStagingAreaListView,  Globals.theme);
+            UpdateGitRepositoryInfo();
         }
+
+        private void showGitTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewTab(TabType.GIT, null);
+        }
+
+        private void kryptonButton5_Click(object sender, EventArgs e)
+        {
+            OpenRepository();
+        }
+
+        private void OpenRepository()
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            DialogResult dialogResult = dialog.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+                string selectedPath = dialog.SelectedPath;
+                string repo = Repository.Discover(selectedPath);
+
+                if (repo == null)
+                {
+                    DialogResult noRepositoryDialogResult = MessageBox.Show("No repository found at specified path. Would you like to initialize a new repository?", "Git - pie", MessageBoxButtons.YesNoCancel);
+
+                    if (noRepositoryDialogResult == DialogResult.Yes)
+                    {
+                        Repository.Init(selectedPath);
+                        repositoryTextBox.Text = selectedPath;
+                        UpdateGitRepositoryInfo();
+
+                        kryptonButton6.Enabled = true;
+                        kryptonButton7.Enabled = true;
+                        kryptonButton8.Enabled = true;
+                        commitMessageRichTextBox.Enabled = true;
+                    }
+                }
+                else
+                {
+                    repositoryTextBox.Text = selectedPath;
+                    UpdateGitRepositoryInfo();
+
+                    kryptonButton6.Enabled = true;
+                    kryptonButton7.Enabled = true;
+                    kryptonButton8.Enabled = true;
+                    commitMessageRichTextBox.Enabled = true;
+                }
+            }    
+        }
+
+        private void UpdateGitRepositoryInfo()
+        {
+            string path = repositoryTextBox.Text;
+
+            gitStagingAreaListView.ShowGroups = false;
+
+            if (path == "")
+            {
+                return;
+            }
+
+            Globals.repo = new Repository(path);
+
+            StatusOptions statusOptions = new StatusOptions();
+            statusOptions.IncludeUnaltered = true;
+
+            List<GitFile> gitFileList = new List<GitFile>();
+
+            foreach (var item in Globals.repo.RetrieveStatus(statusOptions))
+            {
+                GitFile gitFile = new GitFile();
+                gitFile.Name = item.FilePath;
+
+                if (item.State == FileStatus.DeletedFromWorkdir)
+                {
+                    gitFile.Status = "Deleted";
+                }
+                else if (item.State == FileStatus.Ignored)
+                {
+                    gitFile.Status = "Ignored";
+                }
+                else if (item.State == FileStatus.ModifiedInIndex || item.State == FileStatus.ModifiedInWorkdir)
+                {
+                    gitFile.Status = "Modified";
+                }
+                else if (item.State == FileStatus.NewInIndex || item.State == FileStatus.NewInWorkdir)
+                {
+                    gitFile.Status = "New";
+                }
+                else
+                {
+                    gitFile.Status = item.State.ToString();
+                }
+
+                gitFileList.Add(gitFile);
+            }
+
+            gitStagingAreaListView.SetObjects(gitFileList);
+        }
+
+        private void kryptonButton4_Click(object sender, EventArgs e)
+        {
+            OpenRepository();
+        }
+
+        private void gitStagingAreaListView_DoubleClick(object sender, EventArgs e)
+        {
+            if (gitStagingAreaListView.SelectedItems.Count != 0)
+            {
+                foreach(var gitFile in gitStagingAreaListView.SelectedObjects)
+                {
+                    string fileName = ((GitFile)gitFile).Name;
+                    NewTab(TabType.CODE, null);
+                    Open(repositoryTextBox.Text + "\\" + fileName);
+                }
+            }
+        }
+
+        private void kryptonButton8_Click(object sender, EventArgs e)
+        {
+            UpdateGitRepositoryInfo();
+        }
+
+        private void kryptonButton6_Click(object sender, EventArgs e)
+        {
+            RepositoryStatus status = Globals.repo.RetrieveStatus();
+
+            if (status.IsDirty)
+            {
+                Commands.Stage(Globals.repo, "*");
+                Globals.repo.Commit(commitMessageRichTextBox.Text, null, null);
+            }
+            else
+            {
+                MessageBox.Show("You have nothing to commit.", "Git - pie");
+            }
+       }
     }
 }

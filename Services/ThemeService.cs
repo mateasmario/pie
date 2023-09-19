@@ -1,4 +1,5 @@
-﻿using ComponentFactory.Krypton.Docking;
+﻿using BrightIdeasSoftware;
+using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using System;
@@ -26,16 +27,16 @@ namespace pie.Services
             lightColorDictionary["Primary"] = Color.FromArgb(245, 245, 245);
             lightColorDictionary["Secondary"] = Color.FromArgb(235, 235, 235);
             lightColorDictionary["Button"] = Color.FromArgb(220, 220, 220);
+            lightColorDictionary["ButtonFrame"] = Color.FromArgb(190, 190, 190);
             lightColorDictionary["ButtonHover"] = Color.FromArgb(205, 205, 205);
-            lightColorDictionary["ButtonPressed"] = Color.Gainsboro;
             lightColorDictionary["Fore"] = Color.Black;
             lightColorDictionary["FormBorder"] = Color.FromArgb(175, 175, 175);
 
             darkColorDictionary["Primary"] = Color.FromArgb(40, 40, 40);
             darkColorDictionary["Secondary"] = Color.FromArgb(50, 50, 50);
             darkColorDictionary["Button"] = Color.FromArgb(70, 70, 70);
+            darkColorDictionary["ButtonFrame"] = Color.FromArgb(100, 100, 100);
             darkColorDictionary["ButtonHover"] = Color.FromArgb(85, 85, 85);
-            darkColorDictionary["ButtonPressed"] = Color.FromArgb(45, 45, 45);
             darkColorDictionary["Fore"] = Color.White;
             darkColorDictionary["FormBorder"] = Color.FromArgb(90, 90, 90);
         }
@@ -136,7 +137,7 @@ namespace pie.Services
             }
         }
 
-        public static void SetPaletteToTheme(KryptonDockableNavigator tabControl, KryptonPage kryptonPage, MenuStrip menuStrip, KryptonPalette kryptonPalette, int theme)
+        public static void SetPaletteToTheme(KryptonDockableNavigator tabControl, KryptonPage kryptonPage, MenuStrip menuStrip, KryptonPalette kryptonPalette, ObjectListView objectListView, int theme)
         {
             if (!dictionariesInitialized)
             {
@@ -206,11 +207,24 @@ namespace pie.Services
             kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Back.Color1 = colorDictionary["Button"];
             kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Back.Color2 = colorDictionary["Button"];
 
-            kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Back.Color1 = colorDictionary["ButtonPressed"];
-            kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Back.Color2 = colorDictionary["ButtonPressed"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideDefault.Back.Color1 = colorDictionary["Button"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideDefault.Back.Color2 = colorDictionary["Button"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideDefault.Border.Color1 = colorDictionary["ButtonFrame"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideDefault.Border.Color2 = colorDictionary["ButtonFrame"];
 
-            kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Border.Color1 = colorDictionary["ButtonPressed"];
-            kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Border.Color2 = colorDictionary["ButtonPressed"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideFocus.Back.Color1 = colorDictionary["Button"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideFocus.Back.Color2 = colorDictionary["Button"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideFocus.Border.Color1 = colorDictionary["ButtonFrame"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideFocus.Border.Color2 = colorDictionary["ButtonFrame"];
+
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideDefault.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideDefault.Border.ColorStyle = PaletteColorStyle.Solid;
+
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideFocus.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideFocus.Border.ColorStyle = PaletteColorStyle.Solid;
+
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideFocus.Back.Color1 = colorDictionary["Button"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.OverrideFocus.Back.Color2 = colorDictionary["Button"];
 
             kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Content.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Content.ShortText.Color2 = colorDictionary["Fore"];
@@ -300,6 +314,22 @@ namespace pie.Services
 
             kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color2 = colorDictionary["Fore"];
+
+            // ObjectListView
+            objectListView.BackColor = colorDictionary["Primary"];
+            objectListView.ForeColor = colorDictionary["Fore"];
+
+            var headerstyle = new HeaderFormatStyle();
+            headerstyle.Normal.BackColor = colorDictionary["Secondary"];
+            headerstyle.Normal.ForeColor = colorDictionary["Fore"];
+
+            headerstyle.Hot.BackColor = colorDictionary["ButtonHover"];
+            headerstyle.Hot.ForeColor = colorDictionary["Fore"];
+
+            headerstyle.Pressed.BackColor = colorDictionary["ButtonFrame"];
+            headerstyle.Pressed.ForeColor = colorDictionary["Fore"];            
+           
+            objectListView.HeaderFormatStyle = headerstyle;
 
             if (theme == 1)
             {

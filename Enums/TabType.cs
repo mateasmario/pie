@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace pie.Enums
 {
     public enum TabType { 
-        NONE, CODE, RENDER_HTML, RENDER_MD
+        NONE, CODE, RENDER_HTML, RENDER_MD, GIT
     }
 }

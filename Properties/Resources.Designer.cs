@@ -103,6 +103,16 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap deleted {
+            get {
+                object obj = ResourceManager.GetObject("deleted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap folder__5_ {
             get {
                 object obj = ResourceManager.GetObject("folder (5)", resourceCulture);
@@ -113,9 +123,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap git__2_ {
+        internal static System.Drawing.Bitmap github {
             get {
-                object obj = ResourceManager.GetObject("git (2)", resourceCulture);
+                object obj = ResourceManager.GetObject("github", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +133,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap git__3_ {
+        internal static System.Drawing.Bitmap ignore_dark_theme {
             get {
-                object obj = ResourceManager.GetObject("git (3)", resourceCulture);
+                object obj = ResourceManager.GetObject("ignore_dark_theme", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,29 +143,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap git__4_ {
+        internal static System.Drawing.Bitmap ignore_light_theme {
             get {
-                object obj = ResourceManager.GetObject("git (4)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap git__5_ {
-            get {
-                object obj = ResourceManager.GetObject("git (5)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Git_Icon_1788C {
-            get {
-                object obj = ResourceManager.GetObject("Git-Icon-1788C", resourceCulture);
+                object obj = ResourceManager.GetObject("ignore_light_theme", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +183,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap merge {
+        internal static System.Drawing.Bitmap open_folder {
             get {
-                object obj = ResourceManager.GetObject("merge", resourceCulture);
+                object obj = ResourceManager.GetObject("open-folder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,9 +193,19 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap open_folder {
+        internal static System.Drawing.Bitmap pencil_black {
             get {
-                object obj = ResourceManager.GetObject("open-folder", resourceCulture);
+                object obj = ResourceManager.GetObject("pencil_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pencil_white {
+            get {
+                object obj = ResourceManager.GetObject("pencil_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
