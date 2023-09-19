@@ -304,10 +304,17 @@ namespace pie
         {
             Scintilla scintilla = (Scintilla)sender;
 
+            UpdateNumberMarginWidth(scintilla, false);
+
+            Globals.tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
+        }
+
+        public void UpdateNumberMarginWidth(Scintilla scintilla, bool updateTheme)
+        {
             // Did the number of characters in the line number display change?
             // i.e. nnn VS nn, or nnnn VS nn, etc...
             var maxLineNumberCharLength = scintilla.Lines.Count.ToString().Length;
-            if (maxLineNumberCharLength == Globals.maxLineNumberCharLength)
+            if (maxLineNumberCharLength == Globals.maxLineNumberCharLength && !updateTheme)
                 return;
 
             // Calculate the width required to display the last line number
@@ -315,8 +322,6 @@ namespace pie
             const int padding = 2;
             scintilla.Margins[0].Width = scintilla.TextWidth(Style.LineNumber, new string('9', maxLineNumberCharLength + 1)) + padding;
             Globals.maxLineNumberCharLength = maxLineNumberCharLength;
-
-            Globals.tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
         }
 
         private void TextArea_MouseDown(object sender, MouseEventArgs e)
@@ -344,24 +349,6 @@ namespace pie
             Globals.tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
         }
 
-        #region Numbers, Bookmarks, Code Folding
-
-        /// <summary>
-        /// change this to whatever margin you want the bookmarks/breakpoints to show in
-        /// </summary>
-        private const int BOOKMARK_MARGIN = 2;
-        private const int BOOKMARK_MARKER = 2;
-
-        /// <summary>
-        /// change this to whatever margin you want the code folding tree (+/-) to show in
-        /// </summary>
-        private const int FOLDING_MARGIN = 3;
-
-        /// <summary>
-        /// set this true to show circular buttons for code folding (the [+] and [-] buttons on the margin)
-        /// </summary>
-        private const bool CODEFOLDING_CIRCULAR = true;
-
         private void InitNumberMargin(Scintilla TextArea)
         {
 
@@ -371,7 +358,6 @@ namespace pie
             TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = ThemeService.GetNumberMarginColor();
 
             TextArea.Margins[0].Width = 24;
-            TextArea.MarginClick += TextArea_MarginClick;
         }
 
         private void InitCodeFolding(Scintilla TextArea)
@@ -380,52 +366,11 @@ namespace pie
             TextArea.SetFoldMarginColor(true, ThemeService.GetFoldingColor());
             TextArea.SetFoldMarginHighlightColor(true, ThemeService.GetFoldingColor());
 
-            // Enable code folding
-            TextArea.SetProperty("fold", "1");
-            TextArea.SetProperty("fold.compact", "1");
-
-            // Configure a margin to display folding symbols
-            TextArea.Margins[FOLDING_MARGIN].Type = MarginType.Symbol;
-            TextArea.Margins[FOLDING_MARGIN].Mask = Marker.MaskFolders;
-            TextArea.Margins[FOLDING_MARGIN].Sensitive = true;
-            TextArea.Margins[FOLDING_MARGIN].Width = 20;
-
-            // Set colors for all folding markers
-            for (int i = 25; i <= 31; i++)
-            {
-                TextArea.Markers[i].SetForeColor(ThemeService.GetFoldingColor()); // styles for [+] and [-]
-                TextArea.Markers[i].SetBackColor(ThemeService.GetForeColor()); // styles for [+] and [-]
-            }
-
-            // Enable automatic folding
-            TextArea.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
-
+            TextArea.Margins[3].Type = MarginType.Symbol;
+            TextArea.Margins[3].Mask = Marker.MaskFolders;
+            TextArea.Margins[3].Sensitive = true;
+            TextArea.Margins[3].Width = 20;
         }
-
-        private void TextArea_MarginClick(object sender, MarginClickEventArgs e)
-        {
-            Scintilla TextArea = (Scintilla)sender;
-
-            if (e.Margin == BOOKMARK_MARGIN)
-            {
-                // Do we have a marker for this line?
-                const uint mask = (1 << BOOKMARK_MARKER);
-                var line = TextArea.Lines[TextArea.LineFromPosition(e.Position)];
-                if ((line.MarkerGet() & mask) > 0)
-                {
-                    // Remove existing bookmark
-                    line.MarkerDelete(BOOKMARK_MARKER);
-                }
-                else
-                {
-                    // Add bookmark
-                    line.MarkerAdd(BOOKMARK_MARKER);
-                }
-            }
-        }
-
-        #endregion
-
 
         // [Method] Creates a new tab and selects the new tab
         public void NewTab(TabType tabType, String path)
@@ -815,10 +760,6 @@ namespace pie
                 renderMarkdownmdToolStripMenuItem.Enabled = true;
             }
 
-            workingDirectoryToolStripMenuItem.Enabled = true;
-            stagingAreaToolStripMenuItem.Enabled = true;
-            remoteToolStripMenuItem.Enabled = true;
-
             // Custom Build Commands
             foreach (ToolStripMenuItem toolStripMenuItem in Globals.buildCommandToolStripMenuItems)
             {
@@ -843,10 +784,6 @@ namespace pie
             perlScriptplToolStripMenuItem.Enabled = false;
             renderHTMLFilehtmlToolStripMenuItem.Enabled = false;
             renderMarkdownmdToolStripMenuItem.Enabled = false;
-
-            workingDirectoryToolStripMenuItem.Enabled = false;
-            stagingAreaToolStripMenuItem.Enabled = false;
-            remoteToolStripMenuItem.Enabled = false;
         }
 
         // [Method] Opens terminal tab control
@@ -1250,6 +1187,7 @@ namespace pie
                 }
             }
         }
+       
 
         // [Event] Triggered when clicking "Show Terminal Tab" from the context menu
         private void kryptonContextMenuItem15_Click(object sender, EventArgs e)
@@ -1537,8 +1475,9 @@ namespace pie
             if ((index = scintilla.SearchInTarget(text)) != -1)
             {
                 scintilla.SetSelection(index, index + findTextBox.Text.Length);
-                scintilla.SetSelectionBackColor(false, ThemeService.GetSelectionColor());
                 Globals.lastSelectedIndex = index + findTextBox.Text.Length + 1;
+
+                scintilla.ScrollCaret();
             }
             else
             {
@@ -1727,6 +1666,7 @@ namespace pie
                         ColorizeTextArea(scintilla);
                         ColorizeAutocompleteMenu(Globals.tabInfos[i].getAutocompleteMenu());
                         ScintillaLexerService.SetLexer(extension, scintilla, tabControl, i);
+                        UpdateNumberMarginWidth(scintilla, true);
                     }
                     else
                     {

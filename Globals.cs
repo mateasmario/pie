@@ -26,5 +26,6 @@ namespace pie
         public static List<TabInfo> tabInfos;
         public static int theme;
         public static KryptonPalette kryptonPalette;
+        public static bool projectPanelToggled;
     }
 }
