@@ -94,18 +94,8 @@
             this.perlScriptplToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renderHTMLFilehtmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renderMarkdownmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.workingDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createARepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkRepositoryStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteRepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stagingAreaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addChangesToStagingAreaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.commitYourChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.remoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pushToRemoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pullFromRemoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.gitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
@@ -268,11 +258,17 @@
             this.kryptonButton3.OverrideDefault.Back.Color2 = System.Drawing.Color.DarkGray;
             this.kryptonButton3.OverrideDefault.Border.Color1 = System.Drawing.Color.DarkGray;
             this.kryptonButton3.OverrideDefault.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonButton3.OverrideFocus.Back.Color1 = System.Drawing.Color.DarkGray;
             this.kryptonButton3.OverrideFocus.Back.Color2 = System.Drawing.Color.DarkGray;
             this.kryptonButton3.OverrideFocus.Back.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.None;
             this.kryptonButton3.OverrideFocus.Border.Color1 = System.Drawing.Color.DarkGray;
             this.kryptonButton3.OverrideFocus.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton3.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonButton3.Size = new System.Drawing.Size(114, 25);
             this.kryptonButton3.TabIndex = 5;
             this.kryptonButton3.Values.Text = "Replace all";
@@ -287,11 +283,17 @@
             this.kryptonButton2.OverrideDefault.Back.Color2 = System.Drawing.Color.DarkGray;
             this.kryptonButton2.OverrideDefault.Border.Color1 = System.Drawing.Color.DarkGray;
             this.kryptonButton2.OverrideDefault.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonButton2.OverrideFocus.Back.Color1 = System.Drawing.Color.DarkGray;
             this.kryptonButton2.OverrideFocus.Back.Color2 = System.Drawing.Color.DarkGray;
             this.kryptonButton2.OverrideFocus.Back.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.None;
             this.kryptonButton2.OverrideFocus.Border.Color1 = System.Drawing.Color.DarkGray;
             this.kryptonButton2.OverrideFocus.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton2.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonButton2.Size = new System.Drawing.Size(114, 25);
             this.kryptonButton2.TabIndex = 4;
             this.kryptonButton2.Values.Text = "Find and Replace";
@@ -315,11 +317,17 @@
             this.kryptonButton1.OverrideDefault.Back.Color2 = System.Drawing.Color.DarkGray;
             this.kryptonButton1.OverrideDefault.Border.Color1 = System.Drawing.Color.DarkGray;
             this.kryptonButton1.OverrideDefault.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonButton1.OverrideFocus.Back.Color1 = System.Drawing.Color.DarkGray;
             this.kryptonButton1.OverrideFocus.Back.Color2 = System.Drawing.Color.DarkGray;
             this.kryptonButton1.OverrideFocus.Back.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.None;
             this.kryptonButton1.OverrideFocus.Border.Color1 = System.Drawing.Color.DarkGray;
             this.kryptonButton1.OverrideFocus.Border.Color2 = System.Drawing.Color.DarkGray;
+            this.kryptonButton1.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonButton1.Size = new System.Drawing.Size(114, 25);
             this.kryptonButton1.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -452,29 +460,29 @@
             // newFileToolStripMenuItem
             // 
             this.newFileToolStripMenuItem.Name = "newFileToolStripMenuItem";
-            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.newFileToolStripMenuItem.Text = "New";
+            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.newFileToolStripMenuItem.Text = "New File";
             this.newFileToolStripMenuItem.Click += new System.EventHandler(this.newFileToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.openToolStripMenuItem.Text = "Open File";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveFileToolStripMenuItem
             // 
             this.saveFileToolStripMenuItem.Name = "saveFileToolStripMenuItem";
-            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.saveFileToolStripMenuItem.Text = "Save";
+            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.saveFileToolStripMenuItem.Text = "Save File";
             this.saveFileToolStripMenuItem.Click += new System.EventHandler(this.saveFileToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // designToolStripMenuItem
@@ -599,93 +607,6 @@
             this.renderMarkdownmdToolStripMenuItem.Text = "Render Markdown (.md)";
             this.renderMarkdownmdToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
             // 
-            // gitToolStripMenuItem
-            // 
-            this.gitToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.workingDirectoryToolStripMenuItem,
-            this.stagingAreaToolStripMenuItem,
-            this.remoteToolStripMenuItem});
-            this.gitToolStripMenuItem.Name = "gitToolStripMenuItem";
-            this.gitToolStripMenuItem.Size = new System.Drawing.Size(34, 20);
-            this.gitToolStripMenuItem.Text = "Git";
-            // 
-            // workingDirectoryToolStripMenuItem
-            // 
-            this.workingDirectoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createARepositoryToolStripMenuItem,
-            this.checkRepositoryStatusToolStripMenuItem,
-            this.deleteRepositoryToolStripMenuItem});
-            this.workingDirectoryToolStripMenuItem.Name = "workingDirectoryToolStripMenuItem";
-            this.workingDirectoryToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.workingDirectoryToolStripMenuItem.Text = "Working Directory";
-            // 
-            // createARepositoryToolStripMenuItem
-            // 
-            this.createARepositoryToolStripMenuItem.Name = "createARepositoryToolStripMenuItem";
-            this.createARepositoryToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.createARepositoryToolStripMenuItem.Text = "Create a repository";
-            this.createARepositoryToolStripMenuItem.Click += new System.EventHandler(this.createARepositoryToolStripMenuItem_Click);
-            // 
-            // checkRepositoryStatusToolStripMenuItem
-            // 
-            this.checkRepositoryStatusToolStripMenuItem.Name = "checkRepositoryStatusToolStripMenuItem";
-            this.checkRepositoryStatusToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.checkRepositoryStatusToolStripMenuItem.Text = "Check repository status";
-            this.checkRepositoryStatusToolStripMenuItem.Click += new System.EventHandler(this.checkRepositoryStatusToolStripMenuItem_Click);
-            // 
-            // deleteRepositoryToolStripMenuItem
-            // 
-            this.deleteRepositoryToolStripMenuItem.Name = "deleteRepositoryToolStripMenuItem";
-            this.deleteRepositoryToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.deleteRepositoryToolStripMenuItem.Text = "Delete repository";
-            this.deleteRepositoryToolStripMenuItem.Click += new System.EventHandler(this.deleteRepositoryToolStripMenuItem_Click);
-            // 
-            // stagingAreaToolStripMenuItem
-            // 
-            this.stagingAreaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addChangesToStagingAreaToolStripMenuItem,
-            this.commitYourChangesToolStripMenuItem});
-            this.stagingAreaToolStripMenuItem.Name = "stagingAreaToolStripMenuItem";
-            this.stagingAreaToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.stagingAreaToolStripMenuItem.Text = "Staging Area";
-            // 
-            // addChangesToStagingAreaToolStripMenuItem
-            // 
-            this.addChangesToStagingAreaToolStripMenuItem.Name = "addChangesToStagingAreaToolStripMenuItem";
-            this.addChangesToStagingAreaToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.addChangesToStagingAreaToolStripMenuItem.Text = "Add changes to Staging Area";
-            this.addChangesToStagingAreaToolStripMenuItem.Click += new System.EventHandler(this.addChangesToStagingAreaToolStripMenuItem_Click);
-            // 
-            // commitYourChangesToolStripMenuItem
-            // 
-            this.commitYourChangesToolStripMenuItem.Name = "commitYourChangesToolStripMenuItem";
-            this.commitYourChangesToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.commitYourChangesToolStripMenuItem.Text = "Commit your changes";
-            this.commitYourChangesToolStripMenuItem.Click += new System.EventHandler(this.commitYourChangesToolStripMenuItem_Click);
-            // 
-            // remoteToolStripMenuItem
-            // 
-            this.remoteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pushToRemoteToolStripMenuItem,
-            this.pullFromRemoteToolStripMenuItem});
-            this.remoteToolStripMenuItem.Name = "remoteToolStripMenuItem";
-            this.remoteToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.remoteToolStripMenuItem.Text = "Remote";
-            // 
-            // pushToRemoteToolStripMenuItem
-            // 
-            this.pushToRemoteToolStripMenuItem.Name = "pushToRemoteToolStripMenuItem";
-            this.pushToRemoteToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.pushToRemoteToolStripMenuItem.Text = "Push to remote";
-            this.pushToRemoteToolStripMenuItem.Click += new System.EventHandler(this.pushToRemoteToolStripMenuItem_Click);
-            // 
-            // pullFromRemoteToolStripMenuItem
-            // 
-            this.pullFromRemoteToolStripMenuItem.Name = "pullFromRemoteToolStripMenuItem";
-            this.pullFromRemoteToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.pullFromRemoteToolStripMenuItem.Text = "Pull from remote";
-            this.pullFromRemoteToolStripMenuItem.Click += new System.EventHandler(this.pullFromRemoteToolStripMenuItem_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.White;
@@ -701,6 +622,14 @@
             this.menuStrip1.Size = new System.Drawing.Size(1020, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // gitToolStripMenuItem
+            // 
+            this.gitToolStripMenuItem.Enabled = false;
+            this.gitToolStripMenuItem.Image = global::pie.Properties.Resources.Git_Icon_1788C;
+            this.gitToolStripMenuItem.Name = "gitToolStripMenuItem";
+            this.gitToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.gitToolStripMenuItem.Text = "Git";
             // 
             // kryptonRibbon1
             // 
@@ -748,8 +677,8 @@
             this.ClientSize = new System.Drawing.Size(1020, 595);
             this.Controls.Add(this.kryptonHeaderGroup1);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.buildTabControl);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.buildTabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -844,21 +773,11 @@
         private System.Windows.Forms.ToolStripMenuItem perlScriptplToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renderHTMLFilehtmlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renderMarkdownmdToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem workingDirectoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem createARepositoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem checkRepositoryStatusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteRepositoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stagingAreaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addChangesToStagingAreaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem commitYourChangesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem remoteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pushToRemoteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pullFromRemoteToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbon kryptonRibbon1;
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
+        private System.Windows.Forms.ToolStripMenuItem gitToolStripMenuItem;
     }
 }
 

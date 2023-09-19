@@ -347,15 +347,21 @@ namespace pie.Services
             scintilla.SetProperty("fold.compact", "1");
 
             // Style the folder markers
-            scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
+            scintilla.Markers[Marker.Folder].Symbol = MarkerSymbol.CirclePlus;
             scintilla.Markers[Marker.Folder].SetBackColor(SystemColors.ControlText);
-            scintilla.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
-            scintilla.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
+            scintilla.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.CircleMinus;
+            scintilla.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.CirclePlusConnected;
             scintilla.Markers[Marker.FolderEnd].SetBackColor(SystemColors.ControlText);
             scintilla.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
-            scintilla.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
+            scintilla.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.CircleMinusConnected;
             scintilla.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
             scintilla.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+
+            for (int i = 25; i <= 31; i++)
+            {
+                scintilla.Markers[i].SetForeColor(ThemeService.GetFoldingColor()); // styles for [+] and [-]
+                scintilla.Markers[i].SetBackColor(ThemeService.GetForeColor()); // styles for [+] and [-]
+            }
 
             // Enable automatic folding
             scintilla.AutomaticFold = AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change;

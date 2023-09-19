@@ -23,17 +23,21 @@ namespace pie.Services
             lightColorDictionary = new Dictionary<string, Color>();
             darkColorDictionary = new Dictionary<string, Color>();
 
-            lightColorDictionary["Primary"] = Color.FromArgb(240, 240, 240);
-            lightColorDictionary["Secondary"] = Color.FromArgb(227, 227, 227);
+            lightColorDictionary["Primary"] = Color.FromArgb(245, 245, 245);
+            lightColorDictionary["Secondary"] = Color.FromArgb(235, 235, 235);
+            lightColorDictionary["Button"] = Color.FromArgb(220, 220, 220);
+            lightColorDictionary["ButtonHover"] = Color.FromArgb(205, 205, 205);
             lightColorDictionary["ButtonPressed"] = Color.Gainsboro;
             lightColorDictionary["Fore"] = Color.Black;
-            lightColorDictionary["FormBorder"] = Color.FromArgb(140, 140, 140);
+            lightColorDictionary["FormBorder"] = Color.FromArgb(175, 175, 175);
 
             darkColorDictionary["Primary"] = Color.FromArgb(40, 40, 40);
             darkColorDictionary["Secondary"] = Color.FromArgb(50, 50, 50);
+            darkColorDictionary["Button"] = Color.FromArgb(70, 70, 70);
+            darkColorDictionary["ButtonHover"] = Color.FromArgb(85, 85, 85);
             darkColorDictionary["ButtonPressed"] = Color.FromArgb(45, 45, 45);
             darkColorDictionary["Fore"] = Color.White;
-            darkColorDictionary["FormBorder"] = Color.FromArgb(115, 115, 115);
+            darkColorDictionary["FormBorder"] = Color.FromArgb(90, 90, 90);
         }
 
         public static Color GetSelectionColor()
@@ -199,8 +203,8 @@ namespace pie.Services
             kryptonPalette.Common.StateOthers.Border.Color2 = colorDictionary["Secondary"];
 
             // Buttons
-            kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Back.Color1 = colorDictionary["Primary"];
-            kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Back.Color2 = colorDictionary["Primary"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Back.Color1 = colorDictionary["Button"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Back.Color2 = colorDictionary["Button"];
 
             kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Back.Color1 = colorDictionary["ButtonPressed"];
             kryptonPalette.ButtonStyles.ButtonStandalone.StatePressed.Back.Color2 = colorDictionary["ButtonPressed"];
@@ -211,11 +215,11 @@ namespace pie.Services
             kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Content.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.ButtonStyles.ButtonStandalone.StateCommon.Content.ShortText.Color2 = colorDictionary["Fore"];
 
-            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.Color1 = colorDictionary["ButtonPressed"];
-            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.Color2 = colorDictionary["ButtonPressed"];            
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.Color1 = colorDictionary["ButtonHover"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.Color2 = colorDictionary["ButtonHover"];            
             
-            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Border.Color1 = colorDictionary["ButtonPressed"];
-            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Border.Color2 = colorDictionary["ButtonPressed"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Border.Color1 = colorDictionary["ButtonHover"];
+            kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Border.Color2 = colorDictionary["ButtonHover"];
 
             kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonPalette.ButtonStyles.ButtonStandalone.StateTracking.Border.ColorStyle = PaletteColorStyle.Solid;

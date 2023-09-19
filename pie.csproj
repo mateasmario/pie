@@ -73,7 +73,7 @@
     <ManifestKeyFile>pie_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
@@ -391,6 +391,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pie.ico" />
+    <None Include="Resources\git %285%29.png" />
+    <None Include="Resources\git %284%29.png" />
+    <None Include="Resources\git %283%29.png" />
+    <None Include="Resources\git %282%29.png" />
+    <None Include="Resources\Git-Icon-1788C1.png" />
     <None Include="Resources\day-mode.png" />
     <None Include="Resources\crescent-moon.png" />
     <None Include="Resources\image %2814%29.png" />
