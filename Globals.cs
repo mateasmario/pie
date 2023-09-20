@@ -29,5 +29,7 @@ namespace pie
         public static KryptonPalette kryptonPalette;
         public static bool gitTabOpened;
         public static Repository repo;
+        public static GitCredentials gitCredentials;
+        public static bool gitFormClosedWithOk;
     }
 }
