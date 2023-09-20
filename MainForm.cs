@@ -65,31 +65,6 @@ namespace pie
             Globals.tabInfos = new List<TabInfo>();
 
             menuStrip1.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
-
-            try
-            {
-                ScintillaLexerService.GetTheme("theme-settings.config");
-            }
-            catch (FileNotFoundException ex)
-            {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme-settings.config", "0");
-                Globals.theme = 0;
-            }
-
-            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count-1], menuStrip1, this.kryptonPalette1, gitStagingAreaListView, Globals.theme);
-            this.Palette = kryptonPalette1;
-            tabControl.Palette = kryptonPalette1;
-            buildTabControl.Palette = kryptonPalette1;
-            kryptonHeaderGroup1.Palette = kryptonPalette1;
-            kryptonContextMenu1.Palette = kryptonPalette1;
-            kryptonContextMenu2.Palette = kryptonPalette1;
-            kryptonContextMenu3.Palette = kryptonPalette1;
-            kryptonLabel1.Palette = kryptonPalette1;
-            findTextBox.Palette = kryptonPalette1;
-            replaceTextBox.Palette = kryptonPalette1;
-            kryptonButton1.Palette = kryptonPalette1;
-            kryptonButton2.Palette = kryptonPalette1;
-            kryptonButton3.Palette = kryptonPalette1;
         }
 
         public Scintilla CreateNewTextArea()
@@ -1011,20 +986,13 @@ namespace pie
             Globals.findReplacePanelToggled = status;
         }
 
-        // [Event] Form Loading
-        private void Form1_Load(object sender, EventArgs e)
+        private void GetConfigurationDataFromFiles()
         {
-            Globals.kryptonPalette = kryptonPalette1;
-
-            // Load Build Commands from configuration file
-            List<BuildCommand> buildCommands = null;
-            List<ToolStripMenuItem> buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
-
             try
             {
-                buildCommands = BuildCommandService.GetBuildCommandsFromFile("build-commands.config");
+                Globals.buildCommands = BuildCommandService.GetBuildCommandsFromFile("build.config");
 
-                foreach (BuildCommand buildCommand in buildCommands)
+                foreach (BuildCommand buildCommand in Globals.buildCommands)
                 {
                     ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
                     toolStripMenuItem.Text = buildCommand.getName();
@@ -1033,20 +1001,41 @@ namespace pie
                     toolStripMenuItem.Click += ToolStripMenuItem_Click;
 
                     buildToolStripMenuItem1.DropDownItems.Add(toolStripMenuItem);
-                    buildCommandToolStripMenuItems.Add(toolStripMenuItem);
+                    Globals.buildCommandToolStripMenuItems.Add(toolStripMenuItem);
                 }
-            } catch(FileNotFoundException ex)
-            {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "build-commands.config", "");
             }
+            catch (FileNotFoundException ex)
+            {
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "build.config", "");
+            }
+
+            try
+            {
+                GitCredentials gitCredentials = GitService.ReadCredentialsFromFile();
+            }
+            catch (FileNotFoundException ex)
+            {
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "git.config", "");
+            }
+
+            try
+            {
+                ScintillaLexerService.GetTheme("theme.config");
+            }
+            catch (FileNotFoundException ex)
+            {
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme.config", "0");
+                Globals.theme = 0;
+            }
+        }
+
+        private void SetDynamicDesign()
+        {
+            Globals.kryptonPalette = kryptonPalette1;
 
             ResetFindPanelLocation();
             kryptonHeaderGroup1.Hide();
             Globals.findReplacePanelToggled = false;
-
-            Globals.buildCommands = buildCommands;
-            Globals.buildCommandToolStripMenuItems = buildCommandToolStripMenuItems;
-            Globals.firstBrowserTab = true;
 
             gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
 
@@ -1056,7 +1045,21 @@ namespace pie
                 themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
             }
 
-            // Do other visual processing
+            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette1, gitStagingAreaListView, Globals.theme);
+            this.Palette = kryptonPalette1;
+            tabControl.Palette = kryptonPalette1;
+            buildTabControl.Palette = kryptonPalette1;
+            kryptonHeaderGroup1.Palette = kryptonPalette1;
+            kryptonContextMenu1.Palette = kryptonPalette1;
+            kryptonContextMenu2.Palette = kryptonPalette1;
+            kryptonContextMenu3.Palette = kryptonPalette1;
+            kryptonLabel1.Palette = kryptonPalette1;
+            findTextBox.Palette = kryptonPalette1;
+            replaceTextBox.Palette = kryptonPalette1;
+            kryptonButton1.Palette = kryptonPalette1;
+            kryptonButton2.Palette = kryptonPalette1;
+            kryptonButton3.Palette = kryptonPalette1;
+
             buildTabControl.Hide();
             gitPanel.Hide();
 
@@ -1068,12 +1071,10 @@ namespace pie
 
             gitStagingAreaListView.BackColor = ThemeService.GetPrimaryColor();
             gitStagingAreaListView.ForeColor = ThemeService.GetForeColor();
+        }
 
-            kryptonButton6.Enabled = false;
-            kryptonButton7.Enabled = false;
-            kryptonButton8.Enabled = false;
-            commitMessageRichTextBox.Enabled = false;
-
+        private void ProcessCommandLineArguments()
+        {
             string[] args = Environment.GetCommandLineArgs();
 
             if (args.Length == 2)
@@ -1095,6 +1096,18 @@ namespace pie
             {
                 NewTab(TabType.CODE, null);
             }
+        }
+
+        // [Event] Form Loading
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Globals.buildCommands = null;
+            Globals.buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
+            Globals.firstBrowserTab = true;
+
+            GetConfigurationDataFromFiles();
+            SetDynamicDesign();
+            ProcessCommandLineArguments();
         }
 
         private void GitStagingAreaListView_FormatRow(object sender, FormatRowEventArgs e)
@@ -1433,7 +1446,7 @@ namespace pie
         {
             Globals.commitMessage = null;
 
-            GitCommitMessageForm commitMessageForm = new GitCommitMessageForm();
+            GitCredentialsForm commitMessageForm = new GitCredentialsForm();
             commitMessageForm.ShowDialog();
 
             if (Globals.commitMessage != null)
@@ -1727,14 +1740,14 @@ namespace pie
             if (Globals.theme == 0)
             {
                 Globals.theme = 1;
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme-settings.config", "1");
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme.config", "1");
                 themeSettingsToolStripMenuItem.Image = Properties.Resources.sun;
                 themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
             }
             else
             {
                 Globals.theme = 0;
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme-settings.config", "0");
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme.config", "0");
                 themeSettingsToolStripMenuItem.Image = Properties.Resources.crescent_moon;
                 themeSettingsToolStripMenuItem.Text = "Toggle Dark Mode";
             }
@@ -1796,22 +1809,12 @@ namespace pie
                         Repository.Init(selectedPath);
                         repositoryTextBox.Text = selectedPath;
                         UpdateGitRepositoryInfo();
-
-                        kryptonButton6.Enabled = true;
-                        kryptonButton7.Enabled = true;
-                        kryptonButton8.Enabled = true;
-                        commitMessageRichTextBox.Enabled = true;
                     }
                 }
                 else
                 {
                     repositoryTextBox.Text = selectedPath;
                     UpdateGitRepositoryInfo();
-
-                    kryptonButton6.Enabled = true;
-                    kryptonButton7.Enabled = true;
-                    kryptonButton8.Enabled = true;
-                    commitMessageRichTextBox.Enabled = true;
                 }
             }    
         }
@@ -1886,22 +1889,51 @@ namespace pie
 
         private void kryptonButton8_Click(object sender, EventArgs e)
         {
-            UpdateGitRepositoryInfo();
+            if (Globals.repo != null)
+            {
+                UpdateGitRepositoryInfo();
+            }
+        }
+
+        private void GitCommit()
+        {
+            if (Globals.repo != null)
+            {
+                RepositoryStatus status = Globals.repo.RetrieveStatus();
+
+                if (status.IsDirty)
+                {
+                    Commands.Stage(Globals.repo, "*");
+
+                    if (Globals.gitCredentials == null)
+                    {
+                        GitCredentialsForm gitCredentialsForm = new GitCredentialsForm();
+                        Globals.gitFormClosedWithOk = false;
+                        gitCredentialsForm.ShowDialog();
+
+                        if (Globals.gitFormClosedWithOk)
+                        {
+                            File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email);
+                            GitCommit();
+                        }
+                    }
+                    else
+                    {
+                        Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
+                        Globals.repo.Commit(commitMessageRichTextBox.Text, signature, signature);
+                        UpdateGitRepositoryInfo();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You have nothing to commit.", "Git - pie");
+                }
+            }
         }
 
         private void kryptonButton6_Click(object sender, EventArgs e)
         {
-            RepositoryStatus status = Globals.repo.RetrieveStatus();
-
-            if (status.IsDirty)
-            {
-                Commands.Stage(Globals.repo, "*");
-                Globals.repo.Commit(commitMessageRichTextBox.Text, null, null);
-            }
-            else
-            {
-                MessageBox.Show("You have nothing to commit.", "Git - pie");
-            }
+            GitCommit();
        }
     }
 }
