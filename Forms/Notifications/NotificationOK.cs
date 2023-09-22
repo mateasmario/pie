@@ -26,9 +26,6 @@ namespace pie
         private void CustomMessageBox_Load(object sender, EventArgs e)
         {
             kryptonRichTextBox1.Text = Globals.notificationText;
-
-            kryptonRichTextBox1.Multiline = true;
-            kryptonRichTextBox1.WordWrap = false;
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)

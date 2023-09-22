@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonRichTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -45,6 +45,19 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(366, 95);
             this.kryptonPanel1.TabIndex = 7;
             // 
+            // kryptonRichTextBox1
+            // 
+            this.kryptonRichTextBox1.Location = new System.Drawing.Point(3, 8);
+            this.kryptonRichTextBox1.Name = "kryptonRichTextBox1";
+            this.kryptonRichTextBox1.ReadOnly = true;
+            this.kryptonRichTextBox1.Size = new System.Drawing.Size(360, 45);
+            this.kryptonRichTextBox1.StateCommon.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.False;
+            this.kryptonRichTextBox1.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonRichTextBox1.TabIndex = 5;
+            this.kryptonRichTextBox1.Text = "";
+            // 
             // kryptonButton1
             // 
             this.kryptonButton1.Location = new System.Drawing.Point(295, 64);
@@ -56,19 +69,6 @@
             this.kryptonButton1.TabIndex = 4;
             this.kryptonButton1.Values.Text = "OK";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
-            // 
-            // kryptonRichTextBox1
-            // 
-            this.kryptonRichTextBox1.Location = new System.Drawing.Point(12, 13);
-            this.kryptonRichTextBox1.Name = "kryptonRichTextBox1";
-            this.kryptonRichTextBox1.ReadOnly = true;
-            this.kryptonRichTextBox1.Size = new System.Drawing.Size(342, 45);
-            this.kryptonRichTextBox1.StateCommon.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.False;
-            this.kryptonRichTextBox1.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonRichTextBox1.TabIndex = 5;
-            this.kryptonRichTextBox1.Text = "";
             // 
             // NotificationOK
             // 
