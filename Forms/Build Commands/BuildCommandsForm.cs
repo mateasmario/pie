@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using pie.Classes;
 using System.IO;
-using ComponentFactory.Krypton.Toolkit;
 using pie.Enums;
+
+/** 
+ * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
+ * 
+ * Copyright (c) 2017 - 2022, Krypton Suite
+*/
+using ComponentFactory.Krypton.Toolkit;
 
 namespace pie
 {

@@ -1,9 +1,12 @@
 ﻿using pie.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+/**
+ * AutocompleteMenuNS is a namespace that comes from AutoCompleteMenu-ScintillaNet. It is used for various Autocomplete suggestions while writing code.
+ * 
+ * AutoCompleteMenu-ScintillaNet is licensed under the GNU Lesser General Public License (LGPLv3).
+ * For more information related to the license, see https://www.gnu.org/licenses/lgpl-3.0.html.
+ * 
+ */
 using AutocompleteMenuNS;
 
 namespace pie.Classes

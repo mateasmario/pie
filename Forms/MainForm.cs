@@ -1,4 +1,20 @@
-﻿using ComponentFactory.Krypton.Navigator;
+﻿/** Copyright (C) 2023  Mario-Mihai Mateas
+  * This program is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 3 of the License, or
+  * (at your option) any later version.
+
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * 
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
+**/
+
+using ComponentFactory.Krypton.Navigator;
 using pie.Services;
 using System;
 using System.Collections.Generic;
@@ -6,16 +22,69 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using ScintillaNET;
-using pie.Classes;
-using ComponentFactory.Krypton.Toolkit;
-using Markdig;
 using pie.Enums;
+using pie.Classes;
+
+/**
+ * ScintillaNET provides the text editors used in pie.
+ * 
+ * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
+*/
+using ScintillaNET;
+
+/** 
+ * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
+ * 
+ * Copyright (c) 2017 - 2022, Krypton Suite
+*/
+using ComponentFactory.Krypton.Toolkit;
+
+/** Markdig is used in order to allow users to render their Markdown (.md) code into HTML.
+ * 
+ * Copyright (c) 2018-2019, Alexandre Mutel
+ */
+using Markdig;
+
+/**
+ * CefSharp is used in order to integrate Chromium-Based Web Browsers inside pie.
+ * 
+ * Copyright © The CefSharp Authors. All rights reserved.
+ */
 using CefSharp.WinForms;
 using CefSharp;
+
+/**
+ * AutocompleteMenuNS is a namespace that comes from AutoCompleteMenu-ScintillaNet. It is used for various Autocomplete suggestions while writing code.
+ * 
+ * AutoCompleteMenu-ScintillaNet is licensed under the GNU Lesser General Public License (LGPLv3).
+ * For more information related to the license, see https://www.gnu.org/licenses/lgpl-3.0.html.
+ * 
+ */
 using AutocompleteMenuNS;
+
+/**
+ * LibGit2Sharp is used for integrating several advanced Git functionalities into pie.
+ * 
+ * Copyright (c) LibGit2Sharp contributors
+ */
 using LibGit2Sharp;
+
+/**
+ * This namespace provides access to the ObjectListView control.
+ * Licensed under GNU General Public License (GPL 3.0). For more info, see https://www.gnu.org/licenses/gpl-3.0.html 
+ * 
+ * Author of the library: Phillip Piper
+ * Copyright 2006-2016 Bright Ideas Software
+ */
 using BrightIdeasSoftware;
+
+/**
+ * ConEmu.Winforms is used for integrating terminal features inside the application.
+ * 
+ * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
+ */
+using ConEmu.WinForms;
+
 
 namespace pie
 {
@@ -370,6 +439,9 @@ namespace pie
             {
                 tabControl.KryptonContextMenu = gitContextMenu;
 
+                ToggleTerminalTabControl(false);
+                ToggleFindReplacePanel(false);
+
                 if (Globals.gitTabOpened)
                 {
                     for (int i = 0; i<tabControl.Pages.Count-1; i++)
@@ -588,8 +660,8 @@ namespace pie
         {
             KryptonPage selectedKryptonPage = buildTabControl.SelectedPage;
 
-            ConsoleControl.ConsoleControl consoleControl = (ConsoleControl.ConsoleControl)selectedKryptonPage.Controls["ConsoleControl"];
-            consoleControl.StopProcess();
+            ConEmuControl conEmuControl = (ConEmuControl)buildTabControl.SelectedPage.Controls[0];
+            conEmuControl.Dispose();
 
             buildTabControl.Pages.Remove(selectedKryptonPage);
 
@@ -713,12 +785,16 @@ namespace pie
             KryptonPage kryptonPage = new KryptonPage();
 
             buildTabControl.Pages.Add(kryptonPage);
-            
-            ConsoleControl.ConsoleControl consoleControl = new ConsoleControl.ConsoleControl();
-            consoleControl.Name = "ConsoleControl";
-            consoleControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
-            consoleControl.Parent = kryptonPage;
+            ConEmuControl conEmuControl = new ConEmuControl();
+            ConEmuStartInfo conEmuStartInfo = new ConEmuStartInfo();
+            conEmuStartInfo.ConsoleProcessCommandLine = process;
+
+            ConEmuSession conEmuSession = conEmuControl.Start(conEmuStartInfo);
+
+            conEmuControl.BackColor = Color.White;
+            conEmuControl.ForeColor = Color.Red;
+            conEmuControl.Parent = kryptonPage;
 
             if (process == "cmd.exe")
             {
@@ -731,9 +807,7 @@ namespace pie
                 kryptonPage.ImageSmall = Properties.Resources.powershell;
             }
 
-            consoleControl.Dock = DockStyle.Fill;
-
-            consoleControl.StartProcess(process, "");
+            conEmuControl.Dock = DockStyle.Fill;
 
             buildTabControl.SelectedPage = kryptonPage;
         }
@@ -1285,13 +1359,6 @@ namespace pie
         // [Event] Triggered when Form is closed
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Dispose terminals from opened terminal tabs
-            foreach (KryptonPage kryptonPage in buildTabControl.Pages)
-            {
-                ConsoleControl.ConsoleControl consoleControl = (ConsoleControl.ConsoleControl)kryptonPage.Controls["ConsoleControl"];
-                consoleControl.StopProcess();
-            }
-
             bool closeStatus = CloseApp();
 
             if (closeStatus)

@@ -1,11 +1,12 @@
-﻿using CefSharp;
-using pie.Enums;
+﻿using pie.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
+/**
+ * CefSharp is used in order to integrate Chromium-Based Web Browsers inside pie.
+ * 
+ * Copyright © The CefSharp Authors. All rights reserved.
+ */
+using CefSharp;
 
 namespace pie.Classes
 {

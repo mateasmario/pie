@@ -1,11 +1,19 @@
-﻿using CefSharp;
-using ComponentFactory.Krypton.Toolkit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
+
+/**
+ * CefSharp is used in order to integrate Chromium-Based Web Browsers inside pie.
+ * 
+ * Copyright © The CefSharp Authors. All rights reserved.
+ */
+using CefSharp;
+
+/** 
+ * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
+ * 
+ * Copyright (c) 2017 - 2022, Krypton Suite
+*/
+using ComponentFactory.Krypton.Toolkit;
 
 namespace pie.Classes
 {

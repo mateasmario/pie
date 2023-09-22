@@ -693,6 +693,8 @@
             // 
             this.buildTabControl.Bar.BarOrientation = ComponentFactory.Krypton.Toolkit.VisualOrientation.Bottom;
             this.buildTabControl.Bar.TabBorderStyle = ComponentFactory.Krypton.Toolkit.TabBorderStyle.SquareOutsizeMedium;
+            this.buildTabControl.Button.CloseButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
+            this.buildTabControl.Button.ContextButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Hide;
             this.buildTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.buildTabControl.KryptonContextMenu = this.terminalContextMenu;
             this.buildTabControl.Location = new System.Drawing.Point(0, 381);

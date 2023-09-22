@@ -1,10 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using ScintillaNET;
 using System.IO;
-using AutocompleteMenuNS;
 using System.Linq;
+
+/**
+ * ScintillaNET provides the text editors used in pie.
+ * 
+ * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
+*/
+using ScintillaNET;
+
+/**
+ * AutocompleteMenuNS is a namespace that comes from AutoCompleteMenu-ScintillaNet. It is used for various Autocomplete suggestions while writing code.
+ * 
+ * AutoCompleteMenu-ScintillaNet is licensed under the GNU Lesser General Public License (LGPLv3).
+ * For more information related to the license, navigate to Licenses/gpl-3.0.txt
+ * 
+ */
+using AutocompleteMenuNS;
+
+/** 
+ * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
+ * 
+ * Copyright (c) 2017 - 2022, Krypton Suite
+*/
 using ComponentFactory.Krypton.Docking;
 
 namespace pie.Services
