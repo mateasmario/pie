@@ -716,6 +716,7 @@ namespace pie
             
             ConsoleControl.ConsoleControl consoleControl = new ConsoleControl.ConsoleControl();
             consoleControl.Name = "ConsoleControl";
+            consoleControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
             consoleControl.Parent = kryptonPage;
 

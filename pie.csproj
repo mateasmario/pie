@@ -115,6 +115,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Release\ComponentFactory.Krypton.Workspace.dll</HintPath>
     </Reference>
+    <Reference Include="ConEmu.WinForms, Version=1.21.9.5, Culture=neutral, PublicKeyToken=00340228797aafb8, processorArchitecture=MSIL">
+      <HintPath>packages\ConEmu.Control.WinForms.1.21.9.5\lib\net40\ConEmu.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="ConsoleControl, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7edd23586f5e297f, processorArchitecture=MSIL">
       <HintPath>packages\ConsoleControl.1.3.0\lib\net40-client\ConsoleControl.dll</HintPath>
     </Reference>
@@ -573,6 +576,8 @@
     <Error Condition="!Exists('packages\CefSharp.Common.116.0.150\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.116.0.150\build\CefSharp.Common.props'))" />
     <Error Condition="!Exists('packages\CefSharp.Common.116.0.150\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.116.0.150\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('packages\LibGit2Sharp.NativeBinaries.2.0.320\build\net46\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\LibGit2Sharp.NativeBinaries.2.0.320\build\net46\LibGit2Sharp.NativeBinaries.props'))" />
+    <Error Condition="!Exists('packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets'))" />
   </Target>
   <Import Project="packages\CefSharp.Common.116.0.150\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.116.0.150\build\CefSharp.Common.targets')" />
+  <Import Project="packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets" Condition="Exists('packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets')" />
 </Project>

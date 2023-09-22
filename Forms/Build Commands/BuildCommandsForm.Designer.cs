@@ -161,6 +161,7 @@
             this.MaximizeBox = false;
             this.Name = "BuildCommandsForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Build Commands";
             this.Load += new System.EventHandler(this.BuildCommandsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();

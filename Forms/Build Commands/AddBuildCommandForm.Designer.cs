@@ -122,6 +122,7 @@
             this.MinimizeBox = false;
             this.Name = "AddBuildCommandForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Build Command";
             this.Load += new System.EventHandler(this.AddBuildCommandForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
