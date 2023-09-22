@@ -150,6 +150,7 @@ namespace pie
             TextArea.UpdateUI += TextArea_UpdateUI;
             TextArea.WrapMode = WrapMode.None;
             TextArea.IndentationGuides = IndentView.LookBoth;
+            TextArea.ZoomChanged += TextArea_ZoomChanged;
 
             TextArea.UsePopup(false);
 
@@ -160,6 +161,17 @@ namespace pie
             TextArea.Dock = DockStyle.Fill;
 
             return TextArea;
+        }
+
+        private void TextArea_ZoomChanged(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)sender;
+
+            var maxLineNumberCharLength = scintilla.Lines.Count.ToString().Length;
+
+            const int padding = 2;
+
+            scintilla.Margins[0].Width = scintilla.TextWidth(Style.LineNumber, new string('9', maxLineNumberCharLength + 1)) + padding;
         }
 
         private void ColorizeTextArea(Scintilla TextArea) 
