@@ -130,6 +130,12 @@
     <Reference Include="Markdig, Version=0.33.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Markdig.0.33.0\lib\net462\Markdig.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=3.13.8.999, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.13.8\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform, Version=3.13.8.999, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.13.8\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
@@ -317,16 +323,17 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutForm.cs">
+    <Compile Include="Classes\GitCommit.cs" />
+    <Compile Include="Forms\Other\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutForm.Designer.cs">
+    <Compile Include="Forms\Other\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddBuildCommandForm.cs">
+    <Compile Include="Forms\Build Commands\AddBuildCommandForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddBuildCommandForm.Designer.cs">
+    <Compile Include="Forms\Build Commands\AddBuildCommandForm.Designer.cs">
       <DependentUpon>AddBuildCommandForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\BuildCommand.cs" />
@@ -337,25 +344,56 @@
     <Compile Include="Classes\PieContextMenuHandler.cs" />
     <Compile Include="Classes\PieKeyboardHandler.cs" />
     <Compile Include="Classes\TabInfo.cs" />
+    <Compile Include="Enums\NotificationButton.cs" />
+    <Compile Include="Forms\Git\GitCloneForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Git\GitCloneForm.Designer.cs">
+      <DependentUpon>GitCloneForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Git\GitCommitLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Git\GitCommitLogForm.Designer.cs">
+      <DependentUpon>GitCommitLogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Notifications\NotificationOK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Notifications\NotificationOK.Designer.cs">
+      <DependentUpon>NotificationOK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Enums\TabType.cs" />
-    <Compile Include="GitCredentialsForm.cs">
+    <Compile Include="Forms\Git\GitCommitCredentialsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GitCredentialsForm.Designer.cs">
-      <DependentUpon>GitCredentialsForm.cs</DependentUpon>
+    <Compile Include="Forms\Git\GitCommitCredentialsForm.Designer.cs">
+      <DependentUpon>GitCommitCredentialsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Globals.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\Git\GitPushCredentialsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\Git\GitPushCredentialsForm.Designer.cs">
+      <DependentUpon>GitPushCredentialsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Globals.cs" />
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BuildCommandsForm.cs">
+    <Compile Include="Forms\Build Commands\BuildCommandsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BuildCommandsForm.Designer.cs">
+    <Compile Include="Forms\Build Commands\BuildCommandsForm.Designer.cs">
       <DependentUpon>BuildCommandsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Notifications\NotificationYesNoCancel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Notifications\NotificationYesNoCancel.Designer.cs">
+      <DependentUpon>NotificationYesNoCancel.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -364,20 +402,35 @@
     <Compile Include="Services\ParsingService.cs" />
     <Compile Include="Services\ScintillaLexerService.cs" />
     <Compile Include="Services\ThemeService.cs" />
-    <EmbeddedResource Include="AboutForm.resx">
+    <EmbeddedResource Include="Forms\Git\GitCommitLogForm.resx">
+      <DependentUpon>GitCommitLogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Other\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddBuildCommandForm.resx">
+    <EmbeddedResource Include="Forms\Build Commands\AddBuildCommandForm.resx">
       <DependentUpon>AddBuildCommandForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GitCredentialsForm.resx">
-      <DependentUpon>GitCredentialsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Git\GitCloneForm.resx">
+      <DependentUpon>GitCloneForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\Notifications\NotificationOK.resx">
+      <DependentUpon>NotificationOK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Git\GitCommitCredentialsForm.resx">
+      <DependentUpon>GitCommitCredentialsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Git\GitPushCredentialsForm.resx">
+      <DependentUpon>GitPushCredentialsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BuildCommandsForm.resx">
+    <EmbeddedResource Include="Forms\Build Commands\BuildCommandsForm.resx">
       <DependentUpon>BuildCommandsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Notifications\NotificationYesNoCancel.resx">
+      <DependentUpon>NotificationYesNoCancel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

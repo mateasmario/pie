@@ -15,7 +15,6 @@ using CefSharp.WinForms;
 using CefSharp;
 using AutocompleteMenuNS;
 using LibGit2Sharp;
-using static System.Windows.Forms.ListViewItem;
 using BrightIdeasSoftware;
 
 namespace pie
@@ -63,6 +62,8 @@ namespace pie
             this.MinimumSize = new System.Drawing.Size(1036, 634);
 
             Globals.tabInfos = new List<TabInfo>();
+
+            Globals.gitCredentials = new GitCredentials();
 
             menuStrip1.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
         }
@@ -130,10 +131,10 @@ namespace pie
 
         private void RemoveSuggestedActions()
         {
-            if (((KryptonContextMenuHeading)kryptonContextMenu1.Items[2]).Text == "Suggested Actions")
+            if (((KryptonContextMenuHeading)codeContextMenu.Items[2]).Text == "Suggested Actions")
             {
-                kryptonContextMenu1.Items.RemoveAt(3);
-                kryptonContextMenu1.Items.RemoveAt(2);
+                codeContextMenu.Items.RemoveAt(3);
+                codeContextMenu.Items.RemoveAt(2);
             }
         }
 
@@ -147,20 +148,20 @@ namespace pie
             {
                 KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
                 kryptonContextMenuHeading.Text = "Suggested Actions";
-                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+                codeContextMenu.Items.Insert(2, kryptonContextMenuHeading);
 
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Build C/C++ Source";
                 item1.Click += Item1_Click;
                 kryptonContextMenuItems.Items.Add(item1);
-                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+                codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
             else if (extension == "java")
             {
                 KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
                 kryptonContextMenuHeading.Text = "Suggested Actions";
-                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+                codeContextMenu.Items.Insert(2, kryptonContextMenuHeading);
 
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
@@ -172,59 +173,59 @@ namespace pie
                 item2.Text = "Run as Java Class";
                 item2.Click += Item2_Click;
                 kryptonContextMenuItems.Items.Add(item2);
-                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+                codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
             else if (extension == "py")
             {
                 KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
                 kryptonContextMenuHeading.Text = "Suggested Actions";
-                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+                codeContextMenu.Items.Insert(2, kryptonContextMenuHeading);
 
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Run Python Script";
                 item1.Click += Item1_Click2;
                 kryptonContextMenuItems.Items.Add(item1);
-                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+                codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
             else if (extension == "pl")
             {
                 KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
                 kryptonContextMenuHeading.Text = "Suggested Actions";
-                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+                codeContextMenu.Items.Insert(2, kryptonContextMenuHeading);
 
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Run Perl Script";
                 item1.Click += Item1_Click3; ;
                 kryptonContextMenuItems.Items.Add(item1);
-                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+                codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
             else if (extension == "html")
             {
                 KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
                 kryptonContextMenuHeading.Text = "Suggested Actions";
-                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+                codeContextMenu.Items.Insert(2, kryptonContextMenuHeading);
 
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Render HTML";
                 item1.Click += Item1_Click4;
                 kryptonContextMenuItems.Items.Add(item1);
-                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+                codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
             else if (extension == "md")
             {
                 KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
                 kryptonContextMenuHeading.Text = "Suggested Actions";
-                kryptonContextMenu1.Items.Insert(2, kryptonContextMenuHeading);
+                codeContextMenu.Items.Insert(2, kryptonContextMenuHeading);
 
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Render Markdown";
                 item1.Click += Item1_Click5;
                 kryptonContextMenuItems.Items.Add(item1);
-                kryptonContextMenu1.Items.Insert(3, kryptonContextMenuItems);
+                codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
         }
 
@@ -270,7 +271,6 @@ namespace pie
                 Scintilla TextArea = (Scintilla)sender;
 
                 Globals.lastSelectedIndex = TextArea.CurrentPosition;
-                Console.WriteLine(Globals.lastSelectedIndex);
             }
             else
             {
@@ -307,7 +307,7 @@ namespace pie
             Scintilla TextArea = (Scintilla)sender;
 
             if (e.Button == MouseButtons.Right) {
-                kryptonContextMenu1.Show(sender);
+                codeContextMenu.Show(sender);
             }
 
             Globals.lastSelectedIndex = TextArea.SelectionEnd;
@@ -368,6 +368,8 @@ namespace pie
             }
             else if (tabType == TabType.GIT)
             {
+                tabControl.KryptonContextMenu = gitContextMenu;
+
                 if (Globals.gitTabOpened)
                 {
                     for (int i = 0; i<tabControl.Pages.Count-1; i++)
@@ -396,7 +398,7 @@ namespace pie
                     Globals.firstBrowserTab = false;
                 }
 
-                tabControl.KryptonContextMenu = kryptonContextMenu3;
+                tabControl.KryptonContextMenu = renderContextMenu;
                 ToggleTerminalTabControl(false);
                 ToggleFindReplacePanel(false);
 
@@ -423,7 +425,7 @@ namespace pie
                 }
 
                 IKeyboardHandler keyboardHandler = new PieKeyboardHandler(this);
-                IContextMenuHandler contextMenuHandler = new PieContextMenuHandler(this, kryptonContextMenu3);
+                IContextMenuHandler contextMenuHandler = new PieContextMenuHandler(this, renderContextMenu);
                 chromiumWebBrowser.KeyboardHandler = keyboardHandler;
                 chromiumWebBrowser.MenuHandler = contextMenuHandler;
                 chromiumWebBrowser.FrameLoadEnd += ChromiumWebBrowser_FrameLoadEnd;
@@ -475,7 +477,7 @@ namespace pie
             {
                 this.Invoke(new Action(() =>
                 {
-                    kryptonContextMenu3.Close();
+                    renderContextMenu.Close();
                 }));
             }
         }
@@ -516,13 +518,13 @@ namespace pie
             }
             else if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFileChanges())
             {
-                DialogResult dialogResult = MessageBox.Show("Save file before closing it?", "Save file", MessageBoxButtons.YesNoCancel);
-                if (dialogResult == DialogResult.Yes)
+                ShowYesNoCancelNotification("Save file before closing it?");
+                if (Globals.notificationButtonPressed == NotificationButton.YES)
                 {
                     Save();
                     CloseTabAfterWarning();
                 }
-                else if (dialogResult == DialogResult.No)
+                else if (Globals.notificationButtonPressed == NotificationButton.NO)
                 {
                     CloseTabAfterWarning();
                 }
@@ -830,24 +832,6 @@ namespace pie
             terminalTabControlOpened = status;
         }
 
-        // [Method] Used for Git commands
-        public void ExecuteGitCommand(string command)
-        {
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/K " + "(" + command + ")&(pause)&(exit)";
-
-            try
-            {
-                startInfo.WorkingDirectory = ParsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-                Process.Start(startInfo);
-            }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("Please open a file before launching any Git command.", "Git Error");
-            }
-        }
-
         // [Method] Used for Build commands
         public void ExecuteBuildCommand(string type)
         {
@@ -870,8 +854,28 @@ namespace pie
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Please open a file before launching any build command.", "Build Error");
+                ShowNotification("Please open a file before launching any build command.");
             }
+        }
+
+        public static void ShowNotification(string text)
+        {
+            Globals.notificationText = text;
+
+            NotificationOK notification = new NotificationOK();
+            notification.ShowDialog();
+
+            Globals.notificationText = null;
+        }
+
+        public static void ShowYesNoCancelNotification(string text)
+        {
+            Globals.notificationText = text;
+
+            NotificationYesNoCancel notification = new NotificationYesNoCancel();
+            notification.ShowDialog();
+
+            Globals.notificationText = null;
         }
 
         // [Method] Used for Run commands
@@ -907,7 +911,7 @@ namespace pie
                 }
                 else
                 {
-                    MessageBox.Show("pie can only render files with the .html extension.", "pie");
+                    ShowNotification("pie can only render files with the .html extension.");
                 }
 
                 return;
@@ -924,7 +928,7 @@ namespace pie
                 }
                 else
                 {
-                    MessageBox.Show("pie can only render files with the .md extension.", "pie");
+                    ShowNotification("pie can only render files with the .md extension.");
                 }
 
                 return;
@@ -937,7 +941,7 @@ namespace pie
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Please open a file before launching any run command.", "Build Error");
+                ShowNotification("Please open a file before launching any run command.");
             }
         }
 
@@ -1011,7 +1015,7 @@ namespace pie
 
             try
             {
-                GitCredentials gitCredentials = GitService.ReadCredentialsFromFile();
+                Globals.gitCredentials = GitService.ReadCredentialsFromFile();
             }
             catch (FileNotFoundException ex)
             {
@@ -1031,7 +1035,7 @@ namespace pie
 
         private void SetDynamicDesign()
         {
-            Globals.kryptonPalette = kryptonPalette1;
+            Globals.kryptonPalette = kryptonPalette;
 
             ResetFindPanelLocation();
             kryptonHeaderGroup1.Hide();
@@ -1045,20 +1049,21 @@ namespace pie
                 themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
             }
 
-            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette1, gitStagingAreaListView, Globals.theme);
-            this.Palette = kryptonPalette1;
-            tabControl.Palette = kryptonPalette1;
-            buildTabControl.Palette = kryptonPalette1;
-            kryptonHeaderGroup1.Palette = kryptonPalette1;
-            kryptonContextMenu1.Palette = kryptonPalette1;
-            kryptonContextMenu2.Palette = kryptonPalette1;
-            kryptonContextMenu3.Palette = kryptonPalette1;
-            kryptonLabel1.Palette = kryptonPalette1;
-            findTextBox.Palette = kryptonPalette1;
-            replaceTextBox.Palette = kryptonPalette1;
-            kryptonButton1.Palette = kryptonPalette1;
-            kryptonButton2.Palette = kryptonPalette1;
-            kryptonButton3.Palette = kryptonPalette1;
+            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette, gitStagingAreaListView, Globals.theme);
+            this.Palette = kryptonPalette;
+            tabControl.Palette = kryptonPalette;
+            buildTabControl.Palette = kryptonPalette;
+            kryptonHeaderGroup1.Palette = kryptonPalette;
+            codeContextMenu.Palette = kryptonPalette;
+            terminalContextMenu.Palette = kryptonPalette;
+            renderContextMenu.Palette = kryptonPalette;
+            gitContextMenu.Palette = kryptonPalette;
+            kryptonLabel1.Palette = kryptonPalette;
+            findTextBox.Palette = kryptonPalette;
+            replaceTextBox.Palette = kryptonPalette;
+            kryptonButton1.Palette = kryptonPalette;
+            kryptonButton2.Palette = kryptonPalette;
+            kryptonButton3.Palette = kryptonPalette;
 
             buildTabControl.Hide();
             gitPanel.Hide();
@@ -1087,7 +1092,7 @@ namespace pie
                 }
                 else
                 {
-                    MessageBox.Show("pie could not open " + path + ". Are you sure the file exists?", "pie");
+                    ShowNotification("pie could not open " + path + ". Are you sure the file exists?");
                     Application.Exit();
                     return;
                 }
@@ -1123,12 +1128,6 @@ namespace pie
                 e.Item.ForeColor = Globals.theme == 1 ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
         }
 
-        private void CenterControl(Control child, Control parent)
-        {
-            CenterControlHorizontally(child, parent);
-            CenterControlVertically(child, parent);
-        }
-
         private void CenterControlHorizontally(Control child, Control parent)
         {
             child.Left = (parent.ClientSize.Width - child.Width) / 2;
@@ -1149,7 +1148,7 @@ namespace pie
 
                 if (!status)
                 {
-                    MessageBox.Show("No occurences found.", "pie");
+                    ShowNotification("No occurences found.");
                 }
             }
         }
@@ -1185,7 +1184,7 @@ namespace pie
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Please open a file before launching any run command.", "Build Error");
+                ShowNotification("Please open a file before launching any run command.");
             }
         }
 
@@ -1321,7 +1320,7 @@ namespace pie
             }
             catch (NullReferenceException ex)
             {
-                MessageBox.Show("Please open a file before launching any build commands.", "Build Error");
+                ShowNotification("Please open a file before launching any build commands.");
             }
         }
 
@@ -1335,7 +1334,7 @@ namespace pie
             }
             catch (NullReferenceException ex)
             {
-                MessageBox.Show("Please open a file before launching any run commands.", "Run Error");
+                ShowNotification("Please open a file before launching any run commands.");
             }
         }
 
@@ -1351,7 +1350,7 @@ namespace pie
             {
                 if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
                 {
-                    tabControl.KryptonContextMenu = kryptonContextMenu1;
+                    tabControl.KryptonContextMenu = codeContextMenu;
 
                     DeactivateBuildAndRunOptions();
                     if (tabControl.SelectedIndex != -1 && Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
@@ -1368,11 +1367,11 @@ namespace pie
                 {
                     if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.GIT)
                     {
-                        tabControl.KryptonContextMenu = null;
+                        tabControl.KryptonContextMenu = gitContextMenu;
                     }
                     else
                     {
-                        tabControl.KryptonContextMenu = kryptonContextMenu3;
+                        tabControl.KryptonContextMenu = renderContextMenu;
                     }
 
                     ToggleTerminalTabControl(false);
@@ -1403,74 +1402,6 @@ namespace pie
         private void UpdateFormTitle(String customTitle)
         {
             this.Text = customTitle + " - pie";
-        }
-
-        // [Event] Triggered when user presses one of the buttons in the "Git" tab
-        private void createARepositoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExecuteGitCommand("git init");
-        }
-
-        // [Event] Triggered when user presses one of the buttons in the "Git" tab
-        private void checkRepositoryStatusToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExecuteGitCommand("git status");
-        }
-
-        // [Event] Triggered when user presses one of the buttons in the "Git" tab
-        private void deleteRepositoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string path = ParsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-
-                var dir = new DirectoryInfo(path + ".git");
-                if (dir.Exists)
-                {
-                    dir.Delete(true);
-                    MessageBox.Show("Local repository was successfully deleted.", "Git Info");
-                }
-                else
-                {
-                    MessageBox.Show("Repository doesn't exist.", "Git Error");
-                }
-            }
-            catch (NullReferenceException ex)
-            {
-                MessageBox.Show("Please open a file before launching any git commands.", "Git Error");
-            }
-        }
-
-        // [Event] Triggered when user presses one of the buttons in the "Git" tab
-        private void commitYourChangesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Globals.commitMessage = null;
-
-            GitCredentialsForm commitMessageForm = new GitCredentialsForm();
-            commitMessageForm.ShowDialog();
-
-            if (Globals.commitMessage != null)
-            {
-                ExecuteGitCommand("git commit -m \"" + Globals.commitMessage + "\"");
-            }
-        }
-
-        // [Event] Triggered when user presses one of the buttons in the "Git" tab
-        private void addChangesToStagingAreaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExecuteGitCommand("git add .");
-        }
-
-        // [Event] Triggered when user presses one of the buttons in the "Git" tab
-        private void pushToRemoteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExecuteGitCommand("git push");
-        }
-
-        // [Event] Triggered when user presses one of the buttons in the "Git" tab
-        private void pullFromRemoteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExecuteGitCommand("git pull");
         }
 
         private void buildTabControl_TabCountChanged(object sender, EventArgs e)
@@ -1677,7 +1608,7 @@ namespace pie
 
             if (!status)
             {
-                MessageBox.Show("No occurences found.", "pie");
+                ShowNotification("No occurences found.");
             }
         }
 
@@ -1776,7 +1707,7 @@ namespace pie
                 }
             }
 
-            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette1, gitStagingAreaListView,  Globals.theme);
+            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette, gitStagingAreaListView,  Globals.theme);
             UpdateGitRepositoryInfo();
         }
 
@@ -1798,25 +1729,41 @@ namespace pie
             if (dialogResult == DialogResult.OK)
             {
                 string selectedPath = dialog.SelectedPath;
-                string repo = Repository.Discover(selectedPath);
 
-                if (repo == null)
+                OpenRepository(selectedPath);
+            }    
+        }
+
+        private void OpenRepository(string path)
+        {
+            string repo = Repository.Discover(path);
+
+            if (repo == null)
+            {
+                ShowYesNoCancelNotification("No repository found at specified path. Would you like to initialize a new repository?");
+
+                if (Globals.notificationButtonPressed == NotificationButton.YES)
                 {
-                    DialogResult noRepositoryDialogResult = MessageBox.Show("No repository found at specified path. Would you like to initialize a new repository?", "Git - pie", MessageBoxButtons.YesNoCancel);
+                    Repository.Init(path);
+                    repositoryTextBox.Text = path;
+                    UpdateGitRepositoryInfo();
 
-                    if (noRepositoryDialogResult == DialogResult.Yes)
+                    if (gitBranchesComboBox.Items.Count > 0)
                     {
-                        Repository.Init(selectedPath);
-                        repositoryTextBox.Text = selectedPath;
-                        UpdateGitRepositoryInfo();
+                        gitBranchesComboBox.SelectedIndex = Globals.selectedBranchIndex;
                     }
                 }
-                else
+            }
+            else
+            {
+                repositoryTextBox.Text = path;
+                UpdateGitRepositoryInfo();
+
+                if (gitBranchesComboBox.Items.Count > 0)
                 {
-                    repositoryTextBox.Text = selectedPath;
-                    UpdateGitRepositoryInfo();
+                    gitBranchesComboBox.SelectedIndex = Globals.selectedBranchIndex;
                 }
-            }    
+            }
         }
 
         private void UpdateGitRepositoryInfo()
@@ -1867,6 +1814,18 @@ namespace pie
             }
 
             gitStagingAreaListView.SetObjects(gitFileList);
+
+            gitBranchesComboBox.Items.Clear();
+
+            foreach(var branch in Globals.repo.Branches)
+            {
+                gitBranchesComboBox.Items.Add(branch.FriendlyName);
+            }
+
+            if (gitBranchesComboBox.Items.Count > 0)
+            {
+                gitBranchesComboBox.SelectedIndex = 0;
+            }
         }
 
         private void kryptonButton4_Click(object sender, EventArgs e)
@@ -1876,15 +1835,7 @@ namespace pie
 
         private void gitStagingAreaListView_DoubleClick(object sender, EventArgs e)
         {
-            if (gitStagingAreaListView.SelectedItems.Count != 0)
-            {
-                foreach(var gitFile in gitStagingAreaListView.SelectedObjects)
-                {
-                    string fileName = ((GitFile)gitFile).Name;
-                    NewTab(TabType.CODE, null);
-                    Open(repositoryTextBox.Text + "\\" + fileName);
-                }
-            }
+            OpenSelectedGitFiles();
         }
 
         private void kryptonButton8_Click(object sender, EventArgs e)
@@ -1893,9 +1844,13 @@ namespace pie
             {
                 UpdateGitRepositoryInfo();
             }
+            else
+            {
+                ShowNotification("No repository opened.");
+            }
         }
 
-        private void GitCommit()
+        private void GitCommit(string files)
         {
             if (Globals.repo != null)
             {
@@ -1903,18 +1858,18 @@ namespace pie
 
                 if (status.IsDirty)
                 {
-                    Commands.Stage(Globals.repo, "*");
+                    Commands.Stage(Globals.repo, files);
 
-                    if (Globals.gitCredentials == null)
+                    if (Globals.gitCredentials.Name == null || Globals.gitCredentials.Email == null)
                     {
-                        GitCredentialsForm gitCredentialsForm = new GitCredentialsForm();
+                        GitCommitCredentialsForm gitCredentialsForm = new GitCommitCredentialsForm();
                         Globals.gitFormClosedWithOk = false;
                         gitCredentialsForm.ShowDialog();
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email);
-                            GitCommit();
+                            File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+                            GitCommit(files);
                         }
                     }
                     else
@@ -1922,18 +1877,295 @@ namespace pie
                         Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
                         Globals.repo.Commit(commitMessageRichTextBox.Text, signature, signature);
                         UpdateGitRepositoryInfo();
+                        ShowNotification("Successfully commited.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("You have nothing to commit.", "Git - pie");
+                    ShowNotification("You have nothing to commit.");
                 }
             }
         }
 
         private void kryptonButton6_Click(object sender, EventArgs e)
         {
-            GitCommit();
-       }
+            if (Globals.repo != null)
+            {
+                GitCommit("*");
+            }
+            else
+            {
+                ShowNotification("No repository opened.");
+            }
+        }
+
+        private void kryptonContextMenuItem9_Click(object sender, EventArgs e)
+        {
+            NewTab(TabType.CODE, null);
+        }
+
+        private void kryptonContextMenuItem11_Click(object sender, EventArgs e)
+        {
+            CloseTab();
+        }
+
+        private void RemoveGitActions()
+        {
+            if (((KryptonContextMenuHeading)codeContextMenu.Items[2]).Text == "Git")
+            {
+                codeContextMenu.Items.RemoveAt(3);
+                codeContextMenu.Items.RemoveAt(2);
+            }
+        }
+
+        private void gitContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            RemoveGitActions();
+
+            if (gitStagingAreaListView.SelectedItems.Count != 0)
+            {
+                KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
+                kryptonContextMenuHeading.Text = "Git";
+
+                KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
+
+                KryptonContextMenuItem kryptonContextMenuItem = new KryptonContextMenuItem();
+                kryptonContextMenuItem.Text = "Open selected files";
+                kryptonContextMenuItem.Click += KryptonContextMenuItem_Click;
+                kryptonContextMenuItems.Items.Add(kryptonContextMenuItem);
+
+                kryptonContextMenuItem = new KryptonContextMenuItem();
+                kryptonContextMenuItem.Text = "Commit selected files";
+                kryptonContextMenuItem.Click += KryptonContextMenuItem_Click1;
+                kryptonContextMenuItems.Items.Add(kryptonContextMenuItem);
+
+                kryptonContextMenuItem = new KryptonContextMenuItem();
+                kryptonContextMenuItem.Text = "Revert selected files";
+                kryptonContextMenuItem.Click += KryptonContextMenuItem_Click2; ;
+                kryptonContextMenuItems.Items.Add(kryptonContextMenuItem);
+            }
+        }
+
+        private void KryptonContextMenuItem_Click2(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void KryptonContextMenuItem_Click1(object sender, EventArgs e)
+        {
+            string items = "";
+
+            foreach (var gitFile in gitStagingAreaListView.SelectedObjects)
+            {
+                items += ((GitFile)gitFile).Name;
+                items += " ";
+            }
+
+            GitCommit(items);
+        }
+
+        private void KryptonContextMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSelectedGitFiles();
+        }
+
+        private void OpenSelectedGitFiles()
+        {
+            if (gitStagingAreaListView.SelectedItems.Count != 0)
+            {
+                foreach (var gitFile in gitStagingAreaListView.SelectedObjects)
+                {
+                    string fileName = ((GitFile)gitFile).Name;
+                    NewTab(TabType.CODE, null);
+                    Open(repositoryTextBox.Text + "\\" + fileName);
+                }
+            }
+        }
+        
+        private void GitPush()
+        {
+            if (Globals.repo != null)
+            {
+                var branch = Globals.selectedBranch;
+
+                if (true)
+                {
+                    if (Globals.gitCredentials.Name == null || Globals.gitCredentials.Email == null)
+                    {
+                        GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
+                        Globals.gitFormClosedWithOk = false;
+                        gitCredentialsForm.ShowDialog();
+
+                        if (Globals.gitFormClosedWithOk)
+                        {
+                            File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+                            GitPush();
+                        }
+                    }
+                    else
+                    {
+                        Remote remote = Globals.repo.Network.Remotes["origin"];
+
+                        Globals.repo.Branches.Update(Globals.repo.Branches["master"],
+                            b => b.Remote = remote.Name,
+                            b => b.UpstreamBranch = Globals.repo.Branches["master"].CanonicalName);
+
+                        // Push the branch to the remote                        
+                        var pushOptions = new LibGit2Sharp.PushOptions();
+                        pushOptions.CredentialsProvider = new LibGit2Sharp.Handlers.CredentialsHandler(
+                           (url, usernameFromUrl, types) =>
+                               new LibGit2Sharp.UsernamePasswordCredentials()
+                               {
+                                   Username = Globals.gitCredentials.Username,
+                                   Password = Globals.gitCredentials.Password
+                               });
+
+                        try
+                        {
+                            Globals.repo.Network.Push(Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()], pushOptions);
+                            ShowNotification("Successfully pushed to remote.");
+                            UpdateGitRepositoryInfo();
+                        } catch(LibGit2SharpException ex)
+                        {
+                            ShowNotification("Authentication failed. If pushing on GitHub, generate an access token (with proper permissions) instead of using the password.");
+                        }
+                    }
+                }
+                else
+                {
+                    ShowNotification("Repository is not remote. Click 'OK' to see how to add the repository on GitHub");
+                    Process.Start("https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-using-git");
+                }
+            }
+            else
+            {
+                ShowNotification("No repository opened.");
+            }
+        }
+
+        private void kryptonButton7_Click(object sender, EventArgs e)
+        {
+            GitPush();
+        }
+
+        private void kryptonComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Globals.repo != null)
+            {
+                foreach (var branch in Globals.repo.Branches)
+                {
+                    if (branch.FriendlyName == gitBranchesComboBox.Text)
+                    {
+                        Globals.selectedBranch = branch;
+                        Globals.selectedBranchIndex = gitBranchesComboBox.SelectedIndex;
+                    }
+                }
+            }
+            else
+            {
+                ShowNotification("No repository opened.");
+            }
+        }
+
+        private void manageCommitCredentialsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GitCommitCredentialsForm gitCredentialsForm = new GitCommitCredentialsForm();
+            Globals.gitFormClosedWithOk = false;
+            gitCredentialsForm.ShowDialog();
+
+            if (Globals.gitFormClosedWithOk)
+            {
+                File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+            }
+        }
+
+        private void managePushCredentialsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
+            Globals.gitFormClosedWithOk = false;
+            gitCredentialsForm.ShowDialog();
+
+            if (Globals.gitFormClosedWithOk)
+            {
+                File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+            }
+        }
+
+        private void kryptonButton9_Click(object sender, EventArgs e)
+        {
+            GitCloneForm gitCloneForm = new GitCloneForm();
+            gitCloneForm.ShowDialog();
+
+            if (Globals.clonePath != null)
+            {
+                OpenRepository(Globals.clonePath);
+            }
+        }
+
+        private void kryptonButton10_Click(object sender, EventArgs e)
+        {
+            GitPull();
+        }
+
+        private void GitPull()
+        {
+            if (Globals.repo != null)
+            {
+                if (Globals.gitCredentials.Username == null || Globals.gitCredentials.Password == null)
+                {
+                    GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
+                    Globals.gitFormClosedWithOk = false;
+                    gitCredentialsForm.ShowDialog();
+
+                    if (Globals.gitFormClosedWithOk)
+                    {
+                        File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+                        GitPull();
+                    }
+                }
+                else
+                {
+                    var pullOptions = new PullOptions();
+
+                    pullOptions.FetchOptions = new FetchOptions();
+
+                    pullOptions.FetchOptions.CredentialsProvider = new LibGit2Sharp.Handlers.CredentialsHandler(
+                        (_url, _user, _cred) => new UsernamePasswordCredentials()
+                        {
+                            Username = Globals.gitCredentials.Username,
+                            Password = Globals.gitCredentials.Password
+                        });
+
+                    Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
+                    Commands.Pull(Globals.repo, signature, pullOptions);
+                    try
+                    {
+                        UpdateGitRepositoryInfo();
+                        ShowNotification("Pull successful.");
+                    }
+                    catch (LibGit2SharpException ex)
+                    {
+                        ShowNotification(ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                ShowNotification("No repository opened.");
+            }
+        }
+
+        private void kryptonButton11_Click(object sender, EventArgs e)
+        {
+            if (Globals.repo != null)
+            {
+                GitCommitLogForm gitCommitLogForm = new GitCommitLogForm();
+                gitCommitLogForm.ShowDialog();
+            }
+            else
+            {
+                ShowNotification("No repository opened.");
+            }
+        }
     }
 }

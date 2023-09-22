@@ -77,6 +77,30 @@ namespace pie.Services
             }
         }
 
+        public static Color GetButtonHoverColor()
+        {
+            if (Globals.theme == 1)
+            {
+                return darkColorDictionary["ButtonHover"];
+            }
+            else
+            {
+                return lightColorDictionary["ButtonHover"];
+            }
+        }
+
+        public static Color GetButtonFrameColor()
+        {
+            if (Globals.theme == 1)
+            {
+                return darkColorDictionary["ButtonFrame"];
+            }
+            else
+            {
+                return lightColorDictionary["ButtonFrame"];
+            }
+        }
+
         public static Color GetTextAreaBackColor()
         {
             if (Globals.theme == 1)
@@ -137,7 +161,7 @@ namespace pie.Services
             }
         }
 
-        public static void SetPaletteToTheme(KryptonDockableNavigator tabControl, KryptonPage kryptonPage, MenuStrip menuStrip, KryptonPalette kryptonPalette, ObjectListView objectListView, int theme)
+        public static void SetPaletteToTheme(KryptonDockableNavigator tabControl, KryptonPage kryptonPage, MenuStrip menuStrip, KryptonPalette kryptonPalette, ObjectListView gitStagingAreaListView, int theme)
         {
             if (!dictionariesInitialized)
             {
@@ -316,8 +340,8 @@ namespace pie.Services
             kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color2 = colorDictionary["Fore"];
 
             // ObjectListView
-            objectListView.BackColor = colorDictionary["Primary"];
-            objectListView.ForeColor = colorDictionary["Fore"];
+            gitStagingAreaListView.BackColor = colorDictionary["Primary"];
+            gitStagingAreaListView.ForeColor = colorDictionary["Fore"];
 
             var headerstyle = new HeaderFormatStyle();
             headerstyle.Normal.BackColor = colorDictionary["Secondary"];
@@ -329,7 +353,7 @@ namespace pie.Services
             headerstyle.Pressed.BackColor = colorDictionary["ButtonFrame"];
             headerstyle.Pressed.ForeColor = colorDictionary["Fore"];            
            
-            objectListView.HeaderFormatStyle = headerstyle;
+            gitStagingAreaListView.HeaderFormatStyle = headerstyle;
 
             if (theme == 1)
             {

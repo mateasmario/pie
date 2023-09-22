@@ -66,7 +66,7 @@
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(192, 38);
             this.kryptonLabel1.TabIndex = 2;
-            this.kryptonLabel1.Values.Text = "Version 1.0918\r\nPublished on September 18, 2023";
+            this.kryptonLabel1.Values.Text = "Version 1.0922\r\nPublished on September 22, 2023";
             // 
             // kryptonLabel3
             // 
@@ -111,7 +111,7 @@
             this.MaximizeBox = false;
             this.Name = "AboutForm";
             this.ShowIcon = false;
-            this.Text = "About - pie";
+            this.Text = "About";
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();

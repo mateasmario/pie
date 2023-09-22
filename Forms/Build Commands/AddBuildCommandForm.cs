@@ -31,7 +31,7 @@ namespace pie
         {
             if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "")
             {
-                MessageBox.Show("Display Name and Command cannot be empty.");
+                MainForm.ShowNotification("Display Name and Command cannot be empty.");
             }
             else
             {
