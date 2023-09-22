@@ -17,13 +17,19 @@ namespace pie.Services
             IEnumerable<string> lines = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "git.config");
             List<string> lineList = lines.ToList();
 
-            if (lineList.Count != 2)
+            if (lineList.Count < 2)
             {
-                return null;
+                return gitCredentials;
             }
 
             gitCredentials.Name = lineList[0];
             gitCredentials.Email = lineList[1];
+
+            if (lineList.Count == 4)
+            {
+                gitCredentials.Username = lineList[2];
+                gitCredentials.Password = lineList[3];
+            }
 
             return gitCredentials;
         }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using pie.Classes;
 using System.IO;
 using ComponentFactory.Krypton.Toolkit;
+using pie.Enums;
 
 namespace pie
 {
@@ -47,7 +48,7 @@ namespace pie
         {
             if (kryptonListBox2.SelectedItems.Count == 0)
             {
-                MessageBox.Show("Please choose an item to delete.", "Build Commands");
+                MainForm.ShowNotification("Please choose an item to delete.");
             }
             else
             {
@@ -81,7 +82,7 @@ namespace pie
 
                 if (kryptonListBox2.Items.Contains(buildCommand.getName()))
                 {
-                    MessageBox.Show("A command with the same name already exists.", "Build Commands");
+                    MainForm.ShowNotification("A command with the same name already exists.");
                 }
                 else
                 {
@@ -100,10 +101,10 @@ namespace pie
                 buildCommands += buildCommand.getCommand() + Environment.NewLine;
             }
 
-            File.WriteAllText("build-commands.config", buildCommands);
+            File.WriteAllText("build.config", buildCommands);
 
-            DialogResult dialogResult = MessageBox.Show("Close pie and reopen it manually, in order for the changes to take effect?", "Build Commands", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            MainForm.ShowYesNoCancelNotification("Close pie and reopen it manually, in order for the changes to take effect?");
+            if (Globals.notificationButtonPressed == NotificationButton.YES)
             {
                 Globals.closeAfterApplyingChanges = true;
             }

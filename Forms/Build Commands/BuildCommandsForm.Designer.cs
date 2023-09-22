@@ -161,7 +161,7 @@
             this.MaximizeBox = false;
             this.Name = "BuildCommandsForm";
             this.ShowIcon = false;
-            this.Text = "Build Commands - pie";
+            this.Text = "Build Commands";
             this.Load += new System.EventHandler(this.BuildCommandsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.kryptonPage1.ResumeLayout(false);

@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace pie
 {
-    public partial class GitCredentialsForm : KryptonForm
+    public partial class GitCommitCredentialsForm : KryptonForm
     {
-        public GitCredentialsForm()
+        public GitCommitCredentialsForm()
         {
             InitializeComponent();
 
@@ -31,11 +31,8 @@ namespace pie
         {
             if (kryptonTextBox1.Text != "" && kryptonTextBox2.Text != "")
             {
-                GitCredentials gitCredentials = new GitCredentials();
-                gitCredentials.Name = kryptonTextBox1.Text;
-                gitCredentials.Email = kryptonTextBox2.Text;
-
-                Globals.gitCredentials = gitCredentials;
+                Globals.gitCredentials.Name = kryptonTextBox1.Text;
+                Globals.gitCredentials.Email = kryptonTextBox2.Text;
 
                 Globals.gitFormClosedWithOk = true;
 
@@ -43,7 +40,20 @@ namespace pie
             }
             else
             {
-                MessageBox.Show("Author Name and Email cannot be blank.");
+                MainForm.ShowNotification("Author Name and Email cannot be blank.");
+            }
+        }
+
+        private void GitCommitCredentialsForm_Load(object sender, EventArgs e)
+        {
+            if (Globals.gitCredentials.Name != null)
+            {
+                kryptonTextBox1.Text = Globals.gitCredentials.Name;
+            }
+
+            if (Globals.gitCredentials.Email != null)
+            {
+                kryptonTextBox2.Text = Globals.gitCredentials.Email;
             }
         }
     }
