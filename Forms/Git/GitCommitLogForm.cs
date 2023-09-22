@@ -1,18 +1,32 @@
-﻿using BrightIdeasSoftware;
-using ComponentFactory.Krypton.Toolkit;
-using LibGit2Sharp;
-using pie.Classes;
+﻿using pie.Classes;
 using pie.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
+/**
+ * This namespace provides access to the ObjectListView control.
+ * Licensed under GNU General Public License (GPL 3.0). For more info, see https://www.gnu.org/licenses/gpl-3.0.html 
+ * 
+ * Author of the library: Phillip Piper
+ * Copyright 2006-2016 Bright Ideas Software
+ */
+using BrightIdeasSoftware;
+
+/**
+ * LibGit2Sharp is used for integrating several advanced Git functionalities into pie.
+ * 
+ * Copyright (c) LibGit2Sharp contributors
+ */
+using LibGit2Sharp;
+
+/** 
+ * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
+ * 
+ * Copyright (c) 2017 - 2022, Krypton Suite
+*/
+using ComponentFactory.Krypton.Toolkit;
 
 namespace pie
 {

@@ -1,11 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using LibGit2Sharp;
 using pie.Classes;
 using pie.Enums;
+
+/** 
+ * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
+ * 
+ * Copyright (c) 2017 - 2022, Krypton Suite
+*/
+using ComponentFactory.Krypton.Toolkit;
+
+/**
+ * LibGit2Sharp is used for integrating several advanced Git functionalities into pie.
+ * 
+ * Copyright (c) LibGit2Sharp contributors
+ */
+using LibGit2Sharp;
 
 namespace pie
 {
