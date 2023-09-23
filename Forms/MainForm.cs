@@ -87,7 +87,7 @@ using BrightIdeasSoftware;
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
-
+using System.Linq;
 
 namespace pie
 {
@@ -1139,7 +1139,7 @@ namespace pie
                 themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
             }
 
-            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette, gitStagingAreaListView, Globals.theme);
+            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette, gitStagingAreaListView, kryptonHeaderGroup1, Globals.theme);
             this.Palette = kryptonPalette;
             tabControl.Palette = kryptonPalette;
             buildTabControl.Palette = kryptonPalette;
@@ -1790,7 +1790,7 @@ namespace pie
                 }
             }
 
-            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette, gitStagingAreaListView,  Globals.theme);
+            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette, gitStagingAreaListView, kryptonHeaderGroup1, Globals.theme);
             UpdateGitRepositoryInfo();
         }
 
@@ -1933,7 +1933,7 @@ namespace pie
             }
         }
 
-        private void GitCommit(string files)
+        private void GitCommit(string items)
         {
             if (Globals.repo != null)
             {
@@ -1941,7 +1941,21 @@ namespace pie
 
                 if (status.IsDirty)
                 {
-                    Commands.Stage(Globals.repo, files);
+                    if (items != "*")
+                    {
+                        List<string> files = items.Split(' ').ToList();
+
+                        if (files[files.Count-1] == "")
+                        {
+                            files.RemoveAt(files.Count - 1);
+                        }
+
+                        Commands.Stage(Globals.repo, files);
+                    }
+                    else
+                    {
+                        Commands.Stage(Globals.repo, items);
+                    }
 
                     if (Globals.gitCredentials.Name == null || Globals.gitCredentials.Email == null)
                     {
@@ -1952,7 +1966,7 @@ namespace pie
                         if (Globals.gitFormClosedWithOk)
                         {
                             File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
-                            GitCommit(files);
+                            GitCommit(items);
                         }
                     }
                     else
@@ -1994,10 +2008,10 @@ namespace pie
 
         private void RemoveGitActions()
         {
-            if (((KryptonContextMenuHeading)codeContextMenu.Items[2]).Text == "Git")
+            if (gitContextMenu.Items.Count >= 3 && ((KryptonContextMenuHeading)gitContextMenu.Items[2]).Text == "Git")
             {
-                codeContextMenu.Items.RemoveAt(3);
-                codeContextMenu.Items.RemoveAt(2);
+                gitContextMenu.Items.RemoveAt(3);
+                gitContextMenu.Items.RemoveAt(2);
             }
         }
 
@@ -2014,24 +2028,19 @@ namespace pie
 
                 KryptonContextMenuItem kryptonContextMenuItem = new KryptonContextMenuItem();
                 kryptonContextMenuItem.Text = "Open selected files";
+                kryptonContextMenuItem.Image = Properties.Resources.git;
                 kryptonContextMenuItem.Click += KryptonContextMenuItem_Click;
                 kryptonContextMenuItems.Items.Add(kryptonContextMenuItem);
 
                 kryptonContextMenuItem = new KryptonContextMenuItem();
                 kryptonContextMenuItem.Text = "Commit selected files";
+                kryptonContextMenuItem.Image = Properties.Resources.git;
                 kryptonContextMenuItem.Click += KryptonContextMenuItem_Click1;
                 kryptonContextMenuItems.Items.Add(kryptonContextMenuItem);
 
-                kryptonContextMenuItem = new KryptonContextMenuItem();
-                kryptonContextMenuItem.Text = "Revert selected files";
-                kryptonContextMenuItem.Click += KryptonContextMenuItem_Click2; ;
-                kryptonContextMenuItems.Items.Add(kryptonContextMenuItem);
+                gitContextMenu.Items.Add(kryptonContextMenuHeading);
+                gitContextMenu.Items.Add(kryptonContextMenuItems);
             }
-        }
-
-        private void KryptonContextMenuItem_Click2(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void KryptonContextMenuItem_Click1(object sender, EventArgs e)

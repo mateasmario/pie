@@ -443,29 +443,29 @@
             // newFileToolStripMenuItem
             // 
             this.newFileToolStripMenuItem.Name = "newFileToolStripMenuItem";
-            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.newFileToolStripMenuItem.Text = "New File";
+            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newFileToolStripMenuItem.Text = "New";
             this.newFileToolStripMenuItem.Click += new System.EventHandler(this.newFileToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.openToolStripMenuItem.Text = "Open File";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveFileToolStripMenuItem
             // 
             this.saveFileToolStripMenuItem.Name = "saveFileToolStripMenuItem";
-            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.saveFileToolStripMenuItem.Text = "Save File";
+            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveFileToolStripMenuItem.Text = "Save";
             this.saveFileToolStripMenuItem.Click += new System.EventHandler(this.saveFileToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.saveAsToolStripMenuItem.Text = "Save As";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // designToolStripMenuItem
@@ -483,15 +483,15 @@
             // 
             this.showBuildToolsToolStripMenuItem.Image = global::pie.Properties.Resources.terminal;
             this.showBuildToolsToolStripMenuItem.Name = "showBuildToolsToolStripMenuItem";
-            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
             this.showBuildToolsToolStripMenuItem.Click += new System.EventHandler(this.showBuildToolsToolStripMenuItem_Click);
             // 
             // showGitTabToolStripMenuItem
             // 
-            this.showGitTabToolStripMenuItem.Image = global::pie.Properties.Resources.github;
+            this.showGitTabToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showGitTabToolStripMenuItem.Image")));
             this.showGitTabToolStripMenuItem.Name = "showGitTabToolStripMenuItem";
-            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showGitTabToolStripMenuItem.Text = "Show Git Tab";
             this.showGitTabToolStripMenuItem.Click += new System.EventHandler(this.showGitTabToolStripMenuItem_Click);
             // 
@@ -500,7 +500,7 @@
             this.themeSettingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.crescent_moon;
             this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
-            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.themeSettingsToolStripMenuItem.Text = "Toggle Dark Mode";
             this.themeSettingsToolStripMenuItem.Click += new System.EventHandler(this.themeSettingsToolStripMenuItem_Click);
             // 
@@ -508,7 +508,7 @@
             // 
             this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info;
             this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
-            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutPieToolStripMenuItem.Text = "About pie";
             this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
             // 
@@ -620,22 +620,24 @@
             // manageBuildCommandsToolStripMenuItem
             // 
             this.manageBuildCommandsToolStripMenuItem.Name = "manageBuildCommandsToolStripMenuItem";
-            this.manageBuildCommandsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.manageBuildCommandsToolStripMenuItem.Text = "Manage Build Commands";
+            this.manageBuildCommandsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manageBuildCommandsToolStripMenuItem.Text = "Build Commands";
             this.manageBuildCommandsToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // manageCommitCredentialsToolStripMenuItem
             // 
+            this.manageCommitCredentialsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageCommitCredentialsToolStripMenuItem.Image")));
             this.manageCommitCredentialsToolStripMenuItem.Name = "manageCommitCredentialsToolStripMenuItem";
-            this.manageCommitCredentialsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.manageCommitCredentialsToolStripMenuItem.Text = "Manage Commit Credentials";
+            this.manageCommitCredentialsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manageCommitCredentialsToolStripMenuItem.Text = "Commit Credentials";
             this.manageCommitCredentialsToolStripMenuItem.Click += new System.EventHandler(this.manageCommitCredentialsToolStripMenuItem_Click);
             // 
             // managePushCredentialsToolStripMenuItem
             // 
+            this.managePushCredentialsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("managePushCredentialsToolStripMenuItem.Image")));
             this.managePushCredentialsToolStripMenuItem.Name = "managePushCredentialsToolStripMenuItem";
-            this.managePushCredentialsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.managePushCredentialsToolStripMenuItem.Text = "Manage Push Credentials";
+            this.managePushCredentialsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.managePushCredentialsToolStripMenuItem.Text = "Push Credentials";
             this.managePushCredentialsToolStripMenuItem.Click += new System.EventHandler(this.managePushCredentialsToolStripMenuItem_Click);
             // 
             // kryptonRibbon1
@@ -764,6 +766,7 @@
             this.kryptonButton9.TabIndex = 3;
             this.kryptonButton9.Values.Text = "Clone a repo";
             this.kryptonButton9.Click += new System.EventHandler(this.kryptonButton9_Click);
+            this.kryptonButton9.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // repositoryTextBox
             // 
@@ -776,6 +779,7 @@
             this.repositoryTextBox.ReadOnly = true;
             this.repositoryTextBox.Size = new System.Drawing.Size(760, 23);
             this.repositoryTextBox.TabIndex = 2;
+            this.repositoryTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // kryptonButton5
             // 
@@ -788,6 +792,7 @@
             this.kryptonButton5.TabIndex = 0;
             this.kryptonButton5.Values.Text = "Open local repo";
             this.kryptonButton5.Click += new System.EventHandler(this.kryptonButton5_Click);
+            this.kryptonButton5.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // gitPanel
             // 
@@ -832,6 +837,7 @@
             this.gitStagingAreaListView.UseCompatibleStateImageBehavior = false;
             this.gitStagingAreaListView.View = System.Windows.Forms.View.Details;
             this.gitStagingAreaListView.DoubleClick += new System.EventHandler(this.gitStagingAreaListView_DoubleClick);
+            this.gitStagingAreaListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // olvColumn1
             // 
@@ -876,6 +882,7 @@
             this.kryptonButton11.TabIndex = 10;
             this.kryptonButton11.Values.Text = "Show commit log";
             this.kryptonButton11.Click += new System.EventHandler(this.kryptonButton11_Click);
+            this.kryptonButton11.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // kryptonButton10
             // 
@@ -888,6 +895,7 @@
             this.kryptonButton10.TabIndex = 9;
             this.kryptonButton10.Values.Text = "Pull from remote";
             this.kryptonButton10.Click += new System.EventHandler(this.kryptonButton10_Click);
+            this.kryptonButton10.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // gitBranchesComboBox
             // 
@@ -900,6 +908,7 @@
             this.gitBranchesComboBox.Size = new System.Drawing.Size(190, 21);
             this.gitBranchesComboBox.TabIndex = 8;
             this.gitBranchesComboBox.SelectedIndexChanged += new System.EventHandler(this.kryptonComboBox1_SelectedIndexChanged);
+            this.gitBranchesComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // kryptonButton7
             // 
@@ -912,6 +921,7 @@
             this.kryptonButton7.TabIndex = 7;
             this.kryptonButton7.Values.Text = "Push commited files";
             this.kryptonButton7.Click += new System.EventHandler(this.kryptonButton7_Click);
+            this.kryptonButton7.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // commitMessageRichTextBox
             // 
@@ -922,6 +932,7 @@
             this.commitMessageRichTextBox.Size = new System.Drawing.Size(190, 71);
             this.commitMessageRichTextBox.TabIndex = 6;
             this.commitMessageRichTextBox.Text = "Commit message";
+            this.commitMessageRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // kryptonButton8
             // 
@@ -934,6 +945,7 @@
             this.kryptonButton8.TabIndex = 5;
             this.kryptonButton8.Values.Text = "Refresh repository status";
             this.kryptonButton8.Click += new System.EventHandler(this.kryptonButton8_Click);
+            this.kryptonButton8.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // kryptonButton6
             // 
@@ -946,6 +958,7 @@
             this.kryptonButton6.TabIndex = 3;
             this.kryptonButton6.Values.Text = "Commit altered files";
             this.kryptonButton6.Click += new System.EventHandler(this.kryptonButton6_Click);
+            this.kryptonButton6.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // gitContextMenu
             // 

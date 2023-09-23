@@ -162,7 +162,7 @@ namespace pie.Services
             }
             else
             {
-                return Color.FromArgb(229, 229, 229);
+                return Color.FromArgb(235, 235, 235);
             }
         }
 
@@ -190,7 +190,7 @@ namespace pie.Services
             }
         }
 
-        public static void SetPaletteToTheme(KryptonDockableNavigator tabControl, KryptonPage kryptonPage, MenuStrip menuStrip, KryptonPalette kryptonPalette, ObjectListView gitStagingAreaListView, int theme)
+        public static void SetPaletteToTheme(KryptonDockableNavigator tabControl, KryptonPage kryptonPage, MenuStrip menuStrip, KryptonPalette kryptonPalette, ObjectListView gitStagingAreaListView, KryptonHeaderGroup findReplaceHeaderGroup, int theme)
         {
             if (!dictionariesInitialized)
             {
@@ -307,9 +307,16 @@ namespace pie.Services
             kryptonPalette.HeaderStyles.HeaderForm.StateCommon.Content.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.HeaderStyles.HeaderForm.StateCommon.Content.ShortText.Color2 = colorDictionary["Fore"];
 
+            // HeaderGroup
+            findReplaceHeaderGroup.StateCommon.Border.Color1 = colorDictionary["FormBorder"];
+            findReplaceHeaderGroup.StateCommon.Border.Color2 = colorDictionary["FormBorder"];
+
             // InputControl
             kryptonPalette.InputControlStyles.InputControlCommon.StateCommon.Back.Color1 = colorDictionary["Primary"];
             kryptonPalette.InputControlStyles.InputControlCommon.StateCommon.Back.Color2 = colorDictionary["Primary"];
+
+            kryptonPalette.InputControlStyles.InputControlCommon.StateCommon.Border.Color1 = colorDictionary["FormBorder"];
+            kryptonPalette.InputControlStyles.InputControlCommon.StateCommon.Border.Color2 = colorDictionary["FormBorder"];
 
             kryptonPalette.InputControlStyles.InputControlCommon.StateCommon.Content.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.InputControlStyles.InputControlCommon.StateCommon.Content.ShortText.Color2 = colorDictionary["Fore"];

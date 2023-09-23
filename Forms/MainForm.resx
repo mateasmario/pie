@@ -126,16 +126,56 @@
   <metadata name="renderContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>339, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="showGitTabToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAAHUAAAB1AePCB2UAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
+        AAABkklEQVQ4T2OgKijbaM1bvcUpFIitoELEg4bNvlw1m52uzT6ae6d9V+Cr6s1OFVAp4kDdRmfXyfuT
+        Hzz7cP3/5Wf7r9dsdrwHlSIO1Gx2VW3a5vXh2P3152cdzT0A9MYuqBTxoHqzc3TTJofrQLyrequTPFSY
+        NPB7lejlefMSJ0K5KOD/VQY2KBM3+H+Ab7dSz847hquei0KFgGK8tkDxp0D86/9+/h6oMHYAMkC7b8sF
+        ndUPnwPxRKmpF2c93q1y+f+z2U/+v9//6f9BoRdAQ0ygyjEByAt/14oU6K1+ZKuz+lG3+OSLux/u1Lj9
+        /+m82/+/3/z2/4DQI5CLoMpRwTMrk9hnDsY3ntkb73puYaEAFWb4f5AnCOiyT/8P8H/4f5B3zf//DExQ
+        KQR4YmOm9tzZ/sO3/YdfvW+oO/PU2mQ3VAoM/u8W5P9/mF8JysUEQA2uL2IiHvx+/Oz/9727Lz+1NCEt
+        IT0zNuZ6aml89Zmny+Vn1mYvnloZl0OliAcv9PS4n1gahz6xNrKACtEaMDAAAMw9ur898pzSAAAAAElF
+        TkSuQmCC
+</value>
+  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>771, 17</value>
   </metadata>
+  <data name="manageCommitCredentialsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        dAAAAHQBMYXlgQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGSSURBVDhPY6Aq
+        KNtozVu9xSkUiK2gQsSDhs2+XDWbna7NPpp7p31X4KvqzU4VUCniQN1GZ9fJ+5MfPPtw/f/lZ/uv12x2
+        vAeVIg7UbHZVbdrm9eHY/fXnZx3NPQD0xi6oFPGgerNzdNMmh+tAvKt6q5M8VJg08HuV6OV58xInQrko
+        4P9VBjYoEzf4f4Bvt1LPzjuGq56LQoWAYry2QPGnQPzr/37+HqgwdgAyQLtvywWd1Q+fA/FEqakXZz3e
+        rXL5/7PZT/6/3//p/0GhF0BDTKDKMQHIC3/XihTorX5kq7P6Ubf45Iu7H+7UuP3/6bzb/7/f/Pb/gNAj
+        kIugylHBMyuT2GcOxjee2Rvvem5hoQAVZvh/kCcI6LJP/w/wf/h/kHfN//8MTFApBHhiY6b23Nn+w7f9
+        h1+9b6g789TaZDdUCgz+7xbk/3+YXwnKxQRADa4vYiIe/H787P/3vbsvP7U0IS0hPTM25npqaXz1mafL
+        5WfWZi+eWhmXQ6WIBy/09LifWBqHPrE2soAK0RowMAAAzD26vz3ynNIAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="managePushCredentialsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        dAAAAHQBMYXlgQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGSSURBVDhPY6Aq
+        KNtozVu9xSkUiK2gQsSDhs2+XDWbna7NPpp7p31X4KvqzU4VUCniQN1GZ9fJ+5MfPPtw/f/lZ/uv12x2
+        vAeVIg7UbHZVbdrm9eHY/fXnZx3NPQD0xi6oFPGgerNzdNMmh+tAvKt6q5M8VJg08HuV6OV58xInQrko
+        4P9VBjYoEzf4f4Bvt1LPzjuGq56LQoWAYry2QPGnQPzr/37+HqgwdgAyQLtvywWd1Q+fA/FEqakXZz3e
+        rXL5/7PZT/6/3//p/0GhF0BDTKDKMQHIC3/XihTorX5kq7P6Ubf45Iu7H+7UuP3/6bzb/7/f/Pb/gNAj
+        kIugylHBMyuT2GcOxjee2Rvvem5hoQAVZvh/kCcI6LJP/w/wf/h/kHfN//8MTFApBHhiY6b23Nn+w7f9
+        h1+9b6g789TaZDdUCgz+7xbk/3+YXwnKxQRADa4vYiIe/H787P/3vbsvP7U0IS0hPTM25npqaXz1mafL
+        5WfWZi+eWhmXQ6WIBy/09LifWBqHPrE2soAK0RowMAAAzD26vz3ynNIAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="kryptonPalette.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>640, 17</value>
   </metadata>
   <metadata name="gitContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>500, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAYAAAAAAAEAIAB/CgAAZgAAAICAAAABACAAKAgBAOUKAABAQAAAAQAgAChCAAANEwEAMDAAAAEA
