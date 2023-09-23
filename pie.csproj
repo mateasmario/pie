@@ -463,6 +463,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pie.ico" />
+    <None Include="Resources\merge %281%29.png" />
+    <None Include="Resources\Git-Icon-1788C %282%29.png" />
     <None Include="Resources\trash %281%29.png" />
     <None Include="Resources\hidden %281%29.png" />
     <None Include="Resources\hidden.png" />
