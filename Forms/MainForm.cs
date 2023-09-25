@@ -1084,7 +1084,7 @@ namespace pie
         {
             try
             {
-                Globals.buildCommands = BuildCommandService.GetBuildCommandsFromFile("build.config");
+                Globals.buildCommands = BuildCommandService.GetBuildCommandsFromFile("config/build.json");
 
                 foreach (BuildCommand buildCommand in Globals.buildCommands)
                 {
@@ -1100,26 +1100,26 @@ namespace pie
             }
             catch (FileNotFoundException ex)
             {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "build.config", "");
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/build.json", "[]");
             }
 
             try
             {
-                Globals.gitCredentials = GitService.ReadCredentialsFromFile();
+                Globals.gitCredentials = GitService.ReadCredentialsFromFile("config/git.json");
             }
             catch (FileNotFoundException ex)
             {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "git.config", "");
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/git.json", "{}");
             }
 
             try
             {
-                ScintillaLexerService.GetTheme("theme.config");
+                ThemeService.GetTheme("config/theme.json");
             }
             catch (FileNotFoundException ex)
             {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme.config", "0");
                 Globals.theme = 0;
+                ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
             }
         }
 
@@ -1754,14 +1754,14 @@ namespace pie
             if (Globals.theme == 0)
             {
                 Globals.theme = 1;
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme.config", "1");
+                ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
                 themeSettingsToolStripMenuItem.Image = Properties.Resources.sun;
                 themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
             }
             else
             {
                 Globals.theme = 0;
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "theme.config", "0");
+                ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
                 themeSettingsToolStripMenuItem.Image = Properties.Resources.crescent_moon;
                 themeSettingsToolStripMenuItem.Text = "Toggle Dark Mode";
             }
@@ -1957,7 +1957,7 @@ namespace pie
                         Commands.Stage(Globals.repo, items);
                     }
 
-                    if (Globals.gitCredentials.Name == null || Globals.gitCredentials.Email == null)
+                    if (Globals.gitCredentials.Name == "" || Globals.gitCredentials.Email == "")
                     {
                         GitCommitCredentialsForm gitCredentialsForm = new GitCommitCredentialsForm();
                         Globals.gitFormClosedWithOk = false;
@@ -1965,7 +1965,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+                            GitService.WriteCredentials(Globals.gitCredentials);
                             GitCommit(items);
                         }
                     }
@@ -2082,7 +2082,7 @@ namespace pie
 
                 if (true)
                 {
-                    if (Globals.gitCredentials.Name == null || Globals.gitCredentials.Email == null)
+                    if (Globals.gitCredentials.Username == "" || Globals.gitCredentials.Password == "")
                     {
                         GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
                         Globals.gitFormClosedWithOk = false;
@@ -2090,7 +2090,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+                            GitService.WriteCredentials(Globals.gitCredentials);
                             GitPush();
                         }
                     }
@@ -2167,7 +2167,7 @@ namespace pie
 
             if (Globals.gitFormClosedWithOk)
             {
-                File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+                GitService.WriteCredentials(Globals.gitCredentials);
             }
         }
 
@@ -2179,7 +2179,7 @@ namespace pie
 
             if (Globals.gitFormClosedWithOk)
             {
-                File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+                GitService.WriteCredentials(Globals.gitCredentials);
             }
         }
 
@@ -2203,7 +2203,7 @@ namespace pie
         {
             if (Globals.repo != null)
             {
-                if (Globals.gitCredentials.Username == null || Globals.gitCredentials.Password == null)
+                if (Globals.gitCredentials.Username == "" || Globals.gitCredentials.Password == "")
                 {
                     GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
                     Globals.gitFormClosedWithOk = false;
@@ -2211,7 +2211,7 @@ namespace pie
 
                     if (Globals.gitFormClosedWithOk)
                     {
-                        File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+                        GitService.WriteCredentials(Globals.gitCredentials);
                         GitPull();
                     }
                 }

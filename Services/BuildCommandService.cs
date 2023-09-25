@@ -22,6 +22,13 @@ using System.Collections.Generic;
 using pie.Classes;
 using System.IO;
 
+/**
+ * Used for reading and writing to JSON config files
+ * 
+ * Copyright (c) 2007 James Newton-King
+ */
+using Newtonsoft.Json;
+
 namespace pie.Services
 {
     public class BuildCommandService
@@ -30,31 +37,66 @@ namespace pie.Services
         {
             List<BuildCommand> buildCommands = new List<BuildCommand>();
 
-            IEnumerable<String> lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory + file);
-            int rowNum = 0;
-
             BuildCommand buildCommand = null;
 
-            foreach (string line in lines)
+            string token = null;
+
+            using (var textReader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + file))
             {
-                if (rowNum % 2 == 0)
+                JsonTextReader jsonTextReader = new JsonTextReader(textReader);
+
+                while (jsonTextReader.Read())
                 {
-                    buildCommand = new BuildCommand();
-                    buildCommand.setName(line);
+                    if (jsonTextReader.Value != null)
+                    {
+                        if (jsonTextReader.TokenType == JsonToken.PropertyName)
+                        {
+                            token = jsonTextReader.Value.ToString();
+                        }
+                        else if (jsonTextReader.TokenType == JsonToken.String)
+                        {
+                            if (token == "name")
+                            {
+                                buildCommand = new BuildCommand();
+                                buildCommand.setName(jsonTextReader.Value.ToString());
+                            }
+                            else if (token == "command")
+                            {
+                                buildCommand.setCommand(jsonTextReader.Value.ToString());
+                                buildCommands.Add(buildCommand);
+                            }
+                        }
+                    }
                 }
-                else if (buildCommand != null)
-                {
-                    buildCommand.setCommand(line);
-                    buildCommands.Add(buildCommand);
-                }
-                else
-                {
-                    throw new Exception("There was an error while procesing the build commands.");
-                }
-                rowNum++;
             }
 
             return buildCommands;
+        }
+
+        internal static void WriteBuildCommandsToFile(string file, List<BuildCommand> tempCommands)
+        {
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
+
+            TextWriter textWriter = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + file);
+
+            using (JsonWriter writer = new JsonTextWriter(textWriter))
+            {
+                writer.Formatting = Formatting.Indented;
+
+                writer.WriteStartArray();
+
+                foreach (BuildCommand buildCommand in tempCommands)
+                {
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("name");
+                    writer.WriteValue(buildCommand.getName());                    
+                    writer.WritePropertyName("command");
+                    writer.WriteValue(buildCommand.getCommand());
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndArray();
+            }
         }
     }
 }

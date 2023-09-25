@@ -20,7 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 
 /**
@@ -45,6 +44,7 @@ using AutocompleteMenuNS;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Docking;
+using Newtonsoft.Json;
 
 namespace pie.Services
 {
@@ -460,20 +460,6 @@ namespace pie.Services
                 case "sql":
                     ConfigureLexer("mssql", scintilla, tabControl, index);
                     break;
-            }
-        }
-
-        public static void GetTheme(string file)
-        {
-            string content = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + file);
-
-            if (content == "1")
-            {
-                Globals.theme = 1;
-            }
-            else
-            {
-                Globals.theme = 0;
             }
         }
     }

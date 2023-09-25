@@ -21,7 +21,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using pie.Classes;
-using System.IO;
 using pie.Enums;
 
 /** 
@@ -30,6 +29,7 @@ using pie.Enums;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
+using pie.Services;
 
 namespace pie
 {
@@ -53,11 +53,14 @@ namespace pie
         private void BuildCommandsForm_Load(object sender, EventArgs e)
         {
             tempCommands = new List<BuildCommand>();
-            
-            foreach(BuildCommand buildCommand in Globals.buildCommands)
+
+            if (Globals.buildCommands != null)
             {
-                tempCommands.Add(buildCommand);
-                kryptonListBox2.Items.Add(buildCommand.getName());
+                foreach (BuildCommand buildCommand in Globals.buildCommands)
+                {
+                    tempCommands.Add(buildCommand);
+                    kryptonListBox2.Items.Add(buildCommand.getName());
+                }
             }
 
             Globals.closeAfterApplyingChanges = false;
@@ -113,14 +116,7 @@ namespace pie
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            string buildCommands = "";
-            
-            foreach(BuildCommand buildCommand in tempCommands) {
-                buildCommands += buildCommand.getName() + Environment.NewLine;
-                buildCommands += buildCommand.getCommand() + Environment.NewLine;
-            }
-
-            File.WriteAllText("build.config", buildCommands);
+            BuildCommandService.WriteBuildCommandsToFile("build.json", tempCommands);
 
             MainForm.ShowYesNoCancelNotification("Close pie and reopen it manually, in order for the changes to take effect?");
             if (Globals.notificationButtonPressed == NotificationButton.YES)
