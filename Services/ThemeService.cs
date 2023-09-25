@@ -17,6 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
+using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -38,6 +40,13 @@ using ComponentFactory.Krypton.Toolkit;
  * Copyright 2006-2016 Bright Ideas Software
  */
 using BrightIdeasSoftware;
+
+/**
+ * Used for reading and writing to JSON config files
+ * 
+ * Copyright (c) 2007 James Newton-King
+ */
+using Newtonsoft.Json;
 
 namespace pie.Services
 {
@@ -400,5 +409,51 @@ namespace pie.Services
                 kryptonPage.ImageSmall = Properties.Resources.plus_blue;
             }
         }
+
+        public static void GetTheme(string file)
+        {
+            using (var textReader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + file))
+            {
+                JsonTextReader jsonTextReader = new JsonTextReader(textReader);
+
+                string token = null;
+
+                while (jsonTextReader.Read())
+                {
+                    if (jsonTextReader.Value != null)
+                    {
+                        if (jsonTextReader.TokenType == JsonToken.PropertyName)
+                        {
+                            token = jsonTextReader.Value.ToString();
+                        }
+                        else if (jsonTextReader.TokenType == JsonToken.Integer)
+                        {
+                            if (token == "theme")
+                            {
+                                int.TryParse(jsonTextReader.Value.ToString(), out Globals.theme);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        internal static void WriteThemeToFile(string file, int theme)
+        {
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
+
+            TextWriter textWriter = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + file);
+
+            using (JsonWriter writer = new JsonTextWriter(textWriter))
+            {
+                writer.Formatting = Formatting.Indented;
+
+                writer.WriteStartObject();
+                writer.WritePropertyName("theme");
+                writer.WriteValue(Globals.theme);
+                writer.WriteEndObject();
+            }
+        }
     }
+
 }

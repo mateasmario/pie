@@ -19,36 +19,84 @@
 
 using pie.Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+
+/**
+ * Used for reading and writing to JSON config files
+ * 
+ * Copyright (c) 2007 James Newton-King
+ */
+using Newtonsoft.Json;
 
 namespace pie.Services
 {
     internal class GitService
     {
-        public static GitCredentials ReadCredentialsFromFile()
+        public static GitCredentials ReadCredentialsFromFile(String file)
         {
             GitCredentials gitCredentials = new GitCredentials();
 
-            IEnumerable<string> lines = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "git.config");
-            List<string> lineList = lines.ToList();
-
-            if (lineList.Count < 2)
+            using (var textReader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + file))
             {
-                return gitCredentials;
-            }
+                JsonTextReader jsonTextReader = new JsonTextReader(textReader);
 
-            gitCredentials.Name = lineList[0];
-            gitCredentials.Email = lineList[1];
+                string token = null;
 
-            if (lineList.Count == 4)
-            {
-                gitCredentials.Username = lineList[2];
-                gitCredentials.Password = lineList[3];
+                while (jsonTextReader.Read())
+                {
+                    if (jsonTextReader.Value != null)
+                    {
+                        if (jsonTextReader.TokenType == JsonToken.PropertyName)
+                        {
+                            token = jsonTextReader.Value.ToString();
+                        }
+                        else if (jsonTextReader.TokenType == JsonToken.String)
+                        {
+                            if (token == "name")
+                            {
+                                gitCredentials.Name = jsonTextReader.Value.ToString();
+                            }
+                            else if (token == "email")
+                            {
+                                gitCredentials.Email = jsonTextReader.Value.ToString();
+                            }
+                            else if (token == "username")
+                            {
+                                gitCredentials.Username = jsonTextReader.Value.ToString();
+                            }
+                            else if (token == "password")
+                            {
+                                gitCredentials.Password = jsonTextReader.Value.ToString();
+                            }
+                        }
+                    }
+                }
             }
 
             return gitCredentials;
+        }
+
+        public static void WriteCredentials(GitCredentials gitCredentials)
+        {
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "git.json", "");
+
+            TextWriter textWriter = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "git.json");
+
+            using (JsonWriter writer = new JsonTextWriter(textWriter))
+            {
+                writer.Formatting = Formatting.Indented;
+
+                writer.WriteStartObject();
+                writer.WritePropertyName("name");
+                writer.WriteValue(gitCredentials.Name != null ? gitCredentials.Name : "");
+                writer.WritePropertyName("email");
+                writer.WriteValue(gitCredentials.Email != null ? gitCredentials.Email : "");
+                writer.WritePropertyName("username");
+                writer.WriteValue(gitCredentials.Username != null ? gitCredentials.Username : "");
+                writer.WritePropertyName("password");
+                writer.WriteValue(gitCredentials.Password != null ? gitCredentials.Password : "");
+                writer.WriteEndObject();
+            }
         }
     }
 }
