@@ -17,7 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using ComponentFactory.Krypton.Navigator;
 using pie.Services;
 using System;
 using System.Collections.Generic;
@@ -40,6 +39,7 @@ using ScintillaNET;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
+using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 
 /** Markdig is used in order to allow users to render their Markdown (.md) code into HTML.
@@ -1248,12 +1248,7 @@ namespace pie
 
         private void FindTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-                HighlightWord(findTextBox.Text, TextArea);
-                Find(TextArea, Globals.lastSelectedIndex);
-            }
+
         }
 
         private void ResetFindPanelLocation()
@@ -1567,11 +1562,12 @@ namespace pie
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-            HighlightWord(findTextBox.Text, TextArea);
-            Find(TextArea, Globals.lastSelectedIndex);
+            ClearHighlights(TextArea);
+            HighlightWord(findTextBox.Text, TextArea, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
+            Find(TextArea, Globals.lastSelectedIndex, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
         }
 
-        private bool Find(Scintilla scintilla, int indexStart)
+        private bool Find(Scintilla scintilla, int indexStart, bool regex, bool matchCase, bool matchWholeWord)
         {
             Globals.canUpdateUI = false;
 
@@ -1586,14 +1582,30 @@ namespace pie
 
             scintilla.TargetStart = indexStart;
             scintilla.TargetEnd = scintilla.TextLength;
+
             scintilla.SearchFlags = SearchFlags.None;
 
-            int index = -1;
+            if (regex)
+            {
+                scintilla.SearchFlags |= SearchFlags.Regex;
+            }
+    
+            if (matchCase)
+            {
+                scintilla.SearchFlags |= SearchFlags.MatchCase;
+            }
+
+            if (matchWholeWord)
+            {
+                scintilla.SearchFlags |= SearchFlags.WholeWord;
+            }
+
+            int index;
 
             if ((index = scintilla.SearchInTarget(text)) != -1)
             {
-                scintilla.SetSelection(index, index + findTextBox.Text.Length);
-                Globals.lastSelectedIndex = index + findTextBox.Text.Length + 1;
+                scintilla.SetSelection(index, index + scintilla.TargetEnd - scintilla.TargetStart);
+                Globals.lastSelectedIndex = index + scintilla.TargetEnd - scintilla.TargetStart + 1;
 
                 scintilla.ScrollCaret();
             }
@@ -1601,17 +1613,18 @@ namespace pie
             {
                 if (indexStart == 0)
                 {
+                    ShowNotification("No more occurences found.");
                     return false;
                 }
 
                 Globals.lastSelectedIndex = 0;
-                return Find(scintilla, 0);
+                return Find(scintilla, 0, regex, matchCase, matchWholeWord);
             }
 
             return true;
         }
 
-        private void HighlightWord(string text, Scintilla scintilla)
+        private void HighlightWord(string text, Scintilla scintilla, bool regex, bool matchCase, bool matchWholeWord)
         {
             if (string.IsNullOrEmpty(text))
                 return;
@@ -1630,7 +1643,24 @@ namespace pie
             // Search the document
             scintilla.TargetStart = 0;
             scintilla.TargetEnd = scintilla.TextLength;
+
             scintilla.SearchFlags = SearchFlags.None;
+
+            if (regex)
+            {
+                scintilla.SearchFlags |= SearchFlags.Regex;
+            }
+
+            if (matchCase)
+            {
+                scintilla.SearchFlags |= SearchFlags.MatchCase;
+            }
+
+            if (matchWholeWord)
+            {
+                scintilla.SearchFlags |= SearchFlags.WholeWord;
+            }
+
             while (scintilla.SearchInTarget(text) != -1)
             {
                 // Mark the search results with the current indicator
@@ -1672,8 +1702,8 @@ namespace pie
 
         private bool Replace(Scintilla scintilla, String from, String to)
         {
-            HighlightWord(from, scintilla);
-            bool found = Find(scintilla, Globals.lastSelectedIndex);
+            HighlightWord(from, scintilla, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
+            bool found = Find(scintilla, Globals.lastSelectedIndex, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
 
             if (found)
             {
@@ -2296,7 +2326,6 @@ namespace pie
                 }
             }
 
-
             // HeaderGroup
             findReplaceHeaderGroup.StateCommon.Border.Color1 = ThemeService.GetColor("FormBorder");
             findReplaceHeaderGroup.StateCommon.Border.Color2 = ThemeService.GetColor("FormBorder");
@@ -2320,6 +2349,15 @@ namespace pie
             headerstyle.Pressed.ForeColor = ThemeService.GetColor("Fore");
 
             gitStagingAreaListView.HeaderFormatStyle = headerstyle;
+
+            regexCheckBox.StateCommon.ShortText.Color1 = ThemeService.GetColor("Fore");
+            regexCheckBox.StateCommon.ShortText.Color2 = ThemeService.GetColor("Fore");
+
+            matchCaseCheckBox.StateCommon.ShortText.Color1 = ThemeService.GetColor("Fore");
+            matchCaseCheckBox.StateCommon.ShortText.Color2 = ThemeService.GetColor("Fore");
+
+            matchWholeWordCheckBox.StateCommon.ShortText.Color1 = ThemeService.GetColor("Fore");
+            matchWholeWordCheckBox.StateCommon.ShortText.Color2 = ThemeService.GetColor("Fore");
         }
 
         private void SynchronizeImagesWithTheme()
@@ -2331,6 +2369,21 @@ namespace pie
             else
             {
                 kryptonPage1.ImageSmall = Properties.Resources.plus_blue;
+            }
+        }
+
+        private void regexCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            KryptonCheckBox kryptonCheckBox = (KryptonCheckBox)sender;
+
+            if (kryptonCheckBox.Checked)
+            {
+                matchWholeWordCheckBox.Checked = false;
+                matchWholeWordCheckBox.Enabled = false;
+            }
+            else
+            {
+                matchWholeWordCheckBox.Enabled = true;
             }
         }
     }
