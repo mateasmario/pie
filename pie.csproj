@@ -466,6 +466,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pie.ico" />
+    <None Include="Resources\upload.png" />
+    <None Include="Resources\check.png" />
+    <None Include="Resources\down-arrow %281%29.png" />
+    <None Include="Resources\download %282%29.png" />
+    <None Include="Resources\check-mark.png" />
+    <None Include="Resources\pull.png" />
+    <None Include="Resources\commit-git.png" />
+    <None Include="Resources\refresh %282%29.png" />
+    <None Include="Resources\refresh-button %281%29.png" />
+    <None Include="Resources\refresh-button.png" />
     <None Include="Resources\merge %281%29.png" />
     <None Include="Resources\Git-Icon-1788C %282%29.png" />
     <None Include="Resources\trash %281%29.png" />

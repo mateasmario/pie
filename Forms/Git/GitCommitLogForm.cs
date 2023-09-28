@@ -61,14 +61,14 @@ namespace pie
         private HeaderFormatStyle CustomizeHeaderStyle()
         {
             HeaderFormatStyle headerstyle = new HeaderFormatStyle();
-            headerstyle.Normal.BackColor = ThemeService.GetSecondaryColor();
-            headerstyle.Normal.ForeColor = ThemeService.GetForeColor();
+            headerstyle.Normal.BackColor = ThemeService.GetColor("Secondary");
+            headerstyle.Normal.ForeColor = ThemeService.GetColor("Fore");
 
-            headerstyle.Hot.BackColor = ThemeService.GetButtonHoverColor();
-            headerstyle.Hot.ForeColor = ThemeService.GetForeColor();
+            headerstyle.Hot.BackColor = ThemeService.GetColor("ButtonHover");
+            headerstyle.Hot.ForeColor = ThemeService.GetColor("Fore");
 
-            headerstyle.Pressed.BackColor = ThemeService.GetButtonFrameColor();
-            headerstyle.Pressed.ForeColor = ThemeService.GetForeColor();
+            headerstyle.Pressed.BackColor = ThemeService.GetColor("ButtonFrame");
+            headerstyle.Pressed.ForeColor = ThemeService.GetColor("Fore");
 
             return headerstyle;
         }
@@ -76,8 +76,8 @@ namespace pie
         private void GitCommitLogForm_Load(object sender, EventArgs e)
         {
             gitCommitLogListView.ShowGroups = false;
-            gitCommitLogListView.BackColor = ThemeService.GetPrimaryColor();
-            gitCommitLogListView.ForeColor = ThemeService.GetForeColor();
+            gitCommitLogListView.BackColor = ThemeService.GetColor("Primary");
+            gitCommitLogListView.ForeColor = ThemeService.GetColor("Fore");
 
             gitCommitLogListView.HeaderFormatStyle = CustomizeHeaderStyle();
 

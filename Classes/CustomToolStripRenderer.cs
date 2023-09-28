@@ -26,7 +26,7 @@ namespace System.Windows.Forms
         protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
         {
             base.OnRenderArrow(e);
-            e.ArrowColor = ThemeService.GetForeColor();
+            e.ArrowColor = ThemeService.GetColor("Fore");
         }
     }
 }

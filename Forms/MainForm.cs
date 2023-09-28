@@ -137,7 +137,7 @@ namespace pie
 
             Globals.gitCredentials = new GitCredentials();
 
-            menuStrip1.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
+            mainMenuStrip.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
         }
 
         public Scintilla CreateNewTextArea()
@@ -179,11 +179,11 @@ namespace pie
             TextArea.StyleResetDefault();
             TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
             TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
-            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ThemeService.GetForeColor();
-            TextArea.CaretForeColor = ThemeService.GetForeColor();
-            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ThemeService.GetTextAreaBackColor();
-            TextArea.SetSelectionBackColor(true, ThemeService.GetSelectionColor());
-            TextArea.CaretLineBackColor = ThemeService.GetCaretLineBackColor();
+            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ThemeService.GetColor("Fore");
+            TextArea.CaretForeColor = ThemeService.GetColor("Fore");
+            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ThemeService.GetColor("Primary");
+            TextArea.SetSelectionBackColor(true, ThemeService.GetColor("Selection"));
+            TextArea.CaretLineBackColor = ThemeService.GetColor("CaretLineBack");
             TextArea.StyleClearAll();
 
             InitNumberMargin(TextArea);
@@ -204,11 +204,11 @@ namespace pie
         private void ColorizeAutocompleteMenu(AutocompleteMenu autocompleteMenu)
         {
             Colors colors = new Colors();
-            colors.BackColor = ThemeService.GetTextAreaBackColor();
-            colors.ForeColor = ThemeService.GetForeColor();
-            colors.HighlightingColor = ThemeService.GetTextAreaBackColor();
-            colors.SelectedBackColor = ThemeService.GetCaretLineBackColor();
-            colors.SelectedForeColor = ThemeService.GetForeColor();
+            colors.BackColor = ThemeService.GetColor("Primary");
+            colors.ForeColor = ThemeService.GetColor("Fore");
+            colors.HighlightingColor = ThemeService.GetColor("Primary");
+            colors.SelectedBackColor = ThemeService.GetColor("CaretLineBack");
+            colors.SelectedForeColor = ThemeService.GetColor("Fore");
             autocompleteMenu.Colors = colors;
             autocompleteMenu.LeftPadding = 0;
         }
@@ -414,10 +414,10 @@ namespace pie
         private void InitNumberMargin(Scintilla TextArea)
         {
 
-            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = ThemeService.GetNumberMarginColor();
-            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = ThemeService.GetForeColor();
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = ThemeService.GetForeColor();
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = ThemeService.GetNumberMarginColor();
+            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = ThemeService.GetColor("NumberMargin");
+            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = ThemeService.GetColor("Fore");
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = ThemeService.GetColor("Fore");
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = ThemeService.GetColor("NumberMargin");
 
             TextArea.Margins[0].Width = 24;
         }
@@ -425,8 +425,8 @@ namespace pie
         private void InitCodeFolding(Scintilla TextArea)
         {
 
-            TextArea.SetFoldMarginColor(true, ThemeService.GetFoldingColor());
-            TextArea.SetFoldMarginHighlightColor(true, ThemeService.GetFoldingColor());
+            TextArea.SetFoldMarginColor(true, ThemeService.GetColor("Folding"));
+            TextArea.SetFoldMarginHighlightColor(true, ThemeService.GetColor("Folding"));
 
             TextArea.Margins[3].Type = MarginType.Symbol;
             TextArea.Margins[3].Mask = Marker.MaskFolders;
@@ -1062,12 +1062,12 @@ namespace pie
             if (status)
             {
                 ResetFindPanelLocation();
-                kryptonHeaderGroup1.Show();
+                findReplaceHeaderGroup.Show();
                 findTextBox.Focus();
             }
             else
             {
-                kryptonHeaderGroup1.Hide();
+                findReplaceHeaderGroup.Hide();
 
                 if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
                 {
@@ -1128,7 +1128,7 @@ namespace pie
             Globals.kryptonPalette = kryptonPalette;
 
             ResetFindPanelLocation();
-            kryptonHeaderGroup1.Hide();
+            findReplaceHeaderGroup.Hide();
             Globals.findReplacePanelToggled = false;
 
             gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
@@ -1139,11 +1139,14 @@ namespace pie
                 themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
             }
 
-            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette, gitStagingAreaListView, kryptonHeaderGroup1, Globals.theme);
+            ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
+            SynchronizeMainFormComponentsWithTheme();
+            SynchronizeImagesWithTheme();
+            
             this.Palette = kryptonPalette;
             tabControl.Palette = kryptonPalette;
             buildTabControl.Palette = kryptonPalette;
-            kryptonHeaderGroup1.Palette = kryptonPalette;
+            findReplaceHeaderGroup.Palette = kryptonPalette;
             codeContextMenu.Palette = kryptonPalette;
             terminalContextMenu.Palette = kryptonPalette;
             renderContextMenu.Palette = kryptonPalette;
@@ -1164,8 +1167,8 @@ namespace pie
             findTextBox.KeyDown += FindTextBox_KeyDown;
             replaceTextBox.KeyDown += ReplaceTextBox_KeyDown;
 
-            gitStagingAreaListView.BackColor = ThemeService.GetPrimaryColor();
-            gitStagingAreaListView.ForeColor = ThemeService.GetForeColor();
+            gitStagingAreaListView.BackColor = ThemeService.GetColor("Primary");
+            gitStagingAreaListView.ForeColor = ThemeService.GetColor("Secondary");
         }
 
         private void ProcessCommandLineArguments()
@@ -1255,7 +1258,7 @@ namespace pie
 
         private void ResetFindPanelLocation()
         {
-            kryptonHeaderGroup1.Location = new Point((this.Width - kryptonHeaderGroup1.Width) / 2, (this.Height - kryptonHeaderGroup1.Height) / 4);
+            findReplaceHeaderGroup.Location = new Point((this.Width - findReplaceHeaderGroup.Width) / 2, (this.Height - findReplaceHeaderGroup.Height) / 4);
         }
 
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1620,7 +1623,7 @@ namespace pie
             // Update indicator appearance
             scintilla.Indicators[8].Style = IndicatorStyle.StraightBox;
             scintilla.Indicators[8].Under = true;
-            scintilla.Indicators[8].ForeColor = ThemeService.GetSelectionColor();
+            scintilla.Indicators[8].ForeColor = ThemeService.GetColor("Selection");
             scintilla.Indicators[8].OutlineAlpha = 255;
             scintilla.Indicators[8].Alpha = 100;
 
@@ -1655,8 +1658,8 @@ namespace pie
         {
             if (Globals.mouseDown)
             {
-                kryptonHeaderGroup1.Location = new Point(
-                    (kryptonHeaderGroup1.Location.X - Globals.lastLocation.X) + e.X, (kryptonHeaderGroup1.Location.Y - Globals.lastLocation.Y) + e.Y);
+                findReplaceHeaderGroup.Location = new Point(
+                    (findReplaceHeaderGroup.Location.X - Globals.lastLocation.X) + e.X, (findReplaceHeaderGroup.Location.Y - Globals.lastLocation.Y) + e.Y);
 
                 this.Update();
             }
@@ -1790,7 +1793,9 @@ namespace pie
                 }
             }
 
-            ThemeService.SetPaletteToTheme(tabControl, tabControl.Pages[tabControl.Pages.Count - 1], menuStrip1, this.kryptonPalette, gitStagingAreaListView, kryptonHeaderGroup1, Globals.theme);
+            ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
+            SynchronizeMainFormComponentsWithTheme();
+            SynchronizeImagesWithTheme();
             UpdateGitRepositoryInfo();
         }
 
@@ -2257,6 +2262,75 @@ namespace pie
             else
             {
                 ShowNotification("No repository opened.");
+            }
+        }
+
+        private void SynchronizeMainFormComponentsWithTheme()
+        {
+            // MenuStrip & Children
+            mainMenuStrip.BackColor = ThemeService.GetColor("Primary");
+            mainMenuStrip.ForeColor = ThemeService.GetColor("Fore");
+
+            foreach (ToolStripMenuItem toolStripMenuItem in mainMenuStrip.Items)
+            {
+                toolStripMenuItem.DropDown.BackColor = ThemeService.GetColor("Primary");
+                toolStripMenuItem.DropDown.ForeColor = ThemeService.GetColor("Fore");
+                toolStripMenuItem.ImageTransparentColor = ThemeService.GetColor("Primary");
+
+                if (toolStripMenuItem.HasDropDownItems)
+                {
+                    foreach (ToolStripMenuItem toolStripMenuItemChild in toolStripMenuItem.DropDownItems)
+                    {
+                        toolStripMenuItemChild.BackColor = ThemeService.GetColor("Primary");
+                        toolStripMenuItemChild.ForeColor = ThemeService.GetColor("Fore");
+
+                        if (toolStripMenuItemChild.HasDropDownItems)
+                        {
+                            foreach (ToolStripMenuItem toolStripMenuItemChild2 in toolStripMenuItemChild.DropDownItems)
+                            {
+                                toolStripMenuItemChild2.BackColor = ThemeService.GetColor("Primary");
+                                toolStripMenuItemChild2.ForeColor = ThemeService.GetColor("Fore");
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            // HeaderGroup
+            findReplaceHeaderGroup.StateCommon.Border.Color1 = ThemeService.GetColor("FormBorder");
+            findReplaceHeaderGroup.StateCommon.Border.Color2 = ThemeService.GetColor("FormBorder");
+
+            // TabControl
+            tabControl.StateCommon.Panel.Color1 = ThemeService.GetColor("Primary");
+            tabControl.StateCommon.Panel.Color2 = ThemeService.GetColor("Primary");
+
+            // ObjectListView
+            gitStagingAreaListView.BackColor = ThemeService.GetColor("Primary");
+            gitStagingAreaListView.ForeColor = ThemeService.GetColor("Fore");
+
+            var headerstyle = new HeaderFormatStyle();
+            headerstyle.Normal.BackColor = ThemeService.GetColor("Secondary");
+            headerstyle.Normal.ForeColor = ThemeService.GetColor("Fore");
+
+            headerstyle.Hot.BackColor = ThemeService.GetColor("ButtonHover");
+            headerstyle.Hot.ForeColor = ThemeService.GetColor("Fore");
+
+            headerstyle.Pressed.BackColor = ThemeService.GetColor("ButtonFrame");
+            headerstyle.Pressed.ForeColor = ThemeService.GetColor("Fore");
+
+            gitStagingAreaListView.HeaderFormatStyle = headerstyle;
+        }
+
+        private void SynchronizeImagesWithTheme()
+        {
+            if (Globals.theme == 1)
+            {
+                kryptonPage1.ImageSmall = Properties.Resources.plus_white;
+            }
+            else
+            {
+                kryptonPage1.ImageSmall = Properties.Resources.plus_blue;
             }
         }
     }
