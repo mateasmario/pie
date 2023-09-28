@@ -116,7 +116,7 @@ namespace pie
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            BuildCommandService.WriteBuildCommandsToFile("build.json", tempCommands);
+            BuildCommandService.WriteBuildCommandsToFile("config/build.json", tempCommands);
 
             MainForm.ShowYesNoCancelNotification("Close pie and reopen it manually, in order for the changes to take effect?");
             if (Globals.notificationButtonPressed == NotificationButton.YES)
