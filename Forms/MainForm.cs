@@ -1035,6 +1035,7 @@ namespace pie
 
         private void ShowFindReplacePanel()
         {
+            directoryNavigationHeaderGroup.Visible = false;
             ToggleFindReplacePanel(!findReplaceHeaderGroup.Visible);
         }
 
@@ -1107,6 +1108,7 @@ namespace pie
             Globals.kryptonPalette = kryptonPalette;
 
             ResetFindPanelLocation();
+            ResetDirectoryPanelLocation();
             findReplaceHeaderGroup.Visible = false;
             directoryNavigationHeaderGroup.Visible = false;
 
@@ -1144,7 +1146,6 @@ namespace pie
             tabControl.AllowPageDrag = false;
             tabControl.AllowPageReorder = false;
 
-            findTextBox.KeyDown += FindTextBox_KeyDown;
             replaceTextBox.KeyDown += ReplaceTextBox_KeyDown;
 
             gitStagingAreaListView.BackColor = ThemeService.GetColor("Primary");
@@ -1224,11 +1225,6 @@ namespace pie
                     ShowNotification("No occurences found.");
                 }
             }
-        }
-
-        private void FindTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-
         }
 
         private void ResetFindPanelLocation()
@@ -1314,6 +1310,33 @@ namespace pie
         // [Generic Event] Used mostly for tab control and actions on opened files. Called by other event listeners
         private void keyDownEvents(object sender, KeyEventArgs e)
         {
+            if (directoryNavigationListBox.Visible)
+            {
+                if (e.KeyCode == Keys.Down)
+                {
+                    if (directoryNavigationListBox.Items.Count > 0)
+                    {
+                        if (directoryNavigationListBox.SelectedIndex < directoryNavigationListBox.Items.Count - 1)
+                        {
+                            directoryNavigationListBox.SelectedIndex++;
+                        }
+                        else if (directoryNavigationListBox.SelectedItems.Count == 0)
+                        {
+                            directoryNavigationListBox.SelectedIndex = 0;
+                        }
+                    }
+                }
+                else if (e.KeyCode == Keys.Enter)
+                {
+                    if (directoryNavigationListBox.SelectedItems.Count == 1)
+                    {
+                        NewTab(TabType.CODE, null);
+                        Open(directoryNavigationListBox.SelectedItems[0].ToString());
+                        directoryNavigationHeaderGroup.Visible = false;
+                    }
+                }
+            }
+
             if (tabControl.SelectedIndex != tabControl.Pages.Count - 1)
             {
                 if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
@@ -1347,9 +1370,16 @@ namespace pie
 
         private void ShowDirectoryPanel()
         {
+            findReplaceHeaderGroup.Visible = false;
             directoryNavigationHeaderGroup.Visible = !directoryNavigationHeaderGroup.Visible;
+
+            ResetDirectoryPanelLocation();
         }
 
+        private void ResetDirectoryPanelLocation()
+        {
+            directoryNavigationHeaderGroup.Location = new Point((this.Width - directoryNavigationHeaderGroup.Width) / 2, (this.Height - directoryNavigationHeaderGroup.Height) / 4);
+        }
 
         // [Event] Triggered when clicking "Show Terminal Tab" from the context menu
         private void kryptonContextMenuItem15_Click(object sender, EventArgs e)
@@ -1545,6 +1575,7 @@ namespace pie
         private void MainForm_Resize(object sender, EventArgs e)
         {
             ResetFindPanelLocation();
+            ResetDirectoryPanelLocation();
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
@@ -2312,6 +2343,8 @@ namespace pie
             // HeaderGroup
             findReplaceHeaderGroup.StateCommon.Border.Color1 = ThemeService.GetColor("FormBorder");
             findReplaceHeaderGroup.StateCommon.Border.Color2 = ThemeService.GetColor("FormBorder");
+            directoryNavigationHeaderGroup.StateCommon.Border.Color1 = ThemeService.GetColor("FormBorder");
+            directoryNavigationHeaderGroup.StateCommon.Border.Color2 = ThemeService.GetColor("FormBorder");
 
             // TabControl
             tabControl.StateCommon.Panel.Color1 = ThemeService.GetColor("Primary");
@@ -2389,6 +2422,35 @@ namespace pie
                     (directoryNavigationHeaderGroup.Location.X - Globals.lastLocation.X) + e.X, (directoryNavigationHeaderGroup.Location.Y - Globals.lastLocation.Y) + e.Y);
 
                 this.Update();
+            }
+        }
+
+        private void kryptonButton12_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+
+            DialogResult dialogResult = folderBrowserDialog.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+                directoryNavigationListBox.Items.Clear();
+
+                directoryNavigationTextBox.Text = folderBrowserDialog.SelectedPath;
+                string[] files = Directory.GetFiles(folderBrowserDialog.SelectedPath);
+
+                foreach(string file in files)
+                {
+                    directoryNavigationListBox.Items.Add(file);
+                }
+            }
+        }
+
+        private void directoryNavigationListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = this.directoryNavigationListBox.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches)
+            {
+                MessageBox.Show(index.ToString());
             }
         }
     }

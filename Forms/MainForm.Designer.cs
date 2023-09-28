@@ -133,9 +133,9 @@
             this.kryptonContextMenuItem11 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.repositoryTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.directoryNavigationHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.kryptonButton12 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.directoryNavigationListBox = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
+            this.kryptonButton12 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.directoryNavigationTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
@@ -1048,12 +1048,33 @@
             // 
             this.directoryNavigationHeaderGroup.Panel.Controls.Add(this.directoryNavigationListBox);
             this.directoryNavigationHeaderGroup.Panel.Controls.Add(this.kryptonButton12);
-            this.directoryNavigationHeaderGroup.Panel.Controls.Add(this.kryptonTextBox1);
+            this.directoryNavigationHeaderGroup.Panel.Controls.Add(this.directoryNavigationTextBox);
             this.directoryNavigationHeaderGroup.Panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.directoryNavigationHeaderGroup_Panel_MouseDown);
             this.directoryNavigationHeaderGroup.Panel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.directoryNavigationHeaderGroup_Panel_MouseMove);
             this.directoryNavigationHeaderGroup.Panel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.directoryNavigationHeaderGroup_Panel_MouseUp);
-            this.directoryNavigationHeaderGroup.Size = new System.Drawing.Size(496, 228);
+            this.directoryNavigationHeaderGroup.Size = new System.Drawing.Size(496, 304);
             this.directoryNavigationHeaderGroup.TabIndex = 10;
+            // 
+            // directoryNavigationListBox
+            // 
+            this.directoryNavigationListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.directoryNavigationListBox.Location = new System.Drawing.Point(8, 47);
+            this.directoryNavigationListBox.Name = "directoryNavigationListBox";
+            this.directoryNavigationListBox.Palette = this.kryptonPalette;
+            this.directoryNavigationListBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.directoryNavigationListBox.Size = new System.Drawing.Size(478, 240);
+            this.directoryNavigationListBox.StateActive.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.directoryNavigationListBox.StateCheckedNormal.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.directoryNavigationListBox.StateCheckedPressed.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.directoryNavigationListBox.StateCheckedTracking.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.directoryNavigationListBox.StateCommon.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.directoryNavigationListBox.StateNormal.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.directoryNavigationListBox.StatePressed.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.directoryNavigationListBox.StateTracking.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.directoryNavigationListBox.TabIndex = 5;
+            this.directoryNavigationListBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            this.directoryNavigationListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.directoryNavigationListBox_MouseDoubleClick);
             // 
             // kryptonButton12
             // 
@@ -1066,34 +1087,18 @@
             this.kryptonButton12.TabIndex = 4;
             this.kryptonButton12.Values.Image = global::pie.Properties.Resources.browse;
             this.kryptonButton12.Values.Text = "";
+            this.kryptonButton12.Click += new System.EventHandler(this.kryptonButton12_Click);
+            this.kryptonButton12.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
-            // kryptonTextBox1
+            // directoryNavigationTextBox
             // 
-            this.kryptonTextBox1.Location = new System.Drawing.Point(8, 19);
-            this.kryptonTextBox1.Name = "kryptonTextBox1";
-            this.kryptonTextBox1.Palette = this.kryptonPalette;
-            this.kryptonTextBox1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonTextBox1.Size = new System.Drawing.Size(428, 23);
-            this.kryptonTextBox1.TabIndex = 0;
-            // 
-            // directoryNavigationListBox
-            // 
-            this.directoryNavigationListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.directoryNavigationListBox.Location = new System.Drawing.Point(8, 47);
-            this.directoryNavigationListBox.Name = "directoryNavigationListBox";
-            this.directoryNavigationListBox.Palette = this.kryptonPalette;
-            this.directoryNavigationListBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.directoryNavigationListBox.Size = new System.Drawing.Size(478, 158);
-            this.directoryNavigationListBox.StateActive.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.directoryNavigationListBox.StateCheckedNormal.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.directoryNavigationListBox.StateCheckedPressed.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.directoryNavigationListBox.StateCheckedTracking.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.directoryNavigationListBox.StateCommon.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.directoryNavigationListBox.StateNormal.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.directoryNavigationListBox.StatePressed.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.directoryNavigationListBox.StateTracking.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.directoryNavigationListBox.TabIndex = 5;
+            this.directoryNavigationTextBox.Location = new System.Drawing.Point(8, 19);
+            this.directoryNavigationTextBox.Name = "directoryNavigationTextBox";
+            this.directoryNavigationTextBox.Palette = this.kryptonPalette;
+            this.directoryNavigationTextBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.directoryNavigationTextBox.Size = new System.Drawing.Size(428, 23);
+            this.directoryNavigationTextBox.TabIndex = 0;
+            this.directoryNavigationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // MainForm
             // 
@@ -1256,7 +1261,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox matchCaseCheckBox;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox matchWholeWordCheckBox;
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup directoryNavigationHeaderGroup;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox directoryNavigationTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton12;
         private ComponentFactory.Krypton.Toolkit.KryptonListBox directoryNavigationListBox;
     }
