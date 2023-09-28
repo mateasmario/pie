@@ -100,6 +100,9 @@
             this.managePushCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.findReplaceHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.matchWholeWordCheckBox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.matchCaseCheckBox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.regexCheckBox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonPalette = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.buildTabControl = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
@@ -120,14 +123,14 @@
             this.commitMessageRichTextBox = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
             this.kryptonButton8 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton6 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonButton9 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton5 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.gitContextMenu = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
             this.kryptonContextMenuHeading9 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             this.kryptonContextMenuItems11 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem9 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem11 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonButton5 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton9 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.repositoryTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -649,7 +652,6 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -664,6 +666,9 @@
             // 
             // findReplaceHeaderGroup.Panel
             // 
+            this.findReplaceHeaderGroup.Panel.Controls.Add(this.matchWholeWordCheckBox);
+            this.findReplaceHeaderGroup.Panel.Controls.Add(this.matchCaseCheckBox);
+            this.findReplaceHeaderGroup.Panel.Controls.Add(this.regexCheckBox);
             this.findReplaceHeaderGroup.Panel.Controls.Add(this.kryptonLabel1);
             this.findReplaceHeaderGroup.Panel.Controls.Add(this.findTextBox);
             this.findReplaceHeaderGroup.Panel.Controls.Add(this.replaceTextBox);
@@ -673,11 +678,42 @@
             this.findReplaceHeaderGroup.Panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseDown);
             this.findReplaceHeaderGroup.Panel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseMove);
             this.findReplaceHeaderGroup.Panel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseUp);
-            this.findReplaceHeaderGroup.Size = new System.Drawing.Size(496, 129);
+            this.findReplaceHeaderGroup.Size = new System.Drawing.Size(496, 130);
             this.findReplaceHeaderGroup.TabIndex = 0;
             this.findReplaceHeaderGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseDown);
             this.findReplaceHeaderGroup.MouseMove += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseMove);
             this.findReplaceHeaderGroup.MouseUp += new System.Windows.Forms.MouseEventHandler(this.findPanel_MouseUp);
+            // 
+            // matchWholeWordCheckBox
+            // 
+            this.matchWholeWordCheckBox.Location = new System.Drawing.Point(232, 89);
+            this.matchWholeWordCheckBox.Name = "matchWholeWordCheckBox";
+            this.matchWholeWordCheckBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalOffice2003;
+            this.matchWholeWordCheckBox.Size = new System.Drawing.Size(125, 22);
+            this.matchWholeWordCheckBox.TabIndex = 10;
+            this.matchWholeWordCheckBox.Values.Text = "Match whole word";
+            this.matchWholeWordCheckBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // matchCaseCheckBox
+            // 
+            this.matchCaseCheckBox.Location = new System.Drawing.Point(141, 89);
+            this.matchCaseCheckBox.Name = "matchCaseCheckBox";
+            this.matchCaseCheckBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalOffice2003;
+            this.matchCaseCheckBox.Size = new System.Drawing.Size(85, 22);
+            this.matchCaseCheckBox.TabIndex = 9;
+            this.matchCaseCheckBox.Values.Text = "Match case";
+            this.matchCaseCheckBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // regexCheckBox
+            // 
+            this.regexCheckBox.Location = new System.Drawing.Point(9, 89);
+            this.regexCheckBox.Name = "regexCheckBox";
+            this.regexCheckBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalOffice2003;
+            this.regexCheckBox.Size = new System.Drawing.Size(126, 22);
+            this.regexCheckBox.TabIndex = 8;
+            this.regexCheckBox.Values.Text = "Regular Expression";
+            this.regexCheckBox.CheckedChanged += new System.EventHandler(this.regexCheckBox_CheckedChanged);
+            this.regexCheckBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // kryptonPage2
             // 
@@ -828,6 +864,7 @@
             this.kryptonButton11.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.kryptonButton11.Size = new System.Drawing.Size(190, 25);
             this.kryptonButton11.TabIndex = 10;
+            this.kryptonButton11.Values.Image = global::pie.Properties.Resources.documents;
             this.kryptonButton11.Values.Text = "Show commit log";
             this.kryptonButton11.Click += new System.EventHandler(this.kryptonButton11_Click);
             this.kryptonButton11.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
@@ -893,8 +930,8 @@
             this.kryptonButton8.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.kryptonButton8.Size = new System.Drawing.Size(190, 25);
             this.kryptonButton8.TabIndex = 5;
-            this.kryptonButton8.Values.Image = global::pie.Properties.Resources.refresh__2_;
-            this.kryptonButton8.Values.Text = " Refresh repository status";
+            this.kryptonButton8.Values.Image = global::pie.Properties.Resources.refresh;
+            this.kryptonButton8.Values.Text = "Refresh repository status";
             this.kryptonButton8.Click += new System.EventHandler(this.kryptonButton8_Click);
             this.kryptonButton8.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
@@ -911,6 +948,44 @@
             this.kryptonButton6.Values.Text = "Commit altered files";
             this.kryptonButton6.Click += new System.EventHandler(this.kryptonButton6_Click);
             this.kryptonButton6.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.kryptonButton9);
+            this.kryptonPanel1.Controls.Add(this.kryptonButton5);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Palette = this.kryptonPalette;
+            this.kryptonPanel1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonPanel1.Size = new System.Drawing.Size(1015, 32);
+            this.kryptonPanel1.TabIndex = 5;
+            // 
+            // kryptonButton9
+            // 
+            this.kryptonButton9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonButton9.Location = new System.Drawing.Point(894, 4);
+            this.kryptonButton9.Name = "kryptonButton9";
+            this.kryptonButton9.Palette = this.kryptonPalette;
+            this.kryptonButton9.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton9.Size = new System.Drawing.Size(118, 25);
+            this.kryptonButton9.TabIndex = 3;
+            this.kryptonButton9.Values.Text = "Clone a repo";
+            this.kryptonButton9.Click += new System.EventHandler(this.kryptonButton9_Click);
+            this.kryptonButton9.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // kryptonButton5
+            // 
+            this.kryptonButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonButton5.Location = new System.Drawing.Point(773, 4);
+            this.kryptonButton5.Name = "kryptonButton5";
+            this.kryptonButton5.Palette = this.kryptonPalette;
+            this.kryptonButton5.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton5.Size = new System.Drawing.Size(118, 25);
+            this.kryptonButton5.TabIndex = 0;
+            this.kryptonButton5.Values.Text = "Open local repo";
+            this.kryptonButton5.Click += new System.EventHandler(this.kryptonButton5_Click);
+            this.kryptonButton5.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // gitContextMenu
             // 
@@ -940,44 +1015,6 @@
             this.kryptonContextMenuItem11.Text = "Close Current Tab";
             this.kryptonContextMenuItem11.Click += new System.EventHandler(this.kryptonContextMenuItem11_Click);
             // 
-            // kryptonButton5
-            // 
-            this.kryptonButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton5.Location = new System.Drawing.Point(773, 4);
-            this.kryptonButton5.Name = "kryptonButton5";
-            this.kryptonButton5.Palette = this.kryptonPalette;
-            this.kryptonButton5.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonButton5.Size = new System.Drawing.Size(118, 25);
-            this.kryptonButton5.TabIndex = 0;
-            this.kryptonButton5.Values.Text = "Open local repo";
-            this.kryptonButton5.Click += new System.EventHandler(this.kryptonButton5_Click);
-            this.kryptonButton5.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
-            // 
-            // kryptonButton9
-            // 
-            this.kryptonButton9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton9.Location = new System.Drawing.Point(894, 4);
-            this.kryptonButton9.Name = "kryptonButton9";
-            this.kryptonButton9.Palette = this.kryptonPalette;
-            this.kryptonButton9.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonButton9.Size = new System.Drawing.Size(118, 25);
-            this.kryptonButton9.TabIndex = 3;
-            this.kryptonButton9.Values.Text = "Clone a repo";
-            this.kryptonButton9.Click += new System.EventHandler(this.kryptonButton9_Click);
-            this.kryptonButton9.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
-            // 
-            // kryptonPanel1
-            // 
-            this.kryptonPanel1.Controls.Add(this.kryptonButton9);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton5);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Palette = this.kryptonPalette;
-            this.kryptonPanel1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonPanel1.Size = new System.Drawing.Size(1015, 32);
-            this.kryptonPanel1.TabIndex = 5;
-            // 
             // repositoryTextBox
             // 
             this.repositoryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -996,8 +1033,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1020, 595);
-            this.Controls.Add(this.buildTabControl);
             this.Controls.Add(this.gitPanel);
+            this.Controls.Add(this.buildTabControl);
             this.Controls.Add(this.findReplaceHeaderGroup);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.mainMenuStrip);
@@ -1142,6 +1179,9 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton9;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton5;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox repositoryTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox regexCheckBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox matchCaseCheckBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox matchWholeWordCheckBox;
     }
 }
 
