@@ -466,6 +466,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pie.ico" />
+    <None Include="Resources\search %283%29.png" />
     <None Include="Resources\documents.png" />
     <None Include="Resources\upload.png" />
     <None Include="Resources\check.png" />

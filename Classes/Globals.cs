@@ -63,7 +63,6 @@ namespace pie
         // Find & Replace Panel
         public static bool mouseDown;
         public static Point lastLocation;
-        public static bool findReplacePanelToggled;
 
         // Git
         public static Repository repo;

@@ -122,10 +122,6 @@ namespace pie
         }
 
 
-        // [Field] Paths of the opened files
-        public bool darkMode;
-        public bool terminalTabControlOpened;
-
         // [Constructor] Field initializations occur here 
         public MainForm()
         {
@@ -673,14 +669,14 @@ namespace pie
         // [Method] Closes the currently selected *terminal* tab
         public void CloseTerminalTab()
         {
-            KryptonPage selectedKryptonPage = buildTabControl.SelectedPage;
+            KryptonPage selectedKryptonPage = terminalTabControl.SelectedPage;
+            ConEmuControl conEmuControl = (ConEmuControl)terminalTabControl.SelectedPage.Controls[0];
 
-            ConEmuControl conEmuControl = (ConEmuControl)buildTabControl.SelectedPage.Controls[0];
+            terminalTabControl.Pages.Remove(selectedKryptonPage);
+
             conEmuControl.Dispose();
 
-            buildTabControl.Pages.Remove(selectedKryptonPage);
-
-            if (buildTabControl.Pages.Count == 0)
+            if (terminalTabControl.Pages.Count == 0)
             {
                 ShowTerminalTabControl();
             }
@@ -799,7 +795,7 @@ namespace pie
         {
             KryptonPage kryptonPage = new KryptonPage();
 
-            buildTabControl.Pages.Add(kryptonPage);
+            terminalTabControl.Pages.Add(kryptonPage);
 
             ConEmuControl conEmuControl = new ConEmuControl();
             ConEmuStartInfo conEmuStartInfo = new ConEmuStartInfo();
@@ -824,7 +820,7 @@ namespace pie
 
             conEmuControl.Dock = DockStyle.Fill;
 
-            buildTabControl.SelectedPage = kryptonPage;
+            terminalTabControl.SelectedPage = kryptonPage;
         }
 
         public void ActivateSpecificBuildAndRunOptions(String extension)
@@ -890,36 +886,28 @@ namespace pie
         // [Method] Opens terminal tab control
         public void ShowTerminalTabControl()
         {
-            if (buildTabControl.Pages.Count == 0)
+            if (terminalTabControl.Pages.Count == 0)
             {
                 NewTerminalTab("cmd.exe");
             }
 
-            if (terminalTabControlOpened == false)
-            {
-                ToggleTerminalTabControl(true);
-            }
-            else
-            {
-                ToggleTerminalTabControl(false);
-            }
+            ToggleTerminalTabControl(!terminalTabControl.Visible);
         }
 
         public void ToggleTerminalTabControl(bool status)
         {
+            terminalTabControl.Visible = !terminalTabControl.Visible;
+
             if (status)
             {
-                buildTabControl.Show();
                 showBuildToolsToolStripMenuItem.Text = "Hide Terminal Tab";
                 kryptonContextMenuItem15.Text = "Hide Terminal Tab";
             }
             else
             {
-                buildTabControl.Hide();
                 showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
                 kryptonContextMenuItem15.Text = "Show Terminal Tab";
             }
-            terminalTabControlOpened = status;
         }
 
         // [Method] Used for Build commands
@@ -1047,14 +1035,7 @@ namespace pie
 
         private void ShowFindReplacePanel()
         {
-            if (Globals.findReplacePanelToggled)
-            {
-                ToggleFindReplacePanel(false);
-            }
-            else
-            {
-                ToggleFindReplacePanel(true);
-            }
+            ToggleFindReplacePanel(!findReplaceHeaderGroup.Visible);
         }
 
         private void ToggleFindReplacePanel(bool status)
@@ -1062,13 +1043,10 @@ namespace pie
             if (status)
             {
                 ResetFindPanelLocation();
-                findReplaceHeaderGroup.Show();
                 findTextBox.Focus();
             }
             else
             {
-                findReplaceHeaderGroup.Hide();
-
                 if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
                 {
                     Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
@@ -1076,8 +1054,9 @@ namespace pie
                 }
             }
 
+            findReplaceHeaderGroup.Visible = !findReplaceHeaderGroup.Visible;
+
             kryptonContextMenuItem6.Checked = status;
-            Globals.findReplacePanelToggled = status;
         }
 
         private void GetConfigurationDataFromFiles()
@@ -1128,8 +1107,8 @@ namespace pie
             Globals.kryptonPalette = kryptonPalette;
 
             ResetFindPanelLocation();
-            findReplaceHeaderGroup.Hide();
-            Globals.findReplacePanelToggled = false;
+            findReplaceHeaderGroup.Visible = false;
+            directoryNavigationHeaderGroup.Visible = false;
 
             gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
 
@@ -1145,8 +1124,9 @@ namespace pie
             
             this.Palette = kryptonPalette;
             tabControl.Palette = kryptonPalette;
-            buildTabControl.Palette = kryptonPalette;
+            terminalTabControl.Palette = kryptonPalette;
             findReplaceHeaderGroup.Palette = kryptonPalette;
+            directoryNavigationHeaderGroup.Palette = kryptonPalette;
             codeContextMenu.Palette = kryptonPalette;
             terminalContextMenu.Palette = kryptonPalette;
             renderContextMenu.Palette = kryptonPalette;
@@ -1158,7 +1138,7 @@ namespace pie
             kryptonButton2.Palette = kryptonPalette;
             kryptonButton3.Palette = kryptonPalette;
 
-            buildTabControl.Hide();
+            terminalTabControl.Hide();
             gitPanel.Hide();
 
             tabControl.AllowPageDrag = false;
@@ -1336,7 +1316,6 @@ namespace pie
         {
             if (tabControl.SelectedIndex != tabControl.Pages.Count - 1)
             {
-
                 if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
                 {
                     NewTab(TabType.CODE, null);
@@ -1358,10 +1337,19 @@ namespace pie
                     {
                         ShowFindReplacePanel();
                     }
+                    else if (e.KeyCode == Keys.G && e.Modifiers == Keys.Control)
+                    {
+                        ShowDirectoryPanel();
+                    }
                 }
             }
         }
-       
+
+        private void ShowDirectoryPanel()
+        {
+            directoryNavigationHeaderGroup.Visible = !directoryNavigationHeaderGroup.Visible;
+        }
+
 
         // [Event] Triggered when clicking "Show Terminal Tab" from the context menu
         private void kryptonContextMenuItem15_Click(object sender, EventArgs e)
@@ -1487,7 +1475,7 @@ namespace pie
 
         private void buildTabControl_TabCountChanged(object sender, EventArgs e)
         {
-            if (buildTabControl.Pages.Count == 0)
+            if (terminalTabControl.Pages.Count == 0)
             {
                 kryptonContextMenuItem18.Enabled = false;
                 ShowTerminalTabControl();
@@ -2379,6 +2367,28 @@ namespace pie
             else
             {
                 matchWholeWordCheckBox.Enabled = true;
+            }
+        }
+
+        private void directoryNavigationHeaderGroup_Panel_MouseDown(object sender, MouseEventArgs e)
+        {
+            Globals.mouseDown = true;
+            Globals.lastLocation = e.Location;
+        }
+
+        private void directoryNavigationHeaderGroup_Panel_MouseUp(object sender, MouseEventArgs e)
+        {
+            Globals.mouseDown = false;
+        }
+
+        private void directoryNavigationHeaderGroup_Panel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (Globals.mouseDown)
+            {
+                directoryNavigationHeaderGroup.Location = new Point(
+                    (directoryNavigationHeaderGroup.Location.X - Globals.lastLocation.X) + e.X, (directoryNavigationHeaderGroup.Location.Y - Globals.lastLocation.Y) + e.Y);
+
+                this.Update();
             }
         }
     }
