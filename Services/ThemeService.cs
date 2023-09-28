@@ -69,6 +69,10 @@ namespace pie.Services
             lightColorDictionary["ButtonHover"] = Color.FromArgb(205, 205, 205);
             lightColorDictionary["Fore"] = Color.Black;
             lightColorDictionary["FormBorder"] = Color.FromArgb(175, 175, 175);
+            lightColorDictionary["Selection"] = Color.FromArgb(84, 84, 84);
+            lightColorDictionary["CaretLineBack"] = Color.FromArgb(225, 225, 225);
+            lightColorDictionary["NumberMargin"] = Color.FromArgb(225, 225, 225);
+            lightColorDictionary["Folding"] = Color.FromArgb(235, 235, 235);
 
             darkColorDictionary["Primary"] = Color.FromArgb(40, 40, 40);
             darkColorDictionary["Secondary"] = Color.FromArgb(50, 50, 50);
@@ -77,129 +81,26 @@ namespace pie.Services
             darkColorDictionary["ButtonHover"] = Color.FromArgb(85, 85, 85);
             darkColorDictionary["Fore"] = Color.White;
             darkColorDictionary["FormBorder"] = Color.FromArgb(90, 90, 90);
+            darkColorDictionary["Selection"] = Color.FromArgb(192, 192, 192);
+            darkColorDictionary["ButtonHover"] = Color.FromArgb(85, 85, 85);
+            darkColorDictionary["CaretLineBack"] = Color.FromArgb(64, 64, 64);
+            darkColorDictionary["NumberMargin"] = Color.FromArgb(46, 46, 46);
+            darkColorDictionary["Folding"] = Color.FromArgb(50, 50, 50);
         }
 
-        public static Color GetSelectionColor()
+        public static Color GetColor(string color)
         {
             if (Globals.theme == 1)
             {
-                return Color.FromArgb(84, 84, 84);
+                return darkColorDictionary[color];
             }
             else
             {
-                return Color.FromArgb(192, 192, 192);
+                return lightColorDictionary[color];
             }
         }
 
-        public static Color GetCaretLineBackColor()
-        {
-            if (Globals.theme == 1)
-            {
-                return Color.FromArgb(64, 64, 64);
-            }
-            else
-            {
-                return Color.FromArgb(225, 225, 225);
-            }
-        }
-
-        public static Color GetForeColor()
-        {
-            if (Globals.theme == 1)
-            {
-                return darkColorDictionary["Fore"];
-            }
-            else
-            {
-                return lightColorDictionary["Fore"];
-            }
-        }
-
-        public static Color GetButtonHoverColor()
-        {
-            if (Globals.theme == 1)
-            {
-                return darkColorDictionary["ButtonHover"];
-            }
-            else
-            {
-                return lightColorDictionary["ButtonHover"];
-            }
-        }
-
-        public static Color GetButtonFrameColor()
-        {
-            if (Globals.theme == 1)
-            {
-                return darkColorDictionary["ButtonFrame"];
-            }
-            else
-            {
-                return lightColorDictionary["ButtonFrame"];
-            }
-        }
-
-        public static Color GetTextAreaBackColor()
-        {
-            if (Globals.theme == 1)
-            {
-                return darkColorDictionary["Primary"];
-            }
-            else
-            {
-                return lightColorDictionary["Primary"];
-            }
-        }
-
-        public static Color GetNumberMarginColor()
-        {
-            if (Globals.theme == 1)
-            {
-                return Color.FromArgb(46, 46, 46);
-            }
-            else
-            {
-                return Color.FromArgb(225, 225, 225);
-            }
-        }
-
-        public static Color GetFoldingColor()
-        {
-            if (Globals.theme == 1)
-            {
-                return Color.FromArgb(50, 50, 50);
-            }
-            else
-            {
-                return Color.FromArgb(235, 235, 235);
-            }
-        }
-
-        public static Color GetPrimaryColor()
-        {
-            if (Globals.theme == 1)
-            {
-                return darkColorDictionary["Primary"];
-            }
-            else
-            {
-                return lightColorDictionary["Primary"];
-            }
-        }
-
-        public static Color GetSecondaryColor()
-        {
-            if (Globals.theme == 1)
-            {
-                return darkColorDictionary["Secondary"];
-            }
-            else
-            {
-                return lightColorDictionary["Secondary"];
-            }
-        }
-
-        public static void SetPaletteToTheme(KryptonDockableNavigator tabControl, KryptonPage kryptonPage, MenuStrip menuStrip, KryptonPalette kryptonPalette, ObjectListView gitStagingAreaListView, KryptonHeaderGroup findReplaceHeaderGroup, int theme)
+        public static void SetPaletteToTheme(KryptonPalette kryptonPalette, int theme)
         {
             if (!dictionariesInitialized)
             {
@@ -216,38 +117,6 @@ namespace pie.Services
             else
             {
                 colorDictionary = darkColorDictionary;
-            }
-
-            // MenuStrip & Children
-            if (menuStrip != null)
-            {
-                menuStrip.BackColor = colorDictionary["Primary"];
-                menuStrip.ForeColor = colorDictionary["Fore"];
-
-                foreach (ToolStripMenuItem toolStripMenuItem in menuStrip.Items)
-                {
-                    toolStripMenuItem.DropDown.BackColor = colorDictionary["Primary"];
-                    toolStripMenuItem.DropDown.ForeColor = colorDictionary["Fore"];
-                    toolStripMenuItem.ImageTransparentColor = colorDictionary["Primary"];
-
-                    if (toolStripMenuItem.HasDropDownItems)
-                    {
-                        foreach (ToolStripMenuItem toolStripMenuItemChild in toolStripMenuItem.DropDownItems)
-                        {
-                            toolStripMenuItemChild.BackColor = colorDictionary["Primary"];
-                            toolStripMenuItemChild.ForeColor = colorDictionary["Fore"];
-
-                            if (toolStripMenuItemChild.HasDropDownItems)
-                            {
-                                foreach (ToolStripMenuItem toolStripMenuItemChild2 in toolStripMenuItemChild.DropDownItems)
-                                {
-                                    toolStripMenuItemChild2.BackColor = colorDictionary["Primary"];
-                                    toolStripMenuItemChild2.ForeColor = colorDictionary["Fore"];
-                                }
-                            }
-                        }
-                    }
-                }
             }
 
             // Common
@@ -316,10 +185,6 @@ namespace pie.Services
             kryptonPalette.HeaderStyles.HeaderForm.StateCommon.Content.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.HeaderStyles.HeaderForm.StateCommon.Content.ShortText.Color2 = colorDictionary["Fore"];
 
-            // HeaderGroup
-            findReplaceHeaderGroup.StateCommon.Border.Color1 = colorDictionary["FormBorder"];
-            findReplaceHeaderGroup.StateCommon.Border.Color2 = colorDictionary["FormBorder"];
-
             // InputControl
             kryptonPalette.InputControlStyles.InputControlCommon.StateCommon.Back.Color1 = colorDictionary["Primary"];
             kryptonPalette.InputControlStyles.InputControlCommon.StateCommon.Back.Color2 = colorDictionary["Primary"];
@@ -345,12 +210,6 @@ namespace pie.Services
             kryptonPalette.TabStyles.TabCommon.StateSelected.Back.Color2 = colorDictionary["Secondary"];
             kryptonPalette.TabStyles.TabCommon.StateCommon.Content.ShortText.Color1 = colorDictionary["Fore"];
             kryptonPalette.TabStyles.TabCommon.StateCommon.Content.ShortText.Color2 = colorDictionary["Fore"];
-
-            if (tabControl != null)
-            {
-                tabControl.StateCommon.Panel.Color1 = colorDictionary["Primary"];
-                tabControl.StateCommon.Panel.Color2 = colorDictionary["Primary"];
-            }
 
             // ContextMenu
             kryptonPalette.ContextMenu.StateCommon.ControlInner.Back.Color1 = colorDictionary["Primary"];
@@ -382,32 +241,7 @@ namespace pie.Services
             kryptonPalette.ContextMenu.StateCommon.ItemHighlight.Back.Color2 = colorDictionary["Secondary"];
 
             kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color1 = colorDictionary["Fore"];
-            kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color2 = colorDictionary["Fore"];
-
-            // ObjectListView
-            gitStagingAreaListView.BackColor = colorDictionary["Primary"];
-            gitStagingAreaListView.ForeColor = colorDictionary["Fore"];
-
-            var headerstyle = new HeaderFormatStyle();
-            headerstyle.Normal.BackColor = colorDictionary["Secondary"];
-            headerstyle.Normal.ForeColor = colorDictionary["Fore"];
-
-            headerstyle.Hot.BackColor = colorDictionary["ButtonHover"];
-            headerstyle.Hot.ForeColor = colorDictionary["Fore"];
-
-            headerstyle.Pressed.BackColor = colorDictionary["ButtonFrame"];
-            headerstyle.Pressed.ForeColor = colorDictionary["Fore"];            
-           
-            gitStagingAreaListView.HeaderFormatStyle = headerstyle;
-
-            if (theme == 1)
-            {
-                kryptonPage.ImageSmall = Properties.Resources.plus_white;
-            }
-            else
-            {
-                kryptonPage.ImageSmall = Properties.Resources.plus_blue;
-            }
+            kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color2 = colorDictionary["Fore"];            
         }
 
         public static void GetTheme(string file)

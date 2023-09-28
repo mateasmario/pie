@@ -69,11 +69,11 @@ namespace pie.Services
         {
             parserColorDictionary = new Dictionary<string, Color>();
 
-            parserColorDictionary["Default"] = ThemeService.GetForeColor();
-            parserColorDictionary["Background"] = ThemeService.GetTextAreaBackColor();
-            parserColorDictionary["Fore"] = ThemeService.GetForeColor();
-            parserColorDictionary["CaretLine"] = ThemeService.GetCaretLineBackColor();
-            parserColorDictionary["Selection"] = ThemeService.GetSelectionColor();
+            parserColorDictionary["Default"] = ThemeService.GetColor("Fore");
+            parserColorDictionary["Background"] = ThemeService.GetColor("Primary");
+            parserColorDictionary["Fore"] = ThemeService.GetColor("Fore");
+            parserColorDictionary["CaretLine"] = ThemeService.GetColor("CaretLineBack");
+            parserColorDictionary["Selection"] = ThemeService.GetColor("Selection");
 
             if (Globals.theme == 1)
             {
@@ -398,8 +398,8 @@ namespace pie.Services
 
             for (int i = 25; i <= 31; i++)
             {
-                scintilla.Markers[i].SetForeColor(ThemeService.GetFoldingColor()); // styles for [+] and [-]
-                scintilla.Markers[i].SetBackColor(ThemeService.GetForeColor()); // styles for [+] and [-]
+                scintilla.Markers[i].SetForeColor(ThemeService.GetColor("Folding")); // styles for [+] and [-]
+                scintilla.Markers[i].SetBackColor(ThemeService.GetColor("Fore")); // styles for [+] and [-]
             }
 
             // Enable automatic folding
