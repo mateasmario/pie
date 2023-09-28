@@ -1721,11 +1721,6 @@ namespace pie
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
             
             bool status = Replace(TextArea, findTextBox.Text, replaceTextBox.Text);
-
-            if (!status)
-            {
-                ShowNotification("No occurences found.");
-            }
         }
 
         private void ReplaceAll(Scintilla scintilla, String from, String to)
