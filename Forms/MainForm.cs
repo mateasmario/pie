@@ -452,6 +452,7 @@ namespace pie
 
                 ToggleTerminalTabControl(false);
                 ToggleFindReplacePanel(false);
+                directoryNavigationHeaderGroup.Visible = false;
 
                 if (Globals.gitTabOpened)
                 {
@@ -484,6 +485,7 @@ namespace pie
                 tabControl.KryptonContextMenu = renderContextMenu;
                 ToggleTerminalTabControl(false);
                 ToggleFindReplacePanel(false);
+                ToggleDirectoryNavigator(false);
 
                 kryptonPage.Text = ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                 kryptonPage.ToolTipTitle = Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
@@ -745,7 +747,7 @@ namespace pie
         }
 
         // [Method] Opens a file (without openFileDialog), given just a path
-        public void Open(string fileName)
+        public bool Open(string fileName)
         {
             if (tabControl.Pages.Count == 1)
             {
@@ -754,7 +756,16 @@ namespace pie
 
             int openedTabIndex = tabControl.SelectedIndex;
 
-            string fileContent = System.IO.File.ReadAllText(fileName);
+            string fileContent;
+
+            try
+            {
+                fileContent = System.IO.File.ReadAllText(fileName);
+            } catch(Exception ex)
+            {
+                ShowNotification("An error has been encountered while trying to open the file.");
+                return false;
+            }
 
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
             TextArea.Text = fileContent;
@@ -775,6 +786,8 @@ namespace pie
             {
                 Globals.tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(false);
             }
+
+            return true;
         }
 
         // [Method] Opens a new file and replaces text and path (in openedFilePaths) for selected tab (with openFileDialog)
@@ -896,7 +909,7 @@ namespace pie
 
         public void ToggleTerminalTabControl(bool status)
         {
-            terminalTabControl.Visible = !terminalTabControl.Visible;
+            terminalTabControl.Visible = status;
 
             if (status)
             {
@@ -1033,9 +1046,23 @@ namespace pie
             return result;
         }
 
+        private void ToggleDirectoryNavigator(bool status)
+        {
+            if (status)
+            {
+                kryptonContextMenuItem12.Text = "Hide Directory Navigator";
+            }
+            else
+            {
+                kryptonContextMenuItem12.Text = "Show Directory Navigator";
+            }
+
+            directoryNavigationHeaderGroup.Visible = status;
+        }
+
         private void ShowFindReplacePanel()
         {
-            directoryNavigationHeaderGroup.Visible = false;
+            ToggleDirectoryNavigator(false);
             ToggleFindReplacePanel(!findReplaceHeaderGroup.Visible);
         }
 
@@ -1045,6 +1072,7 @@ namespace pie
             {
                 ResetFindPanelLocation();
                 findTextBox.Focus();
+                kryptonContextMenuItem6.Text = "Hide Find and Replace";
             }
             else
             {
@@ -1053,9 +1081,11 @@ namespace pie
                     Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
                     ClearHighlights(TextArea);
                 }
+
+                kryptonContextMenuItem6.Text = "Show Find and Replace";
             }
 
-            findReplaceHeaderGroup.Visible = !findReplaceHeaderGroup.Visible;
+            findReplaceHeaderGroup.Visible = status;
 
             kryptonContextMenuItem6.Checked = status;
         }
@@ -1110,7 +1140,7 @@ namespace pie
             ResetFindPanelLocation();
             ResetDirectoryPanelLocation();
             findReplaceHeaderGroup.Visible = false;
-            directoryNavigationHeaderGroup.Visible = false;
+            ToggleDirectoryNavigator(false);
 
             gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
 
@@ -1147,9 +1177,6 @@ namespace pie
             tabControl.AllowPageReorder = false;
 
             replaceTextBox.KeyDown += ReplaceTextBox_KeyDown;
-
-            gitStagingAreaListView.BackColor = ThemeService.GetColor("Primary");
-            gitStagingAreaListView.ForeColor = ThemeService.GetColor("Secondary");
         }
 
         private void ProcessCommandLineArguments()
@@ -1200,16 +1227,8 @@ namespace pie
                 e.Item.ForeColor = Globals.theme == 1 ? Color.FromArgb(60, 170, 232) : Color.FromArgb(40, 115, 158);
             else if (gitFile.Status == "Modified")
                 e.Item.ForeColor = Globals.theme == 1 ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
-        }
-
-        private void CenterControlHorizontally(Control child, Control parent)
-        {
-            child.Left = (parent.ClientSize.Width - child.Width) / 2;
-        }
-
-        private void CenterControlVertically(Control child, Control parent)
-        {
-            child.Top = (parent.ClientSize.Height - child.Height) / 2;
+            else
+                e.Item.ForeColor = ThemeService.GetColor("Fore");
         }
 
         private void ReplaceTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -1310,29 +1329,55 @@ namespace pie
         // [Generic Event] Used mostly for tab control and actions on opened files. Called by other event listeners
         private void keyDownEvents(object sender, KeyEventArgs e)
         {
-            if (directoryNavigationListBox.Visible)
+            if (directoryNavigationHeaderGroup.Visible)
             {
                 if (e.KeyCode == Keys.Down)
                 {
-                    if (directoryNavigationListBox.Items.Count > 0)
+                    if (directoryNavigationObjectListView.Items.Count > 0)
                     {
-                        if (directoryNavigationListBox.SelectedIndex < directoryNavigationListBox.Items.Count - 1)
+                        if (directoryNavigationObjectListView.SelectedIndex < directoryNavigationObjectListView.Items.Count - 1)
                         {
-                            directoryNavigationListBox.SelectedIndex++;
+                            directoryNavigationObjectListView.Focus();
+                            directoryNavigationObjectListView.SelectedIndex++;
                         }
-                        else if (directoryNavigationListBox.SelectedItems.Count == 0)
+                        else if (directoryNavigationObjectListView.SelectedItems.Count == 0)
                         {
-                            directoryNavigationListBox.SelectedIndex = 0;
+                            directoryNavigationObjectListView.Focus();
+                            directoryNavigationObjectListView.SelectedIndex = 0;
                         }
                     }
                 }
                 else if (e.KeyCode == Keys.Enter)
                 {
-                    if (directoryNavigationListBox.SelectedItems.Count == 1)
+                    if (directoryNavigationObjectListView.SelectedItems.Count == 1)
                     {
-                        NewTab(TabType.CODE, null);
-                        Open(directoryNavigationListBox.SelectedItems[0].ToString());
-                        directoryNavigationHeaderGroup.Visible = false;
+                        NavigatorFile navigatorFile = (NavigatorFile)directoryNavigationObjectListView.SelectedObject;
+
+                        if (navigatorFile.Type == "File")
+                        {
+                            NewTab(TabType.CODE, null);
+                            bool state = Open(((NavigatorFile)navigatorFile).Path);
+
+                            if (!state)
+                            {
+                                CloseTab();
+                            }
+                            else
+                            {
+                                ToggleDirectoryNavigator(false);
+                            }
+                        }
+                        else
+                        {
+                            if (navigatorFile.Path != "..")
+                            {
+                                NavigateToPath(navigatorFile.Path);
+                            }
+                            else
+                            {
+                                NavigateToPath(ParsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
+                            }
+                        }
                     }
                 }
             }
@@ -1362,16 +1407,21 @@ namespace pie
                     }
                     else if (e.KeyCode == Keys.G && e.Modifiers == Keys.Control)
                     {
-                        ShowDirectoryPanel();
+                        ShowDirectoryNavigator();
                     }
                 }
             }
         }
 
-        private void ShowDirectoryPanel()
+        private void ShowDirectoryNavigator()
         {
             findReplaceHeaderGroup.Visible = false;
-            directoryNavigationHeaderGroup.Visible = !directoryNavigationHeaderGroup.Visible;
+            ToggleDirectoryNavigator(!directoryNavigationHeaderGroup.Visible);
+
+            if (directoryNavigationHeaderGroup.Visible)
+            {
+                directoryNavigationObjectListView.Focus();
+            }
 
             ResetDirectoryPanelLocation();
         }
@@ -1475,6 +1525,7 @@ namespace pie
 
                     ToggleTerminalTabControl(false);
                     ToggleFindReplacePanel(false);
+                    ToggleDirectoryNavigator(false);
 
                     if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.GIT)
                     {
@@ -1840,6 +1891,7 @@ namespace pie
             ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
             SynchronizeMainFormComponentsWithTheme();
             SynchronizeImagesWithTheme();
+            NavigateToPath(directoryNavigationTextBox.Text);
             UpdateGitRepositoryInfo();
         }
 
@@ -2351,8 +2403,34 @@ namespace pie
             tabControl.StateCommon.Panel.Color2 = ThemeService.GetColor("Primary");
 
             // ObjectListView
+            gitStagingAreaListView.UseCustomSelectionColors = true;
+            gitStagingAreaListView.FullRowSelect = true;
+            gitStagingAreaListView.ShowGroups = false;
+
+            gitStagingAreaListView.HighlightBackgroundColor = ThemeService.GetColor("Secondary");
+            gitStagingAreaListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
+            gitStagingAreaListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
+            gitStagingAreaListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
+
             gitStagingAreaListView.BackColor = ThemeService.GetColor("Primary");
             gitStagingAreaListView.ForeColor = ThemeService.GetColor("Fore");
+
+            directoryNavigationObjectListView.ShowGroups = false;
+            directoryNavigationObjectListView.UseCustomSelectionColors = true;
+            directoryNavigationObjectListView.FullRowSelect = true;
+            directoryNavigationObjectListView.MultiSelect = false;
+            directoryNavigationObjectListView.HeaderStyle = ColumnHeaderStyle.None;
+            directoryNavigationObjectListView.SmallImageList = new ImageList();
+            directoryNavigationObjectListView.SmallImageList.Images.Add("directory", Properties.Resources.folder);
+            olvColumn3.FillsFreeSpace = true;
+            olvColumn3.ImageGetter = new ImageGetterDelegate(NavigationImageGetter);
+
+            directoryNavigationObjectListView.BackColor = ThemeService.GetColor("Primary");
+            directoryNavigationObjectListView.ForeColor = ThemeService.GetColor("Fore");
+            directoryNavigationObjectListView.HighlightBackgroundColor = ThemeService.GetColor("Secondary");
+            directoryNavigationObjectListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
+            directoryNavigationObjectListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
+            directoryNavigationObjectListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
 
             var headerstyle = new HeaderFormatStyle();
             headerstyle.Normal.BackColor = ThemeService.GetColor("Secondary");
@@ -2427,31 +2505,111 @@ namespace pie
 
         private void kryptonButton12_Click(object sender, EventArgs e)
         {
+            ChooseFolderForNavigator();
+        }
+
+        private void ChooseFolderForNavigator()
+        {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
 
             DialogResult dialogResult = folderBrowserDialog.ShowDialog();
 
             if (dialogResult == DialogResult.OK)
             {
-                directoryNavigationListBox.Items.Clear();
+                NavigateToPath(folderBrowserDialog.SelectedPath);
+            }
+        }
 
-                directoryNavigationTextBox.Text = folderBrowserDialog.SelectedPath;
-                string[] files = Directory.GetFiles(folderBrowserDialog.SelectedPath);
+        private void NavigateToPath(string path)
+        {
+            directoryNavigationObjectListView.Items.Clear();
 
-                foreach(string file in files)
+            string[] files;
+            string[] directories;
+
+            try
+            {
+                files = Directory.GetFiles(path);
+                directories = Directory.GetDirectories(path);
+                directoryNavigationTextBox.Text = path;
+            } catch(Exception ex)
+            {
+                ShowNotification("An error was encountered while trying to access the given path.");
+                ChooseFolderForNavigator();
+                return;
+            }
+
+            List<NavigatorFile> fileList = new List<NavigatorFile>();
+
+            NavigatorFile back = new NavigatorFile();
+            back.Path = "..";
+            fileList.Add(back);
+
+            foreach (string directoryString in directories)
+            {
+                NavigatorFile file = new NavigatorFile();
+                file.Path = directoryString;
+                file.Type = "Directory";
+                fileList.Add(file);
+            }
+
+            foreach (string fileString in files)
+            {
+                NavigatorFile file = new NavigatorFile();
+                file.Path = fileString;
+                file.Type = "File";
+                fileList.Add(file);
+            }
+
+            directoryNavigationObjectListView.SetObjects(fileList);
+        }
+
+        public object NavigationImageGetter(object rowObject)
+        {
+            NavigatorFile navigatorFile = (NavigatorFile)rowObject;
+            if (navigatorFile.Type == "Directory")
+                return "directory";
+            else
+                return "folder";
+        }
+
+        private void directoryNavigationObjectListView_DoubleClick(object sender, EventArgs e)
+        {
+            if (directoryNavigationObjectListView.SelectedItems.Count == 1)
+            {
+                NavigatorFile navigatorFile = (NavigatorFile)directoryNavigationObjectListView.SelectedObject;
+
+                if (navigatorFile.Type == "File")
                 {
-                    directoryNavigationListBox.Items.Add(file);
+                    NewTab(TabType.CODE, null);
+                    bool state = Open(((NavigatorFile)navigatorFile).Path);
+
+                    if (!state)
+                    {
+                        CloseTab();
+                    }
+                    else
+                    {
+                        directoryNavigationHeaderGroup.Visible = false;
+                    }
+                }
+                else
+                {
+                    if (navigatorFile.Path != "..")
+                    {
+                        NavigateToPath(navigatorFile.Path);
+                    }
+                    else
+                    {
+                        NavigateToPath(ParsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
+                    }
                 }
             }
         }
 
-        private void directoryNavigationListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void kryptonContextMenuItem12_Click(object sender, EventArgs e)
         {
-            int index = this.directoryNavigationListBox.IndexFromPoint(e.Location);
-            if (index != System.Windows.Forms.ListBox.NoMatches)
-            {
-                MessageBox.Show(index.ToString());
-            }
+            ShowDirectoryNavigator();
         }
     }
 }
