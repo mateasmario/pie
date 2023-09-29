@@ -124,5 +124,19 @@ namespace pie.Services
         {
             return File.ReadAllText(path);
         }
+
+        public static string GoBackInFilePath(string path)
+        {
+            if (path[path.Length - 1] == '\\')
+            {
+                path = path.Substring(0, path.Length - 1);
+            }
+
+            int lastSlashIndex = path.LastIndexOf('\\');
+            string result = path.Substring(0, lastSlashIndex+1);
+
+
+            return result;
+        }
     }
 }
