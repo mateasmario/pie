@@ -63,6 +63,10 @@ namespace pie
             {
                 MainForm.ShowNotification("Directory does not exist. Create it before cloning a repository.");
             }
+            else if (Directory.GetFiles(kryptonTextBox2.Text).Length > 0 || Directory.GetDirectories(kryptonTextBox2.Text).Length > 0)
+            {
+                MainForm.ShowNotification("Specified directory needs to be empty.");
+            }
             else
             {
                 GitClone();

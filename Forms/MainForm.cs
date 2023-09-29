@@ -1891,7 +1891,11 @@ namespace pie
             ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
             SynchronizeMainFormComponentsWithTheme();
             SynchronizeImagesWithTheme();
-            NavigateToPath(directoryNavigationTextBox.Text);
+
+            if (directoryNavigationTextBox.Text != "")
+            {
+                NavigateToPath(directoryNavigationTextBox.Text);
+            }
             UpdateGitRepositoryInfo();
         }
 
@@ -1963,6 +1967,56 @@ namespace pie
 
             Globals.repo = new Repository(path);
 
+            RetrieveGitItemsForCurrentBranch();
+
+            string selectedBranch = null;
+            if (gitBranchesComboBox.SelectedItem != null)
+            {
+               selectedBranch = gitBranchesComboBox.SelectedItem.ToString();
+            }
+
+            gitBranchesComboBox.Items.Clear();
+
+            foreach (var branch in Globals.repo.Branches)
+            {
+                gitBranchesComboBox.Items.Add(branch.FriendlyName);
+
+                if (selectedBranch != null && branch.FriendlyName == selectedBranch)
+                {
+                    gitBranchesComboBox.SelectedItem = gitBranchesComboBox.Items[gitBranchesComboBox.Items.Count - 1];
+                }
+            }
+
+            if (gitBranchesComboBox.Items.Count > 0 && gitBranchesComboBox.SelectedItem == null)
+            {
+                gitBranchesComboBox.SelectedIndex = 0;
+            }
+        }
+
+        private void kryptonButton4_Click(object sender, EventArgs e)
+        {
+            OpenRepository();
+        }
+
+        private void gitStagingAreaListView_DoubleClick(object sender, EventArgs e)
+        {
+            OpenSelectedGitFiles();
+        }
+
+        private void kryptonButton8_Click(object sender, EventArgs e)
+        {
+            if (Globals.repo != null)
+            {
+                UpdateGitRepositoryInfo();
+            }
+            else
+            {
+                ShowNotification("No repository opened.");
+            }
+        }
+
+        private void RetrieveGitItemsForCurrentBranch()
+        {
             StatusOptions statusOptions = new StatusOptions();
             statusOptions.IncludeUnaltered = true;
 
@@ -1998,40 +2052,6 @@ namespace pie
             }
 
             gitStagingAreaListView.SetObjects(gitFileList);
-
-            gitBranchesComboBox.Items.Clear();
-
-            foreach(var branch in Globals.repo.Branches)
-            {
-                gitBranchesComboBox.Items.Add(branch.FriendlyName);
-            }
-
-            if (gitBranchesComboBox.Items.Count > 0)
-            {
-                gitBranchesComboBox.SelectedIndex = 0;
-            }
-        }
-
-        private void kryptonButton4_Click(object sender, EventArgs e)
-        {
-            OpenRepository();
-        }
-
-        private void gitStagingAreaListView_DoubleClick(object sender, EventArgs e)
-        {
-            OpenSelectedGitFiles();
-        }
-
-        private void kryptonButton8_Click(object sender, EventArgs e)
-        {
-            if (Globals.repo != null)
-            {
-                UpdateGitRepositoryInfo();
-            }
-            else
-            {
-                ShowNotification("No repository opened.");
-            }
         }
 
         private void GitCommit(string items)
@@ -2058,7 +2078,7 @@ namespace pie
                         Commands.Stage(Globals.repo, items);
                     }
 
-                    if (Globals.gitCredentials.Name == "" || Globals.gitCredentials.Email == "")
+                    if (string.IsNullOrEmpty(Globals.gitCredentials.Name) || string.IsNullOrEmpty(Globals.gitCredentials.Email))
                     {
                         GitCommitCredentialsForm gitCredentialsForm = new GitCommitCredentialsForm();
                         Globals.gitFormClosedWithOk = false;
@@ -2183,7 +2203,7 @@ namespace pie
 
                 if (true)
                 {
-                    if (Globals.gitCredentials.Username == "" || Globals.gitCredentials.Password == "")
+                    if (string.IsNullOrEmpty(Globals.gitCredentials.Username) || string.IsNullOrEmpty(Globals.gitCredentials.Password))
                     {
                         GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
                         Globals.gitFormClosedWithOk = false;
@@ -2199,9 +2219,9 @@ namespace pie
                     {
                         Remote remote = Globals.repo.Network.Remotes["origin"];
 
-                        Globals.repo.Branches.Update(Globals.repo.Branches["master"],
+                        Globals.repo.Branches.Update(Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()],
                             b => b.Remote = remote.Name,
-                            b => b.UpstreamBranch = Globals.repo.Branches["master"].CanonicalName);
+                            b => b.UpstreamBranch = Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()].CanonicalName);
 
                         // Push the branch to the remote                        
                         var pushOptions = new LibGit2Sharp.PushOptions();
@@ -2251,8 +2271,39 @@ namespace pie
                     {
                         Globals.selectedBranch = branch;
                         Globals.selectedBranchIndex = gitBranchesComboBox.SelectedIndex;
+
+                        CheckoutOptions checkoutOptions = new CheckoutOptions();
+                        Branch currentBranch = Commands.Checkout(Globals.repo, branch, new CheckoutOptions() { CheckoutModifiers = CheckoutModifiers.Force });
+
+                        if (gitBranchesComboBox.SelectedItem.ToString().StartsWith("origin/"))
+                        {
+                            // Check if current local branch already exists
+                            string localBranchFriendlyName = gitBranchesComboBox.SelectedItem.ToString().Remove(0, 7);
+
+                            if (localBranchFriendlyName == null)
+                            {
+                                // Remove the "origin/" from remote branch name
+                                var remoteBranch = Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()];
+                                var newBranch = Globals.repo.CreateBranch(localBranchFriendlyName, remoteBranch.Tip);
+                                Globals.repo.Branches.Update(newBranch, b => b.TrackedBranch = remoteBranch.CanonicalName);
+                            }
+
+                            int index = 0;
+                            foreach(string branchName in gitBranchesComboBox.Items)
+                            {
+                                if (branchName == localBranchFriendlyName)
+                                {
+                                    gitBranchesComboBox.SelectedIndex = index;
+                                    break;
+                                }
+                                index++;
+                            }
+
+                        }
                     }
                 }
+
+                RetrieveGitItemsForCurrentBranch();
             }
             else
             {
@@ -2304,9 +2355,9 @@ namespace pie
         {
             if (Globals.repo != null)
             {
-                if (Globals.gitCredentials.Username == "" || Globals.gitCredentials.Password == "")
+                if (string.IsNullOrEmpty(Globals.gitCredentials.Name) || string.IsNullOrEmpty(Globals.gitCredentials.Email))
                 {
-                    GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
+                    GitCommitCredentialsForm gitCredentialsForm = new GitCommitCredentialsForm();
                     Globals.gitFormClosedWithOk = false;
                     gitCredentialsForm.ShowDialog();
 
@@ -2318,27 +2369,42 @@ namespace pie
                 }
                 else
                 {
-                    var pullOptions = new PullOptions();
+                    if (string.IsNullOrEmpty(Globals.gitCredentials.Username) || string.IsNullOrEmpty(Globals.gitCredentials.Password))
+                    {
+                        GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
+                        Globals.gitFormClosedWithOk = false;
+                        gitCredentialsForm.ShowDialog();
 
-                    pullOptions.FetchOptions = new FetchOptions();
-
-                    pullOptions.FetchOptions.CredentialsProvider = new LibGit2Sharp.Handlers.CredentialsHandler(
-                        (_url, _user, _cred) => new UsernamePasswordCredentials()
+                        if (Globals.gitFormClosedWithOk)
                         {
-                            Username = Globals.gitCredentials.Username,
-                            Password = Globals.gitCredentials.Password
-                        });
-
-                    Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
-                    Commands.Pull(Globals.repo, signature, pullOptions);
-                    try
-                    {
-                        UpdateGitRepositoryInfo();
-                        ShowNotification("Pull successful.");
+                            GitService.WriteCredentials(Globals.gitCredentials);
+                            GitPull();
+                        }
                     }
-                    catch (LibGit2SharpException ex)
+                    else
                     {
-                        ShowNotification(ex.Message);
+                        var pullOptions = new PullOptions();
+
+                        pullOptions.FetchOptions = new FetchOptions();
+
+                        pullOptions.FetchOptions.CredentialsProvider = new LibGit2Sharp.Handlers.CredentialsHandler(
+                            (_url, _user, _cred) => new UsernamePasswordCredentials()
+                            {
+                                Username = Globals.gitCredentials.Username,
+                                Password = Globals.gitCredentials.Password
+                            });
+
+                        Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
+                        Commands.Pull(Globals.repo, signature, pullOptions);
+                        try
+                        {
+                            UpdateGitRepositoryInfo();
+                            ShowNotification("Pull successful.");
+                        }
+                        catch (LibGit2SharpException ex)
+                        {
+                            ShowNotification(ex.Message);
+                        }
                     }
                 }
             }
