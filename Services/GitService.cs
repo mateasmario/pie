@@ -78,9 +78,9 @@ namespace pie.Services
 
         public static void WriteCredentials(GitCredentials gitCredentials)
         {
-            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "git.json", "");
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/git.json", "");
 
-            TextWriter textWriter = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "git.json");
+            TextWriter textWriter = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "config/git.json");
 
             using (JsonWriter writer = new JsonTextWriter(textWriter))
             {
