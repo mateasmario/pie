@@ -1934,6 +1934,7 @@ namespace pie
                 {
                     Repository.Init(path);
                     repositoryTextBox.Text = path;
+                    Globals.doNotShowBranchChangeNotification = true;
                     UpdateGitRepositoryInfo();
 
                     if (gitBranchesComboBox.Items.Count > 0)
@@ -1945,6 +1946,7 @@ namespace pie
             else
             {
                 repositoryTextBox.Text = path;
+                Globals.doNotShowBranchChangeNotification = true;
                 UpdateGitRepositoryInfo();
 
                 if (gitBranchesComboBox.Items.Count > 0)
@@ -2007,6 +2009,7 @@ namespace pie
         {
             if (Globals.repo != null)
             {
+                Globals.doNotTriggerBranchChangeEvent = true;
                 UpdateGitRepositoryInfo();
             }
             else
@@ -2094,6 +2097,7 @@ namespace pie
                     {
                         Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
                         Globals.repo.Commit(commitMessageRichTextBox.Text, signature, signature);
+                        Globals.doNotShowBranchChangeNotification = true;
                         UpdateGitRepositoryInfo();
                         ShowNotification("Successfully commited.");
                     }
@@ -2235,10 +2239,13 @@ namespace pie
 
                         try
                         {
+                            Globals.doNotShowBranchChangeNotification = true;
                             Globals.repo.Network.Push(Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()], pushOptions);
                             ShowNotification("Successfully pushed to remote.");
                             UpdateGitRepositoryInfo();
-                        } catch(LibGit2SharpException ex)
+                            Globals.doNotShowBranchChangeNotification = false;
+                        }
+                        catch (LibGit2SharpException ex)
                         {
                             ShowNotification("Authentication failed. If pushing on GitHub, generate an access token (with proper permissions) instead of using the password.");
                         }
@@ -2263,47 +2270,70 @@ namespace pie
 
         private void kryptonComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Globals.repo != null)
+            if (Globals.doNotTriggerBranchChangeEvent)
             {
-                foreach (var branch in Globals.repo.Branches)
+                Globals.doNotTriggerBranchChangeEvent = false;
+            }
+            else if (Globals.repo != null)
+            {
+                int selectedIndex = gitBranchesComboBox.SelectedIndex;
+
+                if (Globals.doNotShowBranchChangeNotification)
                 {
-                    if (branch.FriendlyName == gitBranchesComboBox.Text)
-                    {
-                        Globals.selectedBranch = branch;
-                        Globals.selectedBranchIndex = gitBranchesComboBox.SelectedIndex;
-
-                        CheckoutOptions checkoutOptions = new CheckoutOptions();
-                        Branch currentBranch = Commands.Checkout(Globals.repo, branch, new CheckoutOptions() { CheckoutModifiers = CheckoutModifiers.Force });
-
-                        if (gitBranchesComboBox.SelectedItem.ToString().StartsWith("origin/"))
-                        {
-                            // Check if current local branch already exists
-                            string localBranchFriendlyName = gitBranchesComboBox.SelectedItem.ToString().Remove(0, 7);
-
-                            if (localBranchFriendlyName == null)
-                            {
-                                // Remove the "origin/" from remote branch name
-                                var remoteBranch = Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()];
-                                var newBranch = Globals.repo.CreateBranch(localBranchFriendlyName, remoteBranch.Tip);
-                                Globals.repo.Branches.Update(newBranch, b => b.TrackedBranch = remoteBranch.CanonicalName);
-                            }
-
-                            int index = 0;
-                            foreach(string branchName in gitBranchesComboBox.Items)
-                            {
-                                if (branchName == localBranchFriendlyName)
-                                {
-                                    gitBranchesComboBox.SelectedIndex = index;
-                                    break;
-                                }
-                                index++;
-                            }
-
-                        }
-                    }
+                    Globals.doNotShowBranchChangeNotification = false;
+                }
+                else {
+                    ShowYesNoCancelNotification("Checking out another branch will discard your current changes. Would you like to continue?");
                 }
 
-                RetrieveGitItemsForCurrentBranch();
+                if (Globals.notificationButtonPressed == NotificationButton.YES)
+                {
+                    foreach (var branch in Globals.repo.Branches)
+                    {
+                        if (branch.FriendlyName == gitBranchesComboBox.Text)
+                        {
+                            Globals.selectedBranch = branch;
+                            Globals.selectedBranchIndex = gitBranchesComboBox.SelectedIndex;
+
+                            CheckoutOptions checkoutOptions = new CheckoutOptions();
+                            Branch currentBranch = Commands.Checkout(Globals.repo, branch, new CheckoutOptions() { CheckoutModifiers = CheckoutModifiers.Force });
+
+                            if (gitBranchesComboBox.SelectedItem.ToString().StartsWith("origin/"))
+                            {
+                                // Check if current local branch already exists
+                                string localBranchFriendlyName = gitBranchesComboBox.SelectedItem.ToString().Remove(0, 7);
+
+                                if (localBranchFriendlyName == null)
+                                {
+                                    // Remove the "origin/" from remote branch name
+                                    var remoteBranch = Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()];
+                                    var newBranch = Globals.repo.CreateBranch(localBranchFriendlyName, remoteBranch.Tip);
+                                    Globals.repo.Branches.Update(newBranch, b => b.TrackedBranch = remoteBranch.CanonicalName);
+                                }
+
+                                int index = 0;
+                                foreach (string branchName in gitBranchesComboBox.Items)
+                                {
+                                    if (branchName == localBranchFriendlyName)
+                                    {
+                                        gitBranchesComboBox.SelectedIndex = index;
+                                        break;
+                                    }
+                                    index++;
+                                }
+
+                            }
+                        }
+                    }
+
+                    RetrieveGitItemsForCurrentBranch();
+                }
+                else
+                {
+                    Globals.doNotTriggerBranchChangeEvent = true;
+                    gitBranchesComboBox.SelectedIndex = selectedIndex;
+                    Globals.doNotTriggerBranchChangeEvent = false;
+                }
             }
             else
             {
@@ -2477,7 +2507,6 @@ namespace pie
             gitStagingAreaListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
             gitStagingAreaListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
             gitStagingAreaListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
-
             gitStagingAreaListView.BackColor = ThemeService.GetColor("Primary");
             gitStagingAreaListView.ForeColor = ThemeService.GetColor("Fore");
 

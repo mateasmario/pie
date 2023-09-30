@@ -72,6 +72,8 @@ namespace pie
         public static bool gitFormClosedWithOk;
         public static string clonePath;
         public static int selectedBranchIndex;
+        public static bool doNotTriggerBranchChangeEvent;
+        public static bool doNotShowBranchChangeNotification;
 
         // Notification
         public static string notificationText;

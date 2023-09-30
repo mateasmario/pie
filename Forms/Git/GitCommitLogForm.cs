@@ -78,6 +78,14 @@ namespace pie
             gitCommitLogListView.ShowGroups = false;
             gitCommitLogListView.BackColor = ThemeService.GetColor("Primary");
             gitCommitLogListView.ForeColor = ThemeService.GetColor("Fore");
+            gitCommitLogListView.UseCustomSelectionColors = true;
+            gitCommitLogListView.FullRowSelect = true;
+            gitCommitLogListView.HighlightBackgroundColor = ThemeService.GetColor("Secondary");
+            gitCommitLogListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
+            gitCommitLogListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
+            gitCommitLogListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
+            gitCommitLogListView.BackColor = ThemeService.GetColor("Primary");
+            gitCommitLogListView.ForeColor = ThemeService.GetColor("Fore");
 
             gitCommitLogListView.HeaderFormatStyle = CustomizeHeaderStyle();
 
