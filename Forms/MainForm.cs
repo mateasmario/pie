@@ -88,6 +88,7 @@ using BrightIdeasSoftware;
  */
 using ConEmu.WinForms;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace pie
 {
@@ -2104,7 +2105,14 @@ namespace pie
                     else
                     {
                         Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
-                        Globals.repo.Commit(commitMessageRichTextBox.Text, signature, signature);
+
+                        string commitText = commitMessageRichTextBox.Text;
+
+                        Task.Run(() =>
+                        {
+                            Globals.repo.Commit(commitText, signature, signature);
+                        }).Wait();
+
                         Globals.doNotShowBranchChangeNotification = true;
                         UpdateGitRepositoryInfo();
                         ShowNotification("Successfully commited.");
@@ -2248,7 +2256,14 @@ namespace pie
                         try
                         {
                             Globals.doNotShowBranchChangeNotification = true;
-                            Globals.repo.Network.Push(Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()], pushOptions);
+
+                            string branchName = gitBranchesComboBox.SelectedItem.ToString();
+
+                            Task.Run(() =>
+                            {
+                                Globals.repo.Network.Push(Globals.repo.Branches[branchName], pushOptions);
+                            }).Wait();
+
                             ShowNotification("Successfully pushed to remote.");
                             UpdateGitRepositoryInfo();
                             Globals.doNotShowBranchChangeNotification = false;
@@ -2435,9 +2450,13 @@ namespace pie
                             });
 
                         Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
-                        Commands.Pull(Globals.repo, signature, pullOptions);
+                        
                         try
                         {
+                            Task.Run(() => {
+                                Commands.Pull(Globals.repo, signature, pullOptions);
+                            }).Wait();
+
                             UpdateGitRepositoryInfo();
                             ShowNotification("Pull successful.");
                         }

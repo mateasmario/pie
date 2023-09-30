@@ -34,6 +34,7 @@ using LibGit2Sharp;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
+using System.Threading.Tasks;
 
 namespace pie
 {
@@ -100,7 +101,11 @@ namespace pie
 
                 try
                 {
-                    Repository.Clone(kryptonTextBox1.Text, kryptonTextBox2.Text, options);
+                    Task.Run(() =>
+                    {
+                        Repository.Clone(kryptonTextBox1.Text, kryptonTextBox2.Text, options);
+                    }).Wait();
+
                     Globals.clonePath = kryptonTextBox2.Text;
                     this.Close();
                 } catch(NameConflictException e)
