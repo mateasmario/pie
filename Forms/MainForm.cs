@@ -1142,6 +1142,8 @@ namespace pie
             findReplaceHeaderGroup.Visible = false;
             ToggleDirectoryNavigator(false);
 
+            gitStagingAreaListView.ShowGroups = false;
+
             gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
 
             if (Globals.theme == 1)
@@ -1896,7 +1898,12 @@ namespace pie
             {
                 NavigateToPath(directoryNavigationTextBox.Text);
             }
+
+            Globals.doNotShowBranchChangeNotification = true;
+            Globals.doNotTriggerBranchChangeEvent = true;
             UpdateGitRepositoryInfo();
+            Globals.doNotShowBranchChangeNotification = false;
+            Globals.doNotTriggerBranchChangeEvent = false;
         }
 
         private void showGitTabToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1959,8 +1966,6 @@ namespace pie
         private void UpdateGitRepositoryInfo()
         {
             string path = repositoryTextBox.Text;
-
-            gitStagingAreaListView.ShowGroups = false;
 
             if (path == "")
             {
@@ -2306,6 +2311,7 @@ namespace pie
                                 if (localBranchFriendlyName == null)
                                 {
                                     // Remove the "origin/" from remote branch name
+                                    Globals.doNotShowBranchChangeNotification = true;
                                     var remoteBranch = Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()];
                                     var newBranch = Globals.repo.CreateBranch(localBranchFriendlyName, remoteBranch.Tip);
                                     Globals.repo.Branches.Update(newBranch, b => b.TrackedBranch = remoteBranch.CanonicalName);
@@ -2316,6 +2322,7 @@ namespace pie
                                 {
                                     if (branchName == localBranchFriendlyName)
                                     {
+                                        Globals.doNotShowBranchChangeNotification = true;
                                         gitBranchesComboBox.SelectedIndex = index;
                                         break;
                                     }
@@ -2547,6 +2554,17 @@ namespace pie
 
             matchWholeWordCheckBox.StateCommon.ShortText.Color1 = ThemeService.GetColor("Fore");
             matchWholeWordCheckBox.StateCommon.ShortText.Color2 = ThemeService.GetColor("Fore");
+
+            // ComboBox
+            gitBranchesComboBox.StateCommon.Item.Back.ColorStyle = PaletteColorStyle.Solid;
+            gitBranchesComboBox.StateCommon.Item.Border.ColorStyle = PaletteColorStyle.Solid;
+            gitBranchesComboBox.StateCommon.DropBack.Color1 = ThemeService.GetColor("Primary");
+            gitBranchesComboBox.StateCommon.DropBack.Color2 = ThemeService.GetColor("Primary");
+
+            gitBranchesComboBox.StateTracking.Item.Back.ColorStyle = PaletteColorStyle.Solid;
+            gitBranchesComboBox.StateTracking.Item.Border.ColorStyle = PaletteColorStyle.Solid;
+            gitBranchesComboBox.StateTracking.Item.Back.Color1 = ThemeService.GetColor("Secondary");
+            gitBranchesComboBox.StateTracking.Item.Back.Color2 = ThemeService.GetColor("Secondary");            
         }
 
         private void SynchronizeImagesWithTheme()
