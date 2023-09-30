@@ -127,13 +127,19 @@ namespace pie
         {
             InitializeComponent();
 
-            this.MinimumSize = new System.Drawing.Size(1036, 634);
+            InitializeGlobals();
+            GetConfigurationDataFromFiles();
+            SetDynamicDesign();
+            ProcessCommandLineArguments();
+        }
 
+        private void InitializeGlobals()
+        {
             Globals.tabInfos = new List<TabInfo>();
-
             Globals.gitCredentials = new GitCredentials();
-
-            mainMenuStrip.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
+            Globals.buildCommands = null;
+            Globals.buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
+            Globals.firstBrowserTab = true;
         }
 
         public Scintilla CreateNewTextArea()
@@ -1137,6 +1143,10 @@ namespace pie
         {
             Globals.kryptonPalette = kryptonPalette;
 
+            this.MinimumSize = new System.Drawing.Size(1036, 634);
+
+            mainMenuStrip.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
+
             ResetFindPanelLocation();
             ResetDirectoryPanelLocation();
             findReplaceHeaderGroup.Visible = false;
@@ -1209,13 +1219,6 @@ namespace pie
         // [Event] Form Loading
         private void Form1_Load(object sender, EventArgs e)
         {
-            Globals.buildCommands = null;
-            Globals.buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
-            Globals.firstBrowserTab = true;
-
-            GetConfigurationDataFromFiles();
-            SetDynamicDesign();
-            ProcessCommandLineArguments();
         }
 
         private void GitStagingAreaListView_FormatRow(object sender, FormatRowEventArgs e)
