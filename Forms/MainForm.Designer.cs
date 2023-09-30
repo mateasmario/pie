@@ -117,22 +117,22 @@
             this.kryptonContextMenuItem9 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem11 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonButton6 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton8 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton7 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.gitBranchesComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonButton10 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton11 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.gitPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonButton10 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.gitBranchesComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonButton7 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.commitMessageRichTextBox = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
+            this.kryptonButton8 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton6 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.gitPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.gitStagingAreaListView = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonButton5 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton9 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.repositoryTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonButton9 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton5 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton12 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.directoryNavigationObjectListView = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -156,9 +156,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gitBranchesComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gitPanel)).BeginInit();
             this.gitPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gitStagingAreaListView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
             this.kryptonPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gitStagingAreaListView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.directoryNavigationObjectListView)).BeginInit();
@@ -670,7 +670,6 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -842,60 +841,19 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(201, 293);
             this.kryptonPanel2.TabIndex = 10;
             // 
-            // kryptonButton6
+            // kryptonButton11
             // 
-            this.kryptonButton6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton6.Location = new System.Drawing.Point(5, 156);
-            this.kryptonButton6.Name = "kryptonButton6";
-            this.kryptonButton6.Palette = this.kryptonPalette;
-            this.kryptonButton6.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonButton6.Size = new System.Drawing.Size(190, 25);
-            this.kryptonButton6.TabIndex = 3;
-            this.kryptonButton6.Values.Image = global::pie.Properties.Resources.check;
-            this.kryptonButton6.Values.Text = "Commit altered files";
-            this.kryptonButton6.Click += new System.EventHandler(this.kryptonButton6_Click);
-            this.kryptonButton6.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
-            // 
-            // kryptonButton8
-            // 
-            this.kryptonButton8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton8.Location = new System.Drawing.Point(5, 8);
-            this.kryptonButton8.Name = "kryptonButton8";
-            this.kryptonButton8.Palette = this.kryptonPalette;
-            this.kryptonButton8.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonButton8.Size = new System.Drawing.Size(190, 25);
-            this.kryptonButton8.TabIndex = 5;
-            this.kryptonButton8.Values.Image = global::pie.Properties.Resources.refresh;
-            this.kryptonButton8.Values.Text = "Refresh repository status";
-            this.kryptonButton8.Click += new System.EventHandler(this.kryptonButton8_Click);
-            this.kryptonButton8.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
-            // 
-            // kryptonButton7
-            // 
-            this.kryptonButton7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton7.Location = new System.Drawing.Point(5, 218);
-            this.kryptonButton7.Name = "kryptonButton7";
-            this.kryptonButton7.Palette = this.kryptonPalette;
-            this.kryptonButton7.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonButton7.Size = new System.Drawing.Size(190, 25);
-            this.kryptonButton7.TabIndex = 7;
-            this.kryptonButton7.Values.Image = global::pie.Properties.Resources.upload;
-            this.kryptonButton7.Values.Text = "Push commited files";
-            this.kryptonButton7.Click += new System.EventHandler(this.kryptonButton7_Click);
-            this.kryptonButton7.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
-            // 
-            // gitBranchesComboBox
-            // 
-            this.gitBranchesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.gitBranchesComboBox.DropDownWidth = 190;
-            this.gitBranchesComboBox.Location = new System.Drawing.Point(5, 51);
-            this.gitBranchesComboBox.Name = "gitBranchesComboBox";
-            this.gitBranchesComboBox.Palette = this.kryptonPalette;
-            this.gitBranchesComboBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.gitBranchesComboBox.Size = new System.Drawing.Size(190, 21);
-            this.gitBranchesComboBox.TabIndex = 8;
-            this.gitBranchesComboBox.SelectedIndexChanged += new System.EventHandler(this.kryptonComboBox1_SelectedIndexChanged);
-            this.gitBranchesComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            this.kryptonButton11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonButton11.Location = new System.Drawing.Point(5, 249);
+            this.kryptonButton11.Name = "kryptonButton11";
+            this.kryptonButton11.Palette = this.kryptonPalette;
+            this.kryptonButton11.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton11.Size = new System.Drawing.Size(190, 25);
+            this.kryptonButton11.TabIndex = 10;
+            this.kryptonButton11.Values.Image = global::pie.Properties.Resources.documents;
+            this.kryptonButton11.Values.Text = "Show commit log";
+            this.kryptonButton11.Click += new System.EventHandler(this.kryptonButton11_Click);
+            this.kryptonButton11.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // kryptonButton10
             // 
@@ -911,19 +869,71 @@
             this.kryptonButton10.Click += new System.EventHandler(this.kryptonButton10_Click);
             this.kryptonButton10.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
-            // kryptonButton11
+            // gitBranchesComboBox
             // 
-            this.kryptonButton11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton11.Location = new System.Drawing.Point(5, 249);
-            this.kryptonButton11.Name = "kryptonButton11";
-            this.kryptonButton11.Palette = this.kryptonPalette;
-            this.kryptonButton11.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonButton11.Size = new System.Drawing.Size(190, 25);
-            this.kryptonButton11.TabIndex = 10;
-            this.kryptonButton11.Values.Image = global::pie.Properties.Resources.documents;
-            this.kryptonButton11.Values.Text = "Show commit log";
-            this.kryptonButton11.Click += new System.EventHandler(this.kryptonButton11_Click);
-            this.kryptonButton11.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            this.gitBranchesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gitBranchesComboBox.DropDownWidth = 190;
+            this.gitBranchesComboBox.Location = new System.Drawing.Point(5, 51);
+            this.gitBranchesComboBox.Name = "gitBranchesComboBox";
+            this.gitBranchesComboBox.Palette = this.kryptonPalette;
+            this.gitBranchesComboBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.gitBranchesComboBox.Size = new System.Drawing.Size(190, 21);
+            this.gitBranchesComboBox.TabIndex = 8;
+            this.gitBranchesComboBox.SelectedIndexChanged += new System.EventHandler(this.kryptonComboBox1_SelectedIndexChanged);
+            this.gitBranchesComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // kryptonButton7
+            // 
+            this.kryptonButton7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonButton7.Location = new System.Drawing.Point(5, 218);
+            this.kryptonButton7.Name = "kryptonButton7";
+            this.kryptonButton7.Palette = this.kryptonPalette;
+            this.kryptonButton7.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton7.Size = new System.Drawing.Size(190, 25);
+            this.kryptonButton7.TabIndex = 7;
+            this.kryptonButton7.Values.Image = global::pie.Properties.Resources.upload;
+            this.kryptonButton7.Values.Text = "Push commited files";
+            this.kryptonButton7.Click += new System.EventHandler(this.kryptonButton7_Click);
+            this.kryptonButton7.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // commitMessageRichTextBox
+            // 
+            this.commitMessageRichTextBox.Location = new System.Drawing.Point(5, 79);
+            this.commitMessageRichTextBox.Name = "commitMessageRichTextBox";
+            this.commitMessageRichTextBox.Palette = this.kryptonPalette;
+            this.commitMessageRichTextBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.commitMessageRichTextBox.Size = new System.Drawing.Size(190, 71);
+            this.commitMessageRichTextBox.TabIndex = 6;
+            this.commitMessageRichTextBox.Text = "Commit message";
+            this.commitMessageRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // kryptonButton8
+            // 
+            this.kryptonButton8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonButton8.Location = new System.Drawing.Point(5, 8);
+            this.kryptonButton8.Name = "kryptonButton8";
+            this.kryptonButton8.Palette = this.kryptonPalette;
+            this.kryptonButton8.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton8.Size = new System.Drawing.Size(190, 25);
+            this.kryptonButton8.TabIndex = 5;
+            this.kryptonButton8.Values.Image = global::pie.Properties.Resources.refresh;
+            this.kryptonButton8.Values.Text = "Refresh repository status";
+            this.kryptonButton8.Click += new System.EventHandler(this.kryptonButton8_Click);
+            this.kryptonButton8.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // kryptonButton6
+            // 
+            this.kryptonButton6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonButton6.Location = new System.Drawing.Point(5, 156);
+            this.kryptonButton6.Name = "kryptonButton6";
+            this.kryptonButton6.Palette = this.kryptonPalette;
+            this.kryptonButton6.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton6.Size = new System.Drawing.Size(190, 25);
+            this.kryptonButton6.TabIndex = 3;
+            this.kryptonButton6.Values.Image = global::pie.Properties.Resources.check;
+            this.kryptonButton6.Values.Text = "Commit altered files";
+            this.kryptonButton6.Click += new System.EventHandler(this.kryptonButton6_Click);
+            this.kryptonButton6.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // gitPanel
             // 
@@ -937,16 +947,16 @@
             this.gitPanel.Size = new System.Drawing.Size(1015, 325);
             this.gitPanel.TabIndex = 4;
             // 
-            // commitMessageRichTextBox
+            // kryptonPanel3
             // 
-            this.commitMessageRichTextBox.Location = new System.Drawing.Point(5, 79);
-            this.commitMessageRichTextBox.Name = "commitMessageRichTextBox";
-            this.commitMessageRichTextBox.Palette = this.kryptonPalette;
-            this.commitMessageRichTextBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.commitMessageRichTextBox.Size = new System.Drawing.Size(190, 71);
-            this.commitMessageRichTextBox.TabIndex = 6;
-            this.commitMessageRichTextBox.Text = "Commit message";
-            this.commitMessageRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            this.kryptonPanel3.Controls.Add(this.gitStagingAreaListView);
+            this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel3.Location = new System.Drawing.Point(0, 32);
+            this.kryptonPanel3.Name = "kryptonPanel3";
+            this.kryptonPanel3.Palette = this.kryptonPalette;
+            this.kryptonPanel3.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonPanel3.Size = new System.Drawing.Size(814, 293);
+            this.kryptonPanel3.TabIndex = 11;
             // 
             // gitStagingAreaListView
             // 
@@ -974,6 +984,7 @@
             // 
             this.olvColumn1.AspectName = "Name";
             this.olvColumn1.CellPadding = null;
+            this.olvColumn1.FillsFreeSpace = true;
             this.olvColumn1.Text = "File Name";
             this.olvColumn1.Width = 534;
             // 
@@ -981,46 +992,8 @@
             // 
             this.olvColumn2.AspectName = "Status";
             this.olvColumn2.CellPadding = null;
-            this.olvColumn2.FillsFreeSpace = true;
             this.olvColumn2.Text = "Status";
             this.olvColumn2.Width = 460;
-            // 
-            // kryptonPanel3
-            // 
-            this.kryptonPanel3.Controls.Add(this.gitStagingAreaListView);
-            this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel3.Location = new System.Drawing.Point(0, 32);
-            this.kryptonPanel3.Name = "kryptonPanel3";
-            this.kryptonPanel3.Palette = this.kryptonPalette;
-            this.kryptonPanel3.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonPanel3.Size = new System.Drawing.Size(814, 293);
-            this.kryptonPanel3.TabIndex = 11;
-            // 
-            // kryptonButton5
-            // 
-            this.kryptonButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton5.Location = new System.Drawing.Point(773, 4);
-            this.kryptonButton5.Name = "kryptonButton5";
-            this.kryptonButton5.Palette = this.kryptonPalette;
-            this.kryptonButton5.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonButton5.Size = new System.Drawing.Size(118, 25);
-            this.kryptonButton5.TabIndex = 0;
-            this.kryptonButton5.Values.Text = "Open local repo";
-            this.kryptonButton5.Click += new System.EventHandler(this.kryptonButton5_Click);
-            this.kryptonButton5.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
-            // 
-            // kryptonButton9
-            // 
-            this.kryptonButton9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton9.Location = new System.Drawing.Point(894, 4);
-            this.kryptonButton9.Name = "kryptonButton9";
-            this.kryptonButton9.Palette = this.kryptonPalette;
-            this.kryptonButton9.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonButton9.Size = new System.Drawing.Size(118, 25);
-            this.kryptonButton9.TabIndex = 3;
-            this.kryptonButton9.Values.Text = "Clone a repo";
-            this.kryptonButton9.Click += new System.EventHandler(this.kryptonButton9_Click);
-            this.kryptonButton9.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // kryptonPanel1
             // 
@@ -1037,6 +1010,8 @@
             // 
             // repositoryTextBox
             // 
+            this.repositoryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.repositoryTextBox.Enabled = false;
             this.repositoryTextBox.Location = new System.Drawing.Point(7, 5);
             this.repositoryTextBox.Name = "repositoryTextBox";
@@ -1044,6 +1019,32 @@
             this.repositoryTextBox.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.repositoryTextBox.Size = new System.Drawing.Size(760, 23);
             this.repositoryTextBox.TabIndex = 4;
+            // 
+            // kryptonButton9
+            // 
+            this.kryptonButton9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonButton9.Location = new System.Drawing.Point(894, 4);
+            this.kryptonButton9.Name = "kryptonButton9";
+            this.kryptonButton9.Palette = this.kryptonPalette;
+            this.kryptonButton9.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton9.Size = new System.Drawing.Size(118, 25);
+            this.kryptonButton9.TabIndex = 3;
+            this.kryptonButton9.Values.Text = "Clone a repo";
+            this.kryptonButton9.Click += new System.EventHandler(this.kryptonButton9_Click);
+            this.kryptonButton9.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
+            // 
+            // kryptonButton5
+            // 
+            this.kryptonButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonButton5.Location = new System.Drawing.Point(773, 4);
+            this.kryptonButton5.Name = "kryptonButton5";
+            this.kryptonButton5.Palette = this.kryptonPalette;
+            this.kryptonButton5.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.kryptonButton5.Size = new System.Drawing.Size(118, 25);
+            this.kryptonButton5.TabIndex = 0;
+            this.kryptonButton5.Values.Text = "Open local repo";
+            this.kryptonButton5.Click += new System.EventHandler(this.kryptonButton5_Click);
+            this.kryptonButton5.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // kryptonButton12
             // 
@@ -1156,9 +1157,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gitBranchesComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gitPanel)).EndInit();
             this.gitPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gitStagingAreaListView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).EndInit();
             this.kryptonPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gitStagingAreaListView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
