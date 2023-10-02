@@ -1421,7 +1421,7 @@ namespace pie
 
         private void ShowDirectoryNavigator()
         {
-            findReplaceHeaderGroup.Visible = false;
+            ToggleFindReplacePanel(false);
             ToggleDirectoryNavigator(!directoryNavigationHeaderGroup.Visible);
 
             if (directoryNavigationHeaderGroup.Visible)
