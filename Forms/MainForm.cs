@@ -1430,6 +1430,18 @@ namespace pie
             }
 
             ResetDirectoryPanelLocation();
+
+            if (directoryNavigationTextBox.Text == "")
+            {
+                if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
+                {
+                    NavigateToPath(ParsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+                }
+                else
+                {
+                    NavigateToPath("C:\\");
+                }
+            }
         }
 
         private void ResetDirectoryPanelLocation()
