@@ -681,6 +681,25 @@ namespace pie
             KryptonPage selectedKryptonPage = terminalTabControl.SelectedPage;
             ConEmuControl conEmuControl = (ConEmuControl)terminalTabControl.SelectedPage.Controls[0];
 
+            bool nonBuildTabExists = false;
+
+            if (selectedKryptonPage.Text != "Build")
+            {
+                // Check if there is at least one more tab page that isn't Build
+                foreach(KryptonPage kryptonPage in terminalTabControl.Pages)
+                {
+                    if (kryptonPage != selectedKryptonPage && kryptonPage.Text != "Build")
+                    {
+                        nonBuildTabExists = true;
+                    }
+                }
+
+                if (!nonBuildTabExists)
+                {
+                    NewTerminalTab("cmd.exe", true);
+                }
+            }
+
             terminalTabControl.Pages.Remove(selectedKryptonPage);
 
             conEmuControl.Dispose();
@@ -811,15 +830,27 @@ namespace pie
             }
         }
 
-        public void NewTerminalTab(string process)
+        public void NewTerminalTab(string process,bool beginning)
         {
             KryptonPage kryptonPage = new KryptonPage();
 
-            terminalTabControl.Pages.Add(kryptonPage);
+            if (beginning)
+            {
+                terminalTabControl.Pages.Insert(0, kryptonPage);
+            }
+            else
+            {
+                terminalTabControl.Pages.Add(kryptonPage);
+            }
 
             ConEmuControl conEmuControl = new ConEmuControl();
+
             ConEmuStartInfo conEmuStartInfo = new ConEmuStartInfo();
             conEmuStartInfo.ConsoleProcessCommandLine = process;
+
+            if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null) {
+                conEmuStartInfo.StartupDirectory = ParsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+            }
 
             ConEmuSession conEmuSession = conEmuControl.Start(conEmuStartInfo);
 
@@ -837,10 +868,20 @@ namespace pie
                 kryptonPage.Text = "PowerShell";
                 kryptonPage.ImageSmall = Properties.Resources.powershell;
             }
+            else
+            {
+                kryptonPage.Text = "Build";
+                conEmuSession.ConsoleEmulatorClosed += ConEmuSession_ConsoleEmulatorClosed;
+            }
 
             conEmuControl.Dock = DockStyle.Fill;
 
             terminalTabControl.SelectedPage = kryptonPage;
+        }
+
+        private void ConEmuSession_ConsoleEmulatorClosed(object sender, EventArgs e)
+        {
+            CloseTerminalTab();
         }
 
         public void ActivateSpecificBuildAndRunOptions(String extension)
@@ -908,7 +949,7 @@ namespace pie
         {
             if (terminalTabControl.Pages.Count == 0)
             {
-                NewTerminalTab("cmd.exe");
+                NewTerminalTab("cmd.exe", false);
             }
 
             ToggleTerminalTabControl(!terminalTabControl.Visible);
@@ -933,27 +974,25 @@ namespace pie
         // [Method] Used for Build commands
         public void ExecuteBuildCommand(string type)
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = "cmd.exe";
+            if (terminalTabControl.Pages.Count == 0)
+            {
+                NewTerminalTab("cmd.exe", false);
+            }
+
+            ToggleTerminalTabControl(true);
+
+            string process = null;
 
             if (type == "Java Source (.java)")
             {
-                startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(javac " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
+                process = "javac.exe " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
             }
             else if (type == "C/C++ Source (.c, .cpp)")
             {
-                startInfo.Arguments = "/K (echo ^[Pie^] Building started.)&(gcc -Wall " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() + ")&(echo ^[Pie^] Build finished.)&(pause)&(exit)";
+                process = "gcc -Wall " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
             }
 
-            try
-            {
-                startInfo.WorkingDirectory = ParsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-                Process.Start(startInfo);
-            }
-            catch (NullReferenceException)
-            {
-                ShowNotification("Please open a file before launching any build command.");
-            }
+            NewTerminalTab(process, false);
         }
 
         public static void ShowNotification(string text)
@@ -979,65 +1018,65 @@ namespace pie
         // [Method] Used for Run commands
         public void ExecuteRunCommand(string type)
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = "cmd.exe";
-
-            if (type == "Java Class (.class)")
+            if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
             {
-                string className = ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-                className = ParsingService.RemoveFileExtension(className);
-
-                startInfo.Arguments = "/K (echo ^[Pie^] Running started.)&(java " + className + ")&(echo ^[Pie^] Running finished.)&(pause)&(exit)";
-            }
-            else if (type == "Python Script (.py)")
-            {
-                string scriptName = ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-
-                startInfo.Arguments = "/K (echo ^[Pie^] Running started.)&(py " + scriptName + ")&(echo ^[Pie^] Running finished.)&(pause)&(exit)";
-            }
-            else if (type == "Perl Script (.pl)")
-            {
-                string scriptName = ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-
-                startInfo.Arguments = "/K (echo ^[Pie^] Running started.)&(perl " + scriptName + ")&(echo ^[Pie^] Running finished.)&(pause)&(exit)";
-            }
-            else if (type == "Render HTML (.html)")
-            {
-                if (ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "html")
+                if (terminalTabControl.Pages.Count == 0)
                 {
-                    NewTab(TabType.RENDER_HTML, Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-                }
-                else
-                {
-                    ShowNotification("pie can only render files with the .html extension.");
+                    NewTerminalTab("cmd.exe", false);
                 }
 
-                return;
-            }
-            else if (type == "Render Markdown (.md)")
-            {
-                int index = tabControl.SelectedIndex;
+                ToggleTerminalTabControl(true);
 
-                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+                string process = null;
 
-                if (ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "md")
+                if (type == "Java Class (.class)")
                 {
-                    NewTab(TabType.RENDER_MD, Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+                    string className = ParsingService.GetFileName(ParsingService.RemoveFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+
+                    process = "java " + className;
                 }
-                else
+                else if (type == "Python Script (.py)")
                 {
-                    ShowNotification("pie can only render files with the .md extension.");
+                    process = "python " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
+                }
+                else if (type == "Perl Script (.pl)")
+                {
+                    process = "perl " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
+                }
+                else if (type == "Render HTML (.html)")
+                {
+                    if (ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "html")
+                    {
+                        NewTab(TabType.RENDER_HTML, Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+                    }
+                    else
+                    {
+                        ShowNotification("pie can only render files with the .html extension.");
+                    }
+
+                    return;
+                }
+                else if (type == "Render Markdown (.md)")
+                {
+                    int index = tabControl.SelectedIndex;
+
+                    Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+
+                    if (ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "md")
+                    {
+                        NewTab(TabType.RENDER_MD, Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+                    }
+                    else
+                    {
+                        ShowNotification("pie can only render files with the .md extension.");
+                    }
+
+                    return;
                 }
 
-                return;
+                NewTerminalTab(process, false);
             }
-
-            try
-            {
-                startInfo.WorkingDirectory = ParsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-                Process.Start(startInfo);
-            }
-            catch (NullReferenceException)
+            else
             {
                 ShowNotification("Please open a file before launching any run command.");
             }
@@ -1594,13 +1633,13 @@ namespace pie
         // [Event] Opens a new cmd terminal (accessed via Terminal tab control)
         private void kryptonContextMenuItem16_Click(object sender, EventArgs e)
         {
-            NewTerminalTab("cmd.exe");
+            NewTerminalTab("cmd.exe", false);
         }
 
         // [Event] Opens a new PowerShell terminal (accessed via Terminal tab control)
         private void kryptonContextMenuItem17_Click(object sender, EventArgs e)
         {
-            NewTerminalTab("powershell.exe");
+            NewTerminalTab("powershell.exe", false);
         }
 
         // [Event] Close remaining processes after form gets closed
