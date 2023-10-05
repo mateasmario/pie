@@ -1303,14 +1303,19 @@ namespace pie
             string scriptName = ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
             string command = (string)((ToolStripMenuItem)sender).Tag;
             command = command.Replace("$FILE", scriptName);
-            startInfo.Arguments = "/K (echo ^[Pie^] Running started.)&(" + command + ")&(echo ^[Pie^] Running finished.)&(pause)&(exit)";
-           
-            try
+
+            if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
             {
-                startInfo.WorkingDirectory = ParsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-                Process.Start(startInfo);
+                if (terminalTabControl.Pages.Count == 0)
+                {
+                    NewTerminalTab("cmd.exe", false);
+                }
+
+                ToggleTerminalTabControl(true);
+
+                NewTerminalTab(command, false);
             }
-            catch (NullReferenceException)
+            else
             {
                 ShowNotification("Please open a file before launching any run command.");
             }
