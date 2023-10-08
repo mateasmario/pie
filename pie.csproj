@@ -329,6 +329,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ControlHelper.cs" />
     <Compile Include="Classes\NavigatorFile.cs" />
     <Compile Include="Classes\GitCommit.cs" />
     <Compile Include="Forms\Other\AboutForm.cs">
