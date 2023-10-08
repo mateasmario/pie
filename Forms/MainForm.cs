@@ -89,6 +89,8 @@ using BrightIdeasSoftware;
 using ConEmu.WinForms;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace pie
 {
@@ -1911,6 +1913,8 @@ namespace pie
 
         private void themeSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ControlHelper.SuspendDrawing(this);
+
             if (Globals.theme == 0)
             {
                 Globals.theme = 1;
@@ -1964,6 +1968,9 @@ namespace pie
             UpdateGitRepositoryInfo();
             Globals.doNotShowBranchChangeNotification = false;
             Globals.doNotTriggerBranchChangeEvent = false;
+
+            ControlHelper.ResumeDrawing(this);
+            this.RedrawNonClient();
         }
 
         private void showGitTabToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2642,7 +2649,7 @@ namespace pie
             gitBranchesComboBox.StateTracking.Item.Back.ColorStyle = PaletteColorStyle.Solid;
             gitBranchesComboBox.StateTracking.Item.Border.ColorStyle = PaletteColorStyle.Solid;
             gitBranchesComboBox.StateTracking.Item.Back.Color1 = ThemeService.GetColor("Secondary");
-            gitBranchesComboBox.StateTracking.Item.Back.Color2 = ThemeService.GetColor("Secondary");            
+            gitBranchesComboBox.StateTracking.Item.Back.Color2 = ThemeService.GetColor("Secondary");
         }
 
         private void SynchronizeImagesWithTheme()
