@@ -58,11 +58,11 @@ namespace pie.Services
                             if (token == "name")
                             {
                                 buildCommand = new BuildCommand();
-                                buildCommand.setName(jsonTextReader.Value.ToString());
+                                buildCommand.BuildCommandName = jsonTextReader.Value.ToString();
                             }
                             else if (token == "command")
                             {
-                                buildCommand.setCommand(jsonTextReader.Value.ToString());
+                                buildCommand.BuildCommandCmd = jsonTextReader.Value.ToString();
                                 buildCommands.Add(buildCommand);
                             }
                         }
@@ -89,9 +89,9 @@ namespace pie.Services
                 {
                     writer.WriteStartObject();
                     writer.WritePropertyName("name");
-                    writer.WriteValue(buildCommand.getName());                    
+                    writer.WriteValue(buildCommand.BuildCommandName);                    
                     writer.WritePropertyName("command");
-                    writer.WriteValue(buildCommand.getCommand());
+                    writer.WriteValue(buildCommand.BuildCommandCmd);
                     writer.WriteEndObject();
                 }
 

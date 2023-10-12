@@ -63,6 +63,12 @@ namespace pie
         {
             Globals.addBuildCommandName = null;
             Globals.addBuildCommandCmd = null;
+
+            if (Globals.buildCommandEditIndex >= 0)
+            {
+                kryptonTextBox1.Text = Globals.buildCommandToEditName;
+                kryptonTextBox2.Text = Globals.buildCommandToEditCmd;
+            }
         }
     }
 }

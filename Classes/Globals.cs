@@ -59,6 +59,9 @@ namespace pie
         public static List<ToolStripMenuItem> buildCommandToolStripMenuItems;
         public static string addBuildCommandName;
         public static string addBuildCommandCmd;
+        public static int buildCommandEditIndex = -1;
+        public static string buildCommandToEditName;
+        public static string buildCommandToEditCmd;
 
         // Find & Replace Panel
         public static bool mouseDown;

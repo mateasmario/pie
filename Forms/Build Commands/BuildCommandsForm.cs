@@ -30,6 +30,7 @@ using pie.Enums;
 */
 using ComponentFactory.Krypton.Toolkit;
 using pie.Services;
+using BrightIdeasSoftware;
 
 namespace pie
 {
@@ -44,7 +45,6 @@ namespace pie
             this.Palette = Globals.kryptonPalette;
             kryptonPanel1.Palette = Globals.kryptonPalette;
             kryptonLabel2.Palette = Globals.kryptonPalette;
-            kryptonListBox2.Palette = Globals.kryptonPalette;
             kryptonButton1.Palette = Globals.kryptonPalette;
             kryptonButton2.Palette = Globals.kryptonPalette;
             kryptonButton3.Palette = Globals.kryptonPalette;
@@ -54,40 +54,58 @@ namespace pie
         {
             tempCommands = new List<BuildCommand>();
 
+            SynchronizeObjectListViewWithTheme();
+
             if (Globals.buildCommands != null)
             {
                 foreach (BuildCommand buildCommand in Globals.buildCommands)
                 {
                     tempCommands.Add(buildCommand);
-                    kryptonListBox2.Items.Add(buildCommand.getName());
                 }
+
+                buildCommandsListView.SetObjects(tempCommands);
             }
 
             Globals.closeAfterApplyingChanges = false;
         }
 
+        private void SynchronizeObjectListViewWithTheme()
+        {
+            buildCommandsListView.ShowGroups = false;
+            buildCommandsListView.UseCustomSelectionColors = true;
+            buildCommandsListView.FullRowSelect = true;
+            buildCommandsListView.MultiSelect = false;
+            buildCommandsListView.HeaderStyle = ColumnHeaderStyle.None;
+
+            buildCommandsListView.BackColor = ThemeService.GetColor("Primary");
+            buildCommandsListView.ForeColor = ThemeService.GetColor("Fore");
+            buildCommandsListView.HighlightBackgroundColor = ThemeService.GetColor("Secondary");
+            buildCommandsListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
+            buildCommandsListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
+            buildCommandsListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
+
+            BuildCommandNameColumn.FillsFreeSpace = true;
+        }
+
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            if (kryptonListBox2.SelectedItems.Count == 0)
+            if (buildCommandsListView.SelectedItems.Count == 0)
             {
                 MainForm.ShowNotification("Please choose an item to delete.");
             }
             else
             {
-                List<string> selectedItems = new List<string>();
-                ListBox.SelectedObjectCollection selectedObjectCollection = kryptonListBox2.SelectedItems;
-
-                foreach(object s in selectedObjectCollection)
+                foreach(var s in buildCommandsListView.SelectedObjects)
                 {
-                    selectedItems.Add(s.ToString());
+                    BuildCommand buildCommand = (BuildCommand)s;
+
+                    if (tempCommands.Contains(buildCommand))
+                    {
+                        tempCommands.Remove(buildCommand);
+                    }
                 }
 
-                foreach(string s in selectedItems)
-                {
-                    tempCommands.RemoveAt(kryptonListBox2.Items.IndexOf(s.ToString()));
-                    kryptonListBox2.Items.Remove(s.ToString());
-                }
-
+                buildCommandsListView.SetObjects(tempCommands);
             }
         }
 
@@ -99,17 +117,28 @@ namespace pie
             if (Globals.addBuildCommandName != null)
             {
                 BuildCommand buildCommand = new BuildCommand();
-                buildCommand.setName(Globals.addBuildCommandName);
-                buildCommand.setCommand(Globals.addBuildCommandCmd);
+                buildCommand.BuildCommandName = Globals.addBuildCommandName;
+                buildCommand.BuildCommandCmd = Globals.addBuildCommandCmd;
 
-                if (kryptonListBox2.Items.Contains(buildCommand.getName()))
+                bool exists = false;
+
+                // Check if a build command with the specified name already exists
+                foreach(BuildCommand tempCommand in tempCommands)
+                {
+                    if (tempCommand.BuildCommandName.Equals(buildCommand.BuildCommandName))
+                    {
+                        exists = true;
+                    }
+                }
+
+                if (exists)
                 {
                     MainForm.ShowNotification("A command with the same name already exists.");
                 }
                 else
                 {
                     tempCommands.Add(buildCommand);
-                    kryptonListBox2.Items.Add(buildCommand.getName());
+                    buildCommandsListView.SetObjects(tempCommands);
                 }
             }
         }
@@ -121,6 +150,27 @@ namespace pie
             Globals.closeAfterApplyingChanges = true;
 
             this.Close();
+        }
+
+        private void buildCommandsListView_DoubleClick_1(object sender, EventArgs e)
+        {
+            if (buildCommandsListView.SelectedObjects.Count == 1)
+            {
+                Globals.buildCommandEditIndex = buildCommandsListView.SelectedIndex;
+
+                Globals.buildCommandToEditName = tempCommands[Globals.buildCommandEditIndex].BuildCommandName;
+                Globals.buildCommandToEditCmd = tempCommands[Globals.buildCommandEditIndex].BuildCommandCmd;
+
+                AddBuildCommandForm addBuildCommandForm = new AddBuildCommandForm();
+                addBuildCommandForm.ShowDialog();
+
+                tempCommands[Globals.buildCommandEditIndex].BuildCommandName = Globals.addBuildCommandName;
+                tempCommands[Globals.buildCommandEditIndex].BuildCommandCmd = Globals.addBuildCommandCmd;
+
+                Globals.buildCommandEditIndex = -1;
+
+                buildCommandsListView.SetObjects(tempCommands);
+            }
         }
     }
 }
