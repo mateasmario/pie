@@ -118,11 +118,7 @@ namespace pie
         {
             BuildCommandService.WriteBuildCommandsToFile("config/build.json", tempCommands);
 
-            MainForm.ShowYesNoCancelNotification("Close pie and reopen it manually, in order for the changes to take effect?");
-            if (Globals.notificationButtonPressed == NotificationButton.YES)
-            {
-                Globals.closeAfterApplyingChanges = true;
-            }
+            Globals.closeAfterApplyingChanges = true;
 
             this.Close();
         }

@@ -1138,8 +1138,19 @@ namespace pie
             kryptonContextMenuItem6.Checked = status;
         }
 
-        private void GetConfigurationDataFromFiles()
+        private void ProcessBuildCommands()
         {
+            if (buildToolStripMenuItem1.DropDownItems.Count > 2)
+            {
+                int removeCount = buildToolStripMenuItem1.DropDownItems.Count - 2;
+
+                while(removeCount > 0)
+                {
+                    buildToolStripMenuItem1.DropDownItems.RemoveAt(2);
+                    removeCount--;
+                }
+            }
+
             try
             {
                 Globals.buildCommands = BuildCommandService.GetBuildCommandsFromFile("config/build.json");
@@ -1154,12 +1165,23 @@ namespace pie
 
                     buildToolStripMenuItem1.DropDownItems.Add(toolStripMenuItem);
                     Globals.buildCommandToolStripMenuItems.Add(toolStripMenuItem);
+
+
+                    if (tabControl.Pages.Count >= 2 && Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() == null)
+                    {
+                        toolStripMenuItem.Enabled = false;
+                    }
                 }
             }
             catch (FileNotFoundException ex)
             {
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/build.json", "[]");
             }
+        }
+
+        private void GetConfigurationDataFromFiles()
+        {
+            ProcessBuildCommands();
 
             try
             {
@@ -1683,7 +1705,7 @@ namespace pie
 
             if (Globals.closeAfterApplyingChanges)
             {
-                this.Close();
+                ProcessBuildCommands();
             }
         }
 
