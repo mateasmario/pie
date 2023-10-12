@@ -128,6 +128,7 @@ namespace pie
                     if (tempCommand.BuildCommandName.Equals(buildCommand.BuildCommandName))
                     {
                         exists = true;
+                        break;
                     }
                 }
 
@@ -164,8 +165,29 @@ namespace pie
                 AddBuildCommandForm addBuildCommandForm = new AddBuildCommandForm();
                 addBuildCommandForm.ShowDialog();
 
-                tempCommands[Globals.buildCommandEditIndex].BuildCommandName = Globals.addBuildCommandName;
-                tempCommands[Globals.buildCommandEditIndex].BuildCommandCmd = Globals.addBuildCommandCmd;
+                if (Globals.addBuildCommandName != null)
+                {
+                    bool exists = false;
+
+                    foreach (BuildCommand tempCommand in tempCommands)
+                    {
+                        if (tempCommand.BuildCommandName != Globals.buildCommandToEditName && tempCommand.BuildCommandName.Equals(Globals.addBuildCommandName))
+                        {
+                            exists = true;
+                            break;
+                        }
+                    }
+
+                    if (exists)
+                    {
+                        MainForm.ShowNotification("A command with the same name already exists.");
+                    }
+                    else
+                    {
+                        tempCommands[Globals.buildCommandEditIndex].BuildCommandName = Globals.addBuildCommandName;
+                        tempCommands[Globals.buildCommandEditIndex].BuildCommandCmd = Globals.addBuildCommandCmd;
+                    }
+                }
 
                 Globals.buildCommandEditIndex = -1;
 

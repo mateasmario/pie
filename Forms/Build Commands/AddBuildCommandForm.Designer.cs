@@ -76,14 +76,14 @@
             // 
             // kryptonButton1
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(313, 138);
+            this.kryptonButton1.Location = new System.Drawing.Point(324, 138);
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton1.Size = new System.Drawing.Size(90, 25);
+            this.kryptonButton1.Size = new System.Drawing.Size(79, 25);
             this.kryptonButton1.TabIndex = 4;
-            this.kryptonButton1.Values.Text = "Add";
+            this.kryptonButton1.Values.Text = "Save";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // kryptonLabel3
@@ -123,7 +123,7 @@
             this.Name = "AddBuildCommandForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Build Command";
+            this.Text = "Add/Edit Build Command";
             this.Load += new System.EventHandler(this.AddBuildCommandForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
