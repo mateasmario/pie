@@ -1116,11 +1116,14 @@ namespace pie
 
         private void ToggleFindReplacePanel(bool status)
         {
+            findReplaceHeaderGroup.Visible = status;
+            kryptonContextMenuItem6.Checked = status;
+
             if (status)
             {
                 ResetFindPanelLocation();
-                findTextBox.Focus();
                 kryptonContextMenuItem6.Text = "Hide Find and Replace";
+                findTextBox.Focus();
             }
             else
             {
@@ -1132,10 +1135,6 @@ namespace pie
 
                 kryptonContextMenuItem6.Text = "Show Find and Replace";
             }
-
-            findReplaceHeaderGroup.Visible = status;
-
-            kryptonContextMenuItem6.Checked = status;
         }
 
         private void ProcessBuildCommands()
@@ -1421,38 +1420,47 @@ namespace pie
                         }
                     }
                 }
-                else if (e.KeyCode == Keys.Enter)
-                {
-                    if (directoryNavigationObjectListView.SelectedItems.Count == 1)
+                else {
+                    if (e.KeyCode == Keys.Enter)
                     {
-                        NavigatorFile navigatorFile = (NavigatorFile)directoryNavigationObjectListView.SelectedObject;
-
-                        if (navigatorFile.Type == "File")
+                        if (directoryNavigationObjectListView.SelectedItems.Count == 1)
                         {
-                            NewTab(TabType.CODE, null);
-                            bool state = Open(((NavigatorFile)navigatorFile).Path);
+                            NavigatorFile navigatorFile = (NavigatorFile)directoryNavigationObjectListView.SelectedObject;
 
-                            if (!state)
+                            if (navigatorFile.Type == "File")
                             {
-                                CloseTab();
+                                NewTab(TabType.CODE, null);
+                                bool state = Open(((NavigatorFile)navigatorFile).Path);
+
+                                if (!state)
+                                {
+                                    CloseTab();
+                                }
+                                else
+                                {
+                                    ToggleDirectoryNavigator(false);
+                                }
                             }
                             else
                             {
-                                ToggleDirectoryNavigator(false);
-                            }
-                        }
-                        else
-                        {
-                            if (navigatorFile.Path != "..")
-                            {
-                                NavigateToPath(navigatorFile.Path);
-                            }
-                            else
-                            {
-                                NavigateToPath(ParsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
+                                if (navigatorFile.Path != "..")
+                                {
+                                    NavigateToPath(navigatorFile.Path);
+                                }
+                                else
+                                {
+                                    NavigateToPath(ParsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
+                                }
                             }
                         }
                     }
+                }
+            }
+            else if (findReplaceHeaderGroup.Visible)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    StartFind();
                 }
             }
 
@@ -1484,6 +1492,11 @@ namespace pie
                         ShowDirectoryNavigator();
                     }
                 }
+            }
+
+            if (e.Modifiers == Keys.Control)
+            {
+                e.SuppressKeyPress = true;
             }
         }
 
@@ -1716,6 +1729,11 @@ namespace pie
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            StartFind();
+        }
+
+        private void StartFind()
         {
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
             ClearHighlights(TextArea);
