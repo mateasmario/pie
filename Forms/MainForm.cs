@@ -129,7 +129,6 @@ namespace pie
         public MainForm()
         {
             InitializeComponent();
-
             InitializeGlobals();
             GetConfigurationDataFromFiles();
             SetDynamicDesign();
@@ -213,6 +212,7 @@ namespace pie
             colors.ForeColor = ThemeService.GetColor("Fore");
             colors.HighlightingColor = ThemeService.GetColor("Primary");
             colors.SelectedBackColor = ThemeService.GetColor("CaretLineBack");
+            colors.SelectedBackColor2 = ThemeService.GetColor("CaretLineBack");
             colors.SelectedForeColor = ThemeService.GetColor("Fore");
             autocompleteMenu.Colors = colors;
             autocompleteMenu.LeftPadding = 0;
