@@ -69,8 +69,8 @@ namespace pie.Services
             lightColorDictionary["ButtonHover"] = Color.FromArgb(205, 205, 205);
             lightColorDictionary["Fore"] = Color.Black;
             lightColorDictionary["FormBorder"] = Color.FromArgb(175, 175, 175);
-            lightColorDictionary["Selection"] = Color.FromArgb(124, 124, 124);
-            lightColorDictionary["CaretLineBack"] = Color.FromArgb(225, 225, 225);
+            lightColorDictionary["Selection"] = Color.FromArgb(184, 184, 184);
+            lightColorDictionary["CaretLineBack"] = Color.FromArgb(230, 230, 230);
             lightColorDictionary["NumberMargin"] = Color.FromArgb(225, 225, 225);
             lightColorDictionary["Folding"] = Color.FromArgb(235, 235, 235);
 
@@ -81,9 +81,9 @@ namespace pie.Services
             darkColorDictionary["ButtonHover"] = Color.FromArgb(85, 85, 85);
             darkColorDictionary["Fore"] = Color.White;
             darkColorDictionary["FormBorder"] = Color.FromArgb(90, 90, 90);
-            darkColorDictionary["Selection"] = Color.FromArgb(152, 152, 152);
+            darkColorDictionary["Selection"] = Color.FromArgb(92, 92, 92);
             darkColorDictionary["ButtonHover"] = Color.FromArgb(85, 85, 85);
-            darkColorDictionary["CaretLineBack"] = Color.FromArgb(64, 64, 64);
+            darkColorDictionary["CaretLineBack"] = Color.FromArgb(50, 50, 50);
             darkColorDictionary["NumberMargin"] = Color.FromArgb(46, 46, 46);
             darkColorDictionary["Folding"] = Color.FromArgb(50, 50, 50);
         }
