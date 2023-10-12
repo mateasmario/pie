@@ -33,15 +33,17 @@
             this.kryptonListBox1 = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonListBox2 = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.buildCommandsListView = new BrightIdeasSoftware.ObjectListView();
+            this.BuildCommandNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.kryptonPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buildCommandsListView)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonLabel1
@@ -83,23 +85,6 @@
             this.kryptonLabel2.TabIndex = 0;
             this.kryptonLabel2.Values.Text = "Custom Build Commands";
             // 
-            // kryptonListBox2
-            // 
-            this.kryptonListBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonListBox2.Location = new System.Drawing.Point(10, 28);
-            this.kryptonListBox2.Name = "kryptonListBox2";
-            this.kryptonListBox2.Size = new System.Drawing.Size(523, 246);
-            this.kryptonListBox2.StateActive.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonListBox2.StateCheckedNormal.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonListBox2.StateCheckedPressed.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonListBox2.StateCheckedTracking.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonListBox2.StateCommon.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonListBox2.StateNormal.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonListBox2.StatePressed.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonListBox2.StateTracking.Item.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonListBox2.TabIndex = 1;
-            // 
             // kryptonButton1
             // 
             this.kryptonButton1.Location = new System.Drawing.Point(82, 282);
@@ -138,8 +123,8 @@
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.buildCommandsListView);
             this.kryptonPanel1.Controls.Add(this.kryptonButton3);
-            this.kryptonPanel1.Controls.Add(this.kryptonListBox2);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
             this.kryptonPanel1.Controls.Add(this.kryptonButton1);
             this.kryptonPanel1.Controls.Add(this.kryptonButton2);
@@ -148,6 +133,29 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(543, 320);
             this.kryptonPanel1.TabIndex = 6;
+            // 
+            // buildCommandsListView
+            // 
+            this.buildCommandsListView.AllColumns.Add(this.BuildCommandNameColumn);
+            this.buildCommandsListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buildCommandsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.BuildCommandNameColumn});
+            this.buildCommandsListView.HideSelection = false;
+            this.buildCommandsListView.Location = new System.Drawing.Point(10, 29);
+            this.buildCommandsListView.MultiSelect = false;
+            this.buildCommandsListView.Name = "buildCommandsListView";
+            this.buildCommandsListView.Size = new System.Drawing.Size(523, 244);
+            this.buildCommandsListView.TabIndex = 5;
+            this.buildCommandsListView.UseCompatibleStateImageBehavior = false;
+            this.buildCommandsListView.View = System.Windows.Forms.View.Details;
+            this.buildCommandsListView.DoubleClick += new System.EventHandler(this.buildCommandsListView_DoubleClick_1);
+            // 
+            // BuildCommandNameColumn
+            // 
+            this.BuildCommandNameColumn.AspectName = "BuildCommandName";
+            this.BuildCommandNameColumn.CellPadding = null;
             // 
             // BuildCommandsForm
             // 
@@ -170,6 +178,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buildCommandsListView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -179,10 +188,11 @@
         private ComponentFactory.Krypton.Toolkit.KryptonListBox kryptonListBox1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonListBox kryptonListBox2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton3;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private BrightIdeasSoftware.ObjectListView buildCommandsListView;
+        private BrightIdeasSoftware.OLVColumn BuildCommandNameColumn;
     }
 }

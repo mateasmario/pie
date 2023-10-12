@@ -1158,8 +1158,8 @@ namespace pie
                 foreach (BuildCommand buildCommand in Globals.buildCommands)
                 {
                     ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
-                    toolStripMenuItem.Text = buildCommand.getName();
-                    toolStripMenuItem.Tag = buildCommand.getCommand();
+                    toolStripMenuItem.Text = buildCommand.BuildCommandName;
+                    toolStripMenuItem.Tag = buildCommand.BuildCommandCmd;
 
                     toolStripMenuItem.Click += ToolStripMenuItem_Click;
 
