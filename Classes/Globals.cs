@@ -86,11 +86,15 @@ namespace pie
         public static List<DatabaseConnection> databases;
         public static string addDatabaseConnectionName;
         public static string addDatabaseHostname;
+        public static int addDatabasePort;
+        public static string addDatabaseDbName;
         public static string addDatabaseUsername;
         public static string addDatabasePassword;
         public static int databaseEditIndex;
         public static string databaseToEditConnectionName;
         public static string databaseToEditHostname;
+        public static int databaseToEditPort;
+        public static string databaseToEditDbName;
         public static string databaseToEditUsername;
         public static string databaseToEditPassword;
     }

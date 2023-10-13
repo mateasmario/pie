@@ -28,6 +28,7 @@ using System.IO;
  * Copyright (c) 2007 James Newton-King
  */
 using Newtonsoft.Json;
+using System.Data.SqlClient;
 
 namespace pie.Services
 {
@@ -64,6 +65,10 @@ namespace pie.Services
                             {
                                 database.Hostname = jsonTextReader.Value.ToString();
                             }
+                            else if (token == "databaseName")
+                            {
+                                database.DatabaseName = jsonTextReader.Value.ToString();
+                            }
                             else if (token == "username")
                             {
                                 database.Username = jsonTextReader.Value.ToString();
@@ -74,6 +79,13 @@ namespace pie.Services
                                 databases.Add(database);
                             }
                         }
+                        else if (jsonTextReader.TokenType == JsonToken.Integer)
+                        {
+                            if (token == "port")
+                            {
+                                database.Port = int.Parse(jsonTextReader.Value.ToString());
+                            }
+                        }
                     }
                 }
             }
@@ -81,7 +93,7 @@ namespace pie.Services
             return databases;
         }
 
-        internal static void WriteDatabasesToFile(string file, List<DatabaseConnection> tempDatabases)
+        public static void WriteDatabasesToFile(string file, List<DatabaseConnection> tempDatabases)
         {
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
 
@@ -99,7 +111,11 @@ namespace pie.Services
                     writer.WritePropertyName("connectionName");
                     writer.WriteValue(database.ConnectionName);
                     writer.WritePropertyName("hostname");
-                    writer.WriteValue(database.Hostname);                    
+                    writer.WriteValue(database.Hostname);                        
+                    writer.WritePropertyName("port");
+                    writer.WriteValue(database.Port);
+                    writer.WritePropertyName("databaseName");
+                    writer.WriteValue(database.DatabaseName);
                     writer.WritePropertyName("username");
                     writer.WriteValue(database.Username);                    
                     writer.WritePropertyName("password");
@@ -108,6 +124,31 @@ namespace pie.Services
                 }
 
                 writer.WriteEndArray();
+            }
+        }
+
+        public static bool CheckDatabaseConnection(string hostname, int port, string databaseName,  string username, string password)
+        {
+
+            SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder()
+            {
+                DataSource = hostname + ":" + port,
+                InitialCatalog = databaseName,
+                UserID = username,
+                Password = password
+            };
+
+            using (var l_oConnection = new SqlConnection(connectionStringBuilder.ConnectionString))
+            {
+                try
+                {
+                    l_oConnection.Open();
+                    return true;
+                }
+                catch (SqlException)
+                {
+                    return false;
+                }
             }
         }
     }

@@ -96,6 +96,8 @@ namespace pie.Forms.Databases
                 DatabaseConnection database = new DatabaseConnection();
                 database.ConnectionName = Globals.addDatabaseConnectionName;
                 database.Hostname = Globals.addDatabaseHostname;
+                database.Port = Globals.addDatabasePort;
+                database.DatabaseName = Globals.addDatabaseDbName;
                 database.Username = Globals.addDatabaseUsername;
                 database.Password = Globals.addDatabasePassword;
 
@@ -153,6 +155,8 @@ namespace pie.Forms.Databases
 
                 Globals.databaseToEditConnectionName = tempDatabases[Globals.databaseEditIndex].ConnectionName;
                 Globals.databaseToEditHostname = tempDatabases[Globals.databaseEditIndex].Hostname;
+                Globals.databaseToEditPort = tempDatabases[Globals.databaseEditIndex].Port;
+                Globals.databaseToEditDbName = tempDatabases[Globals.databaseEditIndex].DatabaseName;
                 Globals.databaseToEditUsername = tempDatabases[Globals.databaseEditIndex].Username;
                 Globals.databaseToEditPassword = tempDatabases[Globals.databaseEditIndex].Password;
 
@@ -180,6 +184,8 @@ namespace pie.Forms.Databases
                     {
                         tempDatabases[Globals.databaseEditIndex].ConnectionName = Globals.addDatabaseConnectionName;
                         tempDatabases[Globals.databaseEditIndex].Hostname = Globals.addDatabaseHostname;
+                        tempDatabases[Globals.databaseEditIndex].Port = Globals.addDatabasePort;
+                        tempDatabases[Globals.databaseEditIndex].DatabaseName = Globals.addDatabaseDbName;
                         tempDatabases[Globals.databaseEditIndex].Username = Globals.addDatabaseUsername;
                         tempDatabases[Globals.databaseEditIndex].Password = Globals.addDatabasePassword;
                     }
