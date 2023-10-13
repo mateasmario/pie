@@ -97,6 +97,7 @@
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.preferencesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.manageBuildCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.databasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageCommitCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.managePushCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
@@ -630,6 +631,7 @@
             // 
             this.preferencesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manageBuildCommandsToolStripMenuItem,
+            this.databasesToolStripMenuItem,
             this.manageCommitCredentialsToolStripMenuItem,
             this.managePushCredentialsToolStripMenuItem});
             this.preferencesToolStripMenuItem1.Name = "preferencesToolStripMenuItem1";
@@ -638,10 +640,19 @@
             // 
             // manageBuildCommandsToolStripMenuItem
             // 
+            this.manageBuildCommandsToolStripMenuItem.Image = global::pie.Properties.Resources.gears;
             this.manageBuildCommandsToolStripMenuItem.Name = "manageBuildCommandsToolStripMenuItem";
             this.manageBuildCommandsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.manageBuildCommandsToolStripMenuItem.Text = "Build Commands";
             this.manageBuildCommandsToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
+            // 
+            // databasesToolStripMenuItem
+            // 
+            this.databasesToolStripMenuItem.Image = global::pie.Properties.Resources.database__4_;
+            this.databasesToolStripMenuItem.Name = "databasesToolStripMenuItem";
+            this.databasesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.databasesToolStripMenuItem.Text = "Databases";
+            this.databasesToolStripMenuItem.Click += new System.EventHandler(this.databasesToolStripMenuItem_Click);
             // 
             // manageCommitCredentialsToolStripMenuItem
             // 
@@ -668,6 +679,7 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -1282,6 +1294,7 @@
         private BrightIdeasSoftware.OLVColumn olvColumn3;
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup directoryNavigationHeaderGroup;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox directoryNavigationTextBox;
+        private System.Windows.Forms.ToolStripMenuItem databasesToolStripMenuItem;
     }
 }
 

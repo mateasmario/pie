@@ -81,5 +81,17 @@ namespace pie
         // Notification
         public static string notificationText;
         public static NotificationButton notificationButtonPressed;
+
+        // Databases
+        public static List<DatabaseConnection> databases;
+        public static string addDatabaseConnectionName;
+        public static string addDatabaseHostname;
+        public static string addDatabaseUsername;
+        public static string addDatabasePassword;
+        public static int databaseEditIndex;
+        public static string databaseToEditConnectionName;
+        public static string databaseToEditHostname;
+        public static string databaseToEditUsername;
+        public static string databaseToEditPassword;
     }
 }

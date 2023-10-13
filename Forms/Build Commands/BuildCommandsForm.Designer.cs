@@ -79,7 +79,7 @@
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(6, 6);
+            this.kryptonLabel2.Location = new System.Drawing.Point(5, 6);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(149, 20);
             this.kryptonLabel2.TabIndex = 0;
