@@ -25,6 +25,7 @@ using System;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
+using pie.Services;
 
 namespace pie.Forms.Databases
 {
@@ -40,25 +41,42 @@ namespace pie.Forms.Databases
             kryptonLabel2.Palette = Globals.kryptonPalette;
             kryptonLabel3.Palette = Globals.kryptonPalette;
             kryptonLabel4.Palette = Globals.kryptonPalette;
+            kryptonLabel5.Palette = Globals.kryptonPalette;
+            kryptonLabel6.Palette = Globals.kryptonPalette;
             kryptonTextBox1.Palette = Globals.kryptonPalette;
             kryptonTextBox2.Palette = Globals.kryptonPalette;
             kryptonTextBox3.Palette = Globals.kryptonPalette;
             kryptonTextBox4.Palette = Globals.kryptonPalette;
+            kryptonTextBox5.Palette = Globals.kryptonPalette;
+            kryptonTextBox6.Palette = Globals.kryptonPalette;
             kryptonButton1.Palette = Globals.kryptonPalette;
+            kryptonButton2.Palette = Globals.kryptonPalette;
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "")
+            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "")
             {
                 MainForm.ShowNotification("Database fields cannot be empty.");
             }
             else
             {
-                Globals.addDatabaseConnectionName = kryptonTextBox1.Text;
-                Globals.addDatabaseHostname = kryptonTextBox2.Text;
-                Globals.addDatabaseUsername = kryptonTextBox3.Text;
-                Globals.addDatabasePassword = kryptonTextBox4.Text;
+                int port;
+                bool result = int.TryParse(kryptonTextBox3.Text, out port);
+
+                if (!result)
+                {
+                    MainForm.ShowNotification("Port needs to be a number.");
+                }
+                else
+                {
+                    Globals.addDatabaseConnectionName = kryptonTextBox1.Text;
+                    Globals.addDatabaseHostname = kryptonTextBox2.Text;
+                    Globals.addDatabasePort = port;
+                    Globals.addDatabaseDbName = kryptonTextBox4.Text;
+                    Globals.addDatabaseUsername = kryptonTextBox5.Text;
+                    Globals.addDatabasePassword = kryptonTextBox6.Text;
+                }
 
                 this.Close();
             }
@@ -68,6 +86,8 @@ namespace pie.Forms.Databases
         {
             Globals.addDatabaseConnectionName = null;
             Globals.addDatabaseHostname = null;
+            Globals.addDatabasePort = -1;
+            Globals.addDatabaseDbName = null;
             Globals.addDatabaseUsername = null;
             Globals.addDatabasePassword = null;
 
@@ -75,8 +95,39 @@ namespace pie.Forms.Databases
             {
                 kryptonTextBox1.Text = Globals.databaseToEditConnectionName;
                 kryptonTextBox2.Text = Globals.databaseToEditHostname;
-                kryptonTextBox3.Text = Globals.databaseToEditUsername;
-                kryptonTextBox4.Text = Globals.databaseToEditPassword;
+                kryptonTextBox3.Text = Globals.databaseToEditPort.ToString();
+                kryptonTextBox4.Text = Globals.databaseToEditDbName;
+                kryptonTextBox5.Text = Globals.databaseToEditUsername;
+                kryptonTextBox6.Text = Globals.databaseToEditPassword;
+            }
+        }
+
+        private void kryptonButton2_Click(object sender, EventArgs e)
+        {
+            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "")
+            {
+                MainForm.ShowNotification("Database fields cannot be empty.");
+            }
+            else
+            {
+                int port;
+                bool result = int.TryParse(kryptonTextBox3.Text, out port);
+
+                if (!result)
+                {
+                    MainForm.ShowNotification("Port needs to be a number.");
+                }
+                else
+                {
+                    if (DatabaseService.CheckDatabaseConnection(kryptonTextBox2.Text, port, kryptonTextBox4.Text, kryptonTextBox5.Text, kryptonTextBox6.Text))
+                    {
+                        MainForm.ShowNotification("Database connection established successfully.");
+                    }
+                    else
+                    {
+                        MainForm.ShowNotification("Could not establish Database connection.");
+                    }
+                }
             }
         }
     }
