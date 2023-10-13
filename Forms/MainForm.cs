@@ -91,6 +91,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using pie.Forms.Databases;
 
 namespace pie
 {
@@ -142,6 +143,7 @@ namespace pie
             Globals.buildCommands = null;
             Globals.buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
             Globals.firstBrowserTab = true;
+            Globals.databases = null;
         }
 
         public Scintilla CreateNewTextArea()
@@ -1181,6 +1183,7 @@ namespace pie
         private void GetConfigurationDataFromFiles()
         {
             ProcessBuildCommands();
+            ProcessDatabases();
 
             try
             {
@@ -2848,6 +2851,29 @@ namespace pie
         private void kryptonContextMenuItem12_Click(object sender, EventArgs e)
         {
             ShowDirectoryNavigator();
+        }
+
+        private void databasesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DatabasesForm databasesForm = new DatabasesForm();
+            databasesForm.ShowDialog();
+
+            if (Globals.closeAfterApplyingChanges)
+            {
+                ProcessDatabases();
+            }
+        }
+
+        private void ProcessDatabases()
+        {
+            try
+            {
+                Globals.databases = DatabaseService.GetDatabasesFromFile("config/databases.json");
+            }
+            catch (FileNotFoundException ex)
+            {
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/databases.json", "[]");
+            }
         }
     }
 }
