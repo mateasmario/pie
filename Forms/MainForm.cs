@@ -318,6 +318,53 @@ namespace pie
                 kryptonContextMenuItems.Items.Add(item1);
                 codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
+            else if (extension == "sql")
+            {
+                KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
+                kryptonContextMenuHeading.Text = "Suggested Actions";
+                codeContextMenu.Items.Insert(2, kryptonContextMenuHeading);
+
+                KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
+
+                foreach (DatabaseConnection database in Globals.databases) {
+                    KryptonContextMenuItem item1 = new KryptonContextMenuItem();
+                    item1.Text = "Run query against " + database.ConnectionName;
+                    item1.Click += Item1_Click6;
+                    kryptonContextMenuItems.Items.Add(item1);
+                    codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
+                }
+            }
+        }
+
+        private void Item1_Click6(object sender, EventArgs e)
+        {
+            KryptonContextMenuItem kryptonContextMenuItem = (KryptonContextMenuItem)sender;
+
+            string name = kryptonContextMenuItem.Text.Substring(18);
+
+            DatabaseConnection database = null;
+
+            foreach(DatabaseConnection tempDatabase in Globals.databases)
+            {
+                if (name == tempDatabase.ConnectionName)
+                {
+                    database = tempDatabase;
+                    break;
+                }
+            }
+
+            Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+
+            Tuple<bool, string> databaseResult = DatabaseService.ExecuteSQLCommand(TextArea.Text, database);
+
+            string result = databaseResult.Item2;
+            if (result == "")
+            {
+                result = "0 rows returned.";
+            }
+
+            DatabaseOutputForm databaseOutputForm = new DatabaseOutputForm(result);
+            databaseOutputForm.ShowDialog();
         }
 
         private void Item1_Click5(object sender, EventArgs e)
@@ -1458,12 +1505,22 @@ namespace pie
                         }
                     }
                 }
+
+                if (e.Modifiers == Keys.Control)
+                {
+                    e.SuppressKeyPress = true;
+                }
             }
             else if (findReplaceHeaderGroup.Visible)
             {
                 if (e.KeyCode == Keys.Enter)
                 {
                     StartFind();
+                }
+
+                if (e.Modifiers == Keys.Control)
+                {
+                    e.SuppressKeyPress = true;
                 }
             }
 
@@ -1495,11 +1552,6 @@ namespace pie
                         ShowDirectoryNavigator();
                     }
                 }
-            }
-
-            if (e.Modifiers == Keys.Control)
-            {
-                e.SuppressKeyPress = true;
             }
         }
 
