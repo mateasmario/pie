@@ -17,18 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using pie.Enums;
-
-namespace pie.Classes
+namespace pie.Enums
 {
-    public class DatabaseConnection
-    {
-        public string ConnectionName { get; set; }
-        public string Hostname { get; set; }
-        public int Port { get; set; }
-        public string DatabaseName { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public DatabaseType DatabaseType { get; set; }
+    public enum DatabaseType { 
+        None, MySQL, MSSQL
     }
 }
