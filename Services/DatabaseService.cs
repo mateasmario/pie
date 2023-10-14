@@ -31,6 +31,8 @@ using MySql.Data.MySqlClient;
  * Copyright (c) 2007 James Newton-King
  */
 using Newtonsoft.Json;
+using System.Data;
+using System.Linq;
 
 namespace pie.Services
 {
@@ -181,6 +183,7 @@ namespace pie.Services
                     try
                     {
                         l_oConnection.Open();
+                        l_oConnection.Close();
                         return new Tuple<bool, string>(true, null);
                     }
                     catch (SqlException ex)
@@ -190,6 +193,104 @@ namespace pie.Services
                     catch(InvalidOperationException ex)
                     {
                         return new Tuple<bool, string>(false, ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                return new Tuple<bool, string>(false, null);
+            }
+        }
+
+        public static Tuple<bool, string> ExecuteSQLCommand(string query, DatabaseConnection databaseConnection)
+        {
+            if (databaseConnection.DatabaseType == DatabaseType.MySQL)
+            {
+                string result = "";
+
+                string myConnectionString = "server=" + databaseConnection.Hostname + ";port=" + databaseConnection.Port + ";database=" + databaseConnection.DatabaseName + ";uid=" + databaseConnection.Username + ";pwd=" + databaseConnection.Password + ";";
+                MySqlConnection cnn = new MySqlConnection(myConnectionString);
+                try
+                {
+                    cnn.Open();
+
+                    MySqlCommand cmd = new MySqlCommand(query, cnn);
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        result += rdr[0] + "\n";
+                    }
+                    rdr.Close();
+
+                    cnn.Close();
+
+                    return new Tuple<bool, string>(true, result);
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException != null)
+                    {
+                        return new Tuple<bool, string>(false, ex.InnerException.Message);
+                    }
+                    else
+                    {
+                        return new Tuple<bool, string>(false, ex.Message);
+                    }
+                }
+            }
+            else if (databaseConnection.DatabaseType == DatabaseType.MSSQL)
+            {
+                SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder()
+                {
+                    DataSource = databaseConnection.Hostname + "," + databaseConnection.Port,
+                    InitialCatalog = databaseConnection.DatabaseName,
+                    UserID = databaseConnection.Username,
+                    Password = databaseConnection.Password
+                };
+
+                DataTable dt = new DataTable();
+
+                using (var l_oConnection = new SqlConnection(connectionStringBuilder.ConnectionString))
+                {
+                    try
+                    {
+                        l_oConnection.Open();
+
+                        SqlCommand cmd = l_oConnection.CreateCommand();
+                        cmd.CommandText = query;
+
+                        SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                        cmd.CommandType = CommandType.Text;
+
+                        var rows_returned = sda.Fill(dt);
+
+                        l_oConnection.Close();
+                    }
+                    catch (SqlException ex)
+                    {
+                        if (ex.InnerException != null)
+                        {
+                            return new Tuple<bool, string>(false, ex.InnerException.Message);
+                        }
+                        else
+                        {
+                            return new Tuple<bool, string>(false, ex.Message);
+                        }
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        return new Tuple<bool, string>(false, ex.Message);
+                    }
+
+                    if (dt.Rows.Count == 0)
+                    {
+                        return new Tuple<bool, string>(true, "");
+                    }
+                    else
+                    {
+                        string res = string.Join(Environment.NewLine, dt.Rows.OfType<DataRow>().Select(x => string.Join(" ; ", x.ItemArray)));
+                        return new Tuple<bool, string>(true, res);
                     }
                 }
             }
