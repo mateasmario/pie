@@ -95,6 +95,7 @@ namespace pie.Forms.Databases
             {
                 DatabaseConnection database = new DatabaseConnection();
                 database.ConnectionName = Globals.addDatabaseConnectionName;
+                database.DatabaseType = Globals.addDatabaseType;
                 database.Hostname = Globals.addDatabaseHostname;
                 database.Port = Globals.addDatabasePort;
                 database.DatabaseName = Globals.addDatabaseDbName;
@@ -154,6 +155,7 @@ namespace pie.Forms.Databases
                 Globals.databaseEditIndex = databasesListView.SelectedIndex;
 
                 Globals.databaseToEditConnectionName = tempDatabases[Globals.databaseEditIndex].ConnectionName;
+                Globals.databaseToEditType = tempDatabases[Globals.databaseEditIndex].DatabaseType;
                 Globals.databaseToEditHostname = tempDatabases[Globals.databaseEditIndex].Hostname;
                 Globals.databaseToEditPort = tempDatabases[Globals.databaseEditIndex].Port;
                 Globals.databaseToEditDbName = tempDatabases[Globals.databaseEditIndex].DatabaseName;
@@ -183,6 +185,7 @@ namespace pie.Forms.Databases
                     else
                     {
                         tempDatabases[Globals.databaseEditIndex].ConnectionName = Globals.addDatabaseConnectionName;
+                        tempDatabases[Globals.databaseEditIndex].DatabaseType = Globals.addDatabaseType;
                         tempDatabases[Globals.databaseEditIndex].Hostname = Globals.addDatabaseHostname;
                         tempDatabases[Globals.databaseEditIndex].Port = Globals.addDatabasePort;
                         tempDatabases[Globals.databaseEditIndex].DatabaseName = Globals.addDatabaseDbName;

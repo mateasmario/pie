@@ -21,6 +21,9 @@ using pie.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using pie.Enums;
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 /**
  * Used for reading and writing to JSON config files
@@ -28,7 +31,6 @@ using System.IO;
  * Copyright (c) 2007 James Newton-King
  */
 using Newtonsoft.Json;
-using System.Data.SqlClient;
 
 namespace pie.Services
 {
@@ -60,6 +62,17 @@ namespace pie.Services
                             {
                                 database = new DatabaseConnection();
                                 database.ConnectionName = jsonTextReader.Value.ToString();
+                            }
+                            else if (token == "databaseType")
+                            {
+                                if (jsonTextReader.Value.ToString() == "MySQL")
+                                {
+                                    database.DatabaseType = DatabaseType.MySQL;
+                                }
+                                else if (jsonTextReader.Value.ToString() == "MSSQL")
+                                {
+                                    database.DatabaseType = DatabaseType.MSSQL;
+                                }
                             }
                             else if (token == "hostname")
                             {
@@ -110,6 +123,15 @@ namespace pie.Services
                     writer.WriteStartObject();
                     writer.WritePropertyName("connectionName");
                     writer.WriteValue(database.ConnectionName);
+                    writer.WritePropertyName("databaseType");
+                    if (database.DatabaseType == DatabaseType.MySQL)
+                    {
+                        writer.WriteValue("MySQL");
+                    }
+                    else if (database.DatabaseType == DatabaseType.MSSQL)
+                    {
+                        writer.WriteValue("MSSQL");
+                    }
                     writer.WritePropertyName("hostname");
                     writer.WriteValue(database.Hostname);                        
                     writer.WritePropertyName("port");
@@ -127,28 +149,53 @@ namespace pie.Services
             }
         }
 
-        public static bool CheckDatabaseConnection(string hostname, int port, string databaseName,  string username, string password)
+        public static Tuple<bool, string> CheckDatabaseConnection(DatabaseType databaseType, string hostname, int port, string databaseName,  string username, string password)
         {
-
-            SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder()
+            if (databaseType == DatabaseType.MySQL)
             {
-                DataSource = hostname + ":" + port,
-                InitialCatalog = databaseName,
-                UserID = username,
-                Password = password
-            };
-
-            using (var l_oConnection = new SqlConnection(connectionStringBuilder.ConnectionString))
-            {
+                string myConnectionString = "server=" + hostname + ";port=" + port + ";database=" + databaseName + ";uid=" + username + ";pwd=" + password + ";";
+                MySqlConnection cnn = new MySqlConnection(myConnectionString);
                 try
                 {
-                    l_oConnection.Open();
-                    return true;
+                    cnn.Open();
+                    cnn.Close();
+                    return new Tuple<bool, string>(true, null);
                 }
-                catch (SqlException)
+                catch (Exception ex)
                 {
-                    return false;
+                    return new Tuple<bool, string>(false, ex.InnerException.Message);
                 }
+            }
+            else if (databaseType == DatabaseType.MSSQL)
+            {
+                SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder()
+                {
+                    DataSource = hostname + "," + port,
+                    InitialCatalog = databaseName,
+                    UserID = username,
+                    Password = password
+                };
+
+                using (var l_oConnection = new SqlConnection(connectionStringBuilder.ConnectionString))
+                {
+                    try
+                    {
+                        l_oConnection.Open();
+                        return new Tuple<bool, string>(true, null);
+                    }
+                    catch (SqlException ex)
+                    {
+                        return new Tuple<bool, string>(false, ex.InnerException.Message);
+                    }
+                    catch(InvalidOperationException ex)
+                    {
+                        return new Tuple<bool, string>(false, ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                return new Tuple<bool, string>(false, null);
             }
         }
     }

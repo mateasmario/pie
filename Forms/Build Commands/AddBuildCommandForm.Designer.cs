@@ -88,10 +88,10 @@
             // 
             // kryptonLabel3
             // 
-            this.kryptonLabel3.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ItalicControl;
-            this.kryptonLabel3.Location = new System.Drawing.Point(3, 105);
+            this.kryptonLabel3.Location = new System.Drawing.Point(4, 105);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(349, 20);
+            this.kryptonLabel3.Size = new System.Drawing.Size(274, 14);
+            this.kryptonLabel3.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonLabel3.TabIndex = 5;
             this.kryptonLabel3.Values.Text = "$FILE can be used as a placeholder for the currently opened file.";
             // 

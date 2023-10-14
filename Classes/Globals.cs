@@ -90,6 +90,7 @@ namespace pie
         public static string addDatabaseDbName;
         public static string addDatabaseUsername;
         public static string addDatabasePassword;
+        public static DatabaseType addDatabaseType;
         public static int databaseEditIndex;
         public static string databaseToEditConnectionName;
         public static string databaseToEditHostname;
@@ -97,5 +98,6 @@ namespace pie
         public static string databaseToEditDbName;
         public static string databaseToEditUsername;
         public static string databaseToEditPassword;
+        public static DatabaseType databaseToEditType;
     }
 }

@@ -25,6 +25,7 @@ using System;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
+using pie.Enums;
 using pie.Services;
 
 namespace pie.Forms.Databases
@@ -43,6 +44,9 @@ namespace pie.Forms.Databases
             kryptonLabel4.Palette = Globals.kryptonPalette;
             kryptonLabel5.Palette = Globals.kryptonPalette;
             kryptonLabel6.Palette = Globals.kryptonPalette;
+            kryptonLabel7.Palette = Globals.kryptonPalette;
+            kryptonLabel8.Palette = Globals.kryptonPalette;
+            kryptonLabel9.Palette = Globals.kryptonPalette;
             kryptonTextBox1.Palette = Globals.kryptonPalette;
             kryptonTextBox2.Palette = Globals.kryptonPalette;
             kryptonTextBox3.Palette = Globals.kryptonPalette;
@@ -51,11 +55,22 @@ namespace pie.Forms.Databases
             kryptonTextBox6.Palette = Globals.kryptonPalette;
             kryptonButton1.Palette = Globals.kryptonPalette;
             kryptonButton2.Palette = Globals.kryptonPalette;
+            databaseTypeComboBox.Palette = Globals.kryptonPalette;
+
+            databaseTypeComboBox.StateCommon.Item.Back.ColorStyle = PaletteColorStyle.Solid;
+            databaseTypeComboBox.StateCommon.Item.Border.ColorStyle = PaletteColorStyle.Solid;
+            databaseTypeComboBox.StateCommon.DropBack.Color1 = ThemeService.GetColor("Primary");
+            databaseTypeComboBox.StateCommon.DropBack.Color2 = ThemeService.GetColor("Primary");
+
+            databaseTypeComboBox.StateTracking.Item.Back.ColorStyle = PaletteColorStyle.Solid;
+            databaseTypeComboBox.StateTracking.Item.Border.ColorStyle = PaletteColorStyle.Solid;
+            databaseTypeComboBox.StateTracking.Item.Back.Color1 = ThemeService.GetColor("Secondary");
+            databaseTypeComboBox.StateTracking.Item.Back.Color2 = ThemeService.GetColor("Secondary");
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "")
+            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "" || databaseTypeComboBox.Text == "")
             {
                 MainForm.ShowNotification("Database fields cannot be empty.");
             }
@@ -76,6 +91,14 @@ namespace pie.Forms.Databases
                     Globals.addDatabaseDbName = kryptonTextBox4.Text;
                     Globals.addDatabaseUsername = kryptonTextBox5.Text;
                     Globals.addDatabasePassword = kryptonTextBox6.Text;
+                    if (databaseTypeComboBox.SelectedIndex == 0)
+                    {
+                        Globals.addDatabaseType = DatabaseType.MySQL;
+                    }
+                    else if (databaseTypeComboBox.SelectedIndex == 1)
+                    {
+                        Globals.addDatabaseType = DatabaseType.MSSQL;
+                    }
                 }
 
                 this.Close();
@@ -90,6 +113,7 @@ namespace pie.Forms.Databases
             Globals.addDatabaseDbName = null;
             Globals.addDatabaseUsername = null;
             Globals.addDatabasePassword = null;
+            Globals.addDatabaseType = DatabaseType.None;
 
             if (Globals.databaseEditIndex >= 0)
             {
@@ -99,6 +123,14 @@ namespace pie.Forms.Databases
                 kryptonTextBox4.Text = Globals.databaseToEditDbName;
                 kryptonTextBox5.Text = Globals.databaseToEditUsername;
                 kryptonTextBox6.Text = Globals.databaseToEditPassword;
+                if (Globals.databaseToEditType == DatabaseType.MySQL)
+                {
+                    databaseTypeComboBox.SelectedIndex = 0;
+                }
+                else if (Globals.databaseToEditType == DatabaseType.MSSQL)
+                {
+                    databaseTypeComboBox.SelectedIndex = 1;
+                }
             }
         }
 
@@ -119,13 +151,26 @@ namespace pie.Forms.Databases
                 }
                 else
                 {
-                    if (DatabaseService.CheckDatabaseConnection(kryptonTextBox2.Text, port, kryptonTextBox4.Text, kryptonTextBox5.Text, kryptonTextBox6.Text))
+                    DatabaseType databaseType = DatabaseType.None;
+
+                    if (databaseTypeComboBox.SelectedIndex == 0)
+                    {
+                        databaseType = DatabaseType.MySQL;
+                    }
+                    else if (databaseTypeComboBox.SelectedIndex == 1)
+                    {
+                        databaseType = DatabaseType.MSSQL;
+                    }
+
+                    Tuple<bool, string> dbConnectionCheckOutput = DatabaseService.CheckDatabaseConnection(databaseType, kryptonTextBox2.Text, port, kryptonTextBox4.Text, kryptonTextBox5.Text, kryptonTextBox6.Text);
+
+                    if (dbConnectionCheckOutput.Item1)
                     {
                         MainForm.ShowNotification("Database connection established successfully.");
                     }
                     else
                     {
-                        MainForm.ShowNotification("Could not establish Database connection.");
+                        MainForm.ShowNotification(dbConnectionCheckOutput.Item2);
                     }
                 }
             }
