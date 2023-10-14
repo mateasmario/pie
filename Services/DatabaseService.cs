@@ -219,7 +219,31 @@ namespace pie.Services
 
                     while (rdr.Read())
                     {
-                        result += rdr[0] + "\n";
+                        string rowResult = "";
+
+                        for (int i = 0; i<rdr.FieldCount; i++)
+                        {
+                            if (rowResult == "")
+                            {
+                                rowResult = rdr[i].ToString();
+                            }
+                            else
+                            {
+                                if (rdr[i].ToString() != "")
+                                {
+                                    rowResult += "; " + rdr[i];
+                                }
+                            }
+                        }
+
+                        if (result == "")
+                        {
+                            result = rowResult;
+                        }
+                        else
+                        {
+                            result += "\n" + rowResult;
+                        }
                     }
                     rdr.Close();
 
@@ -289,7 +313,7 @@ namespace pie.Services
                     }
                     else
                     {
-                        string res = string.Join(Environment.NewLine, dt.Rows.OfType<DataRow>().Select(x => string.Join(" ; ", x.ItemArray)));
+                        string res = string.Join(Environment.NewLine, dt.Rows.OfType<DataRow>().Select(x => string.Join("; ", x.ItemArray)));
                         return new Tuple<bool, string>(true, res);
                     }
                 }
