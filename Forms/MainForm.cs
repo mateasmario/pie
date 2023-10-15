@@ -318,7 +318,7 @@ namespace pie
                 kryptonContextMenuItems.Items.Add(item1);
                 codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
-            else if (extension == "sql")
+            else if (extension == "sql" && Globals.databases.Count > 0)
             {
                 KryptonContextMenuHeading kryptonContextMenuHeading = new KryptonContextMenuHeading();
                 kryptonContextMenuHeading.Text = "Suggested Actions";
