@@ -982,6 +982,8 @@
             this.gitStagingAreaListView.HideSelection = false;
             this.gitStagingAreaListView.Location = new System.Drawing.Point(7, 8);
             this.gitStagingAreaListView.Name = "gitStagingAreaListView";
+            this.gitStagingAreaListView.SelectColumnsOnRightClick = false;
+            this.gitStagingAreaListView.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None;
             this.gitStagingAreaListView.Size = new System.Drawing.Size(801, 250);
             this.gitStagingAreaListView.TabIndex = 9;
             this.gitStagingAreaListView.UseCompatibleStateImageBehavior = false;
