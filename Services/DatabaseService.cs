@@ -75,6 +75,10 @@ namespace pie.Services
                                 {
                                     database.DatabaseType = DatabaseType.MSSQL;
                                 }
+                                else if (jsonTextReader.Value.ToString() == "Oracle")
+                                {
+                                    database.DatabaseType = DatabaseType.Oracle;
+                                }
                             }
                             else if (token == "hostname")
                             {
@@ -133,6 +137,10 @@ namespace pie.Services
                     else if (database.DatabaseType == DatabaseType.MSSQL)
                     {
                         writer.WriteValue("MSSQL");
+                    }
+                    else if (database.DatabaseType == DatabaseType.Oracle)
+                    {
+                        writer.WriteValue("Oracle");
                     }
                     writer.WritePropertyName("hostname");
                     writer.WriteValue(database.Hostname);                        

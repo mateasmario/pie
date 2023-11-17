@@ -32,6 +32,8 @@ namespace pie.Forms.Databases
 {
     public partial class AddDatabaseForm : KryptonForm
     {
+        DatabaseType selectedDatabaseType;
+
         public AddDatabaseForm()
         {
             InitializeComponent();
@@ -55,22 +57,53 @@ namespace pie.Forms.Databases
             kryptonTextBox6.Palette = Globals.kryptonPalette;
             kryptonButton1.Palette = Globals.kryptonPalette;
             kryptonButton2.Palette = Globals.kryptonPalette;
-            databaseTypeComboBox.Palette = Globals.kryptonPalette;
+            kryptonCheckButton1.Palette = Globals.kryptonPalette;
+            kryptonCheckButton2.Palette = Globals.kryptonPalette;
+            kryptonCheckButton3.Palette = Globals.kryptonPalette;
 
-            databaseTypeComboBox.StateCommon.Item.Back.ColorStyle = PaletteColorStyle.Solid;
-            databaseTypeComboBox.StateCommon.Item.Border.ColorStyle = PaletteColorStyle.Solid;
-            databaseTypeComboBox.StateCommon.DropBack.Color1 = ThemeService.GetColor("Primary");
-            databaseTypeComboBox.StateCommon.DropBack.Color2 = ThemeService.GetColor("Primary");
+            kryptonCheckButton1.StateCommon.Back.Color1 = ThemeService.GetColor("Primary");
+            kryptonCheckButton1.StateCommon.Back.Color2 = ThemeService.GetColor("Primary");
+            kryptonCheckButton1.StateCheckedNormal.Back.Color1 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton1.StateCheckedNormal.Back.Color2 = ThemeService.GetColor("Secondary");            
+            kryptonCheckButton1.StateCheckedTracking.Back.Color1 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton1.StateCheckedTracking.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton1.StateCheckedPressed.Back.Color1 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton1.StateCheckedPressed.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton1.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonCheckButton1.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonCheckButton1.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonCheckButton1.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
 
-            databaseTypeComboBox.StateTracking.Item.Back.ColorStyle = PaletteColorStyle.Solid;
-            databaseTypeComboBox.StateTracking.Item.Border.ColorStyle = PaletteColorStyle.Solid;
-            databaseTypeComboBox.StateTracking.Item.Back.Color1 = ThemeService.GetColor("Secondary");
-            databaseTypeComboBox.StateTracking.Item.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton2.StateCommon.Back.Color1 = ThemeService.GetColor("Primary");
+            kryptonCheckButton2.StateCommon.Back.Color2 = ThemeService.GetColor("Primary");
+            kryptonCheckButton2.StateCheckedNormal.Back.Color1 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton2.StateCheckedNormal.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton2.StateCheckedTracking.Back.Color1 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton2.StateCheckedTracking.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton2.StateCheckedPressed.Back.Color1 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton2.StateCheckedPressed.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton2.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonCheckButton2.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonCheckButton2.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonCheckButton2.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
+
+            kryptonCheckButton3.StateCommon.Back.Color1 = ThemeService.GetColor("Primary");
+            kryptonCheckButton3.StateCommon.Back.Color2 = ThemeService.GetColor("Primary");
+            kryptonCheckButton3.StateCheckedNormal.Back.Color1 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton3.StateCheckedNormal.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton3.StateCheckedTracking.Back.Color1 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton3.StateCheckedTracking.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton3.StateCheckedPressed.Back.Color1 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton3.StateCheckedPressed.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton3.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonCheckButton3.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonCheckButton3.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
+            kryptonCheckButton3.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "" || databaseTypeComboBox.Text == "")
+            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "" || selectedDatabaseType == null)
             {
                 MainForm.ShowNotification("Database fields cannot be empty.");
             }
@@ -91,14 +124,7 @@ namespace pie.Forms.Databases
                     Globals.addDatabaseDbName = kryptonTextBox4.Text;
                     Globals.addDatabaseUsername = kryptonTextBox5.Text;
                     Globals.addDatabasePassword = kryptonTextBox6.Text;
-                    if (databaseTypeComboBox.SelectedIndex == 0)
-                    {
-                        Globals.addDatabaseType = DatabaseType.MySQL;
-                    }
-                    else if (databaseTypeComboBox.SelectedIndex == 1)
-                    {
-                        Globals.addDatabaseType = DatabaseType.MSSQL;
-                    }
+                    Globals.addDatabaseType = selectedDatabaseType;
                 }
 
                 this.Close();
@@ -123,20 +149,25 @@ namespace pie.Forms.Databases
                 kryptonTextBox4.Text = Globals.databaseToEditDbName;
                 kryptonTextBox5.Text = Globals.databaseToEditUsername;
                 kryptonTextBox6.Text = Globals.databaseToEditPassword;
-                if (Globals.databaseToEditType == DatabaseType.MySQL)
+                
+                switch(Globals.databaseToEditType)
                 {
-                    databaseTypeComboBox.SelectedIndex = 0;
-                }
-                else if (Globals.databaseToEditType == DatabaseType.MSSQL)
-                {
-                    databaseTypeComboBox.SelectedIndex = 1;
+                    case DatabaseType.MySQL:
+                        kryptonCheckButton1.Checked = true;
+                        break;
+                    case DatabaseType.MSSQL:
+                        kryptonCheckButton2.Checked = true;
+                        break;
+                    case DatabaseType.Oracle:
+                        kryptonCheckButton3.Checked = true;
+                        break;
                 }
             }
         }
 
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "")
+            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "" || selectedDatabaseType == null)
             {
                 MainForm.ShowNotification("Database fields cannot be empty.");
             }
@@ -151,18 +182,7 @@ namespace pie.Forms.Databases
                 }
                 else
                 {
-                    DatabaseType databaseType = DatabaseType.None;
-
-                    if (databaseTypeComboBox.SelectedIndex == 0)
-                    {
-                        databaseType = DatabaseType.MySQL;
-                    }
-                    else if (databaseTypeComboBox.SelectedIndex == 1)
-                    {
-                        databaseType = DatabaseType.MSSQL;
-                    }
-
-                    Tuple<bool, string> dbConnectionCheckOutput = DatabaseService.CheckDatabaseConnection(databaseType, kryptonTextBox2.Text, port, kryptonTextBox4.Text, kryptonTextBox5.Text, kryptonTextBox6.Text);
+                    Tuple<bool, string> dbConnectionCheckOutput = DatabaseService.CheckDatabaseConnection(selectedDatabaseType, kryptonTextBox2.Text, port, kryptonTextBox4.Text, kryptonTextBox5.Text, kryptonTextBox6.Text);
 
                     if (dbConnectionCheckOutput.Item1)
                     {
@@ -174,6 +194,31 @@ namespace pie.Forms.Databases
                     }
                 }
             }
+        }
+
+        private void kryptonCheckButton1_Click(object sender, EventArgs e)
+        {
+            kryptonCheckButton1.Checked = false;
+            kryptonCheckButton2.Checked = false;
+            kryptonCheckButton3.Checked = false;
+
+            ((KryptonCheckButton)sender).Checked = true;
+
+            string type = ((KryptonCheckButton)sender).Text.Trim();
+
+            switch(type)
+            {
+                case "MySQL":
+                    selectedDatabaseType = DatabaseType.MySQL;
+                    break;
+                case "MS SQL":
+                    selectedDatabaseType= DatabaseType.MSSQL;
+                    break;
+                case "Oracle":
+                    selectedDatabaseType = DatabaseType.Oracle;
+                    break;
+            }
+
         }
     }
 }

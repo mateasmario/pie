@@ -531,6 +531,32 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pie.ico" />
+    <None Include="Resources\mysqldb.png" />
+    <None Include="Resources\mysql2.png" />
+    <None Include="Resources\pngwing.com %2810%29.png" />
+    <None Include="Resources\microsoft %285%29.png" />
+    <None Include="Resources\oracle.png" />
+    <None Include="Resources\db_ms.png" />
+    <None Include="Resources\db_mssql.png" />
+    <None Include="Resources\microsoft %283%291.png" />
+    <None Include="Resources\db_microsoft.png" />
+    <None Include="Resources\db_mysql.png" />
+    <None Include="Resources\mysql_db.png" />
+    <None Include="Resources\pngwing.com %289%29.png" />
+    <None Include="Resources\pngwing.com %288%29.png" />
+    <None Include="Resources\pngwing.com %286%29.png" />
+    <None Include="Resources\62bc7b13071dec17849af324 %281%291.png" />
+    <None Include="Resources\62bc7b13071dec17849af324 %281%29.png" />
+    <None Include="Resources\hiclipart.com.png" />
+    <None Include="Resources\62bc7af6071dec17849af323.png" />
+    <None Include="Resources\microsoft %283%29.png" />
+    <None Include="Resources\microsoft %282%29.png" />
+    <None Include="Resources\microsoft %281%29.png" />
+    <None Include="Resources\62debc4fff3c6e4b8b5de8d32.png" />
+    <None Include="Resources\62debc4fff3c6e4b8b5de8d31.png" />
+    <None Include="Resources\62debc4fff3c6e4b8b5de8d3.png" />
+    <None Include="Resources\mysql1.png" />
+    <None Include="Resources\mysql.png" />
     <None Include="Resources\gears.png" />
     <None Include="Resources\binary-code.png" />
     <None Include="Resources\database %284%29.png" />
