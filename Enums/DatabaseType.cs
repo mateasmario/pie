@@ -20,6 +20,6 @@
 namespace pie.Enums
 {
     public enum DatabaseType { 
-        None, MySQL, MSSQL
+        None, MySQL, MSSQL, Oracle
     }
 }

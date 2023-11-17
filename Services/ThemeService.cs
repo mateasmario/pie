@@ -241,7 +241,7 @@ namespace pie.Services
             kryptonPalette.ContextMenu.StateCommon.ItemHighlight.Back.Color2 = colorDictionary["Secondary"];
 
             kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color1 = colorDictionary["Fore"];
-            kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color2 = colorDictionary["Fore"];            
+            kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color2 = colorDictionary["Fore"];  
         }
 
         public static void GetTheme(string file)
