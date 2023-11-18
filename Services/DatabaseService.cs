@@ -21,9 +21,12 @@ using pie.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Data;
+using System.Linq;
 using pie.Enums;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
+using Npgsql;
 
 /**
  * Used for reading and writing to JSON config files
@@ -31,8 +34,6 @@ using MySql.Data.MySqlClient;
  * Copyright (c) 2007 James Newton-King
  */
 using Newtonsoft.Json;
-using System.Data;
-using System.Linq;
 
 namespace pie.Services
 {
@@ -75,9 +76,9 @@ namespace pie.Services
                                 {
                                     database.DatabaseType = DatabaseType.MSSQL;
                                 }
-                                else if (jsonTextReader.Value.ToString() == "Oracle")
+                                else if (jsonTextReader.Value.ToString() == "PostgreSQL")
                                 {
-                                    database.DatabaseType = DatabaseType.Oracle;
+                                    database.DatabaseType = DatabaseType.PostgreSQL;
                                 }
                             }
                             else if (token == "hostname")
@@ -138,9 +139,9 @@ namespace pie.Services
                     {
                         writer.WriteValue("MSSQL");
                     }
-                    else if (database.DatabaseType == DatabaseType.Oracle)
+                    else if (database.DatabaseType == DatabaseType.PostgreSQL)
                     {
-                        writer.WriteValue("Oracle");
+                        writer.WriteValue("PostgreSQL");
                     }
                     writer.WritePropertyName("hostname");
                     writer.WriteValue(database.Hostname);                        
@@ -198,16 +199,29 @@ namespace pie.Services
                     {
                         return new Tuple<bool, string>(false, ex.InnerException.Message);
                     }
-                    catch(InvalidOperationException ex)
+                    catch (InvalidOperationException ex)
                     {
                         return new Tuple<bool, string>(false, ex.Message);
                     }
                 }
             }
-            else
+            else if (databaseType == DatabaseType.PostgreSQL)
             {
-                return new Tuple<bool, string>(false, null);
+                string strConnString = "Server=" + hostname + ";Port=" + port + ";User Id=" + username + ";Password=" + password + ";Database=" + databaseName;
+                try
+                {
+                    NpgsqlConnection objConn = new NpgsqlConnection(strConnString);
+                    objConn.Open();
+                    objConn.Close();
+                    return new Tuple<bool, string>(true, null);
+                }
+                catch (NpgsqlException ex)
+                {
+                    return new Tuple<bool, string>(false, ex.InnerException.Message);
+                }
             }
+
+            return null;
         }
 
         public static Tuple<bool, string> ExecuteSQLCommand(string query, DatabaseConnection databaseConnection)
@@ -324,6 +338,36 @@ namespace pie.Services
                         string res = string.Join(Environment.NewLine, dt.Rows.OfType<DataRow>().Select(x => string.Join("; ", x.ItemArray)));
                         return new Tuple<bool, string>(true, res);
                     }
+                }
+            }
+            else if (databaseConnection.DatabaseType == DatabaseType.PostgreSQL)
+            {
+                string strConnString = "Server=" + databaseConnection.Hostname + ";Port=" + databaseConnection.Port + ";User Id=" + databaseConnection.Username + ";Password=" + databaseConnection.Password + ";Database=" + databaseConnection.DatabaseName;
+                string result = "";
+
+                try
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection(strConnString);
+                    conn.Open();
+
+                    using (NpgsqlCommand command = new NpgsqlCommand(query, conn))
+                    {
+                        int val;
+                        NpgsqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            result += reader[0].ToString();
+                            result += ";";
+                        }
+                    }
+
+                    conn.Close();
+
+                    return new Tuple<bool, string>(true, result.Remove(result.Length-1, 1));
+                }
+                catch (NpgsqlException ex)
+                {
+                    return new Tuple<bool, string>(false, ex.InnerException.Message);
                 }
             }
             else

@@ -2745,6 +2745,24 @@ namespace pie
             gitBranchesComboBox.StateTracking.Item.Border.ColorStyle = PaletteColorStyle.Solid;
             gitBranchesComboBox.StateTracking.Item.Back.Color1 = ThemeService.GetColor("Secondary");
             gitBranchesComboBox.StateTracking.Item.Back.Color2 = ThemeService.GetColor("Secondary");
+
+            // Git Buttons
+            if (Globals.theme == 0)
+            {
+                kryptonButton8.Values.Image = Properties.Resources.refresh_black;
+                kryptonButton6.Values.Image = Properties.Resources.commit_black;
+                kryptonButton10.Values.Image = Properties.Resources.pull_black;
+                kryptonButton7.Values.Image = Properties.Resources.push_black;
+                kryptonButton11.Values.Image = Properties.Resources.log_black;
+            }
+            else if (Globals.theme == 1)
+            {
+                kryptonButton8.Values.Image = Properties.Resources.refresh_white;
+                kryptonButton6.Values.Image = Properties.Resources.commit_white;
+                kryptonButton10.Values.Image = Properties.Resources.pull_white;
+                kryptonButton7.Values.Image = Properties.Resources.push_white;
+                kryptonButton11.Values.Image = Properties.Resources.log_white;
+            }
         }
 
         private void SynchronizeImagesWithTheme()

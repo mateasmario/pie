@@ -83,9 +83,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap check {
+        internal static System.Drawing.Bitmap color_wheel {
             get {
-                object obj = ResourceManager.GetObject("check", resourceCulture);
+                object obj = ResourceManager.GetObject("color-wheel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,19 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap color_wheel {
+        internal static System.Drawing.Bitmap commit_black {
             get {
-                object obj = ResourceManager.GetObject("color-wheel", resourceCulture);
+                object obj = ResourceManager.GetObject("commit_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap commit_white {
+            get {
+                object obj = ResourceManager.GetObject("commit_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,29 +123,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap database__2_ {
+        internal static System.Drawing.Bitmap database {
             get {
-                object obj = ResourceManager.GetObject("database (2)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap database__3_ {
-            get {
-                object obj = ResourceManager.GetObject("database (3)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap database__4_ {
-            get {
-                object obj = ResourceManager.GetObject("database (4)", resourceCulture);
+                object obj = ResourceManager.GetObject("database", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,16 +136,6 @@ namespace pie.Properties {
         internal static System.Drawing.Bitmap documents {
             get {
                 object obj = ResourceManager.GetObject("documents", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap down_arrow__1_ {
-            get {
-                object obj = ResourceManager.GetObject("down-arrow (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,9 +213,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap microsoft__5_ {
+        internal static System.Drawing.Bitmap log_black {
             get {
-                object obj = ResourceManager.GetObject("microsoft (5)", resourceCulture);
+                object obj = ResourceManager.GetObject("log_black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,9 +223,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap mysql {
+        internal static System.Drawing.Bitmap log_white {
             get {
-                object obj = ResourceManager.GetObject("mysql", resourceCulture);
+                object obj = ResourceManager.GetObject("log_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,9 +233,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap mysqldb {
+        internal static System.Drawing.Bitmap microsoft_black {
             get {
-                object obj = ResourceManager.GetObject("mysqldb", resourceCulture);
+                object obj = ResourceManager.GetObject("microsoft_black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,9 +243,29 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap oracle {
+        internal static System.Drawing.Bitmap microsoft_white {
             get {
-                object obj = ResourceManager.GetObject("oracle", resourceCulture);
+                object obj = ResourceManager.GetObject("microsoft_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mysql_black {
+            get {
+                object obj = ResourceManager.GetObject("mysql_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mysql_white {
+            get {
+                object obj = ResourceManager.GetObject("mysql_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,6 +293,26 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap postgresql_black {
+            get {
+                object obj = ResourceManager.GetObject("postgresql_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap postgresql_white {
+            get {
+                object obj = ResourceManager.GetObject("postgresql_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap powershell {
             get {
                 object obj = ResourceManager.GetObject("powershell", resourceCulture);
@@ -303,9 +323,59 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap refresh {
+        internal static System.Drawing.Bitmap pull_black {
             get {
-                object obj = ResourceManager.GetObject("refresh", resourceCulture);
+                object obj = ResourceManager.GetObject("pull_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pull_white {
+            get {
+                object obj = ResourceManager.GetObject("pull_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap push_black {
+            get {
+                object obj = ResourceManager.GetObject("push_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap push_white {
+            get {
+                object obj = ResourceManager.GetObject("push_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh_black {
+            get {
+                object obj = ResourceManager.GetObject("refresh_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh_white {
+            get {
+                object obj = ResourceManager.GetObject("refresh_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -356,16 +426,6 @@ namespace pie.Properties {
         internal static System.Drawing.Bitmap terminal {
             get {
                 object obj = ResourceManager.GetObject("terminal", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap upload {
-            get {
-                object obj = ResourceManager.GetObject("upload", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
