@@ -390,6 +390,7 @@
     <Compile Include="Classes\DatabaseConnection.cs" />
     <Compile Include="Classes\NavigatorFile.cs" />
     <Compile Include="Classes\GitCommit.cs" />
+    <Compile Include="Classes\Triple.cs" />
     <Compile Include="Enums\DatabaseType.cs" />
     <Compile Include="Forms\Databases\AddDatabaseForm.cs">
       <SubType>Form</SubType>

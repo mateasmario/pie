@@ -92,6 +92,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using pie.Forms.Databases;
+using System.Data;
 
 namespace pie
 {
@@ -355,16 +356,17 @@ namespace pie
 
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
 
-            Tuple<bool, string> databaseResult = DatabaseService.ExecuteSQLCommand(TextArea.Text, database);
+            Triple<bool, string, DataTable> databaseResult = DatabaseService.ExecuteSQLCommand(TextArea.Text, database);
 
-            string result = databaseResult.Item2;
-            if (result == "")
+            if (databaseResult.a == false)
             {
-                result = "0 rows returned.";
+                ShowNotification(databaseResult.b);
             }
-
-            DatabaseOutputForm databaseOutputForm = new DatabaseOutputForm(result);
-            databaseOutputForm.ShowDialog();
+            else
+            {
+                DatabaseOutputForm databaseOutputForm = new DatabaseOutputForm(databaseResult.c);
+                databaseOutputForm.ShowDialog();
+            }
         }
 
         private void Item1_Click5(object sender, EventArgs e)
