@@ -38,18 +38,19 @@ namespace pie.Forms.Databases
 {
     public partial class DatabaseOutputForm : KryptonForm
     {
-        private string databaseOutput;
+        private DataTable dataTable;
 
-        public DatabaseOutputForm(string databaseOutput)
+        public DatabaseOutputForm(DataTable dataTable)
         {
             InitializeComponent();
 
-            this.databaseOutput = databaseOutput;
+            this.dataTable = dataTable;
 
             this.Palette = Globals.kryptonPalette;
             kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonRichTextBox1.Palette = Globals.kryptonPalette;
             kryptonButton3.Palette = Globals.kryptonPalette;
+            kryptonDataGridView1.Palette = Globals.kryptonPalette;
+            kryptonDataGridView1.StateCommon.Background.ColorStyle = PaletteColorStyle.Solid;
         }
 
         private void kryptonButton3_Click(object sender, EventArgs e)
@@ -59,7 +60,7 @@ namespace pie.Forms.Databases
 
         private void DatabaseOutputForm_Load(object sender, EventArgs e)
         {
-            kryptonRichTextBox1.Text = databaseOutput;
+            kryptonDataGridView1.DataSource = this.dataTable;
         }
     }
 }

@@ -224,12 +224,12 @@ namespace pie.Services
             return null;
         }
 
-        public static Tuple<bool, string> ExecuteSQLCommand(string query, DatabaseConnection databaseConnection)
+        public static Triple<bool, string, DataTable> ExecuteSQLCommand(string query, DatabaseConnection databaseConnection)
         {
+            DataTable dt = new DataTable();
+
             if (databaseConnection.DatabaseType == DatabaseType.MySQL)
             {
-                string result = "";
-
                 string myConnectionString = "server=" + databaseConnection.Hostname + ";port=" + databaseConnection.Port + ";database=" + databaseConnection.DatabaseName + ";uid=" + databaseConnection.Username + ";pwd=" + databaseConnection.Password + ";";
                 MySqlConnection cnn = new MySqlConnection(myConnectionString);
                 try
@@ -237,51 +237,23 @@ namespace pie.Services
                     cnn.Open();
 
                     MySqlCommand cmd = new MySqlCommand(query, cnn);
-                    MySqlDataReader rdr = cmd.ExecuteReader();
 
-                    while (rdr.Read())
-                    {
-                        string rowResult = "";
-
-                        for (int i = 0; i<rdr.FieldCount; i++)
-                        {
-                            if (rowResult == "")
-                            {
-                                rowResult = rdr[i].ToString();
-                            }
-                            else
-                            {
-                                if (rdr[i].ToString() != "")
-                                {
-                                    rowResult += "; " + rdr[i];
-                                }
-                            }
-                        }
-
-                        if (result == "")
-                        {
-                            result = rowResult;
-                        }
-                        else
-                        {
-                            result += "\n" + rowResult;
-                        }
-                    }
-                    rdr.Close();
+                    MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
+                    sda.Fill(dt);
 
                     cnn.Close();
 
-                    return new Tuple<bool, string>(true, result);
+                    return new Triple<bool, string, DataTable> (true, null, dt);
                 }
                 catch (Exception ex)
                 {
                     if (ex.InnerException != null)
                     {
-                        return new Tuple<bool, string>(false, ex.InnerException.Message);
+                        return new Triple<bool, string, DataTable>(false, ex.InnerException.Message, null);
                     }
                     else
                     {
-                        return new Tuple<bool, string>(false, ex.Message);
+                        return new Triple<bool, string, DataTable>(false, ex.Message, null);
                     }
                 }
             }
@@ -294,8 +266,6 @@ namespace pie.Services
                     UserID = databaseConnection.Username,
                     Password = databaseConnection.Password
                 };
-
-                DataTable dt = new DataTable();
 
                 using (var l_oConnection = new SqlConnection(connectionStringBuilder.ConnectionString))
                 {
@@ -312,67 +282,52 @@ namespace pie.Services
                         var rows_returned = sda.Fill(dt);
 
                         l_oConnection.Close();
+
+                        return new Triple<bool, string, DataTable>(true, null, dt);
                     }
                     catch (SqlException ex)
                     {
                         if (ex.InnerException != null)
                         {
-                            return new Tuple<bool, string>(false, ex.InnerException.Message);
+                            return new Triple<bool, string, DataTable>(false, ex.InnerException.Message, null);
                         }
                         else
                         {
-                            return new Tuple<bool, string>(false, ex.Message);
+                            return new Triple<bool, string, DataTable>(false, ex.Message, null);
                         }
                     }
                     catch (InvalidOperationException ex)
                     {
-                        return new Tuple<bool, string>(false, ex.Message);
-                    }
-
-                    if (dt.Rows.Count == 0)
-                    {
-                        return new Tuple<bool, string>(true, "");
-                    }
-                    else
-                    {
-                        string res = string.Join(Environment.NewLine, dt.Rows.OfType<DataRow>().Select(x => string.Join("; ", x.ItemArray)));
-                        return new Tuple<bool, string>(true, res);
+                        return new Triple<bool, string, DataTable>(false, ex.Message, null);
                     }
                 }
             }
             else if (databaseConnection.DatabaseType == DatabaseType.PostgreSQL)
             {
                 string strConnString = "Server=" + databaseConnection.Hostname + ";Port=" + databaseConnection.Port + ";User Id=" + databaseConnection.Username + ";Password=" + databaseConnection.Password + ";Database=" + databaseConnection.DatabaseName;
-                string result = "";
 
                 try
                 {
                     NpgsqlConnection conn = new NpgsqlConnection(strConnString);
                     conn.Open();
 
-                    using (NpgsqlCommand command = new NpgsqlCommand(query, conn))
-                    {
-                        int val;
-                        NpgsqlDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            result += reader[0].ToString();
-                            result += ";";
-                        }
-                    }
+                    NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                    NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+
+                    adapter.Fill(dt);
 
                     conn.Close();
 
-                    return new Tuple<bool, string>(true, result.Remove(result.Length-1, 1));
+                    return new Triple<bool, string, DataTable>(true, null, dt);
                 }
                 catch (NpgsqlException ex)
                 {
-                    return new Tuple<bool, string>(false, ex.InnerException.Message);
+                    return new Triple<bool, string, DataTable>(false, ex.InnerException.Message, null);
                 }
             }
             else
             {
-                return new Tuple<bool, string>(false, null);
+                return new Triple<bool, string, DataTable>(false, null, null);
             }
         }
     }
