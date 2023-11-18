@@ -21,25 +21,13 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Docking;
-using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
-
-/**
- * This namespace provides access to the ObjectListView control.
- * Licensed under GNU General Public License (GPL 3.0). For more info, see https://www.gnu.org/licenses/gpl-3.0.html 
- *
- * Author of the library: Phillip Piper
- * Copyright 2006-2016 Bright Ideas Software
- */
-using BrightIdeasSoftware;
 
 /**
  * Used for reading and writing to JSON config files

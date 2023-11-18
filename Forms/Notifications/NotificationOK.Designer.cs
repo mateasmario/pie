@@ -42,7 +42,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(366, 95);
+            this.kryptonPanel1.Size = new System.Drawing.Size(366, 100);
             this.kryptonPanel1.TabIndex = 7;
             // 
             // kryptonRichTextBox1
@@ -50,7 +50,7 @@
             this.kryptonRichTextBox1.Location = new System.Drawing.Point(3, 8);
             this.kryptonRichTextBox1.Name = "kryptonRichTextBox1";
             this.kryptonRichTextBox1.ReadOnly = true;
-            this.kryptonRichTextBox1.Size = new System.Drawing.Size(360, 45);
+            this.kryptonRichTextBox1.Size = new System.Drawing.Size(360, 54);
             this.kryptonRichTextBox1.StateCommon.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.False;
             this.kryptonRichTextBox1.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -60,7 +60,7 @@
             // 
             // kryptonButton1
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(295, 64);
+            this.kryptonButton1.Location = new System.Drawing.Point(295, 68);
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -74,7 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 95);
+            this.ClientSize = new System.Drawing.Size(366, 100);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

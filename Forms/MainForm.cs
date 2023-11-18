@@ -17,15 +17,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using pie.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using pie.Enums;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Data;
 using pie.Classes;
+using pie.Forms.Databases;
+using pie.Services;
+using pie.Enums;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -87,12 +91,6 @@ using BrightIdeasSoftware;
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-using pie.Forms.Databases;
-using System.Data;
 
 namespace pie
 {

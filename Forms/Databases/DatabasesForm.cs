@@ -17,11 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using pie.Services;
 using System;
 using System.Windows.Forms;
-using pie.Classes;
 using System.Collections.Generic;
+using pie.Services;
+using pie.Classes;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.

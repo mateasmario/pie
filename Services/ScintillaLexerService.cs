@@ -44,7 +44,6 @@ using AutocompleteMenuNS;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Docking;
-using Newtonsoft.Json;
 
 namespace pie.Services
 {
