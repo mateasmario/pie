@@ -99,6 +99,19 @@ namespace pie.Forms.Databases
             kryptonCheckButton3.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton3.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton3.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
+
+            if (Globals.theme == 0)
+            {
+                kryptonCheckButton1.Values.Image = Properties.Resources.mysql_black;
+                kryptonCheckButton2.Values.Image = Properties.Resources.microsoft_black;
+                kryptonCheckButton3.Values.Image = Properties.Resources.postgresql_black;
+            }
+            else if (Globals.theme == 1)
+            {
+                kryptonCheckButton1.Values.Image = Properties.Resources.mysql_white;
+                kryptonCheckButton2.Values.Image = Properties.Resources.microsoft_white;
+                kryptonCheckButton3.Values.Image = Properties.Resources.postgresql_white;
+            }
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
@@ -158,7 +171,7 @@ namespace pie.Forms.Databases
                     case DatabaseType.MSSQL:
                         kryptonCheckButton2.Checked = true;
                         break;
-                    case DatabaseType.Oracle:
+                    case DatabaseType.PostgreSQL:
                         kryptonCheckButton3.Checked = true;
                         break;
                 }
@@ -211,11 +224,11 @@ namespace pie.Forms.Databases
                 case "MySQL":
                     selectedDatabaseType = DatabaseType.MySQL;
                     break;
-                case "MS SQL":
+                case "Microsoft SQL":
                     selectedDatabaseType= DatabaseType.MSSQL;
                     break;
-                case "Oracle":
-                    selectedDatabaseType = DatabaseType.Oracle;
+                case "PostgreSQL":
+                    selectedDatabaseType = DatabaseType.PostgreSQL;
                     break;
             }
 

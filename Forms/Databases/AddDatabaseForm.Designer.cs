@@ -87,8 +87,8 @@
             this.kryptonCheckButton3.Name = "kryptonCheckButton3";
             this.kryptonCheckButton3.Size = new System.Drawing.Size(128, 49);
             this.kryptonCheckButton3.TabIndex = 20;
-            this.kryptonCheckButton3.Values.Image = global::pie.Properties.Resources.oracle;
-            this.kryptonCheckButton3.Values.Text = " Oracle";
+            this.kryptonCheckButton3.Values.Image = global::pie.Properties.Resources.postgresql_black;
+            this.kryptonCheckButton3.Values.Text = "PostgreSQL";
             this.kryptonCheckButton3.Click += new System.EventHandler(this.kryptonCheckButton1_Click);
             // 
             // kryptonCheckButton2
@@ -97,8 +97,8 @@
             this.kryptonCheckButton2.Name = "kryptonCheckButton2";
             this.kryptonCheckButton2.Size = new System.Drawing.Size(128, 49);
             this.kryptonCheckButton2.TabIndex = 19;
-            this.kryptonCheckButton2.Values.Image = global::pie.Properties.Resources.microsoft__5_;
-            this.kryptonCheckButton2.Values.Text = " MS SQL";
+            this.kryptonCheckButton2.Values.Image = global::pie.Properties.Resources.microsoft_black;
+            this.kryptonCheckButton2.Values.Text = " Microsoft SQL";
             this.kryptonCheckButton2.Click += new System.EventHandler(this.kryptonCheckButton1_Click);
             // 
             // kryptonCheckButton1
@@ -107,8 +107,8 @@
             this.kryptonCheckButton1.Name = "kryptonCheckButton1";
             this.kryptonCheckButton1.Size = new System.Drawing.Size(128, 49);
             this.kryptonCheckButton1.TabIndex = 18;
-            this.kryptonCheckButton1.Values.Image = global::pie.Properties.Resources.mysqldb;
-            this.kryptonCheckButton1.Values.Text = " MySQL";
+            this.kryptonCheckButton1.Values.Image = global::pie.Properties.Resources.mysql_black;
+            this.kryptonCheckButton1.Values.Text = "MySQL";
             this.kryptonCheckButton1.Click += new System.EventHandler(this.kryptonCheckButton1_Click);
             // 
             // kryptonLabel9
