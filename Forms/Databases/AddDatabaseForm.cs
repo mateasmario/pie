@@ -18,6 +18,8 @@
 */
 
 using System;
+using pie.Enums;
+using pie.Services;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -25,8 +27,6 @@ using System;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
-using pie.Enums;
-using pie.Services;
 
 namespace pie.Forms.Databases
 {

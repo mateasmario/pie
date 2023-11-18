@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using pie.Classes;
+using pie.Services;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -28,7 +29,6 @@ using pie.Classes;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
-using pie.Services;
 
 namespace pie
 {

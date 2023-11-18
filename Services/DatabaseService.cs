@@ -17,16 +17,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using pie.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Data;
-using System.Linq;
-using pie.Enums;
 using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
-using Npgsql;
+using pie.Classes;
+using pie.Enums;
 
 /**
  * Used for reading and writing to JSON config files
@@ -34,6 +31,20 @@ using Npgsql;
  * Copyright (c) 2007 James Newton-King
  */
 using Newtonsoft.Json;
+
+/**
+ * Used for communication between pie and MySQL Databases
+ * 
+ * Copyright (c) 2016 Alan Savage
+ */
+using MySql.Data.MySqlClient;
+
+/**
+ * Used for communication between pie and PostgreSQL Databases
+ * 
+ * Copyright (c) 2002-2023, Npgsql
+ */
+using Npgsql;
 
 namespace pie.Services
 {
@@ -243,6 +254,11 @@ namespace pie.Services
 
                     cnn.Close();
 
+                    if (dt.Columns.Count == 0)
+                    {
+                        return new Triple<bool, string, DataTable>(false, "No columns returned.", null);
+                    }
+
                     return new Triple<bool, string, DataTable> (true, null, dt);
                 }
                 catch (Exception ex)
@@ -283,6 +299,11 @@ namespace pie.Services
 
                         l_oConnection.Close();
 
+                        if (dt.Columns.Count == 0)
+                        {
+                            return new Triple<bool, string, DataTable>(false, "No columns returned", null);
+                        }
+
                         return new Triple<bool, string, DataTable>(true, null, dt);
                     }
                     catch (SqlException ex)
@@ -317,6 +338,11 @@ namespace pie.Services
                     adapter.Fill(dt);
 
                     conn.Close();
+
+                    if (dt.Columns.Count == 0)
+                    {
+                        return new Triple<bool, string, DataTable>(false, "No columns returned", null);
+                    }
 
                     return new Triple<bool, string, DataTable>(true, null, dt);
                 }

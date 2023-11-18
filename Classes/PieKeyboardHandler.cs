@@ -17,8 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using pie.Enums;
 using System;
+using pie.Enums;
 
 /**
  * CefSharp is used in order to integrate Chromium-Based Web Browsers inside pie.
