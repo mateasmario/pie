@@ -296,7 +296,7 @@ namespace pie.Services
                 scintilla.ViewWhitespace = WhitespaceMode.VisibleAlways;
 
                 string keywordSet1 = "and as assert break class continue def del elif else except exec finally for from global if import in is lambda not or pass print raise return try while with yield";
-                string keywordSet2 = "False None True and as assert break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield";
+                string keywordSet2 = "False None True";
                 string keywordSet3 = "cdef cimport cpdef";
 
                 scintilla.SetKeywords(0, keywordSet1 + " " + keywordSet3);
