@@ -1247,7 +1247,7 @@ namespace pie
             }
             catch (FileNotFoundException ex)
             {
-                Globals.theme = 0;
+                Globals.theme = "light";
                 ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
             }
         }
@@ -1269,7 +1269,7 @@ namespace pie
 
             gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
 
-            if (Globals.theme == 1)
+            if (Globals.theme == "dark")
             {
                 themeSettingsToolStripMenuItem.Image = Properties.Resources.sun;
                 themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
@@ -1338,13 +1338,13 @@ namespace pie
         {
             GitFile gitFile = (GitFile)e.Model;
             if (gitFile.Status == "Ignored")
-                e.Item.ForeColor = Globals.theme == 1 ? Color.FromArgb(179, 179, 179) : Color.FromArgb(100, 100, 100);
+                e.Item.ForeColor = Globals.theme == "dark" ? Color.FromArgb(179, 179, 179) : Color.FromArgb(100, 100, 100);
             else if (gitFile.Status == "Deleted")
                 e.Item.ForeColor = Color.FromArgb(251, 77, 77);
             else if (gitFile.Status == "New")
-                e.Item.ForeColor = Globals.theme == 1 ? Color.FromArgb(60, 170, 232) : Color.FromArgb(40, 115, 158);
+                e.Item.ForeColor = Globals.theme == "dark" ? Color.FromArgb(60, 170, 232) : Color.FromArgb(40, 115, 158);
             else if (gitFile.Status == "Modified")
-                e.Item.ForeColor = Globals.theme == 1 ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
+                e.Item.ForeColor = Globals.theme == "dark" ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
             else
                 e.Item.ForeColor = ThemeService.GetColor("Fore");
         }
@@ -2010,16 +2010,16 @@ namespace pie
         {
             ControlHelper.SuspendDrawing(this);
 
-            if (Globals.theme == 0)
+            if (Globals.theme == "light")
             {
-                Globals.theme = 1;
+                Globals.theme = "dark";
                 ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
                 themeSettingsToolStripMenuItem.Image = Properties.Resources.sun;
                 themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
             }
             else
             {
-                Globals.theme = 0;
+                Globals.theme = "light";
                 ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
                 themeSettingsToolStripMenuItem.Image = Properties.Resources.crescent_moon;
                 themeSettingsToolStripMenuItem.Text = "Toggle Dark Mode";
@@ -2747,7 +2747,7 @@ namespace pie
             gitBranchesComboBox.StateTracking.Item.Back.Color2 = ThemeService.GetColor("Secondary");
 
             // Git Buttons
-            if (Globals.theme == 0)
+            if (Globals.theme == "light")
             {
                 kryptonButton8.Values.Image = Properties.Resources.refresh_black;
                 kryptonButton6.Values.Image = Properties.Resources.commit_black;
@@ -2755,7 +2755,7 @@ namespace pie
                 kryptonButton7.Values.Image = Properties.Resources.push_black;
                 kryptonButton11.Values.Image = Properties.Resources.log_black;
             }
-            else if (Globals.theme == 1)
+            else if (Globals.theme == "dark")
             {
                 kryptonButton8.Values.Image = Properties.Resources.refresh_white;
                 kryptonButton6.Values.Image = Properties.Resources.commit_white;
@@ -2767,7 +2767,7 @@ namespace pie
 
         private void SynchronizeImagesWithTheme()
         {
-            if (Globals.theme == 1)
+            if (Globals.theme == "dark")
             {
                 kryptonPage1.ImageSmall = Properties.Resources.plus_white;
             }

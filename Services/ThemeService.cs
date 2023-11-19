@@ -63,7 +63,7 @@ namespace pie.Services
             lightColorDictionary["Folding"] = Color.FromArgb(235, 235, 235);
 
             darkColorDictionary["Primary"] = Color.FromArgb(40, 40, 40);
-            darkColorDictionary["Secondary"] = Color.FromArgb(50, 50, 50);
+            darkColorDictionary["Secondary"] = Color.FromArgb(50, 50, 50);            
             darkColorDictionary["Button"] = Color.FromArgb(70, 70, 70);
             darkColorDictionary["ButtonFrame"] = Color.FromArgb(100, 100, 100);
             darkColorDictionary["ButtonHover"] = Color.FromArgb(85, 85, 85);
@@ -78,7 +78,7 @@ namespace pie.Services
 
         public static Color GetColor(string color)
         {
-            if (Globals.theme == 1)
+            if (Globals.theme == "dark")
             {
                 return darkColorDictionary[color];
             }
@@ -88,7 +88,7 @@ namespace pie.Services
             }
         }
 
-        public static void SetPaletteToTheme(KryptonPalette kryptonPalette, int theme)
+        public static void SetPaletteToTheme(KryptonPalette kryptonPalette, string theme)
         {
             if (!dictionariesInitialized)
             {
@@ -98,7 +98,7 @@ namespace pie.Services
 
             Dictionary<string, Color> colorDictionary;
 
-            if (theme == 0)
+            if (theme == "light")
             {
                 colorDictionary = lightColorDictionary;
             }
@@ -248,11 +248,11 @@ namespace pie.Services
                         {
                             token = jsonTextReader.Value.ToString();
                         }
-                        else if (jsonTextReader.TokenType == JsonToken.Integer)
+                        else if (jsonTextReader.TokenType == JsonToken.String)
                         {
                             if (token == "theme")
                             {
-                                int.TryParse(jsonTextReader.Value.ToString(), out Globals.theme);
+                                Globals.theme = jsonTextReader.Value.ToString();
                             }
                         }
                     }
@@ -260,7 +260,7 @@ namespace pie.Services
             }
         }
 
-        internal static void WriteThemeToFile(string file, int theme)
+        internal static void WriteThemeToFile(string file, string theme)
         {
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
 
