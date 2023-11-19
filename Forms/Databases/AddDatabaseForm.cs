@@ -100,13 +100,13 @@ namespace pie.Forms.Databases
             kryptonCheckButton3.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton3.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
 
-            if (Globals.theme == "light")
+            if (Globals.theme == "light" || ThemeService.GetIconType(Globals.theme) == "dark")
             {
                 kryptonCheckButton1.Values.Image = Properties.Resources.mysql_black;
                 kryptonCheckButton2.Values.Image = Properties.Resources.microsoft_black;
                 kryptonCheckButton3.Values.Image = Properties.Resources.postgresql_black;
             }
-            else if (Globals.theme == "dark")
+            else if (Globals.theme == "dark" || ThemeService.GetIconType(Globals.theme) == "light")
             {
                 kryptonCheckButton1.Values.Image = Properties.Resources.mysql_white;
                 kryptonCheckButton2.Values.Image = Properties.Resources.microsoft_white;
