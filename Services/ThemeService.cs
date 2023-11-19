@@ -21,6 +21,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
+using pie.Classes;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -35,7 +36,6 @@ using ComponentFactory.Krypton.Toolkit;
  * Copyright (c) 2007 James Newton-King
  */
 using Newtonsoft.Json;
-using pie.Classes;
 
 namespace pie.Services
 {
@@ -77,7 +77,16 @@ namespace pie.Services
 
         public static Color GetColor(string color)
         {
-            return Globals.colorDictionary[color];
+            try
+            {
+                return Globals.colorDictionary[color];
+            }
+            catch(Exception ex)
+            {
+                NotificationExceptionHandlerService.handleException(ex);
+                Environment.Exit(0);
+                return Color.White;
+            }
         }
 
         public static string GetIconType(string theme)

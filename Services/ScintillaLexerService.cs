@@ -95,7 +95,7 @@ namespace pie.Services
                 parserColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
 
             }
-            else
+            else if (Globals.theme == "light")
             {
                 parserColorDictionary["Comment"] = Color.FromArgb(180, 180, 180);
                 parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
@@ -114,6 +114,26 @@ namespace pie.Services
                 parserColorDictionary["Entity"] = Color.FromArgb(128, 0, 128);
                 parserColorDictionary["User1"] = Color.FromArgb(128, 128, 128);
                 parserColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
+            }
+            else
+            {
+                parserColorDictionary["Comment"] = ThemeService.GetColor("Comment");
+                parserColorDictionary["CommentLine"] = ThemeService.GetColor("CommentLine");
+                parserColorDictionary["Number"] = ThemeService.GetColor("Number");
+                parserColorDictionary["Word"] = ThemeService.GetColor("Word");
+                parserColorDictionary["Word2"] = ThemeService.GetColor("Word2");
+                parserColorDictionary["Word3"] = ThemeService.GetColor("Word3");
+                parserColorDictionary["Word4"] = ThemeService.GetColor("Word4");
+                parserColorDictionary["String"] = ThemeService.GetColor("String");
+                parserColorDictionary["Operator"] = ThemeService.GetColor("Operator");
+                parserColorDictionary["Preprocessor"] = ThemeService.GetColor("Preprocessor");
+                parserColorDictionary["Triple"] = ThemeService.GetColor("Triple");
+                parserColorDictionary["CommentBlock"] = ThemeService.GetColor("CommentBlock");
+                parserColorDictionary["Decorator"] = ThemeService.GetColor("Decorator");
+                parserColorDictionary["Attribute"] = ThemeService.GetColor("Attribute");
+                parserColorDictionary["Entity"] = ThemeService.GetColor("Entity");
+                parserColorDictionary["User1"] = ThemeService.GetColor("User1");
+                parserColorDictionary["User2"] = ThemeService.GetColor("User2");
             }
         }
 
