@@ -23,10 +23,16 @@ namespace System.Windows.Forms
 {
     internal class CustomToolStripRenderer : ToolStripProfessionalRenderer
     {
+        public CustomToolStripRenderer(ProfessionalColorTable professionalColorTable) : base(professionalColorTable)
+        {
+        }
+
         protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
         {
+            var tsMenuItem = e.Item as ToolStripMenuItem;
+            if (tsMenuItem != null)
+                e.ArrowColor = ThemeService.GetColor("Fore");
             base.OnRenderArrow(e);
-            e.ArrowColor = ThemeService.GetColor("Fore");
         }
     }
 }

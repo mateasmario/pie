@@ -1243,6 +1243,7 @@ namespace pie
 
             try
             {
+                ProcessCustomThemes();
                 ThemeService.GetTheme("config/theme.json");
             }
             catch (FileNotFoundException ex)
@@ -1250,6 +1251,8 @@ namespace pie
                 Globals.theme = "light";
                 ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
             }
+
+            Globals.colorDictionary = ThemeService.SetColorDictionary(Globals.theme);
         }
 
         private void SetDynamicDesign()
@@ -1258,7 +1261,7 @@ namespace pie
 
             this.MinimumSize = new System.Drawing.Size(1036, 634);
 
-            mainMenuStrip.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
+            mainMenuStrip.Renderer = new CustomToolStripRenderer(new CustomColorTable());
 
             ResetFindPanelLocation();
             ResetDirectoryPanelLocation();
@@ -1268,12 +1271,6 @@ namespace pie
             gitStagingAreaListView.ShowGroups = false;
 
             gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
-
-            if (Globals.theme == "dark")
-            {
-                themeSettingsToolStripMenuItem.Image = Properties.Resources.sun;
-                themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
-            }
 
             ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
             SynchronizeMainFormComponentsWithTheme();
@@ -2006,68 +2003,6 @@ namespace pie
             CloseTab();
         }
 
-        private void themeSettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ControlHelper.SuspendDrawing(this);
-
-            if (Globals.theme == "light")
-            {
-                Globals.theme = "dark";
-                ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
-                themeSettingsToolStripMenuItem.Image = Properties.Resources.sun;
-                themeSettingsToolStripMenuItem.Text = "Toggle Light Mode";
-            }
-            else
-            {
-                Globals.theme = "light";
-                ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
-                themeSettingsToolStripMenuItem.Image = Properties.Resources.crescent_moon;
-                themeSettingsToolStripMenuItem.Text = "Toggle Dark Mode";
-            }
-
-            for (int i = 0; i<tabControl.Pages.Count-1; i++)
-            {
-                if (Globals.tabInfos[i].getTabType() == TabType.CODE)
-                {
-                    KryptonPage kryptonPage = tabControl.Pages[i];
-                    Scintilla scintilla = (Scintilla)kryptonPage.Controls[0];
-
-                    ScintillaLexerService.InitializeParserDictionary();
-
-                    if (Globals.tabInfos[i].getOpenedFilePath() != null)
-                    {
-                        string extension = ParsingService.GetFileExtension(Globals.tabInfos[i].getOpenedFilePath());
-                        ColorizeTextArea(scintilla);
-                        ColorizeAutocompleteMenu(Globals.tabInfos[i].getAutocompleteMenu());
-                        ScintillaLexerService.SetLexer(extension, scintilla, tabControl, i);
-                        UpdateNumberMarginWidth(scintilla, true);
-                    }
-                    else
-                    {
-                        ColorizeTextArea(scintilla);
-                    }
-                }
-            }
-
-            ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
-            SynchronizeMainFormComponentsWithTheme();
-            SynchronizeImagesWithTheme();
-
-            if (directoryNavigationTextBox.Text != "")
-            {
-                NavigateToPath(directoryNavigationTextBox.Text);
-            }
-
-            Globals.doNotShowBranchChangeNotification = true;
-            Globals.doNotTriggerBranchChangeEvent = true;
-            UpdateGitRepositoryInfo();
-            Globals.doNotShowBranchChangeNotification = false;
-            Globals.doNotTriggerBranchChangeEvent = false;
-
-            ControlHelper.ResumeDrawing(this);
-            this.RedrawNonClient();
-        }
-
         private void showGitTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NewTab(TabType.GIT, null);
@@ -2747,7 +2682,7 @@ namespace pie
             gitBranchesComboBox.StateTracking.Item.Back.Color2 = ThemeService.GetColor("Secondary");
 
             // Git Buttons
-            if (Globals.theme == "light")
+            if (Globals.theme == "light" || (Globals.theme != "dark" && ThemeService.GetIconType(Globals.theme) == "dark"))
             {
                 kryptonButton8.Values.Image = Properties.Resources.refresh_black;
                 kryptonButton6.Values.Image = Properties.Resources.commit_black;
@@ -2755,7 +2690,7 @@ namespace pie
                 kryptonButton7.Values.Image = Properties.Resources.push_black;
                 kryptonButton11.Values.Image = Properties.Resources.log_black;
             }
-            else if (Globals.theme == "dark")
+            else if (Globals.theme == "dark" || (Globals.theme != "light" && ThemeService.GetIconType(Globals.theme) == "light"))
             {
                 kryptonButton8.Values.Image = Properties.Resources.refresh_white;
                 kryptonButton6.Values.Image = Properties.Resources.commit_white;
@@ -2767,13 +2702,13 @@ namespace pie
 
         private void SynchronizeImagesWithTheme()
         {
-            if (Globals.theme == "dark")
-            {
-                kryptonPage1.ImageSmall = Properties.Resources.plus_white;
-            }
-            else
+            if (Globals.theme == "light" || (Globals.theme != "dark" && ThemeService.GetIconType(Globals.theme) == "dark"))
             {
                 kryptonPage1.ImageSmall = Properties.Resources.plus_blue;
+            }
+            else if (Globals.theme == "dark" || (Globals.theme != "light" && ThemeService.GetIconType(Globals.theme) == "light"))
+            {
+                kryptonPage1.ImageSmall = Properties.Resources.plus_white;
             }
         }
 
@@ -2944,6 +2879,100 @@ namespace pie
             {
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/databases.json", "[]");
             }
+        }
+
+        private void lightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTheme("light");
+        }
+
+        public void ChangeTheme(string theme)
+        {
+            ControlHelper.SuspendDrawing(this);
+
+            Globals.theme = theme;
+            Globals.colorDictionary = ThemeService.SetColorDictionary(theme);
+
+            ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
+
+            for (int i = 0; i < tabControl.Pages.Count - 1; i++)
+            {
+                if (Globals.tabInfos[i].getTabType() == TabType.CODE)
+                {
+                    KryptonPage kryptonPage = tabControl.Pages[i];
+                    Scintilla scintilla = (Scintilla)kryptonPage.Controls[0];
+
+                    ScintillaLexerService.InitializeParserDictionary();
+
+                    if (Globals.tabInfos[i].getOpenedFilePath() != null)
+                    {
+                        string extension = ParsingService.GetFileExtension(Globals.tabInfos[i].getOpenedFilePath());
+                        ColorizeTextArea(scintilla);
+                        ColorizeAutocompleteMenu(Globals.tabInfos[i].getAutocompleteMenu());
+                        ScintillaLexerService.SetLexer(extension, scintilla, tabControl, i);
+                        UpdateNumberMarginWidth(scintilla, true);
+                    }
+                    else
+                    {
+                        ColorizeTextArea(scintilla);
+                    }
+                }
+            }
+
+            ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
+            SynchronizeMainFormComponentsWithTheme();
+            SynchronizeImagesWithTheme();
+
+            if (directoryNavigationTextBox.Text != "")
+            {
+                NavigateToPath(directoryNavigationTextBox.Text);
+            }
+
+            Globals.doNotShowBranchChangeNotification = true;
+            Globals.doNotTriggerBranchChangeEvent = true;
+            UpdateGitRepositoryInfo();
+            Globals.doNotShowBranchChangeNotification = false;
+            Globals.doNotTriggerBranchChangeEvent = false;
+
+            ControlHelper.ResumeDrawing(this);
+            this.RedrawNonClient();
+        }
+
+        private void darkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTheme("dark");
+        }
+
+        private void ProcessCustomThemes()
+        {
+            if (themeSettingsToolStripMenuItem.DropDownItems.Count > 2)
+            {
+                int removeCount = themeSettingsToolStripMenuItem.DropDownItems.Count - 2;
+
+                while (removeCount > 0)
+                {
+                    themeSettingsToolStripMenuItem.DropDownItems.RemoveAt(2);
+                    removeCount--;
+                }
+            }
+
+
+            Globals.themeInfos = ThemeService.LoadThemesFromFolder("config/themes");
+
+            foreach (ThemeInfo themeInfo in Globals.themeInfos)
+            {
+                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
+                toolStripMenuItem.Text = themeInfo.Name;
+
+                toolStripMenuItem.Click += ToolStripMenuItem_Click1;
+
+                themeSettingsToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
+            }
+        }
+
+        private void ToolStripMenuItem_Click1(object sender, EventArgs e)
+        {
+            ChangeTheme(((ToolStripMenuItem)sender).Text);
         }
     }
 }

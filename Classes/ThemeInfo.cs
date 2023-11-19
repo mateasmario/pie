@@ -17,11 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
+using System.Collections.Generic;
+using System.Drawing;
+
 namespace pie.Classes
 {
-    internal class NavigatorFile
+    public class ThemeInfo
     {
-        public string Path { get; set; }
-        public string Type { get; set; }
+        public string Name { get; set; }
+        public Dictionary<string, Color> ColorDictionary { get; set; }
+        public string IconType { get; set; }
     }
 }
