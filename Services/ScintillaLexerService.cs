@@ -74,7 +74,7 @@ namespace pie.Services
             parserColorDictionary["CaretLine"] = ThemeService.GetColor("CaretLineBack");
             parserColorDictionary["Selection"] = ThemeService.GetColor("Selection");
 
-            if (Globals.theme == 1)
+            if (Globals.theme == "dark")
             {
                 parserColorDictionary["Comment"] = Color.FromArgb(192, 192, 192);
                 parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
@@ -295,7 +295,7 @@ namespace pie.Services
 
                 scintilla.ViewWhitespace = WhitespaceMode.VisibleAlways;
 
-                string keywordSet1 = "and as assert break class continue def del elif else except exec finally for from global if import in is lambda not or pass print raise return try while with yield";
+                string keywordSet1 = "and as assert break class continue def del elif else except exec finally for from global if import in is lambda nonlocal not or pass print raise return try while with yield";
                 string keywordSet2 = "False None True";
                 string keywordSet3 = "cdef cimport cpdef";
 

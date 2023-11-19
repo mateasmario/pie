@@ -51,7 +51,7 @@ namespace pie
         public static bool firstBrowserTab;
 
         // Theme
-        public static int theme;
+        public static string theme;
         public static KryptonPalette kryptonPalette;
 
         // Build Commands
