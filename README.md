@@ -23,10 +23,12 @@ The autocomplete feature is also provided through an implementation of Autocompl
 
 ![image](https://i.imgur.com/PrC4Gz1.png)
 
-### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Switch between night and day
-pie allows you to switch between two beautiful and simple themes. The default color of pie is white, but if you feel your eyes hurt, you can easily press the button and do the change :)
+### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Switch between themes
+pie allows you to change all of its colors. From syntax highlighting to buttons. It provides you several pre-installed themes, but if you feel creative, you can easily add new themes (or modify the existing ones).
 
-![image](https://i.imgur.com/c33U9F6.png)
+![image](https://i.imgur.com/7gE6UzG.png)
+
+Each `.json` file added to the `config/themes` directory will be made available in the list of pie themes. `Name.json` will be automatically converted to a new theme called `Name`.
 
 ### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Terminal
 A Terminal object is actually an instance of **ConEmu Inside** (GitHub Page: https://github.com/Maximus5/conemu-inside), available at: https://www.nuget.org/packages/ConEmu.Control.WinForms.
