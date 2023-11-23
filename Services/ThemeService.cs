@@ -272,7 +272,7 @@ namespace pie.Services
 
         public static void GetTheme(string file)
         {
-            using (var textReader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + file))
+            using (var textReader = File.OpenText(file))
             {
                 JsonTextReader jsonTextReader = new JsonTextReader(textReader);
 
@@ -337,7 +337,7 @@ namespace pie.Services
                         themeInfo.Name = ParsingService.RemoveFileExtension(ParsingService.GetFileName(file));
                         themeInfo.ColorDictionary = new Dictionary<string, Color>();
 
-                        using (var textReader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + file))
+                        using (var textReader = File.OpenText(file))
                         {
                             JsonTextReader jsonTextReader = new JsonTextReader(textReader);
 

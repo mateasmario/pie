@@ -1244,7 +1244,7 @@ namespace pie
             try
             {
                 ProcessCustomThemes();
-                ThemeService.GetTheme("config/theme.json");
+                ThemeService.GetTheme(AppDomain.CurrentDomain.BaseDirectory + "config/theme.json");
             }
             catch (FileNotFoundException ex)
             {
@@ -2957,7 +2957,7 @@ namespace pie
             }
 
 
-            Globals.themeInfos = ThemeService.LoadThemesFromFolder("config/themes");
+            Globals.themeInfos = ThemeService.LoadThemesFromFolder(AppDomain.CurrentDomain.BaseDirectory + "config/themes");
 
             foreach (ThemeInfo themeInfo in Globals.themeInfos)
             {
