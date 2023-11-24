@@ -1,4 +1,4 @@
-# ![pie (2)](https://user-images.githubusercontent.com/39602100/226106760-a2dca0ad-8435-452b-9bb8-0b29a985d9a4.png) pie
+# ![pie (2)](https://i.imgur.com/0mdJAyL.png) pie
 Lightweight text editor with some third-party features, capable of replacing Notepad.
 
 ![image](https://i.imgur.com/B533oZ0.png)
