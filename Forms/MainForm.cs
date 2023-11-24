@@ -91,6 +91,7 @@ using BrightIdeasSoftware;
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
+using System.Text.RegularExpressions;
 
 namespace pie
 {
@@ -153,19 +154,46 @@ namespace pie
             TextArea.MouseDown += TextArea_MouseDown;
             TextArea.TextChanged += TextArea_TextChanged;
             TextArea.UpdateUI += TextArea_UpdateUI;
-            TextArea.WrapMode = WrapMode.None;
             TextArea.IndentationGuides = IndentView.LookBoth;
             TextArea.ZoomChanged += TextArea_ZoomChanged;
+
+            if (Globals.wordWrap)
+            {
+                TextArea.WrapMode = WrapMode.Word;
+            }
+            else
+            {
+                TextArea.WrapMode = WrapMode.None;
+            }
 
             TextArea.UsePopup(false);
 
             ColorizeTextArea(TextArea);
 
             TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
+            TextArea.InsertCheck += TextArea_InsertCheck;
 
             TextArea.Dock = DockStyle.Fill;
 
             return TextArea;
+        }
+
+
+        private void TextArea_InsertCheck(object sender, InsertCheckEventArgs e)
+        {
+            Scintilla TextArea = (Scintilla)sender;
+
+            Regex indentLevel = new Regex("^[\\s]*");
+
+            if (e.Text.EndsWith("\r") || e.Text.EndsWith("\n"))
+            {
+                int startPos = TextArea.Lines[TextArea.LineFromPosition(TextArea.CurrentPosition)].Position;
+                int endPos = e.Position;
+                string curLineText = TextArea.GetTextRange(startPos, endPos - startPos);
+                // Text until the caret.
+                Match indent = indentLevel.Match(curLineText);
+                e.Text = e.Text + indent.Value;
+            }
         }
 
         private void TextArea_ZoomChanged(object sender, EventArgs e)
@@ -2973,6 +3001,35 @@ namespace pie
         private void ToolStripMenuItem_Click1(object sender, EventArgs e)
         {
             ChangeTheme(((ToolStripMenuItem)sender).Text);
+        }
+
+        private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Globals.wordWrap = !Globals.wordWrap;
+            ToggleWordWrap(Globals.wordWrap);
+        }
+
+        private void ToggleWordWrap(bool status)
+        {
+            for (int i = 0; i < tabControl.Pages.Count - 1; i++)
+            {
+                if (Globals.tabInfos[i].getTabType() == TabType.CODE)
+                {
+                    KryptonPage kryptonPage = tabControl.Pages[i];
+                    Scintilla scintilla = (Scintilla)kryptonPage.Controls[0];
+
+                    if (status)
+                    {
+                        scintilla.WrapMode = WrapMode.Word;
+                        wordWrapToolStripMenuItem.Text = "Disable Word Wrap";
+                    }
+                    else
+                    {
+                        scintilla.WrapMode = WrapMode.None;
+                        wordWrapToolStripMenuItem.Text = "Enable Word Wrap";
+                    }
+                }
+            }
         }
     }
 }

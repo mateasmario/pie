@@ -101,5 +101,8 @@ namespace pie
         public static string databaseToEditUsername;
         public static string databaseToEditPassword;
         public static DatabaseType databaseToEditType;
+
+        // Scintilla preferences
+        public static bool wordWrap;
     }
 }

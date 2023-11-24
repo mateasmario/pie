@@ -558,6 +558,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pie.ico" />
+    <None Include="Resources\paragraph.png" />
     <None Include="Resources\push_white.png" />
     <None Include="Resources\pull_black.png" />
     <None Include="Resources\log_white.png" />
