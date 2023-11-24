@@ -58,7 +58,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>pie.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <Win32Resource>
@@ -557,7 +557,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon.ico" />
     <Content Include="pie.ico" />
+    <None Include="Resources\logo_small.png" />
+    <None Include="Resources\logo1.png" />
+    <None Include="Resources\logo.png" />
     <None Include="Resources\paragraph.png" />
     <None Include="Resources\push_white.png" />
     <None Include="Resources\pull_black.png" />
