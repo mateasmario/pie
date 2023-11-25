@@ -91,17 +91,27 @@ namespace pie.Services
 
         public static string GetIconType(string theme)
         {
-            foreach (ThemeInfo themeInfo in Globals.themeInfos)
+            if (theme == "light")
             {
-                if (themeInfo.Name == theme)
+                return "dark";
+            }
+            else if (theme == "dark")
+            {
+                return "light";
+            }
+            else {
+                foreach (ThemeInfo themeInfo in Globals.themeInfos)
                 {
-                    if (themeInfo.IconType != null)
+                    if (themeInfo.Name == theme)
                     {
-                        return themeInfo.IconType;
-                    }
-                    else
-                    {
-                        return "dark";
+                        if (themeInfo.IconType != null)
+                        {
+                            return themeInfo.IconType;
+                        }
+                        else
+                        {
+                            return "dark";
+                        }
                     }
                 }
             }
