@@ -485,6 +485,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BuildCommandService.cs" />
+    <Compile Include="Services\EditorPropertiesService.cs" />
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\GitService.cs" />
     <Compile Include="Services\NotificationExceptionHandlerService.cs" />
@@ -559,6 +560,7 @@
   <ItemGroup>
     <Content Include="icon.ico" />
     <Content Include="pie.ico" />
+    <None Include="Resources\diskette %281%29.png" />
     <None Include="Resources\logo_small.png" />
     <None Include="Resources\logo1.png" />
     <None Include="Resources\logo.png" />
