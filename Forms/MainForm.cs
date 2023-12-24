@@ -157,7 +157,7 @@ namespace pie
             TextArea.IndentationGuides = IndentView.LookBoth;
             TextArea.ZoomChanged += TextArea_ZoomChanged;
 
-            if (Globals.wordWrap)
+            if (Globals.wordwrap)
             {
                 TextArea.WrapMode = WrapMode.Word;
             }
@@ -451,6 +451,14 @@ namespace pie
             UpdateNumberMarginWidth(scintilla, false);
 
             Globals.tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
+
+            if (Globals.autosave)
+            {
+                if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
+                {
+                    Save(tabControl.SelectedIndex);
+                }
+            }
         }
 
         public void UpdateNumberMarginWidth(Scintilla scintilla, bool updateTheme)
@@ -692,7 +700,7 @@ namespace pie
                 ShowYesNoCancelNotification("Save file before closing it?");
                 if (Globals.notificationButtonPressed == NotificationButton.YES)
                 {
-                    Save();
+                    Save(tabControl.SelectedIndex);
                     CloseTabAfterWarning();
                 }
                 else if (Globals.notificationButtonPressed == NotificationButton.NO)
@@ -791,26 +799,25 @@ namespace pie
 
         // [Method] Saves text stored in selected tab
         // Additional: If no file is open, lets the user decide the output path and replaces the position marked at selected tab index in the openFilePaths list (SaveAs)
-        public void Save()
+        public void Save(int openedTabIndex)
         {
-            int openedTabIndex = tabControl.SelectedIndex;
             if (Globals.tabInfos[openedTabIndex].getOpenedFilePath() == null)
             {
-                SaveAs();
+                SaveAs(openedTabIndex);
             }
             else
             {
-                string chosenPath = Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
+                string chosenPath = Globals.tabInfos[openedTabIndex].getOpenedFilePath();
 
                 TextWriter txt = new StreamWriter(chosenPath);
-                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+                Scintilla TextArea = (Scintilla)tabControl.Pages[openedTabIndex].Controls[0];
                 txt.Write(TextArea.Text);
                 txt.Close();
 
-                tabControl.SelectedPage.Text = ParsingService.GetFileName(chosenPath);
+                tabControl.Pages[openedTabIndex].Text = ParsingService.GetFileName(chosenPath);
 
-                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
-                ScintillaLexerService.SetLexer(extension, TextArea, tabControl, tabControl.SelectedIndex);
+                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[openedTabIndex].getOpenedFilePath()));
+                ScintillaLexerService.SetLexer(extension, TextArea, tabControl, openedTabIndex);
                 UpdateFormTitle();
             }
 
@@ -824,7 +831,7 @@ namespace pie
 
         // [Method] Saves text stored in selected tab at a user-specified location
         // Additional: If no tab is selected, outputs a MessageBox
-        public void SaveAs()
+        public void SaveAs(int selectedIndex)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
@@ -837,16 +844,16 @@ namespace pie
                 String chosenPath = saveFileDialog.FileName;
 
                 TextWriter txt = new StreamWriter(chosenPath);
-                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+                Scintilla TextArea = (Scintilla)tabControl.Pages[selectedIndex].Controls[0];
                 txt.Write(TextArea.Text);
                 txt.Close();
 
-                Globals.tabInfos[tabControl.SelectedIndex].setOpenedFilePath(chosenPath);
-                tabControl.SelectedPage.Text = ParsingService.GetFileName(chosenPath);
-                tabControl.SelectedPage.ToolTipTitle = chosenPath;
+                Globals.tabInfos[selectedIndex].setOpenedFilePath(chosenPath);
+                tabControl.Pages[selectedIndex].Text = ParsingService.GetFileName(chosenPath);
+                tabControl.Pages[selectedIndex].ToolTipTitle = chosenPath;
 
-                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
-                ScintillaLexerService.SetLexer(extension, TextArea, tabControl, tabControl.SelectedIndex);
+                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[selectedIndex].getOpenedFilePath()));
+                ScintillaLexerService.SetLexer(extension, TextArea, tabControl, selectedIndex);
                 UpdateFormTitle();
             }
         }
@@ -1281,6 +1288,25 @@ namespace pie
             }
 
             Globals.colorDictionary = ThemeService.SetColorDictionary(Globals.theme);
+
+            try
+            {
+                EditorPropertiesService.GetEditorPropertiesFromFile("config/scintilla.json");
+
+                if (Globals.wordwrap)
+                {
+                    wordWrapToolStripMenuItem.Text = "Disable Word Wrap";
+                }
+
+                if (Globals.autosave)
+                {
+                    enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
+                }
+
+            } catch (FileNotFoundException ex)
+            {
+                EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", false, false);
+            }
         }
 
         private void SetDynamicDesign()
@@ -1459,13 +1485,13 @@ namespace pie
         // [Event] "Save" button pressed in upper menu
         private void saveFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Save();
+            Save(tabControl.SelectedIndex);
         }
 
         // [Event] "Save As" button pressed in upper menu
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveAs();
+            SaveAs(tabControl.SelectedIndex);
         }
 
         // [Event] "Open" button pressed in upper menu
@@ -1562,7 +1588,7 @@ namespace pie
                 else if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE) {
                     if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
                     {
-                        Save();
+                        Save(tabControl.SelectedIndex);
                     }
                     else if (e.KeyCode == Keys.B && e.Modifiers == Keys.Control)
                     {
@@ -3005,8 +3031,9 @@ namespace pie
 
         private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Globals.wordWrap = !Globals.wordWrap;
-            ToggleWordWrap(Globals.wordWrap);
+            Globals.wordwrap = !Globals.wordwrap;
+            ToggleWordWrap(Globals.wordwrap);
+            EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave);
         }
 
         private void ToggleWordWrap(bool status)
@@ -3027,6 +3054,37 @@ namespace pie
                     {
                         scintilla.WrapMode = WrapMode.None;
                         wordWrapToolStripMenuItem.Text = "Enable Word Wrap";
+                    }
+                }
+            }
+        }
+
+        private void enableAutosaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Globals.autosave = !Globals.autosave;
+
+            if (Globals.autosave)
+            {
+                enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
+                PerformFirstSaveWhenAutosaveTriggered();
+            }
+            else
+            {
+                enableAutosaveToolStripMenuItem.Text = "Enable Autosave";
+            }
+
+            EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave);
+        }
+
+        private void PerformFirstSaveWhenAutosaveTriggered()
+        {
+            for (int i = 0; i<tabControl.Pages.Count-1; i++)
+            {
+                if (Globals.tabInfos[i].getTabType() == TabType.CODE)
+                {
+                    if (Globals.tabInfos[i].getOpenedFilePath() != null)
+                    {
+                        Save(i);
                     }
                 }
             }

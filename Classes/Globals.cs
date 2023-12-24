@@ -103,6 +103,7 @@ namespace pie
         public static DatabaseType databaseToEditType;
 
         // Scintilla preferences
-        public static bool wordWrap;
+        public static bool wordwrap;
+        public static bool autosave;
     }
 }
