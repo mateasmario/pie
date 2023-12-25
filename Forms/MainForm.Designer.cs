@@ -105,6 +105,21 @@
             this.wordWrapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableAutosaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smartFormatterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.linesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateEveryLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addEmptyRowBetweenEachLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.emptyLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeWhitespaceLinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consecutiveDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trimLineswhitespacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allWhitespaceCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trimWhitespaceCharactersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortAscendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortDescendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.revertLineOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.findReplaceHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.matchWholeWordCheckBox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -144,21 +159,19 @@
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.directoryNavigationHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.directoryNavigationTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.linesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeWhitespaceLinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consecutiveDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.emptyLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortAscendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortDescendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.revertLineOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.allWhitespaceCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trimWhitespaceCharactersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.trimLineswhitespacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.duplicateEveryLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addEmptyRowBetweenEachLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hashingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mD5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHA1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHA256ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHA384ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHA512ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formatXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.capitalizeEntireTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lowercaseEntireContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.capitalizeEveryWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.capitalizeFirstLineCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
@@ -730,10 +743,122 @@
             this.smartFormatterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.linesToolStripMenuItem,
             this.charactersToolStripMenuItem,
-            this.sortToolStripMenuItem});
+            this.sortToolStripMenuItem,
+            this.hashingToolStripMenuItem,
+            this.formatXMLToolStripMenuItem});
             this.smartFormatterToolStripMenuItem.Name = "smartFormatterToolStripMenuItem";
             this.smartFormatterToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.smartFormatterToolStripMenuItem.Text = "Format";
+            // 
+            // linesToolStripMenuItem
+            // 
+            this.linesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.duplicateEveryLineToolStripMenuItem,
+            this.addEmptyRowBetweenEachLineToolStripMenuItem,
+            this.capitalizeFirstLineCharactersToolStripMenuItem,
+            this.emptyLinesToolStripMenuItem,
+            this.removeWhitespaceLinesToolStripMenuItem1,
+            this.removeDuplicateLinesToolStripMenuItem,
+            this.consecutiveDuplicateLinesToolStripMenuItem,
+            this.trimLineswhitespacesToolStripMenuItem});
+            this.linesToolStripMenuItem.Name = "linesToolStripMenuItem";
+            this.linesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.linesToolStripMenuItem.Text = "Lines";
+            // 
+            // duplicateEveryLineToolStripMenuItem
+            // 
+            this.duplicateEveryLineToolStripMenuItem.Name = "duplicateEveryLineToolStripMenuItem";
+            this.duplicateEveryLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.duplicateEveryLineToolStripMenuItem.Text = "Duplicate every line";
+            // 
+            // addEmptyRowBetweenEachLineToolStripMenuItem
+            // 
+            this.addEmptyRowBetweenEachLineToolStripMenuItem.Name = "addEmptyRowBetweenEachLineToolStripMenuItem";
+            this.addEmptyRowBetweenEachLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.addEmptyRowBetweenEachLineToolStripMenuItem.Text = "Add empty row between each line";
+            // 
+            // emptyLinesToolStripMenuItem
+            // 
+            this.emptyLinesToolStripMenuItem.Name = "emptyLinesToolStripMenuItem";
+            this.emptyLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.emptyLinesToolStripMenuItem.Text = "Remove empty lines";
+            // 
+            // removeWhitespaceLinesToolStripMenuItem1
+            // 
+            this.removeWhitespaceLinesToolStripMenuItem1.Name = "removeWhitespaceLinesToolStripMenuItem1";
+            this.removeWhitespaceLinesToolStripMenuItem1.Size = new System.Drawing.Size(348, 22);
+            this.removeWhitespaceLinesToolStripMenuItem1.Text = "Remove whitespace lines";
+            // 
+            // removeDuplicateLinesToolStripMenuItem
+            // 
+            this.removeDuplicateLinesToolStripMenuItem.Name = "removeDuplicateLinesToolStripMenuItem";
+            this.removeDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.removeDuplicateLinesToolStripMenuItem.Text = "Remove duplicate lines";
+            // 
+            // consecutiveDuplicateLinesToolStripMenuItem
+            // 
+            this.consecutiveDuplicateLinesToolStripMenuItem.Name = "consecutiveDuplicateLinesToolStripMenuItem";
+            this.consecutiveDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.consecutiveDuplicateLinesToolStripMenuItem.Text = "Remove consecutive duplicate lines";
+            // 
+            // trimLineswhitespacesToolStripMenuItem
+            // 
+            this.trimLineswhitespacesToolStripMenuItem.Name = "trimLineswhitespacesToolStripMenuItem";
+            this.trimLineswhitespacesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.trimLineswhitespacesToolStripMenuItem.Text = "Trim lines (remove trailing and leading whitespaces)";
+            // 
+            // charactersToolStripMenuItem
+            // 
+            this.charactersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.capitalizeEveryWordToolStripMenuItem,
+            this.capitalizeEntireTextToolStripMenuItem,
+            this.lowercaseEntireContentToolStripMenuItem,
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem,
+            this.allWhitespaceCharactersToolStripMenuItem,
+            this.trimWhitespaceCharactersToolStripMenuItem1});
+            this.charactersToolStripMenuItem.Name = "charactersToolStripMenuItem";
+            this.charactersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.charactersToolStripMenuItem.Text = "Characters";
+            // 
+            // allWhitespaceCharactersToolStripMenuItem
+            // 
+            this.allWhitespaceCharactersToolStripMenuItem.Name = "allWhitespaceCharactersToolStripMenuItem";
+            this.allWhitespaceCharactersToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.allWhitespaceCharactersToolStripMenuItem.Text = "Remove all whitespaces";
+            // 
+            // trimWhitespaceCharactersToolStripMenuItem1
+            // 
+            this.trimWhitespaceCharactersToolStripMenuItem1.Name = "trimWhitespaceCharactersToolStripMenuItem1";
+            this.trimWhitespaceCharactersToolStripMenuItem1.Size = new System.Drawing.Size(250, 22);
+            this.trimWhitespaceCharactersToolStripMenuItem1.Text = "Remove consecutive whitespaces";
+            // 
+            // sortToolStripMenuItem
+            // 
+            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sortAscendingToolStripMenuItem,
+            this.sortDescendingToolStripMenuItem,
+            this.revertLineOrderToolStripMenuItem1});
+            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sortToolStripMenuItem.Text = "Sorting";
+            // 
+            // sortAscendingToolStripMenuItem
+            // 
+            this.sortAscendingToolStripMenuItem.Name = "sortAscendingToolStripMenuItem";
+            this.sortAscendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.sortAscendingToolStripMenuItem.Text = "Sort lines ascending";
+            // 
+            // sortDescendingToolStripMenuItem
+            // 
+            this.sortDescendingToolStripMenuItem.Name = "sortDescendingToolStripMenuItem";
+            this.sortDescendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.sortDescendingToolStripMenuItem.Text = "Sort lines descending";
+            // 
+            // revertLineOrderToolStripMenuItem1
+            // 
+            this.revertLineOrderToolStripMenuItem1.Name = "revertLineOrderToolStripMenuItem1";
+            this.revertLineOrderToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
+            this.revertLineOrderToolStripMenuItem1.Text = "Revert line order";
             // 
             // kryptonRibbon1
             // 
@@ -744,7 +869,6 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -1193,110 +1317,91 @@
             this.directoryNavigationTextBox.TabIndex = 0;
             this.directoryNavigationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
-            // linesToolStripMenuItem
+            // hashingToolStripMenuItem
             // 
-            this.linesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.duplicateEveryLineToolStripMenuItem,
-            this.addEmptyRowBetweenEachLineToolStripMenuItem,
-            this.emptyLinesToolStripMenuItem,
-            this.removeWhitespaceLinesToolStripMenuItem1,
-            this.removeDuplicateLinesToolStripMenuItem,
-            this.consecutiveDuplicateLinesToolStripMenuItem,
-            this.trimLineswhitespacesToolStripMenuItem});
-            this.linesToolStripMenuItem.Name = "linesToolStripMenuItem";
-            this.linesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.linesToolStripMenuItem.Text = "Lines";
+            this.hashingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mD5ToolStripMenuItem,
+            this.sHA1ToolStripMenuItem,
+            this.sHAToolStripMenuItem,
+            this.sHA256ToolStripMenuItem,
+            this.sHA384ToolStripMenuItem,
+            this.sHA512ToolStripMenuItem});
+            this.hashingToolStripMenuItem.Name = "hashingToolStripMenuItem";
+            this.hashingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hashingToolStripMenuItem.Text = "Hash selected text";
             // 
-            // charactersToolStripMenuItem
+            // mD5ToolStripMenuItem
             // 
-            this.charactersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allWhitespaceCharactersToolStripMenuItem,
-            this.trimWhitespaceCharactersToolStripMenuItem1});
-            this.charactersToolStripMenuItem.Name = "charactersToolStripMenuItem";
-            this.charactersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.charactersToolStripMenuItem.Text = "Characters";
+            this.mD5ToolStripMenuItem.Name = "mD5ToolStripMenuItem";
+            this.mD5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mD5ToolStripMenuItem.Text = "MD5";
             // 
-            // sortToolStripMenuItem
+            // sHA1ToolStripMenuItem
             // 
-            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sortAscendingToolStripMenuItem,
-            this.sortDescendingToolStripMenuItem,
-            this.revertLineOrderToolStripMenuItem1});
-            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sortToolStripMenuItem.Text = "Sorting";
+            this.sHA1ToolStripMenuItem.Name = "sHA1ToolStripMenuItem";
+            this.sHA1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sHA1ToolStripMenuItem.Text = "SHA-1";
             // 
-            // removeWhitespaceLinesToolStripMenuItem1
+            // sHAToolStripMenuItem
             // 
-            this.removeWhitespaceLinesToolStripMenuItem1.Name = "removeWhitespaceLinesToolStripMenuItem1";
-            this.removeWhitespaceLinesToolStripMenuItem1.Size = new System.Drawing.Size(348, 22);
-            this.removeWhitespaceLinesToolStripMenuItem1.Text = "Remove whitespace lines";
+            this.sHAToolStripMenuItem.Name = "sHAToolStripMenuItem";
+            this.sHAToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sHAToolStripMenuItem.Text = "SHA-224";
             // 
-            // removeDuplicateLinesToolStripMenuItem
+            // sHA256ToolStripMenuItem
             // 
-            this.removeDuplicateLinesToolStripMenuItem.Name = "removeDuplicateLinesToolStripMenuItem";
-            this.removeDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.removeDuplicateLinesToolStripMenuItem.Text = "Remove duplicate lines";
+            this.sHA256ToolStripMenuItem.Name = "sHA256ToolStripMenuItem";
+            this.sHA256ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sHA256ToolStripMenuItem.Text = "SHA-256";
             // 
-            // consecutiveDuplicateLinesToolStripMenuItem
+            // sHA384ToolStripMenuItem
             // 
-            this.consecutiveDuplicateLinesToolStripMenuItem.Name = "consecutiveDuplicateLinesToolStripMenuItem";
-            this.consecutiveDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.consecutiveDuplicateLinesToolStripMenuItem.Text = "Remove consecutive duplicate lines";
+            this.sHA384ToolStripMenuItem.Name = "sHA384ToolStripMenuItem";
+            this.sHA384ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sHA384ToolStripMenuItem.Text = "SHA-384";
             // 
-            // emptyLinesToolStripMenuItem
+            // sHA512ToolStripMenuItem
             // 
-            this.emptyLinesToolStripMenuItem.Name = "emptyLinesToolStripMenuItem";
-            this.emptyLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.emptyLinesToolStripMenuItem.Text = "Remove empty lines";
+            this.sHA512ToolStripMenuItem.Name = "sHA512ToolStripMenuItem";
+            this.sHA512ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sHA512ToolStripMenuItem.Text = "SHA-512";
             // 
-            // sortAscendingToolStripMenuItem
+            // formatXMLToolStripMenuItem
             // 
-            this.sortAscendingToolStripMenuItem.Name = "sortAscendingToolStripMenuItem";
-            this.sortAscendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.sortAscendingToolStripMenuItem.Text = "Sort lines ascending";
+            this.formatXMLToolStripMenuItem.Enabled = false;
+            this.formatXMLToolStripMenuItem.Name = "formatXMLToolStripMenuItem";
+            this.formatXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.formatXMLToolStripMenuItem.Text = "Format XML";
             // 
-            // sortDescendingToolStripMenuItem
+            // capitalizeEntireTextToolStripMenuItem
             // 
-            this.sortDescendingToolStripMenuItem.Name = "sortDescendingToolStripMenuItem";
-            this.sortDescendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.sortDescendingToolStripMenuItem.Text = "Sort lines descending";
+            this.capitalizeEntireTextToolStripMenuItem.Name = "capitalizeEntireTextToolStripMenuItem";
+            this.capitalizeEntireTextToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.capitalizeEntireTextToolStripMenuItem.Text = "Convert text to uppercase";
             // 
-            // revertLineOrderToolStripMenuItem1
+            // lowercaseEntireContentToolStripMenuItem
             // 
-            this.revertLineOrderToolStripMenuItem1.Name = "revertLineOrderToolStripMenuItem1";
-            this.revertLineOrderToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
-            this.revertLineOrderToolStripMenuItem1.Text = "Revert line order";
+            this.lowercaseEntireContentToolStripMenuItem.Name = "lowercaseEntireContentToolStripMenuItem";
+            this.lowercaseEntireContentToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.lowercaseEntireContentToolStripMenuItem.Text = "Convert text to lowercase";
             // 
-            // allWhitespaceCharactersToolStripMenuItem
+            // capitalizeEveryWordToolStripMenuItem
             // 
-            this.allWhitespaceCharactersToolStripMenuItem.Name = "allWhitespaceCharactersToolStripMenuItem";
-            this.allWhitespaceCharactersToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.allWhitespaceCharactersToolStripMenuItem.Text = "Remove all whitespaces";
+            this.capitalizeEveryWordToolStripMenuItem.Name = "capitalizeEveryWordToolStripMenuItem";
+            this.capitalizeEveryWordToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.capitalizeEveryWordToolStripMenuItem.Text = "Capitalize every word";
             // 
-            // trimWhitespaceCharactersToolStripMenuItem1
+            // switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem
             // 
-            this.trimWhitespaceCharactersToolStripMenuItem1.Name = "trimWhitespaceCharactersToolStripMenuItem1";
-            this.trimWhitespaceCharactersToolStripMenuItem1.Size = new System.Drawing.Size(250, 22);
-            this.trimWhitespaceCharactersToolStripMenuItem1.Text = "Remove consecutive whitespaces";
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Name = "switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem";
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Text = "Swap lowercase and uppercase characters";
             // 
-            // trimLineswhitespacesToolStripMenuItem
+            // capitalizeFirstLineCharactersToolStripMenuItem
             // 
-            this.trimLineswhitespacesToolStripMenuItem.Name = "trimLineswhitespacesToolStripMenuItem";
-            this.trimLineswhitespacesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.trimLineswhitespacesToolStripMenuItem.Text = "Trim lines (remove trailing and leading whitespaces)";
-            // 
-            // duplicateEveryLineToolStripMenuItem
-            // 
-            this.duplicateEveryLineToolStripMenuItem.Name = "duplicateEveryLineToolStripMenuItem";
-            this.duplicateEveryLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.duplicateEveryLineToolStripMenuItem.Text = "Duplicate every line";
-            // 
-            // addEmptyRowBetweenEachLineToolStripMenuItem
-            // 
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Name = "addEmptyRowBetweenEachLineToolStripMenuItem";
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Text = "Add empty row between each line";
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Name = "capitalizeFirstLineCharactersToolStripMenuItem";
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Text = "Capitalize first characters from every line";
             // 
             // MainForm
             // 
@@ -1487,6 +1592,19 @@
         private System.Windows.Forms.ToolStripMenuItem sortDescendingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem revertLineOrderToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem addEmptyRowBetweenEachLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hashingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mD5ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sHA1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sHAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sHA256ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sHA384ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sHA512ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formatXMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem capitalizeFirstLineCharactersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem capitalizeEveryWordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem capitalizeEntireTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lowercaseEntireContentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem;
     }
 }
 
