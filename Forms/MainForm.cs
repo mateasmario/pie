@@ -819,9 +819,9 @@ namespace pie
                 string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[openedTabIndex].getOpenedFilePath()));
                 ScintillaLexerService.SetLexer(extension, TextArea, tabControl, openedTabIndex);
                 UpdateFormTitle();
+                Globals.tabInfos[openedTabIndex].setOpenedFileChanges(false);
             }
 
-            Globals.tabInfos[openedTabIndex].setOpenedFileChanges(false);
             DeactivateBuildAndRunOptions();
 
             if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null) {
@@ -855,6 +855,7 @@ namespace pie
                 string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[selectedIndex].getOpenedFilePath()));
                 ScintillaLexerService.SetLexer(extension, TextArea, tabControl, selectedIndex);
                 UpdateFormTitle();
+                Globals.tabInfos[selectedIndex].setOpenedFileChanges(false);
             }
         }
 
