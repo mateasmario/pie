@@ -487,6 +487,7 @@
     <Compile Include="Services\BuildCommandService.cs" />
     <Compile Include="Services\EditorPropertiesService.cs" />
     <Compile Include="Services\DatabaseService.cs" />
+    <Compile Include="Services\FormattingService.cs" />
     <Compile Include="Services\GitService.cs" />
     <Compile Include="Services\NotificationExceptionHandlerService.cs" />
     <Compile Include="Services\ParsingService.cs" />

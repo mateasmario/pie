@@ -108,18 +108,31 @@
             this.linesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateEveryLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addEmptyRowBetweenEachLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.capitalizeFirstLineCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emptyLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeWhitespaceLinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.removeDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consecutiveDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trimLineswhitespacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.capitalizeEveryWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.capitalizeEntireTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lowercaseEntireContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allWhitespaceCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trimWhitespaceCharactersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sortAscendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sortDescendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.revertLineOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hashingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mD5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHA1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHA256ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHA384ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sHA512ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formatXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.findReplaceHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.matchWholeWordCheckBox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -159,19 +172,6 @@
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.directoryNavigationHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.directoryNavigationTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.hashingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mD5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sHA1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sHAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sHA256ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sHA384ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sHA512ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formatXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.capitalizeEntireTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lowercaseEntireContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.capitalizeEveryWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.capitalizeFirstLineCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
@@ -770,42 +770,56 @@
             this.duplicateEveryLineToolStripMenuItem.Name = "duplicateEveryLineToolStripMenuItem";
             this.duplicateEveryLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
             this.duplicateEveryLineToolStripMenuItem.Text = "Duplicate every line";
+            this.duplicateEveryLineToolStripMenuItem.Click += new System.EventHandler(this.duplicateEveryLineToolStripMenuItem_Click);
             // 
             // addEmptyRowBetweenEachLineToolStripMenuItem
             // 
             this.addEmptyRowBetweenEachLineToolStripMenuItem.Name = "addEmptyRowBetweenEachLineToolStripMenuItem";
             this.addEmptyRowBetweenEachLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
             this.addEmptyRowBetweenEachLineToolStripMenuItem.Text = "Add empty row between each line";
+            this.addEmptyRowBetweenEachLineToolStripMenuItem.Click += new System.EventHandler(this.addEmptyRowBetweenEachLineToolStripMenuItem_Click);
+            // 
+            // capitalizeFirstLineCharactersToolStripMenuItem
+            // 
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Name = "capitalizeFirstLineCharactersToolStripMenuItem";
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Text = "Capitalize first characters from every line";
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Click += new System.EventHandler(this.capitalizeFirstLineCharactersToolStripMenuItem_Click);
             // 
             // emptyLinesToolStripMenuItem
             // 
             this.emptyLinesToolStripMenuItem.Name = "emptyLinesToolStripMenuItem";
             this.emptyLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
             this.emptyLinesToolStripMenuItem.Text = "Remove empty lines";
+            this.emptyLinesToolStripMenuItem.Click += new System.EventHandler(this.emptyLinesToolStripMenuItem_Click);
             // 
             // removeWhitespaceLinesToolStripMenuItem1
             // 
             this.removeWhitespaceLinesToolStripMenuItem1.Name = "removeWhitespaceLinesToolStripMenuItem1";
             this.removeWhitespaceLinesToolStripMenuItem1.Size = new System.Drawing.Size(348, 22);
             this.removeWhitespaceLinesToolStripMenuItem1.Text = "Remove whitespace lines";
+            this.removeWhitespaceLinesToolStripMenuItem1.Click += new System.EventHandler(this.removeWhitespaceLinesToolStripMenuItem1_Click);
             // 
             // removeDuplicateLinesToolStripMenuItem
             // 
             this.removeDuplicateLinesToolStripMenuItem.Name = "removeDuplicateLinesToolStripMenuItem";
             this.removeDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
             this.removeDuplicateLinesToolStripMenuItem.Text = "Remove duplicate lines";
+            this.removeDuplicateLinesToolStripMenuItem.Click += new System.EventHandler(this.removeDuplicateLinesToolStripMenuItem_Click);
             // 
             // consecutiveDuplicateLinesToolStripMenuItem
             // 
             this.consecutiveDuplicateLinesToolStripMenuItem.Name = "consecutiveDuplicateLinesToolStripMenuItem";
             this.consecutiveDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
             this.consecutiveDuplicateLinesToolStripMenuItem.Text = "Remove consecutive duplicate lines";
+            this.consecutiveDuplicateLinesToolStripMenuItem.Click += new System.EventHandler(this.consecutiveDuplicateLinesToolStripMenuItem_Click);
             // 
             // trimLineswhitespacesToolStripMenuItem
             // 
             this.trimLineswhitespacesToolStripMenuItem.Name = "trimLineswhitespacesToolStripMenuItem";
             this.trimLineswhitespacesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
             this.trimLineswhitespacesToolStripMenuItem.Text = "Trim lines (remove trailing and leading whitespaces)";
+            this.trimLineswhitespacesToolStripMenuItem.Click += new System.EventHandler(this.trimLineswhitespacesToolStripMenuItem_Click);
             // 
             // charactersToolStripMenuItem
             // 
@@ -820,17 +834,47 @@
             this.charactersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.charactersToolStripMenuItem.Text = "Characters";
             // 
+            // capitalizeEveryWordToolStripMenuItem
+            // 
+            this.capitalizeEveryWordToolStripMenuItem.Name = "capitalizeEveryWordToolStripMenuItem";
+            this.capitalizeEveryWordToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.capitalizeEveryWordToolStripMenuItem.Text = "Capitalize every word";
+            this.capitalizeEveryWordToolStripMenuItem.Click += new System.EventHandler(this.capitalizeEveryWordToolStripMenuItem_Click);
+            // 
+            // capitalizeEntireTextToolStripMenuItem
+            // 
+            this.capitalizeEntireTextToolStripMenuItem.Name = "capitalizeEntireTextToolStripMenuItem";
+            this.capitalizeEntireTextToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.capitalizeEntireTextToolStripMenuItem.Text = "Convert text to uppercase";
+            this.capitalizeEntireTextToolStripMenuItem.Click += new System.EventHandler(this.capitalizeEntireTextToolStripMenuItem_Click);
+            // 
+            // lowercaseEntireContentToolStripMenuItem
+            // 
+            this.lowercaseEntireContentToolStripMenuItem.Name = "lowercaseEntireContentToolStripMenuItem";
+            this.lowercaseEntireContentToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.lowercaseEntireContentToolStripMenuItem.Text = "Convert text to lowercase";
+            this.lowercaseEntireContentToolStripMenuItem.Click += new System.EventHandler(this.lowercaseEntireContentToolStripMenuItem_Click);
+            // 
+            // switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem
+            // 
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Name = "switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem";
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Text = "Swap lowercase and uppercase characters";
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Click += new System.EventHandler(this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem_Click);
+            // 
             // allWhitespaceCharactersToolStripMenuItem
             // 
             this.allWhitespaceCharactersToolStripMenuItem.Name = "allWhitespaceCharactersToolStripMenuItem";
-            this.allWhitespaceCharactersToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.allWhitespaceCharactersToolStripMenuItem.Text = "Remove all whitespaces";
+            this.allWhitespaceCharactersToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.allWhitespaceCharactersToolStripMenuItem.Text = "Remove all whitespaces (except CR/LF)";
+            this.allWhitespaceCharactersToolStripMenuItem.Click += new System.EventHandler(this.allWhitespaceCharactersToolStripMenuItem_Click);
             // 
             // trimWhitespaceCharactersToolStripMenuItem1
             // 
             this.trimWhitespaceCharactersToolStripMenuItem1.Name = "trimWhitespaceCharactersToolStripMenuItem1";
-            this.trimWhitespaceCharactersToolStripMenuItem1.Size = new System.Drawing.Size(250, 22);
-            this.trimWhitespaceCharactersToolStripMenuItem1.Text = "Remove consecutive whitespaces";
+            this.trimWhitespaceCharactersToolStripMenuItem1.Size = new System.Drawing.Size(330, 22);
+            this.trimWhitespaceCharactersToolStripMenuItem1.Text = "Remove consecutive whitespaces (except CR/LF)";
+            this.trimWhitespaceCharactersToolStripMenuItem1.Click += new System.EventHandler(this.trimWhitespaceCharactersToolStripMenuItem1_Click);
             // 
             // sortToolStripMenuItem
             // 
@@ -838,6 +882,7 @@
             this.sortAscendingToolStripMenuItem,
             this.sortDescendingToolStripMenuItem,
             this.revertLineOrderToolStripMenuItem1});
+            this.sortToolStripMenuItem.Enabled = false;
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
             this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sortToolStripMenuItem.Text = "Sorting";
@@ -860,6 +905,63 @@
             this.revertLineOrderToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
             this.revertLineOrderToolStripMenuItem1.Text = "Revert line order";
             // 
+            // hashingToolStripMenuItem
+            // 
+            this.hashingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mD5ToolStripMenuItem,
+            this.sHA1ToolStripMenuItem,
+            this.sHAToolStripMenuItem,
+            this.sHA256ToolStripMenuItem,
+            this.sHA384ToolStripMenuItem,
+            this.sHA512ToolStripMenuItem});
+            this.hashingToolStripMenuItem.Enabled = false;
+            this.hashingToolStripMenuItem.Name = "hashingToolStripMenuItem";
+            this.hashingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hashingToolStripMenuItem.Text = "Hash selected text";
+            // 
+            // mD5ToolStripMenuItem
+            // 
+            this.mD5ToolStripMenuItem.Name = "mD5ToolStripMenuItem";
+            this.mD5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mD5ToolStripMenuItem.Text = "MD5";
+            // 
+            // sHA1ToolStripMenuItem
+            // 
+            this.sHA1ToolStripMenuItem.Name = "sHA1ToolStripMenuItem";
+            this.sHA1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sHA1ToolStripMenuItem.Text = "SHA-1";
+            // 
+            // sHAToolStripMenuItem
+            // 
+            this.sHAToolStripMenuItem.Name = "sHAToolStripMenuItem";
+            this.sHAToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sHAToolStripMenuItem.Text = "SHA-224";
+            // 
+            // sHA256ToolStripMenuItem
+            // 
+            this.sHA256ToolStripMenuItem.Name = "sHA256ToolStripMenuItem";
+            this.sHA256ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sHA256ToolStripMenuItem.Text = "SHA-256";
+            // 
+            // sHA384ToolStripMenuItem
+            // 
+            this.sHA384ToolStripMenuItem.Name = "sHA384ToolStripMenuItem";
+            this.sHA384ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sHA384ToolStripMenuItem.Text = "SHA-384";
+            // 
+            // sHA512ToolStripMenuItem
+            // 
+            this.sHA512ToolStripMenuItem.Name = "sHA512ToolStripMenuItem";
+            this.sHA512ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sHA512ToolStripMenuItem.Text = "SHA-512";
+            // 
+            // formatXMLToolStripMenuItem
+            // 
+            this.formatXMLToolStripMenuItem.Enabled = false;
+            this.formatXMLToolStripMenuItem.Name = "formatXMLToolStripMenuItem";
+            this.formatXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.formatXMLToolStripMenuItem.Text = "Format XML";
+            // 
             // kryptonRibbon1
             // 
             this.kryptonRibbon1.InDesignHelperMode = true;
@@ -869,6 +971,7 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -1316,92 +1419,6 @@
             this.directoryNavigationTextBox.Size = new System.Drawing.Size(505, 23);
             this.directoryNavigationTextBox.TabIndex = 0;
             this.directoryNavigationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
-            // 
-            // hashingToolStripMenuItem
-            // 
-            this.hashingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mD5ToolStripMenuItem,
-            this.sHA1ToolStripMenuItem,
-            this.sHAToolStripMenuItem,
-            this.sHA256ToolStripMenuItem,
-            this.sHA384ToolStripMenuItem,
-            this.sHA512ToolStripMenuItem});
-            this.hashingToolStripMenuItem.Name = "hashingToolStripMenuItem";
-            this.hashingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.hashingToolStripMenuItem.Text = "Hash selected text";
-            // 
-            // mD5ToolStripMenuItem
-            // 
-            this.mD5ToolStripMenuItem.Name = "mD5ToolStripMenuItem";
-            this.mD5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mD5ToolStripMenuItem.Text = "MD5";
-            // 
-            // sHA1ToolStripMenuItem
-            // 
-            this.sHA1ToolStripMenuItem.Name = "sHA1ToolStripMenuItem";
-            this.sHA1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sHA1ToolStripMenuItem.Text = "SHA-1";
-            // 
-            // sHAToolStripMenuItem
-            // 
-            this.sHAToolStripMenuItem.Name = "sHAToolStripMenuItem";
-            this.sHAToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sHAToolStripMenuItem.Text = "SHA-224";
-            // 
-            // sHA256ToolStripMenuItem
-            // 
-            this.sHA256ToolStripMenuItem.Name = "sHA256ToolStripMenuItem";
-            this.sHA256ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sHA256ToolStripMenuItem.Text = "SHA-256";
-            // 
-            // sHA384ToolStripMenuItem
-            // 
-            this.sHA384ToolStripMenuItem.Name = "sHA384ToolStripMenuItem";
-            this.sHA384ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sHA384ToolStripMenuItem.Text = "SHA-384";
-            // 
-            // sHA512ToolStripMenuItem
-            // 
-            this.sHA512ToolStripMenuItem.Name = "sHA512ToolStripMenuItem";
-            this.sHA512ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sHA512ToolStripMenuItem.Text = "SHA-512";
-            // 
-            // formatXMLToolStripMenuItem
-            // 
-            this.formatXMLToolStripMenuItem.Enabled = false;
-            this.formatXMLToolStripMenuItem.Name = "formatXMLToolStripMenuItem";
-            this.formatXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.formatXMLToolStripMenuItem.Text = "Format XML";
-            // 
-            // capitalizeEntireTextToolStripMenuItem
-            // 
-            this.capitalizeEntireTextToolStripMenuItem.Name = "capitalizeEntireTextToolStripMenuItem";
-            this.capitalizeEntireTextToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
-            this.capitalizeEntireTextToolStripMenuItem.Text = "Convert text to uppercase";
-            // 
-            // lowercaseEntireContentToolStripMenuItem
-            // 
-            this.lowercaseEntireContentToolStripMenuItem.Name = "lowercaseEntireContentToolStripMenuItem";
-            this.lowercaseEntireContentToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
-            this.lowercaseEntireContentToolStripMenuItem.Text = "Convert text to lowercase";
-            // 
-            // capitalizeEveryWordToolStripMenuItem
-            // 
-            this.capitalizeEveryWordToolStripMenuItem.Name = "capitalizeEveryWordToolStripMenuItem";
-            this.capitalizeEveryWordToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
-            this.capitalizeEveryWordToolStripMenuItem.Text = "Capitalize every word";
-            // 
-            // switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem
-            // 
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Name = "switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem";
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Text = "Swap lowercase and uppercase characters";
-            // 
-            // capitalizeFirstLineCharactersToolStripMenuItem
-            // 
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Name = "capitalizeFirstLineCharactersToolStripMenuItem";
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Text = "Capitalize first characters from every line";
             // 
             // MainForm
             // 
