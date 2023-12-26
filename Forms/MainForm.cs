@@ -1705,6 +1705,8 @@ namespace pie
             {
                 if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
                 {
+                    smartFormatterToolStripMenuItem.Enabled = true;
+
                     tabControl.KryptonContextMenu = codeContextMenu;
 
                     DeactivateBuildAndRunOptions();
@@ -1720,6 +1722,8 @@ namespace pie
                 }
                 else
                 {
+                    smartFormatterToolStripMenuItem.Enabled = false;
+
                     if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.GIT)
                     {
                         tabControl.KryptonContextMenu = gitContextMenu;
@@ -3089,6 +3093,174 @@ namespace pie
                     }
                 }
             }
+        }
+
+        private void duplicateEveryLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.DuplicateLines(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void addEmptyRowBetweenEachLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void capitalizeFirstLineCharactersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.CapitalizeFirstCharacterFromEveryLine(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void emptyLinesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.RemoveEmptyLines(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void removeWhitespaceLinesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.RemoveWhitespaceLines(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void removeDuplicateLinesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.RemoveDuplicateLines(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void consecutiveDuplicateLinesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.RemoveConsecutiveDuplicates(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void trimLineswhitespacesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.TrimLines(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void capitalizeEveryWordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.CapitalizeEveryWord(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void capitalizeEntireTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.ConvertTextToUppercase(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void lowercaseEntireContentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.ConvertTextToLowercase(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.SwitchLowercaseWithUppercase(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void allWhitespaceCharactersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.RemoveAllWhitespaces(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void trimWhitespaceCharactersToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.RemoveAllConsecutiveWhitespaces(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
         }
     }
 }

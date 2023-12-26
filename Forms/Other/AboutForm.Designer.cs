@@ -48,7 +48,7 @@
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(188, 38);
             this.kryptonLabel1.TabIndex = 2;
-            this.kryptonLabel1.Values.Text = "Version 2.1224\r\nPublished on December 24, 2023";
+            this.kryptonLabel1.Values.Text = "Version 2.1226\r\nPublished on December 26, 2023";
             // 
             // kryptonLabel3
             // 
