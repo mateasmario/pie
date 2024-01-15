@@ -46,9 +46,9 @@
             this.kryptonLabel1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
             this.kryptonLabel1.Location = new System.Drawing.Point(5, 44);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(188, 38);
+            this.kryptonLabel1.Size = new System.Drawing.Size(173, 38);
             this.kryptonLabel1.TabIndex = 2;
-            this.kryptonLabel1.Values.Text = "Version 2.1226\r\nPublished on December 26, 2023";
+            this.kryptonLabel1.Values.Text = "Version 3.0115\r\nPublished on January 15, 2024";
             // 
             // kryptonLabel3
             // 
