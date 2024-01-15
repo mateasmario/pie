@@ -258,6 +258,11 @@ namespace pie.Services
 
         public static string SortLines (string text, bool ascending)
         {
+            if (text.Equals(""))
+            {
+                return "";
+            }
+
             string result = "";
 
             List<string> lines = text.Split('\n').ToList();
@@ -295,6 +300,11 @@ namespace pie.Services
 
         public static string ReverseLineOrder(string text)
         {
+            if (text.Equals(""))
+            {
+                return "";
+            }
+
             string result = "";
 
             List<string> lines = text.Split('\n').ToList();
