@@ -125,14 +125,6 @@
             this.sortAscendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sortDescendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.revertLineOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.hashingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mD5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sHA1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sHAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sHA256ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sHA384ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sHA512ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formatXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.findReplaceHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.matchWholeWordCheckBox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -743,9 +735,7 @@
             this.smartFormatterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.linesToolStripMenuItem,
             this.charactersToolStripMenuItem,
-            this.sortToolStripMenuItem,
-            this.hashingToolStripMenuItem,
-            this.formatXMLToolStripMenuItem});
+            this.sortToolStripMenuItem});
             this.smartFormatterToolStripMenuItem.Name = "smartFormatterToolStripMenuItem";
             this.smartFormatterToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.smartFormatterToolStripMenuItem.Text = "Format";
@@ -882,7 +872,6 @@
             this.sortAscendingToolStripMenuItem,
             this.sortDescendingToolStripMenuItem,
             this.revertLineOrderToolStripMenuItem1});
-            this.sortToolStripMenuItem.Enabled = false;
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
             this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sortToolStripMenuItem.Text = "Sorting";
@@ -892,75 +881,21 @@
             this.sortAscendingToolStripMenuItem.Name = "sortAscendingToolStripMenuItem";
             this.sortAscendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.sortAscendingToolStripMenuItem.Text = "Sort lines ascending";
+            this.sortAscendingToolStripMenuItem.Click += new System.EventHandler(this.sortAscendingToolStripMenuItem_Click);
             // 
             // sortDescendingToolStripMenuItem
             // 
             this.sortDescendingToolStripMenuItem.Name = "sortDescendingToolStripMenuItem";
             this.sortDescendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.sortDescendingToolStripMenuItem.Text = "Sort lines descending";
+            this.sortDescendingToolStripMenuItem.Click += new System.EventHandler(this.sortDescendingToolStripMenuItem_Click);
             // 
             // revertLineOrderToolStripMenuItem1
             // 
             this.revertLineOrderToolStripMenuItem1.Name = "revertLineOrderToolStripMenuItem1";
             this.revertLineOrderToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
-            this.revertLineOrderToolStripMenuItem1.Text = "Revert line order";
-            // 
-            // hashingToolStripMenuItem
-            // 
-            this.hashingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mD5ToolStripMenuItem,
-            this.sHA1ToolStripMenuItem,
-            this.sHAToolStripMenuItem,
-            this.sHA256ToolStripMenuItem,
-            this.sHA384ToolStripMenuItem,
-            this.sHA512ToolStripMenuItem});
-            this.hashingToolStripMenuItem.Enabled = false;
-            this.hashingToolStripMenuItem.Name = "hashingToolStripMenuItem";
-            this.hashingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.hashingToolStripMenuItem.Text = "Hash selected text";
-            // 
-            // mD5ToolStripMenuItem
-            // 
-            this.mD5ToolStripMenuItem.Name = "mD5ToolStripMenuItem";
-            this.mD5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mD5ToolStripMenuItem.Text = "MD5";
-            // 
-            // sHA1ToolStripMenuItem
-            // 
-            this.sHA1ToolStripMenuItem.Name = "sHA1ToolStripMenuItem";
-            this.sHA1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sHA1ToolStripMenuItem.Text = "SHA-1";
-            // 
-            // sHAToolStripMenuItem
-            // 
-            this.sHAToolStripMenuItem.Name = "sHAToolStripMenuItem";
-            this.sHAToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sHAToolStripMenuItem.Text = "SHA-224";
-            // 
-            // sHA256ToolStripMenuItem
-            // 
-            this.sHA256ToolStripMenuItem.Name = "sHA256ToolStripMenuItem";
-            this.sHA256ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sHA256ToolStripMenuItem.Text = "SHA-256";
-            // 
-            // sHA384ToolStripMenuItem
-            // 
-            this.sHA384ToolStripMenuItem.Name = "sHA384ToolStripMenuItem";
-            this.sHA384ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sHA384ToolStripMenuItem.Text = "SHA-384";
-            // 
-            // sHA512ToolStripMenuItem
-            // 
-            this.sHA512ToolStripMenuItem.Name = "sHA512ToolStripMenuItem";
-            this.sHA512ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sHA512ToolStripMenuItem.Text = "SHA-512";
-            // 
-            // formatXMLToolStripMenuItem
-            // 
-            this.formatXMLToolStripMenuItem.Enabled = false;
-            this.formatXMLToolStripMenuItem.Name = "formatXMLToolStripMenuItem";
-            this.formatXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.formatXMLToolStripMenuItem.Text = "Format XML";
+            this.revertLineOrderToolStripMenuItem1.Text = "Reverse line order";
+            this.revertLineOrderToolStripMenuItem1.Click += new System.EventHandler(this.revertLineOrderToolStripMenuItem1_Click);
             // 
             // kryptonRibbon1
             // 
@@ -971,7 +906,6 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -1609,14 +1543,6 @@
         private System.Windows.Forms.ToolStripMenuItem sortDescendingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem revertLineOrderToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem addEmptyRowBetweenEachLineToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hashingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mD5ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sHA1ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sHAToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sHA256ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sHA384ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sHA512ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem formatXMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem capitalizeFirstLineCharactersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem capitalizeEveryWordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem capitalizeEntireTextToolStripMenuItem;

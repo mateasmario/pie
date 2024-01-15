@@ -3262,5 +3262,41 @@ namespace pie
             scintilla.SelectionStart = currPos;
             scintilla.SelectionEnd = currPos;
         }
+
+        private void sortAscendingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.SortLines(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void sortDescendingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.SortLines(scintilla.Text, false);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void revertLineOrderToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.ReverseLineOrder(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
     }
 }

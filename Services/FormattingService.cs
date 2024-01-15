@@ -250,5 +250,79 @@ namespace pie.Services
 
             return result;
         }
+
+        public static string SortLines(string text)
+        {
+            return SortLines(text, true);
+        }
+
+        public static string SortLines (string text, bool ascending)
+        {
+            string result = "";
+
+            List<string> lines = text.Split('\n').ToList();
+
+            lines.Sort();
+
+            if (!ascending)
+            {
+                lines.Reverse();
+            }
+
+            for(int i = 0; i<lines.Count; i++)
+            {
+                if (i == lines.Count - 1)
+                {
+                    result += lines[i];
+                }
+                else
+                {
+                    result += lines[i] + "\n";
+                }
+            }
+
+            if (result[result.Length - 1] == '\r')
+            {
+                return result.Substring(0, result.Length - 1);
+            }
+            else
+            {
+                return result;
+            }
+
+            return result;
+        }
+
+        public static string ReverseLineOrder(string text)
+        {
+            string result = "";
+
+            List<string> lines = text.Split('\n').ToList();
+
+            lines.Reverse();
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                if (i == lines.Count - 1)
+                {
+                    result += lines[i];
+                }
+                else
+                {
+                    result += lines[i] + "\n";
+                }
+            }
+
+            if (result[result.Length - 1] == '\r')
+            {
+                return result.Substring(0, result.Length - 1);
+            }
+            else
+            {
+                return result;
+            }
+
+            return result;
+        }
     }
 }
