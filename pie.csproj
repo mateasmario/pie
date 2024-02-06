@@ -58,7 +58,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>pieblue.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <Win32Resource>
@@ -560,7 +560,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="pie-wave.ico" />
     <Content Include="pie.ico" />
+    <Content Include="pie2-icon.ico" />
+    <Content Include="pie2.ico" />
+    <Content Include="pieblue.ico" />
+    <None Include="Resources\pie.png" />
+    <None Include="Resources\pie-wave.ico" />
+    <None Include="Resources\font %283%29.png" />
+    <None Include="Resources\font %282%29.png" />
+    <None Include="Resources\font %281%29.png" />
+    <None Include="Resources\sort.png" />
+    <None Include="Resources\arrow %282%29.png" />
+    <None Include="Resources\line.png" />
     <None Include="Resources\diskette %281%29.png" />
     <None Include="Resources\logo_small.png" />
     <None Include="Resources\logo1.png" />
