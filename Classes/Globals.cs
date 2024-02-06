@@ -79,6 +79,7 @@ namespace pie
         public static int selectedBranchIndex;
         public static bool doNotTriggerBranchChangeEvent;
         public static bool doNotShowBranchChangeNotification;
+        public static bool showGitTabPressed;
 
         // Notification
         public static string notificationText;

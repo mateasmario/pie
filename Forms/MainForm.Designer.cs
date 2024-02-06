@@ -37,9 +37,6 @@
             this.kryptonContextMenuItem3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuHeading7 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             this.kryptonContextMenuItems8 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.kryptonContextMenuItem6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem15 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem12 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItems2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
@@ -55,8 +52,6 @@
             this.kryptonContextMenuHeading6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             this.terminalContextMenu = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
             this.kryptonContextMenuItems9 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.kryptonContextMenuItem16 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonContextMenuItem17 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonContextMenuItem18 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -73,7 +68,6 @@
             this.kryptonContextMenuItems10 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuItem10 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.tabControl = new ComponentFactory.Krypton.Docking.KryptonDockableNavigator();
-            this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,12 +75,6 @@
             this.saveFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showBuildToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showGitTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.themeSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutPieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,33 +86,7 @@
             this.renderMarkdownmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.preferencesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.manageBuildCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.databasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manageCommitCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.managePushCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wordWrapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enableAutosaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smartFormatterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.linesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.duplicateEveryLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addEmptyRowBetweenEachLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.capitalizeFirstLineCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.emptyLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeWhitespaceLinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consecutiveDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trimLineswhitespacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.capitalizeEveryWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.capitalizeEntireTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lowercaseEntireContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allWhitespaceCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trimWhitespaceCharactersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortAscendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortDescendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.revertLineOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.findReplaceHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.matchWholeWordCheckBox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -164,9 +126,46 @@
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.directoryNavigationHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.directoryNavigationTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonContextMenuItem16 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem17 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem6 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem15 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonContextMenuItem12 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
+            this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.showBuildToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showGitTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.themeSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutPieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageBuildCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.databasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageCommitCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.managePushCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordWrapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableAutosaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.linesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateEveryLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addEmptyRowBetweenEachLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.capitalizeFirstLineCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.emptyLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeWhitespaceLinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consecutiveDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trimLineswhitespacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.capitalizeEveryWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.capitalizeEntireTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lowercaseEntireContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allWhitespaceCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trimWhitespaceCharactersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortAscendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortDescendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.revertLineOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.findReplaceHeaderGroup)).BeginInit();
@@ -192,6 +191,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.directoryNavigationHeaderGroup.Panel)).BeginInit();
             this.directoryNavigationHeaderGroup.Panel.SuspendLayout();
             this.directoryNavigationHeaderGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.SuspendLayout();
             // 
             // codeContextMenu
@@ -234,24 +234,6 @@
             this.kryptonContextMenuItem6,
             this.kryptonContextMenuItem15,
             this.kryptonContextMenuItem12});
-            // 
-            // kryptonContextMenuItem6
-            // 
-            this.kryptonContextMenuItem6.Image = global::pie.Properties.Resources.search;
-            this.kryptonContextMenuItem6.Text = "Show Find and Replace";
-            this.kryptonContextMenuItem6.Click += new System.EventHandler(this.kryptonContextMenuItem6_Click);
-            // 
-            // kryptonContextMenuItem15
-            // 
-            this.kryptonContextMenuItem15.Image = global::pie.Properties.Resources.terminal;
-            this.kryptonContextMenuItem15.Text = "Show Terminal Tab";
-            this.kryptonContextMenuItem15.Click += new System.EventHandler(this.kryptonContextMenuItem15_Click);
-            // 
-            // kryptonContextMenuItem12
-            // 
-            this.kryptonContextMenuItem12.Image = global::pie.Properties.Resources.browse;
-            this.kryptonContextMenuItem12.Text = "Show Directory Navigator";
-            this.kryptonContextMenuItem12.Click += new System.EventHandler(this.kryptonContextMenuItem12_Click);
             // 
             // kryptonContextMenuItems1
             // 
@@ -306,18 +288,6 @@
             this.kryptonContextMenuItem16,
             this.kryptonContextMenuItem17,
             this.kryptonContextMenuItem18});
-            // 
-            // kryptonContextMenuItem16
-            // 
-            this.kryptonContextMenuItem16.Image = global::pie.Properties.Resources.terminal;
-            this.kryptonContextMenuItem16.Text = "New Command Prompt Tab";
-            this.kryptonContextMenuItem16.Click += new System.EventHandler(this.kryptonContextMenuItem16_Click);
-            // 
-            // kryptonContextMenuItem17
-            // 
-            this.kryptonContextMenuItem17.Image = global::pie.Properties.Resources.powershell;
-            this.kryptonContextMenuItem17.Text = "New PowerShell Tab";
-            this.kryptonContextMenuItem17.Click += new System.EventHandler(this.kryptonContextMenuItem17_Click);
             // 
             // kryptonContextMenuItem18
             // 
@@ -453,21 +423,6 @@
             this.tabControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             this.tabControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl_MouseDown);
             // 
-            // kryptonPage1
-            // 
-            this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage1.Flags = 65534;
-            this.kryptonPage1.ImageSmall = global::pie.Properties.Resources.plus_blue;
-            this.kryptonPage1.LastVisibleSet = true;
-            this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(1018, 546);
-            this.kryptonPage1.Text = "";
-            this.kryptonPage1.TextDescription = "";
-            this.kryptonPage1.TextTitle = "";
-            this.kryptonPage1.ToolTipTitle = "Add New Tab";
-            this.kryptonPage1.UniqueName = "E9D081B0A6964933EA81724511F8E430";
-            // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(5, 9);
@@ -525,55 +480,6 @@
             this.designToolStripMenuItem.Name = "designToolStripMenuItem";
             this.designToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.designToolStripMenuItem.Text = "Interface";
-            // 
-            // showBuildToolsToolStripMenuItem
-            // 
-            this.showBuildToolsToolStripMenuItem.Image = global::pie.Properties.Resources.terminal;
-            this.showBuildToolsToolStripMenuItem.Name = "showBuildToolsToolStripMenuItem";
-            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
-            this.showBuildToolsToolStripMenuItem.Click += new System.EventHandler(this.showBuildToolsToolStripMenuItem_Click);
-            // 
-            // showGitTabToolStripMenuItem
-            // 
-            this.showGitTabToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showGitTabToolStripMenuItem.Image")));
-            this.showGitTabToolStripMenuItem.Name = "showGitTabToolStripMenuItem";
-            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.showGitTabToolStripMenuItem.Text = "Show Git Tab";
-            this.showGitTabToolStripMenuItem.Click += new System.EventHandler(this.showGitTabToolStripMenuItem_Click);
-            // 
-            // themeSettingsToolStripMenuItem
-            // 
-            this.themeSettingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.themeSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lightToolStripMenuItem,
-            this.darkToolStripMenuItem});
-            this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.color_wheel;
-            this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
-            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.themeSettingsToolStripMenuItem.Text = "Themes";
-            // 
-            // lightToolStripMenuItem
-            // 
-            this.lightToolStripMenuItem.Name = "lightToolStripMenuItem";
-            this.lightToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
-            this.lightToolStripMenuItem.Text = "Light";
-            this.lightToolStripMenuItem.Click += new System.EventHandler(this.lightToolStripMenuItem_Click);
-            // 
-            // darkToolStripMenuItem
-            // 
-            this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
-            this.darkToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
-            this.darkToolStripMenuItem.Text = "Dark";
-            this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
-            // 
-            // aboutPieToolStripMenuItem
-            // 
-            this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info;
-            this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
-            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.aboutPieToolStripMenuItem.Text = "About pie";
-            this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
             // 
             // buildToolStripMenuItem1
             // 
@@ -682,54 +588,6 @@
             this.preferencesToolStripMenuItem1.Size = new System.Drawing.Size(80, 20);
             this.preferencesToolStripMenuItem1.Text = "Preferences";
             // 
-            // manageBuildCommandsToolStripMenuItem
-            // 
-            this.manageBuildCommandsToolStripMenuItem.Image = global::pie.Properties.Resources.gears;
-            this.manageBuildCommandsToolStripMenuItem.Name = "manageBuildCommandsToolStripMenuItem";
-            this.manageBuildCommandsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.manageBuildCommandsToolStripMenuItem.Text = "Build Commands";
-            this.manageBuildCommandsToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
-            // 
-            // databasesToolStripMenuItem
-            // 
-            this.databasesToolStripMenuItem.Image = global::pie.Properties.Resources.database;
-            this.databasesToolStripMenuItem.Name = "databasesToolStripMenuItem";
-            this.databasesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.databasesToolStripMenuItem.Text = "Databases";
-            this.databasesToolStripMenuItem.Click += new System.EventHandler(this.databasesToolStripMenuItem_Click);
-            // 
-            // manageCommitCredentialsToolStripMenuItem
-            // 
-            this.manageCommitCredentialsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageCommitCredentialsToolStripMenuItem.Image")));
-            this.manageCommitCredentialsToolStripMenuItem.Name = "manageCommitCredentialsToolStripMenuItem";
-            this.manageCommitCredentialsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.manageCommitCredentialsToolStripMenuItem.Text = "Commit Credentials";
-            this.manageCommitCredentialsToolStripMenuItem.Click += new System.EventHandler(this.manageCommitCredentialsToolStripMenuItem_Click);
-            // 
-            // managePushCredentialsToolStripMenuItem
-            // 
-            this.managePushCredentialsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("managePushCredentialsToolStripMenuItem.Image")));
-            this.managePushCredentialsToolStripMenuItem.Name = "managePushCredentialsToolStripMenuItem";
-            this.managePushCredentialsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.managePushCredentialsToolStripMenuItem.Text = "Push Credentials";
-            this.managePushCredentialsToolStripMenuItem.Click += new System.EventHandler(this.managePushCredentialsToolStripMenuItem_Click);
-            // 
-            // wordWrapToolStripMenuItem
-            // 
-            this.wordWrapToolStripMenuItem.Image = global::pie.Properties.Resources.paragraph;
-            this.wordWrapToolStripMenuItem.Name = "wordWrapToolStripMenuItem";
-            this.wordWrapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.wordWrapToolStripMenuItem.Text = "Enable Word Wrap";
-            this.wordWrapToolStripMenuItem.Click += new System.EventHandler(this.wordWrapToolStripMenuItem_Click);
-            // 
-            // enableAutosaveToolStripMenuItem
-            // 
-            this.enableAutosaveToolStripMenuItem.Image = global::pie.Properties.Resources.diskette__1_;
-            this.enableAutosaveToolStripMenuItem.Name = "enableAutosaveToolStripMenuItem";
-            this.enableAutosaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.enableAutosaveToolStripMenuItem.Text = "Enable Autosave";
-            this.enableAutosaveToolStripMenuItem.Click += new System.EventHandler(this.enableAutosaveToolStripMenuItem_Click);
-            // 
             // smartFormatterToolStripMenuItem
             // 
             this.smartFormatterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -739,163 +597,6 @@
             this.smartFormatterToolStripMenuItem.Name = "smartFormatterToolStripMenuItem";
             this.smartFormatterToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.smartFormatterToolStripMenuItem.Text = "Format";
-            // 
-            // linesToolStripMenuItem
-            // 
-            this.linesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.duplicateEveryLineToolStripMenuItem,
-            this.addEmptyRowBetweenEachLineToolStripMenuItem,
-            this.capitalizeFirstLineCharactersToolStripMenuItem,
-            this.emptyLinesToolStripMenuItem,
-            this.removeWhitespaceLinesToolStripMenuItem1,
-            this.removeDuplicateLinesToolStripMenuItem,
-            this.consecutiveDuplicateLinesToolStripMenuItem,
-            this.trimLineswhitespacesToolStripMenuItem});
-            this.linesToolStripMenuItem.Name = "linesToolStripMenuItem";
-            this.linesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.linesToolStripMenuItem.Text = "Lines";
-            // 
-            // duplicateEveryLineToolStripMenuItem
-            // 
-            this.duplicateEveryLineToolStripMenuItem.Name = "duplicateEveryLineToolStripMenuItem";
-            this.duplicateEveryLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.duplicateEveryLineToolStripMenuItem.Text = "Duplicate every line";
-            this.duplicateEveryLineToolStripMenuItem.Click += new System.EventHandler(this.duplicateEveryLineToolStripMenuItem_Click);
-            // 
-            // addEmptyRowBetweenEachLineToolStripMenuItem
-            // 
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Name = "addEmptyRowBetweenEachLineToolStripMenuItem";
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Text = "Add empty row between each line";
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Click += new System.EventHandler(this.addEmptyRowBetweenEachLineToolStripMenuItem_Click);
-            // 
-            // capitalizeFirstLineCharactersToolStripMenuItem
-            // 
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Name = "capitalizeFirstLineCharactersToolStripMenuItem";
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Text = "Capitalize first characters from every line";
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Click += new System.EventHandler(this.capitalizeFirstLineCharactersToolStripMenuItem_Click);
-            // 
-            // emptyLinesToolStripMenuItem
-            // 
-            this.emptyLinesToolStripMenuItem.Name = "emptyLinesToolStripMenuItem";
-            this.emptyLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.emptyLinesToolStripMenuItem.Text = "Remove empty lines";
-            this.emptyLinesToolStripMenuItem.Click += new System.EventHandler(this.emptyLinesToolStripMenuItem_Click);
-            // 
-            // removeWhitespaceLinesToolStripMenuItem1
-            // 
-            this.removeWhitespaceLinesToolStripMenuItem1.Name = "removeWhitespaceLinesToolStripMenuItem1";
-            this.removeWhitespaceLinesToolStripMenuItem1.Size = new System.Drawing.Size(348, 22);
-            this.removeWhitespaceLinesToolStripMenuItem1.Text = "Remove whitespace lines";
-            this.removeWhitespaceLinesToolStripMenuItem1.Click += new System.EventHandler(this.removeWhitespaceLinesToolStripMenuItem1_Click);
-            // 
-            // removeDuplicateLinesToolStripMenuItem
-            // 
-            this.removeDuplicateLinesToolStripMenuItem.Name = "removeDuplicateLinesToolStripMenuItem";
-            this.removeDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.removeDuplicateLinesToolStripMenuItem.Text = "Remove duplicate lines";
-            this.removeDuplicateLinesToolStripMenuItem.Click += new System.EventHandler(this.removeDuplicateLinesToolStripMenuItem_Click);
-            // 
-            // consecutiveDuplicateLinesToolStripMenuItem
-            // 
-            this.consecutiveDuplicateLinesToolStripMenuItem.Name = "consecutiveDuplicateLinesToolStripMenuItem";
-            this.consecutiveDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.consecutiveDuplicateLinesToolStripMenuItem.Text = "Remove consecutive duplicate lines";
-            this.consecutiveDuplicateLinesToolStripMenuItem.Click += new System.EventHandler(this.consecutiveDuplicateLinesToolStripMenuItem_Click);
-            // 
-            // trimLineswhitespacesToolStripMenuItem
-            // 
-            this.trimLineswhitespacesToolStripMenuItem.Name = "trimLineswhitespacesToolStripMenuItem";
-            this.trimLineswhitespacesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.trimLineswhitespacesToolStripMenuItem.Text = "Trim lines (remove trailing and leading whitespaces)";
-            this.trimLineswhitespacesToolStripMenuItem.Click += new System.EventHandler(this.trimLineswhitespacesToolStripMenuItem_Click);
-            // 
-            // charactersToolStripMenuItem
-            // 
-            this.charactersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.capitalizeEveryWordToolStripMenuItem,
-            this.capitalizeEntireTextToolStripMenuItem,
-            this.lowercaseEntireContentToolStripMenuItem,
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem,
-            this.allWhitespaceCharactersToolStripMenuItem,
-            this.trimWhitespaceCharactersToolStripMenuItem1});
-            this.charactersToolStripMenuItem.Name = "charactersToolStripMenuItem";
-            this.charactersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.charactersToolStripMenuItem.Text = "Characters";
-            // 
-            // capitalizeEveryWordToolStripMenuItem
-            // 
-            this.capitalizeEveryWordToolStripMenuItem.Name = "capitalizeEveryWordToolStripMenuItem";
-            this.capitalizeEveryWordToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
-            this.capitalizeEveryWordToolStripMenuItem.Text = "Capitalize every word";
-            this.capitalizeEveryWordToolStripMenuItem.Click += new System.EventHandler(this.capitalizeEveryWordToolStripMenuItem_Click);
-            // 
-            // capitalizeEntireTextToolStripMenuItem
-            // 
-            this.capitalizeEntireTextToolStripMenuItem.Name = "capitalizeEntireTextToolStripMenuItem";
-            this.capitalizeEntireTextToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
-            this.capitalizeEntireTextToolStripMenuItem.Text = "Convert text to uppercase";
-            this.capitalizeEntireTextToolStripMenuItem.Click += new System.EventHandler(this.capitalizeEntireTextToolStripMenuItem_Click);
-            // 
-            // lowercaseEntireContentToolStripMenuItem
-            // 
-            this.lowercaseEntireContentToolStripMenuItem.Name = "lowercaseEntireContentToolStripMenuItem";
-            this.lowercaseEntireContentToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
-            this.lowercaseEntireContentToolStripMenuItem.Text = "Convert text to lowercase";
-            this.lowercaseEntireContentToolStripMenuItem.Click += new System.EventHandler(this.lowercaseEntireContentToolStripMenuItem_Click);
-            // 
-            // switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem
-            // 
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Name = "switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem";
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Text = "Swap lowercase and uppercase characters";
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Click += new System.EventHandler(this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem_Click);
-            // 
-            // allWhitespaceCharactersToolStripMenuItem
-            // 
-            this.allWhitespaceCharactersToolStripMenuItem.Name = "allWhitespaceCharactersToolStripMenuItem";
-            this.allWhitespaceCharactersToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
-            this.allWhitespaceCharactersToolStripMenuItem.Text = "Remove all whitespaces (except CR/LF)";
-            this.allWhitespaceCharactersToolStripMenuItem.Click += new System.EventHandler(this.allWhitespaceCharactersToolStripMenuItem_Click);
-            // 
-            // trimWhitespaceCharactersToolStripMenuItem1
-            // 
-            this.trimWhitespaceCharactersToolStripMenuItem1.Name = "trimWhitespaceCharactersToolStripMenuItem1";
-            this.trimWhitespaceCharactersToolStripMenuItem1.Size = new System.Drawing.Size(330, 22);
-            this.trimWhitespaceCharactersToolStripMenuItem1.Text = "Remove consecutive whitespaces (except CR/LF)";
-            this.trimWhitespaceCharactersToolStripMenuItem1.Click += new System.EventHandler(this.trimWhitespaceCharactersToolStripMenuItem1_Click);
-            // 
-            // sortToolStripMenuItem
-            // 
-            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sortAscendingToolStripMenuItem,
-            this.sortDescendingToolStripMenuItem,
-            this.revertLineOrderToolStripMenuItem1});
-            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sortToolStripMenuItem.Text = "Sorting";
-            // 
-            // sortAscendingToolStripMenuItem
-            // 
-            this.sortAscendingToolStripMenuItem.Name = "sortAscendingToolStripMenuItem";
-            this.sortAscendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.sortAscendingToolStripMenuItem.Text = "Sort lines ascending";
-            this.sortAscendingToolStripMenuItem.Click += new System.EventHandler(this.sortAscendingToolStripMenuItem_Click);
-            // 
-            // sortDescendingToolStripMenuItem
-            // 
-            this.sortDescendingToolStripMenuItem.Name = "sortDescendingToolStripMenuItem";
-            this.sortDescendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.sortDescendingToolStripMenuItem.Text = "Sort lines descending";
-            this.sortDescendingToolStripMenuItem.Click += new System.EventHandler(this.sortDescendingToolStripMenuItem_Click);
-            // 
-            // revertLineOrderToolStripMenuItem1
-            // 
-            this.revertLineOrderToolStripMenuItem1.Name = "revertLineOrderToolStripMenuItem1";
-            this.revertLineOrderToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
-            this.revertLineOrderToolStripMenuItem1.Text = "Reverse line order";
-            this.revertLineOrderToolStripMenuItem1.Click += new System.EventHandler(this.revertLineOrderToolStripMenuItem1_Click);
             // 
             // kryptonRibbon1
             // 
@@ -1354,6 +1055,308 @@
             this.directoryNavigationTextBox.TabIndex = 0;
             this.directoryNavigationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
+            // kryptonContextMenuItem16
+            // 
+            this.kryptonContextMenuItem16.Image = global::pie.Properties.Resources.terminal;
+            this.kryptonContextMenuItem16.Text = "New Command Prompt Tab";
+            this.kryptonContextMenuItem16.Click += new System.EventHandler(this.kryptonContextMenuItem16_Click);
+            // 
+            // kryptonContextMenuItem17
+            // 
+            this.kryptonContextMenuItem17.Image = global::pie.Properties.Resources.powershell;
+            this.kryptonContextMenuItem17.Text = "New PowerShell Tab";
+            this.kryptonContextMenuItem17.Click += new System.EventHandler(this.kryptonContextMenuItem17_Click);
+            // 
+            // kryptonContextMenuItem6
+            // 
+            this.kryptonContextMenuItem6.Image = global::pie.Properties.Resources.search;
+            this.kryptonContextMenuItem6.Text = "Show Find and Replace";
+            this.kryptonContextMenuItem6.Click += new System.EventHandler(this.kryptonContextMenuItem6_Click);
+            // 
+            // kryptonContextMenuItem15
+            // 
+            this.kryptonContextMenuItem15.Image = global::pie.Properties.Resources.terminal;
+            this.kryptonContextMenuItem15.Text = "Show Terminal Tab";
+            this.kryptonContextMenuItem15.Click += new System.EventHandler(this.kryptonContextMenuItem15_Click);
+            // 
+            // kryptonContextMenuItem12
+            // 
+            this.kryptonContextMenuItem12.Image = global::pie.Properties.Resources.browse;
+            this.kryptonContextMenuItem12.Text = "Show Directory Navigator";
+            this.kryptonContextMenuItem12.Click += new System.EventHandler(this.kryptonContextMenuItem12_Click);
+            // 
+            // kryptonPage1
+            // 
+            this.kryptonPage1.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage1.Flags = 65534;
+            this.kryptonPage1.ImageSmall = global::pie.Properties.Resources.plus_blue;
+            this.kryptonPage1.LastVisibleSet = true;
+            this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage1.Name = "kryptonPage1";
+            this.kryptonPage1.Size = new System.Drawing.Size(1018, 546);
+            this.kryptonPage1.Text = "";
+            this.kryptonPage1.TextDescription = "";
+            this.kryptonPage1.TextTitle = "";
+            this.kryptonPage1.ToolTipTitle = "Add New Tab";
+            this.kryptonPage1.UniqueName = "E9D081B0A6964933EA81724511F8E430";
+            // 
+            // showBuildToolsToolStripMenuItem
+            // 
+            this.showBuildToolsToolStripMenuItem.Image = global::pie.Properties.Resources.terminal;
+            this.showBuildToolsToolStripMenuItem.Name = "showBuildToolsToolStripMenuItem";
+            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
+            this.showBuildToolsToolStripMenuItem.Click += new System.EventHandler(this.showBuildToolsToolStripMenuItem_Click);
+            // 
+            // showGitTabToolStripMenuItem
+            // 
+            this.showGitTabToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showGitTabToolStripMenuItem.Image")));
+            this.showGitTabToolStripMenuItem.Name = "showGitTabToolStripMenuItem";
+            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.showGitTabToolStripMenuItem.Text = "Show Git Tab";
+            this.showGitTabToolStripMenuItem.Click += new System.EventHandler(this.showGitTabToolStripMenuItem_Click);
+            // 
+            // themeSettingsToolStripMenuItem
+            // 
+            this.themeSettingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.themeSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lightToolStripMenuItem,
+            this.darkToolStripMenuItem});
+            this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.color_wheel;
+            this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
+            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.themeSettingsToolStripMenuItem.Text = "Themes";
+            // 
+            // lightToolStripMenuItem
+            // 
+            this.lightToolStripMenuItem.Name = "lightToolStripMenuItem";
+            this.lightToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.lightToolStripMenuItem.Text = "Light";
+            this.lightToolStripMenuItem.Click += new System.EventHandler(this.lightToolStripMenuItem_Click);
+            // 
+            // darkToolStripMenuItem
+            // 
+            this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
+            this.darkToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.darkToolStripMenuItem.Text = "Dark";
+            this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
+            // 
+            // aboutPieToolStripMenuItem
+            // 
+            this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info;
+            this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
+            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.aboutPieToolStripMenuItem.Text = "About pie";
+            this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
+            // 
+            // manageBuildCommandsToolStripMenuItem
+            // 
+            this.manageBuildCommandsToolStripMenuItem.Image = global::pie.Properties.Resources.gears;
+            this.manageBuildCommandsToolStripMenuItem.Name = "manageBuildCommandsToolStripMenuItem";
+            this.manageBuildCommandsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manageBuildCommandsToolStripMenuItem.Text = "Build Commands";
+            this.manageBuildCommandsToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
+            // 
+            // databasesToolStripMenuItem
+            // 
+            this.databasesToolStripMenuItem.Image = global::pie.Properties.Resources.database;
+            this.databasesToolStripMenuItem.Name = "databasesToolStripMenuItem";
+            this.databasesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.databasesToolStripMenuItem.Text = "Databases";
+            this.databasesToolStripMenuItem.Click += new System.EventHandler(this.databasesToolStripMenuItem_Click);
+            // 
+            // manageCommitCredentialsToolStripMenuItem
+            // 
+            this.manageCommitCredentialsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageCommitCredentialsToolStripMenuItem.Image")));
+            this.manageCommitCredentialsToolStripMenuItem.Name = "manageCommitCredentialsToolStripMenuItem";
+            this.manageCommitCredentialsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manageCommitCredentialsToolStripMenuItem.Text = "Commit Credentials";
+            this.manageCommitCredentialsToolStripMenuItem.Click += new System.EventHandler(this.manageCommitCredentialsToolStripMenuItem_Click);
+            // 
+            // managePushCredentialsToolStripMenuItem
+            // 
+            this.managePushCredentialsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("managePushCredentialsToolStripMenuItem.Image")));
+            this.managePushCredentialsToolStripMenuItem.Name = "managePushCredentialsToolStripMenuItem";
+            this.managePushCredentialsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.managePushCredentialsToolStripMenuItem.Text = "Push Credentials";
+            this.managePushCredentialsToolStripMenuItem.Click += new System.EventHandler(this.managePushCredentialsToolStripMenuItem_Click);
+            // 
+            // wordWrapToolStripMenuItem
+            // 
+            this.wordWrapToolStripMenuItem.Image = global::pie.Properties.Resources.paragraph;
+            this.wordWrapToolStripMenuItem.Name = "wordWrapToolStripMenuItem";
+            this.wordWrapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wordWrapToolStripMenuItem.Text = "Enable Word Wrap";
+            this.wordWrapToolStripMenuItem.Click += new System.EventHandler(this.wordWrapToolStripMenuItem_Click);
+            // 
+            // enableAutosaveToolStripMenuItem
+            // 
+            this.enableAutosaveToolStripMenuItem.Image = global::pie.Properties.Resources.diskette__1_;
+            this.enableAutosaveToolStripMenuItem.Name = "enableAutosaveToolStripMenuItem";
+            this.enableAutosaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.enableAutosaveToolStripMenuItem.Text = "Enable Autosave";
+            this.enableAutosaveToolStripMenuItem.Click += new System.EventHandler(this.enableAutosaveToolStripMenuItem_Click);
+            // 
+            // linesToolStripMenuItem
+            // 
+            this.linesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.duplicateEveryLineToolStripMenuItem,
+            this.addEmptyRowBetweenEachLineToolStripMenuItem,
+            this.capitalizeFirstLineCharactersToolStripMenuItem,
+            this.emptyLinesToolStripMenuItem,
+            this.removeWhitespaceLinesToolStripMenuItem1,
+            this.removeDuplicateLinesToolStripMenuItem,
+            this.consecutiveDuplicateLinesToolStripMenuItem,
+            this.trimLineswhitespacesToolStripMenuItem});
+            this.linesToolStripMenuItem.Image = global::pie.Properties.Resources.arrow;
+            this.linesToolStripMenuItem.Name = "linesToolStripMenuItem";
+            this.linesToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.linesToolStripMenuItem.Text = "Lines";
+            // 
+            // duplicateEveryLineToolStripMenuItem
+            // 
+            this.duplicateEveryLineToolStripMenuItem.Name = "duplicateEveryLineToolStripMenuItem";
+            this.duplicateEveryLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.duplicateEveryLineToolStripMenuItem.Text = "Duplicate every line";
+            this.duplicateEveryLineToolStripMenuItem.Click += new System.EventHandler(this.duplicateEveryLineToolStripMenuItem_Click);
+            // 
+            // addEmptyRowBetweenEachLineToolStripMenuItem
+            // 
+            this.addEmptyRowBetweenEachLineToolStripMenuItem.Name = "addEmptyRowBetweenEachLineToolStripMenuItem";
+            this.addEmptyRowBetweenEachLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.addEmptyRowBetweenEachLineToolStripMenuItem.Text = "Add empty row between each line";
+            this.addEmptyRowBetweenEachLineToolStripMenuItem.Click += new System.EventHandler(this.addEmptyRowBetweenEachLineToolStripMenuItem_Click);
+            // 
+            // capitalizeFirstLineCharactersToolStripMenuItem
+            // 
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Name = "capitalizeFirstLineCharactersToolStripMenuItem";
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Text = "Capitalize first characters from every line";
+            this.capitalizeFirstLineCharactersToolStripMenuItem.Click += new System.EventHandler(this.capitalizeFirstLineCharactersToolStripMenuItem_Click);
+            // 
+            // emptyLinesToolStripMenuItem
+            // 
+            this.emptyLinesToolStripMenuItem.Name = "emptyLinesToolStripMenuItem";
+            this.emptyLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.emptyLinesToolStripMenuItem.Text = "Remove empty lines";
+            this.emptyLinesToolStripMenuItem.Click += new System.EventHandler(this.emptyLinesToolStripMenuItem_Click);
+            // 
+            // removeWhitespaceLinesToolStripMenuItem1
+            // 
+            this.removeWhitespaceLinesToolStripMenuItem1.Name = "removeWhitespaceLinesToolStripMenuItem1";
+            this.removeWhitespaceLinesToolStripMenuItem1.Size = new System.Drawing.Size(348, 22);
+            this.removeWhitespaceLinesToolStripMenuItem1.Text = "Remove whitespace lines";
+            this.removeWhitespaceLinesToolStripMenuItem1.Click += new System.EventHandler(this.removeWhitespaceLinesToolStripMenuItem1_Click);
+            // 
+            // removeDuplicateLinesToolStripMenuItem
+            // 
+            this.removeDuplicateLinesToolStripMenuItem.Name = "removeDuplicateLinesToolStripMenuItem";
+            this.removeDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.removeDuplicateLinesToolStripMenuItem.Text = "Remove duplicate lines";
+            this.removeDuplicateLinesToolStripMenuItem.Click += new System.EventHandler(this.removeDuplicateLinesToolStripMenuItem_Click);
+            // 
+            // consecutiveDuplicateLinesToolStripMenuItem
+            // 
+            this.consecutiveDuplicateLinesToolStripMenuItem.Name = "consecutiveDuplicateLinesToolStripMenuItem";
+            this.consecutiveDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.consecutiveDuplicateLinesToolStripMenuItem.Text = "Remove consecutive duplicate lines";
+            this.consecutiveDuplicateLinesToolStripMenuItem.Click += new System.EventHandler(this.consecutiveDuplicateLinesToolStripMenuItem_Click);
+            // 
+            // trimLineswhitespacesToolStripMenuItem
+            // 
+            this.trimLineswhitespacesToolStripMenuItem.Name = "trimLineswhitespacesToolStripMenuItem";
+            this.trimLineswhitespacesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.trimLineswhitespacesToolStripMenuItem.Text = "Trim lines (remove trailing and leading whitespaces)";
+            this.trimLineswhitespacesToolStripMenuItem.Click += new System.EventHandler(this.trimLineswhitespacesToolStripMenuItem_Click);
+            // 
+            // charactersToolStripMenuItem
+            // 
+            this.charactersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.capitalizeEveryWordToolStripMenuItem,
+            this.capitalizeEntireTextToolStripMenuItem,
+            this.lowercaseEntireContentToolStripMenuItem,
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem,
+            this.allWhitespaceCharactersToolStripMenuItem,
+            this.trimWhitespaceCharactersToolStripMenuItem1});
+            this.charactersToolStripMenuItem.Image = global::pie.Properties.Resources.font;
+            this.charactersToolStripMenuItem.Name = "charactersToolStripMenuItem";
+            this.charactersToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.charactersToolStripMenuItem.Text = "Characters";
+            // 
+            // capitalizeEveryWordToolStripMenuItem
+            // 
+            this.capitalizeEveryWordToolStripMenuItem.Name = "capitalizeEveryWordToolStripMenuItem";
+            this.capitalizeEveryWordToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.capitalizeEveryWordToolStripMenuItem.Text = "Capitalize every word";
+            this.capitalizeEveryWordToolStripMenuItem.Click += new System.EventHandler(this.capitalizeEveryWordToolStripMenuItem_Click);
+            // 
+            // capitalizeEntireTextToolStripMenuItem
+            // 
+            this.capitalizeEntireTextToolStripMenuItem.Name = "capitalizeEntireTextToolStripMenuItem";
+            this.capitalizeEntireTextToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.capitalizeEntireTextToolStripMenuItem.Text = "Convert text to uppercase";
+            this.capitalizeEntireTextToolStripMenuItem.Click += new System.EventHandler(this.capitalizeEntireTextToolStripMenuItem_Click);
+            // 
+            // lowercaseEntireContentToolStripMenuItem
+            // 
+            this.lowercaseEntireContentToolStripMenuItem.Name = "lowercaseEntireContentToolStripMenuItem";
+            this.lowercaseEntireContentToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.lowercaseEntireContentToolStripMenuItem.Text = "Convert text to lowercase";
+            this.lowercaseEntireContentToolStripMenuItem.Click += new System.EventHandler(this.lowercaseEntireContentToolStripMenuItem_Click);
+            // 
+            // switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem
+            // 
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Name = "switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem";
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Text = "Swap lowercase and uppercase characters";
+            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Click += new System.EventHandler(this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem_Click);
+            // 
+            // allWhitespaceCharactersToolStripMenuItem
+            // 
+            this.allWhitespaceCharactersToolStripMenuItem.Name = "allWhitespaceCharactersToolStripMenuItem";
+            this.allWhitespaceCharactersToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.allWhitespaceCharactersToolStripMenuItem.Text = "Remove all whitespaces (except CR/LF)";
+            this.allWhitespaceCharactersToolStripMenuItem.Click += new System.EventHandler(this.allWhitespaceCharactersToolStripMenuItem_Click);
+            // 
+            // trimWhitespaceCharactersToolStripMenuItem1
+            // 
+            this.trimWhitespaceCharactersToolStripMenuItem1.Name = "trimWhitespaceCharactersToolStripMenuItem1";
+            this.trimWhitespaceCharactersToolStripMenuItem1.Size = new System.Drawing.Size(330, 22);
+            this.trimWhitespaceCharactersToolStripMenuItem1.Text = "Remove consecutive whitespaces (except CR/LF)";
+            this.trimWhitespaceCharactersToolStripMenuItem1.Click += new System.EventHandler(this.trimWhitespaceCharactersToolStripMenuItem1_Click);
+            // 
+            // sortToolStripMenuItem
+            // 
+            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sortAscendingToolStripMenuItem,
+            this.sortDescendingToolStripMenuItem,
+            this.revertLineOrderToolStripMenuItem1});
+            this.sortToolStripMenuItem.Image = global::pie.Properties.Resources.sort;
+            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.sortToolStripMenuItem.Text = "Sorting";
+            // 
+            // sortAscendingToolStripMenuItem
+            // 
+            this.sortAscendingToolStripMenuItem.Name = "sortAscendingToolStripMenuItem";
+            this.sortAscendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.sortAscendingToolStripMenuItem.Text = "Sort lines ascending";
+            this.sortAscendingToolStripMenuItem.Click += new System.EventHandler(this.sortAscendingToolStripMenuItem_Click);
+            // 
+            // sortDescendingToolStripMenuItem
+            // 
+            this.sortDescendingToolStripMenuItem.Name = "sortDescendingToolStripMenuItem";
+            this.sortDescendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.sortDescendingToolStripMenuItem.Text = "Sort lines descending";
+            this.sortDescendingToolStripMenuItem.Click += new System.EventHandler(this.sortDescendingToolStripMenuItem_Click);
+            // 
+            // revertLineOrderToolStripMenuItem1
+            // 
+            this.revertLineOrderToolStripMenuItem1.Name = "revertLineOrderToolStripMenuItem1";
+            this.revertLineOrderToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
+            this.revertLineOrderToolStripMenuItem1.Text = "Reverse line order";
+            this.revertLineOrderToolStripMenuItem1.Click += new System.EventHandler(this.revertLineOrderToolStripMenuItem1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1377,7 +1380,6 @@
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).EndInit();
@@ -1407,6 +1409,7 @@
             this.directoryNavigationHeaderGroup.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.directoryNavigationHeaderGroup)).EndInit();
             this.directoryNavigationHeaderGroup.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

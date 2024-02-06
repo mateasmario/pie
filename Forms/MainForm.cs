@@ -1212,7 +1212,7 @@ namespace pie
             }
             else
             {
-                if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
+                if (tabControl.SelectedIndex < Globals.tabInfos.Count && Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
                 {
                     Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
                     ClearHighlights(TextArea);
@@ -1747,8 +1747,14 @@ namespace pie
                     }
                 }
             }
+            else if (Globals.showGitTabPressed)
+            {
+                tabControl.KryptonContextMenu = gitContextMenu;
+                Globals.showGitTabPressed = false;
+            }
             else
             {
+                tabControl.KryptonContextMenu = null;
                 DeactivateBuildAndRunOptions();
                 UpdateFormTitle("Untitled");
             }
@@ -2064,6 +2070,7 @@ namespace pie
 
         private void showGitTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Globals.showGitTabPressed = true;
             NewTab(TabType.GIT, null);
         }
 
