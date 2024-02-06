@@ -1,7 +1,4 @@
-# ![pie (2)](https://i.imgur.com/2nE7mDE.png) pie
-Lightweight text editor with some third-party features, capable of replacing Notepad.
-
-![image](https://i.imgur.com/B533oZ0.png)
+# ![pie](https://i.imgur.com/7310ZBJ.png)
 
 ### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Short Introduction
 pie is a combination between a text-editor (like Notepad) and an over-simplified IDE, that allows super-fast modification of code files (or other types of files), whenever you don't feel the need to wait for a big IDE to open.
@@ -9,6 +6,8 @@ pie is a combination between a text-editor (like Notepad) and an over-simplified
 pie has integrated tabs, in order to give the user the ability to manipulate multiple files at once, without keeping more than one instance of the app open in the same time.
 
 pie also has several Build, Run & Git shortcuts integrated, making your life easier whenever you feel the urge to run a command through the terminal. In case you still need a terminal, pie also has this option!
+
+![image](https://i.imgur.com/B533oZ0.png)
 
 ### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Beautiful design
 pie is built in C# using Microsoft's .NET Winforms technology. The main controls use the **Krypton Suite**, available at: https://github.com/ComponentFactory/Krypton. Without Krypton, pie wouldn't be as awesome as it is now.
