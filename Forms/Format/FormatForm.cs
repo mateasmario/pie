@@ -82,6 +82,11 @@ namespace pie.Forms.Format
 
         private void FormatForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             SynchronizeObjectListViewWithTheme();
             List<FormatOption> formatOptions = FetchPredefinedFormatOptions();
             formatOptionsListView.SetObjects(formatOptions);

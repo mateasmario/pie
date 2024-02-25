@@ -51,7 +51,7 @@ namespace pie.Services
             });
 
 
-            if (result[result.Length-1] == '\r')
+            if (result.Length-1 >= 0 && result[result.Length-1] == '\r')
             {
                 return result.Substring(0, result.Length - 1);
             }
@@ -69,7 +69,7 @@ namespace pie.Services
                 return (String.IsNullOrWhiteSpace(curr) ? "" : curr) + (String.IsNullOrWhiteSpace(next) ? "" : "\n" + next);
             });
 
-            if (result[result.Length - 1] == '\r')
+            if (result.Length-1 >= 0 && result[result.Length - 1] == '\r')
             {
                 return result.Substring(0, result.Length - 1);
             }
@@ -150,7 +150,7 @@ namespace pie.Services
                     res = curr + " " + next.Substring(0, 1).ToUpper() + next.Substring(1);
                 }
 
-                if (next[next.Length - 1] == '\r')
+                if (next.Length-1 >= 0 && next[next.Length - 1] == '\r')
                 {
                     isNewLine = true;
                 }
@@ -349,7 +349,7 @@ namespace pie.Services
 
             for (int i = 0; i<lines.Length; i++)
             {
-                if (lines[i][lines[i].Length-1] == '\r')
+                if (lines[i].Length-1 >= 0 && lines[i][lines[i].Length-1] == '\r')
                 {
                     lines[i] = lines[i].Substring(0, lines[i].Length-1);
                 }
@@ -366,7 +366,7 @@ namespace pie.Services
 
             for (int i = 0; i < lines.Length; i++)
             {
-                if (lines[i][lines[i].Length - 1] == '\r')
+                if (lines[i].Length - 1 >= 0 && lines[i][lines[i].Length - 1] == '\r')
                 {
                     lines[i] = lines[i].Substring(0, lines[i].Length - 1);
                 }

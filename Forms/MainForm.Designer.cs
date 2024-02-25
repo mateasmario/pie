@@ -143,6 +143,7 @@
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.directoryNavigationHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.directoryNavigationTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.glassModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
@@ -480,6 +481,7 @@
             this.showBuildToolsToolStripMenuItem,
             this.showGitTabToolStripMenuItem,
             this.themeSettingsToolStripMenuItem,
+            this.glassModeToolStripMenuItem,
             this.aboutPieToolStripMenuItem});
             this.designToolStripMenuItem.Name = "designToolStripMenuItem";
             this.designToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
@@ -497,7 +499,7 @@
             // 
             this.showGitTabToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showGitTabToolStripMenuItem.Image")));
             this.showGitTabToolStripMenuItem.Name = "showGitTabToolStripMenuItem";
-            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showGitTabToolStripMenuItem.Text = "Show Git Tab";
             this.showGitTabToolStripMenuItem.Click += new System.EventHandler(this.showGitTabToolStripMenuItem_Click);
             // 
@@ -705,7 +707,6 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -1154,6 +1155,14 @@
             this.directoryNavigationTextBox.TabIndex = 0;
             this.directoryNavigationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
+            // glassModeToolStripMenuItem
+            // 
+            this.glassModeToolStripMenuItem.Image = global::pie.Properties.Resources.transparency;
+            this.glassModeToolStripMenuItem.Name = "glassModeToolStripMenuItem";
+            this.glassModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.glassModeToolStripMenuItem.Text = "Enable Glass Effect";
+            this.glassModeToolStripMenuItem.Click += new System.EventHandler(this.glassModeToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1326,6 +1335,7 @@
         private System.Windows.Forms.ToolStripMenuItem wordWrapToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enableAutosaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smartFormatterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem glassModeToolStripMenuItem;
     }
 }
 

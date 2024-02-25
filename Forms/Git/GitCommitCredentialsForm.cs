@@ -62,6 +62,11 @@ namespace pie
 
         private void GitCommitCredentialsForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             if (Globals.gitCredentials.Name != null)
             {
                 kryptonTextBox1.Text = Globals.gitCredentials.Name;

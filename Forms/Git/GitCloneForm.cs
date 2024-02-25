@@ -120,6 +120,11 @@ namespace pie
 
         private void GitCloneForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             Globals.clonePath = null;
         }
 

@@ -75,6 +75,11 @@ namespace pie
 
         private void GitCommitLogForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             gitCommitLogListView.ShowGroups = false;
             gitCommitLogListView.BackColor = ThemeService.GetColor("Primary");
             gitCommitLogListView.ForeColor = ThemeService.GetColor("Fore");

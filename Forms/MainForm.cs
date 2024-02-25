@@ -862,7 +862,7 @@ namespace pie
         // [Method] Opens a file (without openFileDialog), given just a path
         public bool Open(string fileName)
         {
-            if (tabControl.Pages.Count == 1)
+            if (tabControl.Pages.Count == 0)
             {
                 NewTab(TabType.CODE, null);
             }
@@ -1304,9 +1304,14 @@ namespace pie
                     enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
                 }
 
+                if (Globals.glass)
+                {
+                    glassModeToolStripMenuItem.Text = "Disable Glass Effect";
+                }
+
             } catch (FileNotFoundException ex)
             {
-                EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", false, false);
+                EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", false, false, false);
             }
         }
 
@@ -1383,6 +1388,10 @@ namespace pie
         // [Event] Form Loading
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
         }
 
         private void GitStagingAreaListView_FormatRow(object sender, FormatRowEventArgs e)
@@ -3018,7 +3027,7 @@ namespace pie
         {
             Globals.wordwrap = !Globals.wordwrap;
             ToggleWordWrap(Globals.wordwrap);
-            EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave);
+            EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave, Globals.glass);
         }
 
         private void ToggleWordWrap(bool status)
@@ -3058,7 +3067,7 @@ namespace pie
                 enableAutosaveToolStripMenuItem.Text = "Enable Autosave";
             }
 
-            EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave);
+            EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave, Globals.glass);
         }
 
         private void PerformFirstSaveWhenAutosaveTriggered()
@@ -3382,6 +3391,24 @@ namespace pie
                 scintilla.SelectionStart = currPos;
                 scintilla.SelectionEnd = currPos;
             }
+        }
+
+        private void glassModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Globals.glass = !Globals.glass;
+
+            if (Globals.glass)
+            {
+                glassModeToolStripMenuItem.Text = "Disable Glass Effect";
+                this.Opacity = 0.875;
+            }
+            else
+            {
+                glassModeToolStripMenuItem.Text = "Enable Glass Effect";
+                this.Opacity = 1;
+            }
+
+            EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave, Globals.glass);
         }
     }
 }

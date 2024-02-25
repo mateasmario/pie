@@ -53,6 +53,11 @@ namespace pie.Forms.Databases
 
         private void DatabaseOutputForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             kryptonDataGridView1.DataSource = this.dataTable;
         }
     }

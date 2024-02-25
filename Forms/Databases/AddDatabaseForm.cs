@@ -146,6 +146,11 @@ namespace pie.Forms.Databases
 
         private void AddDatabaseForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             Globals.addDatabaseConnectionName = null;
             Globals.addDatabaseHostname = null;
             Globals.addDatabasePort = -1;
