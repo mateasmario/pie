@@ -61,6 +61,11 @@ namespace pie
 
         private void AddBuildCommandForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             Globals.addBuildCommandName = null;
             Globals.addBuildCommandCmd = null;
 

@@ -63,13 +63,17 @@ namespace pie.Services
                             {
                                 Globals.autosave = value;
                             }
+                            else if (token == "glass")
+                            {
+                                Globals.glass = value;
+                            }
                         }
                     }
                 }
             }
         }
 
-        public static void WriteEditorPropertiesToFile(string file, bool wordwrap, bool autosave)
+        public static void WriteEditorPropertiesToFile(string file, bool wordwrap, bool autosave, bool glass)
         {
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
 
@@ -84,6 +88,8 @@ namespace pie.Services
                 writer.WriteValue(wordwrap);
                 writer.WritePropertyName("autosave");
                 writer.WriteValue(autosave);
+                writer.WritePropertyName("glass");
+                writer.WriteValue(glass);
                 writer.WriteEndObject();
             }
         }

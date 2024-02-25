@@ -107,6 +107,7 @@ namespace pie
         // Scintilla preferences
         public static bool wordwrap;
         public static bool autosave;
+        public static bool glass;
 
         // Format
         public static string chosenFormatOption;

@@ -50,6 +50,11 @@ namespace pie
 
         private void BuildCommandsForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             tempCommands = new List<BuildCommand>();
 
             SynchronizeObjectListViewWithTheme();

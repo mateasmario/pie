@@ -52,5 +52,13 @@ namespace pie
         {
             Process.Start("https://mateasmario.com");
         }
+
+        private void AboutForm_Load(object sender, EventArgs e)
+        {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+        }
     }
 }

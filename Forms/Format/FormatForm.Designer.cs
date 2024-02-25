@@ -31,9 +31,9 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.formatOptionsListView = new BrightIdeasSoftware.ObjectListView();
             this.FormatOptionNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.FormatOptionCategoryColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.FormatOptionDescriptionColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.formatOptionsListView)).BeginInit();
@@ -80,14 +80,6 @@
             this.FormatOptionNameColumn.Text = "Name";
             this.FormatOptionNameColumn.Width = 199;
             // 
-            // kryptonLabel2
-            // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(5, 6);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(171, 20);
-            this.kryptonLabel2.TabIndex = 0;
-            this.kryptonLabel2.Values.Text = "Select a formatting technique";
-            // 
             // FormatOptionCategoryColumn
             // 
             this.FormatOptionCategoryColumn.AspectName = "FormatOptionCategory";
@@ -102,6 +94,14 @@
             this.FormatOptionDescriptionColumn.Text = "Description";
             this.FormatOptionDescriptionColumn.Width = 372;
             // 
+            // kryptonLabel2
+            // 
+            this.kryptonLabel2.Location = new System.Drawing.Point(5, 6);
+            this.kryptonLabel2.Name = "kryptonLabel2";
+            this.kryptonLabel2.Size = new System.Drawing.Size(171, 20);
+            this.kryptonLabel2.TabIndex = 0;
+            this.kryptonLabel2.Values.Text = "Select a formatting technique";
+            // 
             // FormatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,6 +109,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(714, 350);
             this.Controls.Add(this.kryptonPanel1);
+            this.MaximizeBox = false;
             this.Name = "FormatForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

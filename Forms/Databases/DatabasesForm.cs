@@ -69,6 +69,11 @@ namespace pie.Forms.Databases
 
         private void DatabasesForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             tempDatabases = new List<DatabaseConnection>();
 
             SynchronizeObjectListViewWithTheme();

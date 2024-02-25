@@ -575,6 +575,7 @@
     <Content Include="pie2-icon.ico" />
     <Content Include="pie2.ico" />
     <Content Include="pieblue.ico" />
+    <None Include="Resources\transparency.png" />
     <None Include="Resources\stars.png" />
     <None Include="Resources\smoke.png" />
     <None Include="Resources\magic.png" />

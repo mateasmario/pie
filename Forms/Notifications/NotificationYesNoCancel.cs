@@ -45,6 +45,11 @@ namespace pie
 
         private void NotificationYesNoCancel_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             Globals.notificationButtonPressed = NotificationButton.CANCEL;
             kryptonRichTextBox1.Text = Globals.notificationText;
         }
