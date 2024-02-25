@@ -2935,7 +2935,7 @@ namespace pie
 
             ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
 
-            for (int i = 0; i < tabControl.Pages.Count - 1; i++)
+            for (int i = 0; i < tabControl.Pages.Count; i++)
             {
                 if (Globals.tabInfos[i].getTabType() == TabType.CODE)
                 {
