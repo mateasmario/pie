@@ -26,10 +26,12 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
+using System.Text.RegularExpressions;
 using pie.Classes;
 using pie.Forms.Databases;
 using pie.Services;
 using pie.Enums;
+using pie.Forms.Format;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -91,8 +93,6 @@ using BrightIdeasSoftware;
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
-using System.Text.RegularExpressions;
-using pie.Forms.Format;
 
 namespace pie
 {
@@ -551,7 +551,7 @@ namespace pie
 
                 if (Globals.gitTabOpened)
                 {
-                    for (int i = 0; i<tabControl.Pages.Count-1; i++)
+                    for (int i = 0; i<tabControl.Pages.Count; i++)
                     {
                         if (Globals.tabInfos[i].getTabType() == TabType.GIT)
                         {
@@ -614,18 +614,13 @@ namespace pie
                 kryptonPage.Controls.Add(chromiumWebBrowser);
             }
 
-            int index = 0;
-
-            if (tabControl.Pages.Count > 1)
-            {
-                index = Globals.lastSelectedTabIndex + 1;
-            }
-
-            tabControl.Pages.Insert(index, kryptonPage);
-            tabControl.SelectedPage = kryptonPage;
-
             TabInfo tabInfo = new TabInfo(openedFilePath, false, tabType, autocompleteMenu);
+
+            int index = tabControl.Pages.Count <= 0 ? 0 : tabControl.SelectedIndex+1;
             Globals.tabInfos.Insert(index, tabInfo);
+
+            tabControl.Pages.Insert(tabControl.SelectedIndex+1, kryptonPage);
+            tabControl.SelectedPage = kryptonPage;
             
             if (tabType == TabType.GIT)
             {
@@ -730,15 +725,29 @@ namespace pie
         {
             KryptonPage selectedKryptonPage = tabControl.SelectedPage;
 
-            tabControl.Pages.Remove(selectedKryptonPage);
-
-            if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() != TabType.CODE && Globals.tabInfos[tabControl.SelectedIndex].getTabType() != TabType.GIT)
+            if (tabControl.SelectedIndex == tabControl.Pages.Count-1)
             {
-                selectedKryptonPage.Dispose();
+                Globals.deletesLastTab = true;
+            }
+            else
+            {
+                Globals.deletesLastTab = false;
             }
 
-            Globals.tabInfos.RemoveAt(tabControl.SelectedIndex);
+            if (tabControl.SelectedIndex >= 0)
+            {
+                TabInfo tabInfo = Globals.tabInfos[tabControl.SelectedIndex];
+                Globals.tabInfos.RemoveAt(tabControl.SelectedIndex);
 
+                if (tabInfo.getTabType() != TabType.CODE && tabInfo.getTabType() != TabType.GIT)
+                {
+                    selectedKryptonPage.Dispose();
+                }
+                else
+                {
+                    tabControl.Pages.Remove(selectedKryptonPage);
+                }
+            }
 
             if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < Globals.tabInfos.Count && Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
             {
@@ -746,21 +755,11 @@ namespace pie
                 ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
             }
 
-            if (tabControl.Pages.Count > 1)
-            {
-                tabControl.SelectedIndex = Globals.lastSelectedTabIndex - 1;
-
-                if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
-                {
-                    tabControl.SelectedIndex--;
-                }
-
-                Globals.lastSelectedTabIndex = tabControl.SelectedIndex;
-            }
-            else
+            if (tabControl.Pages.Count <= 0)
             {
                 NewTab(TabType.CODE, null);
             }
+
         }
 
         // [Method] Closes the currently selected *terminal* tab
@@ -1330,7 +1329,6 @@ namespace pie
 
             ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
             SynchronizeMainFormComponentsWithTheme();
-            SynchronizeImagesWithTheme();
             
             this.Palette = kryptonPalette;
             tabControl.Palette = kryptonPalette;
@@ -1577,33 +1575,31 @@ namespace pie
                 }
             }
 
-            if (tabControl.SelectedIndex != tabControl.Pages.Count - 1)
+            
+            if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
             {
-                if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
+                NewTab(TabType.CODE, null);
+            }
+            else if (e.KeyCode == Keys.W && e.Modifiers == Keys.Control)
+            {
+                CloseTab();
+            }
+            else if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE) {
+                if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
                 {
-                    NewTab(TabType.CODE, null);
+                    Save(tabControl.SelectedIndex);
                 }
-                else if (e.KeyCode == Keys.W && e.Modifiers == Keys.Control)
+                else if (e.KeyCode == Keys.B && e.Modifiers == Keys.Control)
                 {
-                    CloseTab();
+                    ShowTerminalTabControl();
                 }
-                else if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE) {
-                    if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
-                    {
-                        Save(tabControl.SelectedIndex);
-                    }
-                    else if (e.KeyCode == Keys.B && e.Modifiers == Keys.Control)
-                    {
-                        ShowTerminalTabControl();
-                    }
-                    else if (e.KeyCode == Keys.F && e.Modifiers == Keys.Control)
-                    {
-                        ShowFindReplacePanel();
-                    }
-                    else if (e.KeyCode == Keys.G && e.Modifiers == Keys.Control)
-                    {
-                        ShowDirectoryNavigator();
-                    }
+                else if (e.KeyCode == Keys.F && e.Modifiers == Keys.Control)
+                {
+                    ShowFindReplacePanel();
+                }
+                else if (e.KeyCode == Keys.G && e.Modifiers == Keys.Control)
+                {
+                    ShowDirectoryNavigator();
                 }
             }
         }
@@ -1697,23 +1693,20 @@ namespace pie
         // [Event] Triggered when a tab is changed
         private void tabControl_SelectedPageChanged(object sender, EventArgs e)
         {
-            if (tabControl.SelectedIndex != tabControl.Pages.Count-1)
-            {
-                Globals.lastSelectedTabIndex = tabControl.SelectedIndex;
-            }
+            int indexToMoveTo = Globals.deletesLastTab ? tabControl.SelectedIndex : tabControl.SelectedIndex - 1;
 
-            if (tabControl.SelectedIndex != tabControl.Pages.Count-1 && (tabControl.Pages.Count == Globals.tabInfos.Count+1))
+            if (indexToMoveTo >= 0)
             {
-                if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
+                if (Globals.tabInfos[indexToMoveTo].getTabType() == TabType.CODE)
                 {
                     smartFormatterToolStripMenuItem.Enabled = true;
 
                     tabControl.KryptonContextMenu = codeContextMenu;
 
                     DeactivateBuildAndRunOptions();
-                    if (tabControl.SelectedIndex != -1 && Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
+                    if (tabControl.SelectedIndex != -1 && Globals.tabInfos[indexToMoveTo].getOpenedFilePath() != null)
                     {
-                        ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+                        ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[indexToMoveTo].getOpenedFilePath()));
                         UpdateFormTitle();
                     }
                     else
@@ -1725,7 +1718,7 @@ namespace pie
                 {
                     smartFormatterToolStripMenuItem.Enabled = false;
 
-                    if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.GIT)
+                    if (Globals.tabInfos[indexToMoveTo].getTabType() == TabType.GIT)
                     {
                         tabControl.KryptonContextMenu = gitContextMenu;
                     }
@@ -1738,7 +1731,7 @@ namespace pie
                     ToggleFindReplacePanel(false);
                     ToggleDirectoryNavigator(false);
 
-                    if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.GIT)
+                    if (Globals.tabInfos[indexToMoveTo].getTabType() == TabType.GIT)
                     {
                         UpdateFormTitle("Git");
                     }
@@ -1815,17 +1808,9 @@ namespace pie
             {
                 if (e.Button == MouseButtons.Right)
                 {
-                    int index = Globals.lastSelectedTabIndex;
-                    tabControl.SelectedIndex = index;
+                    //int index = Globals.lastSelectedTabIndex;
+                    //tabControl.SelectedIndex = index;
                 }
-            }
-        }
-
-        private void tabControl_Click(object sender, EventArgs e)
-        {
-            if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
-            {
-                NewTab(TabType.CODE, null);
             }
         }
 
@@ -2767,18 +2752,6 @@ namespace pie
             }
         }
 
-        private void SynchronizeImagesWithTheme()
-        {
-            if (Globals.theme == "light" || (Globals.theme != "dark" && ThemeService.GetIconType(Globals.theme) == "dark"))
-            {
-                kryptonPage1.ImageSmall = Properties.Resources.plus_blue;
-            }
-            else if (Globals.theme == "dark" || (Globals.theme != "light" && ThemeService.GetIconType(Globals.theme) == "light"))
-            {
-                kryptonPage1.ImageSmall = Properties.Resources.plus_white;
-            }
-        }
-
         private void regexCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             KryptonCheckBox kryptonCheckBox = (KryptonCheckBox)sender;
@@ -2988,7 +2961,6 @@ namespace pie
 
             ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
             SynchronizeMainFormComponentsWithTheme();
-            SynchronizeImagesWithTheme();
 
             if (directoryNavigationTextBox.Text != "")
             {

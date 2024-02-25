@@ -49,6 +49,7 @@ namespace pie
         public static int lastSelectedIndex;
         public static bool canUpdateUI;
         public static bool firstBrowserTab;
+        public static bool deletesLastTab;
 
         // Theme
         public static string theme;

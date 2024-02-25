@@ -17,13 +17,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using BrightIdeasSoftware;
-using ComponentFactory.Krypton.Toolkit;
-using pie.Classes;
-using pie.Services;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using pie.Classes;
+using pie.Services;
+
+/**
+ * This namespace provides access to the ObjectListView control.
+ * Licensed under GNU General Public License (GPL 3.0). For more info, see https://www.gnu.org/licenses/gpl-3.0.html 
+ * 
+ * Author of the library: Phillip Piper
+ * Copyright 2006-2016 Bright Ideas Software
+ */
+using BrightIdeasSoftware;
+
+/** 
+ * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
+ * 
+ * Copyright (c) 2017 - 2022, Krypton Suite
+*/
+using ComponentFactory.Krypton.Toolkit;
 
 namespace pie.Forms.Format
 {
