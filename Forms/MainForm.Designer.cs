@@ -86,7 +86,6 @@
             this.renderMarkdownmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.preferencesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.smartFormatterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
             this.findReplaceHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.matchWholeWordCheckBox = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -144,26 +143,7 @@
             this.managePushCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordWrapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableAutosaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.linesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.duplicateEveryLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addEmptyRowBetweenEachLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.capitalizeFirstLineCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.emptyLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeWhitespaceLinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consecutiveDuplicateLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trimLineswhitespacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.capitalizeEveryWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.capitalizeEntireTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lowercaseEntireContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allWhitespaceCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trimWhitespaceCharactersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortAscendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortDescendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.revertLineOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.smartFormatterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
@@ -587,16 +567,6 @@
             this.preferencesToolStripMenuItem1.Name = "preferencesToolStripMenuItem1";
             this.preferencesToolStripMenuItem1.Size = new System.Drawing.Size(80, 20);
             this.preferencesToolStripMenuItem1.Text = "Preferences";
-            // 
-            // smartFormatterToolStripMenuItem
-            // 
-            this.smartFormatterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.linesToolStripMenuItem,
-            this.charactersToolStripMenuItem,
-            this.sortToolStripMenuItem});
-            this.smartFormatterToolStripMenuItem.Name = "smartFormatterToolStripMenuItem";
-            this.smartFormatterToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.smartFormatterToolStripMenuItem.Text = "Format";
             // 
             // kryptonRibbon1
             // 
@@ -1197,165 +1167,12 @@
             this.enableAutosaveToolStripMenuItem.Text = "Enable Autosave";
             this.enableAutosaveToolStripMenuItem.Click += new System.EventHandler(this.enableAutosaveToolStripMenuItem_Click);
             // 
-            // linesToolStripMenuItem
+            // smartFormatterToolStripMenuItem
             // 
-            this.linesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.duplicateEveryLineToolStripMenuItem,
-            this.addEmptyRowBetweenEachLineToolStripMenuItem,
-            this.capitalizeFirstLineCharactersToolStripMenuItem,
-            this.emptyLinesToolStripMenuItem,
-            this.removeWhitespaceLinesToolStripMenuItem1,
-            this.removeDuplicateLinesToolStripMenuItem,
-            this.consecutiveDuplicateLinesToolStripMenuItem,
-            this.trimLineswhitespacesToolStripMenuItem});
-            this.linesToolStripMenuItem.Image = global::pie.Properties.Resources.arrow;
-            this.linesToolStripMenuItem.Name = "linesToolStripMenuItem";
-            this.linesToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.linesToolStripMenuItem.Text = "Lines";
-            // 
-            // duplicateEveryLineToolStripMenuItem
-            // 
-            this.duplicateEveryLineToolStripMenuItem.Name = "duplicateEveryLineToolStripMenuItem";
-            this.duplicateEveryLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.duplicateEveryLineToolStripMenuItem.Text = "Duplicate every line";
-            this.duplicateEveryLineToolStripMenuItem.Click += new System.EventHandler(this.duplicateEveryLineToolStripMenuItem_Click);
-            // 
-            // addEmptyRowBetweenEachLineToolStripMenuItem
-            // 
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Name = "addEmptyRowBetweenEachLineToolStripMenuItem";
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Text = "Add empty row between each line";
-            this.addEmptyRowBetweenEachLineToolStripMenuItem.Click += new System.EventHandler(this.addEmptyRowBetweenEachLineToolStripMenuItem_Click);
-            // 
-            // capitalizeFirstLineCharactersToolStripMenuItem
-            // 
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Name = "capitalizeFirstLineCharactersToolStripMenuItem";
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Text = "Capitalize first characters from every line";
-            this.capitalizeFirstLineCharactersToolStripMenuItem.Click += new System.EventHandler(this.capitalizeFirstLineCharactersToolStripMenuItem_Click);
-            // 
-            // emptyLinesToolStripMenuItem
-            // 
-            this.emptyLinesToolStripMenuItem.Name = "emptyLinesToolStripMenuItem";
-            this.emptyLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.emptyLinesToolStripMenuItem.Text = "Remove empty lines";
-            this.emptyLinesToolStripMenuItem.Click += new System.EventHandler(this.emptyLinesToolStripMenuItem_Click);
-            // 
-            // removeWhitespaceLinesToolStripMenuItem1
-            // 
-            this.removeWhitespaceLinesToolStripMenuItem1.Name = "removeWhitespaceLinesToolStripMenuItem1";
-            this.removeWhitespaceLinesToolStripMenuItem1.Size = new System.Drawing.Size(348, 22);
-            this.removeWhitespaceLinesToolStripMenuItem1.Text = "Remove whitespace lines";
-            this.removeWhitespaceLinesToolStripMenuItem1.Click += new System.EventHandler(this.removeWhitespaceLinesToolStripMenuItem1_Click);
-            // 
-            // removeDuplicateLinesToolStripMenuItem
-            // 
-            this.removeDuplicateLinesToolStripMenuItem.Name = "removeDuplicateLinesToolStripMenuItem";
-            this.removeDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.removeDuplicateLinesToolStripMenuItem.Text = "Remove duplicate lines";
-            this.removeDuplicateLinesToolStripMenuItem.Click += new System.EventHandler(this.removeDuplicateLinesToolStripMenuItem_Click);
-            // 
-            // consecutiveDuplicateLinesToolStripMenuItem
-            // 
-            this.consecutiveDuplicateLinesToolStripMenuItem.Name = "consecutiveDuplicateLinesToolStripMenuItem";
-            this.consecutiveDuplicateLinesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.consecutiveDuplicateLinesToolStripMenuItem.Text = "Remove consecutive duplicate lines";
-            this.consecutiveDuplicateLinesToolStripMenuItem.Click += new System.EventHandler(this.consecutiveDuplicateLinesToolStripMenuItem_Click);
-            // 
-            // trimLineswhitespacesToolStripMenuItem
-            // 
-            this.trimLineswhitespacesToolStripMenuItem.Name = "trimLineswhitespacesToolStripMenuItem";
-            this.trimLineswhitespacesToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.trimLineswhitespacesToolStripMenuItem.Text = "Trim lines (remove trailing and leading whitespaces)";
-            this.trimLineswhitespacesToolStripMenuItem.Click += new System.EventHandler(this.trimLineswhitespacesToolStripMenuItem_Click);
-            // 
-            // charactersToolStripMenuItem
-            // 
-            this.charactersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.capitalizeEveryWordToolStripMenuItem,
-            this.capitalizeEntireTextToolStripMenuItem,
-            this.lowercaseEntireContentToolStripMenuItem,
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem,
-            this.allWhitespaceCharactersToolStripMenuItem,
-            this.trimWhitespaceCharactersToolStripMenuItem1});
-            this.charactersToolStripMenuItem.Image = global::pie.Properties.Resources.font;
-            this.charactersToolStripMenuItem.Name = "charactersToolStripMenuItem";
-            this.charactersToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.charactersToolStripMenuItem.Text = "Characters";
-            // 
-            // capitalizeEveryWordToolStripMenuItem
-            // 
-            this.capitalizeEveryWordToolStripMenuItem.Name = "capitalizeEveryWordToolStripMenuItem";
-            this.capitalizeEveryWordToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
-            this.capitalizeEveryWordToolStripMenuItem.Text = "Capitalize every word";
-            this.capitalizeEveryWordToolStripMenuItem.Click += new System.EventHandler(this.capitalizeEveryWordToolStripMenuItem_Click);
-            // 
-            // capitalizeEntireTextToolStripMenuItem
-            // 
-            this.capitalizeEntireTextToolStripMenuItem.Name = "capitalizeEntireTextToolStripMenuItem";
-            this.capitalizeEntireTextToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
-            this.capitalizeEntireTextToolStripMenuItem.Text = "Convert text to uppercase";
-            this.capitalizeEntireTextToolStripMenuItem.Click += new System.EventHandler(this.capitalizeEntireTextToolStripMenuItem_Click);
-            // 
-            // lowercaseEntireContentToolStripMenuItem
-            // 
-            this.lowercaseEntireContentToolStripMenuItem.Name = "lowercaseEntireContentToolStripMenuItem";
-            this.lowercaseEntireContentToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
-            this.lowercaseEntireContentToolStripMenuItem.Text = "Convert text to lowercase";
-            this.lowercaseEntireContentToolStripMenuItem.Click += new System.EventHandler(this.lowercaseEntireContentToolStripMenuItem_Click);
-            // 
-            // switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem
-            // 
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Name = "switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem";
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Text = "Swap lowercase and uppercase characters";
-            this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem.Click += new System.EventHandler(this.switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem_Click);
-            // 
-            // allWhitespaceCharactersToolStripMenuItem
-            // 
-            this.allWhitespaceCharactersToolStripMenuItem.Name = "allWhitespaceCharactersToolStripMenuItem";
-            this.allWhitespaceCharactersToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
-            this.allWhitespaceCharactersToolStripMenuItem.Text = "Remove all whitespaces (except CR/LF)";
-            this.allWhitespaceCharactersToolStripMenuItem.Click += new System.EventHandler(this.allWhitespaceCharactersToolStripMenuItem_Click);
-            // 
-            // trimWhitespaceCharactersToolStripMenuItem1
-            // 
-            this.trimWhitespaceCharactersToolStripMenuItem1.Name = "trimWhitespaceCharactersToolStripMenuItem1";
-            this.trimWhitespaceCharactersToolStripMenuItem1.Size = new System.Drawing.Size(330, 22);
-            this.trimWhitespaceCharactersToolStripMenuItem1.Text = "Remove consecutive whitespaces (except CR/LF)";
-            this.trimWhitespaceCharactersToolStripMenuItem1.Click += new System.EventHandler(this.trimWhitespaceCharactersToolStripMenuItem1_Click);
-            // 
-            // sortToolStripMenuItem
-            // 
-            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sortAscendingToolStripMenuItem,
-            this.sortDescendingToolStripMenuItem,
-            this.revertLineOrderToolStripMenuItem1});
-            this.sortToolStripMenuItem.Image = global::pie.Properties.Resources.sort;
-            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.sortToolStripMenuItem.Text = "Sorting";
-            // 
-            // sortAscendingToolStripMenuItem
-            // 
-            this.sortAscendingToolStripMenuItem.Name = "sortAscendingToolStripMenuItem";
-            this.sortAscendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.sortAscendingToolStripMenuItem.Text = "Sort lines ascending";
-            this.sortAscendingToolStripMenuItem.Click += new System.EventHandler(this.sortAscendingToolStripMenuItem_Click);
-            // 
-            // sortDescendingToolStripMenuItem
-            // 
-            this.sortDescendingToolStripMenuItem.Name = "sortDescendingToolStripMenuItem";
-            this.sortDescendingToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.sortDescendingToolStripMenuItem.Text = "Sort lines descending";
-            this.sortDescendingToolStripMenuItem.Click += new System.EventHandler(this.sortDescendingToolStripMenuItem_Click);
-            // 
-            // revertLineOrderToolStripMenuItem1
-            // 
-            this.revertLineOrderToolStripMenuItem1.Name = "revertLineOrderToolStripMenuItem1";
-            this.revertLineOrderToolStripMenuItem1.Size = new System.Drawing.Size(186, 22);
-            this.revertLineOrderToolStripMenuItem1.Text = "Reverse line order";
-            this.revertLineOrderToolStripMenuItem1.Click += new System.EventHandler(this.revertLineOrderToolStripMenuItem1_Click);
+            this.smartFormatterToolStripMenuItem.Name = "smartFormatterToolStripMenuItem";
+            this.smartFormatterToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.smartFormatterToolStripMenuItem.Text = "Format";
+            this.smartFormatterToolStripMenuItem.Click += new System.EventHandler(this.smartFormatterToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1531,26 +1348,6 @@
         private System.Windows.Forms.ToolStripMenuItem wordWrapToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enableAutosaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smartFormatterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem linesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem emptyLinesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removeWhitespaceLinesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem removeDuplicateLinesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consecutiveDuplicateLinesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem trimLineswhitespacesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem duplicateEveryLineToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem charactersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allWhitespaceCharactersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem trimWhitespaceCharactersToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sortAscendingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sortDescendingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem revertLineOrderToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem addEmptyRowBetweenEachLineToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem capitalizeFirstLineCharactersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem capitalizeEveryWordToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem capitalizeEntireTextToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lowercaseEntireContentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem switchLowercaseWithUppercaseAndTheOtherWayAroundToolStripMenuItem;
     }
 }
 

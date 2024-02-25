@@ -167,6 +167,11 @@ namespace pie.Services
         {
             string[] lines = text.Split('\n');
 
+            if (lines.Length == 1)
+            {
+                return lines[0].ToUpper();
+            }
+
             return lines.Aggregate((curr, next) => {
                 return curr.ToUpper() + "\n" + next.ToUpper();
             });
@@ -175,6 +180,11 @@ namespace pie.Services
         public static string ConvertTextToLowercase(string text)
         {
             string[] lines = text.Split('\n');
+
+            if (lines.Length == 1)
+            {
+                return lines[0].ToLower();
+            }
 
             return lines.Aggregate((curr, next) => {
                 return curr.ToLower() + "\n" + next.ToLower();
@@ -331,8 +341,40 @@ namespace pie.Services
             {
                 return result;
             }
+        }
 
-            return result;
+        public static string ConvertNewlineToComma(string text)
+        {
+            string[] lines = text.Split('\n');
+
+            for (int i = 0; i<lines.Length; i++)
+            {
+                if (lines[i][lines[i].Length-1] == '\r')
+                {
+                    lines[i] = lines[i].Substring(0, lines[i].Length-1);
+                }
+            }
+
+            return lines.Aggregate((curr, next) => {
+                return curr + "," + next;
+            });
+        }
+
+        public static string ConvertNewlineToSpace(string text)
+        {
+            string[] lines = text.Split('\n');
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i][lines[i].Length - 1] == '\r')
+                {
+                    lines[i] = lines[i].Substring(0, lines[i].Length - 1);
+                }
+            }
+
+            return lines.Aggregate((curr, next) => {
+                return curr + " " + next;
+            });
         }
     }
 }

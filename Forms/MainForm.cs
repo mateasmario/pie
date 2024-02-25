@@ -92,6 +92,7 @@ using BrightIdeasSoftware;
  */
 using ConEmu.WinForms;
 using System.Text.RegularExpressions;
+using pie.Forms.Format;
 
 namespace pie
 {
@@ -3304,6 +3305,111 @@ namespace pie
 
             scintilla.SelectionStart = currPos;
             scintilla.SelectionEnd = currPos;
+        }
+
+        private void convertNewlineToCommaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.ConvertNewlineToComma(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void convertNewlinenToSpaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+            int currPos = scintilla.CurrentPosition;
+
+            string result = FormattingService.ConvertNewlineToSpace(scintilla.Text);
+            scintilla.Text = result;
+
+            scintilla.SelectionStart = currPos;
+            scintilla.SelectionEnd = currPos;
+        }
+
+        private void smartFormatterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Globals.chosenFormatOption = null;
+
+            FormatForm formatForm = new FormatForm();
+            formatForm.ShowDialog();
+
+            if (Globals.chosenFormatOption != null)
+            {
+                Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+                int currPos = scintilla.CurrentPosition;
+                string result = scintilla.Text;
+
+                switch (Globals.chosenFormatOption)
+                {
+                    case "LINE_DUPLICATE":
+                        result = FormattingService.DuplicateLines(scintilla.Text);
+                       
+                        break;
+                    case "LINE_ADD_EMPTY":
+                        result = FormattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
+                        break;
+                    case "LINE_CAPITALIZE_FIRST":
+                        result = FormattingService.CapitalizeFirstCharacterFromEveryLine(scintilla.Text);
+                        break;
+                    case "LINE_REMOVE_EMPTY":
+                        result = FormattingService.RemoveEmptyLines(scintilla.Text);
+                        break;
+                    case "LINE_REMOVE_WHITESPACE":
+                        result = FormattingService.RemoveWhitespaceLines(scintilla.Text);
+                        break;
+                    case "LINE_REMOVE_DUPLICATE":
+                        result = FormattingService.RemoveDuplicateLines(scintilla.Text);
+                        break;
+                    case "LINE_REMOVE_DUPLICATE_CONSEC":
+                        result = FormattingService.RemoveConsecutiveDuplicates(scintilla.Text);
+                        break;
+                    case "LINE_TRIM":
+                        result = FormattingService.TrimLines(scintilla.Text);
+                        break;
+                    case "CHAR_CAPITALIZE":
+                        result = FormattingService.CapitalizeEveryWord(scintilla.Text);
+                        break;
+                    case "CHAR_CASE_UPPER":
+                        result = FormattingService.ConvertTextToUppercase(scintilla.Text);
+                        break;
+                    case "CHAR_CASE_LOWER":
+                        result = FormattingService.ConvertTextToLowercase(scintilla.Text);
+                        break;
+                    case "CHAR_CASE_SWAP":
+                        result = FormattingService.SwitchLowercaseWithUppercase(scintilla.Text);
+                        break;
+                    case "CHAR_REMOVE_WHITESPACE":
+                        result = FormattingService.RemoveAllWhitespaces(scintilla.Text);
+                        break;
+                    case "CHAR_REMOVE_WHITESPACE_CONSEC":
+                        result = FormattingService.RemoveAllConsecutiveWhitespaces(scintilla.Text);
+                        break;
+                    case "CHAR_CONV_NEWLINE_COMMA":
+                        result = FormattingService.ConvertNewlineToComma(scintilla.Text);
+                        break;
+                    case "CHAR_CONV_NEWLINE_SPACE":
+                        result = FormattingService.ConvertNewlineToSpace(scintilla.Text);
+                        break;
+                    case "SORT_ASC":
+                        result = FormattingService.SortLines(scintilla.Text);
+                        break;
+                    case "SORT_DESC":
+                        result = FormattingService.SortLines(scintilla.Text, false);
+                        break;
+                    case "SORT_REVERSE":
+                        result = FormattingService.ReverseLineOrder(scintilla.Text);
+                        break;
+                }
+
+                scintilla.Text = result;
+                scintilla.SelectionStart = currPos;
+                scintilla.SelectionEnd = currPos;
+            }
         }
     }
 }
