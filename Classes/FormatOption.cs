@@ -19,9 +19,17 @@
 
 namespace pie.Classes
 {
-    public class BuildCommand
+    public class FormatOption
     {
-        public string BuildCommandName { get; set; }
-        public string BuildCommandCmd { get; set; }
+        public string FormatOptionName { get; set; }
+        public string FormatOptionCategory { get; set; }
+        public string FormatOptionDescription { get; set; }
+
+        public FormatOption(string formatOptionName, string formatOptionCategory, string formatOptionDescription)
+        {
+            this.FormatOptionName = formatOptionName;
+            this.FormatOptionCategory = formatOptionCategory;
+            this.FormatOptionDescription = formatOptionDescription;
+        }
     }
 }

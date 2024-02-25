@@ -60,6 +60,7 @@
             this.databasesListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.databasesListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.databasesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ConnectionNameColumn});
             this.databasesListView.HideSelection = false;

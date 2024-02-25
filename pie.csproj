@@ -388,6 +388,7 @@
   <ItemGroup>
     <Compile Include="Classes\ControlHelper.cs" />
     <Compile Include="Classes\DatabaseConnection.cs" />
+    <Compile Include="Classes\FormatOption.cs" />
     <Compile Include="Classes\NavigatorFile.cs" />
     <Compile Include="Classes\GitCommit.cs" />
     <Compile Include="Classes\ThemeInfo.cs" />
@@ -410,6 +411,12 @@
     </Compile>
     <Compile Include="Forms\Databases\DatabasesForm.Designer.cs">
       <DependentUpon>DatabasesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Format\FormatForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Format\FormatForm.Designer.cs">
+      <DependentUpon>FormatForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Other\AboutForm.cs">
       <SubType>Form</SubType>
@@ -502,6 +509,9 @@
     <EmbeddedResource Include="Forms\Databases\DatabasesForm.resx">
       <DependentUpon>DatabasesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Format\FormatForm.resx">
+      <DependentUpon>FormatForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Git\GitCommitLogForm.resx">
       <DependentUpon>GitCommitLogForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -565,6 +575,9 @@
     <Content Include="pie2-icon.ico" />
     <Content Include="pie2.ico" />
     <Content Include="pieblue.ico" />
+    <None Include="Resources\stars.png" />
+    <None Include="Resources\smoke.png" />
+    <None Include="Resources\magic.png" />
     <None Include="Resources\pie.png" />
     <None Include="Resources\pie-wave.ico" />
     <None Include="Resources\font %283%29.png" />
