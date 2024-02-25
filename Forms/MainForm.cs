@@ -3032,7 +3032,7 @@ namespace pie
 
         private void ToggleWordWrap(bool status)
         {
-            for (int i = 0; i < tabControl.Pages.Count - 1; i++)
+            for (int i = 0; i < tabControl.Pages.Count; i++)
             {
                 if (Globals.tabInfos[i].getTabType() == TabType.CODE)
                 {
@@ -3072,7 +3072,7 @@ namespace pie
 
         private void PerformFirstSaveWhenAutosaveTriggered()
         {
-            for (int i = 0; i<tabControl.Pages.Count-1; i++)
+            for (int i = 0; i<tabControl.Pages.Count; i++)
             {
                 if (Globals.tabInfos[i].getTabType() == TabType.CODE)
                 {
