@@ -50,6 +50,7 @@ namespace pie
         public static bool canUpdateUI;
         public static bool firstBrowserTab;
         public static bool deletesLastTab;
+        public static bool deletesTab;
 
         // Theme
         public static string theme;
