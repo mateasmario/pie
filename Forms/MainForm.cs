@@ -628,7 +628,7 @@ namespace pie
             }
             else if (openedFilePath != null)
             {
-                UpdateFormTitle();
+                UpdateFormTitle(tabControl.SelectedIndex);
             }
         }
 
@@ -681,6 +681,8 @@ namespace pie
         // [Method] Closes the currently selected tab
         public bool CloseTab()
         {
+            Globals.deletesTab = true;
+
             if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.RENDER_HTML || Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.RENDER_MD)
             {
                 ChromiumWebBrowser chromiumWebBrowser = (ChromiumWebBrowser)tabControl.SelectedPage.Controls[0];
@@ -715,8 +717,10 @@ namespace pie
 
             if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
             {
-                UpdateFormTitle();
+                UpdateFormTitle(tabControl.SelectedIndex);
             }
+
+            Globals.deletesTab = false;
 
             return true;
         }
@@ -818,7 +822,7 @@ namespace pie
 
                 string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[openedTabIndex].getOpenedFilePath()));
                 ScintillaLexerService.SetLexer(extension, TextArea, tabControl, openedTabIndex);
-                UpdateFormTitle();
+                UpdateFormTitle(tabControl.SelectedIndex);
                 Globals.tabInfos[openedTabIndex].setOpenedFileChanges(false);
             }
 
@@ -854,7 +858,7 @@ namespace pie
 
                 string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[selectedIndex].getOpenedFilePath()));
                 ScintillaLexerService.SetLexer(extension, TextArea, tabControl, selectedIndex);
-                UpdateFormTitle();
+                UpdateFormTitle(selectedIndex);
                 Globals.tabInfos[selectedIndex].setOpenedFileChanges(false);
             }
         }
@@ -893,7 +897,7 @@ namespace pie
 
             DeactivateBuildAndRunOptions();
             ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
-            UpdateFormTitle();
+            UpdateFormTitle(tabControl.SelectedIndex);
 
             if (tabControl.Pages.Count >= 2)
             {
@@ -1702,7 +1706,7 @@ namespace pie
         // [Event] Triggered when a tab is changed
         private void tabControl_SelectedPageChanged(object sender, EventArgs e)
         {
-            int indexToMoveTo = Globals.deletesLastTab ? tabControl.SelectedIndex : tabControl.SelectedIndex - 1;
+            int indexToMoveTo = Globals.deletesLastTab ? tabControl.SelectedIndex : (Globals.deletesTab ? tabControl.SelectedIndex - 1 : tabControl.SelectedIndex);
 
             if (indexToMoveTo >= 0)
             {
@@ -1716,7 +1720,7 @@ namespace pie
                     if (tabControl.SelectedIndex != -1 && Globals.tabInfos[indexToMoveTo].getOpenedFilePath() != null)
                     {
                         ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[indexToMoveTo].getOpenedFilePath()));
-                        UpdateFormTitle();
+                        UpdateFormTitle(indexToMoveTo);
                     }
                     else
                     {
@@ -1746,7 +1750,7 @@ namespace pie
                     }
                     else
                     {
-                        UpdateFormTitle();
+                        UpdateFormTitle(indexToMoveTo);
                     }
                 }
             }
@@ -1763,9 +1767,9 @@ namespace pie
             }
         }
 
-        private void UpdateFormTitle()
+        private void UpdateFormTitle(int index)
         {
-            this.Text = Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() + " - pie";
+            this.Text = Globals.tabInfos[index].getOpenedFilePath() + " - pie";
         }
 
         private void UpdateFormTitle(String customTitle)
