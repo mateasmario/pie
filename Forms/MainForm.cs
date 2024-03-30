@@ -663,7 +663,7 @@ namespace pie
 
             bool closeStatus = false;
 
-            while(tabCount > 1)
+            while(tabCount > 0)
             {
                 closeStatus = CloseTab();
 
