@@ -137,6 +137,7 @@ namespace pie
             ProcessCommandLineArguments();
         }
 
+        // [Method] Sets global helper variables to their initial value (to avoid null-related exceptions)
         private void InitializeGlobals()
         {
             Globals.tabInfos = new List<TabInfo>();
@@ -147,6 +148,8 @@ namespace pie
             Globals.databases = null;
         }
 
+        // [Methods] Creates an instance of the visible code editor with the default configurations
+        // Additional: This instance will be added to a tabpage in another method
         public Scintilla CreateNewTextArea()
         {
             Scintilla TextArea = new Scintilla();
@@ -180,6 +183,7 @@ namespace pie
         }
 
 
+        // [Event] Used for automatic indentation in a Scintilla instance
         private void TextArea_InsertCheck(object sender, InsertCheckEventArgs e)
         {
             Scintilla TextArea = (Scintilla)sender;
@@ -197,6 +201,7 @@ namespace pie
             }
         }
 
+        // [Event] Triggered when zooming in the code editor. Also zooms in the code number (and folding) margins.
         private void TextArea_ZoomChanged(object sender, EventArgs e)
         {
             Scintilla scintilla = (Scintilla)sender;
@@ -208,6 +213,7 @@ namespace pie
             scintilla.Margins[0].Width = scintilla.TextWidth(Style.LineNumber, new string('9', maxLineNumberCharLength + 1)) + padding;
         }
 
+        // [Method] Sets the corresponding theme colors to the code editor's background, text and margins.
         private void ColorizeTextArea(Scintilla TextArea) 
         {
             TextArea.StyleResetDefault();
@@ -224,6 +230,7 @@ namespace pie
             InitCodeFolding(TextArea);
         }
 
+        // [Method] Creates a new instance of the AutocompleteMenu
         private AutocompleteMenu InitializeAutocompleteMenu(Scintilla scintilla)
         {
             AutocompleteMenu autocompleteMenu = new AutocompleteMenu();
@@ -235,6 +242,7 @@ namespace pie
             return autocompleteMenu;
         }
 
+        // [Method] Sets the theme-corresponding colors to the AutocompleteMenu's background and text.
         private void ColorizeAutocompleteMenu(AutocompleteMenu autocompleteMenu)
         {
             Colors colors = new Colors();
@@ -248,6 +256,8 @@ namespace pie
             autocompleteMenu.LeftPadding = 0;
         }
 
+        // [Method] Used in order to remove file extension specific Build&Run actions
+        // Additional: This is usually triggered when switching between tabs
         private void RemoveSuggestedActions()
         {
             if (((KryptonContextMenuHeading)codeContextMenu.Items[2]).Text == "Suggested Actions")
@@ -257,6 +267,7 @@ namespace pie
             }
         }
 
+        // [Method] Fills the code editor's context menu with file extension specific Build&Run actions
         private void FillContextMenu(String extension)
         {
             // Remove old "Suggested Actions" item list
@@ -450,7 +461,8 @@ namespace pie
             Scintilla scintilla = (Scintilla)sender;
 
             UpdateNumberMarginWidth(scintilla, false);
-
+           
+           
             Globals.tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
 
             if (Globals.autosave)
@@ -874,11 +886,10 @@ namespace pie
             int openedTabIndex = tabControl.SelectedIndex;
 
             string fileContent;
-
             try
             {
-                fileContent = System.IO.File.ReadAllText(fileName);
-            } catch(Exception ex)
+                fileContent = File.ReadAllText(fileName);
+            } catch (Exception)
             {
                 ShowNotification("An error has been encountered while trying to open the file.");
                 return false;
@@ -899,7 +910,7 @@ namespace pie
             ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
             UpdateFormTitle(tabControl.SelectedIndex);
 
-            if (tabControl.Pages.Count >= 2)
+            if (tabControl.Pages.Count >= 1)
             {
                 Globals.tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(false);
             }
@@ -1592,6 +1603,7 @@ namespace pie
             if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
             {
                 NewTab(TabType.CODE, null);
+                e.SuppressKeyPress = true;
             }
             else if (e.KeyCode == Keys.W && e.Modifiers == Keys.Control)
             {
@@ -1614,6 +1626,72 @@ namespace pie
                 {
                     ShowDirectoryNavigator();
                 }
+                else if (e.KeyCode == Keys.X && e.Modifiers == Keys.Control)
+                {
+                    Scintilla TextArea = (Scintilla)sender;
+                    
+                    // If nothing is selected, cut the whole line
+                    if (TextArea.SelectedText.Length == 0)
+                    {
+                        CutLine(TextArea);
+                        e.SuppressKeyPress = true;
+                    }
+                }
+            }
+        }
+
+        private void CutLine(Scintilla TextArea)
+        {
+            if (TextArea.Text.Length > 0)
+            {
+                int startLine = TextArea.SelectionStart == 0 ? TextArea.SelectionStart : TextArea.SelectionStart;
+                int endLine = TextArea.SelectionStart == 0 ? TextArea.SelectionStart : TextArea.SelectionStart;
+
+                while (startLine > 0 && TextArea.Text[startLine-1] != '\n')
+                {
+                    startLine--;
+                }
+
+                while (endLine < TextArea.TextLength-1 && TextArea.Text[endLine] != '\n')
+                {
+                    endLine++;
+                }
+
+                if (endLine == TextArea.TextLength)
+                {
+                    endLine--;
+                }
+
+                string stringToCopy = TextArea.Text.Substring(startLine, endLine - startLine + 1);
+
+
+                if (stringToCopy == "" || stringToCopy == "\r\n")
+                {
+                    endLine = startLine + 1;
+                }
+                else
+                {
+                    if (endLine == TextArea.Text.Length - 1 && TextArea.Text[endLine] != '\n')
+                    {
+                        stringToCopy += "\r\n";
+                    }
+
+                    Clipboard.SetText(stringToCopy);
+
+                    if (endLine < startLine)
+                    {
+                        endLine = startLine + 1;
+                    }
+
+                    if (endLine == TextArea.Text.Length - 1)
+                    {
+                        startLine -= 2;
+                    }
+                }
+
+                TextArea.DeleteRange(startLine, endLine - startLine + 1);
+
+                TextArea.SetSelection(startLine, startLine);
             }
         }
 

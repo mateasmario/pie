@@ -85,6 +85,7 @@
             this.themeSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.glassModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutPieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,7 +144,6 @@
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.directoryNavigationHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.directoryNavigationTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.glassModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
@@ -491,7 +491,7 @@
             // 
             this.showBuildToolsToolStripMenuItem.Image = global::pie.Properties.Resources.terminal;
             this.showBuildToolsToolStripMenuItem.Name = "showBuildToolsToolStripMenuItem";
-            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
             this.showBuildToolsToolStripMenuItem.Click += new System.EventHandler(this.showBuildToolsToolStripMenuItem_Click);
             // 
@@ -511,7 +511,7 @@
             this.darkToolStripMenuItem});
             this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.color_wheel;
             this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
-            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.themeSettingsToolStripMenuItem.Text = "Themes";
             // 
             // lightToolStripMenuItem
@@ -528,11 +528,19 @@
             this.darkToolStripMenuItem.Text = "Dark";
             this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
             // 
+            // glassModeToolStripMenuItem
+            // 
+            this.glassModeToolStripMenuItem.Image = global::pie.Properties.Resources.transparency;
+            this.glassModeToolStripMenuItem.Name = "glassModeToolStripMenuItem";
+            this.glassModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.glassModeToolStripMenuItem.Text = "Enable Glass Effect";
+            this.glassModeToolStripMenuItem.Click += new System.EventHandler(this.glassModeToolStripMenuItem_Click);
+            // 
             // aboutPieToolStripMenuItem
             // 
             this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info;
             this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
-            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutPieToolStripMenuItem.Text = "About pie";
             this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
             // 
@@ -707,6 +715,7 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -1154,14 +1163,6 @@
             this.directoryNavigationTextBox.Size = new System.Drawing.Size(505, 23);
             this.directoryNavigationTextBox.TabIndex = 0;
             this.directoryNavigationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
-            // 
-            // glassModeToolStripMenuItem
-            // 
-            this.glassModeToolStripMenuItem.Image = global::pie.Properties.Resources.transparency;
-            this.glassModeToolStripMenuItem.Name = "glassModeToolStripMenuItem";
-            this.glassModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.glassModeToolStripMenuItem.Text = "Enable Glass Effect";
-            this.glassModeToolStripMenuItem.Click += new System.EventHandler(this.glassModeToolStripMenuItem_Click);
             // 
             // MainForm
             // 
