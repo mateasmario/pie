@@ -32,6 +32,7 @@ using pie.Forms.Databases;
 using pie.Services;
 using pie.Enums;
 using pie.Forms.Format;
+using pie.Forms.Other;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -1405,7 +1406,7 @@ namespace pie
         {
             if (Globals.glass)
             {
-                this.Opacity = 0.875;
+                this.Opacity = 0.90;
             }
         }
 
@@ -3482,7 +3483,7 @@ namespace pie
             if (Globals.glass)
             {
                 glassModeToolStripMenuItem.Text = "Disable Glass Effect";
-                this.Opacity = 0.875;
+                this.Opacity = 0.90;
             }
             else
             {
@@ -3491,6 +3492,12 @@ namespace pie
             }
 
             EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave, Globals.glass);
+        }
+
+        private void cheatsheetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheatsheetForm cheatsheetForm = new CheatsheetForm();
+            cheatsheetForm.ShowDialog();
         }
     }
 }
