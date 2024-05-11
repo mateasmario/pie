@@ -67,6 +67,8 @@
             this.formatOptionsListView.Location = new System.Drawing.Point(10, 29);
             this.formatOptionsListView.MultiSelect = false;
             this.formatOptionsListView.Name = "formatOptionsListView";
+            this.formatOptionsListView.SelectColumnsOnRightClick = false;
+            this.formatOptionsListView.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None;
             this.formatOptionsListView.Size = new System.Drawing.Size(694, 309);
             this.formatOptionsListView.TabIndex = 5;
             this.formatOptionsListView.UseCompatibleStateImageBehavior = false;

@@ -86,6 +86,7 @@
             this.lightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.glassModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cheatsheetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutPieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -482,6 +483,7 @@
             this.showGitTabToolStripMenuItem,
             this.themeSettingsToolStripMenuItem,
             this.glassModeToolStripMenuItem,
+            this.cheatsheetToolStripMenuItem,
             this.aboutPieToolStripMenuItem});
             this.designToolStripMenuItem.Name = "designToolStripMenuItem";
             this.designToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
@@ -535,6 +537,14 @@
             this.glassModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.glassModeToolStripMenuItem.Text = "Enable Glass Effect";
             this.glassModeToolStripMenuItem.Click += new System.EventHandler(this.glassModeToolStripMenuItem_Click);
+            // 
+            // cheatsheetToolStripMenuItem
+            // 
+            this.cheatsheetToolStripMenuItem.Image = global::pie.Properties.Resources.open_book;
+            this.cheatsheetToolStripMenuItem.Name = "cheatsheetToolStripMenuItem";
+            this.cheatsheetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cheatsheetToolStripMenuItem.Text = "Cheatsheet";
+            this.cheatsheetToolStripMenuItem.Click += new System.EventHandler(this.cheatsheetToolStripMenuItem_Click);
             // 
             // aboutPieToolStripMenuItem
             // 
@@ -1337,6 +1347,7 @@
         private System.Windows.Forms.ToolStripMenuItem enableAutosaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smartFormatterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem glassModeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cheatsheetToolStripMenuItem;
     }
 }
 

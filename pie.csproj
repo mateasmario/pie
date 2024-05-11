@@ -489,6 +489,12 @@
     <Compile Include="Forms\Notifications\NotificationYesNoCancel.Designer.cs">
       <DependentUpon>NotificationYesNoCancel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Other\CheatsheetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Other\CheatsheetForm.Designer.cs">
+      <DependentUpon>CheatsheetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BuildCommandService.cs" />
@@ -542,6 +548,9 @@
     <EmbeddedResource Include="Forms\Notifications\NotificationYesNoCancel.resx">
       <DependentUpon>NotificationYesNoCancel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Other\CheatsheetForm.resx">
+      <DependentUpon>CheatsheetForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -575,6 +584,21 @@
     <Content Include="pie2-icon.ico" />
     <Content Include="pie2.ico" />
     <Content Include="pieblue.ico" />
+    <None Include="Resources\v_light_theme.png" />
+    <None Include="Resources\v_dark_theme.png" />
+    <None Include="Resources\g_light_theme.png" />
+    <None Include="Resources\g_dark_theme.png" />
+    <None Include="Resources\x_light_theme.png" />
+    <None Include="Resources\x_dark_theme.png" />
+    <None Include="Resources\b_light_theme.png" />
+    <None Include="Resources\b_dark_theme.png" />
+    <None Include="Resources\f_light_theme.png" />
+    <None Include="Resources\f_dark_theme.png" />
+    <None Include="Resources\ctrl_light_theme.png" />
+    <None Include="Resources\ctrl_dark_theme.png" />
+    <None Include="Resources\alt_light_theme.png" />
+    <None Include="Resources\alt_dark_theme.png" />
+    <None Include="Resources\open-book.png" />
     <None Include="Resources\transparency.png" />
     <None Include="Resources\stars.png" />
     <None Include="Resources\smoke.png" />
