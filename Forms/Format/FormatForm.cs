@@ -48,7 +48,7 @@ namespace pie.Forms.Format
 
             this.Palette = Globals.kryptonPalette;
             kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonLabel2.Palette = Globals.kryptonPalette;
+            kryptonTextBox1.Palette = Globals.kryptonPalette;
         }
 
         private void SynchronizeObjectListViewWithTheme()
@@ -90,6 +90,9 @@ namespace pie.Forms.Format
             SynchronizeObjectListViewWithTheme();
             List<FormatOption> formatOptions = FetchPredefinedFormatOptions();
             formatOptionsListView.SetObjects(formatOptions);
+
+            kryptonTextBox1.Select();
+            kryptonTextBox1.SelectAll();
         }
 
         private List<FormatOption> FetchPredefinedFormatOptions()
@@ -110,8 +113,8 @@ namespace pie.Forms.Format
             formatOptions.Add(new FormatOption("CHAR_CASE_SWAP", "Character Processing", "Swaps lowercase and uppercase characters"));
             formatOptions.Add(new FormatOption("CHAR_REMOVE_WHITESPACE", "Character Processing", "Removes all whitespaces (except CR/LF)"));
             formatOptions.Add(new FormatOption("CHAR_REMOVE_WHITESPACE_CONSEC", "Character Processing", "Removes consecutive whitespaces (except CR/LF)"));
-            formatOptions.Add(new FormatOption("CHAR_CONV_NEWLINE_COMMA", "Character Processing", "Converts \'\n\' to comma"));
-            formatOptions.Add(new FormatOption("CHAR_CONV_NEWLINE_SPACE", "Character Processing", "Converts \'\n\' to space"));
+            formatOptions.Add(new FormatOption("CHAR_CONV_NEWLINE_COMMA", "Character Processing", "Converts \'\\n\' to comma"));
+            formatOptions.Add(new FormatOption("CHAR_CONV_NEWLINE_SPACE", "Character Processing", "Converts \'\\n\' to space"));
             formatOptions.Add(new FormatOption("SORT_ASC", "Sorting", "Sorts lines ascending"));
             formatOptions.Add(new FormatOption("SORT_DESC", "Sorting", "Sorts lines descending"));
             formatOptions.Add(new FormatOption("SORT_REVERSE", "Sorting", "Reverses line order"));
@@ -126,6 +129,18 @@ namespace pie.Forms.Format
                 Globals.chosenFormatOption = ((FormatOption)formatOptionsListView.SelectedObject).FormatOptionName;
                 this.Close();
             }
+        }
+
+        private void kryptonTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            List<FormatOption> formatOptions = FetchPredefinedFormatOptions();
+
+            if (!kryptonTextBox1.Text.Trim().Equals(""))
+            {
+                formatOptions = formatOptions.FindAll(x => x.FormatOptionName.ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()) || x.FormatOptionName.ToLower().Replace("_", " ").Contains(kryptonTextBox1.Text.ToLower().Trim()) || x.FormatOptionDescription.ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()) || x.FormatOptionCategory.ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()));
+            }
+            
+            formatOptionsListView.SetObjects(formatOptions);
         }
     }
 }
