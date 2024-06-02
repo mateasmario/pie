@@ -116,7 +116,7 @@ namespace pie.Forms.Databases
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "" || selectedDatabaseType == null)
+            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "" || selectedDatabaseType == DatabaseType.None)
             {
                 MainForm.ShowNotification("Database fields cannot be empty.");
             }
