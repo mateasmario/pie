@@ -119,7 +119,7 @@ namespace pie.Services
             return "dark";
         }
 
-        public static Dictionary<string, Color> SetColorDictionary(String theme)
+        public static Dictionary<string, Color> GetColorDictionary(String theme)
         {
             Dictionary<string, Color> colorDictionary = null;
 

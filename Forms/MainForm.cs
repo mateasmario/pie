@@ -1304,7 +1304,7 @@ namespace pie
                 ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
             }
 
-            Globals.colorDictionary = ThemeService.SetColorDictionary(Globals.theme);
+            Globals.colorDictionary = ThemeService.GetColorDictionary(Globals.theme);
 
             try
             {
@@ -3023,7 +3023,7 @@ namespace pie
             ControlHelper.SuspendDrawing(this);
 
             Globals.theme = theme;
-            Globals.colorDictionary = ThemeService.SetColorDictionary(theme);
+            Globals.colorDictionary = ThemeService.GetColorDictionary(theme);
 
             ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
 
