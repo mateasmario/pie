@@ -20,6 +20,7 @@
 using System;
 using pie.Enums;
 using pie.Services;
+using pie.Classes;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -200,15 +201,15 @@ namespace pie.Forms.Databases
                 }
                 else
                 {
-                    Tuple<bool, string> dbConnectionCheckOutput = DatabaseService.CheckDatabaseConnection(selectedDatabaseType, kryptonTextBox2.Text, port, kryptonTextBox4.Text, kryptonTextBox5.Text, kryptonTextBox6.Text);
+                    DatabaseResponse dbConnectionCheckOutput = DatabaseService.CheckDatabaseConnection(selectedDatabaseType, kryptonTextBox2.Text, port, kryptonTextBox4.Text, kryptonTextBox5.Text, kryptonTextBox6.Text);
 
-                    if (dbConnectionCheckOutput.Item1)
+                    if (dbConnectionCheckOutput.Success)
                     {
                         MainForm.ShowNotification("Database connection established successfully.");
                     }
                     else
                     {
-                        MainForm.ShowNotification(dbConnectionCheckOutput.Item2);
+                        MainForm.ShowNotification(dbConnectionCheckOutput.Message);
                     }
                 }
             }

@@ -386,6 +386,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DatabaseResponse.cs" />
     <Compile Include="Classes\ControlHelper.cs" />
     <Compile Include="Classes\DatabaseConnection.cs" />
     <Compile Include="Classes\FormatOption.cs" />
