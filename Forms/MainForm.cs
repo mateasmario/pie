@@ -395,15 +395,15 @@ namespace pie
 
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
 
-            Triple<bool, string, DataTable> databaseResult = DatabaseService.ExecuteSQLCommand(TextArea.Text, database);
+            DatabaseResponse databaseResult = DatabaseService.ExecuteSQLCommand(TextArea.Text, database);
 
-            if (databaseResult.a == false)
+            if (databaseResult.Success == false)
             {
-                ShowNotification(databaseResult.b);
+                ShowNotification(databaseResult.Message);
             }
             else
             {
-                DatabaseOutputForm databaseOutputForm = new DatabaseOutputForm(databaseResult.c);
+                DatabaseOutputForm databaseOutputForm = new DatabaseOutputForm(databaseResult.DataTable);
                 databaseOutputForm.ShowDialog();
             }
         }

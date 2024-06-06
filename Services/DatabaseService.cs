@@ -28,7 +28,7 @@ using pie.Enums;
 /**
  * Used for reading and writing to JSON config files
  * 
- * Copyright (c) 2007 James Newton-King
+ * Copyright (Tc) 2007 James Newton-King
  */
 using Newtonsoft.Json;
 
@@ -45,6 +45,7 @@ using MySql.Data.MySqlClient;
  * Copyright (c) 2002-2023, Npgsql
  */
 using Npgsql;
+using System.Data.Common;
 
 namespace pie.Services
 {
@@ -171,22 +172,12 @@ namespace pie.Services
             }
         }
 
-        public static Tuple<bool, string> CheckDatabaseConnection(DatabaseType databaseType, string hostname, int port, string databaseName,  string username, string password)
+        public static DatabaseResponse CheckDatabaseConnection(DatabaseType databaseType, string hostname, int port, string databaseName,  string username, string password)
         {
             if (databaseType == DatabaseType.MySQL)
             {
                 string myConnectionString = "server=" + hostname + ";port=" + port + ";database=" + databaseName + ";uid=" + username + ";pwd=" + password + ";";
-                MySqlConnection cnn = new MySqlConnection(myConnectionString);
-                try
-                {
-                    cnn.Open();
-                    cnn.Close();
-                    return new Tuple<bool, string>(true, null);
-                }
-                catch (Exception ex)
-                {
-                    return new Tuple<bool, string>(false, ex.InnerException.Message);
-                }
+                return AttemptConnection(new MySqlConnection(myConnectionString));
             }
             else if (databaseType == DatabaseType.MSSQL)
             {
@@ -198,44 +189,36 @@ namespace pie.Services
                     Password = password
                 };
 
-                using (var l_oConnection = new SqlConnection(connectionStringBuilder.ConnectionString))
-                {
-                    try
-                    {
-                        l_oConnection.Open();
-                        l_oConnection.Close();
-                        return new Tuple<bool, string>(true, null);
-                    }
-                    catch (SqlException ex)
-                    {
-                        return new Tuple<bool, string>(false, ex.InnerException.Message);
-                    }
-                    catch (InvalidOperationException ex)
-                    {
-                        return new Tuple<bool, string>(false, ex.Message);
-                    }
-                }
+                return AttemptConnection(new SqlConnection(connectionStringBuilder.ConnectionString));
             }
             else if (databaseType == DatabaseType.PostgreSQL)
             {
                 string strConnString = "Server=" + hostname + ";Port=" + port + ";User Id=" + username + ";Password=" + password + ";Database=" + databaseName;
-                try
-                {
-                    NpgsqlConnection objConn = new NpgsqlConnection(strConnString);
-                    objConn.Open();
-                    objConn.Close();
-                    return new Tuple<bool, string>(true, null);
-                }
-                catch (NpgsqlException ex)
-                {
-                    return new Tuple<bool, string>(false, ex.InnerException.Message);
-                }
+                return AttemptConnection(new NpgsqlConnection(strConnString));
             }
 
             return null;
         }
 
-        public static Triple<bool, string, DataTable> ExecuteSQLCommand(string query, DatabaseConnection databaseConnection)
+        private static DatabaseResponse AttemptConnection(IDbConnection connection)
+        {
+            try
+            {
+                connection.Open();
+                connection.Close();
+                return new DatabaseResponse(true, null);
+            }
+            catch (DbException ex)
+            {
+                return new DatabaseResponse(false, ex.InnerException.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return new DatabaseResponse(false, ex.Message);
+            }
+        }
+
+        public static DatabaseResponse ExecuteSQLCommand(string query, DatabaseConnection databaseConnection)
         {
             DataTable dt = new DataTable();
 
@@ -256,20 +239,20 @@ namespace pie.Services
 
                     if (dt.Columns.Count == 0)
                     {
-                        return new Triple<bool, string, DataTable>(false, "No columns returned.", null);
+                        return new DatabaseResponse(false, "No columns returned.", null);
                     }
 
-                    return new Triple<bool, string, DataTable> (true, null, dt);
+                    return new DatabaseResponse(true, null, dt);
                 }
                 catch (Exception ex)
                 {
                     if (ex.InnerException != null)
                     {
-                        return new Triple<bool, string, DataTable>(false, ex.InnerException.Message, null);
+                        return new DatabaseResponse(false, ex.InnerException.Message, null);
                     }
                     else
                     {
-                        return new Triple<bool, string, DataTable>(false, ex.Message, null);
+                        return new DatabaseResponse(false, ex.Message, null);
                     }
                 }
             }
@@ -301,25 +284,25 @@ namespace pie.Services
 
                         if (dt.Columns.Count == 0)
                         {
-                            return new Triple<bool, string, DataTable>(false, "No columns returned", null);
+                            return new DatabaseResponse(false, "No columns returned", null);
                         }
 
-                        return new Triple<bool, string, DataTable>(true, null, dt);
+                        return new DatabaseResponse(true, null, dt);
                     }
                     catch (SqlException ex)
                     {
                         if (ex.InnerException != null)
                         {
-                            return new Triple<bool, string, DataTable>(false, ex.InnerException.Message, null);
+                            return new DatabaseResponse(false, ex.InnerException.Message, null);
                         }
                         else
                         {
-                            return new Triple<bool, string, DataTable>(false, ex.Message, null);
+                            return new DatabaseResponse(false, ex.Message, null);
                         }
                     }
                     catch (InvalidOperationException ex)
                     {
-                        return new Triple<bool, string, DataTable>(false, ex.Message, null);
+                        return new DatabaseResponse(false, ex.Message, null);
                     }
                 }
             }
@@ -341,19 +324,19 @@ namespace pie.Services
 
                     if (dt.Columns.Count == 0)
                     {
-                        return new Triple<bool, string, DataTable>(false, "No columns returned", null);
+                        return new DatabaseResponse(false, "No columns returned", null);
                     }
 
-                    return new Triple<bool, string, DataTable>(true, null, dt);
+                    return new DatabaseResponse(true, null, dt);
                 }
                 catch (NpgsqlException ex)
                 {
-                    return new Triple<bool, string, DataTable>(false, ex.InnerException.Message, null);
+                    return new DatabaseResponse(false, ex.InnerException.Message, null);
                 }
             }
             else
             {
-                return new Triple<bool, string, DataTable>(false, null, null);
+                return new DatabaseResponse(false, null, null);
             }
         }
     }
