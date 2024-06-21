@@ -298,7 +298,7 @@ namespace pie.Services
                         }
                         else if (jsonTextReader.TokenType == JsonToken.String)
                         {
-                            if (token == "theme")
+                            if (token.ToLower() == "theme")
                             {
                                 Globals.theme = jsonTextReader.Value.ToString();
                             }
@@ -361,7 +361,7 @@ namespace pie.Services
                                     }
                                     else if (jsonTextReader.TokenType == JsonToken.String)
                                     {
-                                        if (token == "IconType")
+                                        if (token.ToLower() == "icontype")
                                         {
                                             themeInfo.IconType = jsonTextReader.Value.ToString();
                                         }

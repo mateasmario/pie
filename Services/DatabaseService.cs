@@ -73,12 +73,12 @@ namespace pie.Services
                         }
                         else if (jsonTextReader.TokenType == JsonToken.String)
                         {
-                            if (token == "connectionName")
+                            if (token.ToLower() == "connectionname")
                             {
                                 database = new DatabaseConnection();
                                 database.ConnectionName = jsonTextReader.Value.ToString();
                             }
-                            else if (token == "databaseType")
+                            else if (token.ToLower() == "databasetype")
                             {
                                 if (jsonTextReader.Value.ToString() == "MySQL")
                                 {
@@ -93,19 +93,19 @@ namespace pie.Services
                                     database.DatabaseType = DatabaseType.PostgreSQL;
                                 }
                             }
-                            else if (token == "hostname")
+                            else if (token.ToLower() == "hostname")
                             {
                                 database.Hostname = jsonTextReader.Value.ToString();
                             }
-                            else if (token == "databaseName")
+                            else if (token.ToLower() == "databasename")
                             {
                                 database.DatabaseName = jsonTextReader.Value.ToString();
                             }
-                            else if (token == "username")
+                            else if (token.ToLower() == "username")
                             {
                                 database.Username = jsonTextReader.Value.ToString();
                             }
-                            else if (token == "password")
+                            else if (token.ToLower() == "password")
                             {
                                 database.Password = jsonTextReader.Value.ToString();
                                 databases.Add(database);
@@ -113,7 +113,7 @@ namespace pie.Services
                         }
                         else if (jsonTextReader.TokenType == JsonToken.Integer)
                         {
-                            if (token == "port")
+                            if (token.ToLower() == "port")
                             {
                                 database.Port = int.Parse(jsonTextReader.Value.ToString());
                             }

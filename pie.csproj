@@ -390,6 +390,9 @@
     <Compile Include="Classes\ControlHelper.cs" />
     <Compile Include="Classes\DatabaseConnection.cs" />
     <Compile Include="Classes\FormatOption.cs" />
+    <Compile Include="Classes\LanguageMapping.cs" />
+    <Compile Include="Classes\LanguageProperty.cs" />
+    <Compile Include="Classes\LanguageDefinition.cs" />
     <Compile Include="Classes\NavigatorFile.cs" />
     <Compile Include="Classes\GitCommit.cs" />
     <Compile Include="Classes\ThemeInfo.cs" />

@@ -109,6 +109,8 @@ namespace pie
         public static bool wordwrap;
         public static bool autosave;
         public static bool glass;
+        public static List<LanguageDefinition> languageDefinitions;
+        public static List<LanguageMapping> languageMappings;
 
         // Format
         public static string chosenFormatOption;

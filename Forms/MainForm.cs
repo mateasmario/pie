@@ -1279,10 +1279,29 @@ namespace pie
             }
         }
 
+        private void ProcessLanguageMappings()
+        {
+            try
+            {
+                Globals.languageMappings = ScintillaLexerService.GetMappingsFromFile("config/mappings.json");
+            }
+            catch (FileNotFoundException ex)
+            {
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/mappings.json", "[]");
+            }
+        }
+
+        private void ProcessLanguageDefinitions()
+        {
+            Globals.languageDefinitions = ScintillaLexerService.LoadDefinitionsFromFolder(AppDomain.CurrentDomain.BaseDirectory + "config/languages");
+        }
+
         private void GetConfigurationDataFromFiles()
         {
             ProcessBuildCommands();
             ProcessDatabases();
+            ProcessLanguageMappings();
+            ProcessLanguageDefinitions();
 
             try
             {
@@ -3278,6 +3297,7 @@ namespace pie
         private void capitalizeEntireTextToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+
             int currPos = scintilla.CurrentPosition;
 
             string result = FormattingService.ConvertTextToUppercase(scintilla.Text);
