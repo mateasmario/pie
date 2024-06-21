@@ -55,12 +55,12 @@ namespace pie.Services
                         }
                         else if (jsonTextReader.TokenType == JsonToken.String)
                         {
-                            if (token == "name")
+                            if (token.ToLower() == "name")
                             {
                                 buildCommand = new BuildCommand();
                                 buildCommand.BuildCommandName = jsonTextReader.Value.ToString();
                             }
-                            else if (token == "command")
+                            else if (token.ToLower() == "command")
                             {
                                 buildCommand.BuildCommandCmd = jsonTextReader.Value.ToString();
                                 buildCommands.Add(buildCommand);

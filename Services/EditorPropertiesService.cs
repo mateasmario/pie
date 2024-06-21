@@ -55,15 +55,15 @@ namespace pie.Services
                         else if (jsonTextReader.TokenType == JsonToken.Boolean)
                         {
                             bool value = (bool)jsonTextReader.Value;
-                            if (token == "wordwrap")
+                            if (token.ToLower() == "wordwrap")
                             {
                                 Globals.wordwrap = value;
                             }
-                            else if (token == "autosave")
+                            else if (token.ToLower() == "autosave")
                             {
                                 Globals.autosave = value;
                             }
-                            else if (token == "glass")
+                            else if (token.ToLower() == "glass")
                             {
                                 Globals.glass = value;
                             }

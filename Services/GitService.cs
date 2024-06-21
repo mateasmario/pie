@@ -52,19 +52,19 @@ namespace pie.Services
                         }
                         else if (jsonTextReader.TokenType == JsonToken.String)
                         {
-                            if (token == "name")
+                            if (token.ToLower() == "name")
                             {
                                 gitCredentials.Name = jsonTextReader.Value.ToString();
                             }
-                            else if (token == "email")
+                            else if (token.ToLower() == "email")
                             {
                                 gitCredentials.Email = jsonTextReader.Value.ToString();
                             }
-                            else if (token == "username")
+                            else if (token.ToLower() == "username")
                             {
                                 gitCredentials.Username = jsonTextReader.Value.ToString();
                             }
-                            else if (token == "password")
+                            else if (token.ToLower() == "password")
                             {
                                 gitCredentials.Password = jsonTextReader.Value.ToString();
                             }
