@@ -933,7 +933,7 @@ namespace pie
             }
         }
 
-        public void NewTerminalTab(string process,bool beginning)
+        public void NewTerminalTab(string process, bool beginning)
         {
             KryptonPage kryptonPage = new KryptonPage();
 
@@ -973,7 +973,7 @@ namespace pie
             }
             else
             {
-                kryptonPage.Text = "Build";
+                kryptonPage.Text = process;
                 conEmuSession.ConsoleEmulatorClosed += ConEmuSession_ConsoleEmulatorClosed;
             }
 
@@ -1229,6 +1229,29 @@ namespace pie
             else
             {
                 if (tabControl.SelectedIndex < Globals.tabInfos.Count && Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
+                {
+                    Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+                    ClearHighlights(TextArea);
+                }
+
+                kryptonContextMenuItem6.Text = "Show Find and Replace";
+            }
+        }
+
+        private void ToggleFindReplacePanel(bool status, int indexToMoveTo)
+        {
+            findReplaceHeaderGroup.Visible = status;
+            kryptonContextMenuItem6.Checked = status;
+
+            if (status)
+            {
+                ResetFindPanelLocation();
+                kryptonContextMenuItem6.Text = "Hide Find and Replace";
+                findTextBox.Focus();
+            }
+            else
+            {
+                if (indexToMoveTo < Globals.tabInfos.Count && Globals.tabInfos[indexToMoveTo].getTabType() == TabType.CODE)
                 {
                     Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
                     ClearHighlights(TextArea);
@@ -1839,7 +1862,7 @@ namespace pie
                     }
 
                     ToggleTerminalTabControl(false);
-                    ToggleFindReplacePanel(false);
+                    ToggleFindReplacePanel(false, indexToMoveTo);
                     ToggleDirectoryNavigator(false);
 
                     if (Globals.tabInfos[indexToMoveTo].getTabType() == TabType.GIT)
