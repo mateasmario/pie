@@ -495,7 +495,7 @@
             // 
             this.showBuildToolsToolStripMenuItem.Image = global::pie.Properties.Resources.terminal;
             this.showBuildToolsToolStripMenuItem.Name = "showBuildToolsToolStripMenuItem";
-            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
             this.showBuildToolsToolStripMenuItem.Click += new System.EventHandler(this.showBuildToolsToolStripMenuItem_Click);
             // 
@@ -503,7 +503,7 @@
             // 
             this.showGitTabToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showGitTabToolStripMenuItem.Image")));
             this.showGitTabToolStripMenuItem.Name = "showGitTabToolStripMenuItem";
-            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.showGitTabToolStripMenuItem.Text = "Show Git Tab";
             this.showGitTabToolStripMenuItem.Click += new System.EventHandler(this.showGitTabToolStripMenuItem_Click);
             // 
@@ -515,20 +515,20 @@
             this.darkToolStripMenuItem});
             this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.color_wheel;
             this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
-            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.themeSettingsToolStripMenuItem.Text = "Themes";
             // 
             // lightToolStripMenuItem
             // 
             this.lightToolStripMenuItem.Name = "lightToolStripMenuItem";
-            this.lightToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lightToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.lightToolStripMenuItem.Text = "Light";
             this.lightToolStripMenuItem.Click += new System.EventHandler(this.lightToolStripMenuItem_Click);
             // 
             // darkToolStripMenuItem
             // 
             this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
-            this.darkToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.darkToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.darkToolStripMenuItem.Text = "Dark";
             this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
             // 
@@ -536,7 +536,7 @@
             // 
             this.themeDesignerToolStripMenuItem.Image = global::pie.Properties.Resources.graphic_designer;
             this.themeDesignerToolStripMenuItem.Name = "themeDesignerToolStripMenuItem";
-            this.themeDesignerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.themeDesignerToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.themeDesignerToolStripMenuItem.Text = "Theme Designer";
             this.themeDesignerToolStripMenuItem.Click += new System.EventHandler(this.themeDesignerToolStripMenuItem_Click);
             // 
@@ -544,7 +544,7 @@
             // 
             this.glassModeToolStripMenuItem.Image = global::pie.Properties.Resources.transparency;
             this.glassModeToolStripMenuItem.Name = "glassModeToolStripMenuItem";
-            this.glassModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.glassModeToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.glassModeToolStripMenuItem.Text = "Enable Glass Effect";
             this.glassModeToolStripMenuItem.Click += new System.EventHandler(this.glassModeToolStripMenuItem_Click);
             // 
@@ -552,7 +552,7 @@
             // 
             this.cheatsheetToolStripMenuItem.Image = global::pie.Properties.Resources.open_book;
             this.cheatsheetToolStripMenuItem.Name = "cheatsheetToolStripMenuItem";
-            this.cheatsheetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cheatsheetToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.cheatsheetToolStripMenuItem.Text = "Cheatsheet";
             this.cheatsheetToolStripMenuItem.Click += new System.EventHandler(this.cheatsheetToolStripMenuItem_Click);
             // 
@@ -560,7 +560,7 @@
             // 
             this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info;
             this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
-            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.aboutPieToolStripMenuItem.Text = "About pie";
             this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
             // 
@@ -735,7 +735,6 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -1145,6 +1144,7 @@
             this.directoryNavigationObjectListView.TabIndex = 10;
             this.directoryNavigationObjectListView.UseCompatibleStateImageBehavior = false;
             this.directoryNavigationObjectListView.View = System.Windows.Forms.View.Details;
+            this.directoryNavigationObjectListView.DoubleClick += new System.EventHandler(this.directoryNavigationObjectListView_DoubleClick);
             this.directoryNavigationObjectListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
             // olvColumn3
