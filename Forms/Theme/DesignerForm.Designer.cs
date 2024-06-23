@@ -59,11 +59,11 @@
             this.kryptonColorButton4 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
             this.kryptonColorButton3 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
             this.kryptonColorButton1 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.themeListView = new BrightIdeasSoftware.ObjectListView();
             this.ThemeNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -487,6 +487,15 @@
             this.kryptonColorButton1.Values.Text = "Primary";
             this.kryptonColorButton1.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(290, 167);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(437, 20);
+            this.kryptonLabel1.TabIndex = 7;
+            this.kryptonLabel1.Values.Text = "Please select a theme or insert a new one, in order to view the available colors." +
+    "";
+            // 
             // themeListView
             // 
             this.themeListView.AllColumns.Add(this.ThemeNameColumn);
@@ -520,6 +529,7 @@
             this.kryptonButton2.Size = new System.Drawing.Size(111, 25);
             this.kryptonButton2.TabIndex = 8;
             this.kryptonButton2.Values.Text = "New Theme";
+            this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
             // 
             // kryptonButton1
             // 
@@ -532,15 +542,7 @@
             this.kryptonButton1.Size = new System.Drawing.Size(111, 25);
             this.kryptonButton1.TabIndex = 7;
             this.kryptonButton1.Values.Text = "Delete Theme";
-            // 
-            // kryptonLabel1
-            // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(290, 167);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(437, 20);
-            this.kryptonLabel1.TabIndex = 7;
-            this.kryptonLabel1.Values.Text = "Please select a theme or insert a new one, in order to view the available colors." +
-    "";
+            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // DesignerForm
             // 

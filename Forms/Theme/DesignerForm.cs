@@ -18,14 +18,9 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Drawing;
 using pie.Services;
 using pie.Classes;
 
@@ -35,6 +30,7 @@ using pie.Classes;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
+
 
 namespace pie.Forms.Theme
 {
@@ -126,17 +122,19 @@ namespace pie.Forms.Theme
                 }
             }
 
-            kryptonColorButton1.SelectedColor = themeInfoToEdit.ColorDictionary["Primary"];
-            kryptonColorButton3.SelectedColor = themeInfoToEdit.ColorDictionary["Secondary"];
-            kryptonColorButton4.SelectedColor = themeInfoToEdit.ColorDictionary["Button"];
-            kryptonColorButton5.SelectedColor = themeInfoToEdit.ColorDictionary["ButtonFrame"];
-            kryptonColorButton6.SelectedColor = themeInfoToEdit.ColorDictionary["ButtonHover"];
-            kryptonColorButton7.SelectedColor = themeInfoToEdit.ColorDictionary["Fore"];
-            kryptonColorButton8.SelectedColor = themeInfoToEdit.ColorDictionary["FormBorder"];
-            kryptonColorButton9.SelectedColor = themeInfoToEdit.ColorDictionary["Selection"];
-            kryptonColorButton10.SelectedColor = themeInfoToEdit.ColorDictionary["CaretLineBack"];
-            kryptonColorButton11.SelectedColor = themeInfoToEdit.ColorDictionary["NumberMargin"];
-            kryptonColorButton12.SelectedColor = themeInfoToEdit.ColorDictionary["Folding"];
+            Dictionary<string, Color> defaultDictionary = ThemeService.GetColorDictionary("light");
+
+            kryptonColorButton1.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Primary") ? themeInfoToEdit.ColorDictionary["Primary"] : defaultDictionary["Primary"];
+            kryptonColorButton3.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Secondary") ? themeInfoToEdit.ColorDictionary["Secondary"] : defaultDictionary["Secondary"];
+            kryptonColorButton4.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Button") ? themeInfoToEdit.ColorDictionary["Button"] : defaultDictionary["Button"];
+            kryptonColorButton5.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("ButtonFrame") ? themeInfoToEdit.ColorDictionary["ButtonFrame"] : defaultDictionary["ButtonFrame"];
+            kryptonColorButton6.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("ButtonHover") ? themeInfoToEdit.ColorDictionary["ButtonHover"] : defaultDictionary["ButtonHover"];
+            kryptonColorButton7.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Fore") ? themeInfoToEdit.ColorDictionary["Fore"] : defaultDictionary["Fore"];
+            kryptonColorButton8.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("FormBorder") ? themeInfoToEdit.ColorDictionary["FormBorder"] : defaultDictionary["FormBorder"];
+            kryptonColorButton9.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Selection") ? themeInfoToEdit.ColorDictionary["Selection"] : defaultDictionary["Selection"];
+            kryptonColorButton10.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("CaretLineBack") ? themeInfoToEdit.ColorDictionary["CaretLineBack"] : defaultDictionary["CaretLineBack"];
+            kryptonColorButton11.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("NumberMargin") ? themeInfoToEdit.ColorDictionary["NumberMargin"] : defaultDictionary["NumberMargin"];
+            kryptonColorButton12.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Folding") ? themeInfoToEdit.ColorDictionary["Folding"] : defaultDictionary["Folding"];
 
             if (themeInfoToEdit.IconType == null || themeInfoToEdit.IconType.ToLower().Equals("dark"))
             {
@@ -147,20 +145,20 @@ namespace pie.Forms.Theme
                 kryptonComboBox1.SelectedIndex = 1;
             }
 
-            kryptonColorButton22.SelectedColor = themeInfoToEdit.ColorDictionary["Comment"];
-            kryptonColorButton21.SelectedColor = themeInfoToEdit.ColorDictionary["CommentLine"];
-            kryptonColorButton20.SelectedColor = themeInfoToEdit.ColorDictionary["CommentBlock"];
-            kryptonColorButton19.SelectedColor = themeInfoToEdit.ColorDictionary["Word"];
-            kryptonColorButton18.SelectedColor = themeInfoToEdit.ColorDictionary["String"];
-            kryptonColorButton17.SelectedColor = themeInfoToEdit.ColorDictionary["Number"];
-            kryptonColorButton16.SelectedColor = themeInfoToEdit.ColorDictionary["Operator"];
-            kryptonColorButton15.SelectedColor = themeInfoToEdit.ColorDictionary["Preprocessor"];
-            kryptonColorButton14.SelectedColor = themeInfoToEdit.ColorDictionary["Triple"];
-            kryptonColorButton13.SelectedColor = themeInfoToEdit.ColorDictionary["Decorator"];
-            kryptonColorButton2.SelectedColor = themeInfoToEdit.ColorDictionary["Attribute"];
-            kryptonColorButton23.SelectedColor = themeInfoToEdit.ColorDictionary["Entity"];
-            kryptonColorButton24.SelectedColor = themeInfoToEdit.ColorDictionary["User1"];
-            kryptonColorButton25.SelectedColor = themeInfoToEdit.ColorDictionary["User2"];
+            kryptonColorButton22.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Comment") ? themeInfoToEdit.ColorDictionary["Comment"] : defaultDictionary["Comment"];
+            kryptonColorButton21.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("CommentLine") ? themeInfoToEdit.ColorDictionary["CommentLine"] : defaultDictionary["CommentLine"];
+            kryptonColorButton20.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("CommentBlock") ? themeInfoToEdit.ColorDictionary["CommentBlock"] : defaultDictionary["CommentBlock"];
+            kryptonColorButton19.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Word") ? themeInfoToEdit.ColorDictionary["Word"] : defaultDictionary["Word"];
+            kryptonColorButton18.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("String") ? themeInfoToEdit.ColorDictionary["String"] : defaultDictionary["String"];
+            kryptonColorButton17.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Number") ? themeInfoToEdit.ColorDictionary["Number"] : defaultDictionary["Number"];
+            kryptonColorButton16.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Operator") ? themeInfoToEdit.ColorDictionary["Operator"] : defaultDictionary["Operator"];
+            kryptonColorButton15.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Preprocessor") ? themeInfoToEdit.ColorDictionary["Preprocessor"] : defaultDictionary["Preprocessor"];
+            kryptonColorButton14.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Triple") ? themeInfoToEdit.ColorDictionary["Triple"] : defaultDictionary["Triple"];
+            kryptonColorButton13.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Decorator") ? themeInfoToEdit.ColorDictionary["Decorator"] : defaultDictionary["Decorator"];
+            kryptonColorButton2.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Attribute") ? themeInfoToEdit.ColorDictionary["Attribute"] : defaultDictionary["Attribute"];
+            kryptonColorButton23.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("Entity") ? themeInfoToEdit.ColorDictionary["Entity"] : defaultDictionary["Entity"];
+            kryptonColorButton24.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("User1") ? themeInfoToEdit.ColorDictionary["User1"] : defaultDictionary["User1"];
+            kryptonColorButton25.SelectedColor = themeInfoToEdit.ColorDictionary.ContainsKey("User2") ? themeInfoToEdit.ColorDictionary["User2"] : defaultDictionary["User2"];
         }
 
         private void kryptonColorButton_SelectedColorChanged(object sender, ColorEventArgs e)
@@ -185,6 +183,32 @@ namespace pie.Forms.Theme
         {
             ThemeService.WriteThemesToDirectory("config/themes", Globals.themeInfos);
             this.Close();
+        }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            if (themeInfoToEdit != null)
+            {
+                Globals.themeInfos.Remove(themeInfoToEdit);
+                themeListView.RemoveObject(themeInfoToEdit);
+            }
+        }
+
+        private void kryptonButton2_Click(object sender, EventArgs e)
+        {
+            NewThemeForm newThemeForm = new NewThemeForm();
+            newThemeForm.ShowDialog();
+
+            if (Globals.newThemeName != null)
+            {
+                ThemeInfo themeInfo = new ThemeInfo();
+                themeInfo.Name = Globals.newThemeName;
+
+                themeInfo.ColorDictionary = new Dictionary<string, Color>();
+
+                Globals.themeInfos.Add(themeInfo);
+                themeListView.AddObject(themeInfo);
+            }
         }
     }
 }
