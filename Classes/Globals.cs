@@ -57,6 +57,7 @@ namespace pie
         public static KryptonPalette kryptonPalette;
         public static List<ThemeInfo> themeInfos;
         public static Dictionary<string, Color> colorDictionary;
+        public static string newThemeName;
 
         // Build Commands
         public static List<BuildCommand> buildCommands;

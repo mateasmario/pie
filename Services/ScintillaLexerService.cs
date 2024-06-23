@@ -90,9 +90,6 @@ namespace pie.Services
                 parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
                 parserColorDictionary["Number"] = Color.FromArgb(242, 161, 39);
                 parserColorDictionary["Word"] = Color.FromArgb(60, 170, 232);
-                parserColorDictionary["Word2"] = Color.FromArgb(60, 170, 232);
-                parserColorDictionary["Word3"] = Color.FromArgb(145, 35, 247);
-                parserColorDictionary["Word4"] = Color.FromArgb(145, 35, 247);
                 parserColorDictionary["String"] = Color.FromArgb(56, 207, 172);
                 parserColorDictionary["Operator"] = Color.FromArgb(222, 2, 222);
                 parserColorDictionary["Preprocessor"] = Color.FromArgb(222, 2, 222);
@@ -111,9 +108,6 @@ namespace pie.Services
                 parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
                 parserColorDictionary["Number"] = Color.FromArgb(194, 127, 25);
                 parserColorDictionary["Word"] = Color.FromArgb(50, 125, 168);
-                parserColorDictionary["Word2"] = Color.FromArgb(50, 125, 168);
-                parserColorDictionary["Word3"] = Color.FromArgb(138, 43, 226);
-                parserColorDictionary["Word4"] = Color.FromArgb(138, 43, 226);
                 parserColorDictionary["String"] = Color.FromArgb(43, 158, 131);
                 parserColorDictionary["Operator"] = Color.FromArgb(128, 0, 128);
                 parserColorDictionary["Preprocessor"] = Color.FromArgb(128, 0, 128);
@@ -131,9 +125,6 @@ namespace pie.Services
                 parserColorDictionary["CommentLine"] = ThemeService.GetColor("CommentLine");
                 parserColorDictionary["Number"] = ThemeService.GetColor("Number");
                 parserColorDictionary["Word"] = ThemeService.GetColor("Word");
-                parserColorDictionary["Word2"] = ThemeService.GetColor("Word2");
-                parserColorDictionary["Word3"] = ThemeService.GetColor("Word3");
-                parserColorDictionary["Word4"] = ThemeService.GetColor("Word4");
                 parserColorDictionary["String"] = ThemeService.GetColor("String");
                 parserColorDictionary["Operator"] = ThemeService.GetColor("Operator");
                 parserColorDictionary["Preprocessor"] = ThemeService.GetColor("Preprocessor");

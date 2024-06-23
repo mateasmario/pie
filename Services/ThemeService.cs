@@ -60,6 +60,23 @@ namespace pie.Services
             lightColorDictionary["CaretLineBack"] = Color.FromArgb(230, 230, 230);
             lightColorDictionary["NumberMargin"] = Color.FromArgb(225, 225, 225);
             lightColorDictionary["Folding"] = Color.FromArgb(235, 235, 235);
+            lightColorDictionary["Comment"] = Color.FromArgb(180, 180, 180);
+            lightColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
+            lightColorDictionary["Number"] = Color.FromArgb(194, 127, 25);
+            lightColorDictionary["Word"] = Color.FromArgb(50, 125, 168);
+            lightColorDictionary["Word2"] = Color.FromArgb(50, 125, 168);
+            lightColorDictionary["Word3"] = Color.FromArgb(138, 43, 226);
+            lightColorDictionary["Word4"] = Color.FromArgb(138, 43, 226);
+            lightColorDictionary["String"] = Color.FromArgb(43, 158, 131);
+            lightColorDictionary["Operator"] = Color.FromArgb(128, 0, 128);
+            lightColorDictionary["Preprocessor"] = Color.FromArgb(128, 0, 128);
+            lightColorDictionary["Triple"] = Color.FromArgb(127, 0, 0);
+            lightColorDictionary["CommentBlock"] = Color.FromArgb(127, 127, 127);
+            lightColorDictionary["Decorator"] = Color.FromArgb(186, 119, 2);
+            lightColorDictionary["Attribute"] = Color.FromArgb(128, 0, 128);
+            lightColorDictionary["Entity"] = Color.FromArgb(128, 0, 128);
+            lightColorDictionary["User1"] = Color.FromArgb(128, 128, 128);
+            lightColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
 
             darkColorDictionary["Primary"] = Color.FromArgb(40, 40, 40);
             darkColorDictionary["Secondary"] = Color.FromArgb(50, 50, 50);
@@ -73,6 +90,23 @@ namespace pie.Services
             darkColorDictionary["CaretLineBack"] = Color.FromArgb(50, 50, 50);
             darkColorDictionary["NumberMargin"] = Color.FromArgb(46, 46, 46);
             darkColorDictionary["Folding"] = Color.FromArgb(50, 50, 50);
+            darkColorDictionary["Comment"] = Color.FromArgb(192, 192, 192);
+            darkColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
+            darkColorDictionary["Number"] = Color.FromArgb(242, 161, 39);
+            darkColorDictionary["Word"] = Color.FromArgb(60, 170, 232);
+            darkColorDictionary["Word2"] = Color.FromArgb(60, 170, 232);
+            darkColorDictionary["Word3"] = Color.FromArgb(145, 35, 247);
+            darkColorDictionary["Word4"] = Color.FromArgb(145, 35, 247);
+            darkColorDictionary["String"] = Color.FromArgb(56, 207, 172);
+            darkColorDictionary["Operator"] = Color.FromArgb(222, 2, 222);
+            darkColorDictionary["Preprocessor"] = Color.FromArgb(222, 2, 222);
+            darkColorDictionary["Triple"] = Color.FromArgb(207, 2, 2);
+            darkColorDictionary["CommentBlock"] = Color.FromArgb(153, 153, 153);
+            darkColorDictionary["Decorator"] = Color.FromArgb(230, 222, 5);
+            darkColorDictionary["Attribute"] = Color.FromArgb(222, 2, 222);
+            darkColorDictionary["Entity"] = Color.FromArgb(222, 2, 222);
+            darkColorDictionary["User1"] = Color.FromArgb(128, 128, 128);
+            darkColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
         }
 
         public static Color GetColor(string color)

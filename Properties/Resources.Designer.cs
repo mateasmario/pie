@@ -283,6 +283,16 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap graphic_designer {
+            get {
+                object obj = ResourceManager.GetObject("graphic-designer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hiclipart_com {
             get {
                 object obj = ResourceManager.GetObject("hiclipart.com", resourceCulture);
