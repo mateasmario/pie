@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonColorButton25 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
@@ -62,7 +63,7 @@
             this.ThemeNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -91,6 +92,19 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(778, 494);
             this.kryptonPanel1.TabIndex = 7;
             // 
+            // kryptonButton3
+            // 
+            this.kryptonButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonButton3.Location = new System.Drawing.Point(3, 5);
+            this.kryptonButton3.Name = "kryptonButton3";
+            this.kryptonButton3.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonButton3.Size = new System.Drawing.Size(111, 25);
+            this.kryptonButton3.TabIndex = 11;
+            this.kryptonButton3.Values.Text = "Save changes";
+            this.kryptonButton3.Click += new System.EventHandler(this.kryptonButton3_Click);
+            // 
             // kryptonPanel2
             // 
             this.kryptonPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -98,6 +112,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonPanel2.Controls.Add(this.kryptonGroupBox2);
             this.kryptonPanel2.Controls.Add(this.kryptonGroupBox1);
+            this.kryptonPanel2.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel2.Controls.Add(this.themeListView);
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 36);
             this.kryptonPanel2.Name = "kryptonPanel2";
@@ -518,18 +533,14 @@
             this.kryptonButton1.TabIndex = 7;
             this.kryptonButton1.Values.Text = "Delete Theme";
             // 
-            // kryptonButton3
+            // kryptonLabel1
             // 
-            this.kryptonButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton3.Location = new System.Drawing.Point(3, 5);
-            this.kryptonButton3.Name = "kryptonButton3";
-            this.kryptonButton3.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton3.Size = new System.Drawing.Size(111, 25);
-            this.kryptonButton3.TabIndex = 11;
-            this.kryptonButton3.Values.Text = "Save changes";
-            this.kryptonButton3.Click += new System.EventHandler(this.kryptonButton3_Click);
+            this.kryptonLabel1.Location = new System.Drawing.Point(290, 167);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(437, 20);
+            this.kryptonLabel1.TabIndex = 7;
+            this.kryptonLabel1.Values.Text = "Please select a theme or insert a new one, in order to view the available colors." +
+    "";
             // 
             // DesignerForm
             // 
@@ -548,6 +559,7 @@
             this.kryptonPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
             this.kryptonPanel2.ResumeLayout(false);
+            this.kryptonPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).EndInit();
             this.kryptonGroupBox2.Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
@@ -599,5 +611,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton23;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox kryptonComboBox1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton3;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
     }
 }

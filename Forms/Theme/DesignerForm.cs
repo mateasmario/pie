@@ -50,6 +50,7 @@ namespace pie.Forms.Theme
             kryptonPanel2.Palette = Globals.kryptonPalette;
             kryptonButton1.Palette = Globals.kryptonPalette;
             kryptonButton2.Palette = Globals.kryptonPalette;
+            kryptonButton3.Palette = Globals.kryptonPalette;
             kryptonGroupBox1.Palette = Globals.kryptonPalette;
             kryptonGroupBox2.Palette = Globals.kryptonPalette;
             kryptonColorButton1.Palette = Globals.kryptonPalette;
@@ -78,12 +79,16 @@ namespace pie.Forms.Theme
             kryptonColorButton24.Palette = Globals.kryptonPalette;
             kryptonColorButton25.Palette = Globals.kryptonPalette;
             kryptonComboBox1.Palette = Globals.kryptonPalette;
+            kryptonLabel1.Palette = Globals.kryptonPalette;
         }
 
         private void DesignerForm_Load(object sender, EventArgs e)
         {
             SynchronizeObjectListViewWithTheme();
             themeListView.SetObjects(Globals.themeInfos);
+
+            kryptonGroupBox1.Visible = false;
+            kryptonGroupBox2.Visible = false;
         }
 
         private void SynchronizeObjectListViewWithTheme()
@@ -106,6 +111,9 @@ namespace pie.Forms.Theme
 
         private void themeListView_DoubleClick(object sender, EventArgs e)
         {
+            kryptonGroupBox1.Visible = true;
+            kryptonGroupBox2.Visible = true;
+
             if (themeListView.SelectedItems.Count == 1)
             {
                 foreach(ThemeInfo themeInfo in Globals.themeInfos)
@@ -129,7 +137,8 @@ namespace pie.Forms.Theme
             kryptonColorButton10.SelectedColor = themeInfoToEdit.ColorDictionary["CaretLineBack"];
             kryptonColorButton11.SelectedColor = themeInfoToEdit.ColorDictionary["NumberMargin"];
             kryptonColorButton12.SelectedColor = themeInfoToEdit.ColorDictionary["Folding"];
-            if (themeInfoToEdit.IconType.ToLower().Equals("light"))
+
+            if (themeInfoToEdit.IconType == null || themeInfoToEdit.IconType.ToLower().Equals("dark"))
             {
                 kryptonComboBox1.SelectedIndex = 0;
             }
@@ -175,6 +184,7 @@ namespace pie.Forms.Theme
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
             ThemeService.WriteThemesToDirectory("config/themes", Globals.themeInfos);
+            this.Close();
         }
     }
 }
