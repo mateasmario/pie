@@ -393,5 +393,44 @@ namespace pie.Services
                 return themeInfos;
             }
         }
+
+        internal static void WriteThemesToDirectory(string directory, List<ThemeInfo> themeInfos)
+        {
+            DirectoryInfo di = new DirectoryInfo(directory);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+
+
+            foreach (ThemeInfo themeInfo in themeInfos)
+            {
+                string path = AppDomain.CurrentDomain.BaseDirectory + directory + "/" + themeInfo.Name;
+                File.Create(path);
+                TextWriter textWriter = new StreamWriter(path);
+
+                using (JsonWriter writer = new JsonTextWriter(textWriter))
+                {
+                    writer.Formatting = Formatting.Indented;
+
+                    writer.WriteStartArray();
+
+                    foreach (KeyValuePair<string, Color> entry in themeInfo.ColorDictionary)
+                    {
+                        writer.WriteStartObject();
+                        writer.WritePropertyName(entry.Key);
+                        writer.WriteValue(entry.Value);
+                        writer.WriteEndObject();
+                    }
+
+                    writer.WriteEndArray();
+                }
+            }
+        }
     }
 }

@@ -25,13 +25,13 @@ using System.IO;
 using System.Windows.Forms;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Data;
 using System.Text.RegularExpressions;
 using pie.Classes;
 using pie.Forms.Databases;
 using pie.Services;
 using pie.Enums;
 using pie.Forms.Format;
+using pie.Forms.Theme;
 using pie.Forms.Other;
 
 /**
@@ -2993,40 +2993,6 @@ namespace pie
                 return "folder";
         }
 
-        private void directoryNavigationObjectListView_DoubleClick(object sender, EventArgs e)
-        {
-            if (directoryNavigationObjectListView.SelectedItems.Count == 1)
-            {
-                NavigatorFile navigatorFile = (NavigatorFile)directoryNavigationObjectListView.SelectedObject;
-
-                if (navigatorFile.Type == "File")
-                {
-                    NewTab(TabType.CODE, null);
-                    bool state = Open(((NavigatorFile)navigatorFile).Path);
-
-                    if (!state)
-                    {
-                        CloseTab();
-                    }
-                    else
-                    {
-                        directoryNavigationHeaderGroup.Visible = false;
-                    }
-                }
-                else
-                {
-                    if (navigatorFile.Path != "..")
-                    {
-                        NavigateToPath(navigatorFile.Path);
-                    }
-                    else
-                    {
-                        NavigateToPath(ParsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
-                    }
-                }
-            }
-        }
-
         private void kryptonContextMenuItem12_Click(object sender, EventArgs e)
         {
             ShowDirectoryNavigator();
@@ -3541,6 +3507,13 @@ namespace pie
         {
             CheatsheetForm cheatsheetForm = new CheatsheetForm();
             cheatsheetForm.ShowDialog();
+        }
+
+        private void themeDesignerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DesignerForm designerForm = new DesignerForm();
+            designerForm.ShowDialog();
+            ProcessCustomThemes();
         }
     }
 }
