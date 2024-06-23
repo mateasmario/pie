@@ -215,7 +215,7 @@ namespace pie
         }
 
         // [Method] Sets the corresponding theme colors to the code editor's background, text and margins.
-        private void ColorizeTextArea(Scintilla TextArea) 
+        private void ColorizeTextArea(Scintilla TextArea)
         {
             TextArea.StyleResetDefault();
             TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
@@ -366,7 +366,8 @@ namespace pie
 
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
 
-                foreach (DatabaseConnection database in Globals.databases) {
+                foreach (DatabaseConnection database in Globals.databases)
+                {
                     KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                     item1.Text = "Run query against " + database.ConnectionName;
                     item1.Click += Item1_Click6;
@@ -384,7 +385,7 @@ namespace pie
 
             DatabaseConnection database = null;
 
-            foreach(DatabaseConnection tempDatabase in Globals.databases)
+            foreach (DatabaseConnection tempDatabase in Globals.databases)
             {
                 if (name == tempDatabase.ConnectionName)
                 {
@@ -462,8 +463,8 @@ namespace pie
             Scintilla scintilla = (Scintilla)sender;
 
             UpdateNumberMarginWidth(scintilla, false);
-           
-           
+
+
             Globals.tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
 
             if (Globals.autosave)
@@ -494,7 +495,8 @@ namespace pie
         {
             Scintilla TextArea = (Scintilla)sender;
 
-            if (e.Button == MouseButtons.Right) {
+            if (e.Button == MouseButtons.Right)
+            {
                 codeContextMenu.Show(sender);
             }
 
@@ -564,7 +566,7 @@ namespace pie
 
                 if (Globals.gitTabOpened)
                 {
-                    for (int i = 0; i<tabControl.Pages.Count; i++)
+                    for (int i = 0; i < tabControl.Pages.Count; i++)
                     {
                         if (Globals.tabInfos[i].getTabType() == TabType.GIT)
                         {
@@ -629,12 +631,12 @@ namespace pie
 
             TabInfo tabInfo = new TabInfo(openedFilePath, false, tabType, autocompleteMenu);
 
-            int index = tabControl.Pages.Count <= 0 ? 0 : tabControl.SelectedIndex+1;
+            int index = tabControl.Pages.Count <= 0 ? 0 : tabControl.SelectedIndex + 1;
             Globals.tabInfos.Insert(index, tabInfo);
 
-            tabControl.Pages.Insert(tabControl.SelectedIndex+1, kryptonPage);
+            tabControl.Pages.Insert(tabControl.SelectedIndex + 1, kryptonPage);
             tabControl.SelectedPage = kryptonPage;
-            
+
             if (tabType == TabType.GIT)
             {
                 UpdateFormTitle("Git");
@@ -676,14 +678,14 @@ namespace pie
 
             bool closeStatus = false;
 
-            while(tabCount > 0)
+            while (tabCount > 0)
             {
                 closeStatus = CloseTab();
 
                 if (!closeStatus)
                 {
                     return false;
-                } 
+                }
 
                 tabCount--;
             }
@@ -742,7 +744,7 @@ namespace pie
         {
             KryptonPage selectedKryptonPage = tabControl.SelectedPage;
 
-            if (tabControl.SelectedIndex == tabControl.Pages.Count-1)
+            if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
             {
                 Globals.deletesLastTab = true;
             }
@@ -790,7 +792,7 @@ namespace pie
             if (selectedKryptonPage.Text != "Build")
             {
                 // Check if there is at least one more tab page that isn't Build
-                foreach(KryptonPage kryptonPage in terminalTabControl.Pages)
+                foreach (KryptonPage kryptonPage in terminalTabControl.Pages)
                 {
                     if (kryptonPage != selectedKryptonPage && kryptonPage.Text != "Build")
                     {
@@ -841,7 +843,8 @@ namespace pie
 
             DeactivateBuildAndRunOptions();
 
-            if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null) {
+            if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
+            {
                 ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
             }
         }
@@ -890,7 +893,8 @@ namespace pie
             try
             {
                 fileContent = File.ReadAllText(fileName);
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 ShowNotification("An error has been encountered while trying to open the file.");
                 return false;
@@ -951,7 +955,8 @@ namespace pie
             ConEmuStartInfo conEmuStartInfo = new ConEmuStartInfo();
             conEmuStartInfo.ConsoleProcessCommandLine = process;
 
-            if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null) {
+            if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
+            {
                 conEmuStartInfo.StartupDirectory = ParsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
             }
 
@@ -1267,7 +1272,7 @@ namespace pie
             {
                 int removeCount = buildToolStripMenuItem1.DropDownItems.Count - 2;
 
-                while(removeCount > 0)
+                while (removeCount > 0)
                 {
                     buildToolStripMenuItem1.DropDownItems.RemoveAt(2);
                     removeCount--;
@@ -1367,7 +1372,8 @@ namespace pie
                     glassModeToolStripMenuItem.Text = "Disable Glass Effect";
                 }
 
-            } catch (FileNotFoundException ex)
+            }
+            catch (FileNotFoundException ex)
             {
                 EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", false, false, false);
             }
@@ -1392,7 +1398,7 @@ namespace pie
 
             ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
             SynchronizeMainFormComponentsWithTheme();
-            
+
             this.Palette = kryptonPalette;
             tabControl.Palette = kryptonPalette;
             terminalTabControl.Palette = kryptonPalette;
@@ -1588,7 +1594,8 @@ namespace pie
                         }
                     }
                 }
-                else {
+                else
+                {
                     if (e.KeyCode == Keys.Enter)
                     {
                         if (directoryNavigationObjectListView.SelectedItems.Count == 1)
@@ -1642,7 +1649,7 @@ namespace pie
                 }
             }
 
-            
+
             if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
             {
                 NewTab(TabType.CODE, null);
@@ -1652,7 +1659,8 @@ namespace pie
             {
                 CloseTab();
             }
-            else if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE) {
+            else if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
+            {
                 if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
                 {
                     Save(tabControl.SelectedIndex);
@@ -1672,7 +1680,7 @@ namespace pie
                 else if (e.KeyCode == Keys.X && e.Modifiers == Keys.Control)
                 {
                     Scintilla TextArea = (Scintilla)sender;
-                    
+
                     // If nothing is selected, cut the whole line
                     if (TextArea.SelectedText.Length == 0)
                     {
@@ -1690,12 +1698,12 @@ namespace pie
                 int startLine = TextArea.SelectionStart == 0 ? TextArea.SelectionStart : TextArea.SelectionStart;
                 int endLine = TextArea.SelectionStart == 0 ? TextArea.SelectionStart : TextArea.SelectionStart;
 
-                while (startLine > 0 && TextArea.Text[startLine-1] != '\n')
+                while (startLine > 0 && TextArea.Text[startLine - 1] != '\n')
                 {
                     startLine--;
                 }
 
-                while (endLine < TextArea.TextLength-1 && TextArea.Text[endLine] != '\n')
+                while (endLine < TextArea.TextLength - 1 && TextArea.Text[endLine] != '\n')
                 {
                     endLine++;
                 }
@@ -2000,7 +2008,7 @@ namespace pie
             {
                 scintilla.SearchFlags |= SearchFlags.Regex;
             }
-    
+
             if (matchCase)
             {
                 scintilla.SearchFlags |= SearchFlags.MatchCase;
@@ -2130,7 +2138,7 @@ namespace pie
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-            
+
             bool status = Replace(TextArea, findTextBox.Text, replaceTextBox.Text);
         }
 
@@ -2209,7 +2217,7 @@ namespace pie
                 string selectedPath = dialog.SelectedPath;
 
                 OpenRepository(selectedPath);
-            }    
+            }
         }
 
         private void OpenRepository(string path)
@@ -2262,7 +2270,7 @@ namespace pie
             string selectedBranch = null;
             if (gitBranchesComboBox.SelectedItem != null)
             {
-               selectedBranch = gitBranchesComboBox.SelectedItem.ToString();
+                selectedBranch = gitBranchesComboBox.SelectedItem.ToString();
             }
 
             gitBranchesComboBox.Items.Clear();
@@ -2357,7 +2365,7 @@ namespace pie
                     {
                         List<string> files = items.Split(' ').ToList();
 
-                        if (files[files.Count-1] == "")
+                        if (files[files.Count - 1] == "")
                         {
                             files.RemoveAt(files.Count - 1);
                         }
@@ -2493,7 +2501,7 @@ namespace pie
                 }
             }
         }
-        
+
         private void GitPush()
         {
             if (Globals.repo != null)
@@ -2584,7 +2592,8 @@ namespace pie
                 {
                     Globals.doNotShowBranchChangeNotification = false;
                 }
-                else {
+                else
+                {
                     ShowYesNoCancelNotification("Checking out another branch will discard your current changes. Would you like to continue?");
                 }
 
@@ -2729,10 +2738,11 @@ namespace pie
                             });
 
                         Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
-                        
+
                         try
                         {
-                            Task.Run(() => {
+                            Task.Run(() =>
+                            {
                                 Commands.Pull(Globals.repo, signature, pullOptions);
                             }).Wait();
 
@@ -2952,7 +2962,8 @@ namespace pie
                 files = Directory.GetFiles(path);
                 directories = Directory.GetDirectories(path);
                 directoryNavigationTextBox.Text = path;
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 ShowNotification("An error was encountered while trying to access the given path.");
                 ChooseFolderForNavigator();
@@ -3163,7 +3174,7 @@ namespace pie
 
         private void PerformFirstSaveWhenAutosaveTriggered()
         {
-            for (int i = 0; i<tabControl.Pages.Count; i++)
+            for (int i = 0; i < tabControl.Pages.Count; i++)
             {
                 if (Globals.tabInfos[i].getTabType() == TabType.CODE)
                 {
@@ -3421,7 +3432,7 @@ namespace pie
                 {
                     case "LINE_DUPLICATE":
                         result = FormattingService.DuplicateLines(scintilla.Text);
-                       
+
                         break;
                     case "LINE_ADD_EMPTY":
                         result = FormattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
@@ -3516,6 +3527,40 @@ namespace pie
             ProcessCustomThemes();
             Globals.colorDictionary = ThemeService.GetColorDictionary(Globals.theme);
             ChangeTheme(Globals.theme);
+        }
+
+        private void directoryNavigationObjectListView_DoubleClick(object sender, EventArgs e)
+        {
+            if (directoryNavigationObjectListView.SelectedItems.Count == 1)
+            {
+                NavigatorFile navigatorFile = (NavigatorFile)directoryNavigationObjectListView.SelectedObject;
+
+                if (navigatorFile.Type == "File")
+                {
+                    NewTab(TabType.CODE, null);
+                    bool state = Open(((NavigatorFile)navigatorFile).Path);
+
+                    if (!state)
+                    {
+                        CloseTab();
+                    }
+                    else
+                    {
+                        ToggleDirectoryNavigator(false);
+                    }
+                }
+                else
+                {
+                    if (navigatorFile.Path != "..")
+                    {
+                        NavigateToPath(navigatorFile.Path);
+                    }
+                    else
+                    {
+                        NavigateToPath(ParsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
+                    }
+                }
+            }
         }
     }
 }

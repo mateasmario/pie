@@ -249,7 +249,6 @@ namespace pie.Services
             scintilla.Styles[ScintillaNET.Style.Cpp.CommentLineDoc].ForeColor = parserColorDictionary["Comment"];
             scintilla.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = parserColorDictionary["Number"];
             scintilla.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = parserColorDictionary["Word"];
-            scintilla.Styles[ScintillaNET.Style.Cpp.Word2].ForeColor = parserColorDictionary["Word2"];
             scintilla.Styles[ScintillaNET.Style.Cpp.String].ForeColor = parserColorDictionary["String"];
             scintilla.Styles[ScintillaNET.Style.Cpp.Character].ForeColor = parserColorDictionary["String"];
             scintilla.Styles[ScintillaNET.Style.Cpp.Verbatim].ForeColor = parserColorDictionary["String"];
@@ -268,7 +267,6 @@ namespace pie.Services
             scintilla.Styles[Style.Json.BlockComment].ForeColor = parserColorDictionary["CommentBlock"];
             scintilla.Styles[Style.Json.Operator].ForeColor = parserColorDictionary["Operator"];
             scintilla.Styles[Style.Json.Keyword].ForeColor = parserColorDictionary["Word"];
-            scintilla.Styles[Style.Json.Uri].ForeColor = parserColorDictionary["Word2"];
         }
 
         private static void AddLuaStyles(Scintilla scintilla)
@@ -278,9 +276,6 @@ namespace pie.Services
             scintilla.Styles[Style.Lua.CommentLine].ForeColor = parserColorDictionary["CommentLine"];
             scintilla.Styles[Style.Lua.Number].ForeColor = parserColorDictionary["Number"];
             scintilla.Styles[Style.Lua.Word].ForeColor = parserColorDictionary["Word"];
-            scintilla.Styles[Style.Lua.Word2].ForeColor = parserColorDictionary["Word2"];
-            scintilla.Styles[Style.Lua.Word3].ForeColor = parserColorDictionary["Word3"];
-            scintilla.Styles[Style.Lua.Word4].ForeColor = parserColorDictionary["Word4"];
             scintilla.Styles[Style.Lua.String].ForeColor = parserColorDictionary["String"];
             scintilla.Styles[Style.Lua.Character].ForeColor = parserColorDictionary["String"];
             scintilla.Styles[Style.Lua.LiteralString].ForeColor = parserColorDictionary["String"];
@@ -311,7 +306,6 @@ namespace pie.Services
             scintilla.Styles[Style.Python.StringEol].ForeColor = parserColorDictionary["String"];
             scintilla.Styles[Style.Python.StringEol].BackColor = Color.FromArgb(0xE0, 0xC0, 0xE0);
             scintilla.Styles[Style.Python.StringEol].FillLine = true;
-            scintilla.Styles[Style.Python.Word2].ForeColor = parserColorDictionary["Word2"];
             scintilla.Styles[Style.Python.Decorator].ForeColor = parserColorDictionary["Decorator"];
         }
 
@@ -344,7 +338,6 @@ namespace pie.Services
             scintilla.Styles[Style.Sql.CommentLineDoc].ForeColor = parserColorDictionary["CommentLine"];
             scintilla.Styles[Style.Sql.Number].ForeColor = parserColorDictionary["Number"];
             scintilla.Styles[Style.Sql.Word].ForeColor = parserColorDictionary["Word"];
-            scintilla.Styles[Style.Sql.Word2].ForeColor = parserColorDictionary["Word2"];
             scintilla.Styles[Style.Sql.User1].ForeColor = parserColorDictionary["User1"];
             scintilla.Styles[Style.Sql.User2].ForeColor = parserColorDictionary["User2"];
             scintilla.Styles[Style.Sql.String].ForeColor = parserColorDictionary["String"];
