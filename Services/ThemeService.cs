@@ -410,27 +410,39 @@ namespace pie.Services
 
             foreach (ThemeInfo themeInfo in themeInfos)
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + directory + "/" + themeInfo.Name;
-                File.Create(path);
+                string path = AppDomain.CurrentDomain.BaseDirectory + directory + "/" + themeInfo.Name + ".json";
+                var file = File.Create(path);
+                file.Close();
                 TextWriter textWriter = new StreamWriter(path);
 
                 using (JsonWriter writer = new JsonTextWriter(textWriter))
                 {
                     writer.Formatting = Formatting.Indented;
 
-                    writer.WriteStartArray();
+                    writer.WriteStartObject();
 
                     foreach (KeyValuePair<string, Color> entry in themeInfo.ColorDictionary)
                     {
-                        writer.WriteStartObject();
                         writer.WritePropertyName(entry.Key);
-                        writer.WriteValue(entry.Value);
-                        writer.WriteEndObject();
+                        writer.WriteValue(ExtractRGBFromColor(entry.Value));
                     }
 
-                    writer.WriteEndArray();
+                    writer.WritePropertyName("IconType");
+
+                    if (themeInfo.IconType == null)
+                    {
+                        themeInfo.IconType = "dark";
+                    }
+
+                    writer.WriteValue(themeInfo.IconType.ToString());
+
+                    writer.WriteEndObject();
                 }
             }
+        }
+        private static string ExtractRGBFromColor(Color color)
+        {
+            return color.R + ", " + color.G + ", " + color.B;
         }
     }
 }

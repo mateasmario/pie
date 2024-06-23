@@ -3514,6 +3514,8 @@ namespace pie
             DesignerForm designerForm = new DesignerForm();
             designerForm.ShowDialog();
             ProcessCustomThemes();
+            Globals.colorDictionary = ThemeService.GetColorDictionary(Globals.theme);
+            ChangeTheme(Globals.theme);
         }
     }
 }
