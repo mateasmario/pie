@@ -80,6 +80,11 @@ namespace pie.Forms.Theme
 
         private void DesignerForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             SynchronizeObjectListViewWithTheme();
             themeListView.SetObjects(Globals.themeInfos);
 
