@@ -74,6 +74,11 @@ namespace pie.Forms.Theme
 
         private void NewThemeForm_Load(object sender, EventArgs e)
         {
+            if (Globals.glass)
+            {
+                this.Opacity = 0.875;
+            }
+
             Globals.newThemeName = null;
         }
     }
