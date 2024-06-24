@@ -430,7 +430,7 @@ namespace pie.Services
 
         internal static void WriteThemesToDirectory(string directory, List<ThemeInfo> themeInfos)
         {
-            DirectoryInfo di = new DirectoryInfo(directory);
+            DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + directory);
 
             foreach (FileInfo file in di.GetFiles())
             {
