@@ -784,35 +784,11 @@ namespace pie
         // [Method] Closes the currently selected *terminal* tab
         public void CloseTerminalTab()
         {
-            KryptonPage selectedKryptonPage = terminalTabControl.SelectedPage;
-            ConEmuControl conEmuControl = (ConEmuControl)terminalTabControl.SelectedPage.Controls[0];
-
-            bool nonBuildTabExists = false;
-
-            if (selectedKryptonPage.Text != "Build")
-            {
-                // Check if there is at least one more tab page that isn't Build
-                foreach (KryptonPage kryptonPage in terminalTabControl.Pages)
-                {
-                    if (kryptonPage != selectedKryptonPage && kryptonPage.Text != "Build")
-                    {
-                        nonBuildTabExists = true;
-                    }
-                }
-
-                if (!nonBuildTabExists)
-                {
-                    NewTerminalTab("cmd.exe", true);
-                }
-            }
-
-            terminalTabControl.Pages.Remove(selectedKryptonPage);
-
-            conEmuControl.Dispose();
+            terminalTabControl.Pages.Remove(terminalTabControl.SelectedPage);
 
             if (terminalTabControl.Pages.Count == 0)
             {
-                ShowTerminalTabControl();
+                ToggleTerminalTabControl(false);
             }
         }
 
@@ -970,11 +946,13 @@ namespace pie
             {
                 kryptonPage.Text = "Command Prompt";
                 kryptonPage.ImageSmall = Properties.Resources.terminal;
+                conEmuSession.ConsoleEmulatorClosed += ConEmuSession_ConsoleEmulatorClosed1;
             }
             else if (process == "powershell.exe")
             {
                 kryptonPage.Text = "PowerShell";
                 kryptonPage.ImageSmall = Properties.Resources.powershell;
+                conEmuSession.ConsoleEmulatorClosed += ConEmuSession_ConsoleEmulatorClosed1;
             }
             else
             {
@@ -985,6 +963,30 @@ namespace pie
             conEmuControl.Dock = DockStyle.Fill;
 
             terminalTabControl.SelectedPage = kryptonPage;
+        }
+
+        private void ConEmuSession_ConsoleEmulatorClosed1(object sender, EventArgs e)
+        {
+            CreateDefaultTerminalIfNotExists();
+        }
+
+        private void CreateDefaultTerminalIfNotExists()
+        {
+            int termCount = -1;
+
+            foreach (KryptonPage page in terminalTabControl.Pages)
+            {
+                if (page.ImageSmall == Properties.Resources.terminal || page.ImageSmall == Properties.Resources.powershell)
+                {
+                    termCount++;
+                    break;
+                }
+            }
+
+            if (termCount < 1)
+            {
+                NewTerminalTab("cmd.exe", false);
+            }
         }
 
         private void ConEmuSession_ConsoleEmulatorClosed(object sender, EventArgs e)
@@ -1911,7 +1913,6 @@ namespace pie
             if (terminalTabControl.Pages.Count == 0)
             {
                 kryptonContextMenuItem18.Enabled = false;
-                ShowTerminalTabControl();
             }
             else
             {
@@ -1919,7 +1920,7 @@ namespace pie
             }
         }
 
-        // [Event] Closes the currently opened terminal (accessed via Terminal tab control
+        // [Event] Closes the currently opened terminal (accessed via Terminal tab control)
         private void kryptonContextMenuItem18_Click(object sender, EventArgs e)
         {
             CloseTerminalTab();
