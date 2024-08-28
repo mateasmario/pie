@@ -153,6 +153,16 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap copy {
+            get {
+                object obj = ResourceManager.GetObject("copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap crescent_moon {
             get {
                 object obj = ResourceManager.GetObject("crescent-moon", resourceCulture);
@@ -206,6 +216,16 @@ namespace pie.Properties {
         internal static System.Drawing.Bitmap documents {
             get {
                 object obj = ResourceManager.GetObject("documents", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap explorer {
+            get {
+                object obj = ResourceManager.GetObject("explorer", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

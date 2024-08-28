@@ -606,6 +606,10 @@
     <Content Include="pie2-icon.ico" />
     <Content Include="pie2.ico" />
     <Content Include="pieblue.ico" />
+    <None Include="Resources\folder %281%29.png" />
+    <None Include="Resources\copy %281%29.png" />
+    <None Include="Resources\copy.png" />
+    <None Include="Resources\folder.png" />
     <None Include="Resources\graphic-designer.png" />
     <None Include="Resources\v_light_theme.png" />
     <None Include="Resources\v_dark_theme.png" />

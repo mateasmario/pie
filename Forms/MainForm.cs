@@ -261,10 +261,14 @@ namespace pie
         // Additional: This is usually triggered when switching between tabs
         private void RemoveSuggestedActions()
         {
-            if (((KryptonContextMenuHeading)codeContextMenu.Items[2]).Text == "Suggested Actions")
+            for(int i = 0; i<codeContextMenu.Items.Count; i++)
             {
-                codeContextMenu.Items.RemoveAt(3);
-                codeContextMenu.Items.RemoveAt(2);
+                if (codeContextMenu.Items[i] is KryptonContextMenuHeading && ((KryptonContextMenuHeading)codeContextMenu.Items[i]).Text == "Suggested Actions")
+                {
+                    codeContextMenu.Items.RemoveAt(i+1);
+                    codeContextMenu.Items.RemoveAt(i);
+                    break;
+                }
             }
         }
 
@@ -273,6 +277,25 @@ namespace pie
         {
             // Remove old "Suggested Actions" item list
             RemoveSuggestedActions();
+
+            KryptonContextMenuHeading fileActions = new KryptonContextMenuHeading();
+            fileActions.Text = "File Actions";
+            codeContextMenu.Items.Insert(2, fileActions);
+
+            KryptonContextMenuItems fileActionsItems = new KryptonContextMenuItems();
+            KryptonContextMenuItem fileActionsItem1 = new KryptonContextMenuItem();
+            fileActionsItem1.Text = "Copy File Path";
+            fileActionsItem1.Image = Properties.Resources.copy;
+            fileActionsItem1.Click += FileActionsItem1_Click;
+            fileActionsItems.Items.Add(fileActionsItem1);
+
+            KryptonContextMenuItem fileActionsItem2 = new KryptonContextMenuItem();
+            fileActionsItem2.Text = "Open Containing Folder";
+            fileActionsItem2.Image = Properties.Resources.explorer;
+            fileActionsItem2.Click += FileActionsItem2_Click;
+            fileActionsItems.Items.Add(fileActionsItem2);
+
+            codeContextMenu.Items.Insert(3, fileActionsItems);
 
             // Add new "Suggested Actions" header + items
             if (extension == "c" || extension == "cpp")
@@ -375,6 +398,17 @@ namespace pie
                     codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
                 }
             }
+        }
+
+        private void FileActionsItem2_Click(object sender, EventArgs e)
+        {
+            string path = ParsingService.GoBackInFilePath(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+            Process.Start(path);
+        }
+
+        private void FileActionsItem1_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
         }
 
         private void Item1_Click6(object sender, EventArgs e)
@@ -994,6 +1028,19 @@ namespace pie
             CloseTerminalTab();
         }
 
+        private void DeleteFileActions()
+        {
+            for (int i = 0; i < codeContextMenu.Items.Count; i++)
+            {
+                if (codeContextMenu.Items[i] is KryptonContextMenuHeading && ((KryptonContextMenuHeading)codeContextMenu.Items[i]).Text == "File Actions")
+                {
+                    codeContextMenu.Items.RemoveAt(i + 1);
+                    codeContextMenu.Items.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+
         public void ActivateSpecificBuildAndRunOptions(String extension)
         {
             FillContextMenu(extension);
@@ -1037,6 +1084,7 @@ namespace pie
 
         public void DeactivateBuildAndRunOptions()
         {
+            DeleteFileActions();
             RemoveSuggestedActions();
 
             toolStripMenuItem2.Enabled = false;
