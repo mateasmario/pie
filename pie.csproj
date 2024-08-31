@@ -386,6 +386,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CustomFormatter.cs" />
     <Compile Include="Classes\DatabaseResponse.cs" />
     <Compile Include="Classes\ControlHelper.cs" />
     <Compile Include="Classes\DatabaseConnection.cs" />
@@ -398,6 +399,12 @@
     <Compile Include="Classes\ThemeInfo.cs" />
     <Compile Include="Classes\Triple.cs" />
     <Compile Include="Enums\DatabaseType.cs" />
+    <Compile Include="Enums\FormatOptionCategory.cs" />
+    <Compile Include="Exceptions\IncorrectPublicMethodArgumentTypeException.cs" />
+    <Compile Include="Exceptions\IncorrectPublicMethodCountException.cs" />
+    <Compile Include="Exceptions\IncorrectPublicMethodReturnTypeException.cs" />
+    <Compile Include="Exceptions\IncorrectPublicMethodArgumentNumberException.cs" />
+    <Compile Include="Exceptions\IncorrectPublicMethodNameException.cs" />
     <Compile Include="Forms\Databases\AddDatabaseForm.cs">
       <SubType>Form</SubType>
     </Compile>

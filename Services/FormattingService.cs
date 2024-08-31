@@ -1,8 +1,29 @@
-﻿using System;
+﻿/** Copyright (C) 2023  Mario-Mihai Mateas
+ * 
+ * This file is part of pie.
+ * 
+ * pie is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * 
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
+*/
+
+using pie.Classes;
+using pie.Exceptions;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace pie.Services
 {
@@ -372,9 +393,94 @@ namespace pie.Services
                 }
             }
 
-            return lines.Aggregate((curr, next) => {
+            return lines.Aggregate((curr, next) =>
+            {
                 return curr + " " + next;
             });
+        }
+
+        public static List<CustomFormatter> LoadCustomFormattersFromFolder(string directory)
+        {
+            List<CustomFormatter> customFormatters = new List<CustomFormatter>();
+
+            CustomFormatter customFormatter = null;
+
+            string[] files = null;
+
+            try
+            {
+                files = Directory.GetFiles(directory);
+
+                foreach (string file in files)
+                {
+                    if (ParsingService.GetFileExtension(file) == "dll")
+                    {
+                        Assembly externalAssembly = Assembly.LoadFrom(file);
+                        string className = ParsingService.RemoveFileExtension(file).Substring(11);
+                        Type externalType = externalAssembly.GetType(className);
+                        object instance = Activator.CreateInstance(externalType);
+
+                        if (externalType != null)
+                        {
+                            // Validate number of methods: should be only one public
+                            MethodInfo[] methodInfos = externalType.GetMethods();
+
+                            int count = 0;
+                            foreach(MethodInfo methodInfo in methodInfos)
+                            {
+                                if (methodInfo.IsPublic)
+                                {
+                                    count++;
+                                    if (count > 5)
+                                    {
+                                        throw new IncorrectPublicMethodCountException();
+                                    }
+                                }
+                            }
+
+                            // Validate method name
+                            MethodInfo method = externalType.GetMethod("format");
+
+                            if (method == null)
+                            {
+                                throw new IncorrectPublicMethodNameException();
+                            }
+
+                            // Validate method return type: must be TYPE string, not CLASS String
+                            if (method.ReturnType != typeof(string))
+                            {
+                                throw new IncorrectPublicMethodReturnTypeException();
+                            }
+
+                            // Validate method parameter number (must be one)
+                            if (method.GetParameters().Length != 1)
+                            {
+                                throw new IncorrectPublicMethodArgumentNumberException();
+                            }
+
+                            // Validate method return type (must be TYPE string, not CLASS string)
+                            if (method.ReturnType != typeof(string))
+                            {
+                                throw new IncorrectPublicMethodArgumentTypeException();
+                            }
+
+                            customFormatter = new CustomFormatter();
+                            customFormatter.Name = className;
+                            customFormatter.Instance = instance;
+                            customFormatter.MethodInfo = method;
+
+                            customFormatters.Add(customFormatter);
+                        }
+                    }
+                }
+
+                return customFormatters;
+
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                return customFormatters;
+            }
         }
     }
 }

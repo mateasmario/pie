@@ -37,6 +37,7 @@ using BrightIdeasSoftware;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
+using pie.Enums;
 
 namespace pie.Forms.Format
 {
@@ -99,25 +100,31 @@ namespace pie.Forms.Format
         {
             List<FormatOption> formatOptions = new List<FormatOption>();
 
-            formatOptions.Add(new FormatOption("LINE_DUPLICATE", "Line Processing", "Duplicates every line"));
-            formatOptions.Add(new FormatOption("LINE_ADD_EMPTY", "Line Processing", "Adds empty row between each line"));
-            formatOptions.Add(new FormatOption("LINE_CAPITALIZE_FIRST", "Line Processing", "Capitalizes first character from every line"));
-            formatOptions.Add(new FormatOption("LINE_REMOVE_EMPTY", "Line Processing", "Removes empty lines"));
-            formatOptions.Add(new FormatOption("LINE_REMOVE_WHITESPACE", "Line Processing", "Removes whitespace lines"));
-            formatOptions.Add(new FormatOption("LINE_REMOVE_DUPLICATE", "Line Processing", "Removes duplicate lines"));
-            formatOptions.Add(new FormatOption("LINE_REMOVE_DUPLICATE_CONSEC", "Line Processing", "Removes consecutive duplicate lines"));
-            formatOptions.Add(new FormatOption("LINE_TRIM", "Line Processing", "Trims lines (removes trailing and leading whitespaces)"));
-            formatOptions.Add(new FormatOption("CHAR_CAPITALIZE", "Character Processing", "Capitalizes every word"));
-            formatOptions.Add(new FormatOption("CHAR_CASE_UPPER", "Character Processing", "Converts text to uppercase"));
-            formatOptions.Add(new FormatOption("CHAR_CASE_LOWER", "Character Processing", "Converts text to lowercase"));
-            formatOptions.Add(new FormatOption("CHAR_CASE_SWAP", "Character Processing", "Swaps lowercase and uppercase characters"));
-            formatOptions.Add(new FormatOption("CHAR_REMOVE_WHITESPACE", "Character Processing", "Removes all whitespaces (except CR/LF)"));
-            formatOptions.Add(new FormatOption("CHAR_REMOVE_WHITESPACE_CONSEC", "Character Processing", "Removes consecutive whitespaces (except CR/LF)"));
-            formatOptions.Add(new FormatOption("CHAR_CONV_NEWLINE_COMMA", "Character Processing", "Converts \'\\n\' to comma"));
-            formatOptions.Add(new FormatOption("CHAR_CONV_NEWLINE_SPACE", "Character Processing", "Converts \'\\n\' to space"));
-            formatOptions.Add(new FormatOption("SORT_ASC", "Sorting", "Sorts lines ascending"));
-            formatOptions.Add(new FormatOption("SORT_DESC", "Sorting", "Sorts lines descending"));
-            formatOptions.Add(new FormatOption("SORT_REVERSE", "Sorting", "Reverses line order"));
+            foreach(CustomFormatter customFormatter in Globals.customFormatters)
+            {
+                FormatOption formatOption = new FormatOption(customFormatter.Name, FormatOptionCategory.CUSTOM, "External formatter", customFormatter.Instance, customFormatter.MethodInfo);
+                formatOptions.Add(formatOption);
+            }
+
+            formatOptions.Add(new FormatOption("LINE_DUPLICATE", FormatOptionCategory.LINE_PROCESSING, "Duplicates every line"));
+            formatOptions.Add(new FormatOption("LINE_ADD_EMPTY", FormatOptionCategory.LINE_PROCESSING, "Adds empty row between each line"));
+            formatOptions.Add(new FormatOption("LINE_CAPITALIZE_FIRST", FormatOptionCategory.LINE_PROCESSING, "Capitalizes first character from every line"));
+            formatOptions.Add(new FormatOption("LINE_REMOVE_EMPTY", FormatOptionCategory.LINE_PROCESSING, "Removes empty lines"));
+            formatOptions.Add(new FormatOption("LINE_REMOVE_WHITESPACE", FormatOptionCategory.LINE_PROCESSING, "Removes whitespace lines"));
+            formatOptions.Add(new FormatOption("LINE_REMOVE_DUPLICATE", FormatOptionCategory.LINE_PROCESSING, "Removes duplicate lines"));
+            formatOptions.Add(new FormatOption("LINE_REMOVE_DUPLICATE_CONSEC", FormatOptionCategory.LINE_PROCESSING, "Removes consecutive duplicate lines"));
+            formatOptions.Add(new FormatOption("LINE_TRIM", FormatOptionCategory.LINE_PROCESSING, "Trims lines (removes trailing and leading whitespaces)"));
+            formatOptions.Add(new FormatOption("CHAR_CAPITALIZE", FormatOptionCategory.CHARACTER_PROCESSING, "Capitalizes every word"));
+            formatOptions.Add(new FormatOption("CHAR_CASE_UPPER", FormatOptionCategory.CHARACTER_PROCESSING, "Converts text to uppercase"));
+            formatOptions.Add(new FormatOption("CHAR_CASE_LOWER", FormatOptionCategory.CHARACTER_PROCESSING, "Converts text to lowercase"));
+            formatOptions.Add(new FormatOption("CHAR_CASE_SWAP", FormatOptionCategory.CHARACTER_PROCESSING, "Swaps lowercase and uppercase characters"));
+            formatOptions.Add(new FormatOption("CHAR_REMOVE_WHITESPACE", FormatOptionCategory.CHARACTER_PROCESSING, "Removes all whitespaces (except CR/LF)"));
+            formatOptions.Add(new FormatOption("CHAR_REMOVE_WHITESPACE_CONSEC", FormatOptionCategory.CHARACTER_PROCESSING, "Removes consecutive whitespaces (except CR/LF)"));
+            formatOptions.Add(new FormatOption("CHAR_CONV_NEWLINE_COMMA", FormatOptionCategory.CHARACTER_PROCESSING, "Converts \'\\n\' to comma"));
+            formatOptions.Add(new FormatOption("CHAR_CONV_NEWLINE_SPACE", FormatOptionCategory.CHARACTER_PROCESSING, "Converts \'\\n\' to space"));
+            formatOptions.Add(new FormatOption("SORT_ASC", FormatOptionCategory.SORTING, "Sorts lines ascending"));
+            formatOptions.Add(new FormatOption("SORT_DESC", FormatOptionCategory.SORTING, "Sorts lines descending"));
+            formatOptions.Add(new FormatOption("SORT_REVERSE", FormatOptionCategory.SORTING, "Reverses line order"));
 
             return formatOptions;
         }
@@ -126,7 +133,7 @@ namespace pie.Forms.Format
         {
             if (formatOptionsListView.SelectedObjects.Count == 1)
             {
-                Globals.chosenFormatOption = ((FormatOption)formatOptionsListView.SelectedObject).FormatOptionName;
+                Globals.chosenFormatOption = (FormatOption)formatOptionsListView.SelectedObject;
                 this.Close();
             }
         }
@@ -137,7 +144,7 @@ namespace pie.Forms.Format
 
             if (!kryptonTextBox1.Text.Trim().Equals(""))
             {
-                formatOptions = formatOptions.FindAll(x => x.FormatOptionName.ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()) || x.FormatOptionName.ToLower().Replace("_", " ").Contains(kryptonTextBox1.Text.ToLower().Trim()) || x.FormatOptionDescription.ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()) || x.FormatOptionCategory.ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()));
+                formatOptions = formatOptions.FindAll(x => x.FormatOptionName.ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()) || x.FormatOptionName.ToLower().Replace("_", " ").Contains(kryptonTextBox1.Text.ToLower().Trim()) || x.FormatOptionDescription.ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()) || x.FormatOptionCategory.ToString().ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()));
             }
             
             formatOptionsListView.SetObjects(formatOptions);
