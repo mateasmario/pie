@@ -94,6 +94,7 @@ using BrightIdeasSoftware;
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
+using pie.Exceptions;
 
 namespace pie
 {
@@ -1426,6 +1427,31 @@ namespace pie
             catch (FileNotFoundException ex)
             {
                 EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", false, false, false);
+            }
+
+            try
+            {
+                Globals.customFormatters = FormattingService.LoadCustomFormattersFromFolder("formatters");
+            }
+            catch(IncorrectPublicMethodArgumentNumberException ex)
+            {
+                ShowNotification("Public method needs to have a single parameter.");
+            }
+            catch(IncorrectPublicMethodArgumentTypeException ex)
+            {
+                ShowNotification("Public method argument type needs to be string.");
+            }
+            catch(IncorrectPublicMethodCountException ex)
+            {
+                ShowNotification("Formatter class needs to have a single public method.");
+            }
+            catch(IncorrectPublicMethodNameException ex)
+            {
+                ShowNotification("Public method name needs to be 'format'.");
+            }
+            catch(IncorrectPublicMethodReturnTypeException ex)
+            {
+                ShowNotification("Public method return type needs to be string.");
             }
         }
 
@@ -3477,66 +3503,72 @@ namespace pie
                 int currPos = scintilla.CurrentPosition;
                 string result = scintilla.Text;
 
-                switch (Globals.chosenFormatOption)
+                if (Globals.chosenFormatOption.FormatOptionCategory.Equals(FormatOptionCategory.CUSTOM))
                 {
-                    case "LINE_DUPLICATE":
-                        result = FormattingService.DuplicateLines(scintilla.Text);
+                    result = Globals.chosenFormatOption.InvokeMethod(scintilla.Text);
+                }
+                else {
+                    switch (Globals.chosenFormatOption.FormatOptionName)
+                    {
+                        case "LINE_DUPLICATE":
+                            result = FormattingService.DuplicateLines(scintilla.Text);
 
-                        break;
-                    case "LINE_ADD_EMPTY":
-                        result = FormattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
-                        break;
-                    case "LINE_CAPITALIZE_FIRST":
-                        result = FormattingService.CapitalizeFirstCharacterFromEveryLine(scintilla.Text);
-                        break;
-                    case "LINE_REMOVE_EMPTY":
-                        result = FormattingService.RemoveEmptyLines(scintilla.Text);
-                        break;
-                    case "LINE_REMOVE_WHITESPACE":
-                        result = FormattingService.RemoveWhitespaceLines(scintilla.Text);
-                        break;
-                    case "LINE_REMOVE_DUPLICATE":
-                        result = FormattingService.RemoveDuplicateLines(scintilla.Text);
-                        break;
-                    case "LINE_REMOVE_DUPLICATE_CONSEC":
-                        result = FormattingService.RemoveConsecutiveDuplicates(scintilla.Text);
-                        break;
-                    case "LINE_TRIM":
-                        result = FormattingService.TrimLines(scintilla.Text);
-                        break;
-                    case "CHAR_CAPITALIZE":
-                        result = FormattingService.CapitalizeEveryWord(scintilla.Text);
-                        break;
-                    case "CHAR_CASE_UPPER":
-                        result = FormattingService.ConvertTextToUppercase(scintilla.Text);
-                        break;
-                    case "CHAR_CASE_LOWER":
-                        result = FormattingService.ConvertTextToLowercase(scintilla.Text);
-                        break;
-                    case "CHAR_CASE_SWAP":
-                        result = FormattingService.SwitchLowercaseWithUppercase(scintilla.Text);
-                        break;
-                    case "CHAR_REMOVE_WHITESPACE":
-                        result = FormattingService.RemoveAllWhitespaces(scintilla.Text);
-                        break;
-                    case "CHAR_REMOVE_WHITESPACE_CONSEC":
-                        result = FormattingService.RemoveAllConsecutiveWhitespaces(scintilla.Text);
-                        break;
-                    case "CHAR_CONV_NEWLINE_COMMA":
-                        result = FormattingService.ConvertNewlineToComma(scintilla.Text);
-                        break;
-                    case "CHAR_CONV_NEWLINE_SPACE":
-                        result = FormattingService.ConvertNewlineToSpace(scintilla.Text);
-                        break;
-                    case "SORT_ASC":
-                        result = FormattingService.SortLines(scintilla.Text);
-                        break;
-                    case "SORT_DESC":
-                        result = FormattingService.SortLines(scintilla.Text, false);
-                        break;
-                    case "SORT_REVERSE":
-                        result = FormattingService.ReverseLineOrder(scintilla.Text);
-                        break;
+                            break;
+                        case "LINE_ADD_EMPTY":
+                            result = FormattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
+                            break;
+                        case "LINE_CAPITALIZE_FIRST":
+                            result = FormattingService.CapitalizeFirstCharacterFromEveryLine(scintilla.Text);
+                            break;
+                        case "LINE_REMOVE_EMPTY":
+                            result = FormattingService.RemoveEmptyLines(scintilla.Text);
+                            break;
+                        case "LINE_REMOVE_WHITESPACE":
+                            result = FormattingService.RemoveWhitespaceLines(scintilla.Text);
+                            break;
+                        case "LINE_REMOVE_DUPLICATE":
+                            result = FormattingService.RemoveDuplicateLines(scintilla.Text);
+                            break;
+                        case "LINE_REMOVE_DUPLICATE_CONSEC":
+                            result = FormattingService.RemoveConsecutiveDuplicates(scintilla.Text);
+                            break;
+                        case "LINE_TRIM":
+                            result = FormattingService.TrimLines(scintilla.Text);
+                            break;
+                        case "CHAR_CAPITALIZE":
+                            result = FormattingService.CapitalizeEveryWord(scintilla.Text);
+                            break;
+                        case "CHAR_CASE_UPPER":
+                            result = FormattingService.ConvertTextToUppercase(scintilla.Text);
+                            break;
+                        case "CHAR_CASE_LOWER":
+                            result = FormattingService.ConvertTextToLowercase(scintilla.Text);
+                            break;
+                        case "CHAR_CASE_SWAP":
+                            result = FormattingService.SwitchLowercaseWithUppercase(scintilla.Text);
+                            break;
+                        case "CHAR_REMOVE_WHITESPACE":
+                            result = FormattingService.RemoveAllWhitespaces(scintilla.Text);
+                            break;
+                        case "CHAR_REMOVE_WHITESPACE_CONSEC":
+                            result = FormattingService.RemoveAllConsecutiveWhitespaces(scintilla.Text);
+                            break;
+                        case "CHAR_CONV_NEWLINE_COMMA":
+                            result = FormattingService.ConvertNewlineToComma(scintilla.Text);
+                            break;
+                        case "CHAR_CONV_NEWLINE_SPACE":
+                            result = FormattingService.ConvertNewlineToSpace(scintilla.Text);
+                            break;
+                        case "SORT_ASC":
+                            result = FormattingService.SortLines(scintilla.Text);
+                            break;
+                        case "SORT_DESC":
+                            result = FormattingService.SortLines(scintilla.Text, false);
+                            break;
+                        case "SORT_REVERSE":
+                            result = FormattingService.ReverseLineOrder(scintilla.Text);
+                            break;
+                    }
                 }
 
                 scintilla.Text = result;
