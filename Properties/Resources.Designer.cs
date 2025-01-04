@@ -193,6 +193,26 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cursor_down {
+            get {
+                object obj = ResourceManager.GetObject("cursor_down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cursor_down_dark {
+            get {
+                object obj = ResourceManager.GetObject("cursor_down_dark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cursor_left {
             get {
                 object obj = ResourceManager.GetObject("cursor_left", resourceCulture);
@@ -226,6 +246,26 @@ namespace pie.Properties {
         internal static System.Drawing.Bitmap cursor_right_dark {
             get {
                 object obj = ResourceManager.GetObject("cursor_right_dark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cursor_up {
+            get {
+                object obj = ResourceManager.GetObject("cursor_up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cursor_up_dark {
+            get {
+                object obj = ResourceManager.GetObject("cursor_up_dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -46,6 +46,8 @@ namespace pie.Forms.Other
             kryptonLabel8.Palette = Globals.kryptonPalette;
             kryptonLabel2.Palette = Globals.kryptonPalette;
             kryptonLabel4.Palette = Globals.kryptonPalette;
+            kryptonLabel9.Palette = Globals.kryptonPalette;
+            kryptonLabel10.Palette = Globals.kryptonPalette;
         }
 
         private void CheatsheetForm_Load(object sender, EventArgs e)
@@ -68,6 +70,8 @@ namespace pie.Forms.Other
                 pictureBox16.BackgroundImage = Properties.Resources.ctrl_dark;
                 pictureBox13.BackgroundImage = Properties.Resources.alt_dark;
                 pictureBox14.BackgroundImage = Properties.Resources.alt_dark;
+                pictureBox18.BackgroundImage = Properties.Resources.ctrl_dark;
+                pictureBox20.BackgroundImage = Properties.Resources.ctrl_dark;
                 pictureBox2.BackgroundImage = Properties.Resources.f_dark;
                 pictureBox3.BackgroundImage = Properties.Resources.b_dark;
                 pictureBox5.BackgroundImage = Properties.Resources.g_dark;
@@ -75,6 +79,8 @@ namespace pie.Forms.Other
                 pictureBox9.BackgroundImage = Properties.Resources.v_dark;
                 pictureBox11.BackgroundImage = Properties.Resources.cursor_left_dark;
                 pictureBox15.BackgroundImage = Properties.Resources.cursor_right_dark;
+                pictureBox17.BackgroundImage = Properties.Resources.cursor_up_dark;
+                pictureBox19.BackgroundImage = Properties.Resources.cursor_down_dark;
             }
             else
             {
@@ -87,6 +93,8 @@ namespace pie.Forms.Other
                 pictureBox16.BackgroundImage = Properties.Resources.ctrl;
                 pictureBox13.BackgroundImage = Properties.Resources.alt;
                 pictureBox14.BackgroundImage = Properties.Resources.alt;
+                pictureBox18.BackgroundImage = Properties.Resources.ctrl;
+                pictureBox20.BackgroundImage = Properties.Resources.ctrl;
                 pictureBox2.BackgroundImage = Properties.Resources.f;
                 pictureBox3.BackgroundImage = Properties.Resources.b;
                 pictureBox5.BackgroundImage = Properties.Resources.g;
@@ -94,6 +102,8 @@ namespace pie.Forms.Other
                 pictureBox9.BackgroundImage = Properties.Resources.v;
                 pictureBox11.BackgroundImage = Properties.Resources.cursor_left;
                 pictureBox15.BackgroundImage = Properties.Resources.cursor_right;
+                pictureBox17.BackgroundImage = Properties.Resources.cursor_up;
+                pictureBox19.BackgroundImage = Properties.Resources.cursor_down;
             }
 
             ControlHelper.ResumeDrawing(this);
