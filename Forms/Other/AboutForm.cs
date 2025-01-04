@@ -50,7 +50,7 @@ namespace pie
 
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
-            Process.Start("https://mateasmario.com");
+            Process.Start("http://docsbymario.com");
         }
 
         private void AboutForm_Load(object sender, EventArgs e)

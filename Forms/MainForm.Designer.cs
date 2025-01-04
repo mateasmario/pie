@@ -92,7 +92,6 @@
             this.buildToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.javaClassclassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pythonScriptpyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.perlScriptplToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -568,7 +567,12 @@
             // 
             this.buildToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2,
-            this.toolStripMenuItem3});
+            this.toolStripMenuItem3,
+            this.javaClassclassToolStripMenuItem,
+            this.pythonScriptpyToolStripMenuItem,
+            this.perlScriptplToolStripMenuItem,
+            this.renderHTMLFilehtmlToolStripMenuItem,
+            this.renderMarkdownmdToolStripMenuItem});
             this.buildToolStripMenuItem1.Name = "buildToolStripMenuItem1";
             this.buildToolStripMenuItem1.Size = new System.Drawing.Size(46, 20);
             this.buildToolStripMenuItem1.Text = "Build";
@@ -577,7 +581,7 @@
             // 
             this.toolStripMenuItem2.Enabled = false;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(199, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(203, 22);
             this.toolStripMenuItem2.Text = "Java Source (.java)";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.buildEvent);
             // 
@@ -585,21 +589,9 @@
             // 
             this.toolStripMenuItem3.Enabled = false;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(199, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(203, 22);
             this.toolStripMenuItem3.Text = "C/C++ Source (.c, .cpp)";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.buildEvent);
-            // 
-            // runToolStripMenuItem
-            // 
-            this.runToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.javaClassclassToolStripMenuItem,
-            this.pythonScriptpyToolStripMenuItem,
-            this.perlScriptplToolStripMenuItem,
-            this.renderHTMLFilehtmlToolStripMenuItem,
-            this.renderMarkdownmdToolStripMenuItem});
-            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.runToolStripMenuItem.Text = "Run";
             // 
             // javaClassclassToolStripMenuItem
             // 
@@ -607,7 +599,6 @@
             this.javaClassclassToolStripMenuItem.Name = "javaClassclassToolStripMenuItem";
             this.javaClassclassToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.javaClassclassToolStripMenuItem.Text = "Java Class (.class)";
-            this.javaClassclassToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
             // 
             // pythonScriptpyToolStripMenuItem
             // 
@@ -615,7 +606,6 @@
             this.pythonScriptpyToolStripMenuItem.Name = "pythonScriptpyToolStripMenuItem";
             this.pythonScriptpyToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.pythonScriptpyToolStripMenuItem.Text = "Python Script (.py)";
-            this.pythonScriptpyToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
             // 
             // perlScriptplToolStripMenuItem
             // 
@@ -623,7 +613,6 @@
             this.perlScriptplToolStripMenuItem.Name = "perlScriptplToolStripMenuItem";
             this.perlScriptplToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.perlScriptplToolStripMenuItem.Text = "Perl Script (.pl)";
-            this.perlScriptplToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
             // 
             // renderHTMLFilehtmlToolStripMenuItem
             // 
@@ -631,7 +620,6 @@
             this.renderHTMLFilehtmlToolStripMenuItem.Name = "renderHTMLFilehtmlToolStripMenuItem";
             this.renderHTMLFilehtmlToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.renderHTMLFilehtmlToolStripMenuItem.Text = "Render HTML (.html)";
-            this.renderHTMLFilehtmlToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
             // 
             // renderMarkdownmdToolStripMenuItem
             // 
@@ -639,7 +627,6 @@
             this.renderMarkdownmdToolStripMenuItem.Name = "renderMarkdownmdToolStripMenuItem";
             this.renderMarkdownmdToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.renderMarkdownmdToolStripMenuItem.Text = "Render Markdown (.md)";
-            this.renderMarkdownmdToolStripMenuItem.Click += new System.EventHandler(this.runEvent);
             // 
             // mainMenuStrip
             // 
@@ -650,8 +637,7 @@
             this.designToolStripMenuItem,
             this.preferencesToolStripMenuItem1,
             this.smartFormatterToolStripMenuItem,
-            this.buildToolStripMenuItem1,
-            this.runToolStripMenuItem});
+            this.buildToolStripMenuItem1});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.Size = new System.Drawing.Size(1020, 24);
@@ -1301,12 +1287,6 @@
         private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem javaClassclassToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pythonScriptpyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem perlScriptplToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem renderHTMLFilehtmlToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem renderMarkdownmdToolStripMenuItem;
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbon kryptonRibbon1;
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup findReplaceHeaderGroup;
@@ -1362,6 +1342,11 @@
         private System.Windows.Forms.ToolStripMenuItem glassModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cheatsheetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem themeDesignerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem javaClassclassToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pythonScriptpyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem perlScriptplToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderHTMLFilehtmlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderMarkdownmdToolStripMenuItem;
     }
 }
 

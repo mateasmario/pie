@@ -63,9 +63,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap alt_dark_theme {
+        internal static System.Drawing.Bitmap alt {
             get {
-                object obj = ResourceManager.GetObject("alt_dark_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("alt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap alt_light_theme {
+        internal static System.Drawing.Bitmap alt_dark {
             get {
-                object obj = ResourceManager.GetObject("alt_light_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("alt_dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b_dark_theme {
+        internal static System.Drawing.Bitmap b {
             get {
-                object obj = ResourceManager.GetObject("b_dark_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("b", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap b_light_theme {
+        internal static System.Drawing.Bitmap b_dark {
             get {
-                object obj = ResourceManager.GetObject("b_light_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("b_dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +173,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ctrl_dark_theme {
+        internal static System.Drawing.Bitmap ctrl {
             get {
-                object obj = ResourceManager.GetObject("ctrl_dark_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("ctrl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +183,69 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ctrl_light_theme {
+        internal static System.Drawing.Bitmap ctrl_dark {
             get {
-                object obj = ResourceManager.GetObject("ctrl_light_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("ctrl_dark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cursor_left {
+            get {
+                object obj = ResourceManager.GetObject("cursor_left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cursor_left_dark {
+            get {
+                object obj = ResourceManager.GetObject("cursor_left_dark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cursor_right {
+            get {
+                object obj = ResourceManager.GetObject("cursor_right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cursor_right_dark {
+            get {
+                object obj = ResourceManager.GetObject("cursor_right_dark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap d {
+            get {
+                object obj = ResourceManager.GetObject("d", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap d_dark {
+            get {
+                object obj = ResourceManager.GetObject("d_dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,9 +293,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap f_dark_theme {
+        internal static System.Drawing.Bitmap f {
             get {
-                object obj = ResourceManager.GetObject("f_dark_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("f", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,9 +303,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap f_light_theme {
+        internal static System.Drawing.Bitmap f_dark {
             get {
-                object obj = ResourceManager.GetObject("f_light_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("f_dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,9 +323,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap g_dark_theme {
+        internal static System.Drawing.Bitmap g {
             get {
-                object obj = ResourceManager.GetObject("g_dark_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("g", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -273,9 +333,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap g_light_theme {
+        internal static System.Drawing.Bitmap g_dark {
             get {
-                object obj = ResourceManager.GetObject("g_light_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("g_dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -613,9 +673,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap v_dark_theme {
+        internal static System.Drawing.Bitmap v {
             get {
-                object obj = ResourceManager.GetObject("v_dark_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("v", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -623,9 +683,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap v_light_theme {
+        internal static System.Drawing.Bitmap v_dark {
             get {
-                object obj = ResourceManager.GetObject("v_light_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("v_dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -633,9 +693,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap x_dark_theme {
+        internal static System.Drawing.Bitmap x {
             get {
-                object obj = ResourceManager.GetObject("x_dark_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -643,9 +703,9 @@ namespace pie.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap x_light_theme {
+        internal static System.Drawing.Bitmap x_dark {
             get {
-                object obj = ResourceManager.GetObject("x_light_theme", resourceCulture);
+                object obj = ResourceManager.GetObject("x_dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
