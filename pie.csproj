@@ -613,6 +613,10 @@
     <Content Include="pie2-icon.ico" />
     <Content Include="pie2.ico" />
     <Content Include="pieblue.ico" />
+    <None Include="Resources\cursor-down.png" />
+    <None Include="Resources\cursor-up-dark.png" />
+    <None Include="Resources\cursor-up.png" />
+    <None Include="Resources\cursor-down-dark.png" />
     <None Include="Resources\b-dark.png" />
     <None Include="Resources\alt-dark.png" />
     <None Include="Resources\x-dark.png" />

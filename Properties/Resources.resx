@@ -271,6 +271,12 @@
   <data name="ctrl_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ctrl-dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="cursor_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cursor-down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cursor_down_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cursor-down-dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="cursor_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cursor-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -282,6 +288,12 @@
   </data>
   <data name="cursor_right_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cursor-right-dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cursor_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cursor-up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cursor_up_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cursor-up-dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="d" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

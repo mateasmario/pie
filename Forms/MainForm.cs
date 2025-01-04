@@ -1764,6 +1764,48 @@ namespace pie
                         e.SuppressKeyPress = true;
                     }
                 }
+                else if (e.KeyCode == Keys.Down && e.Modifiers == Keys.Control)
+                {
+                    Scintilla TextArea = (Scintilla)sender;
+
+                    if (TextArea.Text.Length > 0)
+                    {
+                        int selectionEnd = TextArea.SelectionEnd;
+
+                        if (selectionEnd < TextArea.Text.Length - 1 && TextArea.Text[selectionEnd] == '\n')
+                        {
+                            selectionEnd++;
+                        }
+
+                        while (selectionEnd < TextArea.Text.Length - 1 && TextArea.Text[selectionEnd] != '\n')
+                        {
+                            selectionEnd++;
+                        }
+
+                        TextArea.SelectionEnd = selectionEnd + 1;
+                    }
+                }
+                else if (e.KeyCode == Keys.Up && e.Modifiers == Keys.Control)
+                {
+                    Scintilla TextArea = (Scintilla)sender;
+
+                    if (TextArea.Text.Length > 0)
+                    {
+                        int selectionStart = TextArea.SelectionStart  - 1;
+
+                        if (selectionStart > 0 && TextArea.Text[selectionStart] == '\n')
+                        {
+                            selectionStart--;
+                        }
+
+                        while (selectionStart > 0 && TextArea.Text[selectionStart] != '\n')
+                        {
+                            selectionStart--;
+                        }
+
+                        TextArea.SelectionStart = selectionStart == 0 ? selectionStart : selectionStart + 1;
+                    }
+                }
             }
             if (e.Modifiers == (Keys.Control | Keys.Alt))
             {
