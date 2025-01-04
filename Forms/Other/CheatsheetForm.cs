@@ -19,6 +19,7 @@
 
 using System;
 using pie.Services;
+using pie.Classes;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -29,12 +30,13 @@ using ComponentFactory.Krypton.Toolkit;
 
 namespace pie.Forms.Other
 {
-    public partial class CheatsheetForm : KryptonForm
+    public partial class CheatsheetForm : KryptonForm 
     {
         public CheatsheetForm()
         {
             InitializeComponent();
             this.Palette = Globals.kryptonPalette;
+
             kryptonPanel1.Palette = Globals.kryptonPalette;
             kryptonLabel1.Palette = Globals.kryptonPalette;
             kryptonLabel3.Palette = Globals.kryptonPalette;
@@ -42,42 +44,59 @@ namespace pie.Forms.Other
             kryptonLabel6.Palette = Globals.kryptonPalette;
             kryptonLabel7.Palette = Globals.kryptonPalette;
             kryptonLabel8.Palette = Globals.kryptonPalette;
+            kryptonLabel2.Palette = Globals.kryptonPalette;
+            kryptonLabel4.Palette = Globals.kryptonPalette;
         }
 
         private void CheatsheetForm_Load(object sender, EventArgs e)
         {
+            ControlHelper.SuspendDrawing(this);
+
             if (Globals.glass)
             {
                 this.Opacity = 0.875;
             }
 
-            if (ThemeService.GetIconType(Globals.theme) == "light")
+            if (ThemeService.GetIconType(Globals.theme) == "dark")
             {
-                pictureBox1.BackgroundImage = Properties.Resources.ctrl_dark_theme;
-                pictureBox4.BackgroundImage = Properties.Resources.ctrl_dark_theme;
-                pictureBox6.BackgroundImage = Properties.Resources.ctrl_dark_theme;
-                pictureBox8.BackgroundImage = Properties.Resources.ctrl_dark_theme;
-                pictureBox10.BackgroundImage = Properties.Resources.ctrl_dark_theme;
-                pictureBox2.BackgroundImage = Properties.Resources.f_dark_theme;
-                pictureBox3.BackgroundImage = Properties.Resources.b_dark_theme;
-                pictureBox5.BackgroundImage = Properties.Resources.g_dark_theme;
-                pictureBox7.BackgroundImage = Properties.Resources.x_dark_theme;
-                pictureBox9.BackgroundImage = Properties.Resources.v_dark_theme;
-                
+                pictureBox1.BackgroundImage = Properties.Resources.ctrl_dark;
+                pictureBox4.BackgroundImage = Properties.Resources.ctrl_dark;
+                pictureBox6.BackgroundImage = Properties.Resources.ctrl_dark;
+                pictureBox8.BackgroundImage = Properties.Resources.ctrl_dark;
+                pictureBox10.BackgroundImage = Properties.Resources.ctrl_dark;
+                pictureBox12.BackgroundImage = Properties.Resources.ctrl_dark;
+                pictureBox16.BackgroundImage = Properties.Resources.ctrl_dark;
+                pictureBox13.BackgroundImage = Properties.Resources.alt_dark;
+                pictureBox14.BackgroundImage = Properties.Resources.alt_dark;
+                pictureBox2.BackgroundImage = Properties.Resources.f_dark;
+                pictureBox3.BackgroundImage = Properties.Resources.b_dark;
+                pictureBox5.BackgroundImage = Properties.Resources.g_dark;
+                pictureBox7.BackgroundImage = Properties.Resources.x_dark;
+                pictureBox9.BackgroundImage = Properties.Resources.v_dark;
+                pictureBox11.BackgroundImage = Properties.Resources.cursor_left_dark;
+                pictureBox15.BackgroundImage = Properties.Resources.cursor_right_dark;
             }
             else
             {
-                pictureBox1.BackgroundImage = Properties.Resources.ctrl_light_theme;
-                pictureBox4.BackgroundImage = Properties.Resources.ctrl_light_theme;
-                pictureBox6.BackgroundImage = Properties.Resources.ctrl_light_theme;
-                pictureBox8.BackgroundImage = Properties.Resources.ctrl_light_theme;
-                pictureBox10.BackgroundImage = Properties.Resources.ctrl_light_theme;
-                pictureBox2.BackgroundImage = Properties.Resources.f_light_theme;
-                pictureBox3.BackgroundImage = Properties.Resources.f_light_theme;
-                pictureBox5.BackgroundImage = Properties.Resources.f_light_theme;
-                pictureBox7.BackgroundImage = Properties.Resources.f_light_theme;
-                pictureBox9.BackgroundImage = Properties.Resources.f_light_theme;
+                pictureBox1.BackgroundImage = Properties.Resources.ctrl;
+                pictureBox4.BackgroundImage = Properties.Resources.ctrl;
+                pictureBox6.BackgroundImage = Properties.Resources.ctrl;
+                pictureBox8.BackgroundImage = Properties.Resources.ctrl;
+                pictureBox10.BackgroundImage = Properties.Resources.ctrl;
+                pictureBox12.BackgroundImage = Properties.Resources.ctrl;
+                pictureBox16.BackgroundImage = Properties.Resources.ctrl;
+                pictureBox13.BackgroundImage = Properties.Resources.alt;
+                pictureBox14.BackgroundImage = Properties.Resources.alt;
+                pictureBox2.BackgroundImage = Properties.Resources.f;
+                pictureBox3.BackgroundImage = Properties.Resources.b;
+                pictureBox5.BackgroundImage = Properties.Resources.g;
+                pictureBox7.BackgroundImage = Properties.Resources.x;
+                pictureBox9.BackgroundImage = Properties.Resources.v;
+                pictureBox11.BackgroundImage = Properties.Resources.cursor_left;
+                pictureBox15.BackgroundImage = Properties.Resources.cursor_right;
             }
+
+            ControlHelper.ResumeDrawing(this);
         }
     }
 }

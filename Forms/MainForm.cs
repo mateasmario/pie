@@ -1731,11 +1731,11 @@ namespace pie
                 NewTab(TabType.CODE, null);
                 e.SuppressKeyPress = true;
             }
-            else if (e.KeyCode == Keys.W && e.Modifiers == Keys.Control)
+            if (e.KeyCode == Keys.W && e.Modifiers == Keys.Control)
             {
                 CloseTab();
             }
-            else if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
+            if (Globals.tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
             {
                 if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control)
                 {
@@ -1763,6 +1763,17 @@ namespace pie
                         CutLine(TextArea);
                         e.SuppressKeyPress = true;
                     }
+                }
+            }
+            if (e.Modifiers == (Keys.Control | Keys.Alt))
+            {
+                if (e.KeyCode == Keys.Left)
+                {
+                    tabControl.SelectedIndex = tabControl.SelectedIndex > 0 ? tabControl.SelectedIndex - 1 : tabControl.Pages.Count - 1;
+                }
+                else if (e.KeyCode == Keys.Right)
+                {
+                    tabControl.SelectedIndex = tabControl.SelectedIndex < tabControl.Pages.Count - 1 ? tabControl.SelectedIndex + 1 : 0;
                 }
             }
         }
