@@ -21,6 +21,6 @@ namespace pie.Enums
 {
     public enum FormatOptionCategory
     {
-        LINE_PROCESSING, CHARACTER_PROCESSING, SORTING, CUSTOM
+        Line, Character, Sorting, Custom
     }
 }

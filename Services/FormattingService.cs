@@ -33,43 +33,28 @@ namespace pie.Services
         {
             string[] lines = text.Split('\n');
 
-            return lines.Aggregate((curr, next) => {
-                if (!curr.Contains("\n"))
-                {
-                    return curr + "\n" + curr + "\n" + next + "\n" + next;
-                }
-                else
-                {
-                    return curr + "\n" + next + "\n" + next;
-                }
-            });
+            return string.Join("\n", lines.Select(line => $"{line}\n{line}")); 
         }
 
         public static string AddEmptyRowBetweenEachLine(string text)
         {
             string[] lines = text.Split('\n');
 
-            return lines.Aggregate((curr, next) => {
-                return curr + "\n\n" + next;
-            });
+            return string.Join("\n", lines.Select(line => $"{line}\n"));
         }
 
         public static string CapitalizeFirstCharacterFromEveryLine(string text)
         {
             string[] lines = text.Split('\n');
 
-            return lines.Aggregate((curr, next) => {
-                return curr.Substring(0, 1).ToUpper() + curr.Substring(1) + "\n" + (next.Length >= 1 ? (next.Substring(0, 1).ToUpper() + next.Substring(1)) : next);
-            });
+            return string.Join("\n", lines.Select(line => line.Length > 0 ? line.Substring(0, 1).ToUpper() + line.Substring(1) : line));
         }
 
         public static string RemoveEmptyLines(string text)
         {
             string[] lines = text.Split('\n');
 
-            string result = lines.Aggregate((curr, next) => {
-                return (((curr.Length == 1 && curr[0] == '\r') || (curr.Length == 0)) ? "" : curr) + (((next.Length == 1 && next[0] == '\r') || (next.Length == 0)) ? "" : "\n" + next);
-            });
+            string result = string.Join("", lines.Select(line => ((line.Length == 1 && line[0] == '\r') || (line.Length == 0)) ? "" : line));
 
 
             if (result.Length-1 >= 0 && result[result.Length-1] == '\r')
@@ -86,9 +71,7 @@ namespace pie.Services
         {
             string[] lines = text.Split('\n');
 
-            string result = lines.Aggregate((curr, next) => {
-                return (String.IsNullOrWhiteSpace(curr) ? "" : curr) + (String.IsNullOrWhiteSpace(next) ? "" : "\n" + next);
-            });
+            string result = string.Join("", lines.Select(line => String.IsNullOrWhiteSpace(line) ? "" : line));
 
             if (result.Length-1 >= 0 && result[result.Length - 1] == '\r')
             {
@@ -106,9 +89,7 @@ namespace pie.Services
 
             string[] lines = text.Split('\n').Distinct().ToArray();
 
-            string result = lines.Aggregate((curr, next) => {
-                return curr + "\n" + next;
-            });
+            string result = string.Join("\n", lines);
 
             return result.Substring(0, result.Length - 1);
         }
@@ -127,9 +108,7 @@ namespace pie.Services
                     results.Add(element);
             }
 
-            string result = results.Aggregate((curr, next) => {
-                return curr + "\n" + next;
-            });
+            string result = string.Join("\n", results);
 
             return result.Substring(0, result.Length - 1);
         }
@@ -138,64 +117,23 @@ namespace pie.Services
         {
             string[] lines = text.Split('\n');
 
-            return lines.Aggregate((curr, next) => {
-                return curr.Trim() + "\n" + next.Trim();
-            });
+            return string.Join("\n", lines.Select(line => line.Trim()));
         }
 
         public static string CapitalizeEveryWord(string text)
         {
-            string[] lines = text.Split('\n', ' ');
+            string[] words = text.Split('\n', ' ');
 
-            if (lines.Length >= 1)
-            {
-                lines[0] = lines[0].ToUpper();
-            }
-
-            bool isNewLine = false;
-
-            return lines.Aggregate((curr, next) => {
-                string res;
-
-                if (curr[curr.Length-1] == '\r')
-                {
-                    isNewLine = true;
-                }
-
-                if (isNewLine)
-                {
-                    res = curr + next.Substring(0, 1).ToUpper() + next.Substring(1);
-                }
-                else
-                {
-                    res = curr + " " + next.Substring(0, 1).ToUpper() + next.Substring(1);
-                }
-
-                if (next.Length-1 >= 0 && next[next.Length - 1] == '\r')
-                {
-                    isNewLine = true;
-                }
-                else
-                {
-                    isNewLine = false;
-                }
-
-                return res;
-            });
+            return string.Join("", words.Select(word => word.Length > 0 ? 
+                        word.Substring(0, 1).ToUpper() + word.Substring(1) +
+                        ((word.Substring(word.Length-1) == "\r") ? "" : " ") : ""));
         }
 
         public static string ConvertTextToUppercase(string text)
         {
             string[] lines = text.Split('\n');
 
-            if (lines.Length == 1)
-            {
-                return lines[0].ToUpper();
-            }
-
-            return lines.Aggregate((curr, next) => {
-                return curr.ToUpper() + "\n" + next.ToUpper();
-            });
+            return string.Join("\n", lines.Select(line => line.ToUpper()));
         }
 
         public static string ConvertTextToLowercase(string text)
@@ -207,9 +145,7 @@ namespace pie.Services
                 return lines[0].ToLower();
             }
 
-            return lines.Aggregate((curr, next) => {
-                return curr.ToLower() + "\n" + next.ToLower();
-            });
+            return string.Join("\n", lines.Select(line => line.ToLower()));
         }
 
         public static string SwitchLowercaseWithUppercase(string text)
@@ -376,9 +312,7 @@ namespace pie.Services
                 }
             }
 
-            return lines.Aggregate((curr, next) => {
-                return curr + "," + next;
-            });
+            return string.Join(",", lines.Select(line => line.ToLower()));
         }
 
         public static string ConvertNewlineToSpace(string text)
@@ -393,10 +327,7 @@ namespace pie.Services
                 }
             }
 
-            return lines.Aggregate((curr, next) =>
-            {
-                return curr + " " + next;
-            });
+            return string.Join(" ", lines.Select(line => line.ToLower()));
         }
 
         public static List<CustomFormatter> LoadCustomFormattersFromFolder(string directory)

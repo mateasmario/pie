@@ -3556,7 +3556,7 @@ namespace pie
                 int currPos = scintilla.CurrentPosition;
                 string result = scintilla.Text;
 
-                if (Globals.chosenFormatOption.FormatOptionCategory.Equals(FormatOptionCategory.CUSTOM))
+                if (Globals.chosenFormatOption.FormatOptionCategory.Equals(FormatOptionCategory.Custom))
                 {
                     result = Globals.chosenFormatOption.InvokeMethod(scintilla.Text);
                 }
