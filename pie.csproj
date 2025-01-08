@@ -82,6 +82,9 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>pie.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutocompleteMenu-ScintillaNET, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\AutoCompleteMenu-ScintillaNET.2.1.1\lib\net45\AutocompleteMenu-ScintillaNET.dll</HintPath>
@@ -250,6 +253,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.IO.FileSystem.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
     </Reference>
@@ -523,6 +527,7 @@
     <Compile Include="Forms\Theme\NewThemeForm.Designer.cs">
       <DependentUpon>NewThemeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PieUpdater.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BuildCommandService.cs" />
