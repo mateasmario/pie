@@ -18,6 +18,7 @@
 */
 
 using System;
+using System.IO;
 using System.IO.Compression;
 using System.Net;
 
@@ -29,15 +30,19 @@ namespace pie
         {
             using (var client = new WebClient())
             {
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 Console.WriteLine("Downloading latest release from GitHub...");
                 client.DownloadFile("https://github.com/mateasmario/pie/releases/latest/download/Release.zip", "Release.zip");
-                ZipArchive archive = ZipFile.OpenRead("Release.zip");
-                foreach(ZipArchiveEntry entry in archive.Entries)
+                using (ZipArchive archive = ZipFile.OpenRead("Release.zip"))
                 {
-                    Console.WriteLine("Extracting " + entry.FullName + "...");
-                    if (entry.Name != "updater.exe")
+                    foreach (ZipArchiveEntry entry in archive.Entries)
                     {
-                        entry.ExtractToFile(entry.FullName);
+                        if (entry.FullName != "PieUpdater.exe")
+                        {
+                            string destinationPath = Path.GetFullPath(Path.Combine(".", entry.FullName));
+                            entry.ExtractToFile(destinationPath);
+                        }
                     }
                 }
             }
