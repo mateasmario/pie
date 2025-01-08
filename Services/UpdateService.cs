@@ -36,7 +36,8 @@ namespace pie.Services
             string remoteVersion = releaseInfo.Version;
             Version assemblyVersion = Assembly.GetEntryAssembly().GetName().Version;
 
-            if (!remoteVersion.Equals(assemblyVersion))
+            if (!assemblyVersion.ToString().Equals(remoteVersion.ToString()) 
+                && (!assemblyVersion.ToString().StartsWith(remoteVersion)))
             {
                 return new UpdateStatus(true, remoteVersion);
             }
