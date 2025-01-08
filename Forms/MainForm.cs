@@ -1532,6 +1532,19 @@ namespace pie
             {
                 this.Opacity = 0.90;
             }
+
+            UpdateStatus updateStatus = UpdateService.GetUpdateStatus();
+
+            if (updateStatus.NeedsUpdate)
+            {
+                ShowNotification("There's a new version available for pie. You can initiate the automatic update process from the Interface menu.");
+                updateToolStripMenuItem.Visible = true;
+                updateToolStripMenuItem.Text = "Update to " + updateStatus.Version;
+            }
+            else
+            {
+                updateToolStripMenuItem.Visible = false;
+            }
         }
 
         private void GitStagingAreaListView_FormatRow(object sender, FormatRowEventArgs e)
