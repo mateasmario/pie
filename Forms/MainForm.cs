@@ -1549,7 +1549,8 @@ namespace pie
                 }
             } catch(Exception)
             {
-                // Don't do anything. Update checker may fail due to missing network connection.
+                // Update checker may fail due to missing network connection.
+                updateToolStripMenuItem.Visible = false;
             }
         }
 

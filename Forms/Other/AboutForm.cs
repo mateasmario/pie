@@ -19,6 +19,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Reflection;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -36,7 +37,7 @@ namespace pie
             InitializeComponent();
             this.Palette = Globals.kryptonPalette;
             kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonLabel1.Palette = Globals.kryptonPalette;
+            versionLabel.Palette = Globals.kryptonPalette;
             kryptonLabel2.Palette = Globals.kryptonPalette;
             kryptonLabel3.Palette = Globals.kryptonPalette;
             kryptonButton1.Palette = Globals.kryptonPalette;
@@ -59,6 +60,9 @@ namespace pie
             {
                 this.Opacity = 0.875;
             }
+
+            Version assemblyVersion = Assembly.GetEntryAssembly().GetName().Version;
+            versionLabel.Text = "Version " + assemblyVersion.ToString();
         }
     }
 }
