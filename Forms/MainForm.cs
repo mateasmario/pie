@@ -1533,17 +1533,23 @@ namespace pie
                 this.Opacity = 0.90;
             }
 
-            UpdateStatus updateStatus = UpdateService.GetUpdateStatus();
+            try
+            {
+                UpdateStatus updateStatus = UpdateService.GetUpdateStatus();
 
-            if (updateStatus.NeedsUpdate)
+                if (updateStatus.NeedsUpdate)
+                {
+                    ShowNotification("There's a new version available for pie. You can initiate the automatic update process from the Interface menu.");
+                    updateToolStripMenuItem.Visible = true;
+                    updateToolStripMenuItem.Text = "Update to " + updateStatus.Version;
+                }
+                else
+                {
+                    updateToolStripMenuItem.Visible = false;
+                }
+            } catch(Exception)
             {
-                ShowNotification("There's a new version available for pie. You can initiate the automatic update process from the Interface menu.");
-                updateToolStripMenuItem.Visible = true;
-                updateToolStripMenuItem.Text = "Update to " + updateStatus.Version;
-            }
-            else
-            {
-                updateToolStripMenuItem.Visible = false;
+                // Don't do anything. Update checker may fail due to missing network connection.
             }
         }
 
