@@ -3728,5 +3728,11 @@ namespace pie
                 Open(file);
             }
         }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("piesync.exe");
+            Environment.Exit(0);
+        }
     }
 }

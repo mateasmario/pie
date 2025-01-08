@@ -26,7 +26,7 @@ using System.Threading;
 
 namespace pie
 {
-    public class PieUpdater
+    public class PieSync
     {
         static void Main()
         {
@@ -36,9 +36,9 @@ namespace pie
                 {
                     ServicePointManager.Expect100Continue = true;
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                    Console.WriteLine("[PieUpdater] Downloading latest release from GitHub...");
+                    Console.WriteLine("piesync: Downloading latest release from GitHub...");
                     client.DownloadFile("https://github.com/mateasmario/pie/releases/latest/download/Release.zip", "Release.zip");
-                    Console.WriteLine("[PieUpdater] Download successful");
+                    Console.WriteLine("piesync: Download successful");
 
                     ExtractArchive("Release.zip");
 
@@ -49,7 +49,7 @@ namespace pie
                 Console.WriteLine(ex);
             }
 
-            Console.WriteLine("[PieUpdater] Update successful. Pie will now start.");
+            Console.WriteLine("piesync: Update successful. Pie will now start.");
 
             Thread.Sleep(2000);
 
@@ -60,26 +60,31 @@ namespace pie
         {
             using (ZipArchive archive = ZipFile.OpenRead(inputPath))
             {
-                Console.WriteLine("[PieUpdater] Deleting old files...");
-
                 foreach(ZipArchiveEntry archiveEntry in archive.Entries)
                 {
-                    Console.WriteLine("[PieUpdater] Deleting " + archiveEntry.FullName + "...");
-                    if (File.Exists(archiveEntry.FullName))
+                    Console.WriteLine("piesync: Syncing " + archiveEntry.FullName + "...");
+
+                    if (archiveEntry.FullName.EndsWith("/") || archiveEntry.FullName.EndsWith("\\"))
                     {
-                        File.Delete(archiveEntry.FullName);
+                        if (Directory.Exists(archiveEntry.FullName))
+                        {
+                            Directory.Delete(archiveEntry.FullName.Substring(0, archiveEntry.FullName.Length - 1), true);
+                        }
+
+                        Directory.CreateDirectory(archiveEntry.FullName.Substring(0, archiveEntry.FullName.Length - 1));
                     }
-                    if (Directory.Exists(archiveEntry.FullName))
+                    else if (archiveEntry.Name != "piesync.exe")
                     {
-                        Directory.Delete(archiveEntry.FullName, true);
+                        if (File.Exists(archiveEntry.FullName) && archiveEntry.Name != "piesync.exe")
+                        {
+                            File.Delete(archiveEntry.FullName);
+                        }
+
+                        archiveEntry.ExtractToFile(archiveEntry.FullName);
                     }
                 }
 
-                Console.WriteLine("[PieUpdater] Old files deleted successfully");
-
-                Console.WriteLine("[PieUpdater] Extracting files from downloaded archive...");
-                archive.ExtractToDirectory(".");
-                Console.WriteLine("[PieUpdater] Files extracted successfully");
+                Console.WriteLine("[piesync] All files synced");
             }
         }
     }
