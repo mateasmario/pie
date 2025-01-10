@@ -33,6 +33,8 @@ using pie.Enums;
 using pie.Forms.Format;
 using pie.Forms.Theme;
 using pie.Forms.Other;
+using pie.Exceptions;
+using pie.Forms.Git;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -94,7 +96,6 @@ using BrightIdeasSoftware;
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
-using pie.Exceptions;
 
 namespace pie
 {
@@ -2804,9 +2805,9 @@ namespace pie
 
         private void manageCommitCredentialsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GitCommitCredentialsForm gitCredentialsForm = new GitCommitCredentialsForm();
+            GitSettingsForm gitSettingsForm = new GitSettingsForm();
             Globals.gitFormClosedWithOk = false;
-            gitCredentialsForm.ShowDialog();
+            gitSettingsForm.ShowDialog();
 
             if (Globals.gitFormClosedWithOk)
             {

@@ -84,7 +84,7 @@ namespace pie
                     }
                 }
 
-                Console.WriteLine("[piesync] All files synced");
+                Console.WriteLine("piesync: All files synced");
             }
         }
     }
