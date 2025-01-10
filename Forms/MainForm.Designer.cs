@@ -103,7 +103,6 @@
             this.manageBuildCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.databasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageCommitCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.managePushCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordWrapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableAutosaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smartFormatterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -146,6 +145,7 @@
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.directoryNavigationHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.directoryNavigationTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.codeTemplatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
@@ -496,7 +496,7 @@
             // 
             this.showBuildToolsToolStripMenuItem.Image = global::pie.Properties.Resources.terminal;
             this.showBuildToolsToolStripMenuItem.Name = "showBuildToolsToolStripMenuItem";
-            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
             this.showBuildToolsToolStripMenuItem.Click += new System.EventHandler(this.showBuildToolsToolStripMenuItem_Click);
             // 
@@ -504,7 +504,7 @@
             // 
             this.showGitTabToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showGitTabToolStripMenuItem.Image")));
             this.showGitTabToolStripMenuItem.Name = "showGitTabToolStripMenuItem";
-            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.showGitTabToolStripMenuItem.Text = "Show Git Tab";
             this.showGitTabToolStripMenuItem.Click += new System.EventHandler(this.showGitTabToolStripMenuItem_Click);
             // 
@@ -516,7 +516,7 @@
             this.darkToolStripMenuItem});
             this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.color_wheel;
             this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
-            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.themeSettingsToolStripMenuItem.Text = "Themes";
             // 
             // lightToolStripMenuItem
@@ -537,7 +537,7 @@
             // 
             this.themeDesignerToolStripMenuItem.Image = global::pie.Properties.Resources.graphic_designer;
             this.themeDesignerToolStripMenuItem.Name = "themeDesignerToolStripMenuItem";
-            this.themeDesignerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.themeDesignerToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.themeDesignerToolStripMenuItem.Text = "Theme Designer";
             this.themeDesignerToolStripMenuItem.Click += new System.EventHandler(this.themeDesignerToolStripMenuItem_Click);
             // 
@@ -545,7 +545,7 @@
             // 
             this.glassModeToolStripMenuItem.Image = global::pie.Properties.Resources.transparency;
             this.glassModeToolStripMenuItem.Name = "glassModeToolStripMenuItem";
-            this.glassModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.glassModeToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.glassModeToolStripMenuItem.Text = "Enable Glass Effect";
             this.glassModeToolStripMenuItem.Click += new System.EventHandler(this.glassModeToolStripMenuItem_Click);
             // 
@@ -553,7 +553,7 @@
             // 
             this.cheatsheetToolStripMenuItem.Image = global::pie.Properties.Resources.open_book;
             this.cheatsheetToolStripMenuItem.Name = "cheatsheetToolStripMenuItem";
-            this.cheatsheetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cheatsheetToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.cheatsheetToolStripMenuItem.Text = "Cheatsheet";
             this.cheatsheetToolStripMenuItem.Click += new System.EventHandler(this.cheatsheetToolStripMenuItem_Click);
             // 
@@ -561,7 +561,7 @@
             // 
             this.updateToolStripMenuItem.Image = global::pie.Properties.Resources.update;
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.updateToolStripMenuItem.Text = "Update to x";
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
@@ -569,7 +569,7 @@
             // 
             this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info;
             this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
-            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.aboutPieToolStripMenuItem.Text = "About pie";
             this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
             // 
@@ -659,8 +659,8 @@
             this.preferencesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manageBuildCommandsToolStripMenuItem,
             this.databasesToolStripMenuItem,
+            this.codeTemplatesToolStripMenuItem,
             this.manageCommitCredentialsToolStripMenuItem,
-            this.managePushCredentialsToolStripMenuItem,
             this.wordWrapToolStripMenuItem,
             this.enableAutosaveToolStripMenuItem});
             this.preferencesToolStripMenuItem1.Name = "preferencesToolStripMenuItem1";
@@ -688,16 +688,8 @@
             this.manageCommitCredentialsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageCommitCredentialsToolStripMenuItem.Image")));
             this.manageCommitCredentialsToolStripMenuItem.Name = "manageCommitCredentialsToolStripMenuItem";
             this.manageCommitCredentialsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.manageCommitCredentialsToolStripMenuItem.Text = "Commit Credentials";
+            this.manageCommitCredentialsToolStripMenuItem.Text = "Git Settings";
             this.manageCommitCredentialsToolStripMenuItem.Click += new System.EventHandler(this.manageCommitCredentialsToolStripMenuItem_Click);
-            // 
-            // managePushCredentialsToolStripMenuItem
-            // 
-            this.managePushCredentialsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("managePushCredentialsToolStripMenuItem.Image")));
-            this.managePushCredentialsToolStripMenuItem.Name = "managePushCredentialsToolStripMenuItem";
-            this.managePushCredentialsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.managePushCredentialsToolStripMenuItem.Text = "Push Credentials";
-            this.managePushCredentialsToolStripMenuItem.Click += new System.EventHandler(this.managePushCredentialsToolStripMenuItem_Click);
             // 
             // wordWrapToolStripMenuItem
             // 
@@ -731,7 +723,6 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -1180,6 +1171,13 @@
             this.directoryNavigationTextBox.TabIndex = 0;
             this.directoryNavigationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
             // 
+            // codeTemplatesToolStripMenuItem
+            // 
+            this.codeTemplatesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("codeTemplatesToolStripMenuItem.Image")));
+            this.codeTemplatesToolStripMenuItem.Name = "codeTemplatesToolStripMenuItem";
+            this.codeTemplatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.codeTemplatesToolStripMenuItem.Text = "Code Templates";
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1316,7 +1314,6 @@
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem manageBuildCommandsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageCommitCredentialsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem managePushCredentialsToolStripMenuItem;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox regexCheckBox;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox matchCaseCheckBox;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox matchWholeWordCheckBox;
@@ -1358,6 +1355,7 @@
         private System.Windows.Forms.ToolStripMenuItem renderHTMLFilehtmlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renderMarkdownmdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem codeTemplatesToolStripMenuItem;
     }
 }
 

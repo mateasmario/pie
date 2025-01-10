@@ -144,21 +144,20 @@
   <metadata name="mainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="manageCommitCredentialsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="codeTemplatesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        cAAAAHABznhikwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGcSURBVDhPY2Cg
-        JijbaM1bvcUptHqLkxW6HEHQsNmXq2az07XZR3PvtO8KfFW92akCXQ1eULfR2XXy/uQHzz5c/3/52f7r
-        NZsd76GrwQtqNruqNm3z+nDs/vrzs47mHqje4rQLXQ1BUL3ZObppk8P1pk0Ou6q3OsmjyxMFfq8SvTxv
-        XuJEdHEQ+H+VgQ1dDAP8P8C3W6ln5x3DVc9FEWK8tv8P8D39f4Dv1//9/D2oOtAAyADtvi0XdFY/fK6z
-        +uFEqakXZz3erXL5/7PZT/6/3//p/0GhF//385ug64MDkBf+rhUp0Fv9yFZn9aNu8ckXdz/cqXH7/9N5
-        t/9/v/nt/wGhRyAXoesDg2dWJrHPHIxvPLM33vXcwkIBJv7/IE/Q/wN8n/4f4P/w/yDvmv//GZhQdTIw
-        MDyxMVN77mz/4dv+w6/eN9SdeWptshtZ/v9uQf7/h/mVkMVQwFNrE9cXMREPfj9+9v/73t2Xn1qakJaQ
-        nhkbcz21NL76zNPl8jNrsxdPrYzL0dUQBC/09LifWBqHPrE2skCXoxkAAMw9ur+CiH5KAAAAAElFTkSu
-        QmCC
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAA+4AAAPuATV4FvAAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
+        AAABYElEQVQ4T2NgoBTY9uzRsunbPc+qb68buhxRwKp3z3rrvj3/bfr3vvZbdymUFOy75qo2g3Xfnt1g
+        Aybu/e+/7jKpeCeGAYuvvvi/9uar/23HH/5P3HYdzN7/6D2YhrE33X7zv/7I/f/+6y/vxjAApAjdJmQx
+        EDtt583/084/xW5A7p7bGAbsuv/u//zLz+EGhG68+j99503sBlQduodhwLJrL+Hs6M3X/kduuvq/YO9t
+        7AZg8wI6Bnlh6jkcXjjw6P3/mRee/m88ev//trtvIbZuuQZ22eSzT/7vvP/u/457b3EbgB5gKDYiBSLZ
+        BoDCAMUAw4IFT3RTJv83a1gDVrDnwbv/C6+8AOMrr7/8T9h2/X/v6cf/jz39CBdfd+s12DtgA3SSJz4z
+        LJjz37RiCdgAUBSBbIHhALDYFRQxEA5afwVqQNokN7PKJTtdZxw4GLDuyipSsP/aS+noeYtkAAD01Erj
+        074aiwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="managePushCredentialsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="manageCommitCredentialsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
         cAAAAHABznhikwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGcSURBVDhPY2Cg

@@ -49,28 +49,28 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(474, 138);
+            this.kryptonPanel1.Size = new System.Drawing.Size(474, 142);
             this.kryptonPanel1.TabIndex = 3;
             // 
             // kryptonLabel2
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(9, 52);
+            this.kryptonLabel2.Location = new System.Drawing.Point(9, 55);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(104, 20);
+            this.kryptonLabel2.Size = new System.Drawing.Size(230, 20);
             this.kryptonLabel2.TabIndex = 5;
-            this.kryptonLabel2.Values.Text = "GitHub Password";
+            this.kryptonLabel2.Values.Text = "Remote Server Password / Access Token";
             // 
             // kryptonLabel1
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(9, 5);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(107, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(149, 20);
             this.kryptonLabel1.TabIndex = 4;
-            this.kryptonLabel1.Values.Text = "GitHub Username";
+            this.kryptonLabel1.Values.Text = "Remote Server Username";
             // 
             // kryptonTextBox2
             // 
-            this.kryptonTextBox2.Location = new System.Drawing.Point(12, 72);
+            this.kryptonTextBox2.Location = new System.Drawing.Point(12, 75);
             this.kryptonTextBox2.Name = "kryptonTextBox2";
             this.kryptonTextBox2.PasswordChar = '●';
             this.kryptonTextBox2.Size = new System.Drawing.Size(449, 23);
@@ -85,7 +85,7 @@
             // 
             // kryptonButton1
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(385, 105);
+            this.kryptonButton1.Location = new System.Drawing.Point(385, 108);
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.Size = new System.Drawing.Size(76, 25);
             this.kryptonButton1.TabIndex = 1;
@@ -96,7 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 138);
+            this.ClientSize = new System.Drawing.Size(474, 142);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
