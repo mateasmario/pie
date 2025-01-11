@@ -155,7 +155,7 @@
             // 
             // BuildCommandNameColumn
             // 
-            this.BuildCommandNameColumn.AspectName = "BuildCommandName";
+            this.BuildCommandNameColumn.AspectName = "Name";
             this.BuildCommandNameColumn.CellPadding = null;
             // 
             // BuildCommandsForm

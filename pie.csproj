@@ -393,12 +393,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CodeTemplate.cs" />
+    <Compile Include="Classes\ConfigurationEntities\ConfigurationEntity.cs" />
     <Compile Include="Classes\CustomFormatter.cs" />
     <Compile Include="Classes\DatabaseResponse.cs" />
     <Compile Include="Classes\ControlHelper.cs" />
-    <Compile Include="Classes\DatabaseConnection.cs" />
+    <Compile Include="Classes\ConfigurationEntities\Impl\DatabaseConnection.cs" />
+    <Compile Include="Classes\Exceptions\Configuration\ConfigurationException.cs" />
+    <Compile Include="Classes\Exceptions\Configuration\Impl\InvalidPropertyNameException.cs" />
+    <Compile Include="Classes\Exceptions\Configuration\Impl\InvalidPropertyTypeException.cs" />
     <Compile Include="Classes\FormatOption.cs" />
-    <Compile Include="Classes\LanguageMapping.cs" />
+    <Compile Include="Classes\ConfigurationEntities\Impl\LanguageMapping.cs" />
     <Compile Include="Classes\LanguageProperty.cs" />
     <Compile Include="Classes\LanguageDefinition.cs" />
     <Compile Include="Classes\NavigatorFile.cs" />
@@ -456,16 +461,16 @@
     <Compile Include="Forms\Other\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Build Commands\AddBuildCommandForm.cs">
+    <Compile Include="Forms\BuildCommands\AddBuildCommandForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Build Commands\AddBuildCommandForm.Designer.cs">
+    <Compile Include="Forms\BuildCommands\AddBuildCommandForm.Designer.cs">
       <DependentUpon>AddBuildCommandForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\BuildCommand.cs" />
+    <Compile Include="Classes\ConfigurationEntities\Impl\BuildCommand.cs" />
     <Compile Include="Classes\CustomColorTable.cs" />
     <Compile Include="Classes\CustomToolStripRenderer.cs" />
-    <Compile Include="Classes\GitCredentials.cs" />
+    <Compile Include="Classes\ConfigurationEntities\Impl\GitCredentials.cs" />
     <Compile Include="Classes\GitFile.cs" />
     <Compile Include="Classes\PieContextMenuHandler.cs" />
     <Compile Include="Classes\PieKeyboardHandler.cs" />
@@ -509,10 +514,10 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Build Commands\BuildCommandsForm.cs">
+    <Compile Include="Forms\BuildCommands\BuildCommandsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Build Commands\BuildCommandsForm.Designer.cs">
+    <Compile Include="Forms\BuildCommands\BuildCommandsForm.Designer.cs">
       <DependentUpon>BuildCommandsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Notifications\NotificationYesNoCancel.cs">
@@ -542,11 +547,10 @@
     <Compile Include="PieSync.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\BuildCommandService.cs" />
+    <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\EditorPropertiesService.cs" />
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\FormattingService.cs" />
-    <Compile Include="Services\GitService.cs" />
     <Compile Include="Services\NotificationExceptionHandlerService.cs" />
     <Compile Include="Services\ParsingService.cs" />
     <Compile Include="Services\ScintillaLexerService.cs" />
@@ -576,7 +580,7 @@
     <EmbeddedResource Include="Forms\Other\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Build Commands\AddBuildCommandForm.resx">
+    <EmbeddedResource Include="Forms\BuildCommands\AddBuildCommandForm.resx">
       <DependentUpon>AddBuildCommandForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Git\GitCloneForm.resx">
@@ -594,7 +598,7 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Build Commands\BuildCommandsForm.resx">
+    <EmbeddedResource Include="Forms\BuildCommands\BuildCommandsForm.resx">
       <DependentUpon>BuildCommandsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Notifications\NotificationYesNoCancel.resx">

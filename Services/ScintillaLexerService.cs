@@ -353,7 +353,7 @@ namespace pie.Services
                 {
                     foreach(LanguageDefinition languageDefinition in Globals.languageDefinitions)
                     {
-                        if (languageDefinition.Name.Equals(languageMapping.LanguageName))
+                        if (languageDefinition.Name.Equals(languageMapping.Language))
                         {
                             ConfigureLexer(languageDefinition, scintilla, tabControl, index);
                             return;
@@ -361,46 +361,6 @@ namespace pie.Services
                     }
                 }
             }
-        }
-
-        public static List<LanguageMapping> GetMappingsFromFile(string file)
-        {
-            List<LanguageMapping> languageMappings = new List<LanguageMapping>();
-
-            LanguageMapping languageMapping = null;
-
-            string token = null;
-
-            using (var textReader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + file))
-            {
-                JsonTextReader jsonTextReader = new JsonTextReader(textReader);
-
-                while (jsonTextReader.Read())
-                {
-                    if (jsonTextReader.Value != null)
-                    {
-                        if (jsonTextReader.TokenType == JsonToken.PropertyName)
-                        {
-                            token = jsonTextReader.Value.ToString();
-                        }
-                        else if (jsonTextReader.TokenType == JsonToken.String)
-                        {
-                            if (token.ToLower() == "extension")
-                            {
-                                languageMapping = new LanguageMapping();
-                                languageMapping.Extension = jsonTextReader.Value.ToString();
-                            }
-                            else if (token.ToLower() == "language")
-                            {
-                                languageMapping.LanguageName = jsonTextReader.Value.ToString();
-                                languageMappings.Add(languageMapping);
-                            }
-                        }
-                    }
-                }
-            }
-
-            return languageMappings;
         }
 
         public static List<LanguageDefinition> LoadDefinitionsFromFolder(string directory)
