@@ -19,9 +19,9 @@
 
 namespace pie.Classes
 {
-    public class BuildCommand
+    public class CodeTemplate
     {
-        public string BuildCommandName { get; set; }
-        public string BuildCommandCmd { get; set; }
+        public int Index { get; set; }
+        public string Content { get; set; }
     }
 }

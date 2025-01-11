@@ -207,7 +207,7 @@ namespace pie.Forms.Databases
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            DatabaseService.WriteDatabasesToFile("config/databases.json", tempDatabases);
+            ConfigurationService<DatabaseConnection>.WriteToFile("config/databases.json", tempDatabases);
 
             Globals.closeAfterApplyingChanges = true;
 

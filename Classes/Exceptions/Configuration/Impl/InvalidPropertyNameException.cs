@@ -17,13 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-namespace pie.Classes
+using System;
+
+namespace pie.Classes.Exceptions
 {
-    public class GitCredentials
+    public class InvalidPropertyNameException : ConfigurationException
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
     }
 }

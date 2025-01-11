@@ -120,15 +120,15 @@ namespace pie
             if (Globals.addBuildCommandName != null)
             {
                 BuildCommand buildCommand = new BuildCommand();
-                buildCommand.BuildCommandName = Globals.addBuildCommandName;
-                buildCommand.BuildCommandCmd = Globals.addBuildCommandCmd;
+                buildCommand.Name = Globals.addBuildCommandName;
+                buildCommand.Command = Globals.addBuildCommandCmd;
 
                 bool exists = false;
 
                 // Check if a build command with the specified name already exists
                 foreach(BuildCommand tempCommand in tempCommands)
                 {
-                    if (tempCommand.BuildCommandName.Equals(buildCommand.BuildCommandName))
+                    if (tempCommand.Name.Equals(buildCommand.Name))
                     {
                         exists = true;
                         break;
@@ -149,7 +149,7 @@ namespace pie
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            BuildCommandService.WriteBuildCommandsToFile("config/build.json", tempCommands);
+            ConfigurationService<BuildCommand>.WriteToFile("config/build.json", tempCommands);
 
             Globals.closeAfterApplyingChanges = true;
 
@@ -162,8 +162,8 @@ namespace pie
             {
                 Globals.buildCommandEditIndex = buildCommandsListView.SelectedIndex;
 
-                Globals.buildCommandToEditName = tempCommands[Globals.buildCommandEditIndex].BuildCommandName;
-                Globals.buildCommandToEditCmd = tempCommands[Globals.buildCommandEditIndex].BuildCommandCmd;
+                Globals.buildCommandToEditName = tempCommands[Globals.buildCommandEditIndex].Name;
+                Globals.buildCommandToEditCmd = tempCommands[Globals.buildCommandEditIndex].Command;
 
                 AddBuildCommandForm addBuildCommandForm = new AddBuildCommandForm();
                 addBuildCommandForm.ShowDialog();
@@ -174,7 +174,7 @@ namespace pie
 
                     foreach (BuildCommand tempCommand in tempCommands)
                     {
-                        if (tempCommand.BuildCommandName != Globals.buildCommandToEditName && tempCommand.BuildCommandName.Equals(Globals.addBuildCommandName))
+                        if (tempCommand.Name != Globals.buildCommandToEditName && tempCommand.Name.Equals(Globals.addBuildCommandName))
                         {
                             exists = true;
                             break;
@@ -187,8 +187,8 @@ namespace pie
                     }
                     else
                     {
-                        tempCommands[Globals.buildCommandEditIndex].BuildCommandName = Globals.addBuildCommandName;
-                        tempCommands[Globals.buildCommandEditIndex].BuildCommandCmd = Globals.addBuildCommandCmd;
+                        tempCommands[Globals.buildCommandEditIndex].Name = Globals.addBuildCommandName;
+                        tempCommands[Globals.buildCommandEditIndex].Command = Globals.addBuildCommandCmd;
                     }
                 }
 

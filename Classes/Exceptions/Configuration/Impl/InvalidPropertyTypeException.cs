@@ -17,11 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-namespace pie.Classes
+using System;
+
+namespace pie.Classes.Exceptions
 {
-    public class LanguageMapping
+    public class InvalidPropertyTypeException : ConfigurationException
     {
-        public string Extension { get; set; }
-        public string LanguageName { get; set; }
     }
 }

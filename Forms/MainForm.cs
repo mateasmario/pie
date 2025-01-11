@@ -36,6 +36,7 @@ using pie.Forms.Other;
 using pie.Exceptions;
 using pie.Forms.Git;
 using pie.Forms.CodeTemplates;
+using pie.Classes.Exceptions;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -1334,13 +1335,13 @@ namespace pie
 
             try
             {
-                Globals.buildCommands = BuildCommandService.GetBuildCommandsFromFile("config/build.json");
+                Globals.buildCommands = ConfigurationService<BuildCommand>.GetFromFile("config/build.json");
 
                 foreach (BuildCommand buildCommand in Globals.buildCommands)
                 {
                     ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
-                    toolStripMenuItem.Text = buildCommand.BuildCommandName;
-                    toolStripMenuItem.Tag = buildCommand.BuildCommandCmd;
+                    toolStripMenuItem.Text = buildCommand.Name;
+                    toolStripMenuItem.Tag = buildCommand.Command;
 
                     toolStripMenuItem.Click += ToolStripMenuItem_Click;
 
@@ -1358,17 +1359,25 @@ namespace pie
             {
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/build.json", "[]");
             }
+            catch (ConfigurationException ex)
+            {
+                ShowNotification("There was an error in reading the build commands. Please check the syntax of the .json configuration.");
+            }
         }
 
         private void ProcessLanguageMappings()
         {
             try
             {
-                Globals.languageMappings = ScintillaLexerService.GetMappingsFromFile("config/mappings.json");
+                Globals.languageMappings = ConfigurationService<LanguageMapping>.GetFromFile("config/mappings.json");
             }
             catch (FileNotFoundException ex)
             {
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/mappings.json", "[]");
+            }
+            catch (ConfigurationException ex)
+            {
+                ShowNotification("There was an error in reading the build commands. Please check the syntax of the .json configuration.");
             }
         }
 
@@ -1379,14 +1388,9 @@ namespace pie
 
         private void GetConfigurationDataFromFiles()
         {
-            ProcessBuildCommands();
-            ProcessDatabases();
-            ProcessLanguageMappings();
-            ProcessLanguageDefinitions();
-
             try
             {
-                Globals.gitCredentials = GitService.ReadCredentialsFromFile("config/git.json");
+                Globals.gitCredentials = ConfigurationService<GitCredentials>.GetFromFile("config/git.json")[0];
             }
             catch (FileNotFoundException ex)
             {
@@ -1455,6 +1459,11 @@ namespace pie
             {
                 ShowNotification("Public method return type needs to be string.");
             }
+
+            ProcessBuildCommands();
+            ProcessDatabaseConnections();
+            ProcessLanguageMappings();
+            ProcessLanguageDefinitions();
         }
 
         private void SetDynamicDesign()
@@ -2535,7 +2544,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            GitService.WriteCredentials(Globals.gitCredentials);
+                            ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                             GitCommit(items);
                         }
                     }
@@ -2668,7 +2677,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            GitService.WriteCredentials(Globals.gitCredentials);
+                            ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                             GitPush();
                         }
                     }
@@ -2812,7 +2821,7 @@ namespace pie
 
             if (Globals.gitFormClosedWithOk)
             {
-                GitService.WriteCredentials(Globals.gitCredentials);
+                ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
             }
         }
 
@@ -2824,7 +2833,7 @@ namespace pie
 
             if (Globals.gitFormClosedWithOk)
             {
-                GitService.WriteCredentials(Globals.gitCredentials);
+                ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials } );
             }
         }
 
@@ -2856,7 +2865,7 @@ namespace pie
 
                     if (Globals.gitFormClosedWithOk)
                     {
-                        GitService.WriteCredentials(Globals.gitCredentials);
+                        ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                         GitPull();
                     }
                 }
@@ -2870,7 +2879,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            GitService.WriteCredentials(Globals.gitCredentials);
+                            ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                             GitPull();
                         }
                     }
@@ -3166,19 +3175,23 @@ namespace pie
 
             if (Globals.closeAfterApplyingChanges)
             {
-                ProcessDatabases();
+                ProcessDatabaseConnections();
             }
         }
 
-        private void ProcessDatabases()
+        private void ProcessDatabaseConnections()
         {
             try
             {
-                Globals.databases = DatabaseService.GetDatabasesFromFile("config/databases.json");
+                Globals.databases = ConfigurationService<DatabaseConnection>.GetFromFile("config/databases.json");
             }
             catch (FileNotFoundException ex)
             {
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/databases.json", "[]");
+            }
+            catch (ConfigurationException ex)
+            {
+                ShowNotification("There was an error in reading the database connections. Please check the syntax of the .json configuration.");
             }
         }
 

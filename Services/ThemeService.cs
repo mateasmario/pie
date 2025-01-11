@@ -354,7 +354,7 @@ namespace pie.Services
 
                 writer.WriteStartObject();
                 writer.WritePropertyName("theme");
-                writer.WriteValue(Globals.theme);
+                writer.WriteValue(theme);
                 writer.WriteEndObject();
             }
         }
