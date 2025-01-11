@@ -102,6 +102,7 @@
             this.preferencesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.manageBuildCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.databasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codeTemplatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageCommitCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordWrapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableAutosaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,7 +146,6 @@
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.directoryNavigationHeaderGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.directoryNavigationTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.codeTemplatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
@@ -683,6 +683,14 @@
             this.databasesToolStripMenuItem.Text = "Databases";
             this.databasesToolStripMenuItem.Click += new System.EventHandler(this.databasesToolStripMenuItem_Click);
             // 
+            // codeTemplatesToolStripMenuItem
+            // 
+            this.codeTemplatesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("codeTemplatesToolStripMenuItem.Image")));
+            this.codeTemplatesToolStripMenuItem.Name = "codeTemplatesToolStripMenuItem";
+            this.codeTemplatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.codeTemplatesToolStripMenuItem.Text = "Code Templates";
+            this.codeTemplatesToolStripMenuItem.Click += new System.EventHandler(this.codeTemplatesToolStripMenuItem_Click);
+            // 
             // manageCommitCredentialsToolStripMenuItem
             // 
             this.manageCommitCredentialsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageCommitCredentialsToolStripMenuItem.Image")));
@@ -723,6 +731,7 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
@@ -1170,13 +1179,6 @@
             this.directoryNavigationTextBox.Size = new System.Drawing.Size(505, 23);
             this.directoryNavigationTextBox.TabIndex = 0;
             this.directoryNavigationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyDownEvents);
-            // 
-            // codeTemplatesToolStripMenuItem
-            // 
-            this.codeTemplatesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("codeTemplatesToolStripMenuItem.Image")));
-            this.codeTemplatesToolStripMenuItem.Name = "codeTemplatesToolStripMenuItem";
-            this.codeTemplatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.codeTemplatesToolStripMenuItem.Text = "Code Templates";
             // 
             // MainForm
             // 
