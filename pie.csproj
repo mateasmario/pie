@@ -414,6 +414,12 @@
     <Compile Include="Exceptions\IncorrectPublicMethodReturnTypeException.cs" />
     <Compile Include="Exceptions\IncorrectPublicMethodArgumentNumberException.cs" />
     <Compile Include="Exceptions\IncorrectPublicMethodNameException.cs" />
+    <Compile Include="Forms\CodeTemplates\CodeTemplatesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CodeTemplates\CodeTemplatesForm.Designer.cs">
+      <DependentUpon>CodeTemplatesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Databases\AddDatabaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -546,6 +552,9 @@
     <Compile Include="Services\ScintillaLexerService.cs" />
     <Compile Include="Services\ThemeService.cs" />
     <Compile Include="Services\UpdateService.cs" />
+    <EmbeddedResource Include="Forms\CodeTemplates\CodeTemplatesForm.resx">
+      <DependentUpon>CodeTemplatesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Databases\AddDatabaseForm.resx">
       <DependentUpon>AddDatabaseForm.cs</DependentUpon>
     </EmbeddedResource>

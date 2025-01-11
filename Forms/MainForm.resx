@@ -146,15 +146,15 @@
   </metadata>
   <data name="codeTemplatesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAA+4AAAPuATV4FvAAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
-        AAABYElEQVQ4T2NgoBTY9uzRsunbPc+qb68buhxRwKp3z3rrvj3/bfr3vvZbdymUFOy75qo2g3Xfnt1g
-        Aybu/e+/7jKpeCeGAYuvvvi/9uar/23HH/5P3HYdzN7/6D2YhrE33X7zv/7I/f/+6y/vxjAApAjdJmQx
-        EDtt583/084/xW5A7p7bGAbsuv/u//zLz+EGhG68+j99503sBlQduodhwLJrL+Hs6M3X/kduuvq/YO9t
-        7AZg8wI6Bnlh6jkcXjjw6P3/mRee/m88ev//trtvIbZuuQZ22eSzT/7vvP/u/457b3EbgB5gKDYiBSLZ
-        BoDCAMUAw4IFT3RTJv83a1gDVrDnwbv/C6+8AOMrr7/8T9h2/X/v6cf/jz39CBdfd+s12DtgA3SSJz4z
-        LJjz37RiCdgAUBSBbIHhALDYFRQxEA5afwVqQNokN7PKJTtdZxw4GLDuyipSsP/aS+noeYtkAAD01Erj
-        074aiwAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAD
+        7QAAA+0BmME3nQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFgSURBVDhPY2Cg
+        FNj27NGy6ds9z6pvrxu6HFHAqnfPeuu+Pf9t+ve+9lt3KZQU7LvmqjaDdd+e3WADJu7977/uMql4J4YB
+        i6+++L/25qv/bccf/k/cdh3M3v/oPZiGsTfdfvO//sj9//7rL+/GMACkCN0mZDEQO23nzf/Tzj/FbkDu
+        ntsYBuy6/+7//MvP4QaEbrz6P33nTewGVB26h2HAsmsv4ezozdf+R266+r9g723sBmDzAjoGeWHqORxe
+        OPDo/f+ZF57+bzx6//+2u28htm65BnbZ5LNP/u+8/+7/jntvcRuAHmAoNiIFItkGgMIAxQDDggVPdFMm
+        /zdrWANWsOfBu/8Lr7wA4yuvv/xP2Hb9f+/px/+PPf0IF1936zXYO2ADdJInPjMsmPPftGIJ2ABQFIFs
+        geEAsNgVFDEQDlp/BWpA2iQ3s8olO11nHDgYsO7KKlKw/9pL6eh5i2QAAPTUSuPTvhqLAAAAAElFTkSu
+        QmCC
 </value>
   </data>
   <data name="manageCommitCredentialsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

@@ -35,6 +35,7 @@ using pie.Forms.Theme;
 using pie.Forms.Other;
 using pie.Exceptions;
 using pie.Forms.Git;
+using pie.Forms.CodeTemplates;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -3584,62 +3585,61 @@ namespace pie
                 else {
                     switch (Globals.chosenFormatOption.FormatOptionName)
                     {
-                        case "LINE_DUPLICATE":
+                        case "LineDuplicate":
                             result = FormattingService.DuplicateLines(scintilla.Text);
-
                             break;
-                        case "LINE_ADD_EMPTY":
+                        case "LineAddEmpty":
                             result = FormattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
                             break;
-                        case "LINE_CAPITALIZE_FIRST":
+                        case "LineCapitalizeFirst":
                             result = FormattingService.CapitalizeFirstCharacterFromEveryLine(scintilla.Text);
                             break;
-                        case "LINE_REMOVE_EMPTY":
+                        case "LineRemoveEmpty":
                             result = FormattingService.RemoveEmptyLines(scintilla.Text);
                             break;
-                        case "LINE_REMOVE_WHITESPACE":
+                        case "LineRemoveWhitespace":
                             result = FormattingService.RemoveWhitespaceLines(scintilla.Text);
                             break;
-                        case "LINE_REMOVE_DUPLICATE":
+                        case "LineRemoveDuplicate":
                             result = FormattingService.RemoveDuplicateLines(scintilla.Text);
                             break;
-                        case "LINE_REMOVE_DUPLICATE_CONSEC":
+                        case "LineRemoveDuplicateConsec":
                             result = FormattingService.RemoveConsecutiveDuplicates(scintilla.Text);
                             break;
-                        case "LINE_TRIM":
+                        case "LineTrim":
                             result = FormattingService.TrimLines(scintilla.Text);
                             break;
-                        case "CHAR_CAPITALIZE":
+                        case "CharCapitalize":
                             result = FormattingService.CapitalizeEveryWord(scintilla.Text);
                             break;
-                        case "CHAR_CASE_UPPER":
+                        case "CharCaseUpper":
                             result = FormattingService.ConvertTextToUppercase(scintilla.Text);
                             break;
-                        case "CHAR_CASE_LOWER":
+                        case "CharCaseLower":
                             result = FormattingService.ConvertTextToLowercase(scintilla.Text);
                             break;
-                        case "CHAR_CASE_SWAP":
+                        case "CharCaseSwap":
                             result = FormattingService.SwitchLowercaseWithUppercase(scintilla.Text);
                             break;
-                        case "CHAR_REMOVE_WHITESPACE":
+                        case "CharRemoveWhitespace":
                             result = FormattingService.RemoveAllWhitespaces(scintilla.Text);
                             break;
-                        case "CHAR_REMOVE_WHITESPACE_CONSEC":
+                        case "CharRemoveWhitespaceConsec":
                             result = FormattingService.RemoveAllConsecutiveWhitespaces(scintilla.Text);
                             break;
-                        case "CHAR_CONV_NEWLINE_COMMA":
+                        case "CharConvNewlineComma":
                             result = FormattingService.ConvertNewlineToComma(scintilla.Text);
                             break;
-                        case "CHAR_CONV_NEWLINE_SPACE":
+                        case "CharConvNewlineSpace":
                             result = FormattingService.ConvertNewlineToSpace(scintilla.Text);
                             break;
-                        case "SORT_ASC":
+                        case "SortAsc":
                             result = FormattingService.SortLines(scintilla.Text);
                             break;
-                        case "SORT_DESC":
+                        case "SortDesc":
                             result = FormattingService.SortLines(scintilla.Text, false);
                             break;
-                        case "SORT_REVERSE":
+                        case "SortReverse":
                             result = FormattingService.ReverseLineOrder(scintilla.Text);
                             break;
                     }
@@ -3741,6 +3741,12 @@ namespace pie
         {
             Process.Start("piesync.exe");
             Environment.Exit(0);
+        }
+
+        private void codeTemplatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CodeTemplatesForm codeTemplatesForm = new CodeTemplatesForm();
+            codeTemplatesForm.ShowDialog();
         }
     }
 }
