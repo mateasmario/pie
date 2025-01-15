@@ -29,7 +29,7 @@ namespace pie.Services
 {
     public class UpdateService
     {
-        public static UpdateStatus GetUpdateStatus()
+        public UpdateStatus GetUpdateStatus()
         {
             // Send GET Request
             ReleaseInfo releaseInfo = Task.Run(async () => await GetAsync("https://api.github.com/repos/mateasmario/pie/releases/latest")).Result;
@@ -45,7 +45,7 @@ namespace pie.Services
             return new UpdateStatus(false);
         }
 
-        private static async Task<ReleaseInfo> GetAsync(string uri)
+        private async Task<ReleaseInfo> GetAsync(string uri)
         {
             try
             {

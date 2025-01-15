@@ -34,6 +34,7 @@ using ComponentFactory.Krypton.Toolkit;
  * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
 */
 using ScintillaNET;
+using System.Windows.Forms;
 
 namespace pie.Services
 {
@@ -105,7 +106,7 @@ namespace pie.Services
             darkTheme.Name = "Dark";
         }
 
-        public static ThemeInfo GetThemeInternal(String themeName)
+        public ThemeInfo GetThemeInternal(String themeName)
         {
             ThemeInfo themeInfo = null;
 
@@ -131,7 +132,7 @@ namespace pie.Services
             return lightTheme;
         }
 
-        public static void SetPaletteToTheme(KryptonPalette kryptonPalette, ThemeInfo theme)
+        public void SetPaletteToTheme(KryptonPalette kryptonPalette, ThemeInfo theme)
         {
             // Common
             kryptonPalette.Common.StateCommon.Content.ShortText.Color1 = theme.Fore;
@@ -259,7 +260,7 @@ namespace pie.Services
         }
 
         // [Method] Sets the corresponding theme colors to the code editor's background, text and margins.
-        public static void ColorizeTextArea(Scintilla TextArea, ThemeInfo theme)
+        public void ColorizeTextArea(Scintilla TextArea, ThemeInfo theme)
         {
             TextArea.StyleResetDefault();
             TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
@@ -275,7 +276,7 @@ namespace pie.Services
             InitCodeFolding(TextArea, theme);
         }
 
-        private static void InitNumberMargin(Scintilla TextArea, ThemeInfo theme)
+        private void InitNumberMargin(Scintilla TextArea, ThemeInfo theme)
         {
 
             TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = theme.NumberMargin;
@@ -286,7 +287,7 @@ namespace pie.Services
             TextArea.Margins[0].Width = 24;
         }
 
-        private static void InitCodeFolding(Scintilla TextArea, ThemeInfo theme)
+        private void InitCodeFolding(Scintilla TextArea, ThemeInfo theme)
         {
 
             TextArea.SetFoldMarginColor(true, theme.Folding);
@@ -296,6 +297,41 @@ namespace pie.Services
             TextArea.Margins[3].Mask = Marker.MaskFolders;
             TextArea.Margins[3].Sensitive = true;
             TextArea.Margins[3].Width = 20;
+        }
+
+        public void SetPaletteToObjects(Control control, KryptonPalette palette)
+        {
+            foreach(Control child in control.Controls)
+            {
+               if (child is KryptonPanel)
+               {
+                    ((KryptonPanel)child).Palette = palette;
+               }
+               else if (child is KryptonLabel)
+                {
+                    ((KryptonLabel)child).Palette = palette;
+                }
+               else if (child is KryptonButton)
+                {
+                    ((KryptonButton)child).Palette = palette;
+                }
+               else if (child is KryptonTextBox)
+                {
+                    ((KryptonTextBox)child).Palette = palette;
+                }
+               else if (child is KryptonRichTextBox)
+                {
+                    ((KryptonRichTextBox)child).Palette = palette;
+                }
+               else if (child is KryptonCheckBox)
+                {
+                    ((KryptonCheckBox)child).Palette = palette;
+                }
+                else if (child is KryptonCheckButton)
+                {
+                    ((KryptonCheckButton)child).Palette = palette;
+                }
+            }
         }
     }
 }

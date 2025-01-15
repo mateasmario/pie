@@ -35,6 +35,8 @@ namespace pie.Forms.Databases
 {
     public partial class DatabasesForm : KryptonForm
     {
+        private ConfigurationService configurationService = new ConfigurationService();
+
         List<DatabaseConnection> tempDatabases;
 
         public DatabasesForm()
@@ -207,7 +209,7 @@ namespace pie.Forms.Databases
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            ConfigurationService.WriteToFile("config/databases.json", tempDatabases);
+            configurationService.WriteToFile("config/databases.json", tempDatabases);
 
             Globals.closeAfterApplyingChanges = true;
 

@@ -29,28 +29,30 @@ namespace pie.Services
 {
     public class FormattingService
     {
-        public static string DuplicateLines(string text)
+        private ParsingService parsingService = new ParsingService();
+
+        public string DuplicateLines(string text)
         {
             string[] lines = text.Split('\n');
 
             return string.Join("\n", lines.Select(line => $"{line}\n{line}")); 
         }
 
-        public static string AddEmptyRowBetweenEachLine(string text)
+        public string AddEmptyRowBetweenEachLine(string text)
         {
             string[] lines = text.Split('\n');
 
             return string.Join("\n", lines.Select(line => $"{line}\n"));
         }
 
-        public static string CapitalizeFirstCharacterFromEveryLine(string text)
+        public string CapitalizeFirstCharacterFromEveryLine(string text)
         {
             string[] lines = text.Split('\n');
 
             return string.Join("\n", lines.Select(line => line.Length > 0 ? line.Substring(0, 1).ToUpper() + line.Substring(1) : line));
         }
 
-        public static string RemoveEmptyLines(string text)
+        public string RemoveEmptyLines(string text)
         {
             string[] lines = text.Split('\n');
 
@@ -67,7 +69,7 @@ namespace pie.Services
             }
         }
 
-        public static string RemoveWhitespaceLines(string text)
+        public string RemoveWhitespaceLines(string text)
         {
             string[] lines = text.Split('\n');
 
@@ -83,7 +85,7 @@ namespace pie.Services
             }
         }
 
-        public static string RemoveDuplicateLines(string text)
+        public string RemoveDuplicateLines(string text)
         {
             text = text + "\r";
 
@@ -94,7 +96,7 @@ namespace pie.Services
             return result.Substring(0, result.Length - 1);
         }
 
-        public static string RemoveConsecutiveDuplicates(string text)
+        public string RemoveConsecutiveDuplicates(string text)
         {
             text = text + "\r";
 
@@ -113,14 +115,14 @@ namespace pie.Services
             return result.Substring(0, result.Length - 1);
         }
 
-        public static string TrimLines(string text)
+        public string TrimLines(string text)
         {
             string[] lines = text.Split('\n');
 
             return string.Join("\n", lines.Select(line => line.Trim()));
         }
 
-        public static string CapitalizeEveryWord(string text)
+        public string CapitalizeEveryWord(string text)
         {
             string[] words = text.Split('\n', ' ');
 
@@ -129,14 +131,14 @@ namespace pie.Services
                         ((word.Substring(word.Length-1) == "\r") ? "" : " ") : ""));
         }
 
-        public static string ConvertTextToUppercase(string text)
+        public string ConvertTextToUppercase(string text)
         {
             string[] lines = text.Split('\n');
 
             return string.Join("\n", lines.Select(line => line.ToUpper()));
         }
 
-        public static string ConvertTextToLowercase(string text)
+        public string ConvertTextToLowercase(string text)
         {
             string[] lines = text.Split('\n');
 
@@ -148,7 +150,7 @@ namespace pie.Services
             return string.Join("\n", lines.Select(line => line.ToLower()));
         }
 
-        public static string SwitchLowercaseWithUppercase(string text)
+        public string SwitchLowercaseWithUppercase(string text)
         {
             string result = "";
 
@@ -174,7 +176,7 @@ namespace pie.Services
             return result;
         }
 
-        public static string RemoveAllWhitespaces(string text)
+        public string RemoveAllWhitespaces(string text)
         {
             string result = "";
 
@@ -196,7 +198,7 @@ namespace pie.Services
             return result;
         }
 
-        public static string RemoveAllConsecutiveWhitespaces(string text)
+        public string RemoveAllConsecutiveWhitespaces(string text)
         {
             string result = "";
 
@@ -218,12 +220,12 @@ namespace pie.Services
             return result;
         }
 
-        public static string SortLines(string text)
+        public string SortLines(string text)
         {
             return SortLines(text, true);
         }
 
-        public static string SortLines (string text, bool ascending)
+        public string SortLines (string text, bool ascending)
         {
             if (text.Equals(""))
             {
@@ -265,7 +267,7 @@ namespace pie.Services
             return result;
         }
 
-        public static string ReverseLineOrder(string text)
+        public string ReverseLineOrder(string text)
         {
             if (text.Equals(""))
             {
@@ -300,7 +302,7 @@ namespace pie.Services
             }
         }
 
-        public static string ConvertNewlineToComma(string text)
+        public string ConvertNewlineToComma(string text)
         {
             string[] lines = text.Split('\n');
 
@@ -315,7 +317,7 @@ namespace pie.Services
             return string.Join(",", lines.Select(line => line.ToLower()));
         }
 
-        public static string ConvertNewlineToSpace(string text)
+        public string ConvertNewlineToSpace(string text)
         {
             string[] lines = text.Split('\n');
 
@@ -330,7 +332,7 @@ namespace pie.Services
             return string.Join(" ", lines.Select(line => line.ToLower()));
         }
 
-        public static List<CustomFormatter> LoadCustomFormattersFromFolder(string directory)
+        public List<CustomFormatter> LoadCustomFormattersFromFolder(string directory)
         {
             List<CustomFormatter> customFormatters = new List<CustomFormatter>();
 
@@ -344,10 +346,10 @@ namespace pie.Services
 
                 foreach (string file in files)
                 {
-                    if (ParsingService.GetFileExtension(file) == "dll")
+                    if (parsingService.GetFileExtension(file) == "dll")
                     {
                         Assembly externalAssembly = Assembly.LoadFrom(file);
-                        string className = ParsingService.RemoveFileExtension(file).Substring(11);
+                        string className = parsingService.RemoveFileExtension(file).Substring(11);
                         Type externalType = externalAssembly.GetType(className);
                         object instance = Activator.CreateInstance(externalType);
 

@@ -57,101 +57,56 @@ using Newtonsoft.Json.Linq;
 
 namespace pie.Services
 {
-    internal class ScintillaLexerService
+    public class ScintillaLexerService
     {
-        private static Dictionary<string, Color> parserColorDictionary;
-        private static bool dictionaryInitialized = false;
+        private ParsingService parsingService = new ParsingService();
 
-        public static string ConvertColorToHex(Color c)
+        private static Dictionary<string, Color> parserColorDictionary;
+
+        public static void ResetDictionary()
+        {
+            parserColorDictionary = new Dictionary<string, Color>();
+            parserColorDictionary["Default"] = Globals.theme.Fore;
+            parserColorDictionary["Background"] = Globals.theme.Primary;
+            parserColorDictionary["Fore"] = Globals.theme.Fore;
+            parserColorDictionary["CaretLine"] = Globals.theme.CaretLineBack;
+            parserColorDictionary["Selection"] = Globals.theme.Selection;
+            parserColorDictionary["Comment"] = Globals.theme.Comment;
+            parserColorDictionary["CommentLine"] = Globals.theme.CommentLine;
+            parserColorDictionary["Number"] = Globals.theme.Number;
+            parserColorDictionary["Word"] = Globals.theme.Word;
+            parserColorDictionary["String"] = Globals.theme.String;
+            parserColorDictionary["Operator"] = Globals.theme.Operator;
+            parserColorDictionary["Preprocessor"] = Globals.theme.Preprocessor;
+            parserColorDictionary["Triple"] = Globals.theme.Triple;
+            parserColorDictionary["CommentBlock"] = Globals.theme.CommentBlock;
+            parserColorDictionary["Decorator"] = Globals.theme.Decorator;
+            parserColorDictionary["Attribute"] = Globals.theme.Attribute;
+            parserColorDictionary["Entity"] = Globals.theme.Entity;
+            parserColorDictionary["User1"] = Globals.theme.User1;
+            parserColorDictionary["User2"] = Globals.theme.User2;
+        }
+
+        public string ConvertColorToHex(Color c)
         {
             return $"{c.R:X2}{c.G:X2}{c.B:X2}";
         }
 
-        public static Color ConvertHexToColor(string value)
+        public Color ConvertHexToColor(string value)
         {
             ColorConverter converter = new ColorConverter();
             Color color = (Color)converter.ConvertFromString("#FF" + value);
             return color;
         }
 
-        public static void InitializeParserDictionary()
-        {
-            parserColorDictionary = new Dictionary<string, Color>();
-
-            parserColorDictionary["Default"] = Globals.theme.Fore;
-            parserColorDictionary["Background"] = Globals.theme.Primary;
-            parserColorDictionary["Fore"] = Globals.theme.Fore;
-            parserColorDictionary["CaretLine"] = Globals.theme.CaretLineBack;
-            parserColorDictionary["Selection"] = Globals.theme.Selection;
-
-            if (Globals.theme == ThemeService.darkTheme)
-            {
-                parserColorDictionary["Comment"] = Color.FromArgb(192, 192, 192);
-                parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
-                parserColorDictionary["Number"] = Color.FromArgb(242, 161, 39);
-                parserColorDictionary["Word"] = Color.FromArgb(60, 170, 232);
-                parserColorDictionary["String"] = Color.FromArgb(56, 207, 172);
-                parserColorDictionary["Operator"] = Color.FromArgb(222, 2, 222);
-                parserColorDictionary["Preprocessor"] = Color.FromArgb(222, 2, 222);
-                parserColorDictionary["Triple"] = Color.FromArgb(207, 2, 2);
-                parserColorDictionary["CommentBlock"] = Color.FromArgb(153, 153, 153);
-                parserColorDictionary["Decorator"] = Color.FromArgb(230, 222, 5);
-                parserColorDictionary["Attribute"] = Color.FromArgb(222, 2, 222);
-                parserColorDictionary["Entity"] = Color.FromArgb(222, 2, 222);
-                parserColorDictionary["User1"] = Color.FromArgb(128, 128, 128);
-                parserColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
-
-            }
-            else if (Globals.theme == ThemeService.lightTheme)
-            {
-                parserColorDictionary["Comment"] = Color.FromArgb(180, 180, 180);
-                parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
-                parserColorDictionary["Number"] = Color.FromArgb(194, 127, 25);
-                parserColorDictionary["Word"] = Color.FromArgb(50, 125, 168);
-                parserColorDictionary["String"] = Color.FromArgb(43, 158, 131);
-                parserColorDictionary["Operator"] = Color.FromArgb(128, 0, 128);
-                parserColorDictionary["Preprocessor"] = Color.FromArgb(128, 0, 128);
-                parserColorDictionary["Triple"] = Color.FromArgb(127, 0, 0);
-                parserColorDictionary["CommentBlock"] = Color.FromArgb(127, 127, 127);
-                parserColorDictionary["Decorator"] = Color.FromArgb(186, 119, 2);
-                parserColorDictionary["Attribute"] = Color.FromArgb(128, 0, 128);
-                parserColorDictionary["Entity"] = Color.FromArgb(128, 0, 128);
-                parserColorDictionary["User1"] = Color.FromArgb(128, 128, 128);
-                parserColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
-            }
-            else
-            {
-                parserColorDictionary["Comment"] = Globals.theme.Comment;
-                parserColorDictionary["CommentLine"] = Globals.theme.CommentLine;
-                parserColorDictionary["Number"] = Globals.theme.Number;
-                parserColorDictionary["Word"] = Globals.theme.Word;
-                parserColorDictionary["String"] = Globals.theme.String;
-                parserColorDictionary["Operator"] = Globals.theme.Operator;
-                parserColorDictionary["Preprocessor"] = Globals.theme.Preprocessor;
-                parserColorDictionary["Triple"] = Globals.theme.Triple;
-                parserColorDictionary["CommentBlock"] = Globals.theme.CommentBlock;
-                parserColorDictionary["Decorator"] = Globals.theme.Decorator;
-                parserColorDictionary["Attribute"] = Globals.theme.Attribute;
-                parserColorDictionary["Entity"] = Globals.theme.Entity;
-                parserColorDictionary["User1"] = Globals.theme.User1;
-                parserColorDictionary["User2"] = Globals.theme.User2;
-            }
-        }
-
-        public static void SetAutocompleteMenuKeywords(AutocompleteMenu autocompleteMenu, List<string> keywords)
+        public void SetAutocompleteMenuKeywords(AutocompleteMenu autocompleteMenu, List<string> keywords)
         {
             autocompleteMenu.AppearInterval = 1;
             autocompleteMenu.SetAutocompleteItems(keywords);
         }
 
-        public static void ConfigureLexer(LanguageDefinition languageDefinition, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
+        public void ConfigureLexer(LanguageDefinition languageDefinition, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
         {
-            if (!dictionaryInitialized)
-            {
-                InitializeParserDictionary();
-                dictionaryInitialized = true;
-            }
-
             Lexer lexer = (Lexer)Enum.Parse(typeof(Lexer), languageDefinition.Lexer);
             scintilla.Lexer = lexer;
 
@@ -182,7 +137,7 @@ namespace pie.Services
             SetDefaultStyles(scintilla, lexer);
         }
 
-        private static void SetDefaultStyles(Scintilla scintilla, Lexer lexer)
+        private void SetDefaultStyles(Scintilla scintilla, Lexer lexer)
         {
             if (lexer == Lexer.Cpp)
             {
@@ -214,7 +169,7 @@ namespace pie.Services
             }
         }
 
-        private static void EnableFolding(Scintilla scintilla)
+        private void EnableFolding(Scintilla scintilla)
         {
             // Enable folding
             scintilla.SetProperty("fold", "1");
@@ -241,7 +196,7 @@ namespace pie.Services
             scintilla.AutomaticFold = AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change;
         }
 
-        private static void AddCppStyles(Scintilla scintilla)
+        private void AddCppStyles(Scintilla scintilla)
         {
             scintilla.Styles[ScintillaNET.Style.Cpp.Default].ForeColor = parserColorDictionary["Default"];
             scintilla.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = parserColorDictionary["Comment"];
@@ -257,7 +212,7 @@ namespace pie.Services
             scintilla.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = parserColorDictionary["Preprocessor"];
         }
 
-        private static void AddJsonStyles(Scintilla scintilla)
+        private void AddJsonStyles(Scintilla scintilla)
         {
             scintilla.Styles[Style.Json.Default].ForeColor = parserColorDictionary["Default"];
             scintilla.Styles[Style.Json.Number].ForeColor = parserColorDictionary["Number"];
@@ -269,7 +224,7 @@ namespace pie.Services
             scintilla.Styles[Style.Json.Keyword].ForeColor = parserColorDictionary["Word"];
         }
 
-        private static void AddLuaStyles(Scintilla scintilla)
+        private void AddLuaStyles(Scintilla scintilla)
         {
             scintilla.Styles[Style.Lua.Default].ForeColor = parserColorDictionary["Default"];
             scintilla.Styles[Style.Lua.Comment].ForeColor = parserColorDictionary["Comment"];
@@ -284,7 +239,7 @@ namespace pie.Services
             scintilla.Styles[Style.Lua.Preprocessor].ForeColor = parserColorDictionary["Preprocessor"];
         }
 
-        private static void AddPythonStyles(Scintilla scintilla)
+        private void AddPythonStyles(Scintilla scintilla)
         {
             scintilla.Styles[Style.Python.Default].ForeColor = parserColorDictionary["Default"];
             scintilla.Styles[Style.Python.CommentLine].ForeColor = parserColorDictionary["CommentLine"];
@@ -309,7 +264,7 @@ namespace pie.Services
             scintilla.Styles[Style.Python.Decorator].ForeColor = parserColorDictionary["Decorator"];
         }
 
-        private static void AddXmlStyles(Scintilla scintilla)
+        private void AddXmlStyles(Scintilla scintilla)
         {
             scintilla.Styles[Style.Xml.Attribute].ForeColor = parserColorDictionary["Attribute"];
             scintilla.Styles[Style.Xml.Entity].ForeColor = parserColorDictionary["Entity"];
@@ -320,7 +275,7 @@ namespace pie.Services
             scintilla.Styles[Style.Xml.SingleString].ForeColor = parserColorDictionary["String"];
         }
 
-        private static void AddHtmlStyles(Scintilla scintilla)
+        private void AddHtmlStyles(Scintilla scintilla)
         {
             scintilla.Styles[Style.Html.Attribute].ForeColor = parserColorDictionary["Attribute"];
             scintilla.Styles[Style.Html.Entity].ForeColor = parserColorDictionary["Entity"];
@@ -331,7 +286,7 @@ namespace pie.Services
             scintilla.Styles[Style.Html.SingleString].ForeColor = parserColorDictionary["String"];
         }
 
-        private static void AddSqlStyles(Scintilla scintilla)
+        private void AddSqlStyles(Scintilla scintilla)
         {
             scintilla.Styles[Style.Sql.Comment].ForeColor = parserColorDictionary["Comment"];
             scintilla.Styles[Style.Sql.CommentLine].ForeColor = parserColorDictionary["CommentLine"];
@@ -345,7 +300,7 @@ namespace pie.Services
             scintilla.Styles[Style.Sql.Operator].ForeColor = parserColorDictionary["Operator"];
         }
 
-        public static void SetLexer(String extension, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
+        public void SetLexer(String extension, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
         {
             foreach(LanguageMapping languageMapping in Globals.languageMappings)
             {
@@ -363,7 +318,7 @@ namespace pie.Services
             }
         }
 
-        public static List<LanguageDefinition> LoadDefinitionsFromFolder(string directory)
+        public List<LanguageDefinition> LoadDefinitionsFromFolder(string directory)
         {
             List <LanguageDefinition> languageDefinitions = new List<LanguageDefinition>();
 
@@ -379,10 +334,10 @@ namespace pie.Services
 
                 foreach (string file in files)
                 {
-                    if (ParsingService.GetFileExtension(file) == "json")
+                    if (parsingService.GetFileExtension(file) == "json")
                     {
                         languageDefinition = new LanguageDefinition();
-                        languageDefinition.Name = ParsingService.RemoveFileExtension(ParsingService.GetFileName(file));
+                        languageDefinition.Name = parsingService.RemoveFileExtension(parsingService.GetFileName(file));
 
                         using (var textReader = File.OpenText(file))
                         {
