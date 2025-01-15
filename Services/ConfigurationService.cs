@@ -36,7 +36,9 @@ namespace pie.Services
 {
     public class ConfigurationService
     {
-        public static List<T> GetFromFile<T>(string file) where T : ConfigurationEntity, new()
+        private ParsingService parsingService = new ParsingService();
+
+        public List<T> GetFromFile<T>(string file) where T : ConfigurationEntity, new()
         {
             List<T> configurationEntities = new List<T>();
 
@@ -94,7 +96,7 @@ namespace pie.Services
             return configurationEntities;
         }
 
-        public static T GetSingleFromFile<T>(string file) where T : ConfigurationEntity, new()
+        public T GetSingleFromFile<T>(string file) where T : ConfigurationEntity, new()
         {
             T configurationEntity = new T();
 
@@ -144,7 +146,7 @@ namespace pie.Services
             return configurationEntity;
         }
 
-        public static void WriteToFile<T>(string file, T configurationEntity) where T : ConfigurationEntity, new()
+        public void WriteToFile<T>(string file, T configurationEntity) where T : ConfigurationEntity, new()
         {
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
 
@@ -170,7 +172,7 @@ namespace pie.Services
             }
         }
 
-        public static void WriteToFile<T>(string file, List<T> configurationEntities) where T : ConfigurationEntity, new()
+        public void WriteToFile<T>(string file, List<T> configurationEntities) where T : ConfigurationEntity, new()
         {
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
 
@@ -201,7 +203,7 @@ namespace pie.Services
             }
         }
 
-        public static List<T> LoadFromFolder<T>(string directory, string extension) where T : MultiFileConfigurationEntity, new()
+        public List<T> LoadFromFolder<T>(string directory, string extension) where T : MultiFileConfigurationEntity, new()
         {
             List<T> configurationList = new List<T>();
 
@@ -215,27 +217,27 @@ namespace pie.Services
 
                 foreach (string file in files)
                 {
-                    if (ParsingService.GetFileExtension(file) == extension)
+                    if (parsingService.GetFileExtension(file) == extension)
                     {
                         configurationList.Add(GetSingleFromFile<T>(file));
-                        configurationList[configurationList.Count - 1].Name = ParsingService.RemoveFileExtension(ParsingService.GetFileName(file));
+                        configurationList[configurationList.Count - 1].Name = parsingService.RemoveFileExtension(parsingService.GetFileName(file));
                     }
                 }
 
                 return configurationList;
             }
-            catch (DirectoryNotFoundException ex)
+            catch (DirectoryNotFoundException)
             {
                 return configurationList;
             }
         }
 
-        private static bool TokenIsValidProperty<T>(string token) where T : ConfigurationEntity, new()
+        private bool TokenIsValidProperty<T>(string token) where T : ConfigurationEntity, new()
         {
             return typeof(T).GetProperty(token.Substring(0, 1).ToUpper() + token.Substring(1)) != null;
         }
 
-        private static bool TokenTypeMatchesPropertyType<T>(JsonToken tokenType, string token) where T : ConfigurationEntity, new()
+        private bool TokenTypeMatchesPropertyType<T>(JsonToken tokenType, string token) where T : ConfigurationEntity, new()
         {
             PropertyInfo[] properties = typeof(T).GetProperties();
 
@@ -263,7 +265,7 @@ namespace pie.Services
             return false;
         }
 
-        private static PropertyInfo GetProperty<T>(string token) where T : ConfigurationEntity, new()
+        private PropertyInfo GetProperty<T>(string token) where T : ConfigurationEntity, new()
         {
             PropertyInfo[] properties = typeof(T).GetProperties();
 
@@ -278,7 +280,7 @@ namespace pie.Services
             return null;
         }
 
-        private static void MapConfigurationEntityPropertyToTokenValue(ConfigurationEntity configurationEntity, PropertyInfo propertyInfo, JsonTextReader jsonTextReader)
+        private void MapConfigurationEntityPropertyToTokenValue(ConfigurationEntity configurationEntity, PropertyInfo propertyInfo, JsonTextReader jsonTextReader)
         {
             // Treat special cases
             if (propertyInfo.PropertyType == typeof(Color))
@@ -301,7 +303,7 @@ namespace pie.Services
             }
         }
 
-        private static bool AllPropertiesAreFilled<T>(T configurationEntity) where T : ConfigurationEntity, new()
+        private bool AllPropertiesAreFilled<T>(T configurationEntity) where T : ConfigurationEntity, new()
         {
             PropertyInfo[] properties = typeof(T).GetProperties();
 
@@ -316,7 +318,7 @@ namespace pie.Services
             return true;
         }
 
-        public static void WriteFilesToDirectory<T>(string directory, List<T> items) where T : MultiFileConfigurationEntity, new()
+        public void WriteFilesToDirectory<T>(string directory, List<T> items) where T : MultiFileConfigurationEntity, new()
         {
             DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + directory);
 
@@ -336,7 +338,7 @@ namespace pie.Services
             }
         }
 
-        private static string ExtractRGBFromColor(Color color)
+        private string ExtractRGBFromColor(Color color)
         {
             return color.R + ", " + color.G + ", " + color.B;
         }

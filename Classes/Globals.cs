@@ -42,7 +42,7 @@ namespace pie
     public class Globals
     {
         // General
-        public static List<TabInfo> tabInfos;
+        public static List<TabInfo> tabInfos = new List<TabInfo>();
         public static int lastSelectedTabIndex;
         public static int maxLineNumberCharLength;
         public static bool closeAfterApplyingChanges;
@@ -61,7 +61,7 @@ namespace pie
 
         // Build Commands
         public static List<BuildCommand> buildCommands;
-        public static List<ToolStripMenuItem> buildCommandToolStripMenuItems;
+        public static List<ToolStripMenuItem> buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
         public static string addBuildCommandName;
         public static string addBuildCommandCmd;
         public static int buildCommandEditIndex = -1;
@@ -75,7 +75,7 @@ namespace pie
         // Git
         public static Repository repo;
         public static Branch selectedBranch;
-        public static GitCredentials gitCredentials;
+        public static GitCredentials gitCredentials = new GitCredentials();
         public static bool gitTabOpened;
         public static bool gitFormClosedWithOk;
         public static string clonePath;

@@ -34,6 +34,8 @@ namespace pie
 {
     public partial class BuildCommandsForm : KryptonForm
     {
+        private ConfigurationService configurationService = new ConfigurationService();
+
         List<BuildCommand> tempCommands;
 
         public BuildCommandsForm()
@@ -149,7 +151,7 @@ namespace pie
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            ConfigurationService.WriteToFile("config/build.json", tempCommands);
+            configurationService.WriteToFile("config/build.json", tempCommands);
 
             Globals.closeAfterApplyingChanges = true;
 

@@ -36,6 +36,8 @@ namespace pie.Forms.Theme
 {
     public partial class DesignerForm : KryptonForm
     {
+        private ConfigurationService configurationService = new ConfigurationService();
+
         private ThemeInfo themeInfoToEdit;
 
         public DesignerForm()
@@ -184,7 +186,7 @@ namespace pie.Forms.Theme
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            ConfigurationService.WriteFilesToDirectory("config/themes", Globals.themeInfos);
+            configurationService.WriteFilesToDirectory("config/themes", Globals.themeInfos);
             this.Close();
         }
 

@@ -25,7 +25,7 @@ namespace pie.Services
 {
     public class ParsingService
     {
-        public static string GetFolderName(string path)
+        public string GetFolderName(string path)
         {
             if (path == null)
             {
@@ -53,7 +53,7 @@ namespace pie.Services
             }
         }
 
-        public static string GetFileName(string path)
+        public string GetFileName(string path)
         {
             if (path == null)
             {
@@ -81,7 +81,7 @@ namespace pie.Services
             }
         }
 
-        public static string RemoveFileExtension(string path)
+        public string RemoveFileExtension(string path)
         {
             if (path == null)
             {
@@ -110,22 +110,22 @@ namespace pie.Services
             }
         }
 
-        public static string GetFileExtension(string fileName)
+        public string GetFileExtension(string fileName)
         {
             return fileName.Substring(fileName.LastIndexOf('.')+1);
         }
 
-        public static Color IntToColor(int rgb)
+        public Color IntToColor(int rgb)
         {
             return Color.FromArgb(255, (byte)(rgb >> 16), (byte)(rgb >> 8), (byte)rgb);
         }
 
-        public static string GetContentFromFile(string path)
+        public string GetContentFromFile(string path)
         {
             return File.ReadAllText(path);
         }
 
-        public static string GoBackInFilePath(string path)
+        public string GoBackInFilePath(string path)
         {
             if (path[path.Length - 1] == '\\')
             {

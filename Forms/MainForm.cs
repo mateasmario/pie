@@ -103,6 +103,13 @@ namespace pie
 {
     public partial class MainForm : KryptonForm
     {
+        private ConfigurationService configurationService = new ConfigurationService();
+        private ThemeService themeService = new ThemeService();
+        private ParsingService parsingService = new ParsingService();
+        private UpdateService updateService = new UpdateService();
+        private ScintillaLexerService scintillaLexerService = new ScintillaLexerService();
+        private FormattingService formattingService = new FormattingService();
+
         public string[] Args;
 
         const int WM_CONTEXTMENU = 0x007B;
@@ -132,61 +139,271 @@ namespace pie
         }
 
 
-        // [Constructor] Field initializations occur here 
         public MainForm()
         {
             InitializeComponent();
-            InitializeGlobals();
             GetConfigurationDataFromFiles();
             SetDynamicDesign();
             ProcessCommandLineArguments();
         }
 
-        // [Method] Sets global helper variables to their initial value (to avoid null-related exceptions)
-        private void InitializeGlobals()
+        private void GetConfigurationDataFromFiles()
         {
-            Globals.tabInfos = new List<TabInfo>();
-            Globals.gitCredentials = new GitCredentials();
-            Globals.buildCommands = null;
-            Globals.buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
-            Globals.firstBrowserTab = true;
-            Globals.databases = null;
+            ProcessGitCredentials();
+            ProcessThemes();
+            ProcessEditorProperties();
+            ProcessBuildCommands();
+            ProcessDatabaseConnections();
+            ProcessLanguageMappings();
+            ProcessLanguageDefinitions();
         }
 
-        // [Methods] Creates an instance of the visible code editor with the default configurations
-        // Additional: This instance will be added to a tabpage in another method
-        public Scintilla CreateNewTextArea()
+        private void ProcessGitCredentials()
         {
-            Scintilla TextArea = new Scintilla();
-            TextArea.KeyDown += keyDownEvents;
-            TextArea.KeyPress += TextArea_KeyPress;
-            TextArea.MouseDown += TextArea_MouseDown;
-            TextArea.TextChanged += TextArea_TextChanged;
-            TextArea.UpdateUI += TextArea_UpdateUI;
-            TextArea.IndentationGuides = IndentView.LookBoth;
-            TextArea.ZoomChanged += TextArea_ZoomChanged;
-
-            if (Globals.wordwrap)
+            try
             {
-                TextArea.WrapMode = WrapMode.Word;
+                Globals.gitCredentials = configurationService.GetFromFile<GitCredentials>("config/git.json")[0];
+            }
+            catch (FileNotFoundException)
+            {
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/git.json", "{}");
+            }
+        }
+
+        private void ProcessThemes()
+        {
+            try
+            {
+                ProcessCustomThemes();
+                SelectedTheme selectedTheme = configurationService.GetSingleFromFile<SelectedTheme>("config/theme.json");
+
+                if (selectedTheme.Name == "Dark")
+                {
+                    Globals.theme = ThemeService.darkTheme;
+                }
+                else if (selectedTheme.Name == "Light")
+                {
+                    Globals.theme = ThemeService.lightTheme;
+                }
+                else
+                {
+                    foreach (ThemeInfo t in Globals.themeInfos)
+                    {
+                        if (t.Name == selectedTheme.Name)
+                        {
+                            Globals.theme = t;
+                        }
+                    }
+                }
+
+                ScintillaLexerService.ResetDictionary();
+            }
+            catch (FileNotFoundException)
+            {
+                Globals.theme = ThemeService.lightTheme;
+                configurationService.WriteToFile("config/theme.json", new SelectedTheme("light"));
+            }
+        }
+
+        private void ProcessCustomThemes()
+        {
+            if (themeSettingsToolStripMenuItem.DropDownItems.Count > 2)
+            {
+                int removeCount = themeSettingsToolStripMenuItem.DropDownItems.Count - 2;
+
+                while (removeCount > 0)
+                {
+                    themeSettingsToolStripMenuItem.DropDownItems.RemoveAt(2);
+                    removeCount--;
+                }
+            }
+
+
+            Globals.themeInfos = configurationService.LoadFromFolder<ThemeInfo>("config/themes", "json");
+
+            foreach (ThemeInfo themeInfo in Globals.themeInfos)
+            {
+                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
+                toolStripMenuItem.Text = themeInfo.Name;
+
+                toolStripMenuItem.Click += ToolStripMenuItem_Click1;
+
+                themeSettingsToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
+            }
+        }
+
+        public void ChangeTheme(ThemeInfo theme)
+        {
+            ControlHelper.SuspendDrawing(this);
+
+            Globals.theme = theme;
+
+            configurationService.WriteToFile("config/theme.json", new SelectedTheme(theme.Name));
+
+            for (int i = 0; i < tabControl.Pages.Count; i++)
+            {
+                if (Globals.tabInfos[i].getTabType() == TabType.CODE)
+                {
+                    KryptonPage kryptonPage = tabControl.Pages[i];
+                    Scintilla scintilla = (Scintilla)kryptonPage.Controls[0];
+
+                    ScintillaLexerService.ResetDictionary();
+
+                    if (Globals.tabInfos[i].getOpenedFilePath() != null)
+                    {
+                        string extension = parsingService.GetFileExtension(Globals.tabInfos[i].getOpenedFilePath());
+                        themeService.ColorizeTextArea(scintilla, Globals.theme);
+                        ColorizeAutocompleteMenu(Globals.tabInfos[i].getAutocompleteMenu());
+                        scintillaLexerService.SetLexer(extension, scintilla, tabControl, i);
+                        UpdateNumberMarginWidth(scintilla, true);
+                    }
+                    else
+                    {
+                        themeService.ColorizeTextArea(scintilla, Globals.theme);
+                    }
+                }
+            }
+
+            themeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
+            SynchronizeMainFormComponentsWithTheme();
+
+            if (directoryNavigationTextBox.Text != "")
+            {
+                NavigateToPath(directoryNavigationTextBox.Text);
+            }
+
+            Globals.doNotShowBranchChangeNotification = true;
+            Globals.doNotTriggerBranchChangeEvent = true;
+            UpdateGitRepositoryInfo();
+            Globals.doNotShowBranchChangeNotification = false;
+            Globals.doNotTriggerBranchChangeEvent = false;
+
+            ControlHelper.ResumeDrawing(this);
+            this.RedrawNonClient();
+        }
+
+        private void ProcessEditorProperties()
+        {
+            try
+            {
+                EditorPropertiesService.GetEditorPropertiesFromFile("config/scintilla.json");
+
+                if (Globals.wordwrap)
+                {
+                    wordWrapToolStripMenuItem.Text = "Disable Word Wrap";
+                }
+
+                if (Globals.autosave)
+                {
+                    enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
+                }
+
+                if (Globals.glass)
+                {
+                    glassModeToolStripMenuItem.Text = "Disable Glass Effect";
+                }
+
+            }
+            catch (FileNotFoundException ex)
+            {
+                EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", false, false, false);
+            }
+
+            try
+            {
+                Globals.customFormatters = formattingService.LoadCustomFormattersFromFolder("formatters");
+            }
+            catch (IncorrectPublicMethodArgumentNumberException ex)
+            {
+                ShowNotification("Public method needs to have a single parameter.");
+            }
+            catch (IncorrectPublicMethodArgumentTypeException ex)
+            {
+                ShowNotification("Public method argument type needs to be string.");
+            }
+            catch (IncorrectPublicMethodCountException ex)
+            {
+                ShowNotification("Formatter class needs to have a single public method.");
+            }
+            catch (IncorrectPublicMethodNameException ex)
+            {
+                ShowNotification("Public method name needs to be 'format'.");
+            }
+            catch (IncorrectPublicMethodReturnTypeException ex)
+            {
+                ShowNotification("Public method return type needs to be string.");
+            }
+        }
+
+        private void SetDynamicDesign()
+        {
+            Globals.kryptonPalette = kryptonPalette;
+
+            this.MinimumSize = new System.Drawing.Size(1036, 634);
+
+            mainMenuStrip.Renderer = new CustomToolStripRenderer(new CustomColorTable());
+
+            ResetFindPanelLocation();
+            ResetDirectoryPanelLocation();
+            findReplaceHeaderGroup.Visible = false;
+            ToggleDirectoryNavigator(false);
+
+            gitStagingAreaListView.ShowGroups = false;
+
+            gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
+
+            themeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
+            SynchronizeMainFormComponentsWithTheme();
+
+            this.Palette = kryptonPalette;
+            tabControl.Palette = kryptonPalette;
+            terminalTabControl.Palette = kryptonPalette;
+            findReplaceHeaderGroup.Palette = kryptonPalette;
+            directoryNavigationHeaderGroup.Palette = kryptonPalette;
+            codeContextMenu.Palette = kryptonPalette;
+            terminalContextMenu.Palette = kryptonPalette;
+            renderContextMenu.Palette = kryptonPalette;
+            gitContextMenu.Palette = kryptonPalette;
+            kryptonLabel1.Palette = kryptonPalette;
+            findTextBox.Palette = kryptonPalette;
+            replaceTextBox.Palette = kryptonPalette;
+            kryptonButton1.Palette = kryptonPalette;
+            kryptonButton2.Palette = kryptonPalette;
+            kryptonButton3.Palette = kryptonPalette;
+
+            terminalTabControl.Hide();
+            gitPanel.Hide();
+
+            tabControl.AllowPageDrag = false;
+            tabControl.AllowPageReorder = false;
+
+            replaceTextBox.KeyDown += ReplaceTextBox_KeyDown;
+        }
+
+        private void ProcessCommandLineArguments()
+        {
+            string[] args = Environment.GetCommandLineArgs();
+
+            if (args.Length == 2)
+            {
+                string path = args[1];
+
+                if (File.Exists(path))
+                {
+                    Open(path);
+                }
+                else
+                {
+                    ShowNotification("pie could not open " + path + ". Are you sure the file exists?");
+                    Application.Exit();
+                    return;
+                }
             }
             else
             {
-                TextArea.WrapMode = WrapMode.None;
+                NewTab(TabType.CODE, null);
             }
-
-            TextArea.UsePopup(false);
-
-            ThemeService.ColorizeTextArea(TextArea, Globals.theme);
-
-            TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
-            TextArea.InsertCheck += TextArea_InsertCheck;
-
-            TextArea.Dock = DockStyle.Fill;
-
-            return TextArea;
         }
-
 
         // [Event] Used for automatic indentation in a Scintilla instance
         private void TextArea_InsertCheck(object sender, InsertCheckEventArgs e)
@@ -389,7 +606,7 @@ namespace pie
 
         private void FileActionsItem2_Click(object sender, EventArgs e)
         {
-            string path = ParsingService.GoBackInFilePath(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+            string path = parsingService.GoBackInFilePath(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
             Process.Start(path);
         }
 
@@ -595,7 +812,7 @@ namespace pie
                 ToggleFindReplacePanel(false);
                 ToggleDirectoryNavigator(false);
 
-                kryptonPage.Text = ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+                kryptonPage.Text = parsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                 kryptonPage.ToolTipTitle = Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
 
                 ChromiumWebBrowser chromiumWebBrowser = new ChromiumWebBrowser();
@@ -643,6 +860,38 @@ namespace pie
             {
                 UpdateFormTitle(tabControl.SelectedIndex);
             }
+        }
+
+        private Scintilla CreateNewTextArea()
+        {
+            Scintilla TextArea = new Scintilla();
+            TextArea.KeyDown += keyDownEvents;
+            TextArea.KeyPress += TextArea_KeyPress;
+            TextArea.MouseDown += TextArea_MouseDown;
+            TextArea.TextChanged += TextArea_TextChanged;
+            TextArea.UpdateUI += TextArea_UpdateUI;
+            TextArea.IndentationGuides = IndentView.LookBoth;
+            TextArea.ZoomChanged += TextArea_ZoomChanged;
+
+            if (Globals.wordwrap)
+            {
+                TextArea.WrapMode = WrapMode.Word;
+            }
+            else
+            {
+                TextArea.WrapMode = WrapMode.None;
+            }
+
+            TextArea.UsePopup(false);
+
+            themeService.ColorizeTextArea(TextArea, Globals.theme);
+
+            TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
+            TextArea.InsertCheck += TextArea_InsertCheck;
+
+            TextArea.Dock = DockStyle.Fill;
+
+            return TextArea;
         }
 
         private void ChromiumWebBrowser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
@@ -769,7 +1018,7 @@ namespace pie
             if (tabControl.SelectedIndex >= 0 && tabControl.SelectedIndex < Globals.tabInfos.Count && Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
             {
                 DeactivateBuildAndRunOptions();
-                ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+                ActivateSpecificBuildAndRunOptions(parsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
             }
 
             if (tabControl.Pages.Count <= 0)
@@ -807,10 +1056,10 @@ namespace pie
                 txt.Write(TextArea.Text);
                 txt.Close();
 
-                tabControl.Pages[openedTabIndex].Text = ParsingService.GetFileName(chosenPath);
+                tabControl.Pages[openedTabIndex].Text = parsingService.GetFileName(chosenPath);
 
-                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[openedTabIndex].getOpenedFilePath()));
-                ScintillaLexerService.SetLexer(extension, TextArea, tabControl, openedTabIndex);
+                string extension = parsingService.GetFileExtension(parsingService.GetFileName(Globals.tabInfos[openedTabIndex].getOpenedFilePath()));
+                scintillaLexerService.SetLexer(extension, TextArea, tabControl, openedTabIndex);
                 UpdateFormTitle(tabControl.SelectedIndex);
                 Globals.tabInfos[openedTabIndex].setOpenedFileChanges(false);
             }
@@ -819,7 +1068,7 @@ namespace pie
 
             if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
             {
-                ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+                ActivateSpecificBuildAndRunOptions(parsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
             }
         }
 
@@ -843,11 +1092,11 @@ namespace pie
                 txt.Close();
 
                 Globals.tabInfos[selectedIndex].setOpenedFilePath(chosenPath);
-                tabControl.Pages[selectedIndex].Text = ParsingService.GetFileName(chosenPath);
+                tabControl.Pages[selectedIndex].Text = parsingService.GetFileName(chosenPath);
                 tabControl.Pages[selectedIndex].ToolTipTitle = chosenPath;
 
-                string extension = ParsingService.GetFileExtension(ParsingService.GetFileName(Globals.tabInfos[selectedIndex].getOpenedFilePath()));
-                ScintillaLexerService.SetLexer(extension, TextArea, tabControl, selectedIndex);
+                string extension = parsingService.GetFileExtension(parsingService.GetFileName(Globals.tabInfos[selectedIndex].getOpenedFilePath()));
+                scintillaLexerService.SetLexer(extension, TextArea, tabControl, selectedIndex);
                 UpdateFormTitle(selectedIndex);
                 Globals.tabInfos[selectedIndex].setOpenedFileChanges(false);
             }
@@ -878,15 +1127,15 @@ namespace pie
             TextArea.Text = fileContent;
 
             Globals.tabInfos[openedTabIndex].setOpenedFilePath(fileName);
-            tabControl.SelectedPage.Text = ParsingService.GetFileName(fileName);
+            tabControl.SelectedPage.Text = parsingService.GetFileName(fileName);
             tabControl.SelectedPage.ToolTipTitle = fileName;
 
-            string extension = ParsingService.GetFileExtension(fileName);
+            string extension = parsingService.GetFileExtension(fileName);
 
-            ScintillaLexerService.SetLexer(extension, TextArea, tabControl, tabControl.SelectedIndex);
+            scintillaLexerService.SetLexer(extension, TextArea, tabControl, tabControl.SelectedIndex);
 
             DeactivateBuildAndRunOptions();
-            ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+            ActivateSpecificBuildAndRunOptions(parsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
             UpdateFormTitle(tabControl.SelectedIndex);
 
             if (tabControl.Pages.Count >= 1)
@@ -931,7 +1180,7 @@ namespace pie
 
             if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
             {
-                conEmuStartInfo.StartupDirectory = ParsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+                conEmuStartInfo.StartupDirectory = parsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
             }
 
             ConEmuSession conEmuSession = conEmuControl.Start(conEmuStartInfo);
@@ -1153,7 +1402,7 @@ namespace pie
 
                 if (type == "Java Class (.class)")
                 {
-                    string className = ParsingService.GetFileName(ParsingService.RemoveFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+                    string className = parsingService.GetFileName(parsingService.RemoveFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
 
                     process = "java " + className;
                 }
@@ -1167,7 +1416,7 @@ namespace pie
                 }
                 else if (type == "Render HTML (.html)")
                 {
-                    if (ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "html")
+                    if (parsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "html")
                     {
                         NewTab(TabType.RENDER_HTML, Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                     }
@@ -1184,7 +1433,7 @@ namespace pie
 
                     Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
 
-                    if (ParsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "md")
+                    if (parsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "md")
                     {
                         NewTab(TabType.RENDER_MD, Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                     }
@@ -1206,7 +1455,7 @@ namespace pie
 
         private string ConvertMarkdownToHtml(string path)
         {
-            string content = ParsingService.GetContentFromFile(path);
+            string content = parsingService.GetContentFromFile(path);
 
             var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
             string result = Markdown.ToHtml(content, pipeline);
@@ -1295,7 +1544,7 @@ namespace pie
 
             try
             {
-                Globals.buildCommands = ConfigurationService.GetFromFile<BuildCommand>("config/build.json");
+                Globals.buildCommands = configurationService.GetFromFile<BuildCommand>("config/build.json");
 
                 foreach (BuildCommand buildCommand in Globals.buildCommands)
                 {
@@ -1329,7 +1578,7 @@ namespace pie
         {
             try
             {
-                Globals.languageMappings = ConfigurationService.GetFromFile<LanguageMapping>("config/mappings.json");
+                Globals.languageMappings = configurationService.GetFromFile<LanguageMapping>("config/mappings.json");
             }
             catch (FileNotFoundException ex)
             {
@@ -1343,174 +1592,7 @@ namespace pie
 
         private void ProcessLanguageDefinitions()
         {
-            Globals.languageDefinitions = ScintillaLexerService.LoadDefinitionsFromFolder(AppDomain.CurrentDomain.BaseDirectory + "config/languages");
-        }
-
-        private void GetConfigurationDataFromFiles()
-        {
-            try
-            {
-                Globals.gitCredentials = ConfigurationService.GetFromFile<GitCredentials>("config/git.json")[0];
-            }
-            catch (FileNotFoundException)
-            {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/git.json", "{}");
-            }
-
-            try
-            {
-                ProcessCustomThemes();
-                SelectedTheme selectedTheme = ConfigurationService.GetSingleFromFile<SelectedTheme>("config/theme.json");
-
-                if (selectedTheme.Name == "Dark")
-                {
-                    Globals.theme = ThemeService.darkTheme;
-                }
-                else if (selectedTheme.Name == "Light")
-                {
-                    Globals.theme = ThemeService.lightTheme;
-                }
-                else
-                {
-                    foreach (ThemeInfo t in Globals.themeInfos)
-                    {
-                        if (t.Name == selectedTheme.Name)
-                        {
-                            Globals.theme = t;
-                        }
-                    }
-                }
-            }
-            catch (FileNotFoundException)
-            {
-                Globals.theme = ThemeService.lightTheme;
-                ConfigurationService.WriteToFile("config/theme.json", new SelectedTheme("light"));
-            }
-
-            try
-            {
-                EditorPropertiesService.GetEditorPropertiesFromFile("config/scintilla.json");
-
-                if (Globals.wordwrap)
-                {
-                    wordWrapToolStripMenuItem.Text = "Disable Word Wrap";
-                }
-
-                if (Globals.autosave)
-                {
-                    enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
-                }
-
-                if (Globals.glass)
-                {
-                    glassModeToolStripMenuItem.Text = "Disable Glass Effect";
-                }
-
-            }
-            catch (FileNotFoundException ex)
-            {
-                EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", false, false, false);
-            }
-
-            try
-            {
-                Globals.customFormatters = FormattingService.LoadCustomFormattersFromFolder("formatters");
-            }
-            catch(IncorrectPublicMethodArgumentNumberException ex)
-            {
-                ShowNotification("Public method needs to have a single parameter.");
-            }
-            catch(IncorrectPublicMethodArgumentTypeException ex)
-            {
-                ShowNotification("Public method argument type needs to be string.");
-            }
-            catch(IncorrectPublicMethodCountException ex)
-            {
-                ShowNotification("Formatter class needs to have a single public method.");
-            }
-            catch(IncorrectPublicMethodNameException ex)
-            {
-                ShowNotification("Public method name needs to be 'format'.");
-            }
-            catch(IncorrectPublicMethodReturnTypeException ex)
-            {
-                ShowNotification("Public method return type needs to be string.");
-            }
-
-            ProcessBuildCommands();
-            ProcessDatabaseConnections();
-            ProcessLanguageMappings();
-            ProcessLanguageDefinitions();
-        }
-
-        private void SetDynamicDesign()
-        {
-            Globals.kryptonPalette = kryptonPalette;
-
-            this.MinimumSize = new System.Drawing.Size(1036, 634);
-
-            mainMenuStrip.Renderer = new CustomToolStripRenderer(new CustomColorTable());
-
-            ResetFindPanelLocation();
-            ResetDirectoryPanelLocation();
-            findReplaceHeaderGroup.Visible = false;
-            ToggleDirectoryNavigator(false);
-
-            gitStagingAreaListView.ShowGroups = false;
-
-            gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
-
-            ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
-            SynchronizeMainFormComponentsWithTheme();
-
-            this.Palette = kryptonPalette;
-            tabControl.Palette = kryptonPalette;
-            terminalTabControl.Palette = kryptonPalette;
-            findReplaceHeaderGroup.Palette = kryptonPalette;
-            directoryNavigationHeaderGroup.Palette = kryptonPalette;
-            codeContextMenu.Palette = kryptonPalette;
-            terminalContextMenu.Palette = kryptonPalette;
-            renderContextMenu.Palette = kryptonPalette;
-            gitContextMenu.Palette = kryptonPalette;
-            kryptonLabel1.Palette = kryptonPalette;
-            findTextBox.Palette = kryptonPalette;
-            replaceTextBox.Palette = kryptonPalette;
-            kryptonButton1.Palette = kryptonPalette;
-            kryptonButton2.Palette = kryptonPalette;
-            kryptonButton3.Palette = kryptonPalette;
-
-            terminalTabControl.Hide();
-            gitPanel.Hide();
-
-            tabControl.AllowPageDrag = false;
-            tabControl.AllowPageReorder = false;
-
-            replaceTextBox.KeyDown += ReplaceTextBox_KeyDown;
-        }
-
-        private void ProcessCommandLineArguments()
-        {
-            string[] args = Environment.GetCommandLineArgs();
-
-            if (args.Length == 2)
-            {
-                string path = args[1];
-
-                if (File.Exists(path))
-                {
-                    Open(path);
-                }
-                else
-                {
-                    ShowNotification("pie could not open " + path + ". Are you sure the file exists?");
-                    Application.Exit();
-                    return;
-                }
-            }
-            else
-            {
-                NewTab(TabType.CODE, null);
-            }
+            Globals.languageDefinitions = scintillaLexerService.LoadDefinitionsFromFolder(AppDomain.CurrentDomain.BaseDirectory + "config/languages");
         }
 
         // [Event] Form Loading
@@ -1523,7 +1605,7 @@ namespace pie
 
             try
             {
-                UpdateStatus updateStatus = UpdateService.GetUpdateStatus();
+                UpdateStatus updateStatus = updateService.GetUpdateStatus();
 
                 if (updateStatus.NeedsUpdate)
                 {
@@ -1581,7 +1663,7 @@ namespace pie
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "cmd.exe";
-            string scriptName = ParsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+            string scriptName = parsingService.GetFileName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
             string command = (string)((ToolStripMenuItem)sender).Tag;
             command = command.Replace("$FILE", scriptName);
 
@@ -1708,7 +1790,7 @@ namespace pie
                                 }
                                 else
                                 {
-                                    NavigateToPath(ParsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
+                                    NavigateToPath(parsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
                                 }
                             }
                         }
@@ -1899,7 +1981,7 @@ namespace pie
             {
                 if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
                 {
-                    NavigateToPath(ParsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+                    NavigateToPath(parsingService.GetFolderName(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
                 }
                 else
                 {
@@ -1985,7 +2067,7 @@ namespace pie
                     DeactivateBuildAndRunOptions();
                     if (tabControl.SelectedIndex != -1 && Globals.tabInfos[indexToMoveTo].getOpenedFilePath() != null)
                     {
-                        ActivateSpecificBuildAndRunOptions(ParsingService.GetFileExtension(Globals.tabInfos[indexToMoveTo].getOpenedFilePath()));
+                        ActivateSpecificBuildAndRunOptions(parsingService.GetFileExtension(Globals.tabInfos[indexToMoveTo].getOpenedFilePath()));
                         UpdateFormTitle(indexToMoveTo);
                     }
                     else
@@ -2521,7 +2603,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                            configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                             GitCommit(items);
                         }
                     }
@@ -2654,7 +2736,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                            configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                             GitPush();
                         }
                     }
@@ -2798,7 +2880,7 @@ namespace pie
 
             if (Globals.gitFormClosedWithOk)
             {
-                ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
             }
         }
 
@@ -2810,7 +2892,7 @@ namespace pie
 
             if (Globals.gitFormClosedWithOk)
             {
-                ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials } );
+                configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials } );
             }
         }
 
@@ -2842,7 +2924,7 @@ namespace pie
 
                     if (Globals.gitFormClosedWithOk)
                     {
-                        ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                        configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                         GitPull();
                     }
                 }
@@ -2856,7 +2938,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                            configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                             GitPull();
                         }
                     }
@@ -3160,7 +3242,7 @@ namespace pie
         {
             try
             {
-                Globals.databases = ConfigurationService.GetFromFile<DatabaseConnection>("config/databases.json");
+                Globals.databases = configurationService.GetFromFile<DatabaseConnection>("config/databases.json");
             }
             catch (FileNotFoundException ex)
             {
@@ -3177,86 +3259,9 @@ namespace pie
             ChangeTheme(ThemeService.lightTheme);
         }
 
-        public void ChangeTheme(ThemeInfo theme)
-        {
-            ControlHelper.SuspendDrawing(this);
-
-            Globals.theme = theme;
-
-            ConfigurationService.WriteToFile("config/theme.json", new SelectedTheme(theme.Name));
-
-            for (int i = 0; i < tabControl.Pages.Count; i++)
-            {
-                if (Globals.tabInfos[i].getTabType() == TabType.CODE)
-                {
-                    KryptonPage kryptonPage = tabControl.Pages[i];
-                    Scintilla scintilla = (Scintilla)kryptonPage.Controls[0];
-
-                    ScintillaLexerService.InitializeParserDictionary();
-
-                    if (Globals.tabInfos[i].getOpenedFilePath() != null)
-                    {
-                        string extension = ParsingService.GetFileExtension(Globals.tabInfos[i].getOpenedFilePath());
-                        ThemeService.ColorizeTextArea(scintilla, Globals.theme);
-                        ColorizeAutocompleteMenu(Globals.tabInfos[i].getAutocompleteMenu());
-                        ScintillaLexerService.SetLexer(extension, scintilla, tabControl, i);
-                        UpdateNumberMarginWidth(scintilla, true);
-                    }
-                    else
-                    {
-                        ThemeService.ColorizeTextArea(scintilla, Globals.theme);
-                    }
-                }
-            }
-
-            ThemeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
-            SynchronizeMainFormComponentsWithTheme();
-
-            if (directoryNavigationTextBox.Text != "")
-            {
-                NavigateToPath(directoryNavigationTextBox.Text);
-            }
-
-            Globals.doNotShowBranchChangeNotification = true;
-            Globals.doNotTriggerBranchChangeEvent = true;
-            UpdateGitRepositoryInfo();
-            Globals.doNotShowBranchChangeNotification = false;
-            Globals.doNotTriggerBranchChangeEvent = false;
-
-            ControlHelper.ResumeDrawing(this);
-            this.RedrawNonClient();
-        }
-
         private void darkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChangeTheme(ThemeService.darkTheme);
-        }
-
-        private void ProcessCustomThemes()
-        {
-            if (themeSettingsToolStripMenuItem.DropDownItems.Count > 2)
-            {
-                int removeCount = themeSettingsToolStripMenuItem.DropDownItems.Count - 2;
-
-                while (removeCount > 0)
-                {
-                    themeSettingsToolStripMenuItem.DropDownItems.RemoveAt(2);
-                    removeCount--;
-                }
-            }
-
-
-            Globals.themeInfos = ConfigurationService.LoadFromFolder<ThemeInfo>("config/themes", "json");
-
-            foreach (ThemeInfo themeInfo in Globals.themeInfos)
-            {
-                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
-                toolStripMenuItem.Text = themeInfo.Name;
-
-                toolStripMenuItem.Click += ToolStripMenuItem_Click1;
-
-                themeSettingsToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
-            }
         }
 
         private void ToolStripMenuItem_Click1(object sender, EventArgs e)
@@ -3330,7 +3335,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.DuplicateLines(scintilla.Text);
+            string result = formattingService.DuplicateLines(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3342,7 +3347,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
+            string result = formattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3354,7 +3359,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.CapitalizeFirstCharacterFromEveryLine(scintilla.Text);
+            string result = formattingService.CapitalizeFirstCharacterFromEveryLine(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3366,7 +3371,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.RemoveEmptyLines(scintilla.Text);
+            string result = formattingService.RemoveEmptyLines(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3378,7 +3383,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.RemoveWhitespaceLines(scintilla.Text);
+            string result = formattingService.RemoveWhitespaceLines(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3390,7 +3395,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.RemoveDuplicateLines(scintilla.Text);
+            string result = formattingService.RemoveDuplicateLines(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3402,7 +3407,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.RemoveConsecutiveDuplicates(scintilla.Text);
+            string result = formattingService.RemoveConsecutiveDuplicates(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3414,7 +3419,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.TrimLines(scintilla.Text);
+            string result = formattingService.TrimLines(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3426,7 +3431,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.CapitalizeEveryWord(scintilla.Text);
+            string result = formattingService.CapitalizeEveryWord(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3439,7 +3444,7 @@ namespace pie
 
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.ConvertTextToUppercase(scintilla.Text);
+            string result = formattingService.ConvertTextToUppercase(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3451,7 +3456,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.ConvertTextToLowercase(scintilla.Text);
+            string result = formattingService.ConvertTextToLowercase(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3463,7 +3468,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.SwitchLowercaseWithUppercase(scintilla.Text);
+            string result = formattingService.SwitchLowercaseWithUppercase(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3475,7 +3480,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.RemoveAllWhitespaces(scintilla.Text);
+            string result = formattingService.RemoveAllWhitespaces(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3487,7 +3492,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.RemoveAllConsecutiveWhitespaces(scintilla.Text);
+            string result = formattingService.RemoveAllConsecutiveWhitespaces(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3499,7 +3504,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.SortLines(scintilla.Text);
+            string result = formattingService.SortLines(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3511,7 +3516,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.SortLines(scintilla.Text, false);
+            string result = formattingService.SortLines(scintilla.Text, false);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3523,7 +3528,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.ReverseLineOrder(scintilla.Text);
+            string result = formattingService.ReverseLineOrder(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3535,7 +3540,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.ConvertNewlineToComma(scintilla.Text);
+            string result = formattingService.ConvertNewlineToComma(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3547,7 +3552,7 @@ namespace pie
             Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
             int currPos = scintilla.CurrentPosition;
 
-            string result = FormattingService.ConvertNewlineToSpace(scintilla.Text);
+            string result = formattingService.ConvertNewlineToSpace(scintilla.Text);
             scintilla.Text = result;
 
             scintilla.SelectionStart = currPos;
@@ -3575,61 +3580,61 @@ namespace pie
                     switch (Globals.chosenFormatOption.FormatOptionName)
                     {
                         case "LineDuplicate":
-                            result = FormattingService.DuplicateLines(scintilla.Text);
+                            result = formattingService.DuplicateLines(scintilla.Text);
                             break;
                         case "LineAddEmpty":
-                            result = FormattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
+                            result = formattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
                             break;
                         case "LineCapitalizeFirst":
-                            result = FormattingService.CapitalizeFirstCharacterFromEveryLine(scintilla.Text);
+                            result = formattingService.CapitalizeFirstCharacterFromEveryLine(scintilla.Text);
                             break;
                         case "LineRemoveEmpty":
-                            result = FormattingService.RemoveEmptyLines(scintilla.Text);
+                            result = formattingService.RemoveEmptyLines(scintilla.Text);
                             break;
                         case "LineRemoveWhitespace":
-                            result = FormattingService.RemoveWhitespaceLines(scintilla.Text);
+                            result = formattingService.RemoveWhitespaceLines(scintilla.Text);
                             break;
                         case "LineRemoveDuplicate":
-                            result = FormattingService.RemoveDuplicateLines(scintilla.Text);
+                            result = formattingService.RemoveDuplicateLines(scintilla.Text);
                             break;
                         case "LineRemoveDuplicateConsec":
-                            result = FormattingService.RemoveConsecutiveDuplicates(scintilla.Text);
+                            result = formattingService.RemoveConsecutiveDuplicates(scintilla.Text);
                             break;
                         case "LineTrim":
-                            result = FormattingService.TrimLines(scintilla.Text);
+                            result = formattingService.TrimLines(scintilla.Text);
                             break;
                         case "CharCapitalize":
-                            result = FormattingService.CapitalizeEveryWord(scintilla.Text);
+                            result = formattingService.CapitalizeEveryWord(scintilla.Text);
                             break;
                         case "CharCaseUpper":
-                            result = FormattingService.ConvertTextToUppercase(scintilla.Text);
+                            result = formattingService.ConvertTextToUppercase(scintilla.Text);
                             break;
                         case "CharCaseLower":
-                            result = FormattingService.ConvertTextToLowercase(scintilla.Text);
+                            result = formattingService.ConvertTextToLowercase(scintilla.Text);
                             break;
                         case "CharCaseSwap":
-                            result = FormattingService.SwitchLowercaseWithUppercase(scintilla.Text);
+                            result = formattingService.SwitchLowercaseWithUppercase(scintilla.Text);
                             break;
                         case "CharRemoveWhitespace":
-                            result = FormattingService.RemoveAllWhitespaces(scintilla.Text);
+                            result = formattingService.RemoveAllWhitespaces(scintilla.Text);
                             break;
                         case "CharRemoveWhitespaceConsec":
-                            result = FormattingService.RemoveAllConsecutiveWhitespaces(scintilla.Text);
+                            result = formattingService.RemoveAllConsecutiveWhitespaces(scintilla.Text);
                             break;
                         case "CharConvNewlineComma":
-                            result = FormattingService.ConvertNewlineToComma(scintilla.Text);
+                            result = formattingService.ConvertNewlineToComma(scintilla.Text);
                             break;
                         case "CharConvNewlineSpace":
-                            result = FormattingService.ConvertNewlineToSpace(scintilla.Text);
+                            result = formattingService.ConvertNewlineToSpace(scintilla.Text);
                             break;
                         case "SortAsc":
-                            result = FormattingService.SortLines(scintilla.Text);
+                            result = formattingService.SortLines(scintilla.Text);
                             break;
                         case "SortDesc":
-                            result = FormattingService.SortLines(scintilla.Text, false);
+                            result = formattingService.SortLines(scintilla.Text, false);
                             break;
                         case "SortReverse":
-                            result = FormattingService.ReverseLineOrder(scintilla.Text);
+                            result = formattingService.ReverseLineOrder(scintilla.Text);
                             break;
                     }
                 }
@@ -3700,7 +3705,7 @@ namespace pie
                     }
                     else
                     {
-                        NavigateToPath(ParsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
+                        NavigateToPath(parsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
                     }
                 }
             }
