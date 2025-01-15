@@ -177,7 +177,7 @@ namespace pie
 
             TextArea.UsePopup(false);
 
-            ColorizeTextArea(TextArea);
+            ThemeService.ColorizeTextArea(TextArea, Globals.theme);
 
             TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
             TextArea.InsertCheck += TextArea_InsertCheck;
@@ -218,23 +218,6 @@ namespace pie
             scintilla.Margins[0].Width = scintilla.TextWidth(Style.LineNumber, new string('9', maxLineNumberCharLength + 1)) + padding;
         }
 
-        // [Method] Sets the corresponding theme colors to the code editor's background, text and margins.
-        private void ColorizeTextArea(Scintilla TextArea)
-        {
-            TextArea.StyleResetDefault();
-            TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
-            TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
-            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ThemeService.GetColor("Fore");
-            TextArea.CaretForeColor = ThemeService.GetColor("Fore");
-            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ThemeService.GetColor("Primary");
-            TextArea.SetSelectionBackColor(true, ThemeService.GetColor("Selection"));
-            TextArea.CaretLineBackColor = ThemeService.GetColor("CaretLineBack");
-            TextArea.StyleClearAll();
-
-            InitNumberMargin(TextArea);
-            InitCodeFolding(TextArea);
-        }
-
         // [Method] Creates a new instance of the AutocompleteMenu
         private AutocompleteMenu InitializeAutocompleteMenu(Scintilla scintilla)
         {
@@ -251,12 +234,12 @@ namespace pie
         private void ColorizeAutocompleteMenu(AutocompleteMenu autocompleteMenu)
         {
             Colors colors = new Colors();
-            colors.BackColor = ThemeService.GetColor("Primary");
-            colors.ForeColor = ThemeService.GetColor("Fore");
-            colors.HighlightingColor = ThemeService.GetColor("Primary");
-            colors.SelectedBackColor = ThemeService.GetColor("CaretLineBack");
-            colors.SelectedBackColor2 = ThemeService.GetColor("CaretLineBack");
-            colors.SelectedForeColor = ThemeService.GetColor("Fore");
+            colors.BackColor = Globals.theme.Primary;
+            colors.ForeColor = Globals.theme.Fore;
+            colors.HighlightingColor = Globals.theme.Primary;
+            colors.SelectedBackColor = Globals.theme.CaretLineBack;
+            colors.SelectedBackColor2 = Globals.theme.CaretLineBack;
+            colors.SelectedForeColor = Globals.theme.Fore;
             autocompleteMenu.Colors = colors;
             autocompleteMenu.LeftPadding = 0;
         }
@@ -396,7 +379,7 @@ namespace pie
                 foreach (DatabaseConnection database in Globals.databases)
                 {
                     KryptonContextMenuItem item1 = new KryptonContextMenuItem();
-                    item1.Text = "Run query against " + database.ConnectionName;
+                    item1.Text = "Run query against " + database.Name;
                     item1.Click += Item1_Click6;
                     kryptonContextMenuItems.Items.Add(item1);
                     codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
@@ -425,7 +408,7 @@ namespace pie
 
             foreach (DatabaseConnection tempDatabase in Globals.databases)
             {
-                if (name == tempDatabase.ConnectionName)
+                if (name == tempDatabase.Name)
                 {
                     database = tempDatabase;
                     break;
@@ -553,29 +536,6 @@ namespace pie
             }
 
             Globals.tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
-        }
-
-        private void InitNumberMargin(Scintilla TextArea)
-        {
-
-            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = ThemeService.GetColor("NumberMargin");
-            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = ThemeService.GetColor("Fore");
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = ThemeService.GetColor("Fore");
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = ThemeService.GetColor("NumberMargin");
-
-            TextArea.Margins[0].Width = 24;
-        }
-
-        private void InitCodeFolding(Scintilla TextArea)
-        {
-
-            TextArea.SetFoldMarginColor(true, ThemeService.GetColor("Folding"));
-            TextArea.SetFoldMarginHighlightColor(true, ThemeService.GetColor("Folding"));
-
-            TextArea.Margins[3].Type = MarginType.Symbol;
-            TextArea.Margins[3].Mask = Marker.MaskFolders;
-            TextArea.Margins[3].Sensitive = true;
-            TextArea.Margins[3].Width = 20;
         }
 
         // [Method] Creates a new tab and selects the new tab
@@ -1335,7 +1295,7 @@ namespace pie
 
             try
             {
-                Globals.buildCommands = ConfigurationService<BuildCommand>.GetFromFile("config/build.json");
+                Globals.buildCommands = ConfigurationService.GetFromFile<BuildCommand>("config/build.json");
 
                 foreach (BuildCommand buildCommand in Globals.buildCommands)
                 {
@@ -1369,7 +1329,7 @@ namespace pie
         {
             try
             {
-                Globals.languageMappings = ConfigurationService<LanguageMapping>.GetFromFile("config/mappings.json");
+                Globals.languageMappings = ConfigurationService.GetFromFile<LanguageMapping>("config/mappings.json");
             }
             catch (FileNotFoundException ex)
             {
@@ -1390,9 +1350,9 @@ namespace pie
         {
             try
             {
-                Globals.gitCredentials = ConfigurationService<GitCredentials>.GetFromFile("config/git.json")[0];
+                Globals.gitCredentials = ConfigurationService.GetFromFile<GitCredentials>("config/git.json")[0];
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException)
             {
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/git.json", "{}");
             }
@@ -1400,15 +1360,32 @@ namespace pie
             try
             {
                 ProcessCustomThemes();
-                ThemeService.GetTheme(AppDomain.CurrentDomain.BaseDirectory + "config/theme.json");
-            }
-            catch (FileNotFoundException ex)
-            {
-                Globals.theme = "light";
-                ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
-            }
+                SelectedTheme selectedTheme = ConfigurationService.GetSingleFromFile<SelectedTheme>("config/theme.json");
 
-            Globals.colorDictionary = ThemeService.GetColorDictionary(Globals.theme);
+                if (selectedTheme.Name == "Dark")
+                {
+                    Globals.theme = ThemeService.darkTheme;
+                }
+                else if (selectedTheme.Name == "Light")
+                {
+                    Globals.theme = ThemeService.lightTheme;
+                }
+                else
+                {
+                    foreach (ThemeInfo t in Globals.themeInfos)
+                    {
+                        if (t.Name == selectedTheme.Name)
+                        {
+                            Globals.theme = t;
+                        }
+                    }
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Globals.theme = ThemeService.lightTheme;
+                ConfigurationService.WriteToFile("config/theme.json", new SelectedTheme("light"));
+            }
 
             try
             {
@@ -1569,15 +1546,15 @@ namespace pie
         {
             GitFile gitFile = (GitFile)e.Model;
             if (gitFile.Status == "Ignored")
-                e.Item.ForeColor = Globals.theme == "dark" ? Color.FromArgb(179, 179, 179) : Color.FromArgb(100, 100, 100);
+                e.Item.ForeColor = Globals.theme.IconType == "dark" ? Color.FromArgb(179, 179, 179) : Color.FromArgb(100, 100, 100);
             else if (gitFile.Status == "Deleted")
                 e.Item.ForeColor = Color.FromArgb(251, 77, 77);
             else if (gitFile.Status == "New")
-                e.Item.ForeColor = Globals.theme == "dark" ? Color.FromArgb(60, 170, 232) : Color.FromArgb(40, 115, 158);
+                e.Item.ForeColor = Globals.theme.IconType == "dark" ? Color.FromArgb(60, 170, 232) : Color.FromArgb(40, 115, 158);
             else if (gitFile.Status == "Modified")
-                e.Item.ForeColor = Globals.theme == "dark" ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
+                e.Item.ForeColor = Globals.theme.IconType == "dark" ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
             else
-                e.Item.ForeColor = ThemeService.GetColor("Fore");
+                e.Item.ForeColor = Globals.theme.Fore;
         }
 
         private void ReplaceTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -2214,7 +2191,7 @@ namespace pie
             // Update indicator appearance
             scintilla.Indicators[8].Style = IndicatorStyle.StraightBox;
             scintilla.Indicators[8].Under = true;
-            scintilla.Indicators[8].ForeColor = ThemeService.GetColor("Selection");
+            scintilla.Indicators[8].ForeColor = Globals.theme.Selection;
             scintilla.Indicators[8].OutlineAlpha = 255;
             scintilla.Indicators[8].Alpha = 100;
 
@@ -2544,7 +2521,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                            ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                             GitCommit(items);
                         }
                     }
@@ -2677,7 +2654,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                            ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                             GitPush();
                         }
                     }
@@ -2821,7 +2798,7 @@ namespace pie
 
             if (Globals.gitFormClosedWithOk)
             {
-                ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
             }
         }
 
@@ -2833,7 +2810,7 @@ namespace pie
 
             if (Globals.gitFormClosedWithOk)
             {
-                ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials } );
+                ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials } );
             }
         }
 
@@ -2865,7 +2842,7 @@ namespace pie
 
                     if (Globals.gitFormClosedWithOk)
                     {
-                        ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                        ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                         GitPull();
                     }
                 }
@@ -2879,7 +2856,7 @@ namespace pie
 
                         if (Globals.gitFormClosedWithOk)
                         {
-                            ConfigurationService<GitCredentials>.WriteToFile("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                            ConfigurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
                             GitPull();
                         }
                     }
@@ -2937,28 +2914,28 @@ namespace pie
         private void SynchronizeMainFormComponentsWithTheme()
         {
             // MenuStrip & Children
-            mainMenuStrip.BackColor = ThemeService.GetColor("Primary");
-            mainMenuStrip.ForeColor = ThemeService.GetColor("Fore");
+            mainMenuStrip.BackColor = Globals.theme.Primary;
+            mainMenuStrip.ForeColor = Globals.theme.Fore;
 
             foreach (ToolStripMenuItem toolStripMenuItem in mainMenuStrip.Items)
             {
-                toolStripMenuItem.DropDown.BackColor = ThemeService.GetColor("Primary");
-                toolStripMenuItem.DropDown.ForeColor = ThemeService.GetColor("Fore");
-                toolStripMenuItem.ImageTransparentColor = ThemeService.GetColor("Primary");
+                toolStripMenuItem.DropDown.BackColor = Globals.theme.Primary;
+                toolStripMenuItem.DropDown.ForeColor = Globals.theme.Fore;
+                toolStripMenuItem.ImageTransparentColor = Globals.theme.Primary;
 
                 if (toolStripMenuItem.HasDropDownItems)
                 {
                     foreach (ToolStripMenuItem toolStripMenuItemChild in toolStripMenuItem.DropDownItems)
                     {
-                        toolStripMenuItemChild.BackColor = ThemeService.GetColor("Primary");
-                        toolStripMenuItemChild.ForeColor = ThemeService.GetColor("Fore");
+                        toolStripMenuItemChild.BackColor = Globals.theme.Primary;
+                        toolStripMenuItemChild.ForeColor = Globals.theme.Fore;
 
                         if (toolStripMenuItemChild.HasDropDownItems)
                         {
                             foreach (ToolStripMenuItem toolStripMenuItemChild2 in toolStripMenuItemChild.DropDownItems)
                             {
-                                toolStripMenuItemChild2.BackColor = ThemeService.GetColor("Primary");
-                                toolStripMenuItemChild2.ForeColor = ThemeService.GetColor("Fore");
+                                toolStripMenuItemChild2.BackColor = Globals.theme.Primary;
+                                toolStripMenuItemChild2.ForeColor = Globals.theme.Fore;
                             }
                         }
                     }
@@ -2966,26 +2943,26 @@ namespace pie
             }
 
             // HeaderGroup
-            findReplaceHeaderGroup.StateCommon.Border.Color1 = ThemeService.GetColor("FormBorder");
-            findReplaceHeaderGroup.StateCommon.Border.Color2 = ThemeService.GetColor("FormBorder");
-            directoryNavigationHeaderGroup.StateCommon.Border.Color1 = ThemeService.GetColor("FormBorder");
-            directoryNavigationHeaderGroup.StateCommon.Border.Color2 = ThemeService.GetColor("FormBorder");
+            findReplaceHeaderGroup.StateCommon.Border.Color1 = Globals.theme.FormBorder;
+            findReplaceHeaderGroup.StateCommon.Border.Color2 = Globals.theme.FormBorder;
+            directoryNavigationHeaderGroup.StateCommon.Border.Color1 = Globals.theme.FormBorder;
+            directoryNavigationHeaderGroup.StateCommon.Border.Color2 = Globals.theme.FormBorder;
 
             // TabControl
-            tabControl.StateCommon.Panel.Color1 = ThemeService.GetColor("Primary");
-            tabControl.StateCommon.Panel.Color2 = ThemeService.GetColor("Primary");
+            tabControl.StateCommon.Panel.Color1 = Globals.theme.Primary;
+            tabControl.StateCommon.Panel.Color2 = Globals.theme.Primary;
 
             // ObjectListView
             gitStagingAreaListView.UseCustomSelectionColors = true;
             gitStagingAreaListView.FullRowSelect = true;
             gitStagingAreaListView.ShowGroups = false;
 
-            gitStagingAreaListView.HighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            gitStagingAreaListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
-            gitStagingAreaListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            gitStagingAreaListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
-            gitStagingAreaListView.BackColor = ThemeService.GetColor("Primary");
-            gitStagingAreaListView.ForeColor = ThemeService.GetColor("Fore");
+            gitStagingAreaListView.HighlightBackgroundColor = Globals.theme.Secondary;
+            gitStagingAreaListView.HighlightForegroundColor = Globals.theme.Fore;
+            gitStagingAreaListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
+            gitStagingAreaListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
+            gitStagingAreaListView.BackColor = Globals.theme.Primary;
+            gitStagingAreaListView.ForeColor = Globals.theme.Fore;
 
             directoryNavigationObjectListView.ShowGroups = false;
             directoryNavigationObjectListView.UseCustomSelectionColors = true;
@@ -2997,47 +2974,47 @@ namespace pie
             olvColumn3.FillsFreeSpace = true;
             olvColumn3.ImageGetter = new ImageGetterDelegate(NavigationImageGetter);
 
-            directoryNavigationObjectListView.BackColor = ThemeService.GetColor("Primary");
-            directoryNavigationObjectListView.ForeColor = ThemeService.GetColor("Fore");
-            directoryNavigationObjectListView.HighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            directoryNavigationObjectListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
-            directoryNavigationObjectListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            directoryNavigationObjectListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
+            directoryNavigationObjectListView.BackColor = Globals.theme.Primary;
+            directoryNavigationObjectListView.ForeColor = Globals.theme.Fore;
+            directoryNavigationObjectListView.HighlightBackgroundColor = Globals.theme.Secondary;
+            directoryNavigationObjectListView.HighlightForegroundColor = Globals.theme.Fore;
+            directoryNavigationObjectListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
+            directoryNavigationObjectListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
 
             var headerstyle = new HeaderFormatStyle();
-            headerstyle.Normal.BackColor = ThemeService.GetColor("Secondary");
-            headerstyle.Normal.ForeColor = ThemeService.GetColor("Fore");
+            headerstyle.Normal.BackColor = Globals.theme.Secondary;
+            headerstyle.Normal.ForeColor = Globals.theme.Fore;
 
-            headerstyle.Hot.BackColor = ThemeService.GetColor("ButtonHover");
-            headerstyle.Hot.ForeColor = ThemeService.GetColor("Fore");
+            headerstyle.Hot.BackColor = Globals.theme.ButtonHover;
+            headerstyle.Hot.ForeColor = Globals.theme.Fore;
 
-            headerstyle.Pressed.BackColor = ThemeService.GetColor("ButtonFrame");
-            headerstyle.Pressed.ForeColor = ThemeService.GetColor("Fore");
+            headerstyle.Pressed.BackColor = Globals.theme.ButtonFrame;
+            headerstyle.Pressed.ForeColor = Globals.theme.Fore;
 
             gitStagingAreaListView.HeaderFormatStyle = headerstyle;
 
-            regexCheckBox.StateCommon.ShortText.Color1 = ThemeService.GetColor("Fore");
-            regexCheckBox.StateCommon.ShortText.Color2 = ThemeService.GetColor("Fore");
+            regexCheckBox.StateCommon.ShortText.Color1 = Globals.theme.Fore;
+            regexCheckBox.StateCommon.ShortText.Color2 = Globals.theme.Fore;
 
-            matchCaseCheckBox.StateCommon.ShortText.Color1 = ThemeService.GetColor("Fore");
-            matchCaseCheckBox.StateCommon.ShortText.Color2 = ThemeService.GetColor("Fore");
+            matchCaseCheckBox.StateCommon.ShortText.Color1 = Globals.theme.Fore;
+            matchCaseCheckBox.StateCommon.ShortText.Color2 = Globals.theme.Fore;
 
-            matchWholeWordCheckBox.StateCommon.ShortText.Color1 = ThemeService.GetColor("Fore");
-            matchWholeWordCheckBox.StateCommon.ShortText.Color2 = ThemeService.GetColor("Fore");
+            matchWholeWordCheckBox.StateCommon.ShortText.Color1 = Globals.theme.Fore;
+            matchWholeWordCheckBox.StateCommon.ShortText.Color2 = Globals.theme.Fore;
 
             // ComboBox
             gitBranchesComboBox.StateCommon.Item.Back.ColorStyle = PaletteColorStyle.Solid;
             gitBranchesComboBox.StateCommon.Item.Border.ColorStyle = PaletteColorStyle.Solid;
-            gitBranchesComboBox.StateCommon.DropBack.Color1 = ThemeService.GetColor("Primary");
-            gitBranchesComboBox.StateCommon.DropBack.Color2 = ThemeService.GetColor("Primary");
+            gitBranchesComboBox.StateCommon.DropBack.Color1 = Globals.theme.Primary;
+            gitBranchesComboBox.StateCommon.DropBack.Color2 = Globals.theme.Primary;
 
             gitBranchesComboBox.StateTracking.Item.Back.ColorStyle = PaletteColorStyle.Solid;
             gitBranchesComboBox.StateTracking.Item.Border.ColorStyle = PaletteColorStyle.Solid;
-            gitBranchesComboBox.StateTracking.Item.Back.Color1 = ThemeService.GetColor("Secondary");
-            gitBranchesComboBox.StateTracking.Item.Back.Color2 = ThemeService.GetColor("Secondary");
+            gitBranchesComboBox.StateTracking.Item.Back.Color1 = Globals.theme.Secondary;
+            gitBranchesComboBox.StateTracking.Item.Back.Color2 = Globals.theme.Secondary;
 
             // Git Buttons
-            if (Globals.theme == "light" || (Globals.theme != "dark" && ThemeService.GetIconType(Globals.theme) == "dark"))
+            if (Globals.theme.IconType == "dark")
             {
                 kryptonButton8.Values.Image = Properties.Resources.refresh_black;
                 kryptonButton6.Values.Image = Properties.Resources.commit_black;
@@ -3045,7 +3022,7 @@ namespace pie
                 kryptonButton7.Values.Image = Properties.Resources.push_black;
                 kryptonButton11.Values.Image = Properties.Resources.log_black;
             }
-            else if (Globals.theme == "dark" || (Globals.theme != "light" && ThemeService.GetIconType(Globals.theme) == "light"))
+            else if (Globals.theme.IconType == "light")
             {
                 kryptonButton8.Values.Image = Properties.Resources.refresh_white;
                 kryptonButton6.Values.Image = Properties.Resources.commit_white;
@@ -3183,7 +3160,7 @@ namespace pie
         {
             try
             {
-                Globals.databases = ConfigurationService<DatabaseConnection>.GetFromFile("config/databases.json");
+                Globals.databases = ConfigurationService.GetFromFile<DatabaseConnection>("config/databases.json");
             }
             catch (FileNotFoundException ex)
             {
@@ -3197,17 +3174,16 @@ namespace pie
 
         private void lightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangeTheme("light");
+            ChangeTheme(ThemeService.lightTheme);
         }
 
-        public void ChangeTheme(string theme)
+        public void ChangeTheme(ThemeInfo theme)
         {
             ControlHelper.SuspendDrawing(this);
 
             Globals.theme = theme;
-            Globals.colorDictionary = ThemeService.GetColorDictionary(theme);
 
-            ThemeService.WriteThemeToFile("config/theme.json", Globals.theme);
+            ConfigurationService.WriteToFile("config/theme.json", new SelectedTheme(theme.Name));
 
             for (int i = 0; i < tabControl.Pages.Count; i++)
             {
@@ -3221,14 +3197,14 @@ namespace pie
                     if (Globals.tabInfos[i].getOpenedFilePath() != null)
                     {
                         string extension = ParsingService.GetFileExtension(Globals.tabInfos[i].getOpenedFilePath());
-                        ColorizeTextArea(scintilla);
+                        ThemeService.ColorizeTextArea(scintilla, Globals.theme);
                         ColorizeAutocompleteMenu(Globals.tabInfos[i].getAutocompleteMenu());
                         ScintillaLexerService.SetLexer(extension, scintilla, tabControl, i);
                         UpdateNumberMarginWidth(scintilla, true);
                     }
                     else
                     {
-                        ColorizeTextArea(scintilla);
+                        ThemeService.ColorizeTextArea(scintilla, Globals.theme);
                     }
                 }
             }
@@ -3253,7 +3229,7 @@ namespace pie
 
         private void darkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangeTheme("dark");
+            ChangeTheme(ThemeService.darkTheme);
         }
 
         private void ProcessCustomThemes()
@@ -3270,7 +3246,7 @@ namespace pie
             }
 
 
-            Globals.themeInfos = ThemeService.LoadThemesFromFolder(AppDomain.CurrentDomain.BaseDirectory + "config/themes");
+            Globals.themeInfos = ConfigurationService.LoadFromFolder<ThemeInfo>("config/themes", "json");
 
             foreach (ThemeInfo themeInfo in Globals.themeInfos)
             {
@@ -3285,7 +3261,7 @@ namespace pie
 
         private void ToolStripMenuItem_Click1(object sender, EventArgs e)
         {
-            ChangeTheme(((ToolStripMenuItem)sender).Text);
+            ChangeTheme(Globals.themeInfos.Find(theme => theme.Name == ((ToolStripMenuItem)sender).Text));
         }
 
         private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3693,7 +3669,6 @@ namespace pie
             DesignerForm designerForm = new DesignerForm();
             designerForm.ShowDialog();
             ProcessCustomThemes();
-            Globals.colorDictionary = ThemeService.GetColorDictionary(Globals.theme);
             ChangeTheme(Globals.theme);
         }
 

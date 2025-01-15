@@ -20,8 +20,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using pie.Classes;
+using System.Reflection;
+using System.Drawing;
 using pie.Classes.ConfigurationEntities;
+using pie.Classes.Exceptions;
 
 /**
  * Used for reading and writing to JSON config files
@@ -29,14 +31,12 @@ using pie.Classes.ConfigurationEntities;
  * Copyright (c) 2007 James Newton-King
  */
 using Newtonsoft.Json;
-using System.Reflection;
-using pie.Classes.Exceptions;
 
 namespace pie.Services
 {
-    public class ConfigurationService<T> where T: ConfigurationEntity, new()
+    public class ConfigurationService
     {
-        public static List<T> GetFromFile(string file)
+        public static List<T> GetFromFile<T>(string file) where T : ConfigurationEntity, new()
         {
             List<T> configurationEntities = new List<T>();
 
@@ -56,16 +56,16 @@ namespace pie.Services
                         {
                             token = jsonTextReader.Value.ToString();
 
-                            if (!TokenIsValidProperty(token))
+                            if (!TokenIsValidProperty<T>(token))
                             {
                                 throw new InvalidPropertyNameException();
                             }
                         }
                         else
                         {
-                            if (TokenTypeMatchesPropertyType(jsonTextReader.TokenType, token))
+                            if (TokenTypeMatchesPropertyType<T>(jsonTextReader.TokenType, token))
                             {
-                                PropertyInfo propertyInfo = GetProperty(token);
+                                PropertyInfo propertyInfo = GetProperty<T>(token);
 
                                 if (propertyInfo == null)
                                 {
@@ -73,7 +73,7 @@ namespace pie.Services
                                 }
                                 else
                                 {
-                                    propertyInfo.SetValue(configurationEntity, jsonTextReader.Value);
+                                    MapConfigurationEntityPropertyToTokenValue(configurationEntity, propertyInfo, jsonTextReader);
 
                                     if (AllPropertiesAreFilled(configurationEntity))
                                     {
@@ -94,7 +94,83 @@ namespace pie.Services
             return configurationEntities;
         }
 
-        internal static void WriteToFile(string file, List<T> configurationEntities)
+        public static T GetSingleFromFile<T>(string file) where T : ConfigurationEntity, new()
+        {
+            T configurationEntity = new T();
+
+            string token = null;
+
+            using (var textReader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + file))
+            {
+                JsonTextReader jsonTextReader = new JsonTextReader(textReader);
+
+                while (jsonTextReader.Read())
+                {
+                    if (jsonTextReader.Value != null)
+                    {
+                        if (jsonTextReader.TokenType == JsonToken.PropertyName)
+                        {
+                            token = jsonTextReader.Value.ToString();
+
+                            if (!TokenIsValidProperty<T>(token))
+                            {
+                                throw new InvalidPropertyNameException();
+                            }
+                        }
+                        else
+                        {
+                            if (TokenTypeMatchesPropertyType<T>(jsonTextReader.TokenType, token))
+                            {
+                                PropertyInfo propertyInfo = GetProperty<T>(token);
+
+                                if (propertyInfo == null)
+                                {
+                                    throw new InvalidPropertyNameException();
+                                }
+                                else
+                                {
+                                    MapConfigurationEntityPropertyToTokenValue(configurationEntity, propertyInfo, jsonTextReader);
+                                }
+                            }
+                            else
+                            {
+                                throw new InvalidPropertyTypeException();
+                            }
+                        }
+                    }
+                }
+            }
+
+            return configurationEntity;
+        }
+
+        public static void WriteToFile<T>(string file, T configurationEntity) where T : ConfigurationEntity, new()
+        {
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
+
+            TextWriter textWriter = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + file);
+
+            using (JsonWriter writer = new JsonTextWriter(textWriter))
+            {
+                writer.Formatting = Formatting.Indented;
+
+                writer.WriteStartArray();
+
+                PropertyInfo[] properties = typeof(T).GetProperties();
+
+                writer.WriteStartObject();
+
+                foreach (PropertyInfo propertyInfo in properties)
+                {
+                    writer.WritePropertyName(propertyInfo.Name);
+                    writer.WriteValue(propertyInfo.GetValue(configurationEntity));
+                }
+
+                writer.WriteEndObject();
+            }
+        }
+
+        public static void WriteToFile<T>(string file, List<T> configurationEntities) where T : ConfigurationEntity, new()
         {
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
 
@@ -125,21 +201,41 @@ namespace pie.Services
             }
         }
 
-        private static bool TokenIsValidProperty(string token)
+        public static List<T> LoadFromFolder<T>(string directory, string extension) where T : MultiFileConfigurationEntity, new()
         {
-            PropertyInfo[] properties = typeof(T).GetProperties();
+            List<T> configurationList = new List<T>();
 
-            foreach(PropertyInfo propertyInfo in properties) {
-                if (propertyInfo.Name.ToLower() == token.ToLower())
+            T configuration = null;
+
+            string[] files = null;
+
+            try
+            {
+                files = Directory.GetFiles(directory);
+
+                foreach (string file in files)
                 {
-                    return true;
+                    if (ParsingService.GetFileExtension(file) == extension)
+                    {
+                        configurationList.Add(GetSingleFromFile<T>(file));
+                        configurationList[configurationList.Count - 1].Name = ParsingService.RemoveFileExtension(ParsingService.GetFileName(file));
+                    }
                 }
-            }
 
-            return false;
+                return configurationList;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                return configurationList;
+            }
         }
 
-        private static bool TokenTypeMatchesPropertyType(JsonToken tokenType, string token)
+        private static bool TokenIsValidProperty<T>(string token) where T : ConfigurationEntity, new()
+        {
+            return typeof(T).GetProperty(token.Substring(0, 1).ToUpper() + token.Substring(1)) != null;
+        }
+
+        private static bool TokenTypeMatchesPropertyType<T>(JsonToken tokenType, string token) where T : ConfigurationEntity, new()
         {
             PropertyInfo[] properties = typeof(T).GetProperties();
 
@@ -155,6 +251,10 @@ namespace pie.Services
                     {
                         return true;
                     }
+                    else if (propertyInfo.PropertyType == typeof(Color) && tokenType == JsonToken.String)
+                    {
+                        return true;
+                    }
 
                     return false;
                 }
@@ -163,7 +263,7 @@ namespace pie.Services
             return false;
         }
 
-        private static PropertyInfo GetProperty(string token)
+        private static PropertyInfo GetProperty<T>(string token) where T : ConfigurationEntity, new()
         {
             PropertyInfo[] properties = typeof(T).GetProperties();
 
@@ -178,7 +278,30 @@ namespace pie.Services
             return null;
         }
 
-        private static bool AllPropertiesAreFilled(T configurationEntity)
+        private static void MapConfigurationEntityPropertyToTokenValue(ConfigurationEntity configurationEntity, PropertyInfo propertyInfo, JsonTextReader jsonTextReader)
+        {
+            // Treat special cases
+            if (propertyInfo.PropertyType == typeof(Color))
+            {
+                string colorValue = jsonTextReader.Value.ToString();
+
+                string[] rgbValues = colorValue.Split(',');
+
+                int red, green, blue;
+                int.TryParse(rgbValues[0].Trim(), out red);
+                int.TryParse(rgbValues[1].Trim(), out green);
+                int.TryParse(rgbValues[2].Trim(), out blue);
+
+                propertyInfo.SetValue(configurationEntity, Color.FromArgb(red, green, blue));
+            }
+            // Treat normal cases (Strings, Integers, etc.)
+            else
+            {
+                propertyInfo.SetValue(configurationEntity, jsonTextReader.Value);
+            }
+        }
+
+        private static bool AllPropertiesAreFilled<T>(T configurationEntity) where T : ConfigurationEntity, new()
         {
             PropertyInfo[] properties = typeof(T).GetProperties();
 
@@ -191,6 +314,31 @@ namespace pie.Services
             }
 
             return true;
+        }
+
+        public static void WriteFilesToDirectory<T>(string directory, List<T> items) where T : MultiFileConfigurationEntity, new()
+        {
+            DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + directory);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+
+
+            foreach (T item in items)
+            {
+                WriteToFile(directory + item.Name, item);
+            }
+        }
+
+        private static string ExtractRGBFromColor(Color color)
+        {
+            return color.R + ", " + color.G + ", " + color.B;
         }
     }
 }

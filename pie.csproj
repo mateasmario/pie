@@ -394,6 +394,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CodeTemplate.cs" />
+    <Compile Include="Classes\ConfigurationEntities\Impl\SelectedTheme.cs" />
+    <Compile Include="Classes\ConfigurationEntities\MultifileConfigurationEntity.cs" />
     <Compile Include="Classes\ConfigurationEntities\ConfigurationEntity.cs" />
     <Compile Include="Classes\CustomFormatter.cs" />
     <Compile Include="Classes\DatabaseResponse.cs" />
@@ -410,7 +412,7 @@
     <Compile Include="Classes\GitCommit.cs" />
     <Compile Include="Classes\UpdateStatus.cs" />
     <Compile Include="Classes\ReleaseInfo.cs" />
-    <Compile Include="Classes\ThemeInfo.cs" />
+    <Compile Include="Classes\ConfigurationEntities\Impl\ThemeInfo.cs" />
     <Compile Include="Classes\Triple.cs" />
     <Compile Include="Enums\DatabaseType.cs" />
     <Compile Include="Enums\FormatOptionCategory.cs" />

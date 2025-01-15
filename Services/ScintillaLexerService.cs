@@ -78,13 +78,13 @@ namespace pie.Services
         {
             parserColorDictionary = new Dictionary<string, Color>();
 
-            parserColorDictionary["Default"] = ThemeService.GetColor("Fore");
-            parserColorDictionary["Background"] = ThemeService.GetColor("Primary");
-            parserColorDictionary["Fore"] = ThemeService.GetColor("Fore");
-            parserColorDictionary["CaretLine"] = ThemeService.GetColor("CaretLineBack");
-            parserColorDictionary["Selection"] = ThemeService.GetColor("Selection");
+            parserColorDictionary["Default"] = Globals.theme.Fore;
+            parserColorDictionary["Background"] = Globals.theme.Primary;
+            parserColorDictionary["Fore"] = Globals.theme.Fore;
+            parserColorDictionary["CaretLine"] = Globals.theme.CaretLineBack;
+            parserColorDictionary["Selection"] = Globals.theme.Selection;
 
-            if (Globals.theme == "dark")
+            if (Globals.theme == ThemeService.darkTheme)
             {
                 parserColorDictionary["Comment"] = Color.FromArgb(192, 192, 192);
                 parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
@@ -102,7 +102,7 @@ namespace pie.Services
                 parserColorDictionary["User2"] = Color.FromArgb(255, 0, 128);
 
             }
-            else if (Globals.theme == "light")
+            else if (Globals.theme == ThemeService.lightTheme)
             {
                 parserColorDictionary["Comment"] = Color.FromArgb(180, 180, 180);
                 parserColorDictionary["CommentLine"] = Color.FromArgb(0, 128, 0);
@@ -121,20 +121,20 @@ namespace pie.Services
             }
             else
             {
-                parserColorDictionary["Comment"] = ThemeService.GetColor("Comment");
-                parserColorDictionary["CommentLine"] = ThemeService.GetColor("CommentLine");
-                parserColorDictionary["Number"] = ThemeService.GetColor("Number");
-                parserColorDictionary["Word"] = ThemeService.GetColor("Word");
-                parserColorDictionary["String"] = ThemeService.GetColor("String");
-                parserColorDictionary["Operator"] = ThemeService.GetColor("Operator");
-                parserColorDictionary["Preprocessor"] = ThemeService.GetColor("Preprocessor");
-                parserColorDictionary["Triple"] = ThemeService.GetColor("Triple");
-                parserColorDictionary["CommentBlock"] = ThemeService.GetColor("CommentBlock");
-                parserColorDictionary["Decorator"] = ThemeService.GetColor("Decorator");
-                parserColorDictionary["Attribute"] = ThemeService.GetColor("Attribute");
-                parserColorDictionary["Entity"] = ThemeService.GetColor("Entity");
-                parserColorDictionary["User1"] = ThemeService.GetColor("User1");
-                parserColorDictionary["User2"] = ThemeService.GetColor("User2");
+                parserColorDictionary["Comment"] = Globals.theme.Comment;
+                parserColorDictionary["CommentLine"] = Globals.theme.CommentLine;
+                parserColorDictionary["Number"] = Globals.theme.Number;
+                parserColorDictionary["Word"] = Globals.theme.Word;
+                parserColorDictionary["String"] = Globals.theme.String;
+                parserColorDictionary["Operator"] = Globals.theme.Operator;
+                parserColorDictionary["Preprocessor"] = Globals.theme.Preprocessor;
+                parserColorDictionary["Triple"] = Globals.theme.Triple;
+                parserColorDictionary["CommentBlock"] = Globals.theme.CommentBlock;
+                parserColorDictionary["Decorator"] = Globals.theme.Decorator;
+                parserColorDictionary["Attribute"] = Globals.theme.Attribute;
+                parserColorDictionary["Entity"] = Globals.theme.Entity;
+                parserColorDictionary["User1"] = Globals.theme.User1;
+                parserColorDictionary["User2"] = Globals.theme.User2;
             }
         }
 
@@ -233,8 +233,8 @@ namespace pie.Services
 
             for (int i = 25; i <= 31; i++)
             {
-                scintilla.Markers[i].SetForeColor(ThemeService.GetColor("Folding")); // styles for [+] and [-]
-                scintilla.Markers[i].SetBackColor(ThemeService.GetColor("Fore")); // styles for [+] and [-]
+                scintilla.Markers[i].SetForeColor(Globals.theme.Folding); // styles for [+] and [-]
+                scintilla.Markers[i].SetBackColor(Globals.theme.Fore); // styles for [+] and [-]
             }
 
             // Enable automatic folding

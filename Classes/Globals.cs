@@ -53,7 +53,7 @@ namespace pie
         public static bool deletesTab;
 
         // Theme
-        public static string theme;
+        public static ThemeInfo theme;
         public static KryptonPalette kryptonPalette;
         public static List<ThemeInfo> themeInfos;
         public static Dictionary<string, Color> colorDictionary;

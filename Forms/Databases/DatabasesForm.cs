@@ -57,12 +57,12 @@ namespace pie.Forms.Databases
             databasesListView.MultiSelect = false;
             databasesListView.HeaderStyle = ColumnHeaderStyle.None;
 
-            databasesListView.BackColor = ThemeService.GetColor("Primary");
-            databasesListView.ForeColor = ThemeService.GetColor("Fore");
-            databasesListView.HighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            databasesListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
-            databasesListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            databasesListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
+            databasesListView.BackColor = Globals.theme.Primary;
+            databasesListView.ForeColor = Globals.theme.Fore;
+            databasesListView.HighlightBackgroundColor = Globals.theme.Secondary;
+            databasesListView.HighlightForegroundColor = Globals.theme.Fore;
+            databasesListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
+            databasesListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
 
             ConnectionNameColumn.FillsFreeSpace = true;
         }
@@ -99,7 +99,7 @@ namespace pie.Forms.Databases
             if (Globals.addDatabaseConnectionName != null)
             {
                 DatabaseConnection database = new DatabaseConnection();
-                database.ConnectionName = Globals.addDatabaseConnectionName;
+                database.Name = Globals.addDatabaseConnectionName;
                 database.DatabaseType = Globals.addDatabaseType;
                 database.Hostname = Globals.addDatabaseHostname;
                 database.Port = Globals.addDatabasePort;
@@ -112,7 +112,7 @@ namespace pie.Forms.Databases
                 // Check if a database connection with the specified name already exists
                 foreach (DatabaseConnection tempDatabase in tempDatabases)
                 {
-                    if (tempDatabase.ConnectionName.Equals(database.ConnectionName))
+                    if (tempDatabase.Name.Equals(database.Name))
                     {
                         exists = true;
                         break;
@@ -159,7 +159,7 @@ namespace pie.Forms.Databases
             {
                 Globals.databaseEditIndex = databasesListView.SelectedIndex;
 
-                Globals.databaseToEditConnectionName = tempDatabases[Globals.databaseEditIndex].ConnectionName;
+                Globals.databaseToEditConnectionName = tempDatabases[Globals.databaseEditIndex].Name;
                 Globals.databaseToEditType = tempDatabases[Globals.databaseEditIndex].DatabaseType;
                 Globals.databaseToEditHostname = tempDatabases[Globals.databaseEditIndex].Hostname;
                 Globals.databaseToEditPort = tempDatabases[Globals.databaseEditIndex].Port;
@@ -176,7 +176,7 @@ namespace pie.Forms.Databases
 
                     foreach (DatabaseConnection tempDatabase in tempDatabases)
                     {
-                        if (tempDatabase.ConnectionName != Globals.databaseToEditConnectionName && tempDatabase.ConnectionName.Equals(Globals.addDatabaseConnectionName))
+                        if (tempDatabase.Name != Globals.databaseToEditConnectionName && tempDatabase.Name.Equals(Globals.addDatabaseConnectionName))
                         {
                             exists = true;
                             break;
@@ -189,7 +189,7 @@ namespace pie.Forms.Databases
                     }
                     else
                     {
-                        tempDatabases[Globals.databaseEditIndex].ConnectionName = Globals.addDatabaseConnectionName;
+                        tempDatabases[Globals.databaseEditIndex].Name = Globals.addDatabaseConnectionName;
                         tempDatabases[Globals.databaseEditIndex].DatabaseType = Globals.addDatabaseType;
                         tempDatabases[Globals.databaseEditIndex].Hostname = Globals.addDatabaseHostname;
                         tempDatabases[Globals.databaseEditIndex].Port = Globals.addDatabasePort;
@@ -207,7 +207,7 @@ namespace pie.Forms.Databases
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            ConfigurationService<DatabaseConnection>.WriteToFile("config/databases.json", tempDatabases);
+            ConfigurationService.WriteToFile("config/databases.json", tempDatabases);
 
             Globals.closeAfterApplyingChanges = true;
 
