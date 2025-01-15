@@ -80,12 +80,12 @@ namespace pie
             buildCommandsListView.MultiSelect = false;
             buildCommandsListView.HeaderStyle = ColumnHeaderStyle.None;
 
-            buildCommandsListView.BackColor = ThemeService.GetColor("Primary");
-            buildCommandsListView.ForeColor = ThemeService.GetColor("Fore");
-            buildCommandsListView.HighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            buildCommandsListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
-            buildCommandsListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            buildCommandsListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
+            buildCommandsListView.BackColor = Globals.theme.Primary;
+            buildCommandsListView.ForeColor = Globals.theme.Fore;
+            buildCommandsListView.HighlightBackgroundColor = Globals.theme.Secondary;
+            buildCommandsListView.HighlightForegroundColor = Globals.theme.Fore;
+            buildCommandsListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
+            buildCommandsListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
 
             BuildCommandNameColumn.FillsFreeSpace = true;
         }
@@ -149,7 +149,7 @@ namespace pie
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            ConfigurationService<BuildCommand>.WriteToFile("config/build.json", tempCommands);
+            ConfigurationService.WriteToFile("config/build.json", tempCommands);
 
             Globals.closeAfterApplyingChanges = true;
 

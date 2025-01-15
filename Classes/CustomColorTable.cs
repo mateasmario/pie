@@ -33,79 +33,79 @@ namespace pie.Classes
         {
             get
             {
-                return ThemeService.GetColor("Secondary");
+                return Globals.theme.Secondary;
             }
         }
         public override System.Drawing.Color MenuBorder
         {
-            get { return ThemeService.GetColor("Secondary"); }
+            get { return Globals.theme.Secondary; }
         }
         public override System.Drawing.Color MenuItemBorder
         {
-            get { return ThemeService.GetColor("Primary"); }
+            get { return Globals.theme.Primary; }
         }
         public override Color MenuItemSelected
         {
-            get { return ThemeService.GetColor("Secondary"); }
+            get { return Globals.theme.Secondary; }
         }
         public override Color MenuItemSelectedGradientBegin
         {
-            get { return ThemeService.GetColor("Secondary"); }
+            get { return Globals.theme.Secondary; }
         }
         public override Color MenuItemSelectedGradientEnd
         {
-            get { return ThemeService.GetColor("Secondary"); }
+            get { return Globals.theme.Secondary; }
         }
         public override Color MenuItemPressedGradientBegin
         {
-            get { return ThemeService.GetColor("Secondary"); }
+            get { return Globals.theme.Secondary; }
         }
         public override Color MenuItemPressedGradientEnd
         {
-            get { return ThemeService.GetColor("Secondary"); }
+            get { return Globals.theme.Secondary; }
         }
         public override Color MenuStripGradientBegin
         {
-            get { return ThemeService.GetColor("Primary"); }
+            get { return Globals.theme.Primary; }
         }
         public override Color MenuStripGradientEnd
         {
-            get { return ThemeService.GetColor("Primary"); }
+            get { return Globals.theme.Primary; }
         }
 
         public override Color ImageMarginGradientBegin
         {
-            get { return ThemeService.GetColor("Primary"); }
+            get { return Globals.theme.Primary; }
         }
 
         public override Color ImageMarginGradientMiddle
         {
-            get { return ThemeService.GetColor("Primary"); }
+            get { return Globals.theme.Primary; }
         }
 
         public override Color ImageMarginGradientEnd
         {
-            get { return ThemeService.GetColor("Primary"); }
+            get { return Globals.theme.Primary; }
         }
 
         public override Color ButtonCheckedGradientBegin
         {
-            get { return ThemeService.GetColor("Primary"); }
+            get { return Globals.theme.Primary; }
         }
 
         public override Color ButtonCheckedGradientMiddle
         {
-            get { return ThemeService.GetColor("Primary"); }
+            get { return Globals.theme.Primary; }
         }
 
         public override Color ButtonCheckedGradientEnd
         {
-            get { return ThemeService.GetColor("Primary"); }
+            get { return Globals.theme.Primary; }
         }
 
         public override Color ButtonCheckedHighlight
         {
-            get { return ThemeService.GetColor("Primary"); }
+            get { return Globals.theme.Primary; }
         }
     }
 }

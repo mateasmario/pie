@@ -17,22 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using pie;
-
-namespace System.Windows.Forms
+namespace pie.Classes.ConfigurationEntities
 {
-    internal class CustomToolStripRenderer : ToolStripProfessionalRenderer
+    public class MultiFileConfigurationEntity : ConfigurationEntity
     {
-        public CustomToolStripRenderer(ProfessionalColorTable professionalColorTable) : base(professionalColorTable)
-        {
-        }
-
-        protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
-        {
-            var tsMenuItem = e.Item as ToolStripMenuItem;
-            if (tsMenuItem != null)
-                e.ArrowColor = Globals.theme.Fore;
-            base.OnRenderArrow(e);
-        }
+        public string Name { get; set; }
     }
 }

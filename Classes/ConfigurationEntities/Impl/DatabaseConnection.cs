@@ -24,7 +24,7 @@ namespace pie.Classes
 {
     public class DatabaseConnection : ConfigurationEntity
     {
-        public string ConnectionName { get; set; }
+        public string Name { get; set; }
         public string Hostname { get; set; }
         public int Port { get; set; }
         public string DatabaseName { get; set; }

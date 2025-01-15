@@ -60,22 +60,22 @@ namespace pie.Forms.Format
             formatOptionsListView.FullRowSelect = true;
             formatOptionsListView.MultiSelect = false;
 
-            formatOptionsListView.BackColor = ThemeService.GetColor("Primary");
-            formatOptionsListView.ForeColor = ThemeService.GetColor("Fore");
-            formatOptionsListView.HighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            formatOptionsListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
-            formatOptionsListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            formatOptionsListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
+            formatOptionsListView.BackColor = Globals.theme.Primary;
+            formatOptionsListView.ForeColor = Globals.theme.Fore;
+            formatOptionsListView.HighlightBackgroundColor = Globals.theme.Secondary;
+            formatOptionsListView.HighlightForegroundColor = Globals.theme.Fore;
+            formatOptionsListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
+            formatOptionsListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
 
             var headerstyle = new HeaderFormatStyle();
-            headerstyle.Normal.BackColor = ThemeService.GetColor("Secondary");
-            headerstyle.Normal.ForeColor = ThemeService.GetColor("Fore");
+            headerstyle.Normal.BackColor = Globals.theme.Secondary;
+            headerstyle.Normal.ForeColor = Globals.theme.Fore;
 
-            headerstyle.Hot.BackColor = ThemeService.GetColor("ButtonHover");
-            headerstyle.Hot.ForeColor = ThemeService.GetColor("Fore");
+            headerstyle.Hot.BackColor = Globals.theme.ButtonHover;
+            headerstyle.Hot.ForeColor = Globals.theme.Fore;
 
-            headerstyle.Pressed.BackColor = ThemeService.GetColor("ButtonFrame");
-            headerstyle.Pressed.ForeColor = ThemeService.GetColor("Fore");
+            headerstyle.Pressed.BackColor = Globals.theme.ButtonFrame;
+            headerstyle.Pressed.ForeColor = Globals.theme.Fore;
 
             formatOptionsListView.HeaderFormatStyle = headerstyle;
 

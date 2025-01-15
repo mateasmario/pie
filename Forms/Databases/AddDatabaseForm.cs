@@ -62,52 +62,52 @@ namespace pie.Forms.Databases
             kryptonCheckButton2.Palette = Globals.kryptonPalette;
             kryptonCheckButton3.Palette = Globals.kryptonPalette;
 
-            kryptonCheckButton1.StateCommon.Back.Color1 = ThemeService.GetColor("Primary");
-            kryptonCheckButton1.StateCommon.Back.Color2 = ThemeService.GetColor("Primary");
-            kryptonCheckButton1.StateCheckedNormal.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton1.StateCheckedNormal.Back.Color2 = ThemeService.GetColor("Secondary");            
-            kryptonCheckButton1.StateCheckedTracking.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton1.StateCheckedTracking.Back.Color2 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton1.StateCheckedPressed.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton1.StateCheckedPressed.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton1.StateCommon.Back.Color1 = Globals.theme.Primary;
+            kryptonCheckButton1.StateCommon.Back.Color2 = Globals.theme.Primary;
+            kryptonCheckButton1.StateCheckedNormal.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton1.StateCheckedNormal.Back.Color2 = Globals.theme.Secondary;            
+            kryptonCheckButton1.StateCheckedTracking.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton1.StateCheckedTracking.Back.Color2 = Globals.theme.Secondary;
+            kryptonCheckButton1.StateCheckedPressed.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton1.StateCheckedPressed.Back.Color2 = Globals.theme.Secondary;
             kryptonCheckButton1.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton1.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton1.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton1.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
 
-            kryptonCheckButton2.StateCommon.Back.Color1 = ThemeService.GetColor("Primary");
-            kryptonCheckButton2.StateCommon.Back.Color2 = ThemeService.GetColor("Primary");
-            kryptonCheckButton2.StateCheckedNormal.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton2.StateCheckedNormal.Back.Color2 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton2.StateCheckedTracking.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton2.StateCheckedTracking.Back.Color2 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton2.StateCheckedPressed.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton2.StateCheckedPressed.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton2.StateCommon.Back.Color1 = Globals.theme.Primary;
+            kryptonCheckButton2.StateCommon.Back.Color2 = Globals.theme.Primary;
+            kryptonCheckButton2.StateCheckedNormal.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton2.StateCheckedNormal.Back.Color2 = Globals.theme.Secondary;
+            kryptonCheckButton2.StateCheckedTracking.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton2.StateCheckedTracking.Back.Color2 = Globals.theme.Secondary;
+            kryptonCheckButton2.StateCheckedPressed.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton2.StateCheckedPressed.Back.Color2 = Globals.theme.Secondary;
             kryptonCheckButton2.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton2.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton2.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton2.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
 
-            kryptonCheckButton3.StateCommon.Back.Color1 = ThemeService.GetColor("Primary");
-            kryptonCheckButton3.StateCommon.Back.Color2 = ThemeService.GetColor("Primary");
-            kryptonCheckButton3.StateCheckedNormal.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton3.StateCheckedNormal.Back.Color2 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton3.StateCheckedTracking.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton3.StateCheckedTracking.Back.Color2 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton3.StateCheckedPressed.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton3.StateCheckedPressed.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton3.StateCommon.Back.Color1 = Globals.theme.Primary;
+            kryptonCheckButton3.StateCommon.Back.Color2 = Globals.theme.Primary;
+            kryptonCheckButton3.StateCheckedNormal.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton3.StateCheckedNormal.Back.Color2 = Globals.theme.Secondary;
+            kryptonCheckButton3.StateCheckedTracking.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton3.StateCheckedTracking.Back.Color2 = Globals.theme.Secondary;
+            kryptonCheckButton3.StateCheckedPressed.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton3.StateCheckedPressed.Back.Color2 = Globals.theme.Secondary;
             kryptonCheckButton3.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton3.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton3.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton3.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
 
-            if (Globals.theme == "light" || ThemeService.GetIconType(Globals.theme) == "dark")
+            if (Globals.theme.IconType == "dark")
             {
                 kryptonCheckButton1.Values.Image = Properties.Resources.mysql_black;
                 kryptonCheckButton2.Values.Image = Properties.Resources.microsoft_black;
                 kryptonCheckButton3.Values.Image = Properties.Resources.postgresql_black;
             }
-            else if (Globals.theme == "dark" || ThemeService.GetIconType(Globals.theme) == "light")
+            else if (Globals.theme.IconType == "light")
             {
                 kryptonCheckButton1.Values.Image = Properties.Resources.mysql_white;
                 kryptonCheckButton2.Values.Image = Properties.Resources.microsoft_white;

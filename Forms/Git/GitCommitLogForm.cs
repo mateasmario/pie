@@ -61,14 +61,14 @@ namespace pie
         private HeaderFormatStyle CustomizeHeaderStyle()
         {
             HeaderFormatStyle headerstyle = new HeaderFormatStyle();
-            headerstyle.Normal.BackColor = ThemeService.GetColor("Secondary");
-            headerstyle.Normal.ForeColor = ThemeService.GetColor("Fore");
+            headerstyle.Normal.BackColor = Globals.theme.Secondary;
+            headerstyle.Normal.ForeColor = Globals.theme.Fore;
 
-            headerstyle.Hot.BackColor = ThemeService.GetColor("ButtonHover");
-            headerstyle.Hot.ForeColor = ThemeService.GetColor("Fore");
+            headerstyle.Hot.BackColor = Globals.theme.ButtonHover;
+            headerstyle.Hot.ForeColor = Globals.theme.Fore;
 
-            headerstyle.Pressed.BackColor = ThemeService.GetColor("ButtonFrame");
-            headerstyle.Pressed.ForeColor = ThemeService.GetColor("Fore");
+            headerstyle.Pressed.BackColor = Globals.theme.ButtonFrame;
+            headerstyle.Pressed.ForeColor = Globals.theme.Fore;
 
             return headerstyle;
         }
@@ -81,16 +81,16 @@ namespace pie
             }
 
             gitCommitLogListView.ShowGroups = false;
-            gitCommitLogListView.BackColor = ThemeService.GetColor("Primary");
-            gitCommitLogListView.ForeColor = ThemeService.GetColor("Fore");
+            gitCommitLogListView.BackColor = Globals.theme.Primary;
+            gitCommitLogListView.ForeColor = Globals.theme.Fore;
             gitCommitLogListView.UseCustomSelectionColors = true;
             gitCommitLogListView.FullRowSelect = true;
-            gitCommitLogListView.HighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            gitCommitLogListView.HighlightForegroundColor = ThemeService.GetColor("Fore");
-            gitCommitLogListView.UnfocusedHighlightBackgroundColor = ThemeService.GetColor("Secondary");
-            gitCommitLogListView.UnfocusedHighlightForegroundColor = ThemeService.GetColor("Fore");
-            gitCommitLogListView.BackColor = ThemeService.GetColor("Primary");
-            gitCommitLogListView.ForeColor = ThemeService.GetColor("Fore");
+            gitCommitLogListView.HighlightBackgroundColor = Globals.theme.Secondary;
+            gitCommitLogListView.HighlightForegroundColor = Globals.theme.Fore;
+            gitCommitLogListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
+            gitCommitLogListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
+            gitCommitLogListView.BackColor = Globals.theme.Primary;
+            gitCommitLogListView.ForeColor = Globals.theme.Fore;
 
             gitCommitLogListView.HeaderFormatStyle = CustomizeHeaderStyle();
 

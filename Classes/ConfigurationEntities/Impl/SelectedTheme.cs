@@ -17,15 +17,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using System.Collections.Generic;
-using System.Drawing;
+using pie.Classes.ConfigurationEntities;
 
 namespace pie.Classes
 {
-    public class ThemeInfo
+    public class SelectedTheme : ConfigurationEntity
     {
         public string Name { get; set; }
-        public Dictionary<string, Color> ColorDictionary { get; set; }
-        public string IconType { get; set; }
+
+        public SelectedTheme(string name)
+        {
+            Name = name;
+        }
+
+        public SelectedTheme()
+        {
+
+        }
     }
 }

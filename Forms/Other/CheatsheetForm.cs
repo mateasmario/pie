@@ -59,7 +59,7 @@ namespace pie.Forms.Other
                 this.Opacity = 0.875;
             }
 
-            if (ThemeService.GetIconType(Globals.theme) == "dark")
+            if (Globals.theme.IconType == "dark")
             {
                 pictureBox1.BackgroundImage = Properties.Resources.ctrl_dark;
                 pictureBox4.BackgroundImage = Properties.Resources.ctrl_dark;

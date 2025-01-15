@@ -106,16 +106,16 @@ namespace pie.Forms.CodeTemplates
             TextArea.StyleResetDefault();
             TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
             TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
-            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = ThemeService.GetColor("Fore");
-            TextArea.CaretForeColor = ThemeService.GetColor("Fore");
-            TextArea.Styles[ScintillaNET.Style.Default].BackColor = ThemeService.GetColor("Primary");
-            TextArea.SetSelectionBackColor(true, ThemeService.GetColor("Selection"));
-            TextArea.CaretLineBackColor = ThemeService.GetColor("CaretLineBack");
+            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = Globals.theme.Fore;
+            TextArea.CaretForeColor = Globals.theme.Fore;
+            TextArea.Styles[ScintillaNET.Style.Default].BackColor = Globals.theme.Primary;
+            TextArea.SetSelectionBackColor(true, Globals.theme.Selection);
+            TextArea.CaretLineBackColor = Globals.theme.CaretLineBack;
             TextArea.StyleClearAll();
-            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = ThemeService.GetColor("NumberMargin");
-            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = ThemeService.GetColor("Fore");
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = ThemeService.GetColor("Fore");
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = ThemeService.GetColor("NumberMargin");
+            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = Globals.theme.NumberMargin;
+            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = Globals.theme.Fore;
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = Globals.theme.Fore;
+            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = Globals.theme.NumberMargin;
 
             TextArea.Margins[0].Width = 24;
             TextArea.Parent = kryptonPanel2;
@@ -124,14 +124,14 @@ namespace pie.Forms.CodeTemplates
 
         private void ColorizeButton(KryptonCheckButton kryptonCheckButton)
         {
-            kryptonCheckButton.StateCommon.Back.Color1 = ThemeService.GetColor("Primary");
-            kryptonCheckButton.StateCommon.Back.Color2 = ThemeService.GetColor("Primary");
-            kryptonCheckButton.StateCheckedNormal.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton.StateCheckedNormal.Back.Color2 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton.StateCheckedTracking.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton.StateCheckedTracking.Back.Color2 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton.StateCheckedPressed.Back.Color1 = ThemeService.GetColor("Secondary");
-            kryptonCheckButton.StateCheckedPressed.Back.Color2 = ThemeService.GetColor("Secondary");
+            kryptonCheckButton.StateCommon.Back.Color1 = Globals.theme.Primary;
+            kryptonCheckButton.StateCommon.Back.Color2 = Globals.theme.Primary;
+            kryptonCheckButton.StateCheckedNormal.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton.StateCheckedNormal.Back.Color2 = Globals.theme.Secondary;
+            kryptonCheckButton.StateCheckedTracking.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton.StateCheckedTracking.Back.Color2 = Globals.theme.Secondary;
+            kryptonCheckButton.StateCheckedPressed.Back.Color1 = Globals.theme.Secondary;
+            kryptonCheckButton.StateCheckedPressed.Back.Color2 = Globals.theme.Secondary;
             kryptonCheckButton.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
