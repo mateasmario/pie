@@ -39,36 +39,13 @@ namespace pie.Forms.CodeTemplates
 {
     public partial class CodeTemplatesForm : KryptonForm
     {
+        private ThemeService themeService = new ThemeService();
+
         public CodeTemplatesForm()
         {
             InitializeComponent();
 
-            this.Palette = Globals.kryptonPalette;
-            kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonPanel2.Palette = Globals.kryptonPalette;
-            kryptonButton1.Palette = Globals.kryptonPalette;
-            kryptonLabel8.Palette = Globals.kryptonPalette;
-            kryptonCheckButton1.Palette = Globals.kryptonPalette;
-            kryptonCheckButton2.Palette = Globals.kryptonPalette;
-            kryptonCheckButton3.Palette = Globals.kryptonPalette;
-            kryptonCheckButton4.Palette = Globals.kryptonPalette;
-            kryptonCheckButton5.Palette = Globals.kryptonPalette;
-            kryptonCheckButton6.Palette = Globals.kryptonPalette;
-            kryptonCheckButton7.Palette = Globals.kryptonPalette;
-            kryptonCheckButton8.Palette = Globals.kryptonPalette;
-            kryptonCheckButton9.Palette = Globals.kryptonPalette;
-            kryptonCheckButton10.Palette = Globals.kryptonPalette;
-
-            kryptonCheckButton1.Click += kryptonCheckButton_Click;
-            kryptonCheckButton2.Click += kryptonCheckButton_Click;
-            kryptonCheckButton3.Click += kryptonCheckButton_Click;
-            kryptonCheckButton4.Click += kryptonCheckButton_Click;
-            kryptonCheckButton5.Click += kryptonCheckButton_Click;
-            kryptonCheckButton6.Click += kryptonCheckButton_Click;
-            kryptonCheckButton7.Click += kryptonCheckButton_Click;
-            kryptonCheckButton8.Click += kryptonCheckButton_Click;
-            kryptonCheckButton9.Click += kryptonCheckButton_Click;
-            kryptonCheckButton10.Click += kryptonCheckButton_Click;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
 
             ColorizeButton(kryptonCheckButton1);
             ColorizeButton(kryptonCheckButton2);

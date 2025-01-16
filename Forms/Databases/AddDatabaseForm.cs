@@ -33,34 +33,15 @@ namespace pie.Forms.Databases
 {
     public partial class AddDatabaseForm : KryptonForm
     {
+        private ThemeService themeService = new ThemeService();
+
         DatabaseType selectedDatabaseType;
 
         public AddDatabaseForm()
         {
             InitializeComponent();
 
-            this.Palette = Globals.kryptonPalette;
-            kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonLabel1.Palette = Globals.kryptonPalette;
-            kryptonLabel2.Palette = Globals.kryptonPalette;
-            kryptonLabel3.Palette = Globals.kryptonPalette;
-            kryptonLabel4.Palette = Globals.kryptonPalette;
-            kryptonLabel5.Palette = Globals.kryptonPalette;
-            kryptonLabel6.Palette = Globals.kryptonPalette;
-            kryptonLabel7.Palette = Globals.kryptonPalette;
-            kryptonLabel8.Palette = Globals.kryptonPalette;
-            kryptonLabel9.Palette = Globals.kryptonPalette;
-            kryptonTextBox1.Palette = Globals.kryptonPalette;
-            kryptonTextBox2.Palette = Globals.kryptonPalette;
-            kryptonTextBox3.Palette = Globals.kryptonPalette;
-            kryptonTextBox4.Palette = Globals.kryptonPalette;
-            kryptonTextBox5.Palette = Globals.kryptonPalette;
-            kryptonTextBox6.Palette = Globals.kryptonPalette;
-            kryptonButton1.Palette = Globals.kryptonPalette;
-            kryptonButton2.Palette = Globals.kryptonPalette;
-            kryptonCheckButton1.Palette = Globals.kryptonPalette;
-            kryptonCheckButton2.Palette = Globals.kryptonPalette;
-            kryptonCheckButton3.Palette = Globals.kryptonPalette;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
 
             kryptonCheckButton1.StateCommon.Back.Color1 = Globals.theme.Primary;
             kryptonCheckButton1.StateCommon.Back.Color2 = Globals.theme.Primary;

@@ -355,21 +355,11 @@ namespace pie
             themeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
             SynchronizeMainFormComponentsWithTheme();
 
-            this.Palette = kryptonPalette;
-            tabControl.Palette = kryptonPalette;
-            terminalTabControl.Palette = kryptonPalette;
-            findReplaceHeaderGroup.Palette = kryptonPalette;
-            directoryNavigationHeaderGroup.Palette = kryptonPalette;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
             codeContextMenu.Palette = kryptonPalette;
             terminalContextMenu.Palette = kryptonPalette;
             renderContextMenu.Palette = kryptonPalette;
             gitContextMenu.Palette = kryptonPalette;
-            kryptonLabel1.Palette = kryptonPalette;
-            findTextBox.Palette = kryptonPalette;
-            replaceTextBox.Palette = kryptonPalette;
-            kryptonButton1.Palette = kryptonPalette;
-            kryptonButton2.Palette = kryptonPalette;
-            kryptonButton3.Palette = kryptonPalette;
 
             terminalTabControl.Hide();
             gitPanel.Hide();
@@ -3561,88 +3551,16 @@ namespace pie
 
         private void smartFormatterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Globals.chosenFormatOption = null;
+            Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
 
             FormatForm formatForm = new FormatForm();
+            formatForm.Input = TextArea.Text;
             formatForm.ShowDialog();
 
-            if (Globals.chosenFormatOption != null)
-            {
-                Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
-                int currPos = scintilla.CurrentPosition;
-                string result = scintilla.Text;
-
-                if (Globals.chosenFormatOption.FormatOptionCategory.Equals(FormatOptionCategory.Custom))
-                {
-                    result = Globals.chosenFormatOption.InvokeMethod(scintilla.Text);
-                }
-                else {
-                    switch (Globals.chosenFormatOption.FormatOptionName)
-                    {
-                        case "LineDuplicate":
-                            result = formattingService.DuplicateLines(scintilla.Text);
-                            break;
-                        case "LineAddEmpty":
-                            result = formattingService.AddEmptyRowBetweenEachLine(scintilla.Text);
-                            break;
-                        case "LineCapitalizeFirst":
-                            result = formattingService.CapitalizeFirstCharacterFromEveryLine(scintilla.Text);
-                            break;
-                        case "LineRemoveEmpty":
-                            result = formattingService.RemoveEmptyLines(scintilla.Text);
-                            break;
-                        case "LineRemoveWhitespace":
-                            result = formattingService.RemoveWhitespaceLines(scintilla.Text);
-                            break;
-                        case "LineRemoveDuplicate":
-                            result = formattingService.RemoveDuplicateLines(scintilla.Text);
-                            break;
-                        case "LineRemoveDuplicateConsec":
-                            result = formattingService.RemoveConsecutiveDuplicates(scintilla.Text);
-                            break;
-                        case "LineTrim":
-                            result = formattingService.TrimLines(scintilla.Text);
-                            break;
-                        case "CharCapitalize":
-                            result = formattingService.CapitalizeEveryWord(scintilla.Text);
-                            break;
-                        case "CharCaseUpper":
-                            result = formattingService.ConvertTextToUppercase(scintilla.Text);
-                            break;
-                        case "CharCaseLower":
-                            result = formattingService.ConvertTextToLowercase(scintilla.Text);
-                            break;
-                        case "CharCaseSwap":
-                            result = formattingService.SwitchLowercaseWithUppercase(scintilla.Text);
-                            break;
-                        case "CharRemoveWhitespace":
-                            result = formattingService.RemoveAllWhitespaces(scintilla.Text);
-                            break;
-                        case "CharRemoveWhitespaceConsec":
-                            result = formattingService.RemoveAllConsecutiveWhitespaces(scintilla.Text);
-                            break;
-                        case "CharConvNewlineComma":
-                            result = formattingService.ConvertNewlineToComma(scintilla.Text);
-                            break;
-                        case "CharConvNewlineSpace":
-                            result = formattingService.ConvertNewlineToSpace(scintilla.Text);
-                            break;
-                        case "SortAsc":
-                            result = formattingService.SortLines(scintilla.Text);
-                            break;
-                        case "SortDesc":
-                            result = formattingService.SortLines(scintilla.Text, false);
-                            break;
-                        case "SortReverse":
-                            result = formattingService.ReverseLineOrder(scintilla.Text);
-                            break;
-                    }
-                }
-
-                scintilla.Text = result;
-                scintilla.SelectionStart = currPos;
-                scintilla.SelectionEnd = currPos;
-            }
+            int currPos = TextArea.CurrentPosition;
+            TextArea.Text = formatForm.Output;
+            TextArea.SelectionStart = currPos;
+            TextArea.SelectionEnd = currPos;
         }
 
         private void glassModeToolStripMenuItem_Click(object sender, EventArgs e)

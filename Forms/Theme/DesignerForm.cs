@@ -19,8 +19,6 @@
 
 using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Drawing;
 using pie.Services;
 using pie.Classes;
 
@@ -36,6 +34,7 @@ namespace pie.Forms.Theme
 {
     public partial class DesignerForm : KryptonForm
     {
+        private ThemeService themeService = new ThemeService();
         private ConfigurationService configurationService = new ConfigurationService();
 
         private ThemeInfo themeInfoToEdit;
@@ -43,41 +42,7 @@ namespace pie.Forms.Theme
         public DesignerForm()
         {
             InitializeComponent();
-            this.Palette = Globals.kryptonPalette;
-            kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonPanel2.Palette = Globals.kryptonPalette;
-            kryptonButton1.Palette = Globals.kryptonPalette;
-            kryptonButton2.Palette = Globals.kryptonPalette;
-            kryptonButton3.Palette = Globals.kryptonPalette;
-            kryptonGroupBox1.Palette = Globals.kryptonPalette;
-            kryptonGroupBox2.Palette = Globals.kryptonPalette;
-            kryptonColorButton1.Palette = Globals.kryptonPalette;
-            kryptonColorButton2.Palette = Globals.kryptonPalette;
-            kryptonColorButton3.Palette = Globals.kryptonPalette;
-            kryptonColorButton4.Palette = Globals.kryptonPalette;
-            kryptonColorButton5.Palette = Globals.kryptonPalette;
-            kryptonColorButton6.Palette = Globals.kryptonPalette;
-            kryptonColorButton7.Palette = Globals.kryptonPalette;
-            kryptonColorButton8.Palette = Globals.kryptonPalette;
-            kryptonColorButton9.Palette = Globals.kryptonPalette;
-            kryptonColorButton10.Palette = Globals.kryptonPalette;
-            kryptonColorButton11.Palette = Globals.kryptonPalette;
-            kryptonColorButton12.Palette = Globals.kryptonPalette;
-            kryptonColorButton13.Palette = Globals.kryptonPalette;
-            kryptonColorButton14.Palette = Globals.kryptonPalette;
-            kryptonColorButton15.Palette = Globals.kryptonPalette;
-            kryptonColorButton16.Palette = Globals.kryptonPalette;
-            kryptonColorButton17.Palette = Globals.kryptonPalette;
-            kryptonColorButton18.Palette = Globals.kryptonPalette;
-            kryptonColorButton19.Palette = Globals.kryptonPalette;
-            kryptonColorButton20.Palette = Globals.kryptonPalette;
-            kryptonColorButton21.Palette = Globals.kryptonPalette;
-            kryptonColorButton22.Palette = Globals.kryptonPalette;
-            kryptonColorButton23.Palette = Globals.kryptonPalette;
-            kryptonColorButton24.Palette = Globals.kryptonPalette;
-            kryptonColorButton25.Palette = Globals.kryptonPalette;
-            kryptonComboBox1.Palette = Globals.kryptonPalette;
-            kryptonLabel1.Palette = Globals.kryptonPalette;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
         private void DesignerForm_Load(object sender, EventArgs e)

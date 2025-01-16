@@ -18,6 +18,7 @@
 */
 
 using System;
+using pie.Services;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -30,18 +31,12 @@ namespace pie
 {
     public partial class AddBuildCommandForm : KryptonForm
     {
+        private ThemeService themeService = new ThemeService();
+
         public AddBuildCommandForm()
         {
             InitializeComponent();
-
-            this.Palette = Globals.kryptonPalette;
-            kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonLabel1.Palette = Globals.kryptonPalette;
-            kryptonLabel2.Palette = Globals.kryptonPalette;
-            kryptonLabel3.Palette = Globals.kryptonPalette;
-            kryptonTextBox1.Palette = Globals.kryptonPalette;
-            kryptonTextBox2.Palette = Globals.kryptonPalette;
-            kryptonButton1.Palette = Globals.kryptonPalette;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)

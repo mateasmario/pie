@@ -19,6 +19,7 @@
 
 using System;
 using System.Data;
+using pie.Services;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -31,19 +32,16 @@ namespace pie.Forms.Databases
 {
     public partial class DatabaseOutputForm : KryptonForm
     {
+        private ThemeService themeService = new ThemeService();
+
         private DataTable dataTable;
 
         public DatabaseOutputForm(DataTable dataTable)
         {
             InitializeComponent();
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
 
             this.dataTable = dataTable;
-
-            this.Palette = Globals.kryptonPalette;
-            kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonButton3.Palette = Globals.kryptonPalette;
-            kryptonDataGridView1.Palette = Globals.kryptonPalette;
-            kryptonDataGridView1.StateCommon.Background.ColorStyle = PaletteColorStyle.Solid;
         }
 
         private void kryptonButton3_Click(object sender, EventArgs e)

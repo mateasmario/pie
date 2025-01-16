@@ -19,6 +19,7 @@
 
 using System;
 using pie.Enums;
+using pie.Services;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -31,16 +32,12 @@ namespace pie
 {
     public partial class NotificationYesNoCancel : KryptonForm
     {
+        private ThemeService themeService = new ThemeService();
+
         public NotificationYesNoCancel()
         {
             InitializeComponent();
-
-            this.Palette = Globals.kryptonPalette;
-            kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonRichTextBox1.Palette = Globals.kryptonPalette;
-            kryptonButton1.Palette = Globals.kryptonPalette;
-            kryptonButton2.Palette = Globals.kryptonPalette;
-            kryptonButton3.Palette = Globals.kryptonPalette;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
         private void NotificationYesNoCancel_Load(object sender, EventArgs e)

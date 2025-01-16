@@ -20,6 +20,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using pie.Services;
 
 /**
  * LibGit2Sharp is used for integrating several advanced Git functionalities into pie.
@@ -40,18 +41,12 @@ namespace pie
 {
     public partial class GitCloneForm : KryptonForm
     {
+        private ThemeService themeService = new ThemeService();
+
         public GitCloneForm()
         {
             InitializeComponent();
-
-            this.Palette = Globals.kryptonPalette;
-            kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonTextBox1.Palette = Globals.kryptonPalette;
-            kryptonTextBox2.Palette = Globals.kryptonPalette;
-            kryptonLabel1.Palette = Globals.kryptonPalette;
-            kryptonLabel2.Palette = Globals.kryptonPalette;
-            kryptonButton1.Palette = Globals.kryptonPalette;
-            kryptonButton2.Palette = Globals.kryptonPalette;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
         private void kryptonButton2_Click(object sender, EventArgs e)

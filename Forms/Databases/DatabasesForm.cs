@@ -36,19 +36,14 @@ namespace pie.Forms.Databases
     public partial class DatabasesForm : KryptonForm
     {
         private ConfigurationService configurationService = new ConfigurationService();
+        private ThemeService themeService = new ThemeService();
 
         List<DatabaseConnection> tempDatabases;
 
         public DatabasesForm()
         {
             InitializeComponent();
-
-            this.Palette = Globals.kryptonPalette;
-            kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonLabel2.Palette = Globals.kryptonPalette;
-            kryptonButton1.Palette = Globals.kryptonPalette;
-            kryptonButton2.Palette = Globals.kryptonPalette;
-            kryptonButton3.Palette = Globals.kryptonPalette;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
         private void SynchronizeObjectListViewWithTheme()
