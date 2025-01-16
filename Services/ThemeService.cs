@@ -35,6 +35,7 @@ using ComponentFactory.Krypton.Toolkit;
 */
 using ScintillaNET;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Docking;
 
 namespace pie.Services
 {
@@ -102,7 +103,7 @@ namespace pie.Services
             darkTheme.Entity = Color.FromArgb(222, 2, 222);
             darkTheme.User1 = Color.FromArgb(128, 128, 128);
             darkTheme.User2 = Color.FromArgb(255, 0, 128);
-            darkTheme.IconType = "dark";
+            darkTheme.IconType = "light";
             darkTheme.Name = "Dark";
         }
 
@@ -301,11 +302,17 @@ namespace pie.Services
 
         public void SetPaletteToObjects(Control control, KryptonPalette palette)
         {
+            if (control is KryptonForm)
+            {
+                ((KryptonForm)control).Palette = palette;
+            }
+
             foreach(Control child in control.Controls)
             {
                if (child is KryptonPanel)
                {
                     ((KryptonPanel)child).Palette = palette;
+                    SetPaletteToObjects((KryptonPanel)child, palette);
                }
                else if (child is KryptonLabel)
                 {
@@ -330,6 +337,14 @@ namespace pie.Services
                 else if (child is KryptonCheckButton)
                 {
                     ((KryptonCheckButton)child).Palette = palette;
+                }
+               else if (child is KryptonDockableNavigator)
+                {
+                    ((KryptonDockableNavigator)child).Palette = palette;
+                }
+               else if (child is KryptonHeaderGroup)
+                {
+                    ((KryptonHeaderGroup)child).Palette = palette;
                 }
             }
         }

@@ -51,11 +51,12 @@ namespace pie
 {
     public partial class GitCommitLogForm : KryptonForm
     {
+        private ThemeService themeService = new ThemeService();
+
         public GitCommitLogForm()
         {
             InitializeComponent();
-
-            this.Palette = Globals.kryptonPalette;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
         private HeaderFormatStyle CustomizeHeaderStyle()

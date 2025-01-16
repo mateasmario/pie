@@ -18,6 +18,7 @@
 */
 
 using System;
+using pie.Services;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -30,21 +31,12 @@ namespace pie.Forms.Git
 {
     public partial class GitSettingsForm : KryptonForm
     {
+        private ThemeService themeService = new ThemeService();
+
         public GitSettingsForm()
         {
             InitializeComponent();
-
-            this.Palette = Globals.kryptonPalette;
-            kryptonPanel1.Palette = Globals.kryptonPalette;
-            authorNameTextBox.Palette = Globals.kryptonPalette;
-            authorEmailTextBox.Palette = Globals.kryptonPalette;
-            remoteServerUsernameTextBox.Palette = Globals.kryptonPalette;
-            remoteServerPasswordTextBox.Palette = Globals.kryptonPalette;
-            authorNameLabel.Palette = Globals.kryptonPalette;
-            authorEmailLabel.Palette = Globals.kryptonPalette;
-            remoteServerUsernameLabel.Palette = Globals.kryptonPalette;
-            remoteServerPasswordLabel.Palette = Globals.kryptonPalette;
-            saveButton.Palette = Globals.kryptonPalette;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
         private void GitSettingsForm_Load(object sender, EventArgs e)

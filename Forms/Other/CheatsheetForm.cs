@@ -32,22 +32,12 @@ namespace pie.Forms.Other
 {
     public partial class CheatsheetForm : KryptonForm 
     {
+        private ThemeService themeService = new ThemeService();
+
         public CheatsheetForm()
         {
             InitializeComponent();
-            this.Palette = Globals.kryptonPalette;
-
-            kryptonPanel1.Palette = Globals.kryptonPalette;
-            kryptonLabel1.Palette = Globals.kryptonPalette;
-            kryptonLabel3.Palette = Globals.kryptonPalette;
-            kryptonLabel5.Palette = Globals.kryptonPalette;
-            kryptonLabel6.Palette = Globals.kryptonPalette;
-            kryptonLabel7.Palette = Globals.kryptonPalette;
-            kryptonLabel8.Palette = Globals.kryptonPalette;
-            kryptonLabel2.Palette = Globals.kryptonPalette;
-            kryptonLabel4.Palette = Globals.kryptonPalette;
-            kryptonLabel9.Palette = Globals.kryptonPalette;
-            kryptonLabel10.Palette = Globals.kryptonPalette;
+            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
         private void CheatsheetForm_Load(object sender, EventArgs e)
