@@ -257,6 +257,10 @@ namespace pie.Services
                     {
                         return true;
                     }
+                    else if (propertyInfo.PropertyType == typeof(bool) && tokenType == JsonToken.Boolean)
+                    {
+                        return true;
+                    }
 
                     return false;
                 }

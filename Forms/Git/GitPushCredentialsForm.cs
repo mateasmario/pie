@@ -41,7 +41,7 @@ namespace pie
 
         private void GitPushCredentialsForm_Load(object sender, EventArgs e)
         {
-            if (Globals.glass)
+            if (Globals.editorProperties.Glass)
             {
                 this.Opacity = 0.875;
             }
