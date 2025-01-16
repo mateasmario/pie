@@ -17,11 +17,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
+
+using pie.Classes.ConfigurationEntities;
+using System.Reflection;
+
 namespace pie.Classes
 {
-    public class CodeTemplate
+    public class CustomFormatter : MultiFileConfigurationEntity
     {
-        public int Index { get; set; }
-        public string Content { get; set; }
+        public string Name { get; set; }
+        public object Instance { get; set; }
+        public MethodInfo MethodInfo { get; set; }
     }
 }

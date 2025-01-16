@@ -107,9 +107,7 @@ namespace pie
         public static DatabaseType databaseToEditType;
 
         // Scintilla preferences
-        public static bool wordwrap;
-        public static bool autosave;
-        public static bool glass;
+        public static EditorProperties editorProperties;
         public static List<LanguageDefinition> languageDefinitions;
         public static List<LanguageMapping> languageMappings;
 

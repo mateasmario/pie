@@ -17,14 +17,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using System.Reflection;
+using pie.Classes.ConfigurationEntities;
 
 namespace pie.Classes
 {
-    public class CustomFormatter
+    public class EditorProperties : ConfigurationEntity
     {
-        public string Name { get; set; }
-        public object Instance { get; set; }
-        public MethodInfo MethodInfo { get; set; }
+        public bool Wordwrap { get; set; }
+        public bool Autosave { get; set; }
+        public bool Glass { get; set; }
+
+        public EditorProperties()
+        {
+
+        }
+
+        public EditorProperties(bool wordwrap, bool autosave, bool glass)
+        {
+            Wordwrap = wordwrap;
+            Autosave = autosave;
+            Glass = glass;
+        }
     }
 }

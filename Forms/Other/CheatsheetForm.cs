@@ -44,7 +44,7 @@ namespace pie.Forms.Other
         {
             ControlHelper.SuspendDrawing(this);
 
-            if (Globals.glass)
+            if (Globals.editorProperties.Glass)
             {
                 this.Opacity = 0.875;
             }

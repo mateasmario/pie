@@ -47,10 +47,10 @@ namespace pie.Forms.Format
         private ThemeService themeService = new ThemeService();
         private FormattingService formattingService = new FormattingService();
 
-        private List<FormatOption> formatOptions;
-
         public string Input { get; set; }
         public string Output { get; set; }
+
+        private List<FormatOption> formatOptions;
 
         public FormatForm()
         {
@@ -117,7 +117,7 @@ namespace pie.Forms.Format
 
         private void FormatForm_Load(object sender, EventArgs e)
         {
-            if (Globals.glass)
+            if (Globals.editorProperties.Glass)
             {
                 this.Opacity = 0.875;
             }

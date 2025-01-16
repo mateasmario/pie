@@ -286,19 +286,19 @@ namespace pie
         {
             try
             {
-                EditorPropertiesService.GetEditorPropertiesFromFile("config/scintilla.json");
+                Globals.editorProperties = configurationService.GetSingleFromFile<EditorProperties>("config/scintilla.json");
 
-                if (Globals.wordwrap)
+                if (Globals.editorProperties.Wordwrap)
                 {
                     wordWrapToolStripMenuItem.Text = "Disable Word Wrap";
                 }
 
-                if (Globals.autosave)
+                if (Globals.editorProperties.Autosave)
                 {
                     enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
                 }
 
-                if (Globals.glass)
+                if (Globals.editorProperties.Glass)
                 {
                     glassModeToolStripMenuItem.Text = "Disable Glass Effect";
                 }
@@ -306,7 +306,7 @@ namespace pie
             }
             catch (FileNotFoundException ex)
             {
-                EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", false, false, false);
+                configurationService.WriteToFile("config/scintilla.json", new EditorProperties(false, false, false));
             }
 
             try
@@ -695,7 +695,7 @@ namespace pie
 
             Globals.tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
 
-            if (Globals.autosave)
+            if (Globals.editorProperties.Autosave)
             {
                 if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
                 {
@@ -863,7 +863,7 @@ namespace pie
             TextArea.IndentationGuides = IndentView.LookBoth;
             TextArea.ZoomChanged += TextArea_ZoomChanged;
 
-            if (Globals.wordwrap)
+            if (Globals.editorProperties.Wordwrap)
             {
                 TextArea.WrapMode = WrapMode.Word;
             }
@@ -1588,7 +1588,7 @@ namespace pie
         // [Event] Form Loading
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (Globals.glass)
+            if (Globals.editorProperties.Glass)
             {
                 this.Opacity = 0.90;
             }
@@ -3261,9 +3261,9 @@ namespace pie
 
         private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Globals.wordwrap = !Globals.wordwrap;
-            ToggleWordWrap(Globals.wordwrap);
-            EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave, Globals.glass);
+            Globals.editorProperties.Wordwrap = !Globals.editorProperties.Wordwrap;
+            ToggleWordWrap(Globals.editorProperties.Wordwrap);
+            configurationService.WriteToFile("config/scintilla.json", Globals.editorProperties);
         }
 
         private void ToggleWordWrap(bool status)
@@ -3291,9 +3291,9 @@ namespace pie
 
         private void enableAutosaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Globals.autosave = !Globals.autosave;
+            Globals.editorProperties.Autosave = !Globals.editorProperties.Autosave;
 
-            if (Globals.autosave)
+            if (Globals.editorProperties.Autosave)
             {
                 enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
                 PerformFirstSaveWhenAutosaveTriggered();
@@ -3303,7 +3303,7 @@ namespace pie
                 enableAutosaveToolStripMenuItem.Text = "Enable Autosave";
             }
 
-            EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave, Globals.glass);
+            configurationService.WriteToFile("config/scintilla.json", Globals.editorProperties);
         }
 
         private void PerformFirstSaveWhenAutosaveTriggered()
@@ -3565,9 +3565,9 @@ namespace pie
 
         private void glassModeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Globals.glass = !Globals.glass;
+            Globals.editorProperties.Glass = !Globals.editorProperties.Glass;
 
-            if (Globals.glass)
+            if (Globals.editorProperties.Glass)
             {
                 glassModeToolStripMenuItem.Text = "Disable Glass Effect";
                 this.Opacity = 0.90;
@@ -3578,7 +3578,7 @@ namespace pie
                 this.Opacity = 1;
             }
 
-            EditorPropertiesService.WriteEditorPropertiesToFile("config/scintilla.json", Globals.wordwrap, Globals.autosave, Globals.glass);
+            configurationService.WriteToFile("config/scintilla.json", Globals.editorProperties);
         }
 
         private void cheatsheetToolStripMenuItem_Click(object sender, EventArgs e)
