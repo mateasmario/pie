@@ -307,51 +307,62 @@ namespace pie.Services
             {
                 ((KryptonForm)control).Palette = palette;
             }
-
-            foreach(Control child in control.Controls)
+            else if (control is KryptonPanel)
             {
-               if (child is KryptonPanel)
-               {
-                    ((KryptonPanel)child).Palette = palette;
-                    SetPaletteToObjects((KryptonPanel)child, palette);
-               }
-               else if (child is KryptonLabel)
-                {
-                    ((KryptonLabel)child).Palette = palette;
-                }
-               else if (child is KryptonButton)
-                {
-                    ((KryptonButton)child).Palette = palette;
-                }
-               else if (child is KryptonTextBox)
-                {
-                    ((KryptonTextBox)child).Palette = palette;
-                }
-               else if (child is KryptonRichTextBox)
-                {
-                    ((KryptonRichTextBox)child).Palette = palette;
-                }
-               else if (child is KryptonCheckBox)
-                {
-                    ((KryptonCheckBox)child).Palette = palette;
-                }
-                else if (child is KryptonCheckButton)
-                {
-                    ((KryptonCheckButton)child).Palette = palette;
-                }
-               else if (child is KryptonNavigator)
-                {
-                    ((KryptonNavigator)child).Palette = palette;
-                }
-                else if (child is KryptonDockableNavigator)
-                {
-                    ((KryptonDockableNavigator)child).Palette = palette;
-                    SetPaletteToObjects(child, palette);
-                }
-               else if (child is KryptonHeaderGroup)
-                {
-                    ((KryptonHeaderGroup)child).Palette = palette;
-                }
+                ((KryptonPanel)control).Palette = palette;
+            }
+            else if (control is KryptonLabel)
+            {
+                ((KryptonLabel)control).Palette = palette;
+            }
+            else if (control is KryptonButton)
+            {
+                ((KryptonButton)control).Palette = palette;
+            }
+            else if (control is KryptonTextBox)
+            {
+                ((KryptonTextBox)control).Palette = palette;
+            }
+            else if (control is KryptonRichTextBox)
+            {
+                ((KryptonRichTextBox)control).Palette = palette;
+            }
+            else if (control is KryptonCheckBox)
+            {
+                ((KryptonCheckBox)control).Palette = palette;
+            }
+            else if (control is KryptonCheckButton)
+            {
+                ((KryptonCheckButton)control).Palette = palette;
+            }
+            else if (control is KryptonColorButton)
+            {
+                ((KryptonColorButton)control).Palette = palette;
+            }
+            else if (control is KryptonNavigator)
+            {
+                ((KryptonNavigator)control).Palette = palette;
+            }
+            else if (control is KryptonDockableNavigator)
+            {
+                ((KryptonDockableNavigator)control).Palette = palette;
+            }
+            else if (control is KryptonHeaderGroup)
+            {
+                ((KryptonHeaderGroup)control).Palette = palette;
+            }
+            else if (control is KryptonGroupBox)
+            {
+                ((KryptonGroupBox)control).Palette = palette;
+            }
+            else if (control is KryptonComboBox)
+            {
+                ((KryptonComboBox)control).Palette = palette;
+            }
+
+            foreach (Control child in control.Controls)
+            {
+                SetPaletteToObjects(child, palette);
             }
         }
     }
