@@ -75,7 +75,7 @@
             // 
             // ConnectionNameColumn
             // 
-            this.ConnectionNameColumn.AspectName = "ConnectionName";
+            this.ConnectionNameColumn.AspectName = "Name";
             this.ConnectionNameColumn.CellPadding = null;
             // 
             // kryptonButton3

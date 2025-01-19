@@ -54,6 +54,8 @@ using ComponentFactory.Krypton.Docking;
  */
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace pie.Services
 {
@@ -123,14 +125,12 @@ namespace pie.Services
                 scintilla.WordChars = languageDefinition.WordChars;
             }
 
-            if (languageDefinition.Properties != null && languageDefinition.Properties.Count > 0)
+            if (languageDefinition.Properties != null)
             {
-                foreach (LanguageProperty property in languageDefinition.Properties)
+                foreach (PropertyInfo propertyInfo in languageDefinition.Properties.GetType().GetProperties())
                 {
-                    if (property != null && property.Name != null && property.Value != null)
-                    {
-                        scintilla.SetProperty(property.Name, property.Value);
-                    }
+                    string formattedPropertyName = Regex.Replace(propertyInfo.Name, "([A-Z])", " $1", RegexOptions.Compiled).Trim().ToLower();
+                    scintilla.SetProperty(formattedPropertyName, propertyInfo.GetValue(languageDefinition).ToString());
                 }
             }
 
@@ -315,92 +315,6 @@ namespace pie.Services
                         }
                     }
                 }
-            }
-        }
-
-        public List<LanguageDefinition> LoadDefinitionsFromFolder(string directory)
-        {
-            List <LanguageDefinition> languageDefinitions = new List<LanguageDefinition>();
-
-            LanguageDefinition languageDefinition = null;
-
-            string token = null;
-
-            string[] files = null;
-
-            try
-            {
-                files = Directory.GetFiles(directory);
-
-                foreach (string file in files)
-                {
-                    if (parsingService.GetFileExtension(file) == "json")
-                    {
-                        languageDefinition = new LanguageDefinition();
-                        languageDefinition.Name = parsingService.RemoveFileExtension(parsingService.GetFileName(file));
-
-                        using (var textReader = File.OpenText(file))
-                        {
-                            JsonTextReader jsonTextReader = new JsonTextReader(textReader);
-
-                            while (jsonTextReader.Read())
-                            {
-                                if (jsonTextReader.Value != null)
-                                {
-                                    if (jsonTextReader.TokenType == JsonToken.PropertyName)
-                                    {
-                                        token = jsonTextReader.Value.ToString();
-                                    }
-                                    else if (jsonTextReader.TokenType == JsonToken.String)
-                                    {
-                                        if (token.ToLower() == "lexer")
-                                        {
-                                            languageDefinition.Lexer = jsonTextReader.Value.ToString();
-                                        }
-                                        else if (token.ToLower() == "keywords")
-                                        {
-                                            languageDefinition.Keywords = jsonTextReader.Value.ToString();
-                                        }
-                                        else if (token.ToLower() == "wordchars")
-                                        {
-                                            languageDefinition.WordChars = jsonTextReader.Value.ToString();
-                                        }
-                                        else if (token.ToLower() == "properties")
-                                        {
-                                            List<LanguageProperty> languageProperties = new List<LanguageProperty>();
-
-                                            JObject propertyJson = JObject.Parse(jsonTextReader.Value.ToString());
-                                            foreach (var x in propertyJson)
-                                            {
-                                                LanguageProperty languageProperty = new LanguageProperty();
-                                                
-                                                if (x.Key == "name")
-                                                {
-                                                    languageProperty.Name = x.ToString();
-                                                }
-                                                else if (x.Key == "value")
-                                                {
-                                                    languageProperty.Value = x.ToString();
-                                                    languageProperties.Add(languageProperty);
-                                                }
-                                            }
-
-                                            languageDefinition.Properties = languageProperties;
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        languageDefinitions.Add(languageDefinition);
-                    }
-                }
-
-                return languageDefinitions;
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                return languageDefinitions;
             }
         }
     }

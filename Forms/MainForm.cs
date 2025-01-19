@@ -162,7 +162,7 @@ namespace pie
         {
             try
             {
-                Globals.gitCredentials = configurationService.GetFromFile<GitCredentials>("config/git.json")[0];
+                Globals.gitCredentials = configurationService.GetArrayFromFile<GitCredentials>("config/git.json")[0];
             }
             catch (FileNotFoundException)
             {
@@ -175,7 +175,7 @@ namespace pie
             try
             {
                 ProcessCustomThemes();
-                SelectedTheme selectedTheme = configurationService.GetSingleFromFile<SelectedTheme>("config/theme.json");
+                SelectedTheme selectedTheme = configurationService.GetObjectFromFile<SelectedTheme>("config/theme.json");
 
                 if (selectedTheme.Name == "Dark")
                 {
@@ -219,7 +219,7 @@ namespace pie
             }
 
 
-            Globals.themeInfos = configurationService.LoadFromFolder<ThemeInfo>("config/themes", "json");
+            Globals.themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>("config/themes", "json");
 
             foreach (ThemeInfo themeInfo in Globals.themeInfos)
             {
@@ -286,7 +286,7 @@ namespace pie
         {
             try
             {
-                Globals.editorProperties = configurationService.GetSingleFromFile<EditorProperties>("config/scintilla.json");
+                Globals.editorProperties = configurationService.GetObjectFromFile<EditorProperties>("config/scintilla.json");
 
                 if (Globals.editorProperties.Wordwrap)
                 {
@@ -304,7 +304,7 @@ namespace pie
                 }
 
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException)
             {
                 configurationService.WriteToFile("config/scintilla.json", new EditorProperties(false, false, false));
             }
@@ -313,23 +313,23 @@ namespace pie
             {
                 Globals.customFormatters = formattingService.LoadCustomFormattersFromFolder("formatters");
             }
-            catch (IncorrectPublicMethodArgumentNumberException ex)
+            catch (IncorrectPublicMethodArgumentNumberException)
             {
                 ShowNotification("Public method needs to have a single parameter.");
             }
-            catch (IncorrectPublicMethodArgumentTypeException ex)
+            catch (IncorrectPublicMethodArgumentTypeException)
             {
                 ShowNotification("Public method argument type needs to be string.");
             }
-            catch (IncorrectPublicMethodCountException ex)
+            catch (IncorrectPublicMethodCountException)
             {
                 ShowNotification("Formatter class needs to have a single public method.");
             }
-            catch (IncorrectPublicMethodNameException ex)
+            catch (IncorrectPublicMethodNameException)
             {
                 ShowNotification("Public method name needs to be 'format'.");
             }
-            catch (IncorrectPublicMethodReturnTypeException ex)
+            catch (IncorrectPublicMethodReturnTypeException)
             {
                 ShowNotification("Public method return type needs to be string.");
             }
@@ -1534,7 +1534,7 @@ namespace pie
 
             try
             {
-                Globals.buildCommands = configurationService.GetFromFile<BuildCommand>("config/build.json");
+                Globals.buildCommands = configurationService.GetArrayFromFile<BuildCommand>("config/build.json");
 
                 foreach (BuildCommand buildCommand in Globals.buildCommands)
                 {
@@ -1548,7 +1548,7 @@ namespace pie
                     Globals.buildCommandToolStripMenuItems.Add(toolStripMenuItem);
 
 
-                    if (tabControl.Pages.Count >= 2 && Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() == null)
+                    if (tabControl.Pages.Count >= 1 && Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() == null)
                     {
                         toolStripMenuItem.Enabled = false;
                     }
@@ -1568,7 +1568,7 @@ namespace pie
         {
             try
             {
-                Globals.languageMappings = configurationService.GetFromFile<LanguageMapping>("config/mappings.json");
+                Globals.languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config/mappings.json");
             }
             catch (FileNotFoundException ex)
             {
@@ -1582,7 +1582,7 @@ namespace pie
 
         private void ProcessLanguageDefinitions()
         {
-            Globals.languageDefinitions = scintillaLexerService.LoadDefinitionsFromFolder(AppDomain.CurrentDomain.BaseDirectory + "config/languages");
+            Globals.languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>("config/languages", "json");
         }
 
         // [Event] Form Loading
@@ -2090,6 +2090,8 @@ namespace pie
                     {
                         UpdateFormTitle(indexToMoveTo);
                     }
+
+                    DeactivateBuildAndRunOptions();
                 }
             }
             else if (Globals.showGitTabPressed)
@@ -3232,13 +3234,13 @@ namespace pie
         {
             try
             {
-                Globals.databases = configurationService.GetFromFile<DatabaseConnection>("config/databases.json");
+                Globals.databases = configurationService.GetArrayFromFile<DatabaseConnection>("config/databases.json");
             }
             catch (FileNotFoundException ex)
             {
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/databases.json", "[]");
             }
-            catch (ConfigurationException ex)
+            catch (ConfigurationException)
             {
                 ShowNotification("There was an error in reading the database connections. Please check the syntax of the .json configuration.");
             }

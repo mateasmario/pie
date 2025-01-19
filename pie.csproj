@@ -407,8 +407,8 @@
     <Compile Include="Classes\Exceptions\Configuration\Impl\InvalidPropertyTypeException.cs" />
     <Compile Include="Classes\Configuration\FormatOption.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\LanguageMapping.cs" />
-    <Compile Include="Classes\Configuration\LanguageProperty.cs" />
-    <Compile Include="Classes\Configuration\LanguageDefinition.cs" />
+    <Compile Include="Classes\Configuration\FileBased\Impl\LanguageProperties.cs" />
+    <Compile Include="Classes\Configuration\FileBased\Impl\LanguageDefinition.cs" />
     <Compile Include="Classes\TransferObjects\NavigatorFile.cs" />
     <Compile Include="Classes\TransferObjects\GitCommit.cs" />
     <Compile Include="Classes\Configuration\UpdateStatus.cs" />

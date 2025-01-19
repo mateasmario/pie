@@ -19,6 +19,7 @@
 
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 using pie.Classes;
 
 /** 
@@ -27,6 +28,8 @@ using pie.Classes;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -34,8 +37,6 @@ using ComponentFactory.Krypton.Toolkit;
  * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
 */
 using ScintillaNET;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Docking;
 
 namespace pie.Services
 {
@@ -338,9 +339,14 @@ namespace pie.Services
                 {
                     ((KryptonCheckButton)child).Palette = palette;
                 }
-               else if (child is KryptonDockableNavigator)
+               else if (child is KryptonNavigator)
+                {
+                    ((KryptonNavigator)child).Palette = palette;
+                }
+                else if (child is KryptonDockableNavigator)
                 {
                     ((KryptonDockableNavigator)child).Palette = palette;
+                    SetPaletteToObjects(child, palette);
                 }
                else if (child is KryptonHeaderGroup)
                 {

@@ -35,7 +35,7 @@ namespace pie.Forms.Databases
     {
         private ThemeService themeService = new ThemeService();
 
-        DatabaseType selectedDatabaseType;
+        DatabaseType selectedDatabaseType = Globals.databaseToEditType;
 
         public AddDatabaseForm()
         {
