@@ -17,16 +17,15 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using System.Collections.Generic;
+using pie.Classes.ConfigurationEntities;
 
 namespace pie.Classes
 {
-    public class LanguageDefinition
+    public class LanguageDefinition : MultiFileConfigurationEntity
     {
-        public string Name { get; set; }
         public string Lexer { get; set; }
         public string Keywords { get; set; }
         public string WordChars { get; set; }
-        public List<LanguageProperty> Properties { get; set; }
+        public LanguageProperties Properties { get; set; }
     }
 }
