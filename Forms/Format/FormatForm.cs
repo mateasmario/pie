@@ -18,7 +18,6 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using pie.Classes;
 using pie.Services;
@@ -38,7 +37,6 @@ using BrightIdeasSoftware;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
-using pie.Enums;
 
 namespace pie.Forms.Format
 {

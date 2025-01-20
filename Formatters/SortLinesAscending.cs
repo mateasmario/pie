@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
+using System.Collections.Generic;
 
 public class SortLinesAscending {
     public string format(string text) {
@@ -37,7 +34,5 @@ public class SortLinesAscending {
         {
             return result;
         }
-
-        return result;
     }
 }
