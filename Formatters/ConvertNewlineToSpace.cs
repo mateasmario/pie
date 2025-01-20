@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 
 public class ConvertNewlineToSpace {
     public string format(string text) {

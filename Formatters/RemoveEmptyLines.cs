@@ -1,23 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 
 public class RemoveEmptyLines {
     public string format(string text) {
         string[] lines = text.Split('\n');
 
-            string result = string.Join("", lines.Select(line => ((line.Length == 1 && line[0] == '\r') || (line.Length == 0)) ? "" : line));
+        string result = string.Join("", lines.Select(line => ((line.Length == 1 && line[0] == '\r') || (line.Length == 0)) ? "" : line));
 
 
-            if (result.Length-1 >= 0 && result[result.Length-1] == '\r')
-            {
-                return result.Substring(0, result.Length - 1);
-            }
-            else
-            {
-                return result;
-            }
+        if (result.Length-1 >= 0 && result[result.Length-1] == '\r')
+        {
+            return result.Substring(0, result.Length - 1);
+        }
+        else
+        {
+            return result;
+        }
     }
 }
