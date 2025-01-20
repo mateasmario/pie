@@ -17,16 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-
-using pie.Classes.ConfigurationEntities;
-using System.Reflection;
-
-namespace pie.Classes
+namespace pie.Enums
 {
-    public class CustomFormatter : MultiFileConfigurationEntity
-    {
-        public string Name { get; set; }
-        public object Instance { get; set; }
-        public MethodInfo MethodInfo { get; set; }
+    public enum DynamicLibraryValidatorFlag { 
+        VALIDATE_METHOD_COUNT,
+        VALIDATE_METHOD_PARAMETER_COUNT,
+        VALIDATE_METHOD_RETURN_TYPE
     }
 }

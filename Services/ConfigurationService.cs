@@ -24,6 +24,7 @@ using System.Reflection;
 using System.Drawing;
 using pie.Classes.ConfigurationEntities;
 using pie.Classes.Exceptions;
+using pie.Classes;
 
 /**
  * Used for reading and writing to JSON config files
@@ -251,6 +252,51 @@ namespace pie.Services
                 ReadPropertiesFromJson(jsonTextReader, (ConfigurationEntity)instance);
 
                 propertyInfo.SetValue(configurationEntity, instance);
+            }
+        }
+
+        public List<T> LoadLinkLibrariesFromMultipleFiles<T>(string directory, DynamicLibraryValidator validator) where T : DynamicLibraryConfigurationEntity, new()
+        {
+            List<T> dlls = new List<T>();
+
+            T dll = null;
+
+            string[] files = null;
+
+            try
+            {
+                files = Directory.GetFiles(directory);
+
+                foreach (string file in files)
+                {
+                    if (parsingService.GetFileExtension(file) == "dll")
+                    {
+                        Assembly externalAssembly = Assembly.LoadFrom(file);
+                        string className = parsingService.RemoveFileExtension(file).Substring(11);
+                        Type externalType = externalAssembly.GetType(className);
+                        object instance = Activator.CreateInstance(externalType);
+
+                        if (externalType != null)
+                        {
+                            // Validate
+
+                            MethodInfo method = externalType.GetMethod(validator.MethodName);
+                            dll = new T();
+                            dll.Name = className;
+                            dll.Instance = instance;
+                            dll.MethodInfo = method;
+
+                            dlls.Add(dll);
+                        }
+                    }
+                }
+
+                return dlls;
+
+            }
+            catch (DirectoryNotFoundException)
+            {
+                return dlls;
             }
         }
 

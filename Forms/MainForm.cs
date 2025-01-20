@@ -311,7 +311,21 @@ namespace pie
 
             try
             {
-                Globals.customFormatters = formattingService.LoadCustomFormattersFromFolder("formatters");
+                Globals.customFormatters = configurationService.LoadLinkLibrariesFromMultipleFiles<Formatter>(
+                                    "formatters",
+                                    new DynamicLibraryValidator.Builder()
+                                    .WithFlags(
+                                        new DynamicLibraryValidatorFlag[]{
+                                                DynamicLibraryValidatorFlag.VALIDATE_METHOD_COUNT,
+                                                DynamicLibraryValidatorFlag.VALIDATE_METHOD_PARAMETER_COUNT,
+                                                DynamicLibraryValidatorFlag.VALIDATE_METHOD_RETURN_TYPE
+                                        }
+                                    )
+                                    .WithMethodName("format")
+                                    .WithMethodCount(5)
+                                    .WithMethodParameterCount(1)
+                                    .WithMethodReturnType(typeof(string))
+                                    .Build());
             }
             catch (IncorrectPublicMethodArgumentNumberException)
             {

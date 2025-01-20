@@ -59,7 +59,7 @@ namespace pie.Forms.Format
 
             formatOptions = new List<FormatOption>();
 
-            foreach (CustomFormatter customFormatter in Globals.customFormatters)
+            foreach (Formatter customFormatter in Globals.customFormatters)
             {
                 FormatOption formatOption = new FormatOption(customFormatter.Name, FormatOptionCategory.Custom, "External formatter", customFormatter.Instance, customFormatter.MethodInfo);
                 formatOptions.Add(formatOption);

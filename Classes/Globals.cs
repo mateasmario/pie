@@ -112,6 +112,6 @@ namespace pie
         public static List<LanguageMapping> languageMappings;
 
         // Format
-        public static List<CustomFormatter> customFormatters;
+        public static List<Formatter> customFormatters;
     }
 }
