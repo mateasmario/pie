@@ -19,16 +19,10 @@
 
 using System;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using pie.Classes;
 using pie.Enums;
-
-/**
- * Used for reading and writing to JSON config files
- * 
- * Copyright (Tc) 2007 James Newton-King
- */
-using Newtonsoft.Json;
 
 /**
  * Used for communication between pie and MySQL Databases
@@ -43,7 +37,6 @@ using MySql.Data.MySqlClient;
  * Copyright (c) 2002-2023, Npgsql
  */
 using Npgsql;
-using System.Data.Common;
 
 namespace pie.Services
 {

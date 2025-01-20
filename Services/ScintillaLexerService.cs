@@ -21,7 +21,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.IO;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using pie.Classes;
 
 /**
@@ -46,16 +47,6 @@ using AutocompleteMenuNS;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Docking;
-
-/**
- * Used for reading and writing to JSON config files
- * 
- * Copyright (c) 2007 James Newton-King
- */
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace pie.Services
 {

@@ -300,7 +300,7 @@ namespace pie.Services
             }
         }
 
-        public void WriteFilesToDirectory<T>(string directory, List<T> items) where T : MultiFileConfigurationEntity, new()
+        public void WriteFilesToDirectory<T>(string directory, List<T> items, string extension) where T : MultiFileConfigurationEntity, new()
         {
             DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + directory);
 
@@ -316,7 +316,7 @@ namespace pie.Services
 
             foreach (T item in items)
             {
-                WriteToFile(directory + item.Name, item);
+                WriteToFile(directory + "/" + item.Name + "." + extension, item);
             }
         }
 
@@ -339,7 +339,16 @@ namespace pie.Services
                 foreach (PropertyInfo propertyInfo in properties)
                 {
                     writer.WritePropertyName(propertyInfo.Name);
-                    writer.WriteValue(propertyInfo.GetValue(configurationEntity));
+
+                    if (propertyInfo.PropertyType == typeof(Color))
+                    {
+                        Color c = (Color)propertyInfo.GetValue(configurationEntity);
+                        writer.WriteValue($"{c.R}, {c.G}, {c.B}");
+                    }
+                    else
+                    {
+                        writer.WriteValue(propertyInfo.GetValue(configurationEntity));
+                    }
                 }
 
                 writer.WriteEndObject();
