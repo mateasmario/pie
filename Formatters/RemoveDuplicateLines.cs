@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-public class RemoveWhitespaceLines {
+public class RemoveDuplicateLines {
     public string format(string text) {
             text = text + "\r";
 
