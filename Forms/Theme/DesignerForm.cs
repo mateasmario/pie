@@ -29,6 +29,7 @@ using pie.Classes;
 */
 using ComponentFactory.Krypton.Toolkit;
 using System.Reflection;
+using System.Linq;
 
 namespace pie.Forms.Theme
 {
@@ -151,7 +152,7 @@ namespace pie.Forms.Theme
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            configurationService.WriteFilesToDirectory("config/themes", Globals.themeInfos);
+            configurationService.WriteFilesToDirectory<ThemeInfo>("config/themes", Globals.themeInfos, "json");
             this.Close();
         }
 
