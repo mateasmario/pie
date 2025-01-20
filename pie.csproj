@@ -396,16 +396,17 @@
     <Compile Include="Classes\Configuration\FileBased\Impl\CodeTemplate.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\EditorProperties.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\SelectedTheme.cs" />
+    <Compile Include="Classes\Configuration\FileBased\DynamicLibraryConfigurationEntity.cs" />
     <Compile Include="Classes\Configuration\FileBased\MultiFileConfigurationEntity.cs" />
     <Compile Include="Classes\Configuration\FileBased\ConfigurationEntity.cs" />
-    <Compile Include="Classes\Configuration\FileBased\Impl\CustomFormatter.cs" />
+    <Compile Include="Classes\Configuration\FileBased\Impl\Formatter.cs" />
+    <Compile Include="Classes\Helpers\DynamicLibraryValidator.cs" />
     <Compile Include="Classes\TransferObjects\DatabaseResponse.cs" />
     <Compile Include="Classes\Helpers\ControlHelper.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\DatabaseConnection.cs" />
     <Compile Include="Classes\Exceptions\Configuration\ConfigurationException.cs" />
     <Compile Include="Classes\Exceptions\Configuration\Impl\InvalidPropertyNameException.cs" />
     <Compile Include="Classes\Exceptions\Configuration\Impl\InvalidPropertyTypeException.cs" />
-    <Compile Include="Classes\Configuration\FormatOption.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\LanguageMapping.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\LanguageProperties.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\LanguageDefinition.cs" />
@@ -415,6 +416,7 @@
     <Compile Include="Classes\Configuration\ReleaseInfo.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\ThemeInfo.cs" />
     <Compile Include="Classes\Helpers\Triple.cs" />
+    <Compile Include="Enums\DynamicLibraryValidatorFlag.cs" />
     <Compile Include="Enums\DatabaseType.cs" />
     <Compile Include="Enums\FormatOptionCategory.cs" />
     <Compile Include="Exceptions\IncorrectPublicMethodArgumentTypeException.cs" />
@@ -552,7 +554,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\DatabaseService.cs" />
-    <Compile Include="Services\FormattingService.cs" />
     <Compile Include="Services\NotificationExceptionHandlerService.cs" />
     <Compile Include="Services\ParsingService.cs" />
     <Compile Include="Services\ScintillaLexerService.cs" />
