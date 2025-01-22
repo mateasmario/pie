@@ -70,7 +70,7 @@ namespace pie.Services
         {
             T configurationEntity = new T();
 
-            using (var textReader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + file))
+            using (var textReader = File.OpenText(file))
             {
                 JsonTextReader jsonTextReader = new JsonTextReader(textReader);
                 ReadPropertiesFromJson(jsonTextReader, configurationEntity);
@@ -87,7 +87,7 @@ namespace pie.Services
 
             try
             {
-                files = Directory.GetFiles(directory);
+                files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + directory);
 
                 foreach (string file in files)
                 {

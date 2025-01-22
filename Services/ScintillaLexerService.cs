@@ -52,8 +52,6 @@ namespace pie.Services
 {
     public class ScintillaLexerService
     {
-        private ParsingService parsingService = new ParsingService();
-
         private static Dictionary<string, Color> parserColorDictionary;
 
         public static void ResetDictionary()
