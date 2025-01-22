@@ -118,8 +118,13 @@ namespace pie.Services
             {
                 foreach (PropertyInfo propertyInfo in languageDefinition.Properties.GetType().GetProperties())
                 {
-                    string formattedPropertyName = Regex.Replace(propertyInfo.Name, "([A-Z])", " $1", RegexOptions.Compiled).Trim().ToLower();
-                    scintilla.SetProperty(formattedPropertyName, propertyInfo.GetValue(languageDefinition).ToString());
+                    string formattedPropertyName = Regex.Replace(propertyInfo.Name, "([A-Z])", ".$1", RegexOptions.Compiled).Trim().ToLower().Substring(1);
+                    object propertyValue = propertyInfo.GetValue(languageDefinition.Properties);
+
+                    if (propertyValue != null)
+                    {
+                        scintilla.SetProperty(formattedPropertyName, propertyValue.ToString());
+                    }
                 }
             }
 
