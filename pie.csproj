@@ -142,6 +142,9 @@
     <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
       <HintPath>packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
     </Reference>
+    <Reference Include="Krypton.Toolkit">
+      <HintPath>..\tiramisu\packages\Krypton.Toolkit.85.24.8.239\lib\net47\Krypton.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="LibGit2Sharp, Version=0.27.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
       <HintPath>packages\LibGit2Sharp.0.27.2\lib\net472\LibGit2Sharp.dll</HintPath>
     </Reference>

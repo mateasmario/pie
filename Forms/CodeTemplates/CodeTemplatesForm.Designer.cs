@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonCheckButton9 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.kryptonCheckButton10 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.kryptonCheckButton5 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
@@ -41,7 +42,6 @@
             this.kryptonCheckButton1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -67,6 +67,13 @@
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.Size = new System.Drawing.Size(412, 416);
             this.kryptonPanel1.TabIndex = 8;
+            // 
+            // kryptonPanel2
+            // 
+            this.kryptonPanel2.Location = new System.Drawing.Point(12, 76);
+            this.kryptonPanel2.Name = "kryptonPanel2";
+            this.kryptonPanel2.Size = new System.Drawing.Size(391, 285);
+            this.kryptonPanel2.TabIndex = 28;
             // 
             // kryptonCheckButton9
             // 
@@ -168,13 +175,6 @@
             this.kryptonButton1.TabIndex = 8;
             this.kryptonButton1.Values.Text = "Save";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
-            // 
-            // kryptonPanel2
-            // 
-            this.kryptonPanel2.Location = new System.Drawing.Point(12, 76);
-            this.kryptonPanel2.Name = "kryptonPanel2";
-            this.kryptonPanel2.Size = new System.Drawing.Size(391, 285);
-            this.kryptonPanel2.TabIndex = 28;
             // 
             // CodeTemplatesForm
             // 

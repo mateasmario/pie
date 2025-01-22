@@ -174,7 +174,7 @@ namespace pie
             try
             {
                 ProcessCustomThemes();
-                SelectedTheme selectedTheme = configurationService.GetObjectFromFile<SelectedTheme>("config/theme.json");
+                SelectedTheme selectedTheme = configurationService.GetObjectFromFile<SelectedTheme>(AppDomain.CurrentDomain.BaseDirectory + "config/theme.json");
 
                 if (selectedTheme.Name == "Dark")
                 {
@@ -218,7 +218,7 @@ namespace pie
             }
 
 
-            Globals.themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>("config/themes", "json");
+            Globals.themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>("config\\themes", "json");
 
             foreach (ThemeInfo themeInfo in Globals.themeInfos)
             {
@@ -285,7 +285,7 @@ namespace pie
         {
             try
             {
-                Globals.editorProperties = configurationService.GetObjectFromFile<EditorProperties>("config/scintilla.json");
+                Globals.editorProperties = configurationService.GetObjectFromFile<EditorProperties>(AppDomain.CurrentDomain.BaseDirectory + "config/scintilla.json");
 
                 if (Globals.editorProperties.Wordwrap)
                 {
@@ -1581,7 +1581,7 @@ namespace pie
         {
             try
             {
-                Globals.languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config/mappings.json");
+                Globals.languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config\\mappings.json");
             }
             catch (FileNotFoundException ex)
             {

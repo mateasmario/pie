@@ -57,6 +57,17 @@ namespace pie.Forms.CodeTemplates
             ColorizeButton(kryptonCheckButton8);
             ColorizeButton(kryptonCheckButton9);
             ColorizeButton(kryptonCheckButton10);
+
+            kryptonCheckButton1.Click += kryptonCheckButton_Click;
+            kryptonCheckButton2.Click += kryptonCheckButton_Click;
+            kryptonCheckButton3.Click += kryptonCheckButton_Click;
+            kryptonCheckButton4.Click += kryptonCheckButton_Click;
+            kryptonCheckButton5.Click += kryptonCheckButton_Click;
+            kryptonCheckButton6.Click += kryptonCheckButton_Click;
+            kryptonCheckButton7.Click += kryptonCheckButton_Click;
+            kryptonCheckButton8.Click += kryptonCheckButton_Click;
+            kryptonCheckButton9.Click += kryptonCheckButton_Click;
+            kryptonCheckButton10.Click += kryptonCheckButton_Click;
         }
 
         private void kryptonCheckButton_Click(object sender, EventArgs e)
