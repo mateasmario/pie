@@ -1,35 +1,34 @@
 # ![pie](https://i.imgur.com/41INRl7.png) Pie: A General Purpose Code Editor Focused on Simplicity
 
-### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Short Introduction
-pie is a combination between a text-editor (like Notepad) and an over-simplified IDE, that allows super-fast modification of code files (or other types of files), whenever you don't feel the need to wait for a big IDE to open.
+![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie/bug) ![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie/enhancement) ![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie/documentation)
 
-pie has integrated tabs, in order to give the user the ability to manipulate multiple files at once, without keeping more than one instance of the app open in the same time.
+Pie is a combination between a text-editor (like Notepad) and an over-simplified IDE, that allows super-fast modification of code files (or other types of files), whenever you don't feel the need to wait for a big IDE to open. It features integrated tabs, in order to give the user the ability to manipulate multiple files at once, without keeping more than one instance of the app open in the same time.
 
-pie also has several Build, Run & Git shortcuts integrated, making your life easier whenever you feel the urge to run a command through the terminal. In case you still need a terminal, pie also has this option!
+Pie also has several Build, Run & Git shortcuts integrated, making your life easier whenever you feel the urge to run a command through the terminal. In case you still need a terminal, pie also has this option!
 
 ![image](https://i.imgur.com/B533oZ0.png)
 
-### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Beautiful design
+## Beautiful design
 pie is built in C# using Microsoft's .NET Winforms technology. The main controls use the **Krypton Suite**, available at: https://github.com/ComponentFactory/Krypton. Without Krypton, pie wouldn't be as awesome as it is now.
 
-### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Simple, but powerful code editor
+## Simple, but powerful code editor
 As for the boxes you use in order to write content to a file, these were at the beginning instances of **FastColoredTextBox**, available at: https://github.com/PavelTorgashov/FastColoredTextBox. FastColoredTextbox isn't as advanced as professional editors such as Visual Studio Code or IntelliJ, as it doesn't provide autocomplete features or advanced code highlighting, but it is still better than having none of these features at all. Later, I have upgraded to **ScintilaNET**, a .NET implementation of the well-known Scintilla, available at: https://github.com/jacobslusser/ScintillaNET.
 
-### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Code highlights and autocomplete
+## Code highlights and autocomplete
 pie automatically highlights the code in your files. At this moment, it supports some basic ScintillaNET user-submitted highlights, available on https://github.com/jacobslusser/ScintillaNET/wiki/User-Submitted-Recipes and https://github.com/VPKSoft/ScintillaLexers/.
 
 The autocomplete feature is also provided through an implementation of AutocompleteMenu-ScintillaNet (see https://github.com/Ahmad45123/AutoCompleteMenu-ScintillaNET).
 
 ![image](https://i.imgur.com/PrC4Gz1.png)
 
-### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Switch between themes
+## Switch between themes
 pie allows you to change all of its colors. From syntax highlighting to buttons. It provides you several pre-installed themes, but if you feel creative, you can easily add new themes (or modify the existing ones).
 
 ![image](https://i.imgur.com/7gE6UzG.png)
 
 Each `.json` file added to the `config/themes` directory will be made available in the list of pie themes. `Name.json` will be automatically converted to a new theme called `Name`.
 
-### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Terminal
+## Terminal
 A Terminal object is actually an instance of **ConEmu Inside** (GitHub Page: https://github.com/Maximus5/conemu-inside), available at: https://www.nuget.org/packages/ConEmu.Control.WinForms.
 
 The terminal tab control can be accessed via `Interface` (or right click somewhere in your editor) -> `Show Terminal Tab`, or `Ctrl` + `B`.
@@ -37,7 +36,7 @@ Right click the tab control (either a tab or the empty slots next to the tab) to
 
 ![image](https://i.imgur.com/5dVZlQZ.png)
 
-### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Build, Run, and Git functionalities
+## Build, Run, and Git functionalities
 You can use both the terminal or the integrated commands (from `Build`, `Run` and `Git` tabs in the upper menu), in order to run some common commands.
 
 ![image](https://i.imgur.com/f7KGSY8.png)
@@ -54,7 +53,7 @@ Finally, the `Show Git Tab` button from the `Interface` tab allows you to manage
 
 ![image](https://i.imgur.com/n8hB6Zm.png)
 
-### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Execute SQL queries against a database
+## Execute SQL queries against a database
 
 pie provides you the ability to run simple SQL queries against *MySQL*, *MSSQL* or *PostgreSQL* databases. By navigating to `Preferences` -> `Databases`, you will be provided an option to store all of your database connections.
 
