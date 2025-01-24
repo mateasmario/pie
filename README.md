@@ -1,4 +1,4 @@
-# ![pie](https://i.imgur.com/7310ZBJ.png)
+# ![pie](https://i.imgur.com/41INRl7.png) Pie: A General Purpose Code Editor Focused on Simplicity
 
 ### ![arrow-right](https://i.imgur.com/4Eg9yg9.png) Short Introduction
 pie is a combination between a text-editor (like Notepad) and an over-simplified IDE, that allows super-fast modification of code files (or other types of files), whenever you don't feel the need to wait for a big IDE to open.
