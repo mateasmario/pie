@@ -155,6 +155,7 @@ namespace pie
             ProcessDatabaseConnections();
             ProcessLanguageMappings();
             ProcessLanguageDefinitions();
+            ProcessCodeTemplates();
         }
 
         private void ProcessGitCredentials()
@@ -1587,15 +1588,42 @@ namespace pie
             {
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/mappings.json", "[]");
             }
-            catch (ConfigurationException ex)
+            catch (ConfigurationException)
             {
-                ShowNotification("There was an error in reading the build commands. Please check the syntax of the .json configuration.");
+                ShowNotification("There was an error in reading the language mappings. Please check the syntax of the .json configuration.");
             }
         }
 
         private void ProcessLanguageDefinitions()
         {
-            Globals.languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>("config/languages", "json");
+            try
+            {
+                Globals.languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>("config/languages", "json");
+            }
+            catch (FileNotFoundException)
+            {
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/mappings.json", "[]");
+            }
+            catch (ConfigurationException)
+            {
+                ShowNotification("There was an error in reading the language definitions. Please check the syntax of the .json configuration.");
+            }
+        }
+
+        private void ProcessCodeTemplates()
+        {
+            try
+            {
+                Globals.codeTemplates = configurationService.GetArrayFromFile<CodeTemplate>("config\\templates.json");
+            }
+            catch (FileNotFoundException ex)
+            {
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/mappings.json", "[]");
+            }
+            catch (ConfigurationException)
+            {
+                ShowNotification("There was an error in reading the code templates. Please check the syntax of the .json configuration.");
+            }
         }
 
         // [Event] Form Loading
@@ -3443,6 +3471,7 @@ namespace pie
         private void codeTemplatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CodeTemplatesForm codeTemplatesForm = new CodeTemplatesForm();
+            codeTemplatesForm.Input = Globals.codeTemplates;
             codeTemplatesForm.ShowDialog();
         }
     }

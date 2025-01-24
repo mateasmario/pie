@@ -58,7 +58,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>pieblue.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <Win32Resource>
@@ -645,6 +645,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon.ico" />
+    <Content Include="icons.ico" />
+    <Content Include="pie.ico" />
     <Content Include="pieblue.ico" />
     <None Include="Resources\sync.png" />
     <None Include="Resources\cursor-down.png" />

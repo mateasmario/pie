@@ -671,7 +671,7 @@
             // 
             this.manageBuildCommandsToolStripMenuItem.Image = global::pie.Properties.Resources.gears;
             this.manageBuildCommandsToolStripMenuItem.Name = "manageBuildCommandsToolStripMenuItem";
-            this.manageBuildCommandsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manageBuildCommandsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.manageBuildCommandsToolStripMenuItem.Text = "Build Commands";
             this.manageBuildCommandsToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
@@ -679,7 +679,7 @@
             // 
             this.databasesToolStripMenuItem.Image = global::pie.Properties.Resources.database;
             this.databasesToolStripMenuItem.Name = "databasesToolStripMenuItem";
-            this.databasesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.databasesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.databasesToolStripMenuItem.Text = "Databases";
             this.databasesToolStripMenuItem.Click += new System.EventHandler(this.databasesToolStripMenuItem_Click);
             // 
@@ -687,7 +687,7 @@
             // 
             this.codeTemplatesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("codeTemplatesToolStripMenuItem.Image")));
             this.codeTemplatesToolStripMenuItem.Name = "codeTemplatesToolStripMenuItem";
-            this.codeTemplatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.codeTemplatesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.codeTemplatesToolStripMenuItem.Text = "Code Templates";
             this.codeTemplatesToolStripMenuItem.Click += new System.EventHandler(this.codeTemplatesToolStripMenuItem_Click);
             // 
@@ -695,7 +695,7 @@
             // 
             this.manageCommitCredentialsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageCommitCredentialsToolStripMenuItem.Image")));
             this.manageCommitCredentialsToolStripMenuItem.Name = "manageCommitCredentialsToolStripMenuItem";
-            this.manageCommitCredentialsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manageCommitCredentialsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.manageCommitCredentialsToolStripMenuItem.Text = "Git Settings";
             this.manageCommitCredentialsToolStripMenuItem.Click += new System.EventHandler(this.manageCommitCredentialsToolStripMenuItem_Click);
             // 
@@ -703,7 +703,7 @@
             // 
             this.wordWrapToolStripMenuItem.Image = global::pie.Properties.Resources.paragraph;
             this.wordWrapToolStripMenuItem.Name = "wordWrapToolStripMenuItem";
-            this.wordWrapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wordWrapToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.wordWrapToolStripMenuItem.Text = "Enable Word Wrap";
             this.wordWrapToolStripMenuItem.Click += new System.EventHandler(this.wordWrapToolStripMenuItem_Click);
             // 
@@ -711,7 +711,7 @@
             // 
             this.enableAutosaveToolStripMenuItem.Image = global::pie.Properties.Resources.diskette__1_;
             this.enableAutosaveToolStripMenuItem.Name = "enableAutosaveToolStripMenuItem";
-            this.enableAutosaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.enableAutosaveToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.enableAutosaveToolStripMenuItem.Text = "Enable Autosave";
             this.enableAutosaveToolStripMenuItem.Click += new System.EventHandler(this.enableAutosaveToolStripMenuItem_Click);
             // 
@@ -731,7 +731,6 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
