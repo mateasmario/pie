@@ -113,5 +113,8 @@ namespace pie
 
         // Format
         public static List<Formatter> formatters;
+
+        // Code Templates
+        public static List<CodeTemplate> codeTemplates;
     }
 }

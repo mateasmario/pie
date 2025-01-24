@@ -19,7 +19,9 @@
 
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using pie.Services;
+using pie.Classes;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -40,6 +42,11 @@ namespace pie.Forms.CodeTemplates
     public partial class CodeTemplatesForm : KryptonForm
     {
         private ThemeService themeService = new ThemeService();
+        private ConfigurationService configurationService = new ConfigurationService();
+
+        private int selectedIndex;
+
+        public List<CodeTemplate> Input { get; set; }
 
         public CodeTemplatesForm()
         {
@@ -83,7 +90,11 @@ namespace pie.Forms.CodeTemplates
             kryptonCheckButton9.Checked = false;
             kryptonCheckButton10.Checked = false;
 
-            ((KryptonCheckButton)sender).Checked = true;
+            KryptonCheckButton kryptonCheckButton = (KryptonCheckButton)sender;
+            kryptonCheckButton.Checked = true;
+
+            selectedIndex = Convert.ToInt32(kryptonCheckButton.Name.Remove(0, 18)) - 1;
+            SyncScintillaWithSelectedTemplate();
         }
 
         private void CodeTemplatesForm_Load(object sender, EventArgs e)
@@ -108,6 +119,8 @@ namespace pie.Forms.CodeTemplates
             TextArea.Margins[0].Width = 24;
             TextArea.Parent = kryptonPanel2;
             TextArea.Dock = DockStyle.Fill;
+
+            SyncScintillaWithSelectedTemplate();
         }
 
         private void ColorizeButton(KryptonCheckButton kryptonCheckButton)
@@ -129,6 +142,20 @@ namespace pie.Forms.CodeTemplates
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void SyncScintillaWithSelectedTemplate()
+        {
+            CodeTemplate codeTemplate = Input.Find(t => t.Index == selectedIndex);
+
+            if (codeTemplate != null)
+            {
+                ((Scintilla)kryptonPanel2.Controls[0]).Text = codeTemplate.Content;
+            }
+            else
+            {
+                ((Scintilla)kryptonPanel2.Controls[0]).Text = "";
+            }
         }
     }
 }

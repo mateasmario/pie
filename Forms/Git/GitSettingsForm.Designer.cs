@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GitSettingsForm));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.remoteServerPasswordTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.remoteServerUsernameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -119,7 +120,6 @@
             this.saveButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.saveButton.OverrideFocus.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Inherit;
             this.saveButton.Size = new System.Drawing.Size(79, 25);
             this.saveButton.TabIndex = 4;
             this.saveButton.Values.Text = "Save";
@@ -148,6 +148,7 @@
             this.ClientSize = new System.Drawing.Size(411, 254);
             this.Controls.Add(this.kryptonPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "GitSettingsForm";
             this.ShowIcon = false;
