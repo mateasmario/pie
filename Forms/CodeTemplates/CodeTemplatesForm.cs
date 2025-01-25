@@ -20,6 +20,7 @@
 using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Drawing;
 using pie.Services;
 using pie.Classes;
 
@@ -42,11 +43,12 @@ namespace pie.Forms.CodeTemplates
     public partial class CodeTemplatesForm : KryptonForm
     {
         private ThemeService themeService = new ThemeService();
-        private ConfigurationService configurationService = new ConfigurationService();
 
-        private int selectedIndex;
+        private int selectedIndex = -1;
 
         public List<CodeTemplate> Input { get; set; }
+        private List<CodeTemplate> Working { get; set; }
+        public List<CodeTemplate> Output { get; private set; }
 
         public CodeTemplatesForm()
         {
@@ -54,73 +56,112 @@ namespace pie.Forms.CodeTemplates
 
             themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
 
-            ColorizeButton(kryptonCheckButton1);
-            ColorizeButton(kryptonCheckButton2);
-            ColorizeButton(kryptonCheckButton3);
-            ColorizeButton(kryptonCheckButton4);
-            ColorizeButton(kryptonCheckButton5);
-            ColorizeButton(kryptonCheckButton6);
-            ColorizeButton(kryptonCheckButton7);
-            ColorizeButton(kryptonCheckButton8);
-            ColorizeButton(kryptonCheckButton9);
-            ColorizeButton(kryptonCheckButton10);
+            ColorizeButton(indexButton1);
+            ColorizeButton(indexButton2);
+            ColorizeButton(indexButton4);
+            ColorizeButton(indexButton3);
+            ColorizeButton(indexButton8);
+            ColorizeButton(indexButton7);
+            ColorizeButton(indexButton6);
+            ColorizeButton(indexButton5);
+            ColorizeButton(indexButton0);
+            ColorizeButton(indexButton9);
 
-            kryptonCheckButton1.Click += kryptonCheckButton_Click;
-            kryptonCheckButton2.Click += kryptonCheckButton_Click;
-            kryptonCheckButton3.Click += kryptonCheckButton_Click;
-            kryptonCheckButton4.Click += kryptonCheckButton_Click;
-            kryptonCheckButton5.Click += kryptonCheckButton_Click;
-            kryptonCheckButton6.Click += kryptonCheckButton_Click;
-            kryptonCheckButton7.Click += kryptonCheckButton_Click;
-            kryptonCheckButton8.Click += kryptonCheckButton_Click;
-            kryptonCheckButton9.Click += kryptonCheckButton_Click;
-            kryptonCheckButton10.Click += kryptonCheckButton_Click;
+            indexButton1.Click += kryptonCheckButton_Click;
+            indexButton2.Click += kryptonCheckButton_Click;
+            indexButton4.Click += kryptonCheckButton_Click;
+            indexButton3.Click += kryptonCheckButton_Click;
+            indexButton8.Click += kryptonCheckButton_Click;
+            indexButton7.Click += kryptonCheckButton_Click;
+            indexButton6.Click += kryptonCheckButton_Click;
+            indexButton5.Click += kryptonCheckButton_Click;
+            indexButton0.Click += kryptonCheckButton_Click;
+            indexButton9.Click += kryptonCheckButton_Click;
+        }
+
+        private void SaveCurrentTemplate()
+        {
+            CodeTemplate currentTemplate = Working.Find(codeTemplate => codeTemplate.Index == selectedIndex);
+            string text = ((Scintilla)textAreaPanel.Controls[1]).Text;
+
+            if (text != "")
+            {
+                if (currentTemplate != null)
+                {
+                    currentTemplate.Content = text;
+                }
+                else
+                {
+                    Working.Add(new CodeTemplate(selectedIndex, text));
+                }
+            }
+            else
+            {
+                if (currentTemplate != null)
+                {
+                    Working.Remove(currentTemplate);
+                }
+            }
         }
 
         private void kryptonCheckButton_Click(object sender, EventArgs e)
         {
-            kryptonCheckButton1.Checked = false;
-            kryptonCheckButton2.Checked = false;
-            kryptonCheckButton3.Checked = false;
-            kryptonCheckButton4.Checked = false;
-            kryptonCheckButton5.Checked = false;
-            kryptonCheckButton6.Checked = false;
-            kryptonCheckButton7.Checked = false;
-            kryptonCheckButton8.Checked = false;
-            kryptonCheckButton9.Checked = false;
-            kryptonCheckButton10.Checked = false;
+            indexButton1.Checked = false;
+            indexButton2.Checked = false;
+            indexButton4.Checked = false;
+            indexButton3.Checked = false;
+            indexButton8.Checked = false;
+            indexButton7.Checked = false;
+            indexButton6.Checked = false;
+            indexButton5.Checked = false;
+            indexButton0.Checked = false;
+            indexButton9.Checked = false;
 
             KryptonCheckButton kryptonCheckButton = (KryptonCheckButton)sender;
             kryptonCheckButton.Checked = true;
 
-            selectedIndex = Convert.ToInt32(kryptonCheckButton.Name.Remove(0, 18)) - 1;
-            SyncScintillaWithSelectedTemplate();
+            if (selectedIndex == -1)
+            {
+                placeholderLabel.Visible = false;
+
+                Scintilla TextArea = new Scintilla();
+
+                TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
+                TextArea.StyleResetDefault();
+                TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
+                TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
+                TextArea.Styles[ScintillaNET.Style.Default].ForeColor = Globals.theme.Fore;
+                TextArea.CaretForeColor = Globals.theme.Fore;
+                TextArea.Styles[ScintillaNET.Style.Default].BackColor = Globals.theme.Primary;
+                TextArea.SetSelectionBackColor(true, Globals.theme.Selection);
+                TextArea.CaretLineBackColor = Globals.theme.CaretLineBack;
+                TextArea.StyleClearAll();
+                TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = Globals.theme.NumberMargin;
+                TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = Globals.theme.Fore;
+                TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = Globals.theme.Fore;
+                TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = Globals.theme.NumberMargin;
+
+                TextArea.Margins[0].Width = 24;
+                TextArea.Parent = textAreaPanel;
+                TextArea.Dock = DockStyle.Fill;
+            }
+            else
+            {
+                SaveCurrentTemplate();
+            }
+
+            selectedIndex = Convert.ToInt32(kryptonCheckButton.Name.Remove(0, 11));
+            SyncScintillaWithSelectedTemplate((Scintilla)textAreaPanel.Controls[1]);
         }
 
         private void CodeTemplatesForm_Load(object sender, EventArgs e)
         {
-            Scintilla TextArea = new Scintilla();
+            Working = Input.ConvertAll(codeTemplate => codeTemplate.Clone());
+            Output = Input;
 
-            TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
-            TextArea.StyleResetDefault();
-            TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
-            TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
-            TextArea.Styles[ScintillaNET.Style.Default].ForeColor = Globals.theme.Fore;
-            TextArea.CaretForeColor = Globals.theme.Fore;
-            TextArea.Styles[ScintillaNET.Style.Default].BackColor = Globals.theme.Primary;
-            TextArea.SetSelectionBackColor(true, Globals.theme.Selection);
-            TextArea.CaretLineBackColor = Globals.theme.CaretLineBack;
-            TextArea.StyleClearAll();
-            TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = Globals.theme.NumberMargin;
-            TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = Globals.theme.Fore;
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = Globals.theme.Fore;
-            TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = Globals.theme.NumberMargin;
-
-            TextArea.Margins[0].Width = 24;
-            TextArea.Parent = kryptonPanel2;
-            TextArea.Dock = DockStyle.Fill;
-
-            SyncScintillaWithSelectedTemplate();
+            int x = (textAreaPanel.Width - placeholderLabel.Width) / 2;
+            int y = (textAreaPanel.Height - placeholderLabel.Height) / 2;
+            placeholderLabel.Location = new Point(x,y);
         }
 
         private void ColorizeButton(KryptonCheckButton kryptonCheckButton)
@@ -141,20 +182,22 @@ namespace pie.Forms.CodeTemplates
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
+            SaveCurrentTemplate();
+            Output = Working;
             this.Close();
         }
 
-        private void SyncScintillaWithSelectedTemplate()
+        private void SyncScintillaWithSelectedTemplate(Scintilla scintilla)
         {
-            CodeTemplate codeTemplate = Input.Find(t => t.Index == selectedIndex);
+            CodeTemplate codeTemplate = Working.Find(t => t.Index == selectedIndex);
 
             if (codeTemplate != null)
             {
-                ((Scintilla)kryptonPanel2.Controls[0]).Text = codeTemplate.Content;
+                scintilla.Text = codeTemplate.Content;
             }
             else
             {
-                ((Scintilla)kryptonPanel2.Controls[0]).Text = "";
+                scintilla.Text = "";
             }
         }
     }

@@ -3473,6 +3473,8 @@ namespace pie
             CodeTemplatesForm codeTemplatesForm = new CodeTemplatesForm();
             codeTemplatesForm.Input = Globals.codeTemplates;
             codeTemplatesForm.ShowDialog();
+            configurationService.WriteToFile("config\\templates.json", codeTemplatesForm.Output);
+            Globals.codeTemplates = codeTemplatesForm.Output;
         }
     }
 }
