@@ -403,6 +403,7 @@
     <Compile Include="Classes\Configuration\FileBased\MultiFileConfigurationEntity.cs" />
     <Compile Include="Classes\Configuration\FileBased\ConfigurationEntity.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\Formatter.cs" />
+    <Compile Include="Classes\Configuration\ICloneable.cs" />
     <Compile Include="Classes\Helpers\DynamicLibraryValidator.cs" />
     <Compile Include="Classes\TransferObjects\DatabaseResponse.cs" />
     <Compile Include="Classes\Helpers\ControlHelper.cs" />
