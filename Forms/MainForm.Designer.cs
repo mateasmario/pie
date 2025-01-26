@@ -584,8 +584,8 @@
             this.renderHTMLFilehtmlToolStripMenuItem,
             this.renderMarkdownmdToolStripMenuItem});
             this.buildToolStripMenuItem1.Name = "buildToolStripMenuItem1";
-            this.buildToolStripMenuItem1.Size = new System.Drawing.Size(46, 20);
-            this.buildToolStripMenuItem1.Text = "Build";
+            this.buildToolStripMenuItem1.Size = new System.Drawing.Size(83, 20);
+            this.buildToolStripMenuItem1.Text = "Build && Run";
             // 
             // toolStripMenuItem2
             // 
@@ -731,6 +731,7 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);

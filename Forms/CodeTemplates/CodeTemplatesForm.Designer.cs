@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CodeTemplatesForm));
             this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.textAreaPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.placeholderLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.indexButton0 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.indexButton9 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.indexButton8 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
@@ -43,7 +44,6 @@
             this.indexButton1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.tipLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.placeholderLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textAreaPanel)).BeginInit();
@@ -78,6 +78,14 @@
             this.textAreaPanel.Name = "textAreaPanel";
             this.textAreaPanel.Size = new System.Drawing.Size(391, 285);
             this.textAreaPanel.TabIndex = 28;
+            // 
+            // placeholderLabel
+            // 
+            this.placeholderLabel.Location = new System.Drawing.Point(105, 126);
+            this.placeholderLabel.Name = "placeholderLabel";
+            this.placeholderLabel.Size = new System.Drawing.Size(177, 20);
+            this.placeholderLabel.TabIndex = 0;
+            this.placeholderLabel.Values.Text = "Select a hotkey to begin with...";
             // 
             // indexButton0
             // 
@@ -170,6 +178,7 @@
             // 
             // saveButton
             // 
+            this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(324, 376);
             this.saveButton.Name = "saveButton";
             this.saveButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
@@ -179,14 +188,6 @@
             this.saveButton.TabIndex = 8;
             this.saveButton.Values.Text = "Save";
             this.saveButton.Click += new System.EventHandler(this.kryptonButton1_Click);
-            // 
-            // placeholderLabel
-            // 
-            this.placeholderLabel.Location = new System.Drawing.Point(105, 126);
-            this.placeholderLabel.Name = "placeholderLabel";
-            this.placeholderLabel.Size = new System.Drawing.Size(177, 20);
-            this.placeholderLabel.TabIndex = 0;
-            this.placeholderLabel.Values.Text = "Select a hotkey to begin with...";
             // 
             // CodeTemplatesForm
             // 
