@@ -152,6 +152,8 @@ namespace pie.Forms.CodeTemplates
 
             selectedIndex = Convert.ToInt32(kryptonCheckButton.Name.Remove(0, 11));
             SyncScintillaWithSelectedTemplate((Scintilla)textAreaPanel.Controls[1]);
+
+            saveButton.Enabled = true;
         }
 
         private void CodeTemplatesForm_Load(object sender, EventArgs e)

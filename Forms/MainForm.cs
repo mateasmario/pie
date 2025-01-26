@@ -1927,6 +1927,20 @@ namespace pie
                         TextArea.SelectionStart = selectionStart == 0 ? selectionStart : selectionStart + 1;
                     }
                 }
+                else if (e.KeyCode.ToString().Length >= 2 && e.KeyCode.ToString()[1] >= '0' && e.KeyCode.ToString()[1] <= '9' && e.Modifiers == Keys.Control)
+                {
+                    CodeTemplate codeTemplate = Globals.codeTemplates.Find(template => template.Index == Convert.ToInt32(e.KeyCode.ToString().Substring(1, 1)));
+
+                    if (codeTemplate != null)
+                    {
+                        Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+
+                        int selectionEnd = scintilla.SelectionEnd;
+                        scintilla.Text = scintilla.Text.Substring(0, scintilla.SelectionEnd) + codeTemplate.Content + scintilla.Text.Substring(scintilla.SelectionEnd);
+                        scintilla.SelectionStart = selectionEnd + codeTemplate.Content.Length;
+                        scintilla.SelectionEnd = scintilla.SelectionStart;
+                    }
+                }
             }
             if (e.Modifiers == (Keys.Control | Keys.Alt))
             {
