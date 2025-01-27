@@ -1,7 +1,15 @@
 using System.Linq;
 
 public class TrimLines {
-    public string format(string text) {
+    public string Category() {
+        return "Character";
+    }
+    
+    public string Description() {
+        return "Removes trailing whitespaces from every line.";
+    }
+    
+    public string Format(string text) {
         string[] words = text.Split('\n', ' ');
 
         return string.Join("", words.Select(word => word.Length > 0 ? 

@@ -1,7 +1,15 @@
 using System.Linq;
 
 public class ConvertNewlineToSpace {
-    public string format(string text) {
+    public string Category() {
+        return "Line";
+    }
+    
+    public string Description() {
+        return "Replaces every new line with a space.";
+    }
+    
+    public string Format(string text) {
         string[] lines = text.Split('\n');
 
         for (int i = 0; i < lines.Length; i++)

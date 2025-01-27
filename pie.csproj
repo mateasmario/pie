@@ -404,7 +404,7 @@
     <Compile Include="Classes\Configuration\FileBased\ConfigurationEntity.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\Formatter.cs" />
     <Compile Include="Classes\Configuration\ICloneable.cs" />
-    <Compile Include="Classes\Helpers\DynamicLibraryValidator.cs" />
+    <Compile Include="Classes\Helpers\Validators\MethodValidator.cs" />
     <Compile Include="Classes\TransferObjects\DatabaseResponse.cs" />
     <Compile Include="Classes\Helpers\ControlHelper.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\DatabaseConnection.cs" />
@@ -420,7 +420,6 @@
     <Compile Include="Classes\Configuration\ReleaseInfo.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\ThemeInfo.cs" />
     <Compile Include="Classes\Helpers\Triple.cs" />
-    <Compile Include="Enums\DynamicLibraryValidatorFlag.cs" />
     <Compile Include="Enums\DatabaseType.cs" />
     <Compile Include="Enums\FormatOptionCategory.cs" />
     <Compile Include="Exceptions\IncorrectPublicMethodArgumentTypeException.cs" />

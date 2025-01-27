@@ -255,7 +255,7 @@ namespace pie.Services
             }
         }
 
-        public List<T> LoadLinkLibrariesFromMultipleFiles<T>(string directory, DynamicLibraryValidator validator) where T : DynamicLibraryConfigurationEntity, new()
+        public List<T> LoadLinkLibrariesFromMultipleFiles<T>(string directory, MethodValidator nameValidator) where T : DynamicLibraryConfigurationEntity, new()
         {
             List<T> dlls = new List<T>();
 
@@ -279,12 +279,29 @@ namespace pie.Services
                         if (externalType != null)
                         {
                             // Validate
-
-                            MethodInfo method = externalType.GetMethod(validator.MethodName);
+                            MethodInfo method = externalType.GetMethod(nameValidator.MethodName);
                             dll = new T();
                             dll.Name = className;
                             dll.Instance = instance;
                             dll.MethodInfo = method;
+
+                            MethodValidator descriptionValidator = new MethodValidator.Builder()
+                                .WithMethodName("Description")
+                                .WithMethodParameterCount(0)
+                                .WithMethodReturnType(typeof(string))
+                                .Build();
+
+                            descriptionValidator.Validate(externalType);
+                            dll.Description = (string)externalType.GetMethod(descriptionValidator.MethodName).Invoke(instance, new object[] { });
+
+                            MethodValidator categoryValidator = new MethodValidator.Builder()
+                                .WithMethodName("Category")
+                                .WithMethodParameterCount(0)
+                                .WithMethodReturnType(typeof(string))
+                                .Build();
+
+                            categoryValidator.Validate(externalType);
+                            dll.Category = (string)externalType.GetMethod(categoryValidator.MethodName).Invoke(instance, new object[] { });
 
                             dlls.Add(dll);
                         }

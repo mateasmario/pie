@@ -2,7 +2,15 @@ using System.Linq;
 using System.Collections.Generic;
 
 public class ReverseLineOrder {
-    public string format(string text) {
+    public string Category() {
+        return "Sort";
+    }
+    
+    public string Description() {
+        return "Reverses line order.";
+    }
+    
+    public string Format(string text) {
         if (text.Equals(""))
         {
             return "";
