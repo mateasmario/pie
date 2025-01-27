@@ -25,6 +25,8 @@ namespace pie.Classes.ConfigurationEntities
     {
         public object Instance { get; set; }
         public MethodInfo MethodInfo { get; set; }
+        public string Description { get; set; }
+        public string Category { get; set; }
         public string InvokeMethod(string argument)
         {
             return (string)this.MethodInfo.Invoke(this.Instance, new object[] { argument });

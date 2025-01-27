@@ -313,16 +313,8 @@ namespace pie
             {
                 Globals.formatters = configurationService.LoadLinkLibrariesFromMultipleFiles<Formatter>(
                                     "formatters",
-                                    new DynamicLibraryValidator.Builder()
-                                    .WithFlags(
-                                        new DynamicLibraryValidatorFlag[]{
-                                                DynamicLibraryValidatorFlag.VALIDATE_METHOD_COUNT,
-                                                DynamicLibraryValidatorFlag.VALIDATE_METHOD_PARAMETER_COUNT,
-                                                DynamicLibraryValidatorFlag.VALIDATE_METHOD_RETURN_TYPE
-                                        }
-                                    )
-                                    .WithMethodName("format")
-                                    .WithMethodCount(5)
+                                    new MethodValidator.Builder()
+                                    .WithMethodName("Format")
                                     .WithMethodParameterCount(1)
                                     .WithMethodReturnType(typeof(string))
                                     .Build());

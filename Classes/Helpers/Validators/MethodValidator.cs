@@ -18,53 +18,25 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using pie.Enums;
 using pie.Exceptions;
 
 namespace pie.Classes
 {
-    public class DynamicLibraryValidator
+    public class MethodValidator
     {
-        public DynamicLibraryValidatorFlag[] Flags { get; private set; }
         public string MethodName { get; private set; }
-        public int MethodCount { get; private set; }
         public int MethodParameterCount { get; private set; }
         public Type MethodReturnType { get; private set; }
 
-        private DynamicLibraryValidator(DynamicLibraryValidatorFlag[] flags, string methodName, int methodCount, int methodParameterCount, Type methodReturnType) {
-            Flags = flags;
+        private MethodValidator(string methodName, int methodParameterCount, Type methodReturnType) {
             MethodName = methodName;
-            MethodCount = methodCount;
             MethodParameterCount = methodParameterCount;
             MethodReturnType = methodReturnType;
         }
 
         public void Validate(Type externalType)
         {
-            List<DynamicLibraryValidatorFlag> flagList = Flags.OfType<DynamicLibraryValidatorFlag>().ToList();
-
-            // Validate number of methods: should be only one public
-            MethodInfo[] methodInfos = externalType.GetMethods();
-
-            if (flagList.Contains(DynamicLibraryValidatorFlag.VALIDATE_METHOD_COUNT))
-            {
-                int count = 0;
-                foreach (MethodInfo methodInfo in methodInfos)
-                {
-                    if (methodInfo.IsPublic)
-                    {
-                        count++;
-                        if (count > MethodCount)
-                        {
-                            throw new IncorrectPublicMethodCountException();
-                        }
-                    }
-                }
-            }
-
             // Validate method name
             MethodInfo method = externalType.GetMethod(MethodName);
 
@@ -74,13 +46,13 @@ namespace pie.Classes
             }
 
             // Validate method return type: must be TYPE string, not CLASS String
-            if (flagList.Contains(DynamicLibraryValidatorFlag.VALIDATE_METHOD_RETURN_TYPE) && method.ReturnType != MethodReturnType)
+            if (method.ReturnType != MethodReturnType)
             {
                 throw new IncorrectPublicMethodReturnTypeException();
             }
 
             // Validate method parameter number (must be one)
-            if (flagList.Contains(DynamicLibraryValidatorFlag.VALIDATE_METHOD_PARAMETER_COUNT) && method.GetParameters().Length != MethodParameterCount)
+            if (method.GetParameters().Length != MethodParameterCount)
             {
                 throw new IncorrectPublicMethodArgumentNumberException();
             }
@@ -88,27 +60,13 @@ namespace pie.Classes
 
         public class Builder
         {
-            private DynamicLibraryValidatorFlag[] Flags { get; set; }
             private string MethodName { get; set; }
-            private int MethodCount { get; set; }
             private int MethodParameterCount { get; set; }
             private Type MethodReturnType { get; set; }
-
-            public Builder WithFlags(DynamicLibraryValidatorFlag[] flags)
-            {
-                Flags = flags;
-                return this;
-            }
 
             public Builder WithMethodName(string methodName)
             {
                 MethodName = methodName;
-                return this;
-            }
-
-            public Builder WithMethodCount(int methodCount)
-            {
-                MethodCount = methodCount;
                 return this;
             }
 
@@ -124,9 +82,9 @@ namespace pie.Classes
                 return this;
             }
 
-            public DynamicLibraryValidator Build()
+            public MethodValidator Build()
             {
-                return new DynamicLibraryValidator(Flags, MethodName, MethodCount, MethodParameterCount, MethodReturnType);
+                return new MethodValidator(MethodName, MethodParameterCount, MethodReturnType);
             }
         }
     }

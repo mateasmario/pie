@@ -33,6 +33,8 @@
             this.kryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.formatOptionsListView = new BrightIdeasSoftware.ObjectListView();
             this.FormatOptionNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.FormatOptionCategoryColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.FormatOptionDescriptionColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.formatOptionsListView)).BeginInit();
@@ -62,12 +64,16 @@
             // formatOptionsListView
             // 
             this.formatOptionsListView.AllColumns.Add(this.FormatOptionNameColumn);
+            this.formatOptionsListView.AllColumns.Add(this.FormatOptionCategoryColumn);
+            this.formatOptionsListView.AllColumns.Add(this.FormatOptionDescriptionColumn);
             this.formatOptionsListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.formatOptionsListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.formatOptionsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.FormatOptionNameColumn});
+            this.FormatOptionNameColumn,
+            this.FormatOptionCategoryColumn,
+            this.FormatOptionDescriptionColumn});
             this.formatOptionsListView.HeaderUsesThemes = false;
             this.formatOptionsListView.HideSelection = false;
             this.formatOptionsListView.Location = new System.Drawing.Point(10, 42);
@@ -87,6 +93,18 @@
             this.FormatOptionNameColumn.CellPadding = null;
             this.FormatOptionNameColumn.Text = "Name";
             this.FormatOptionNameColumn.Width = 199;
+            // 
+            // FormatOptionCategoryColumn
+            // 
+            this.FormatOptionCategoryColumn.AspectName = "Category";
+            this.FormatOptionCategoryColumn.CellPadding = null;
+            this.FormatOptionCategoryColumn.Text = "Category";
+            // 
+            // FormatOptionDescriptionColumn
+            // 
+            this.FormatOptionDescriptionColumn.AspectName = "Description";
+            this.FormatOptionDescriptionColumn.CellPadding = null;
+            this.FormatOptionDescriptionColumn.Text = "Description";
             // 
             // FormatForm
             // 
@@ -116,5 +134,7 @@
         private BrightIdeasSoftware.ObjectListView formatOptionsListView;
         private BrightIdeasSoftware.OLVColumn FormatOptionNameColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
+        private BrightIdeasSoftware.OLVColumn FormatOptionCategoryColumn;
+        private BrightIdeasSoftware.OLVColumn FormatOptionDescriptionColumn;
     }
 }

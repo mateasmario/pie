@@ -79,7 +79,7 @@ namespace pie.Forms.Format
 
             formatOptionsListView.HeaderFormatStyle = headerstyle;
 
-            FormatOptionNameColumn.FillsFreeSpace = true;
+            FormatOptionDescriptionColumn.FillsFreeSpace = true;
         }
 
         private void FormatForm_Load(object sender, EventArgs e)

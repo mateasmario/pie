@@ -1,7 +1,15 @@
 using System.Linq;
 
 public class RemoveDuplicateLines {
-    public string format(string text) {
+    public string Category() {
+        return "Line";
+    }
+    
+    public string Description() {
+        return "Removes all duplicate lines.";
+    }
+    
+    public string Format(string text) {
             text = text + "\r";
 
             string[] lines = text.Split('\n').Distinct().ToArray();

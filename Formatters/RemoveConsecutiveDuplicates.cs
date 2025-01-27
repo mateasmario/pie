@@ -2,7 +2,15 @@ using System.Linq;
 using System.Collections.Generic;
 
 public class RemoveConsecutiveDuplicates {
-    public string format(string text) {
+    public string Category() {
+        return "Character";
+    }
+    
+    public string Description() {
+        return "Removes all consecutive duplicates.";
+    }
+    
+    public string Format(string text) {
         text = text + "\r";
 
         List<string> results = new List<string>();

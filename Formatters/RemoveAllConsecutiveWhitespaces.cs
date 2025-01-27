@@ -1,7 +1,15 @@
 using System.Linq;
 
 public class RemoveAllConsecutiveWhitespaces {
-    public string format(string text) {
+    public string Category() {
+        return "Character";
+    }
+    
+    public string Description() {
+        return "Removes all duplicate whitespaces.";
+    }
+
+    public string Format(string text) {
         string result = "";
 
         for (int i = 0; i < text.Length; i++)
