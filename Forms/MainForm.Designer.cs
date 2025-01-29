@@ -593,7 +593,7 @@
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(203, 22);
             this.toolStripMenuItem2.Text = "Java Source (.java)";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.buildEvent);
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.executeCommandEvent);
             // 
             // toolStripMenuItem3
             // 
@@ -601,7 +601,7 @@
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(203, 22);
             this.toolStripMenuItem3.Text = "C/C++ Source (.c, .cpp)";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.buildEvent);
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.executeCommandEvent);
             // 
             // javaClassclassToolStripMenuItem
             // 
@@ -609,6 +609,7 @@
             this.javaClassclassToolStripMenuItem.Name = "javaClassclassToolStripMenuItem";
             this.javaClassclassToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.javaClassclassToolStripMenuItem.Text = "Java Class (.class)";
+            this.javaClassclassToolStripMenuItem.Click += new System.EventHandler(this.executeCommandEvent);
             // 
             // pythonScriptpyToolStripMenuItem
             // 
@@ -616,6 +617,7 @@
             this.pythonScriptpyToolStripMenuItem.Name = "pythonScriptpyToolStripMenuItem";
             this.pythonScriptpyToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.pythonScriptpyToolStripMenuItem.Text = "Python Script (.py)";
+            this.pythonScriptpyToolStripMenuItem.Click += new System.EventHandler(this.executeCommandEvent);
             // 
             // perlScriptplToolStripMenuItem
             // 
@@ -623,6 +625,7 @@
             this.perlScriptplToolStripMenuItem.Name = "perlScriptplToolStripMenuItem";
             this.perlScriptplToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.perlScriptplToolStripMenuItem.Text = "Perl Script (.pl)";
+            this.perlScriptplToolStripMenuItem.Click += new System.EventHandler(this.executeCommandEvent);
             // 
             // renderHTMLFilehtmlToolStripMenuItem
             // 
@@ -630,6 +633,7 @@
             this.renderHTMLFilehtmlToolStripMenuItem.Name = "renderHTMLFilehtmlToolStripMenuItem";
             this.renderHTMLFilehtmlToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.renderHTMLFilehtmlToolStripMenuItem.Text = "Render HTML (.html)";
+            this.renderHTMLFilehtmlToolStripMenuItem.Click += new System.EventHandler(this.executeCommandEvent);
             // 
             // renderMarkdownmdToolStripMenuItem
             // 
@@ -637,6 +641,7 @@
             this.renderMarkdownmdToolStripMenuItem.Name = "renderMarkdownmdToolStripMenuItem";
             this.renderMarkdownmdToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.renderMarkdownmdToolStripMenuItem.Text = "Render Markdown (.md)";
+            this.renderMarkdownmdToolStripMenuItem.Click += new System.EventHandler(this.executeCommandEvent);
             // 
             // mainMenuStrip
             // 
@@ -731,7 +736,6 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
