@@ -507,7 +507,7 @@ namespace pie
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Build C/C++ Source";
-                item1.Click += Item1_Click;
+                item1.Click += executeCommandEvent;
                 kryptonContextMenuItems.Items.Add(item1);
                 codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
@@ -520,12 +520,12 @@ namespace pie
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Build Java Source";
-                item1.Click += Item1_Click1;
+                item1.Click += executeCommandEvent;
                 kryptonContextMenuItems.Items.Add(item1);
 
                 KryptonContextMenuItem item2 = new KryptonContextMenuItem();
                 item2.Text = "Run as Java Class";
-                item2.Click += Item2_Click;
+                item2.Click += executeCommandEvent;
                 kryptonContextMenuItems.Items.Add(item2);
                 codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
@@ -538,7 +538,7 @@ namespace pie
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Run Python Script";
-                item1.Click += Item1_Click2;
+                item1.Click += executeCommandEvent;
                 kryptonContextMenuItems.Items.Add(item1);
                 codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
@@ -551,7 +551,7 @@ namespace pie
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Run Perl Script";
-                item1.Click += Item1_Click3; ;
+                item1.Click += executeCommandEvent;
                 kryptonContextMenuItems.Items.Add(item1);
                 codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
@@ -564,7 +564,7 @@ namespace pie
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Render HTML";
-                item1.Click += Item1_Click4;
+                item1.Click += executeCommandEvent;
                 kryptonContextMenuItems.Items.Add(item1);
                 codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
@@ -577,7 +577,7 @@ namespace pie
                 KryptonContextMenuItems kryptonContextMenuItems = new KryptonContextMenuItems();
                 KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                 item1.Text = "Render Markdown";
-                item1.Click += Item1_Click5;
+                item1.Click += executeCommandEvent;
                 kryptonContextMenuItems.Items.Add(item1);
                 codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
             }
@@ -593,7 +593,7 @@ namespace pie
                 {
                     KryptonContextMenuItem item1 = new KryptonContextMenuItem();
                     item1.Text = "Run query against " + database.Name;
-                    item1.Click += Item1_Click6;
+                    item1.Click += executeCommandEvent;
                     kryptonContextMenuItems.Items.Add(item1);
                     codeContextMenu.Items.Insert(3, kryptonContextMenuItems);
                 }
@@ -609,73 +609,6 @@ namespace pie
         private void FileActionsItem1_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-        }
-
-        private void Item1_Click6(object sender, EventArgs e)
-        {
-            KryptonContextMenuItem kryptonContextMenuItem = (KryptonContextMenuItem)sender;
-
-            string name = kryptonContextMenuItem.Text.Substring(18);
-
-            DatabaseConnection database = null;
-
-            foreach (DatabaseConnection tempDatabase in Globals.databases)
-            {
-                if (name == tempDatabase.Name)
-                {
-                    database = tempDatabase;
-                    break;
-                }
-            }
-
-            Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-
-            DatabaseResponse databaseResult = DatabaseService.ExecuteSQLCommand(TextArea.Text, database);
-
-            if (databaseResult.Success == false)
-            {
-                ShowNotification(databaseResult.Message);
-            }
-            else
-            {
-                DatabaseOutputForm databaseOutputForm = new DatabaseOutputForm(databaseResult.DataTable);
-                databaseOutputForm.ShowDialog();
-            }
-        }
-
-        private void Item1_Click5(object sender, EventArgs e)
-        {
-            ExecuteRunCommand("Render Markdown (.md)");
-        }
-
-        private void Item1_Click4(object sender, EventArgs e)
-        {
-            ExecuteRunCommand("Render HTML (.html)");
-        }
-
-        private void Item1_Click3(object sender, EventArgs e)
-        {
-            ExecuteRunCommand("Perl Script (.pl)");
-        }
-
-        private void Item1_Click2(object sender, EventArgs e)
-        {
-            ExecuteRunCommand("Python Script (.py)");
-        }
-
-        private void Item2_Click(object sender, EventArgs e)
-        {
-            ExecuteRunCommand("Java Class (.class)");
-        }
-
-        private void Item1_Click1(object sender, EventArgs e)
-        {
-            ExecuteBuildCommand("Java Source (.java)");
-        }
-
-        private void Item1_Click(object sender, EventArgs e)
-        {
-            ExecuteBuildCommand("C/C++ Source (.c, .cpp)");
         }
 
         private void TextArea_UpdateUI(object sender, UpdateUIEventArgs e)
@@ -1338,8 +1271,7 @@ namespace pie
             }
         }
 
-        // [Method] Used for Build commands
-        public void ExecuteBuildCommand(string type)
+        public void ExecuteCommand(string type)
         {
             if (terminalTabControl.Pages.Count == 0)
             {
@@ -1350,13 +1282,90 @@ namespace pie
 
             string process = null;
 
-            if (type == "Java Source (.java)")
+            if (type == "Java Source (.java)" || type == "Build Java Source")
             {
                 process = "javac.exe " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
             }
-            else if (type == "C/C++ Source (.c, .cpp)")
+            else if (type == "C/C++ Source (.c, .cpp)" || type == "Build C/C++ Source")
             {
                 process = "gcc -Wall " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
+            }
+            else if (type == "Java Class (.class)" || type == "Run as Java Class")
+            {
+                string className = parsingService.GetFileName(parsingService.RemoveFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+
+                process = "java " + className;
+            }
+            else if (type == "Python Script (.py)" || type == "Run Python Script")
+            {
+                process = "python " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
+            }
+            else if (type == "Perl Script (.pl)" || type == "Run Perl Script")
+            {
+                process = "perl " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
+            }
+            else if (type == "Render HTML (.html)" || type == "Render HTML")
+            {
+                if (parsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "html")
+                {
+                    NewTab(TabType.RENDER_HTML, Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+                }
+                else
+                {
+                    ShowNotification("pie can only render files with the .html extension.");
+                }
+
+                return;
+            }
+            else if (type == "Render Markdown (.md)" || type == "Render Markdown")
+            {
+                int index = tabControl.SelectedIndex;
+
+                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+
+                if (parsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "md")
+                {
+                    NewTab(TabType.RENDER_MD, Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
+                }
+                else
+                {
+                    ShowNotification("pie can only render files with the .md extension.");
+                }
+
+                return;
+            }
+            else if (type.StartsWith("Run query against"))
+            {
+                string name = type.Substring(18);
+
+                DatabaseConnection database = null;
+
+                foreach (DatabaseConnection tempDatabase in Globals.databases)
+                {
+                    if (name == tempDatabase.Name)
+                    {
+                        database = tempDatabase;
+                        break;
+                    }
+                }
+
+                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
+
+                DatabaseResponse databaseResult = DatabaseService.ExecuteSQLCommand(TextArea.Text, database);
+
+                if (databaseResult.Success == false)
+                {
+                    ShowNotification(databaseResult.Message);
+                }
+                else
+                {
+                    DatabaseOutputForm databaseOutputForm = new DatabaseOutputForm(databaseResult.DataTable);
+                    databaseOutputForm.ShowDialog();
+                }
+            }
+            else if (terminalTabControl.Pages.Count == 0)
+            {
+                NewTerminalTab("cmd.exe", false);
             }
 
             NewTerminalTab(process, false);
@@ -1380,73 +1389,6 @@ namespace pie
             notification.ShowDialog();
 
             Globals.notificationText = null;
-        }
-
-        // [Method] Used for Run commands
-        public void ExecuteRunCommand(string type)
-        {
-            if (Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
-            {
-                if (terminalTabControl.Pages.Count == 0)
-                {
-                    NewTerminalTab("cmd.exe", false);
-                }
-
-                ToggleTerminalTabControl(true);
-
-                string process = null;
-
-                if (type == "Java Class (.class)")
-                {
-                    string className = parsingService.GetFileName(parsingService.RemoveFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
-
-                    process = "java " + className;
-                }
-                else if (type == "Python Script (.py)")
-                {
-                    process = "python " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
-                }
-                else if (type == "Perl Script (.pl)")
-                {
-                    process = "perl " + Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath();
-                }
-                else if (type == "Render HTML (.html)")
-                {
-                    if (parsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "html")
-                    {
-                        NewTab(TabType.RENDER_HTML, Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-                    }
-                    else
-                    {
-                        ShowNotification("pie can only render files with the .html extension.");
-                    }
-
-                    return;
-                }
-                else if (type == "Render Markdown (.md)")
-                {
-                    int index = tabControl.SelectedIndex;
-
-                    Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-
-                    if (parsingService.GetFileExtension(Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "md")
-                    {
-                        NewTab(TabType.RENDER_MD, Globals.tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-                    }
-                    else
-                    {
-                        ShowNotification("pie can only render files with the .md extension.");
-                    }
-
-                    return;
-                }
-
-                NewTerminalTab(process, false);
-            }
-            else
-            {
-                ShowNotification("Please open a file before launching any run command.");
-            }
         }
 
         private string ConvertMarkdownToHtml(string path)
@@ -1527,9 +1469,9 @@ namespace pie
 
         private void ProcessBuildCommands()
         {
-            if (buildToolStripMenuItem1.DropDownItems.Count > 2)
+            if (buildToolStripMenuItem1.DropDownItems.Count > 7)
             {
-                int removeCount = buildToolStripMenuItem1.DropDownItems.Count - 2;
+                int removeCount = buildToolStripMenuItem1.DropDownItems.Count - 7;
 
                 while (removeCount > 0)
                 {
@@ -2061,14 +2003,24 @@ namespace pie
         }
 
         // [Event] Triggered by multiple senders, when building (upper menu -> Build)
-        private void buildEvent(object sender, EventArgs e)
+        private void executeCommandEvent(object sender, EventArgs e)
         {
-            string content = ((ToolStripMenuItem)sender).Text;
+            string content = null;
+
+            if (sender is ToolStripMenuItem)
+            {
+                content = ((ToolStripMenuItem)sender).Text;
+            }
+            else if (sender is KryptonContextMenuItem)
+            {
+                content = ((KryptonContextMenuItem)sender).Text;
+            }
+
             try
             {
-                ExecuteBuildCommand(content);
+                ExecuteCommand(content);
             }
-            catch (NullReferenceException ex)
+            catch (NullReferenceException)
             {
                 ShowNotification("Please open a file before launching any build commands.");
             }
@@ -2080,7 +2032,7 @@ namespace pie
             string content = ((ToolStripMenuItem)sender).Text;
             try
             {
-                ExecuteRunCommand(content);
+                ExecuteCommand(content);
             }
             catch (NullReferenceException ex)
             {
