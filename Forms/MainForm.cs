@@ -1475,7 +1475,7 @@ namespace pie
 
                 while (removeCount > 0)
                 {
-                    buildToolStripMenuItem1.DropDownItems.RemoveAt(2);
+                    buildToolStripMenuItem1.DropDownItems.RemoveAt(7);
                     removeCount--;
                 }
             }
