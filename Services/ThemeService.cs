@@ -327,10 +327,6 @@ namespace pie.Services
             {
                 ((KryptonRichTextBox)control).Palette = palette;
             }
-            else if (control is KryptonCheckBox)
-            {
-                ((KryptonCheckBox)control).Palette = palette;
-            }
             else if (control is KryptonCheckButton)
             {
                 ((KryptonCheckButton)control).Palette = palette;
@@ -359,7 +355,7 @@ namespace pie.Services
             {
                 ((KryptonComboBox)control).Palette = palette;
             }
-
+            
             foreach (Control child in control.Controls)
             {
                 SetPaletteToObjects(child, palette);

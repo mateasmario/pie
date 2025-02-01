@@ -25,5 +25,6 @@ namespace pie.Classes
     {
         public string Name { get; set; }
         public string Command { get; set; }
+        public string Extensions { get; set; }
     }
 }

@@ -41,11 +41,8 @@ namespace pie
 {
     public class Globals
     {
-        // General
-        public static List<TabInfo> tabInfos = new List<TabInfo>();
         public static int lastSelectedTabIndex;
         public static int maxLineNumberCharLength;
-        public static bool closeAfterApplyingChanges;
         public static int lastSelectedIndex;
         public static bool canUpdateUI;
         public static bool firstBrowserTab;
@@ -58,16 +55,7 @@ namespace pie
         public static List<ThemeInfo> themeInfos;
         public static Dictionary<string, Color> colorDictionary;
         public static string newThemeName;
-
-        // Build Commands
-        public static List<BuildCommand> buildCommands;
-        public static List<ToolStripMenuItem> buildCommandToolStripMenuItems = new List<ToolStripMenuItem>();
-        public static string addBuildCommandName;
-        public static string addBuildCommandCmd;
-        public static int buildCommandEditIndex = -1;
-        public static string buildCommandToEditName;
-        public static string buildCommandToEditCmd;
-
+        
         // Find & Replace Panel
         public static bool mouseDown;
         public static Point lastLocation;

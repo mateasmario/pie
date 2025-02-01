@@ -178,7 +178,6 @@
             // 
             // saveButton
             // 
-            this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(324, 376);
             this.saveButton.Name = "saveButton";
             this.saveButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 

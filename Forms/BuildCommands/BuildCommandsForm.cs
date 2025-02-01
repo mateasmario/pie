@@ -37,7 +37,9 @@ namespace pie
         private ConfigurationService configurationService = new ConfigurationService();
         private ThemeService themeService = new ThemeService();
 
-        List<BuildCommand> tempCommands;
+        public List<BuildCommand> InputBuildCommands { get; set; }
+        public bool OutputSaveStatus { get; private set; }
+        private List<BuildCommand> tempCommands;
 
         public BuildCommandsForm()
         {
@@ -56,9 +58,9 @@ namespace pie
 
             SynchronizeObjectListViewWithTheme();
 
-            if (Globals.buildCommands != null)
+            if (InputBuildCommands != null)
             {
-                foreach (BuildCommand buildCommand in Globals.buildCommands)
+                foreach (BuildCommand buildCommand in InputBuildCommands)
                 {
                     tempCommands.Add(buildCommand);
                 }
@@ -66,7 +68,7 @@ namespace pie
                 buildCommandsListView.SetObjects(tempCommands);
             }
 
-            Globals.closeAfterApplyingChanges = false;
+            OutputSaveStatus = false;
         }
 
         private void SynchronizeObjectListViewWithTheme()
@@ -114,18 +116,16 @@ namespace pie
             AddBuildCommandForm addBuildCommandForm = new AddBuildCommandForm();
             addBuildCommandForm.ShowDialog();
 
-            if (Globals.addBuildCommandName != null)
-            {
-                BuildCommand buildCommand = new BuildCommand();
-                buildCommand.Name = Globals.addBuildCommandName;
-                buildCommand.Command = Globals.addBuildCommandCmd;
+            BuildCommand outputBuildCommand = addBuildCommandForm.Output;
 
+            if (outputBuildCommand != null)
+            {
                 bool exists = false;
 
                 // Check if a build command with the specified name already exists
                 foreach(BuildCommand tempCommand in tempCommands)
                 {
-                    if (tempCommand.Name.Equals(buildCommand.Name))
+                    if (tempCommand.Name.Equals(outputBuildCommand.Name))
                     {
                         exists = true;
                         break;
@@ -138,7 +138,7 @@ namespace pie
                 }
                 else
                 {
-                    tempCommands.Add(buildCommand);
+                    tempCommands.Add(outputBuildCommand);
                     buildCommandsListView.SetObjects(tempCommands);
                 }
             }
@@ -148,7 +148,7 @@ namespace pie
         {
             configurationService.WriteToFile("config/build.json", tempCommands);
 
-            Globals.closeAfterApplyingChanges = true;
+            OutputSaveStatus = true;
 
             this.Close();
         }
@@ -157,21 +157,19 @@ namespace pie
         {
             if (buildCommandsListView.SelectedObjects.Count == 1)
             {
-                Globals.buildCommandEditIndex = buildCommandsListView.SelectedIndex;
-
-                Globals.buildCommandToEditName = tempCommands[Globals.buildCommandEditIndex].Name;
-                Globals.buildCommandToEditCmd = tempCommands[Globals.buildCommandEditIndex].Command;
-
                 AddBuildCommandForm addBuildCommandForm = new AddBuildCommandForm();
+                addBuildCommandForm.InputBuildCommand = tempCommands[buildCommandsListView.SelectedIndex];
                 addBuildCommandForm.ShowDialog();
 
-                if (Globals.addBuildCommandName != null)
+                BuildCommand outputBuildCommand = addBuildCommandForm.Output;
+
+                if (outputBuildCommand != null)
                 {
                     bool exists = false;
 
                     foreach (BuildCommand tempCommand in tempCommands)
                     {
-                        if (tempCommand.Name != Globals.buildCommandToEditName && tempCommand.Name.Equals(Globals.addBuildCommandName))
+                        if (tempCommand.Name != tempCommands[buildCommandsListView.SelectedIndex].Name && tempCommand.Name.Equals(outputBuildCommand.Name))
                         {
                             exists = true;
                             break;
@@ -184,12 +182,9 @@ namespace pie
                     }
                     else
                     {
-                        tempCommands[Globals.buildCommandEditIndex].Name = Globals.addBuildCommandName;
-                        tempCommands[Globals.buildCommandEditIndex].Command = Globals.addBuildCommandCmd;
+                        tempCommands[buildCommandsListView.SelectedIndex] = outputBuildCommand;
                     }
                 }
-
-                Globals.buildCommandEditIndex = -1;
 
                 buildCommandsListView.SetObjects(tempCommands);
             }
