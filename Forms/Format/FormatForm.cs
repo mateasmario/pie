@@ -44,47 +44,20 @@ namespace pie.Forms.Format
     {
         private ThemeService themeService = new ThemeService();
 
-        public string Input { get; set; }
-        public string Output { get; set; }
+        public FormatFormInput Input { get; set; }
+        public FormatFormOutput Output { get; set; }
 
         public FormatForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
-        }
-
-        private void SynchronizeObjectListViewWithTheme()
-        {
-            formatOptionsListView.ShowGroups = false;
-            formatOptionsListView.UseCustomSelectionColors = true;
-            formatOptionsListView.FullRowSelect = true;
-            formatOptionsListView.MultiSelect = false;
-
-            formatOptionsListView.BackColor = Globals.theme.Primary;
-            formatOptionsListView.ForeColor = Globals.theme.Fore;
-            formatOptionsListView.HighlightBackgroundColor = Globals.theme.Secondary;
-            formatOptionsListView.HighlightForegroundColor = Globals.theme.Fore;
-            formatOptionsListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
-            formatOptionsListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
-
-            var headerstyle = new HeaderFormatStyle();
-            headerstyle.Normal.BackColor = Globals.theme.Secondary;
-            headerstyle.Normal.ForeColor = Globals.theme.Fore;
-
-            headerstyle.Hot.BackColor = Globals.theme.ButtonHover;
-            headerstyle.Hot.ForeColor = Globals.theme.Fore;
-
-            headerstyle.Pressed.BackColor = Globals.theme.ButtonFrame;
-            headerstyle.Pressed.ForeColor = Globals.theme.Fore;
-
-            formatOptionsListView.HeaderFormatStyle = headerstyle;
-
-            FormatOptionDescriptionColumn.FillsFreeSpace = true;
+            Output = new FormatFormOutput();
         }
 
         private void FormatForm_Load(object sender, EventArgs e)
         {
-            if (Globals.editorProperties.Glass)
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
             {
                 this.Opacity = 0.875;
             }
@@ -96,12 +69,42 @@ namespace pie.Forms.Format
             kryptonTextBox1.SelectAll();
         }
 
+
+        private void SynchronizeObjectListViewWithTheme()
+        {
+            formatOptionsListView.ShowGroups = false;
+            formatOptionsListView.UseCustomSelectionColors = true;
+            formatOptionsListView.FullRowSelect = true;
+            formatOptionsListView.MultiSelect = false;
+
+            formatOptionsListView.BackColor = Input.ActiveTheme.Primary;
+            formatOptionsListView.ForeColor = Input.ActiveTheme.Fore;
+            formatOptionsListView.HighlightBackgroundColor = Input.ActiveTheme.Secondary;
+            formatOptionsListView.HighlightForegroundColor = Input.ActiveTheme.Fore;
+            formatOptionsListView.UnfocusedHighlightBackgroundColor = Input.ActiveTheme.Secondary;
+            formatOptionsListView.UnfocusedHighlightForegroundColor = Input.ActiveTheme.Fore;
+
+            var headerstyle = new HeaderFormatStyle();
+            headerstyle.Normal.BackColor = Input.ActiveTheme.Secondary;
+            headerstyle.Normal.ForeColor = Input.ActiveTheme.Fore;
+
+            headerstyle.Hot.BackColor = Input.ActiveTheme.ButtonHover;
+            headerstyle.Hot.ForeColor = Input.ActiveTheme.Fore;
+
+            headerstyle.Pressed.BackColor = Input.ActiveTheme.ButtonFrame;
+            headerstyle.Pressed.ForeColor = Input.ActiveTheme.Fore;
+
+            formatOptionsListView.HeaderFormatStyle = headerstyle;
+
+            FormatOptionDescriptionColumn.FillsFreeSpace = true;
+        }
+
         private void formatOptionsListView_DoubleClick(object sender, EventArgs e)
         {
             if (formatOptionsListView.SelectedObjects.Count == 1)
             {
                 Formatter selectedFormatOption = Globals.formatters.Find(formatter => ((Formatter)formatOptionsListView.SelectedObject).Name == formatter.Name);
-                Output = selectedFormatOption.InvokeMethod(Input);
+                Output.Text = selectedFormatOption.InvokeMethod(Input.Text);
                 this.Close();
             }
         }

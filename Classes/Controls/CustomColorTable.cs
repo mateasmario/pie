@@ -19,12 +19,13 @@
 
 using System.Drawing;
 using System.Windows.Forms;
-using pie.Services;
 
 namespace pie.Classes
 {
     internal class CustomColorTable : ProfessionalColorTable
     {
+        public ThemeInfo InputThemeInfo { get; set; }
+
         public CustomColorTable()
         {
             base.UseSystemColors = false;
@@ -33,79 +34,79 @@ namespace pie.Classes
         {
             get
             {
-                return Globals.theme.Secondary;
+                return InputThemeInfo.Secondary;
             }
         }
         public override System.Drawing.Color MenuBorder
         {
-            get { return Globals.theme.Secondary; }
+            get { return InputThemeInfo.Secondary; }
         }
         public override System.Drawing.Color MenuItemBorder
         {
-            get { return Globals.theme.Primary; }
+            get { return InputThemeInfo.Primary; }
         }
         public override Color MenuItemSelected
         {
-            get { return Globals.theme.Secondary; }
+            get { return InputThemeInfo.Secondary; }
         }
         public override Color MenuItemSelectedGradientBegin
         {
-            get { return Globals.theme.Secondary; }
+            get { return InputThemeInfo.Secondary; }
         }
         public override Color MenuItemSelectedGradientEnd
         {
-            get { return Globals.theme.Secondary; }
+            get { return InputThemeInfo.Secondary; }
         }
         public override Color MenuItemPressedGradientBegin
         {
-            get { return Globals.theme.Secondary; }
+            get { return InputThemeInfo.Secondary; }
         }
         public override Color MenuItemPressedGradientEnd
         {
-            get { return Globals.theme.Secondary; }
+            get { return InputThemeInfo.Secondary; }
         }
         public override Color MenuStripGradientBegin
         {
-            get { return Globals.theme.Primary; }
+            get { return InputThemeInfo.Primary; }
         }
         public override Color MenuStripGradientEnd
         {
-            get { return Globals.theme.Primary; }
+            get { return InputThemeInfo.Primary; }
         }
 
         public override Color ImageMarginGradientBegin
         {
-            get { return Globals.theme.Primary; }
+            get { return InputThemeInfo.Primary; }
         }
 
         public override Color ImageMarginGradientMiddle
         {
-            get { return Globals.theme.Primary; }
+            get { return InputThemeInfo.Primary; }
         }
 
         public override Color ImageMarginGradientEnd
         {
-            get { return Globals.theme.Primary; }
+            get { return InputThemeInfo.Primary; }
         }
 
         public override Color ButtonCheckedGradientBegin
         {
-            get { return Globals.theme.Primary; }
+            get { return InputThemeInfo.Primary; }
         }
 
         public override Color ButtonCheckedGradientMiddle
         {
-            get { return Globals.theme.Primary; }
+            get { return InputThemeInfo.Primary; }
         }
 
         public override Color ButtonCheckedGradientEnd
         {
-            get { return Globals.theme.Primary; }
+            get { return InputThemeInfo.Primary; }
         }
 
         public override Color ButtonCheckedHighlight
         {
-            get { return Globals.theme.Primary; }
+            get { return InputThemeInfo.Primary; }
         }
     }
 }

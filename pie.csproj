@@ -58,7 +58,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>pie.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <Win32Resource>
@@ -404,6 +404,35 @@
     <Compile Include="Classes\Configuration\FileBased\ConfigurationEntity.cs" />
     <Compile Include="Classes\Configuration\FileBased\Impl\Formatter.cs" />
     <Compile Include="Classes\Configuration\ICloneable.cs" />
+    <Compile Include="Classes\Form IO\Input\AddBuildCommandFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\BuildCommandsFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\CodeTemplatesFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\DatabaseOutputFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\AddDatabaseFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\DatabasesFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\GitCloneFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\NotificationFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\AboutFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\CheatsheetFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\NewThemeFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\DesignerFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\GitCommitLogFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\GitSettingsFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\GitPushCredentialsFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\GitCommitCredentialsFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\FormatFormInput.cs" />
+    <Compile Include="Classes\Form IO\Output\BuildCommandsFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\CodeTemplatesFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\GitCloneFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\DatabasesFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\AddDatabaseFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\AddBuildCommandFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\NotificationYesNoCancelFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\NewThemeFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\GitSettingsFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\GitPushCredentialsFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\GitCommitCredentialsFormOutput.cs" />
+    <Compile Include="Classes\Form IO\Output\FormatFormOutput.cs" />
     <Compile Include="Classes\Helpers\Validators\MethodValidator.cs" />
     <Compile Include="Classes\TransferObjects\DatabaseResponse.cs" />
     <Compile Include="Classes\Helpers\ControlHelper.cs" />
@@ -496,11 +525,11 @@
     <Compile Include="Forms\Git\GitCommitLogForm.Designer.cs">
       <DependentUpon>GitCommitLogForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Notifications\NotificationOK.cs">
+    <Compile Include="Forms\Notifications\NotificationOKForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Notifications\NotificationOK.Designer.cs">
-      <DependentUpon>NotificationOK.cs</DependentUpon>
+    <Compile Include="Forms\Notifications\NotificationOKForm.Designer.cs">
+      <DependentUpon>NotificationOKForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Enums\TabType.cs" />
     <Compile Include="Forms\Git\GitCommitCredentialsForm.cs">
@@ -528,11 +557,11 @@
     <Compile Include="Forms\BuildCommands\BuildCommandsForm.Designer.cs">
       <DependentUpon>BuildCommandsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Notifications\NotificationYesNoCancel.cs">
+    <Compile Include="Forms\Notifications\NotificationYesNoCancelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Notifications\NotificationYesNoCancel.Designer.cs">
-      <DependentUpon>NotificationYesNoCancel.cs</DependentUpon>
+    <Compile Include="Forms\Notifications\NotificationYesNoCancelForm.Designer.cs">
+      <DependentUpon>NotificationYesNoCancelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Other\CheatsheetForm.cs">
       <SubType>Form</SubType>
@@ -557,7 +586,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\DatabaseService.cs" />
-    <Compile Include="Services\NotificationExceptionHandlerService.cs" />
     <Compile Include="Services\ParsingService.cs" />
     <Compile Include="Services\ScintillaLexerService.cs" />
     <Compile Include="Services\ThemeService.cs" />
@@ -592,8 +620,8 @@
     <EmbeddedResource Include="Forms\Git\GitCloneForm.resx">
       <DependentUpon>GitCloneForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Notifications\NotificationOK.resx">
-      <DependentUpon>NotificationOK.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Notifications\NotificationOKForm.resx">
+      <DependentUpon>NotificationOKForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Git\GitCommitCredentialsForm.resx">
       <DependentUpon>GitCommitCredentialsForm.cs</DependentUpon>
@@ -607,8 +635,8 @@
     <EmbeddedResource Include="Forms\BuildCommands\BuildCommandsForm.resx">
       <DependentUpon>BuildCommandsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Notifications\NotificationYesNoCancel.resx">
-      <DependentUpon>NotificationYesNoCancel.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Notifications\NotificationYesNoCancelForm.resx">
+      <DependentUpon>NotificationYesNoCancelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Other\CheatsheetForm.resx">
       <DependentUpon>CheatsheetForm.cs</DependentUpon>

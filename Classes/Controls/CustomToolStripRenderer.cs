@@ -18,11 +18,14 @@
 */
 
 using pie;
+using pie.Classes;
 
 namespace System.Windows.Forms
 {
     internal class CustomToolStripRenderer : ToolStripProfessionalRenderer
     {
+        public ThemeInfo InputThemeInfo;
+
         public CustomToolStripRenderer(ProfessionalColorTable professionalColorTable) : base(professionalColorTable)
         {
         }
@@ -31,7 +34,7 @@ namespace System.Windows.Forms
         {
             var tsMenuItem = e.Item as ToolStripMenuItem;
             if (tsMenuItem != null)
-                e.ArrowColor = Globals.theme.Fore;
+                e.ArrowColor = InputThemeInfo.Fore;
             base.OnRenderArrow(e);
         }
     }

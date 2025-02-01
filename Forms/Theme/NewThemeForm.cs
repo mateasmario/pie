@@ -34,32 +34,60 @@ namespace pie.Forms.Theme
     {
         private ThemeService themeService = new ThemeService();
 
+        public NewThemeFormInput Input { get; set; }
+        public NewThemeFormOutput Output { get; set; }
+
         public NewThemeForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+
+            Output = new NewThemeFormOutput();
+        }
+
+        private void NewThemeForm_Load(object sender, EventArgs e)
+        {
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
+            {
+                this.Opacity = 0.875;
+            }
+        }
+
+        public void ShowNotification(string text)
+        {
+            NotificationOKForm notificationOkForm = new NotificationOKForm();
+
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = Input.Palette;
+            notificationFormInput.NotificationText = text;
+
+            notificationOkForm.Input = notificationFormInput;
+
+            notificationOkForm.ShowDialog();
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             if (kryptonTextBox1.Text.Trim().Length == 0)
             {
-                MainForm.ShowNotification("Theme name cannot contain whitespaces only.");
+                ShowNotification("Theme name cannot contain whitespaces only.");
             }
             else if (themeExists(kryptonTextBox1.Text.Trim()))
             {
-                MainForm.ShowNotification("Theme with specified name already exists. Please choose another name.");
+                ShowNotification("Theme with specified name already exists. Please choose another name.");
             }
             else
             {
-                Globals.newThemeName = kryptonTextBox1.Text.Trim();
+                Output.NewThemeName = kryptonTextBox1.Text.Trim();
                 this.Close();
             }
         }
 
         private bool themeExists(string name)
         {
-            foreach (ThemeInfo themeInfo in Globals.themeInfos)
+            foreach (ThemeInfo themeInfo in Input.ThemeInfos)
             {
                 if (themeInfo.Name.Equals(name))
                 {
@@ -68,16 +96,6 @@ namespace pie.Forms.Theme
             }
 
             return false;
-        }
-
-        private void NewThemeForm_Load(object sender, EventArgs e)
-        {
-            if (Globals.editorProperties.Glass)
-            {
-                this.Opacity = 0.875;
-            }
-
-            Globals.newThemeName = null;
         }
     }
 }

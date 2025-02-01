@@ -35,162 +35,179 @@ namespace pie.Forms.Databases
     {
         private ThemeService themeService = new ThemeService();
 
-        DatabaseType selectedDatabaseType = Globals.databaseToEditType;
+        public AddDatabaseFormInput Input { get; set; }
+        public AddDatabaseFormOutput Output { get; set; }
+
+        DatabaseType selectedDatabaseType;
+
 
         public AddDatabaseForm()
         {
             InitializeComponent();
 
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+            mysqlCheckButton.StateCommon.Back.Color1 = Input.ActiveTheme.Primary;
+            mysqlCheckButton.StateCommon.Back.Color2 = Input.ActiveTheme.Primary;
+            mysqlCheckButton.StateCheckedNormal.Back.Color1 = Input.ActiveTheme.Secondary;
+            mysqlCheckButton.StateCheckedNormal.Back.Color2 = Input.ActiveTheme.Secondary;            
+            mysqlCheckButton.StateCheckedTracking.Back.Color1 = Input.ActiveTheme.Secondary;
+            mysqlCheckButton.StateCheckedTracking.Back.Color2 = Input.ActiveTheme.Secondary;
+            mysqlCheckButton.StateCheckedPressed.Back.Color1 = Input.ActiveTheme.Secondary;
+            mysqlCheckButton.StateCheckedPressed.Back.Color2 = Input.ActiveTheme.Secondary;
+            mysqlCheckButton.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
+            mysqlCheckButton.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
+            mysqlCheckButton.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
+            mysqlCheckButton.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
 
-            kryptonCheckButton1.StateCommon.Back.Color1 = Globals.theme.Primary;
-            kryptonCheckButton1.StateCommon.Back.Color2 = Globals.theme.Primary;
-            kryptonCheckButton1.StateCheckedNormal.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton1.StateCheckedNormal.Back.Color2 = Globals.theme.Secondary;            
-            kryptonCheckButton1.StateCheckedTracking.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton1.StateCheckedTracking.Back.Color2 = Globals.theme.Secondary;
-            kryptonCheckButton1.StateCheckedPressed.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton1.StateCheckedPressed.Back.Color2 = Globals.theme.Secondary;
-            kryptonCheckButton1.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
-            kryptonCheckButton1.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
-            kryptonCheckButton1.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
-            kryptonCheckButton1.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
+            mssqlCheckButton.StateCommon.Back.Color1 = Input.ActiveTheme.Primary;
+            mssqlCheckButton.StateCommon.Back.Color2 = Input.ActiveTheme.Primary;
+            mssqlCheckButton.StateCheckedNormal.Back.Color1 = Input.ActiveTheme.Secondary;
+            mssqlCheckButton.StateCheckedNormal.Back.Color2 = Input.ActiveTheme.Secondary;
+            mssqlCheckButton.StateCheckedTracking.Back.Color1 = Input.ActiveTheme.Secondary;
+            mssqlCheckButton.StateCheckedTracking.Back.Color2 = Input.ActiveTheme.Secondary;
+            mssqlCheckButton.StateCheckedPressed.Back.Color1 = Input.ActiveTheme.Secondary;
+            mssqlCheckButton.StateCheckedPressed.Back.Color2 = Input.ActiveTheme.Secondary;
+            mssqlCheckButton.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
+            mssqlCheckButton.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
+            mssqlCheckButton.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
+            mssqlCheckButton.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
 
-            kryptonCheckButton2.StateCommon.Back.Color1 = Globals.theme.Primary;
-            kryptonCheckButton2.StateCommon.Back.Color2 = Globals.theme.Primary;
-            kryptonCheckButton2.StateCheckedNormal.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton2.StateCheckedNormal.Back.Color2 = Globals.theme.Secondary;
-            kryptonCheckButton2.StateCheckedTracking.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton2.StateCheckedTracking.Back.Color2 = Globals.theme.Secondary;
-            kryptonCheckButton2.StateCheckedPressed.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton2.StateCheckedPressed.Back.Color2 = Globals.theme.Secondary;
-            kryptonCheckButton2.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
-            kryptonCheckButton2.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
-            kryptonCheckButton2.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
-            kryptonCheckButton2.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
+            postgresqlCheckButton.StateCommon.Back.Color1 = Input.ActiveTheme.Primary;
+            postgresqlCheckButton.StateCommon.Back.Color2 = Input.ActiveTheme.Primary;
+            postgresqlCheckButton.StateCheckedNormal.Back.Color1 = Input.ActiveTheme.Secondary;
+            postgresqlCheckButton.StateCheckedNormal.Back.Color2 = Input.ActiveTheme.Secondary;
+            postgresqlCheckButton.StateCheckedTracking.Back.Color1 = Input.ActiveTheme.Secondary;
+            postgresqlCheckButton.StateCheckedTracking.Back.Color2 = Input.ActiveTheme.Secondary;
+            postgresqlCheckButton.StateCheckedPressed.Back.Color1 = Input.ActiveTheme.Secondary;
+            postgresqlCheckButton.StateCheckedPressed.Back.Color2 = Input.ActiveTheme.Secondary;
+            postgresqlCheckButton.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
+            postgresqlCheckButton.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
+            postgresqlCheckButton.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
+            postgresqlCheckButton.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
 
-            kryptonCheckButton3.StateCommon.Back.Color1 = Globals.theme.Primary;
-            kryptonCheckButton3.StateCommon.Back.Color2 = Globals.theme.Primary;
-            kryptonCheckButton3.StateCheckedNormal.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton3.StateCheckedNormal.Back.Color2 = Globals.theme.Secondary;
-            kryptonCheckButton3.StateCheckedTracking.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton3.StateCheckedTracking.Back.Color2 = Globals.theme.Secondary;
-            kryptonCheckButton3.StateCheckedPressed.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton3.StateCheckedPressed.Back.Color2 = Globals.theme.Secondary;
-            kryptonCheckButton3.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
-            kryptonCheckButton3.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
-            kryptonCheckButton3.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
-            kryptonCheckButton3.StateCheckedPressed.Back.ColorStyle = PaletteColorStyle.Solid;
-
-            if (Globals.theme.IconType == "dark")
+            if (Input.ActiveTheme.IconType == "dark")
             {
-                kryptonCheckButton1.Values.Image = Properties.Resources.mysql_black;
-                kryptonCheckButton2.Values.Image = Properties.Resources.microsoft_black;
-                kryptonCheckButton3.Values.Image = Properties.Resources.postgresql_black;
+                mysqlCheckButton.Values.Image = Properties.Resources.mysql_black;
+                mssqlCheckButton.Values.Image = Properties.Resources.microsoft_black;
+                postgresqlCheckButton.Values.Image = Properties.Resources.postgresql_black;
             }
-            else if (Globals.theme.IconType == "light")
+            else if (Input.ActiveTheme.IconType == "light")
             {
-                kryptonCheckButton1.Values.Image = Properties.Resources.mysql_white;
-                kryptonCheckButton2.Values.Image = Properties.Resources.microsoft_white;
-                kryptonCheckButton3.Values.Image = Properties.Resources.postgresql_white;
+                mysqlCheckButton.Values.Image = Properties.Resources.mysql_white;
+                mssqlCheckButton.Values.Image = Properties.Resources.microsoft_white;
+                postgresqlCheckButton.Values.Image = Properties.Resources.postgresql_white;
             }
+
+            Output = new AddDatabaseFormOutput();
+        }
+
+        private void AddDatabaseForm_Load(object sender, EventArgs e)
+        {
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
+            {
+                this.Opacity = 0.875;
+            }
+
+            if (Input != null && Input.Database != null)
+            {
+                databaseConnectionNameTextBox.Text = Input.Database.Name;
+                databaseHostnameTextBox.Text = Input.Database.Hostname;
+                databasePortTextBox.Text = Input.Database.Port.ToString();
+                databaseNameTextBox.Text = Input.Database.DatabaseName;
+                databaseUsernameTextBox.Text = Input.Database.Username;
+                databasePasswordTextBox.Text = Input.Database.Password;
+                selectedDatabaseType = Input.Database.DatabaseType;
+                
+                switch(Input.Database.DatabaseType)
+                {
+                    case DatabaseType.MySQL:
+                        mysqlCheckButton.Checked = true;
+                        break;
+                    case DatabaseType.MSSQL:
+                        mssqlCheckButton.Checked = true;
+                        break;
+                    case DatabaseType.PostgreSQL:
+                        postgresqlCheckButton.Checked = true;
+                        break;
+                }
+            }
+        }
+
+        public void ShowNotification(string text)
+        {
+            NotificationOKForm notificationOkForm = new NotificationOKForm();
+
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = Input.Palette;
+            notificationFormInput.NotificationText = text;
+
+            notificationOkForm.Input = notificationFormInput;
+
+            notificationOkForm.ShowDialog();
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "" || selectedDatabaseType == DatabaseType.None)
+            if (databaseConnectionNameTextBox.Text == "" || databaseHostnameTextBox.Text == "" || databasePortTextBox.Text == "" || databaseNameTextBox.Text == "" || databaseUsernameTextBox.Text == "" || databasePasswordTextBox.Text == "" || selectedDatabaseType == DatabaseType.None)
             {
-                MainForm.ShowNotification("Database fields cannot be empty.");
+                ShowNotification("Database fields cannot be empty.");
             }
             else
             {
                 int port;
-                bool result = int.TryParse(kryptonTextBox3.Text, out port);
+                bool result = int.TryParse(databasePortTextBox.Text, out port);
 
                 if (!result)
                 {
-                    MainForm.ShowNotification("Port needs to be a number.");
+                    ShowNotification("Port needs to be a number.");
                 }
                 else
                 {
-                    Globals.addDatabaseConnectionName = kryptonTextBox1.Text;
-                    Globals.addDatabaseHostname = kryptonTextBox2.Text;
-                    Globals.addDatabasePort = port;
-                    Globals.addDatabaseDbName = kryptonTextBox4.Text;
-                    Globals.addDatabaseUsername = kryptonTextBox5.Text;
-                    Globals.addDatabasePassword = kryptonTextBox6.Text;
-                    Globals.addDatabaseType = selectedDatabaseType;
+                    DatabaseConnection databaseConnection = new DatabaseConnection();
+
+                    databaseConnection.Name = databaseConnectionNameTextBox.Text;
+                    databaseConnection.Hostname = databaseHostnameTextBox.Text;
+                    databaseConnection.Port = port;
+                    databaseConnection.DatabaseName = databaseNameTextBox.Text;
+                    databaseConnection.Username = databaseUsernameTextBox.Text;
+                    databaseConnection.Password = databasePasswordTextBox.Text;
+                    databaseConnection.DatabaseType = selectedDatabaseType;
+
+                    Output.Database = databaseConnection;
                 }
 
                 this.Close();
             }
         }
 
-        private void AddDatabaseForm_Load(object sender, EventArgs e)
-        {
-            if (Globals.editorProperties.Glass)
-            {
-                this.Opacity = 0.875;
-            }
-
-            Globals.addDatabaseConnectionName = null;
-            Globals.addDatabaseHostname = null;
-            Globals.addDatabasePort = -1;
-            Globals.addDatabaseDbName = null;
-            Globals.addDatabaseUsername = null;
-            Globals.addDatabasePassword = null;
-            Globals.addDatabaseType = DatabaseType.None;
-
-            if (Globals.databaseEditIndex >= 0)
-            {
-                kryptonTextBox1.Text = Globals.databaseToEditConnectionName;
-                kryptonTextBox2.Text = Globals.databaseToEditHostname;
-                kryptonTextBox3.Text = Globals.databaseToEditPort.ToString();
-                kryptonTextBox4.Text = Globals.databaseToEditDbName;
-                kryptonTextBox5.Text = Globals.databaseToEditUsername;
-                kryptonTextBox6.Text = Globals.databaseToEditPassword;
-                
-                switch(Globals.databaseToEditType)
-                {
-                    case DatabaseType.MySQL:
-                        kryptonCheckButton1.Checked = true;
-                        break;
-                    case DatabaseType.MSSQL:
-                        kryptonCheckButton2.Checked = true;
-                        break;
-                    case DatabaseType.PostgreSQL:
-                        kryptonCheckButton3.Checked = true;
-                        break;
-                }
-            }
-        }
-
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "" || kryptonTextBox3.Text == "" || kryptonTextBox4.Text == "" || kryptonTextBox5.Text == "" || kryptonTextBox6.Text == "" || selectedDatabaseType == null)
+            if (databaseConnectionNameTextBox.Text == "" || databaseHostnameTextBox.Text == "" || databasePortTextBox.Text == "" || databaseNameTextBox.Text == "" || databaseUsernameTextBox.Text == "" || databasePasswordTextBox.Text == "" || selectedDatabaseType == null)
             {
-                MainForm.ShowNotification("Database fields cannot be empty.");
+                ShowNotification("Database fields cannot be empty.");
             }
             else
             {
                 int port;
-                bool result = int.TryParse(kryptonTextBox3.Text, out port);
+                bool result = int.TryParse(databasePortTextBox.Text, out port);
 
                 if (!result)
                 {
-                    MainForm.ShowNotification("Port needs to be a number.");
+                    ShowNotification("Port needs to be a number.");
                 }
                 else
                 {
-                    DatabaseResponse dbConnectionCheckOutput = DatabaseService.CheckDatabaseConnection(selectedDatabaseType, kryptonTextBox2.Text, port, kryptonTextBox4.Text, kryptonTextBox5.Text, kryptonTextBox6.Text);
+                    DatabaseResponse dbConnectionCheckOutput = DatabaseService.CheckDatabaseConnection(selectedDatabaseType, databaseHostnameTextBox.Text, port, databaseNameTextBox.Text, databaseUsernameTextBox.Text, databasePasswordTextBox.Text);
 
                     if (dbConnectionCheckOutput.Success)
                     {
-                        MainForm.ShowNotification("Database connection established successfully.");
+                        ShowNotification("Database connection established successfully.");
                     }
                     else
                     {
-                        MainForm.ShowNotification(dbConnectionCheckOutput.Message);
+                        ShowNotification(dbConnectionCheckOutput.Message);
                     }
                 }
             }
@@ -198,9 +215,9 @@ namespace pie.Forms.Databases
 
         private void kryptonCheckButton1_Click(object sender, EventArgs e)
         {
-            kryptonCheckButton1.Checked = false;
-            kryptonCheckButton2.Checked = false;
-            kryptonCheckButton3.Checked = false;
+            mysqlCheckButton.Checked = false;
+            mssqlCheckButton.Checked = false;
+            postgresqlCheckButton.Checked = false;
 
             ((KryptonCheckButton)sender).Checked = true;
 

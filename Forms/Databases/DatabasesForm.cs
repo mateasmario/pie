@@ -38,13 +38,53 @@ namespace pie.Forms.Databases
         private ConfigurationService configurationService = new ConfigurationService();
         private ThemeService themeService = new ThemeService();
 
-        public bool OutputSaveStatus;
+        public DatabasesFormInput Input { get; set; }
+        public DatabasesFormOutput Output { get; set; }
         private List<DatabaseConnection> tempDatabases;
 
         public DatabasesForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+
+            Output = new DatabasesFormOutput();
+        }
+
+        private void DatabasesForm_Load(object sender, EventArgs e)
+        {
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
+            {
+                this.Opacity = 0.875;
+            }
+
+            tempDatabases = new List<DatabaseConnection>();
+
+            SynchronizeObjectListViewWithTheme();
+
+            if (Input.Databases != null)
+            {
+                foreach (DatabaseConnection database in Input.Databases)
+                {
+                    tempDatabases.Add(database);
+                }
+
+                databasesListView.SetObjects(tempDatabases);
+            }
+        }
+
+        public void ShowNotification(string text)
+        {
+            NotificationOKForm notificationOkForm = new NotificationOKForm();
+
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = Input.Palette;
+            notificationFormInput.NotificationText = text;
+
+            notificationOkForm.Input = notificationFormInput;
+
+            notificationOkForm.ShowDialog();
         }
 
         private void SynchronizeObjectListViewWithTheme()
@@ -55,38 +95,14 @@ namespace pie.Forms.Databases
             databasesListView.MultiSelect = false;
             databasesListView.HeaderStyle = ColumnHeaderStyle.None;
 
-            databasesListView.BackColor = Globals.theme.Primary;
-            databasesListView.ForeColor = Globals.theme.Fore;
-            databasesListView.HighlightBackgroundColor = Globals.theme.Secondary;
-            databasesListView.HighlightForegroundColor = Globals.theme.Fore;
-            databasesListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
-            databasesListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
+            databasesListView.BackColor = Input.ActiveTheme.Primary;
+            databasesListView.ForeColor = Input.ActiveTheme.Fore;
+            databasesListView.HighlightBackgroundColor = Input.ActiveTheme.Secondary;
+            databasesListView.HighlightForegroundColor = Input.ActiveTheme.Fore;
+            databasesListView.UnfocusedHighlightBackgroundColor = Input.ActiveTheme.Secondary;
+            databasesListView.UnfocusedHighlightForegroundColor = Input.ActiveTheme.Fore;
 
             ConnectionNameColumn.FillsFreeSpace = true;
-        }
-
-        private void DatabasesForm_Load(object sender, EventArgs e)
-        {
-            if (Globals.editorProperties.Glass)
-            {
-                this.Opacity = 0.875;
-            }
-
-            tempDatabases = new List<DatabaseConnection>();
-
-            SynchronizeObjectListViewWithTheme();
-
-            if (Globals.databases != null)
-            {
-                foreach (DatabaseConnection database in Globals.databases)
-                {
-                    tempDatabases.Add(database);
-                }
-
-                databasesListView.SetObjects(tempDatabases);
-            }
-
-            OutputSaveStatus = false;
         }
 
         private void kryptonButton2_Click(object sender, EventArgs e)
@@ -94,16 +110,9 @@ namespace pie.Forms.Databases
             AddDatabaseForm addDatabaseForm = new AddDatabaseForm();
             addDatabaseForm.ShowDialog();
 
-            if (Globals.addDatabaseConnectionName != null)
+            if (addDatabaseForm.Output.Database != null)
             {
-                DatabaseConnection database = new DatabaseConnection();
-                database.Name = Globals.addDatabaseConnectionName;
-                database.DatabaseType = Globals.addDatabaseType;
-                database.Hostname = Globals.addDatabaseHostname;
-                database.Port = Globals.addDatabasePort;
-                database.DatabaseName = Globals.addDatabaseDbName;
-                database.Username = Globals.addDatabaseUsername;
-                database.Password = Globals.addDatabasePassword;
+                DatabaseConnection database = addDatabaseForm.Output.Database;
 
                 bool exists = false;
 
@@ -119,7 +128,7 @@ namespace pie.Forms.Databases
 
                 if (exists)
                 {
-                    MainForm.ShowNotification("A database entry with the same name already exists.");
+                    ShowNotification("A database entry with the same name already exists.");
                 }
                 else
                 {
@@ -133,7 +142,7 @@ namespace pie.Forms.Databases
         {
             if (databasesListView.SelectedItems.Count == 0)
             {
-                MainForm.ShowNotification("Please choose an item to delete.");
+                ShowNotification("Please choose an item to delete.");
             }
             else
             {
@@ -155,26 +164,32 @@ namespace pie.Forms.Databases
         {
             if (databasesListView.SelectedObjects.Count == 1)
             {
-                Globals.databaseEditIndex = databasesListView.SelectedIndex;
-
-                Globals.databaseToEditConnectionName = tempDatabases[Globals.databaseEditIndex].Name;
-                Globals.databaseToEditType = tempDatabases[Globals.databaseEditIndex].DatabaseType;
-                Globals.databaseToEditHostname = tempDatabases[Globals.databaseEditIndex].Hostname;
-                Globals.databaseToEditPort = tempDatabases[Globals.databaseEditIndex].Port;
-                Globals.databaseToEditDbName = tempDatabases[Globals.databaseEditIndex].DatabaseName;
-                Globals.databaseToEditUsername = tempDatabases[Globals.databaseEditIndex].Username;
-                Globals.databaseToEditPassword = tempDatabases[Globals.databaseEditIndex].Password;
-
                 AddDatabaseForm addDatabaseForm = new AddDatabaseForm();
+
+                int databaseEditIndex = databasesListView.SelectedIndex;
+
+                DatabaseConnection databaseConnection = new DatabaseConnection();
+                databaseConnection.Name = tempDatabases[databaseEditIndex].Name;
+                databaseConnection.Hostname = tempDatabases[databaseEditIndex].Hostname;
+                databaseConnection.Port = tempDatabases[databaseEditIndex].Port;
+                databaseConnection.DatabaseName = tempDatabases[databaseEditIndex].DatabaseName;
+                databaseConnection.Username = tempDatabases[databaseEditIndex].Username;
+                databaseConnection.Password = tempDatabases[databaseEditIndex].Password;
+                databaseConnection.DatabaseType = tempDatabases[databaseEditIndex].DatabaseType;
+
+                AddDatabaseFormInput addDatabaseFormInput = new AddDatabaseFormInput();
+                addDatabaseFormInput.Database = databaseConnection;
+                addDatabaseForm.Input = addDatabaseFormInput;
+
                 addDatabaseForm.ShowDialog();
 
-                if (Globals.addDatabaseConnectionName != null)
+                if (addDatabaseForm.Output.Database != null)
                 {
                     bool exists = false;
 
                     foreach (DatabaseConnection tempDatabase in tempDatabases)
                     {
-                        if (tempDatabase.Name != Globals.databaseToEditConnectionName && tempDatabase.Name.Equals(Globals.addDatabaseConnectionName))
+                        if (tempDatabase.Name != ((DatabaseConnection)databasesListView.SelectedObject).Name && tempDatabase.Name.Equals(addDatabaseForm.Output.Database.Name))
                         {
                             exists = true;
                             break;
@@ -183,21 +198,13 @@ namespace pie.Forms.Databases
 
                     if (exists)
                     {
-                        MainForm.ShowNotification("A database entry with the same name already exists.");
+                        ShowNotification("A database entry with the same name already exists.");
                     }
                     else
                     {
-                        tempDatabases[Globals.databaseEditIndex].Name = Globals.addDatabaseConnectionName;
-                        tempDatabases[Globals.databaseEditIndex].DatabaseType = Globals.addDatabaseType;
-                        tempDatabases[Globals.databaseEditIndex].Hostname = Globals.addDatabaseHostname;
-                        tempDatabases[Globals.databaseEditIndex].Port = Globals.addDatabasePort;
-                        tempDatabases[Globals.databaseEditIndex].DatabaseName = Globals.addDatabaseDbName;
-                        tempDatabases[Globals.databaseEditIndex].Username = Globals.addDatabaseUsername;
-                        tempDatabases[Globals.databaseEditIndex].Password = Globals.addDatabasePassword;
+                        tempDatabases[databaseEditIndex] = addDatabaseForm.Output.Database;
                     }
                 }
-
-                Globals.databaseEditIndex = -1;
 
                 databasesListView.SetObjects(tempDatabases);
             }
@@ -207,7 +214,7 @@ namespace pie.Forms.Databases
         {
             configurationService.WriteToFile("config/databases.json", tempDatabases);
 
-            OutputSaveStatus = true;
+            Output.Saved = true;
 
             this.Close();
         }

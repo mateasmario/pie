@@ -17,9 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using System;
-using pie.Services;
-
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
  * 
@@ -27,31 +24,12 @@ using pie.Services;
 */
 using ComponentFactory.Krypton.Toolkit;
 
-namespace pie
+namespace pie.Classes
 {
-    public partial class NotificationOK : KryptonForm
+    public class GitCloneFormInput
     {
-        private ThemeService themeService = new ThemeService();
-
-        public NotificationOK()
-        {
-            InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
-        }
-
-        private void CustomMessageBox_Load(object sender, EventArgs e)
-        {
-            if (Globals.editorProperties.Glass)
-            {
-                this.Opacity = 0.875;
-            }
-
-            kryptonRichTextBox1.Text = Globals.notificationText;
-        }
-
-        private void kryptonButton1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        public GitCredentials GitCredentials { get; set; }
+        public KryptonPalette Palette { get; set; }
+        public EditorProperties EditorProperties { get; set; }
     }
 }

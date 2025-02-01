@@ -17,9 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using pie.Classes;
 
 /** 
@@ -108,7 +108,7 @@ namespace pie.Services
             darkTheme.Name = "Dark";
         }
 
-        public ThemeInfo GetThemeInternal(String themeName)
+        public ThemeInfo GetThemeInternal(string themeName, List<ThemeInfo> themeInfos)
         {
             ThemeInfo themeInfo = null;
 
@@ -122,7 +122,7 @@ namespace pie.Services
             }
             else
             {
-                foreach (ThemeInfo t in Globals.themeInfos)
+                foreach (ThemeInfo t in themeInfos)
                 {
                     if (themeInfo.Name == themeName)
                     {
