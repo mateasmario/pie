@@ -21,6 +21,7 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 using pie.Services;
+using pie.Classes;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -35,10 +36,24 @@ namespace pie
     {
         private ThemeService themeService = new ThemeService();
 
+        public AboutFormInput Input { get; set; }
+
         public AboutForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+        }
+
+        private void AboutForm_Load(object sender, EventArgs e)
+        {
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
+            {
+                this.Opacity = 0.875;
+            }
+
+            Version assemblyVersion = Assembly.GetEntryAssembly().GetName().Version;
+            versionLabel.Text = "Version " + assemblyVersion.ToString();
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
@@ -49,17 +64,6 @@ namespace pie
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
             Process.Start("http://docsbymario.com");
-        }
-
-        private void AboutForm_Load(object sender, EventArgs e)
-        {
-            if (Globals.editorProperties.Glass)
-            {
-                this.Opacity = 0.875;
-            }
-
-            Version assemblyVersion = Assembly.GetEntryAssembly().GetName().Version;
-            versionLabel.Text = "Version " + assemblyVersion.ToString();
         }
     }
 }

@@ -19,6 +19,7 @@
 
 using System;
 using pie.Services;
+using pie.Classes;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -31,45 +32,64 @@ namespace pie
 {
     public partial class GitCommitCredentialsForm : KryptonForm
     {
+        public GitCommitCredentialsFormInput Input { get; set; }
+        public GitCommitCredentialsFormOutput Output { get; set; }
+
         private ThemeService themeService = new ThemeService();
         public GitCommitCredentialsForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+            Output = new GitCommitCredentialsFormOutput();
+        }
+
+        private void GitCommitCredentialsForm_Load(object sender, EventArgs e)
+        {
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
+            {
+                this.Opacity = 0.875;
+            }
+
+            if (Input.GitCredentials.Name != null)
+            {
+                kryptonTextBox1.Text = Input.GitCredentials.Name;
+            }
+
+            if (Input.GitCredentials.Email != null)
+            {
+                kryptonTextBox2.Text = Input.GitCredentials.Email;
+            }
+        }
+
+        public void ShowNotification(string text)
+        {
+            NotificationOKForm notificationOkForm = new NotificationOKForm();
+
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = Input.Palette;
+            notificationFormInput.NotificationText = text;
+
+            notificationOkForm.Input = notificationFormInput;
+
+            notificationOkForm.ShowDialog();
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             if (kryptonTextBox1.Text != "" && kryptonTextBox2.Text != "")
             {
-                Globals.gitCredentials.Name = kryptonTextBox1.Text;
-                Globals.gitCredentials.Email = kryptonTextBox2.Text;
+                Input.GitCredentials.Name = kryptonTextBox1.Text;
+                Input.GitCredentials.Email = kryptonTextBox2.Text;
 
-                Globals.gitFormClosedWithOk = true;
+                Output.Saved = true;
 
                 this.Close();
             }
             else
             {
-                MainForm.ShowNotification("Author Name and Email cannot be blank.");
-            }
-        }
-
-        private void GitCommitCredentialsForm_Load(object sender, EventArgs e)
-        {
-            if (Globals.editorProperties.Glass)
-            {
-                this.Opacity = 0.875;
-            }
-
-            if (Globals.gitCredentials.Name != null)
-            {
-                kryptonTextBox1.Text = Globals.gitCredentials.Name;
-            }
-
-            if (Globals.gitCredentials.Email != null)
-            {
-                kryptonTextBox2.Text = Globals.gitCredentials.Email;
+                ShowNotification("Author Name and Email cannot be blank.");
             }
         }
     }

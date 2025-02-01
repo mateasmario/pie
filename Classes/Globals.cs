@@ -19,16 +19,8 @@
 
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 using pie.Classes;
 using pie.Enums;
-
-/** 
- * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
- * 
- * Copyright (c) 2017 - 2022, Krypton Suite
-*/
-using ComponentFactory.Krypton.Toolkit;
 
 /**
  * LibGit2Sharp is used for integrating several advanced Git functionalities into pie.
@@ -49,60 +41,23 @@ namespace pie
         public static bool deletesLastTab;
         public static bool deletesTab;
 
-        // Theme
-        public static ThemeInfo theme;
-        public static KryptonPalette kryptonPalette;
-        public static List<ThemeInfo> themeInfos;
-        public static Dictionary<string, Color> colorDictionary;
-        public static string newThemeName;
-        
         // Find & Replace Panel
         public static bool mouseDown;
         public static Point lastLocation;
 
         // Git
-        public static Repository repo;
         public static Branch selectedBranch;
-        public static GitCredentials gitCredentials = new GitCredentials();
         public static bool gitTabOpened;
-        public static bool gitFormClosedWithOk;
-        public static string clonePath;
         public static int selectedBranchIndex;
         public static bool doNotTriggerBranchChangeEvent;
         public static bool doNotShowBranchChangeNotification;
         public static bool showGitTabPressed;
 
-        // Notification
-        public static string notificationText;
-        public static NotificationButton notificationButtonPressed;
-
-        // Databases
-        public static List<DatabaseConnection> databases;
-        public static string addDatabaseConnectionName;
-        public static string addDatabaseHostname;
-        public static int addDatabasePort;
-        public static string addDatabaseDbName;
-        public static string addDatabaseUsername;
-        public static string addDatabasePassword;
-        public static DatabaseType addDatabaseType;
-        public static int databaseEditIndex;
-        public static string databaseToEditConnectionName;
-        public static string databaseToEditHostname;
-        public static int databaseToEditPort;
-        public static string databaseToEditDbName;
-        public static string databaseToEditUsername;
-        public static string databaseToEditPassword;
-        public static DatabaseType databaseToEditType;
-
         // Scintilla preferences
-        public static EditorProperties editorProperties;
         public static List<LanguageDefinition> languageDefinitions;
         public static List<LanguageMapping> languageMappings;
 
         // Format
         public static List<Formatter> formatters;
-
-        // Code Templates
-        public static List<CodeTemplate> codeTemplates;
     }
 }

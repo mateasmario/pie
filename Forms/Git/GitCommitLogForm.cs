@@ -53,45 +53,33 @@ namespace pie
     {
         private ThemeService themeService = new ThemeService();
 
+        public GitCommitLogFormInput Input { get; set; }
+
         public GitCommitLogForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
-        }
-
-        private HeaderFormatStyle CustomizeHeaderStyle()
-        {
-            HeaderFormatStyle headerstyle = new HeaderFormatStyle();
-            headerstyle.Normal.BackColor = Globals.theme.Secondary;
-            headerstyle.Normal.ForeColor = Globals.theme.Fore;
-
-            headerstyle.Hot.BackColor = Globals.theme.ButtonHover;
-            headerstyle.Hot.ForeColor = Globals.theme.Fore;
-
-            headerstyle.Pressed.BackColor = Globals.theme.ButtonFrame;
-            headerstyle.Pressed.ForeColor = Globals.theme.Fore;
-
-            return headerstyle;
         }
 
         private void GitCommitLogForm_Load(object sender, EventArgs e)
         {
-            if (Globals.editorProperties.Glass)
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
             {
                 this.Opacity = 0.875;
             }
 
             gitCommitLogListView.ShowGroups = false;
-            gitCommitLogListView.BackColor = Globals.theme.Primary;
-            gitCommitLogListView.ForeColor = Globals.theme.Fore;
+            gitCommitLogListView.BackColor = Input.ActiveTheme.Primary;
+            gitCommitLogListView.ForeColor = Input.ActiveTheme.Fore;
             gitCommitLogListView.UseCustomSelectionColors = true;
             gitCommitLogListView.FullRowSelect = true;
-            gitCommitLogListView.HighlightBackgroundColor = Globals.theme.Secondary;
-            gitCommitLogListView.HighlightForegroundColor = Globals.theme.Fore;
-            gitCommitLogListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
-            gitCommitLogListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
-            gitCommitLogListView.BackColor = Globals.theme.Primary;
-            gitCommitLogListView.ForeColor = Globals.theme.Fore;
+            gitCommitLogListView.HighlightBackgroundColor = Input.ActiveTheme.Secondary;
+            gitCommitLogListView.HighlightForegroundColor = Input.ActiveTheme.Fore;
+            gitCommitLogListView.UnfocusedHighlightBackgroundColor = Input.ActiveTheme.Secondary;
+            gitCommitLogListView.UnfocusedHighlightForegroundColor = Input.ActiveTheme.Fore;
+            gitCommitLogListView.BackColor = Input.ActiveTheme.Primary;
+            gitCommitLogListView.ForeColor = Input.ActiveTheme.Fore;
 
             gitCommitLogListView.HeaderFormatStyle = CustomizeHeaderStyle();
 
@@ -99,7 +87,7 @@ namespace pie
 
             var RFC2822Format = "ddd dd MMM HH:mm:ss yyyy K";
 
-            foreach (Commit c in Globals.repo.Commits.Take(15))
+            foreach (Commit c in Input.Repository.Commits.Take(15))
             {
                 GitCommit gitCommit = new GitCommit();
 
@@ -112,6 +100,21 @@ namespace pie
             }
 
             gitCommitLogListView.SetObjects(gitCommitList);
+        }
+
+        private HeaderFormatStyle CustomizeHeaderStyle()
+        {
+            HeaderFormatStyle headerstyle = new HeaderFormatStyle();
+            headerstyle.Normal.BackColor = Input.ActiveTheme.Secondary;
+            headerstyle.Normal.ForeColor = Input.ActiveTheme.Fore;
+
+            headerstyle.Hot.BackColor = Input.ActiveTheme.ButtonHover;
+            headerstyle.Hot.ForeColor = Input.ActiveTheme.Fore;
+
+            headerstyle.Pressed.BackColor = Input.ActiveTheme.ButtonFrame;
+            headerstyle.Pressed.ForeColor = Input.ActiveTheme.Fore;
+
+            return headerstyle;
         }
     }
 }

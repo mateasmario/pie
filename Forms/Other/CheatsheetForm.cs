@@ -34,22 +34,25 @@ namespace pie.Forms.Other
     {
         private ThemeService themeService = new ThemeService();
 
+        public CheatsheetFormInput Input { get; set; }
+
         public CheatsheetForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
         private void CheatsheetForm_Load(object sender, EventArgs e)
         {
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
             ControlHelper.SuspendDrawing(this);
 
-            if (Globals.editorProperties.Glass)
+            if (Input.EditorProperties.Glass)
             {
                 this.Opacity = 0.875;
             }
 
-            if (Globals.theme.IconType == "dark")
+            if (Input.ActiveTheme.IconType == "dark")
             {
                 pictureBox1.BackgroundImage = Properties.Resources.ctrl_dark;
                 pictureBox4.BackgroundImage = Properties.Resources.ctrl_dark;

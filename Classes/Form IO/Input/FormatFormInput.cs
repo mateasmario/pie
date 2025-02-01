@@ -17,17 +17,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using System;
+/** 
+ * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
+ * 
+ * Copyright (c) 2017 - 2022, Krypton Suite
+*/
+using ComponentFactory.Krypton.Toolkit;
 
-namespace pie.Services
+namespace pie.Classes
 {
-    public class NotificationExceptionHandlerService
+    public class FormatFormInput
     {
-        public static void handleException(Exception ex)
-        {
-            NotificationOK notificationOK = new NotificationOK();
-            Globals.notificationText = "Exception encountered: " + ex.Message;
-            notificationOK.ShowDialog();
-        }
+        public string Text { get; set; }
+        public ThemeInfo ActiveTheme { get; set; }
+        public KryptonPalette Palette { get; set; }
+        public EditorProperties EditorProperties { get; set; }
     }
 }

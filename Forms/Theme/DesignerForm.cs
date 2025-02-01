@@ -28,8 +28,6 @@ using pie.Classes;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
-using System.Reflection;
-using System.Linq;
 
 namespace pie.Forms.Theme
 {
@@ -38,23 +36,26 @@ namespace pie.Forms.Theme
         private ThemeService themeService = new ThemeService();
         private ConfigurationService configurationService = new ConfigurationService();
 
+        public DesignerFormInput Input { get; set; }
+
         private ThemeInfo themeInfoToEdit;
 
         public DesignerForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
         private void DesignerForm_Load(object sender, EventArgs e)
         {
-            if (Globals.editorProperties.Glass)
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
             {
                 this.Opacity = 0.875;
             }
 
             SynchronizeObjectListViewWithTheme();
-            themeListView.SetObjects(Globals.themeInfos);
+            themeListView.SetObjects(Input.ThemeInfos);
 
             kryptonGroupBox1.Visible = false;
             kryptonGroupBox2.Visible = false;
@@ -68,12 +69,12 @@ namespace pie.Forms.Theme
             themeListView.MultiSelect = false;
             themeListView.HeaderStyle = ColumnHeaderStyle.None;
 
-            themeListView.BackColor = Globals.theme.Primary;
-            themeListView.ForeColor = Globals.theme.Fore;
-            themeListView.HighlightBackgroundColor = Globals.theme.Secondary;
-            themeListView.HighlightForegroundColor = Globals.theme.Fore;
-            themeListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
-            themeListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
+            themeListView.BackColor = Input.ActiveTheme.Primary;
+            themeListView.ForeColor = Input.ActiveTheme.Fore;
+            themeListView.HighlightBackgroundColor = Input.ActiveTheme.Secondary;
+            themeListView.HighlightForegroundColor = Input.ActiveTheme.Fore;
+            themeListView.UnfocusedHighlightBackgroundColor = Input.ActiveTheme.Secondary;
+            themeListView.UnfocusedHighlightForegroundColor = Input.ActiveTheme.Fore;
 
             ThemeNameColumn.FillsFreeSpace = true;
         }
@@ -85,7 +86,7 @@ namespace pie.Forms.Theme
 
             if (themeListView.SelectedItems.Count == 1)
             {
-                foreach(ThemeInfo themeInfo in Globals.themeInfos)
+                foreach(ThemeInfo themeInfo in Input.ThemeInfos)
                 {
                     if (themeInfo.Name.Equals(themeListView.SelectedItem.Text))
                     {
@@ -152,7 +153,7 @@ namespace pie.Forms.Theme
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            configurationService.WriteFilesToDirectory<ThemeInfo>("config/themes", Globals.themeInfos, "json");
+            configurationService.WriteFilesToDirectory("config/themes", Input.ThemeInfos, "json");
             this.Close();
         }
 
@@ -160,7 +161,7 @@ namespace pie.Forms.Theme
         {
             if (themeInfoToEdit != null)
             {
-                Globals.themeInfos.Remove(themeInfoToEdit);
+                Input.ThemeInfos.Remove(themeInfoToEdit);
                 themeListView.RemoveObject(themeInfoToEdit);
             }
         }
@@ -168,14 +169,22 @@ namespace pie.Forms.Theme
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
             NewThemeForm newThemeForm = new NewThemeForm();
+
+            NewThemeFormInput newThemeFormInput = new NewThemeFormInput();
+            newThemeFormInput.Palette = Input.Palette;
+            newThemeFormInput.ThemeInfos = Input.ThemeInfos;
+            newThemeFormInput.EditorProperties = Input.EditorProperties;
+
+            newThemeForm.Input = newThemeFormInput;
+
             newThemeForm.ShowDialog();
 
-            if (Globals.newThemeName != null)
+            if (newThemeForm.Output.NewThemeName != null)
             {
                 ThemeInfo themeInfo = new ThemeInfo();
-                themeInfo.Name = Globals.newThemeName;
+                themeInfo.Name = newThemeForm.Output.NewThemeName;
 
-                Globals.themeInfos.Add(themeInfo);
+                Input.ThemeInfos.Add(themeInfo);
                 themeListView.AddObject(themeInfo);
             }
         }

@@ -37,19 +37,23 @@ namespace pie
         private ConfigurationService configurationService = new ConfigurationService();
         private ThemeService themeService = new ThemeService();
 
-        public List<BuildCommand> InputBuildCommands { get; set; }
-        public bool OutputSaveStatus { get; private set; }
+        public BuildCommandsFormInput Input { get; set; }
+        public BuildCommandsFormOutput Output { get; set; }
+
         private List<BuildCommand> tempCommands;
 
         public BuildCommandsForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+
+            Output = new BuildCommandsFormOutput();
         }
 
         private void BuildCommandsForm_Load(object sender, EventArgs e)
         {
-            if (Globals.editorProperties.Glass)
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
             {
                 this.Opacity = 0.875;
             }
@@ -58,17 +62,29 @@ namespace pie
 
             SynchronizeObjectListViewWithTheme();
 
-            if (InputBuildCommands != null)
+            if (Input.BuildCommands != null)
             {
-                foreach (BuildCommand buildCommand in InputBuildCommands)
+                foreach (BuildCommand buildCommand in Input.BuildCommands)
                 {
                     tempCommands.Add(buildCommand);
                 }
 
                 buildCommandsListView.SetObjects(tempCommands);
             }
+        }
 
-            OutputSaveStatus = false;
+        public void ShowNotification(string text)
+        {
+            NotificationOKForm notificationOkForm = new NotificationOKForm();
+
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = Input.Palette;
+            notificationFormInput.NotificationText = text;
+
+            notificationOkForm.Input = notificationFormInput;
+
+            notificationOkForm.ShowDialog();
         }
 
         private void SynchronizeObjectListViewWithTheme()
@@ -79,12 +95,12 @@ namespace pie
             buildCommandsListView.MultiSelect = false;
             buildCommandsListView.HeaderStyle = ColumnHeaderStyle.None;
 
-            buildCommandsListView.BackColor = Globals.theme.Primary;
-            buildCommandsListView.ForeColor = Globals.theme.Fore;
-            buildCommandsListView.HighlightBackgroundColor = Globals.theme.Secondary;
-            buildCommandsListView.HighlightForegroundColor = Globals.theme.Fore;
-            buildCommandsListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
-            buildCommandsListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
+            buildCommandsListView.BackColor = Input.ActiveTheme.Primary;
+            buildCommandsListView.ForeColor = Input.ActiveTheme.Fore;
+            buildCommandsListView.HighlightBackgroundColor = Input.ActiveTheme.Secondary;
+            buildCommandsListView.HighlightForegroundColor = Input.ActiveTheme.Fore;
+            buildCommandsListView.UnfocusedHighlightBackgroundColor = Input.ActiveTheme.Secondary;
+            buildCommandsListView.UnfocusedHighlightForegroundColor = Input.ActiveTheme.Fore;
 
             BuildCommandNameColumn.FillsFreeSpace = true;
         }
@@ -93,7 +109,7 @@ namespace pie
         {
             if (buildCommandsListView.SelectedItems.Count == 0)
             {
-                MainForm.ShowNotification("Please choose an item to delete.");
+                ShowNotification("Please choose an item to delete.");
             }
             else
             {
@@ -116,7 +132,7 @@ namespace pie
             AddBuildCommandForm addBuildCommandForm = new AddBuildCommandForm();
             addBuildCommandForm.ShowDialog();
 
-            BuildCommand outputBuildCommand = addBuildCommandForm.Output;
+            BuildCommand outputBuildCommand = addBuildCommandForm.Output.BuildCommand;
 
             if (outputBuildCommand != null)
             {
@@ -134,7 +150,7 @@ namespace pie
 
                 if (exists)
                 {
-                    MainForm.ShowNotification("A command with the same name already exists.");
+                    ShowNotification("A command with the same name already exists.");
                 }
                 else
                 {
@@ -148,7 +164,7 @@ namespace pie
         {
             configurationService.WriteToFile("config/build.json", tempCommands);
 
-            OutputSaveStatus = true;
+            Output.Saved = true;
 
             this.Close();
         }
@@ -158,18 +174,23 @@ namespace pie
             if (buildCommandsListView.SelectedObjects.Count == 1)
             {
                 AddBuildCommandForm addBuildCommandForm = new AddBuildCommandForm();
-                addBuildCommandForm.InputBuildCommand = tempCommands[buildCommandsListView.SelectedIndex];
+
+                AddBuildCommandFormInput addBuildCommandFormInput = new AddBuildCommandFormInput();
+                addBuildCommandFormInput.Palette = Input.Palette;
+                addBuildCommandFormInput.EditorProperties = Input.EditorProperties;
+                addBuildCommandFormInput.BuildCommand = tempCommands[buildCommandsListView.SelectedIndex];
+
+                addBuildCommandForm.Input = addBuildCommandFormInput;
+
                 addBuildCommandForm.ShowDialog();
 
-                BuildCommand outputBuildCommand = addBuildCommandForm.Output;
-
-                if (outputBuildCommand != null)
+                if (addBuildCommandForm.Output != null)
                 {
                     bool exists = false;
 
                     foreach (BuildCommand tempCommand in tempCommands)
                     {
-                        if (tempCommand.Name != tempCommands[buildCommandsListView.SelectedIndex].Name && tempCommand.Name.Equals(outputBuildCommand.Name))
+                        if (tempCommand.Name != tempCommands[buildCommandsListView.SelectedIndex].Name && tempCommand.Name.Equals(addBuildCommandForm.Output.BuildCommand.Name))
                         {
                             exists = true;
                             break;
@@ -178,11 +199,11 @@ namespace pie
 
                     if (exists)
                     {
-                        MainForm.ShowNotification("A command with the same name already exists.");
+                        ShowNotification("A command with the same name already exists.");
                     }
                     else
                     {
-                        tempCommands[buildCommandsListView.SelectedIndex] = outputBuildCommand;
+                        tempCommands[buildCommandsListView.SelectedIndex] = addBuildCommandForm.Output.BuildCommand;
                     }
                 }
 

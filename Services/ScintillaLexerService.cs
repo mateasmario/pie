@@ -54,28 +54,28 @@ namespace pie.Services
     {
         private static Dictionary<string, Color> parserColorDictionary;
 
-        public static void ResetDictionary()
+        public static void ResetDictionary(ThemeInfo activeTheme)
         {
             parserColorDictionary = new Dictionary<string, Color>();
-            parserColorDictionary["Default"] = Globals.theme.Fore;
-            parserColorDictionary["Background"] = Globals.theme.Primary;
-            parserColorDictionary["Fore"] = Globals.theme.Fore;
-            parserColorDictionary["CaretLine"] = Globals.theme.CaretLineBack;
-            parserColorDictionary["Selection"] = Globals.theme.Selection;
-            parserColorDictionary["Comment"] = Globals.theme.Comment;
-            parserColorDictionary["CommentLine"] = Globals.theme.CommentLine;
-            parserColorDictionary["Number"] = Globals.theme.Number;
-            parserColorDictionary["Word"] = Globals.theme.Word;
-            parserColorDictionary["String"] = Globals.theme.String;
-            parserColorDictionary["Operator"] = Globals.theme.Operator;
-            parserColorDictionary["Preprocessor"] = Globals.theme.Preprocessor;
-            parserColorDictionary["Triple"] = Globals.theme.Triple;
-            parserColorDictionary["CommentBlock"] = Globals.theme.CommentBlock;
-            parserColorDictionary["Decorator"] = Globals.theme.Decorator;
-            parserColorDictionary["Attribute"] = Globals.theme.Attribute;
-            parserColorDictionary["Entity"] = Globals.theme.Entity;
-            parserColorDictionary["User1"] = Globals.theme.User1;
-            parserColorDictionary["User2"] = Globals.theme.User2;
+            parserColorDictionary["Default"] = activeTheme.Fore;
+            parserColorDictionary["Background"] = activeTheme.Primary;
+            parserColorDictionary["Fore"] = activeTheme.Fore;
+            parserColorDictionary["CaretLine"] = activeTheme.CaretLineBack;
+            parserColorDictionary["Selection"] = activeTheme.Selection;
+            parserColorDictionary["Comment"] = activeTheme.Comment;
+            parserColorDictionary["CommentLine"] = activeTheme.CommentLine;
+            parserColorDictionary["Number"] = activeTheme.Number;
+            parserColorDictionary["Word"] = activeTheme.Word;
+            parserColorDictionary["String"] = activeTheme.String;
+            parserColorDictionary["Operator"] = activeTheme.Operator;
+            parserColorDictionary["Preprocessor"] = activeTheme.Preprocessor;
+            parserColorDictionary["Triple"] = activeTheme.Triple;
+            parserColorDictionary["CommentBlock"] = activeTheme.CommentBlock;
+            parserColorDictionary["Decorator"] = activeTheme.Decorator;
+            parserColorDictionary["Attribute"] = activeTheme.Attribute;
+            parserColorDictionary["Entity"] = activeTheme.Entity;
+            parserColorDictionary["User1"] = activeTheme.User1;
+            parserColorDictionary["User2"] = activeTheme.User2;
         }
 
         public string ConvertColorToHex(Color c)
@@ -96,7 +96,7 @@ namespace pie.Services
             autocompleteMenu.SetAutocompleteItems(keywords);
         }
 
-        public void ConfigureLexer(AutocompleteMenu autocompleteMenu, LanguageDefinition languageDefinition, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
+        public void ConfigureLexer(AutocompleteMenu autocompleteMenu, LanguageDefinition languageDefinition, Scintilla scintilla, ThemeInfo activeTheme)
         {
             Lexer lexer = (Lexer)Enum.Parse(typeof(Lexer), languageDefinition.Lexer);
             scintilla.Lexer = lexer;
@@ -107,7 +107,7 @@ namespace pie.Services
             }
 
             SetAutocompleteMenuKeywords(autocompleteMenu, languageDefinition.Keywords.Split(' ').ToList());
-            EnableFolding(scintilla);
+            EnableFolding(scintilla, activeTheme);
 
             if (languageDefinition.WordChars != null)
             {
@@ -163,7 +163,7 @@ namespace pie.Services
             }
         }
 
-        private void EnableFolding(Scintilla scintilla)
+        private void EnableFolding(Scintilla scintilla, ThemeInfo activeTheme)
         {
             // Enable folding
             scintilla.SetProperty("fold", "1");
@@ -182,8 +182,8 @@ namespace pie.Services
 
             for (int i = 25; i <= 31; i++)
             {
-                scintilla.Markers[i].SetForeColor(Globals.theme.Folding); // styles for [+] and [-]
-                scintilla.Markers[i].SetBackColor(Globals.theme.Fore); // styles for [+] and [-]
+                scintilla.Markers[i].SetForeColor(activeTheme.Folding); // styles for [+] and [-]
+                scintilla.Markers[i].SetBackColor(activeTheme.Fore); // styles for [+] and [-]
             }
 
             // Enable automatic folding
@@ -294,7 +294,7 @@ namespace pie.Services
             scintilla.Styles[Style.Sql.Operator].ForeColor = parserColorDictionary["Operator"];
         }
 
-        public void SetLexer(AutocompleteMenu autocompleteMenu, string extension, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
+        public void SetLexer(AutocompleteMenu autocompleteMenu, string extension, Scintilla scintilla, ThemeInfo activeTheme)
         {
             foreach(LanguageMapping languageMapping in Globals.languageMappings)
             {
@@ -304,7 +304,7 @@ namespace pie.Services
                     {
                         if (languageDefinition.Name.Equals(languageMapping.Language))
                         {
-                            ConfigureLexer(autocompleteMenu, languageDefinition, scintilla, tabControl, index);
+                            ConfigureLexer(autocompleteMenu, languageDefinition, scintilla, activeTheme);
                             return;
                         }
                     }

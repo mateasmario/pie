@@ -19,6 +19,7 @@
 
 using System;
 using pie.Services;
+using pie.Classes;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -33,48 +34,54 @@ namespace pie.Forms.Git
     {
         private ThemeService themeService = new ThemeService();
 
+        public GitSettingsFormInput Input { get; set; }
+        public GitSettingsFormOutput Output { get; set; }
+
         public GitSettingsForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+
+            Output = new GitSettingsFormOutput();
         }
 
         private void GitSettingsForm_Load(object sender, EventArgs e)
         {
-            if (Globals.editorProperties.Glass)
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
             {
                 this.Opacity = 0.875;
             }
 
-            if (Globals.gitCredentials.Name != null)
+            if (Input.GitCredentials.Name != null)
             {
-                authorNameTextBox.Text = Globals.gitCredentials.Name;
+                authorNameTextBox.Text = Input.GitCredentials.Name;
             }
 
-            if (Globals.gitCredentials.Email != null)
+            if (Input.GitCredentials.Email != null)
             {
-                authorEmailTextBox.Text = Globals.gitCredentials.Email;
+                authorEmailTextBox.Text = Input.GitCredentials.Email;
             }
 
-            if (Globals.gitCredentials.Username != null)
+            if (Input.GitCredentials.Username != null)
             {
-                remoteServerUsernameTextBox.Text = Globals.gitCredentials.Username;
+                remoteServerUsernameTextBox.Text = Input.GitCredentials.Username;
             }
 
-            if (Globals.gitCredentials.Password != null)
+            if (Input.GitCredentials.Password != null)
             {
-                remoteServerPasswordTextBox.Text = Globals.gitCredentials.Password;
+                remoteServerPasswordTextBox.Text = Input.GitCredentials.Password;
             }
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            Globals.gitCredentials.Name = authorNameTextBox.Text;
-            Globals.gitCredentials.Email = authorEmailTextBox.Text;
-            Globals.gitCredentials.Username = remoteServerUsernameTextBox.Text;
-            Globals.gitCredentials.Password = remoteServerPasswordTextBox.Text;
+            Input.GitCredentials.Name = authorNameTextBox.Text;
+            Input.GitCredentials.Email = authorEmailTextBox.Text;
+            Input.GitCredentials.Username = remoteServerUsernameTextBox.Text;
+            Input.GitCredentials.Password = remoteServerPasswordTextBox.Text;
 
-            Globals.gitFormClosedWithOk = true;
+            Output.Saved = true;
 
             this.Close();
         }

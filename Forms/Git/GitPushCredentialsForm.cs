@@ -19,6 +19,7 @@
 
 using System;
 using pie.Services;
+using pie.Classes;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -32,45 +33,64 @@ namespace pie
     public partial class GitPushCredentialsForm : KryptonForm
     {
         private ThemeService themeService = new ThemeService();
+        
+        public GitPushCredentialsFormInput Input { get; set; }
+        public GitPushCredentialsFormOutput Output { get; set; }
 
         public GitPushCredentialsForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+            Output = new GitPushCredentialsFormOutput();
         }
 
         private void GitPushCredentialsForm_Load(object sender, EventArgs e)
         {
-            if (Globals.editorProperties.Glass)
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
             {
                 this.Opacity = 0.875;
             }
 
-            if (Globals.gitCredentials.Username != null)
+            if (Input.GitCredentials.Username != null)
             {
-                kryptonTextBox1.Text = Globals.gitCredentials.Username;
+                kryptonTextBox1.Text = Input.GitCredentials.Username;
             }
 
-            if (Globals.gitCredentials.Password != null)
+            if (Input.GitCredentials.Password != null)
             {
-                kryptonTextBox2.Text = Globals.gitCredentials.Password;
+                kryptonTextBox2.Text = Input.GitCredentials.Password;
             }
+        }
+
+        public void ShowNotification(string text)
+        {
+            NotificationOKForm notificationOkForm = new NotificationOKForm();
+
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = Input.Palette;
+            notificationFormInput.NotificationText = text;
+
+            notificationOkForm.Input = notificationFormInput;
+
+            notificationOkForm.ShowDialog();
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             if (kryptonTextBox1.Text != "" && kryptonTextBox2.Text != "")
             {
-                Globals.gitCredentials.Username = kryptonTextBox1.Text;
-                Globals.gitCredentials.Password = kryptonTextBox2.Text;
+                Input.GitCredentials.Username = kryptonTextBox1.Text;
+                Input.GitCredentials.Password = kryptonTextBox2.Text;
 
-                Globals.gitFormClosedWithOk = true;
+                Output.Saved = true;
 
                 this.Close();
             }
             else
             {
-                MainForm.ShowNotification("Username and Password cannot be blank.");
+                ShowNotification("Username and Password cannot be blank.");
             }
         }
     }

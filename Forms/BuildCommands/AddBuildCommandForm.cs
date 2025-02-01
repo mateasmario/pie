@@ -20,7 +20,6 @@
 using System;
 using pie.Services;
 using pie.Classes;
-using pie.Enums;
 using System.Collections.Generic;
 
 /** 
@@ -36,34 +35,66 @@ namespace pie
     {
         private ThemeService themeService = new ThemeService();
 
-        public BuildCommand InputBuildCommand;
-        public BuildCommand Output { get; private set; }
+        public AddBuildCommandFormInput Input { get; set; }
+        public AddBuildCommandFormOutput Output { get; set; }
 
         public AddBuildCommandForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+
+            Output = new AddBuildCommandFormOutput();
+        }
+
+        private void AddBuildCommandForm_Load(object sender, EventArgs e)
+        {
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
+            {
+                this.Opacity = 0.875;
+            }
+
+            if (Input.BuildCommand != null)
+            {
+                displayNameTextBox.Text = Input.BuildCommand.Name;
+                commandTextBox.Text = Input.BuildCommand.Command;
+                fileExtensionsRichTextBox.Text = Input.BuildCommand.Extensions.Replace(',', '\n').Replace(" ", "");
+            }
+        }
+
+        public void ShowNotification(string text)
+        {
+            NotificationOKForm notificationOkForm = new NotificationOKForm();
+
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = Input.Palette;
+            notificationFormInput.NotificationText = text;
+
+            notificationOkForm.Input = notificationFormInput;
+
+            notificationOkForm.ShowDialog();
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (displayNameTextBox.Text == "" || commandTextBox.Text == "")
             {
-                MainForm.ShowNotification("Display Name and Command cannot be empty.");
+                ShowNotification("Display Name and Command cannot be empty.");
             }
             else
             {
-                Output = new BuildCommand();
+                Output.BuildCommand = new BuildCommand();
 
-                Output.Name = displayNameTextBox.Text;
-                Output.Command = commandTextBox.Text;
+                Output.BuildCommand.Name = displayNameTextBox.Text;
+                Output.BuildCommand.Command = commandTextBox.Text;
 
                 List<string> fileExtensions = new List<string>();
                 fileExtensions.AddRange(fileExtensionsRichTextBox.Text.Split('\n'));
                 fileExtensions.ForEach(extension => extension.Trim());
 
                 string extensions = "";
-                for (int i = 0; i<fileExtensions.Count; i++)
+                for (int i = 0; i < fileExtensions.Count; i++)
                 {
                     if (fileExtensions[i].StartsWith("."))
                     {
@@ -88,24 +119,9 @@ namespace pie
                     }
                 }
 
-                Output.Extensions = extensions;
+                Output.BuildCommand.Extensions = extensions;
 
                 this.Close();
-            }
-        }
-
-        private void AddBuildCommandForm_Load(object sender, EventArgs e)
-        {
-            if (Globals.editorProperties.Glass)
-            {
-                this.Opacity = 0.875;
-            }
-
-            if (InputBuildCommand != null)
-            {
-                displayNameTextBox.Text = InputBuildCommand.Name;
-                commandTextBox.Text = InputBuildCommand.Command;
-                fileExtensionsRichTextBox.Text = InputBuildCommand.Extensions.Replace(',', '\n').Replace(" ", "");
             }
         }
     }

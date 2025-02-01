@@ -30,23 +30,23 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddDatabaseForm));
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonCheckButton3 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.kryptonCheckButton2 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.kryptonCheckButton1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.postgresqlCheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.mssqlCheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.mysqlCheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonTextBox6 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.databasePasswordTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonTextBox5 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.databaseUsernameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonTextBox4 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.databaseNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonTextBox3 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.databasePortTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonTextBox2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.databaseHostnameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.databaseConnectionNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -56,23 +56,23 @@
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.kryptonCheckButton3);
-            this.kryptonPanel1.Controls.Add(this.kryptonCheckButton2);
-            this.kryptonPanel1.Controls.Add(this.kryptonCheckButton1);
+            this.kryptonPanel1.Controls.Add(this.postgresqlCheckButton);
+            this.kryptonPanel1.Controls.Add(this.mssqlCheckButton);
+            this.kryptonPanel1.Controls.Add(this.mysqlCheckButton);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel9);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel8);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
-            this.kryptonPanel1.Controls.Add(this.kryptonTextBox6);
+            this.kryptonPanel1.Controls.Add(this.databasePasswordTextBox);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel6);
-            this.kryptonPanel1.Controls.Add(this.kryptonTextBox5);
+            this.kryptonPanel1.Controls.Add(this.databaseUsernameTextBox);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel5);
             this.kryptonPanel1.Controls.Add(this.kryptonButton2);
-            this.kryptonPanel1.Controls.Add(this.kryptonTextBox4);
+            this.kryptonPanel1.Controls.Add(this.databaseNameTextBox);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
-            this.kryptonPanel1.Controls.Add(this.kryptonTextBox3);
+            this.kryptonPanel1.Controls.Add(this.databasePortTextBox);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
-            this.kryptonPanel1.Controls.Add(this.kryptonTextBox2);
-            this.kryptonPanel1.Controls.Add(this.kryptonTextBox1);
+            this.kryptonPanel1.Controls.Add(this.databaseHostnameTextBox);
+            this.kryptonPanel1.Controls.Add(this.databaseConnectionNameTextBox);
             this.kryptonPanel1.Controls.Add(this.kryptonButton1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
@@ -84,33 +84,33 @@
             // 
             // kryptonCheckButton3
             // 
-            this.kryptonCheckButton3.Location = new System.Drawing.Point(277, 27);
-            this.kryptonCheckButton3.Name = "kryptonCheckButton3";
-            this.kryptonCheckButton3.Size = new System.Drawing.Size(128, 49);
-            this.kryptonCheckButton3.TabIndex = 20;
-            this.kryptonCheckButton3.Values.Image = global::pie.Properties.Resources.postgresql_black;
-            this.kryptonCheckButton3.Values.Text = "PostgreSQL";
-            this.kryptonCheckButton3.Click += new System.EventHandler(this.kryptonCheckButton1_Click);
+            this.postgresqlCheckButton.Location = new System.Drawing.Point(277, 27);
+            this.postgresqlCheckButton.Name = "kryptonCheckButton3";
+            this.postgresqlCheckButton.Size = new System.Drawing.Size(128, 49);
+            this.postgresqlCheckButton.TabIndex = 20;
+            this.postgresqlCheckButton.Values.Image = global::pie.Properties.Resources.postgresql_black;
+            this.postgresqlCheckButton.Values.Text = "PostgreSQL";
+            this.postgresqlCheckButton.Click += new System.EventHandler(this.kryptonCheckButton1_Click);
             // 
             // kryptonCheckButton2
             // 
-            this.kryptonCheckButton2.Location = new System.Drawing.Point(143, 27);
-            this.kryptonCheckButton2.Name = "kryptonCheckButton2";
-            this.kryptonCheckButton2.Size = new System.Drawing.Size(128, 49);
-            this.kryptonCheckButton2.TabIndex = 19;
-            this.kryptonCheckButton2.Values.Image = global::pie.Properties.Resources.microsoft_black;
-            this.kryptonCheckButton2.Values.Text = " Microsoft SQL";
-            this.kryptonCheckButton2.Click += new System.EventHandler(this.kryptonCheckButton1_Click);
+            this.mssqlCheckButton.Location = new System.Drawing.Point(143, 27);
+            this.mssqlCheckButton.Name = "kryptonCheckButton2";
+            this.mssqlCheckButton.Size = new System.Drawing.Size(128, 49);
+            this.mssqlCheckButton.TabIndex = 19;
+            this.mssqlCheckButton.Values.Image = global::pie.Properties.Resources.microsoft_black;
+            this.mssqlCheckButton.Values.Text = " Microsoft SQL";
+            this.mssqlCheckButton.Click += new System.EventHandler(this.kryptonCheckButton1_Click);
             // 
             // kryptonCheckButton1
             // 
-            this.kryptonCheckButton1.Location = new System.Drawing.Point(8, 27);
-            this.kryptonCheckButton1.Name = "kryptonCheckButton1";
-            this.kryptonCheckButton1.Size = new System.Drawing.Size(128, 49);
-            this.kryptonCheckButton1.TabIndex = 18;
-            this.kryptonCheckButton1.Values.Image = global::pie.Properties.Resources.mysql_black;
-            this.kryptonCheckButton1.Values.Text = "MySQL";
-            this.kryptonCheckButton1.Click += new System.EventHandler(this.kryptonCheckButton1_Click);
+            this.mysqlCheckButton.Location = new System.Drawing.Point(8, 27);
+            this.mysqlCheckButton.Name = "kryptonCheckButton1";
+            this.mysqlCheckButton.Size = new System.Drawing.Size(128, 49);
+            this.mysqlCheckButton.TabIndex = 18;
+            this.mysqlCheckButton.Values.Image = global::pie.Properties.Resources.mysql_black;
+            this.mysqlCheckButton.Values.Text = "MySQL";
+            this.mysqlCheckButton.Click += new System.EventHandler(this.kryptonCheckButton1_Click);
             // 
             // kryptonLabel9
             // 
@@ -141,13 +141,13 @@
             // 
             // kryptonTextBox6
             // 
-            this.kryptonTextBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.databasePasswordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonTextBox6.Location = new System.Drawing.Point(7, 334);
-            this.kryptonTextBox6.Name = "kryptonTextBox6";
-            this.kryptonTextBox6.PasswordChar = '*';
-            this.kryptonTextBox6.Size = new System.Drawing.Size(395, 23);
-            this.kryptonTextBox6.TabIndex = 6;
+            this.databasePasswordTextBox.Location = new System.Drawing.Point(7, 334);
+            this.databasePasswordTextBox.Name = "kryptonTextBox6";
+            this.databasePasswordTextBox.PasswordChar = '*';
+            this.databasePasswordTextBox.Size = new System.Drawing.Size(395, 23);
+            this.databasePasswordTextBox.TabIndex = 6;
             // 
             // kryptonLabel6
             // 
@@ -159,12 +159,12 @@
             // 
             // kryptonTextBox5
             // 
-            this.kryptonTextBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.databaseUsernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonTextBox5.Location = new System.Drawing.Point(7, 284);
-            this.kryptonTextBox5.Name = "kryptonTextBox5";
-            this.kryptonTextBox5.Size = new System.Drawing.Size(395, 23);
-            this.kryptonTextBox5.TabIndex = 5;
+            this.databaseUsernameTextBox.Location = new System.Drawing.Point(7, 284);
+            this.databaseUsernameTextBox.Name = "kryptonTextBox5";
+            this.databaseUsernameTextBox.Size = new System.Drawing.Size(395, 23);
+            this.databaseUsernameTextBox.TabIndex = 5;
             // 
             // kryptonLabel5
             // 
@@ -188,12 +188,12 @@
             // 
             // kryptonTextBox4
             // 
-            this.kryptonTextBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.databaseNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonTextBox4.Location = new System.Drawing.Point(8, 234);
-            this.kryptonTextBox4.Name = "kryptonTextBox4";
-            this.kryptonTextBox4.Size = new System.Drawing.Size(395, 23);
-            this.kryptonTextBox4.TabIndex = 4;
+            this.databaseNameTextBox.Location = new System.Drawing.Point(8, 234);
+            this.databaseNameTextBox.Name = "kryptonTextBox4";
+            this.databaseNameTextBox.Size = new System.Drawing.Size(395, 23);
+            this.databaseNameTextBox.TabIndex = 4;
             // 
             // kryptonLabel4
             // 
@@ -205,12 +205,12 @@
             // 
             // kryptonTextBox3
             // 
-            this.kryptonTextBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.databasePortTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonTextBox3.Location = new System.Drawing.Point(310, 170);
-            this.kryptonTextBox3.Name = "kryptonTextBox3";
-            this.kryptonTextBox3.Size = new System.Drawing.Size(93, 23);
-            this.kryptonTextBox3.TabIndex = 3;
+            this.databasePortTextBox.Location = new System.Drawing.Point(310, 170);
+            this.databasePortTextBox.Name = "kryptonTextBox3";
+            this.databasePortTextBox.Size = new System.Drawing.Size(93, 23);
+            this.databasePortTextBox.TabIndex = 3;
             // 
             // kryptonLabel3
             // 
@@ -222,21 +222,21 @@
             // 
             // kryptonTextBox2
             // 
-            this.kryptonTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.databaseHostnameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonTextBox2.Location = new System.Drawing.Point(8, 170);
-            this.kryptonTextBox2.Name = "kryptonTextBox2";
-            this.kryptonTextBox2.Size = new System.Drawing.Size(296, 23);
-            this.kryptonTextBox2.TabIndex = 2;
+            this.databaseHostnameTextBox.Location = new System.Drawing.Point(8, 170);
+            this.databaseHostnameTextBox.Name = "kryptonTextBox2";
+            this.databaseHostnameTextBox.Size = new System.Drawing.Size(296, 23);
+            this.databaseHostnameTextBox.TabIndex = 2;
             // 
             // kryptonTextBox1
             // 
-            this.kryptonTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.databaseConnectionNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonTextBox1.Location = new System.Drawing.Point(8, 106);
-            this.kryptonTextBox1.Name = "kryptonTextBox1";
-            this.kryptonTextBox1.Size = new System.Drawing.Size(395, 23);
-            this.kryptonTextBox1.TabIndex = 0;
+            this.databaseConnectionNameTextBox.Location = new System.Drawing.Point(8, 106);
+            this.databaseConnectionNameTextBox.Name = "kryptonTextBox1";
+            this.databaseConnectionNameTextBox.Size = new System.Drawing.Size(395, 23);
+            this.databaseConnectionNameTextBox.TabIndex = 0;
             // 
             // kryptonButton1
             // 
@@ -290,25 +290,25 @@
         #endregion
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox2;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databaseHostnameTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databaseConnectionNameTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox4;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databaseNameTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox3;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databasePortTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox5;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databaseUsernameTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox6;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databasePasswordTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton kryptonCheckButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton kryptonCheckButton2;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton kryptonCheckButton3;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton mysqlCheckButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton mssqlCheckButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton postgresqlCheckButton;
     }
 }

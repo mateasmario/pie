@@ -43,18 +43,36 @@ namespace pie.Forms.CodeTemplates
     public partial class CodeTemplatesForm : KryptonForm
     {
         private ThemeService themeService = new ThemeService();
+        private ConfigurationService configurationService = new ConfigurationService();
+
+        public CodeTemplatesFormInput Input { get; set; }
+        public CodeTemplatesFormOutput Output { get; private set; }
+
+        private List<CodeTemplate> Working { get; set; }
 
         private int selectedIndex = -1;
-
-        public List<CodeTemplate> Input { get; set; }
-        private List<CodeTemplate> Working { get; set; }
-        public List<CodeTemplate> Output { get; private set; }
 
         public CodeTemplatesForm()
         {
             InitializeComponent();
 
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+            indexButton1.Click += kryptonCheckButton_Click;
+            indexButton2.Click += kryptonCheckButton_Click;
+            indexButton4.Click += kryptonCheckButton_Click;
+            indexButton3.Click += kryptonCheckButton_Click;
+            indexButton8.Click += kryptonCheckButton_Click;
+            indexButton7.Click += kryptonCheckButton_Click;
+            indexButton6.Click += kryptonCheckButton_Click;
+            indexButton5.Click += kryptonCheckButton_Click;
+            indexButton0.Click += kryptonCheckButton_Click;
+            indexButton9.Click += kryptonCheckButton_Click;
+
+            Output = new CodeTemplatesFormOutput();
+        }
+
+        private void CodeTemplatesForm_Load(object sender, EventArgs e)
+        {
+            themeService.SetPaletteToObjects(this, Input.Palette);
 
             ColorizeButton(indexButton1);
             ColorizeButton(indexButton2);
@@ -67,16 +85,16 @@ namespace pie.Forms.CodeTemplates
             ColorizeButton(indexButton0);
             ColorizeButton(indexButton9);
 
-            indexButton1.Click += kryptonCheckButton_Click;
-            indexButton2.Click += kryptonCheckButton_Click;
-            indexButton4.Click += kryptonCheckButton_Click;
-            indexButton3.Click += kryptonCheckButton_Click;
-            indexButton8.Click += kryptonCheckButton_Click;
-            indexButton7.Click += kryptonCheckButton_Click;
-            indexButton6.Click += kryptonCheckButton_Click;
-            indexButton5.Click += kryptonCheckButton_Click;
-            indexButton0.Click += kryptonCheckButton_Click;
-            indexButton9.Click += kryptonCheckButton_Click;
+            if (Input.EditorProperties.Glass)
+            {
+                this.Opacity = 0.875;
+            }
+
+            Working = Input.CodeTemplates.ConvertAll(codeTemplate => codeTemplate.Clone());
+
+            int x = (textAreaPanel.Width - placeholderLabel.Width) / 2;
+            int y = (textAreaPanel.Height - placeholderLabel.Height) / 2;
+            placeholderLabel.Location = new Point(x, y);
         }
 
         private void SaveCurrentTemplate()
@@ -131,18 +149,18 @@ namespace pie.Forms.CodeTemplates
 
                 TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
                 TextArea.StyleResetDefault();
-                TextArea.Styles[ScintillaNET.Style.Default].Font = "Consolas";
-                TextArea.Styles[ScintillaNET.Style.Default].Size = 15;
-                TextArea.Styles[ScintillaNET.Style.Default].ForeColor = Globals.theme.Fore;
-                TextArea.CaretForeColor = Globals.theme.Fore;
-                TextArea.Styles[ScintillaNET.Style.Default].BackColor = Globals.theme.Primary;
-                TextArea.SetSelectionBackColor(true, Globals.theme.Selection);
-                TextArea.CaretLineBackColor = Globals.theme.CaretLineBack;
+                TextArea.Styles[Style.Default].Font = "Consolas";
+                TextArea.Styles[Style.Default].Size = 15;
+                TextArea.Styles[Style.Default].ForeColor = Input.ActiveTheme.Fore;
+                TextArea.CaretForeColor = Input.ActiveTheme.Fore;
+                TextArea.Styles[Style.Default].BackColor = Input.ActiveTheme.Primary;
+                TextArea.SetSelectionBackColor(true, Input.ActiveTheme.Selection);
+                TextArea.CaretLineBackColor = Input.ActiveTheme.CaretLineBack;
                 TextArea.StyleClearAll();
-                TextArea.Styles[ScintillaNET.Style.LineNumber].BackColor = Globals.theme.NumberMargin;
-                TextArea.Styles[ScintillaNET.Style.LineNumber].ForeColor = Globals.theme.Fore;
-                TextArea.Styles[ScintillaNET.Style.IndentGuide].ForeColor = Globals.theme.Fore;
-                TextArea.Styles[ScintillaNET.Style.IndentGuide].BackColor = Globals.theme.NumberMargin;
+                TextArea.Styles[Style.LineNumber].BackColor = Input.ActiveTheme.NumberMargin;
+                TextArea.Styles[Style.LineNumber].ForeColor = Input.ActiveTheme.Fore;
+                TextArea.Styles[Style.IndentGuide].ForeColor = Input.ActiveTheme.Fore;
+                TextArea.Styles[Style.IndentGuide].BackColor = Input.ActiveTheme.NumberMargin;
 
                 TextArea.Margins[0].Width = 24;
                 TextArea.Parent = textAreaPanel;
@@ -159,26 +177,16 @@ namespace pie.Forms.CodeTemplates
             saveButton.Enabled = true;
         }
 
-        private void CodeTemplatesForm_Load(object sender, EventArgs e)
-        {
-            Working = Input.ConvertAll(codeTemplate => codeTemplate.Clone());
-            Output = Input;
-
-            int x = (textAreaPanel.Width - placeholderLabel.Width) / 2;
-            int y = (textAreaPanel.Height - placeholderLabel.Height) / 2;
-            placeholderLabel.Location = new Point(x,y);
-        }
-
         private void ColorizeButton(KryptonCheckButton kryptonCheckButton)
         {
-            kryptonCheckButton.StateCommon.Back.Color1 = Globals.theme.Primary;
-            kryptonCheckButton.StateCommon.Back.Color2 = Globals.theme.Primary;
-            kryptonCheckButton.StateCheckedNormal.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton.StateCheckedNormal.Back.Color2 = Globals.theme.Secondary;
-            kryptonCheckButton.StateCheckedTracking.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton.StateCheckedTracking.Back.Color2 = Globals.theme.Secondary;
-            kryptonCheckButton.StateCheckedPressed.Back.Color1 = Globals.theme.Secondary;
-            kryptonCheckButton.StateCheckedPressed.Back.Color2 = Globals.theme.Secondary;
+            kryptonCheckButton.StateCommon.Back.Color1 = Input.ActiveTheme.Primary;
+            kryptonCheckButton.StateCommon.Back.Color2 = Input.ActiveTheme.Primary;
+            kryptonCheckButton.StateCheckedNormal.Back.Color1 = Input.ActiveTheme.Secondary;
+            kryptonCheckButton.StateCheckedNormal.Back.Color2 = Input.ActiveTheme.Secondary;
+            kryptonCheckButton.StateCheckedTracking.Back.Color1 = Input.ActiveTheme.Secondary;
+            kryptonCheckButton.StateCheckedTracking.Back.Color2 = Input.ActiveTheme.Secondary;
+            kryptonCheckButton.StateCheckedPressed.Back.Color1 = Input.ActiveTheme.Secondary;
+            kryptonCheckButton.StateCheckedPressed.Back.Color2 = Input.ActiveTheme.Secondary;
             kryptonCheckButton.StateCommon.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton.StateCheckedNormal.Back.ColorStyle = PaletteColorStyle.Solid;
             kryptonCheckButton.StateCheckedTracking.Back.ColorStyle = PaletteColorStyle.Solid;
@@ -188,7 +196,11 @@ namespace pie.Forms.CodeTemplates
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             SaveCurrentTemplate();
-            Output = Working;
+
+            configurationService.WriteToFile("config\\templates.json", Working);
+
+            Output.Saved = true;
+
             this.Close();
         }
 

@@ -20,7 +20,9 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 using pie.Services;
+using pie.Classes;
 
 /**
  * LibGit2Sharp is used for integrating several advanced Git functionalities into pie.
@@ -35,7 +37,6 @@ using LibGit2Sharp;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using ComponentFactory.Krypton.Toolkit;
-using System.Threading.Tasks;
 
 namespace pie
 {
@@ -43,25 +44,56 @@ namespace pie
     {
         private ThemeService themeService = new ThemeService();
 
+        public GitCloneFormInput Input { get; set; }
+        public GitCloneFormOutput Output { get; set; }
+
         public GitCloneForm()
         {
             InitializeComponent();
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+
+            Output = new GitCloneFormOutput();
         }
+
+        private void GitCloneForm_Load(object sender, EventArgs e)
+        {
+            themeService.SetPaletteToObjects(this, Input.Palette);
+
+            if (Input.EditorProperties.Glass)
+            {
+                this.Opacity = 0.875;
+            }
+
+            Output.ClonePath = null;
+        }
+
+        public void ShowNotification(string text)
+        {
+            NotificationOKForm notificationOkForm = new NotificationOKForm();
+
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = Input.Palette;
+            notificationFormInput.NotificationText = text;
+
+            notificationOkForm.Input = notificationFormInput;
+
+            notificationOkForm.ShowDialog();
+        }
+
 
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
             if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "")
             {
-                MainForm.ShowNotification("Repository URL and clone location should not be empty.");
+                ShowNotification("Repository URL and clone location should not be empty.");
             }
             else if (!Directory.Exists(kryptonTextBox2.Text))
             {
-                MainForm.ShowNotification("Directory does not exist. Create it before cloning a repository.");
+                ShowNotification("Directory does not exist. Create it before cloning a repository.");
             }
             else if (Directory.GetFiles(kryptonTextBox2.Text).Length > 0 || Directory.GetDirectories(kryptonTextBox2.Text).Length > 0)
             {
-                MainForm.ShowNotification("Specified directory needs to be empty.");
+                ShowNotification("Specified directory needs to be empty.");
             }
             else
             {
@@ -71,15 +103,22 @@ namespace pie
 
         private void GitClone()
         {
-            if (Globals.gitCredentials.Username == null || Globals.gitCredentials.Password == null)
+            if (Input.GitCredentials.Username == null || Input.GitCredentials.Password == null)
             {
-                GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
-                Globals.gitFormClosedWithOk = false;
-                gitCredentialsForm.ShowDialog();
+                GitPushCredentialsForm gitPushCredentialsForm = new GitPushCredentialsForm();
 
-                if (Globals.gitFormClosedWithOk)
+                GitPushCredentialsFormInput gitPushCredentialsFormInput = new GitPushCredentialsFormInput();
+                gitPushCredentialsFormInput.EditorProperties = Input.EditorProperties;
+                gitPushCredentialsFormInput.GitCredentials = Input.GitCredentials;
+                gitPushCredentialsFormInput.Palette = Input.Palette;
+
+                gitPushCredentialsForm.Input = gitPushCredentialsFormInput;
+
+                gitPushCredentialsForm.ShowDialog();
+
+                if (gitPushCredentialsForm.Output.Saved)
                 {
-                    File.WriteAllText("git.config", Globals.gitCredentials.Name + "\n" + Globals.gitCredentials.Email + "\n" + Globals.gitCredentials.Username + "\n" + Globals.gitCredentials.Password);
+                    File.WriteAllText("git.config", Input.GitCredentials.Name + "\n" + Input.GitCredentials.Email + "\n" + Input.GitCredentials.Username + "\n" + Input.GitCredentials.Password);
                     GitClone();
                 }
             }
@@ -89,8 +128,8 @@ namespace pie
                 {
                     CredentialsProvider = (_url, _user, _cred) => new UsernamePasswordCredentials
                     {
-                        Username = Globals.gitCredentials.Username,
-                        Password = Globals.gitCredentials.Password
+                        Username = Input.GitCredentials.Username,
+                        Password = Input.GitCredentials.Password
                     }
                 };
 
@@ -101,26 +140,18 @@ namespace pie
                         Repository.Clone(kryptonTextBox1.Text, kryptonTextBox2.Text, options);
                     }).Wait();
 
-                    Globals.clonePath = kryptonTextBox2.Text;
+                    Output.ClonePath = kryptonTextBox2.Text;
                     this.Close();
-                } catch(NameConflictException e)
+                }
+                catch (NameConflictException e)
                 {
-                    MainForm.ShowNotification(e.Message);
-                } catch(LibGit2SharpException e)
+                    ShowNotification(e.Message);
+                }
+                catch (LibGit2SharpException e)
                 {
-                    MainForm.ShowNotification(e.Message);
+                    ShowNotification(e.Message);
                 }
             }
-        }
-
-        private void GitCloneForm_Load(object sender, EventArgs e)
-        {
-            if (Globals.editorProperties.Glass)
-            {
-                this.Opacity = 0.875;
-            }
-
-            Globals.clonePath = null;
         }
 
         private void kryptonButton1_Click_1(object sender, EventArgs e)

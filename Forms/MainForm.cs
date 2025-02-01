@@ -110,7 +110,16 @@ namespace pie
         private ScintillaLexerService scintillaLexerService = new ScintillaLexerService();
 
         private List<TabInfo> tabInfos = new List<TabInfo>();
+        private List<ThemeInfo> themeInfos;
         private List<BuildCommand> buildCommands;
+        private List<DatabaseConnection> databases;
+        private List<CodeTemplate> codeTemplates;
+        private EditorProperties editorProperties;
+        private GitCredentials gitCredentials;
+
+        private Repository repository;
+
+        private ThemeInfo activeTheme;
 
         public string[] Args;
 
@@ -165,7 +174,7 @@ namespace pie
         {
             try
             {
-                Globals.gitCredentials = configurationService.GetArrayFromFile<GitCredentials>("config/git.json")[0];
+                gitCredentials = configurationService.GetArrayFromFile<GitCredentials>("config/git.json")[0];
             }
             catch (FileNotFoundException)
             {
@@ -182,28 +191,28 @@ namespace pie
 
                 if (selectedTheme.Name == "Dark")
                 {
-                    Globals.theme = ThemeService.darkTheme;
+                    activeTheme = ThemeService.darkTheme;
                 }
                 else if (selectedTheme.Name == "Light")
                 {
-                    Globals.theme = ThemeService.lightTheme;
+                    activeTheme = ThemeService.lightTheme;
                 }
                 else
                 {
-                    foreach (ThemeInfo t in Globals.themeInfos)
+                    foreach (ThemeInfo t in themeInfos)
                     {
                         if (t.Name == selectedTheme.Name)
                         {
-                            Globals.theme = t;
+                            activeTheme = t;
                         }
                     }
                 }
 
-                ScintillaLexerService.ResetDictionary();
+                ScintillaLexerService.ResetDictionary(activeTheme);
             }
             catch (FileNotFoundException)
             {
-                Globals.theme = ThemeService.lightTheme;
+                activeTheme = ThemeService.lightTheme;
                 configurationService.WriteToFile("config/theme.json", new SelectedTheme("light"));
             }
         }
@@ -222,9 +231,9 @@ namespace pie
             }
 
 
-            Globals.themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>("config\\themes", "json");
+            themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>("config\\themes", "json");
 
-            foreach (ThemeInfo themeInfo in Globals.themeInfos)
+            foreach (ThemeInfo themeInfo in themeInfos)
             {
                 ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
                 toolStripMenuItem.Text = themeInfo.Name;
@@ -239,7 +248,7 @@ namespace pie
         {
             ControlHelper.SuspendDrawing(this);
 
-            Globals.theme = theme;
+            activeTheme = theme;
 
             configurationService.WriteToFile("config/theme.json", new SelectedTheme(theme.Name));
 
@@ -250,24 +259,24 @@ namespace pie
                     KryptonPage kryptonPage = tabControl.Pages[i];
                     Scintilla scintilla = (Scintilla)kryptonPage.Controls[0];
 
-                    ScintillaLexerService.ResetDictionary();
+                    ScintillaLexerService.ResetDictionary(activeTheme);
 
                     if (tabInfos[i].getOpenedFilePath() != null)
                     {
                         string extension = parsingService.GetFileExtension(tabInfos[i].getOpenedFilePath());
-                        themeService.ColorizeTextArea(scintilla, Globals.theme);
+                        themeService.ColorizeTextArea(scintilla, activeTheme);
                         ColorizeAutocompleteMenu(tabInfos[i].getAutocompleteMenu());
-                        scintillaLexerService.SetLexer(tabInfos[i].getAutocompleteMenu(), extension, scintilla, tabControl, i);
+                        scintillaLexerService.SetLexer(tabInfos[i].getAutocompleteMenu(), extension, scintilla, activeTheme);
                         UpdateNumberMarginWidth(scintilla, true);
                     }
                     else
                     {
-                        themeService.ColorizeTextArea(scintilla, Globals.theme);
+                        themeService.ColorizeTextArea(scintilla, activeTheme);
                     }
                 }
             }
 
-            themeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
+            themeService.SetPaletteToTheme(kryptonPalette, activeTheme);
             SynchronizeMainFormComponentsWithTheme();
 
             if (directoryNavigationTextBox.Text != "")
@@ -289,19 +298,19 @@ namespace pie
         {
             try
             {
-                Globals.editorProperties = configurationService.GetObjectFromFile<EditorProperties>(AppDomain.CurrentDomain.BaseDirectory + "config/scintilla.json");
+                editorProperties = configurationService.GetObjectFromFile<EditorProperties>(AppDomain.CurrentDomain.BaseDirectory + "config/scintilla.json");
 
-                if (Globals.editorProperties.Wordwrap)
+                if (editorProperties.Wordwrap)
                 {
                     wordWrapToolStripMenuItem.Text = "Disable Word Wrap";
                 }
 
-                if (Globals.editorProperties.Autosave)
+                if (editorProperties.Autosave)
                 {
                     enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
                 }
 
-                if (Globals.editorProperties.Glass)
+                if (editorProperties.Glass)
                 {
                     glassModeToolStripMenuItem.Text = "Disable Glass Effect";
                 }
@@ -346,11 +355,14 @@ namespace pie
 
         private void SetDynamicDesign()
         {
-            Globals.kryptonPalette = kryptonPalette;
+            this.MinimumSize = new Size(1036, 634);
 
-            this.MinimumSize = new System.Drawing.Size(1036, 634);
+            CustomColorTable customColorTable = new CustomColorTable();
+            customColorTable.InputThemeInfo = activeTheme;
 
-            mainMenuStrip.Renderer = new CustomToolStripRenderer(new CustomColorTable());
+            CustomToolStripRenderer customToolStripRenderer = new CustomToolStripRenderer(customColorTable);
+            customToolStripRenderer.InputThemeInfo = activeTheme;
+            mainMenuStrip.Renderer = customToolStripRenderer;
 
             ResetFindPanelLocation();
             ResetDirectoryPanelLocation();
@@ -361,10 +373,10 @@ namespace pie
 
             gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
 
-            themeService.SetPaletteToTheme(kryptonPalette, Globals.theme);
+            themeService.SetPaletteToTheme(kryptonPalette, activeTheme);
             SynchronizeMainFormComponentsWithTheme();
 
-            themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
+            themeService.SetPaletteToObjects(this, kryptonPalette);
             codeContextMenu.Palette = kryptonPalette;
             terminalContextMenu.Palette = kryptonPalette;
             renderContextMenu.Palette = kryptonPalette;
@@ -450,12 +462,12 @@ namespace pie
         private void ColorizeAutocompleteMenu(AutocompleteMenu autocompleteMenu)
         {
             Colors colors = new Colors();
-            colors.BackColor = Globals.theme.Primary;
-            colors.ForeColor = Globals.theme.Fore;
-            colors.HighlightingColor = Globals.theme.Primary;
-            colors.SelectedBackColor = Globals.theme.CaretLineBack;
-            colors.SelectedBackColor2 = Globals.theme.CaretLineBack;
-            colors.SelectedForeColor = Globals.theme.Fore;
+            colors.BackColor = activeTheme.Primary;
+            colors.ForeColor = activeTheme.Fore;
+            colors.HighlightingColor = activeTheme.Primary;
+            colors.SelectedBackColor = activeTheme.CaretLineBack;
+            colors.SelectedBackColor2 = activeTheme.CaretLineBack;
+            colors.SelectedForeColor = activeTheme.Fore;
             autocompleteMenu.Colors = colors;
             autocompleteMenu.LeftPadding = 0;
         }
@@ -526,9 +538,9 @@ namespace pie
                 item.Click += RenderMarkdownCommandTrigger_Click;
                 kryptonContextMenuItems.Items.Add(item);
             }
-            else if (extension == "sql" && Globals.databases.Count > 0)
+            else if (extension == "sql" && databases.Count > 0)
             {
-                foreach (DatabaseConnection database in Globals.databases)
+                foreach (DatabaseConnection database in databases)
                 {
                     buildCommandCount++;
 
@@ -581,7 +593,7 @@ namespace pie
 
                 DatabaseConnection database = null;
 
-                foreach (DatabaseConnection tempDatabase in Globals.databases)
+                foreach (DatabaseConnection tempDatabase in databases)
                 {
                     if (name == tempDatabase.Name)
                     {
@@ -600,7 +612,15 @@ namespace pie
                 }
                 else
                 {
-                    DatabaseOutputForm databaseOutputForm = new DatabaseOutputForm(databaseResult.DataTable);
+                    DatabaseOutputForm databaseOutputForm = new DatabaseOutputForm();
+
+                    DatabaseOutputFormInput databaseOutputFormInput = new DatabaseOutputFormInput();
+                    databaseOutputFormInput.Palette = kryptonPalette;
+                    databaseOutputFormInput.EditorProperties = editorProperties;
+                    databaseOutputFormInput.DataTable = databaseResult.DataTable;
+
+                    databaseOutputForm.Input = databaseOutputFormInput;
+
                     databaseOutputForm.ShowDialog();
                 }
             }
@@ -640,7 +660,7 @@ namespace pie
 
             tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(true);
 
-            if (Globals.editorProperties.Autosave)
+            if (editorProperties.Autosave)
             {
                 if (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
                 {
@@ -808,7 +828,7 @@ namespace pie
             TextArea.IndentationGuides = IndentView.LookBoth;
             TextArea.ZoomChanged += TextArea_ZoomChanged;
 
-            if (Globals.editorProperties.Wordwrap)
+            if (editorProperties.Wordwrap)
             {
                 TextArea.WrapMode = WrapMode.Word;
             }
@@ -819,7 +839,7 @@ namespace pie
 
             TextArea.UsePopup(false);
 
-            themeService.ColorizeTextArea(TextArea, Globals.theme);
+            themeService.ColorizeTextArea(TextArea, activeTheme);
 
             TextArea.BorderStyle = ScintillaNET.BorderStyle.None;
             TextArea.InsertCheck += TextArea_InsertCheck;
@@ -892,13 +912,13 @@ namespace pie
             }
             else if (tabInfos[tabControl.SelectedIndex].getOpenedFileChanges())
             {
-                ShowYesNoCancelNotification("Save file before closing it?");
-                if (Globals.notificationButtonPressed == NotificationButton.YES)
+                NotificationYesNoCancelFormOutput notificationYesNoCancelFormOutput = ShowYesNoCancelNotification("Save file before closing it?");
+                if (notificationYesNoCancelFormOutput.NotificationButton == NotificationButton.YES)
                 {
                     Save(tabControl.SelectedIndex);
                     CloseTabAfterWarning();
                 }
-                else if (Globals.notificationButtonPressed == NotificationButton.NO)
+                else if (notificationYesNoCancelFormOutput.NotificationButton == NotificationButton.NO)
                 {
                     CloseTabAfterWarning();
                 }
@@ -994,7 +1014,7 @@ namespace pie
                 tabControl.Pages[openedTabIndex].Text = parsingService.GetFileName(chosenPath);
 
                 string extension = parsingService.GetFileExtension(parsingService.GetFileName(tabInfos[openedTabIndex].getOpenedFilePath()));
-                scintillaLexerService.SetLexer(tabInfos[openedTabIndex].getAutocompleteMenu(), extension, TextArea, tabControl, openedTabIndex);
+                scintillaLexerService.SetLexer(tabInfos[openedTabIndex].getAutocompleteMenu(), extension, TextArea, activeTheme);
                 UpdateFormTitle(tabControl.SelectedIndex);
                 tabInfos[openedTabIndex].setOpenedFileChanges(false);
             }
@@ -1031,7 +1051,7 @@ namespace pie
                 tabControl.Pages[selectedIndex].ToolTipTitle = chosenPath;
 
                 string extension = parsingService.GetFileExtension(parsingService.GetFileName(tabInfos[selectedIndex].getOpenedFilePath()));
-                scintillaLexerService.SetLexer(tabInfos[selectedIndex].getAutocompleteMenu(), extension, TextArea, tabControl, selectedIndex);
+                scintillaLexerService.SetLexer(tabInfos[selectedIndex].getAutocompleteMenu(), extension, TextArea, activeTheme);
                 UpdateFormTitle(selectedIndex);
                 tabInfos[selectedIndex].setOpenedFileChanges(false);
             }
@@ -1067,7 +1087,7 @@ namespace pie
 
             string extension = parsingService.GetFileExtension(fileName);
 
-            scintillaLexerService.SetLexer(tabInfos[openedTabIndex].getAutocompleteMenu(), extension, TextArea, tabControl, tabControl.SelectedIndex);
+            scintillaLexerService.SetLexer(tabInfos[openedTabIndex].getAutocompleteMenu(), extension, TextArea, activeTheme);
 
             DeactivateBuildAndRunOptions();
             ActivateSpecificBuildAndRunOptions(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
@@ -1243,24 +1263,34 @@ namespace pie
             }
         }
 
-        public static void ShowNotification(string text)
+        public void ShowNotification(string text)
         {
-            Globals.notificationText = text;
+            NotificationOKForm notificationOkForm = new NotificationOKForm();
 
-            NotificationOK notification = new NotificationOK();
-            notification.ShowDialog();
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = kryptonPalette;
+            notificationFormInput.NotificationText = text;
 
-            Globals.notificationText = null;
+            notificationOkForm.Input = notificationFormInput;
+
+            notificationOkForm.ShowDialog();
         }
 
-        public static void ShowYesNoCancelNotification(string text)
+        public NotificationYesNoCancelFormOutput ShowYesNoCancelNotification(string text)
         {
-            Globals.notificationText = text;
+            NotificationYesNoCancelForm notificationYesNoCancelForm = new NotificationYesNoCancelForm();
 
-            NotificationYesNoCancel notification = new NotificationYesNoCancel();
-            notification.ShowDialog();
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = kryptonPalette;
+            notificationFormInput.NotificationText = text;
 
-            Globals.notificationText = null;
+            notificationYesNoCancelForm.Input = notificationFormInput;
+
+            notificationYesNoCancelForm.ShowDialog();
+
+            return notificationYesNoCancelForm.Output;
         }
 
         private string ConvertMarkdownToHtml(string path)
@@ -1417,7 +1447,7 @@ namespace pie
         {
             try
             {
-                Globals.codeTemplates = configurationService.GetArrayFromFile<CodeTemplate>("config\\templates.json");
+                codeTemplates = configurationService.GetArrayFromFile<CodeTemplate>("config\\templates.json");
             }
             catch (FileNotFoundException ex)
             {
@@ -1432,7 +1462,7 @@ namespace pie
         // [Event] Form Loading
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (Globals.editorProperties.Glass)
+            if (editorProperties.Glass)
             {
                 this.Opacity = 0.90;
             }
@@ -1462,15 +1492,15 @@ namespace pie
         {
             GitFile gitFile = (GitFile)e.Model;
             if (gitFile.Status == "Ignored")
-                e.Item.ForeColor = Globals.theme.IconType == "dark" ? Color.FromArgb(179, 179, 179) : Color.FromArgb(100, 100, 100);
+                e.Item.ForeColor = activeTheme.IconType == "dark" ? Color.FromArgb(179, 179, 179) : Color.FromArgb(100, 100, 100);
             else if (gitFile.Status == "Deleted")
                 e.Item.ForeColor = Color.FromArgb(251, 77, 77);
             else if (gitFile.Status == "New")
-                e.Item.ForeColor = Globals.theme.IconType == "dark" ? Color.FromArgb(60, 170, 232) : Color.FromArgb(40, 115, 158);
+                e.Item.ForeColor = activeTheme.IconType == "dark" ? Color.FromArgb(60, 170, 232) : Color.FromArgb(40, 115, 158);
             else if (gitFile.Status == "Modified")
-                e.Item.ForeColor = Globals.theme.IconType == "dark" ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
+                e.Item.ForeColor = activeTheme.IconType == "dark" ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
             else
-                e.Item.ForeColor = Globals.theme.Fore;
+                e.Item.ForeColor = activeTheme.Fore;
         }
 
         private void ReplaceTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -1707,7 +1737,7 @@ namespace pie
                 }
                 else if (e.KeyCode.ToString().Length >= 2 && e.KeyCode.ToString()[1] >= '0' && e.KeyCode.ToString()[1] <= '9' && e.Modifiers == Keys.Control)
                 {
-                    CodeTemplate codeTemplate = Globals.codeTemplates.Find(template => template.Index == Convert.ToInt32(e.KeyCode.ToString().Substring(1, 1)));
+                    CodeTemplate codeTemplate = codeTemplates.Find(template => template.Index == Convert.ToInt32(e.KeyCode.ToString().Substring(1, 1)));
 
                     if (codeTemplate != null)
                     {
@@ -2002,10 +2032,18 @@ namespace pie
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BuildCommandsForm buildCommandsForm = new BuildCommandsForm();
-            buildCommandsForm.InputBuildCommands = buildCommands;
+
+            BuildCommandsFormInput buildCommandsFormInput = new BuildCommandsFormInput();
+            buildCommandsFormInput.Palette = kryptonPalette;
+            buildCommandsFormInput.ActiveTheme = activeTheme;
+            buildCommandsFormInput.EditorProperties = editorProperties;
+            buildCommandsFormInput.BuildCommands = buildCommands;
+
+            buildCommandsForm.Input = buildCommandsFormInput;
+            
             buildCommandsForm.ShowDialog();
 
-            if (buildCommandsForm.OutputSaveStatus)
+            if (buildCommandsForm.Output.Saved)
             {
                 ProcessBuildCommands();
             }
@@ -2099,7 +2137,7 @@ namespace pie
             // Update indicator appearance
             scintilla.Indicators[8].Style = IndicatorStyle.StraightBox;
             scintilla.Indicators[8].Under = true;
-            scintilla.Indicators[8].ForeColor = Globals.theme.Selection;
+            scintilla.Indicators[8].ForeColor = activeTheme.Selection;
             scintilla.Indicators[8].OutlineAlpha = 255;
             scintilla.Indicators[8].Alpha = 100;
 
@@ -2206,6 +2244,13 @@ namespace pie
         private void aboutPieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm aboutForm = new AboutForm();
+
+            AboutFormInput aboutFormInput = new AboutFormInput();
+            aboutFormInput.Palette = kryptonPalette;
+            aboutFormInput.EditorProperties = editorProperties;
+
+            aboutForm.Input = aboutFormInput;
+
             aboutForm.ShowDialog();
         }
 
@@ -2270,9 +2315,9 @@ namespace pie
 
             if (repo == null)
             {
-                ShowYesNoCancelNotification("No repository found at specified path. Would you like to initialize a new repository?");
+                NotificationYesNoCancelFormOutput notificationYesNoCancelFormOutput = ShowYesNoCancelNotification("No repository found at specified path. Would you like to initialize a new repository?");
 
-                if (Globals.notificationButtonPressed == NotificationButton.YES)
+                if (notificationYesNoCancelFormOutput.NotificationButton == NotificationButton.YES)
                 {
                     Repository.Init(path);
                     repositoryTextBox.Text = path;
@@ -2307,7 +2352,7 @@ namespace pie
                 return;
             }
 
-            Globals.repo = new Repository(path);
+            repository = new Repository(path);
 
             RetrieveGitItemsForCurrentBranch();
 
@@ -2319,7 +2364,7 @@ namespace pie
 
             gitBranchesComboBox.Items.Clear();
 
-            foreach (var branch in Globals.repo.Branches)
+            foreach (var branch in repository.Branches)
             {
                 gitBranchesComboBox.Items.Add(branch.FriendlyName);
 
@@ -2347,7 +2392,7 @@ namespace pie
 
         private void kryptonButton8_Click(object sender, EventArgs e)
         {
-            if (Globals.repo != null)
+            if (repository != null)
             {
                 Globals.doNotTriggerBranchChangeEvent = true;
                 UpdateGitRepositoryInfo();
@@ -2365,7 +2410,7 @@ namespace pie
 
             List<GitFile> gitFileList = new List<GitFile>();
 
-            foreach (var item in Globals.repo.RetrieveStatus(statusOptions))
+            foreach (var item in repository.RetrieveStatus(statusOptions))
             {
                 GitFile gitFile = new GitFile();
                 gitFile.Name = item.FilePath;
@@ -2399,9 +2444,9 @@ namespace pie
 
         private void GitCommit(string items)
         {
-            if (Globals.repo != null)
+            if (repository != null)
             {
-                RepositoryStatus status = Globals.repo.RetrieveStatus();
+                RepositoryStatus status = repository.RetrieveStatus();
 
                 if (status.IsDirty)
                 {
@@ -2414,34 +2459,41 @@ namespace pie
                             files.RemoveAt(files.Count - 1);
                         }
 
-                        Commands.Stage(Globals.repo, files);
+                        Commands.Stage(repository, files);
                     }
                     else
                     {
-                        Commands.Stage(Globals.repo, items);
+                        Commands.Stage(repository, items);
                     }
 
-                    if (string.IsNullOrEmpty(Globals.gitCredentials.Name) || string.IsNullOrEmpty(Globals.gitCredentials.Email))
+                    if (string.IsNullOrEmpty(gitCredentials.Name) || string.IsNullOrEmpty(gitCredentials.Email))
                     {
-                        GitCommitCredentialsForm gitCredentialsForm = new GitCommitCredentialsForm();
-                        Globals.gitFormClosedWithOk = false;
-                        gitCredentialsForm.ShowDialog();
+                        GitCommitCredentialsForm gitCommitCredentialsForm = new GitCommitCredentialsForm();
 
-                        if (Globals.gitFormClosedWithOk)
+                        GitCommitCredentialsFormInput gitCommitCredentialsFormInput = new GitCommitCredentialsFormInput();
+                        gitCommitCredentialsFormInput.GitCredentials = gitCredentials;
+                        gitCommitCredentialsFormInput.Palette = kryptonPalette;
+                        gitCommitCredentialsFormInput.EditorProperties = editorProperties;
+
+                        gitCommitCredentialsForm.Input = gitCommitCredentialsFormInput;
+
+                        gitCommitCredentialsForm.ShowDialog();
+
+                        if (gitCommitCredentialsForm.Output.Saved)
                         {
-                            configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                            configurationService.WriteToFile("config/git.json", new List<GitCredentials>() { gitCredentials });
                             GitCommit(items);
                         }
                     }
                     else
                     {
-                        Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
+                        Signature signature = new Signature(gitCredentials.Name, gitCredentials.Email, DateTime.Now);
 
                         string commitText = commitMessageRichTextBox.Text;
 
                         Task.Run(() =>
                         {
-                            Globals.repo.Commit(commitText, signature, signature);
+                            repository.Commit(commitText, signature, signature);
                         }).Wait();
 
                         Globals.doNotShowBranchChangeNotification = true;
@@ -2458,7 +2510,7 @@ namespace pie
 
         private void kryptonButton6_Click(object sender, EventArgs e)
         {
-            if (Globals.repo != null)
+            if (repository != null)
             {
                 GitCommit("*");
             }
@@ -2548,40 +2600,47 @@ namespace pie
 
         private void GitPush()
         {
-            if (Globals.repo != null)
+            if (repository != null)
             {
                 var branch = Globals.selectedBranch;
 
                 if (true)
                 {
-                    if (string.IsNullOrEmpty(Globals.gitCredentials.Username) || string.IsNullOrEmpty(Globals.gitCredentials.Password))
+                    if (string.IsNullOrEmpty(gitCredentials.Username) || string.IsNullOrEmpty(gitCredentials.Password))
                     {
-                        GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
-                        Globals.gitFormClosedWithOk = false;
-                        gitCredentialsForm.ShowDialog();
+                        GitPushCredentialsForm gitPushCredentialsForm = new GitPushCredentialsForm();
 
-                        if (Globals.gitFormClosedWithOk)
+                        GitPushCredentialsFormInput gitPushCredentialsFormInput = new GitPushCredentialsFormInput();
+                        gitPushCredentialsFormInput.GitCredentials = gitCredentials;
+                        gitPushCredentialsFormInput.Palette = kryptonPalette;
+                        gitPushCredentialsFormInput.EditorProperties = editorProperties;
+
+                        gitPushCredentialsForm.Input = gitPushCredentialsFormInput;
+
+                        gitPushCredentialsForm.ShowDialog();
+
+                        if (gitPushCredentialsForm.Output.Saved)
                         {
-                            configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                            configurationService.WriteToFile("config/git.json", new List<GitCredentials>() { gitCredentials });
                             GitPush();
                         }
                     }
                     else
                     {
-                        Remote remote = Globals.repo.Network.Remotes["origin"];
+                        Remote remote = repository.Network.Remotes["origin"];
 
-                        Globals.repo.Branches.Update(Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()],
+                        repository.Branches.Update(repository.Branches[gitBranchesComboBox.SelectedItem.ToString()],
                             b => b.Remote = remote.Name,
-                            b => b.UpstreamBranch = Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()].CanonicalName);
+                            b => b.UpstreamBranch = repository.Branches[gitBranchesComboBox.SelectedItem.ToString()].CanonicalName);
 
                         // Push the branch to the remote                        
-                        var pushOptions = new LibGit2Sharp.PushOptions();
+                        var pushOptions = new PushOptions();
                         pushOptions.CredentialsProvider = new LibGit2Sharp.Handlers.CredentialsHandler(
                            (url, usernameFromUrl, types) =>
-                               new LibGit2Sharp.UsernamePasswordCredentials()
+                               new UsernamePasswordCredentials()
                                {
-                                   Username = Globals.gitCredentials.Username,
-                                   Password = Globals.gitCredentials.Password
+                                   Username = gitCredentials.Username,
+                                   Password = gitCredentials.Password
                                });
 
                         try
@@ -2592,7 +2651,7 @@ namespace pie
 
                             Task.Run(() =>
                             {
-                                Globals.repo.Network.Push(Globals.repo.Branches[branchName], pushOptions);
+                                repository.Network.Push(repository.Branches[branchName], pushOptions);
                             }).Wait();
 
                             ShowNotification("Successfully pushed to remote.");
@@ -2624,11 +2683,13 @@ namespace pie
 
         private void kryptonComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            NotificationYesNoCancelFormOutput notificationYesNoCancelFormOutput = null;
+
             if (Globals.doNotTriggerBranchChangeEvent)
             {
                 Globals.doNotTriggerBranchChangeEvent = false;
             }
-            else if (Globals.repo != null)
+            else if (repository != null)
             {
                 int selectedIndex = gitBranchesComboBox.SelectedIndex;
 
@@ -2638,12 +2699,12 @@ namespace pie
                 }
                 else
                 {
-                    ShowYesNoCancelNotification("Checking out another branch will discard your current changes. Would you like to continue?");
+                    notificationYesNoCancelFormOutput = ShowYesNoCancelNotification("Checking out another branch will discard your current changes. Would you like to continue?");
                 }
 
-                if (Globals.notificationButtonPressed == NotificationButton.YES)
+                if (notificationYesNoCancelFormOutput != null && notificationYesNoCancelFormOutput.NotificationButton == NotificationButton.YES)
                 {
-                    foreach (var branch in Globals.repo.Branches)
+                    foreach (var branch in repository.Branches)
                     {
                         if (branch.FriendlyName == gitBranchesComboBox.Text)
                         {
@@ -2651,7 +2712,7 @@ namespace pie
                             Globals.selectedBranchIndex = gitBranchesComboBox.SelectedIndex;
 
                             CheckoutOptions checkoutOptions = new CheckoutOptions();
-                            Branch currentBranch = Commands.Checkout(Globals.repo, branch, new CheckoutOptions() { CheckoutModifiers = CheckoutModifiers.Force });
+                            Branch currentBranch = Commands.Checkout(repository, branch, new CheckoutOptions() { CheckoutModifiers = CheckoutModifiers.Force });
 
                             if (gitBranchesComboBox.SelectedItem.ToString().StartsWith("origin/"))
                             {
@@ -2662,9 +2723,9 @@ namespace pie
                                 {
                                     // Remove the "origin/" from remote branch name
                                     Globals.doNotShowBranchChangeNotification = true;
-                                    var remoteBranch = Globals.repo.Branches[gitBranchesComboBox.SelectedItem.ToString()];
-                                    var newBranch = Globals.repo.CreateBranch(localBranchFriendlyName, remoteBranch.Tip);
-                                    Globals.repo.Branches.Update(newBranch, b => b.TrackedBranch = remoteBranch.CanonicalName);
+                                    var remoteBranch = repository.Branches[gitBranchesComboBox.SelectedItem.ToString()];
+                                    var newBranch = repository.CreateBranch(localBranchFriendlyName, remoteBranch.Tip);
+                                    repository.Branches.Update(newBranch, b => b.TrackedBranch = remoteBranch.CanonicalName);
                                 }
 
                                 int index = 0;
@@ -2701,35 +2762,58 @@ namespace pie
         private void manageCommitCredentialsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GitSettingsForm gitSettingsForm = new GitSettingsForm();
-            Globals.gitFormClosedWithOk = false;
+
+            GitSettingsFormInput gitSettingsFormInput = new GitSettingsFormInput();
+            gitSettingsFormInput.GitCredentials = gitCredentials;
+            gitSettingsFormInput.Palette = kryptonPalette;
+            gitSettingsFormInput.EditorProperties = editorProperties;
+
+            gitSettingsForm.Input = gitSettingsFormInput;
+
             gitSettingsForm.ShowDialog();
 
-            if (Globals.gitFormClosedWithOk)
+            if (gitSettingsForm.Output.Saved)
             {
-                configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                configurationService.WriteToFile("config/git.json", new List<GitCredentials>() { gitCredentials });
             }
         }
 
         private void managePushCredentialsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
-            Globals.gitFormClosedWithOk = false;
-            gitCredentialsForm.ShowDialog();
+            GitPushCredentialsForm gitPushCredentialsForm = new GitPushCredentialsForm();
 
-            if (Globals.gitFormClosedWithOk)
+            GitPushCredentialsFormInput gitPushCredentialsFormInput = new GitPushCredentialsFormInput();
+            gitPushCredentialsFormInput.GitCredentials = gitCredentials;
+            gitPushCredentialsFormInput.Palette = kryptonPalette;
+            gitPushCredentialsFormInput.EditorProperties = editorProperties;
+
+            gitPushCredentialsForm.Input = gitPushCredentialsFormInput;
+
+            gitPushCredentialsForm.ShowDialog();
+
+            if (gitPushCredentialsForm.Output.Saved)
             {
-                configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials } );
+                configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { gitCredentials } );
             }
         }
 
         private void kryptonButton9_Click(object sender, EventArgs e)
         {
             GitCloneForm gitCloneForm = new GitCloneForm();
+
+            GitCloneFormInput gitCloneFormInput = new GitCloneFormInput();
+
+            gitCloneFormInput.Palette = kryptonPalette;
+            gitCloneFormInput.EditorProperties = editorProperties;
+            gitCloneFormInput.GitCredentials = gitCredentials;
+
+            gitCloneForm.Input = gitCloneFormInput;
+
             gitCloneForm.ShowDialog();
 
-            if (Globals.clonePath != null)
+            if (gitCloneForm.Output.ClonePath != null)
             {
-                OpenRepository(Globals.clonePath);
+                OpenRepository(gitCloneForm.Output.ClonePath);
             }
         }
 
@@ -2740,31 +2824,45 @@ namespace pie
 
         private void GitPull()
         {
-            if (Globals.repo != null)
+            if (repository != null)
             {
-                if (string.IsNullOrEmpty(Globals.gitCredentials.Name) || string.IsNullOrEmpty(Globals.gitCredentials.Email))
+                if (string.IsNullOrEmpty(gitCredentials.Name) || string.IsNullOrEmpty(gitCredentials.Email))
                 {
-                    GitCommitCredentialsForm gitCredentialsForm = new GitCommitCredentialsForm();
-                    Globals.gitFormClosedWithOk = false;
-                    gitCredentialsForm.ShowDialog();
+                    GitCommitCredentialsForm gitCommitCredentialsForm = new GitCommitCredentialsForm();
 
-                    if (Globals.gitFormClosedWithOk)
+                    GitCommitCredentialsFormInput gitCommitCredentialsFormInput = new GitCommitCredentialsFormInput();
+                    gitCommitCredentialsFormInput.GitCredentials = gitCredentials;
+                    gitCommitCredentialsFormInput.Palette = kryptonPalette;
+                    gitCommitCredentialsFormInput.EditorProperties = editorProperties;
+
+                    gitCommitCredentialsForm.Input = gitCommitCredentialsFormInput;
+
+                    gitCommitCredentialsForm.ShowDialog();
+
+                    if (gitCommitCredentialsForm.Output.Saved)
                     {
-                        configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                        configurationService.WriteToFile("config/git.json", new List<GitCredentials>() { gitCredentials });
                         GitPull();
                     }
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(Globals.gitCredentials.Username) || string.IsNullOrEmpty(Globals.gitCredentials.Password))
+                    if (string.IsNullOrEmpty(gitCredentials.Username) || string.IsNullOrEmpty(gitCredentials.Password))
                     {
-                        GitPushCredentialsForm gitCredentialsForm = new GitPushCredentialsForm();
-                        Globals.gitFormClosedWithOk = false;
-                        gitCredentialsForm.ShowDialog();
+                        GitPushCredentialsForm gitPushCredentialsForm = new GitPushCredentialsForm();
 
-                        if (Globals.gitFormClosedWithOk)
+                        GitPushCredentialsFormInput gitPushCredentialsFormInput = new GitPushCredentialsFormInput();
+                        gitPushCredentialsFormInput.GitCredentials = gitCredentials;
+                        gitPushCredentialsFormInput.Palette = kryptonPalette;
+                        gitPushCredentialsFormInput.EditorProperties = editorProperties;
+
+                        gitPushCredentialsForm.Input = gitPushCredentialsFormInput;
+
+                        gitPushCredentialsForm.ShowDialog();
+
+                        if (gitPushCredentialsForm.Output.Saved)
                         {
-                            configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { Globals.gitCredentials });
+                            configurationService.WriteToFile("config/git.json", new List<GitCredentials>() { gitCredentials });
                             GitPull();
                         }
                     }
@@ -2777,17 +2875,17 @@ namespace pie
                         pullOptions.FetchOptions.CredentialsProvider = new LibGit2Sharp.Handlers.CredentialsHandler(
                             (_url, _user, _cred) => new UsernamePasswordCredentials()
                             {
-                                Username = Globals.gitCredentials.Username,
-                                Password = Globals.gitCredentials.Password
+                                Username = gitCredentials.Username,
+                                Password = gitCredentials.Password
                             });
 
-                        Signature signature = new Signature(Globals.gitCredentials.Name, Globals.gitCredentials.Email, DateTime.Now);
+                        Signature signature = new Signature(gitCredentials.Name, gitCredentials.Email, DateTime.Now);
 
                         try
                         {
                             Task.Run(() =>
                             {
-                                Commands.Pull(Globals.repo, signature, pullOptions);
+                                Commands.Pull(repository, signature, pullOptions);
                             }).Wait();
 
                             UpdateGitRepositoryInfo();
@@ -2808,9 +2906,18 @@ namespace pie
 
         private void kryptonButton11_Click(object sender, EventArgs e)
         {
-            if (Globals.repo != null)
+            if (repository != null)
             {
                 GitCommitLogForm gitCommitLogForm = new GitCommitLogForm();
+
+                GitCommitLogFormInput gitCommitLogFormInput = new GitCommitLogFormInput();
+                gitCommitLogFormInput.ActiveTheme = activeTheme;
+                gitCommitLogFormInput.Repository = repository;
+                gitCommitLogFormInput.EditorProperties = editorProperties;
+                gitCommitLogFormInput.Palette = kryptonPalette;
+
+                gitCommitLogForm.Input = gitCommitLogFormInput;
+
                 gitCommitLogForm.ShowDialog();
             }
             else
@@ -2822,28 +2929,28 @@ namespace pie
         private void SynchronizeMainFormComponentsWithTheme()
         {
             // MenuStrip & Children
-            mainMenuStrip.BackColor = Globals.theme.Primary;
-            mainMenuStrip.ForeColor = Globals.theme.Fore;
+            mainMenuStrip.BackColor = activeTheme.Primary;
+            mainMenuStrip.ForeColor = activeTheme.Fore;
 
             foreach (ToolStripMenuItem toolStripMenuItem in mainMenuStrip.Items)
             {
-                toolStripMenuItem.DropDown.BackColor = Globals.theme.Primary;
-                toolStripMenuItem.DropDown.ForeColor = Globals.theme.Fore;
-                toolStripMenuItem.ImageTransparentColor = Globals.theme.Primary;
+                toolStripMenuItem.DropDown.BackColor = activeTheme.Primary;
+                toolStripMenuItem.DropDown.ForeColor = activeTheme.Fore;
+                toolStripMenuItem.ImageTransparentColor = activeTheme.Primary;
 
                 if (toolStripMenuItem.HasDropDownItems)
                 {
                     foreach (ToolStripMenuItem toolStripMenuItemChild in toolStripMenuItem.DropDownItems)
                     {
-                        toolStripMenuItemChild.BackColor = Globals.theme.Primary;
-                        toolStripMenuItemChild.ForeColor = Globals.theme.Fore;
+                        toolStripMenuItemChild.BackColor = activeTheme.Primary;
+                        toolStripMenuItemChild.ForeColor = activeTheme.Fore;
 
                         if (toolStripMenuItemChild.HasDropDownItems)
                         {
                             foreach (ToolStripMenuItem toolStripMenuItemChild2 in toolStripMenuItemChild.DropDownItems)
                             {
-                                toolStripMenuItemChild2.BackColor = Globals.theme.Primary;
-                                toolStripMenuItemChild2.ForeColor = Globals.theme.Fore;
+                                toolStripMenuItemChild2.BackColor = activeTheme.Primary;
+                                toolStripMenuItemChild2.ForeColor = activeTheme.Fore;
                             }
                         }
                     }
@@ -2851,26 +2958,26 @@ namespace pie
             }
 
             // HeaderGroup
-            findReplaceHeaderGroup.StateCommon.Border.Color1 = Globals.theme.FormBorder;
-            findReplaceHeaderGroup.StateCommon.Border.Color2 = Globals.theme.FormBorder;
-            directoryNavigationHeaderGroup.StateCommon.Border.Color1 = Globals.theme.FormBorder;
-            directoryNavigationHeaderGroup.StateCommon.Border.Color2 = Globals.theme.FormBorder;
+            findReplaceHeaderGroup.StateCommon.Border.Color1 = activeTheme.FormBorder;
+            findReplaceHeaderGroup.StateCommon.Border.Color2 = activeTheme.FormBorder;
+            directoryNavigationHeaderGroup.StateCommon.Border.Color1 = activeTheme.FormBorder;
+            directoryNavigationHeaderGroup.StateCommon.Border.Color2 = activeTheme.FormBorder;
 
             // TabControl
-            tabControl.StateCommon.Panel.Color1 = Globals.theme.Primary;
-            tabControl.StateCommon.Panel.Color2 = Globals.theme.Primary;
+            tabControl.StateCommon.Panel.Color1 = activeTheme.Primary;
+            tabControl.StateCommon.Panel.Color2 = activeTheme.Primary;
 
             // ObjectListView
             gitStagingAreaListView.UseCustomSelectionColors = true;
             gitStagingAreaListView.FullRowSelect = true;
             gitStagingAreaListView.ShowGroups = false;
 
-            gitStagingAreaListView.HighlightBackgroundColor = Globals.theme.Secondary;
-            gitStagingAreaListView.HighlightForegroundColor = Globals.theme.Fore;
-            gitStagingAreaListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
-            gitStagingAreaListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
-            gitStagingAreaListView.BackColor = Globals.theme.Primary;
-            gitStagingAreaListView.ForeColor = Globals.theme.Fore;
+            gitStagingAreaListView.HighlightBackgroundColor = activeTheme.Secondary;
+            gitStagingAreaListView.HighlightForegroundColor = activeTheme.Fore;
+            gitStagingAreaListView.UnfocusedHighlightBackgroundColor = activeTheme.Secondary;
+            gitStagingAreaListView.UnfocusedHighlightForegroundColor = activeTheme.Fore;
+            gitStagingAreaListView.BackColor = activeTheme.Primary;
+            gitStagingAreaListView.ForeColor = activeTheme.Fore;
 
             directoryNavigationObjectListView.ShowGroups = false;
             directoryNavigationObjectListView.UseCustomSelectionColors = true;
@@ -2882,47 +2989,47 @@ namespace pie
             olvColumn3.FillsFreeSpace = true;
             olvColumn3.ImageGetter = new ImageGetterDelegate(NavigationImageGetter);
 
-            directoryNavigationObjectListView.BackColor = Globals.theme.Primary;
-            directoryNavigationObjectListView.ForeColor = Globals.theme.Fore;
-            directoryNavigationObjectListView.HighlightBackgroundColor = Globals.theme.Secondary;
-            directoryNavigationObjectListView.HighlightForegroundColor = Globals.theme.Fore;
-            directoryNavigationObjectListView.UnfocusedHighlightBackgroundColor = Globals.theme.Secondary;
-            directoryNavigationObjectListView.UnfocusedHighlightForegroundColor = Globals.theme.Fore;
+            directoryNavigationObjectListView.BackColor = activeTheme.Primary;
+            directoryNavigationObjectListView.ForeColor = activeTheme.Fore;
+            directoryNavigationObjectListView.HighlightBackgroundColor = activeTheme.Secondary;
+            directoryNavigationObjectListView.HighlightForegroundColor = activeTheme.Fore;
+            directoryNavigationObjectListView.UnfocusedHighlightBackgroundColor = activeTheme.Secondary;
+            directoryNavigationObjectListView.UnfocusedHighlightForegroundColor = activeTheme.Fore;
 
             var headerstyle = new HeaderFormatStyle();
-            headerstyle.Normal.BackColor = Globals.theme.Secondary;
-            headerstyle.Normal.ForeColor = Globals.theme.Fore;
+            headerstyle.Normal.BackColor = activeTheme.Secondary;
+            headerstyle.Normal.ForeColor = activeTheme.Fore;
 
-            headerstyle.Hot.BackColor = Globals.theme.ButtonHover;
-            headerstyle.Hot.ForeColor = Globals.theme.Fore;
+            headerstyle.Hot.BackColor = activeTheme.ButtonHover;
+            headerstyle.Hot.ForeColor = activeTheme.Fore;
 
-            headerstyle.Pressed.BackColor = Globals.theme.ButtonFrame;
-            headerstyle.Pressed.ForeColor = Globals.theme.Fore;
+            headerstyle.Pressed.BackColor = activeTheme.ButtonFrame;
+            headerstyle.Pressed.ForeColor = activeTheme.Fore;
 
             gitStagingAreaListView.HeaderFormatStyle = headerstyle;
 
-            regexCheckBox.StateCommon.ShortText.Color1 = Globals.theme.Fore;
-            regexCheckBox.StateCommon.ShortText.Color2 = Globals.theme.Fore;
+            regexCheckBox.StateCommon.ShortText.Color1 = activeTheme.Fore;
+            regexCheckBox.StateCommon.ShortText.Color2 = activeTheme.Fore;
 
-            matchCaseCheckBox.StateCommon.ShortText.Color1 = Globals.theme.Fore;
-            matchCaseCheckBox.StateCommon.ShortText.Color2 = Globals.theme.Fore;
+            matchCaseCheckBox.StateCommon.ShortText.Color1 = activeTheme.Fore;
+            matchCaseCheckBox.StateCommon.ShortText.Color2 = activeTheme.Fore;
 
-            matchWholeWordCheckBox.StateCommon.ShortText.Color1 = Globals.theme.Fore;
-            matchWholeWordCheckBox.StateCommon.ShortText.Color2 = Globals.theme.Fore;
+            matchWholeWordCheckBox.StateCommon.ShortText.Color1 = activeTheme.Fore;
+            matchWholeWordCheckBox.StateCommon.ShortText.Color2 = activeTheme.Fore;
 
             // ComboBox
             gitBranchesComboBox.StateCommon.Item.Back.ColorStyle = PaletteColorStyle.Solid;
             gitBranchesComboBox.StateCommon.Item.Border.ColorStyle = PaletteColorStyle.Solid;
-            gitBranchesComboBox.StateCommon.DropBack.Color1 = Globals.theme.Primary;
-            gitBranchesComboBox.StateCommon.DropBack.Color2 = Globals.theme.Primary;
+            gitBranchesComboBox.StateCommon.DropBack.Color1 = activeTheme.Primary;
+            gitBranchesComboBox.StateCommon.DropBack.Color2 = activeTheme.Primary;
 
             gitBranchesComboBox.StateTracking.Item.Back.ColorStyle = PaletteColorStyle.Solid;
             gitBranchesComboBox.StateTracking.Item.Border.ColorStyle = PaletteColorStyle.Solid;
-            gitBranchesComboBox.StateTracking.Item.Back.Color1 = Globals.theme.Secondary;
-            gitBranchesComboBox.StateTracking.Item.Back.Color2 = Globals.theme.Secondary;
+            gitBranchesComboBox.StateTracking.Item.Back.Color1 = activeTheme.Secondary;
+            gitBranchesComboBox.StateTracking.Item.Back.Color2 = activeTheme.Secondary;
 
             // Git Buttons
-            if (Globals.theme.IconType == "dark")
+            if (activeTheme.IconType == "dark")
             {
                 kryptonButton8.Values.Image = Properties.Resources.refresh_black;
                 kryptonButton6.Values.Image = Properties.Resources.commit_black;
@@ -2930,7 +3037,7 @@ namespace pie
                 kryptonButton7.Values.Image = Properties.Resources.push_black;
                 kryptonButton11.Values.Image = Properties.Resources.log_black;
             }
-            else if (Globals.theme.IconType == "light")
+            else if (activeTheme.IconType == "light")
             {
                 kryptonButton8.Values.Image = Properties.Resources.refresh_white;
                 kryptonButton6.Values.Image = Properties.Resources.commit_white;
@@ -3056,9 +3163,16 @@ namespace pie
         private void databasesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DatabasesForm databasesForm = new DatabasesForm();
+
+            DatabasesFormInput databasesFormInput = new DatabasesFormInput();
+            databasesFormInput.Databases = databases;
+            databasesFormInput.Palette = kryptonPalette;
+            databasesFormInput.EditorProperties = editorProperties;
+            databasesFormInput.ActiveTheme = activeTheme;
+
             databasesForm.ShowDialog();
 
-            if (databasesForm.OutputSaveStatus)
+            if (databasesForm.Output.Saved)
             {
                 ProcessDatabaseConnections();
             }
@@ -3068,7 +3182,7 @@ namespace pie
         {
             try
             {
-                Globals.databases = configurationService.GetArrayFromFile<DatabaseConnection>("config/databases.json");
+                databases = configurationService.GetArrayFromFile<DatabaseConnection>("config/databases.json");
             }
             catch (FileNotFoundException ex)
             {
@@ -3092,14 +3206,14 @@ namespace pie
 
         private void ToolStripMenuItem_Click1(object sender, EventArgs e)
         {
-            ChangeTheme(Globals.themeInfos.Find(theme => theme.Name == ((ToolStripMenuItem)sender).Text));
+            ChangeTheme(themeInfos.Find(theme => theme.Name == ((ToolStripMenuItem)sender).Text));
         }
 
         private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Globals.editorProperties.Wordwrap = !Globals.editorProperties.Wordwrap;
-            ToggleWordWrap(Globals.editorProperties.Wordwrap);
-            configurationService.WriteToFile("config/scintilla.json", Globals.editorProperties);
+            editorProperties.Wordwrap = !editorProperties.Wordwrap;
+            ToggleWordWrap(editorProperties.Wordwrap);
+            configurationService.WriteToFile("config/scintilla.json", editorProperties);
         }
 
         private void ToggleWordWrap(bool status)
@@ -3127,9 +3241,9 @@ namespace pie
 
         private void enableAutosaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Globals.editorProperties.Autosave = !Globals.editorProperties.Autosave;
+            editorProperties.Autosave = !editorProperties.Autosave;
 
-            if (Globals.editorProperties.Autosave)
+            if (editorProperties.Autosave)
             {
                 enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
                 PerformFirstSaveWhenAutosaveTriggered();
@@ -3139,7 +3253,7 @@ namespace pie
                 enableAutosaveToolStripMenuItem.Text = "Enable Autosave";
             }
 
-            configurationService.WriteToFile("config/scintilla.json", Globals.editorProperties);
+            configurationService.WriteToFile("config/scintilla.json", editorProperties);
         }
 
         private void PerformFirstSaveWhenAutosaveTriggered()
@@ -3161,20 +3275,28 @@ namespace pie
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
 
             FormatForm formatForm = new FormatForm();
-            formatForm.Input = TextArea.Text;
+
+            FormatFormInput formatFormInput = new FormatFormInput();
+            formatFormInput.Text = TextArea.Text;
+            formatFormInput.ActiveTheme = activeTheme;
+            formatFormInput.Palette = kryptonPalette;
+            formatFormInput.EditorProperties = editorProperties;
+
+            formatForm.Input = formatFormInput;
+            
             formatForm.ShowDialog();
 
             int currPos = TextArea.CurrentPosition;
-            TextArea.Text = formatForm.Output;
+            TextArea.Text = formatForm.Output.Text;
             TextArea.SelectionStart = currPos;
             TextArea.SelectionEnd = currPos;
         }
 
         private void glassModeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Globals.editorProperties.Glass = !Globals.editorProperties.Glass;
+            editorProperties.Glass = !editorProperties.Glass;
 
-            if (Globals.editorProperties.Glass)
+            if (editorProperties.Glass)
             {
                 glassModeToolStripMenuItem.Text = "Disable Glass Effect";
                 this.Opacity = 0.90;
@@ -3185,21 +3307,39 @@ namespace pie
                 this.Opacity = 1;
             }
 
-            configurationService.WriteToFile("config/scintilla.json", Globals.editorProperties);
+            configurationService.WriteToFile("config/scintilla.json", editorProperties);
         }
 
         private void cheatsheetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CheatsheetForm cheatsheetForm = new CheatsheetForm();
+
+            CheatsheetFormInput cheatsheetFormInput = new CheatsheetFormInput();
+            cheatsheetFormInput.Palette = kryptonPalette;
+            cheatsheetFormInput.EditorProperties = editorProperties;
+            cheatsheetFormInput.ActiveTheme = activeTheme;
+
+            cheatsheetForm.Input = cheatsheetFormInput;
+
             cheatsheetForm.ShowDialog();
         }
 
         private void themeDesignerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DesignerForm designerForm = new DesignerForm();
+
+            DesignerFormInput designerFormInput = new DesignerFormInput();
+            designerFormInput.ThemeInfos = themeInfos;
+            designerFormInput.EditorProperties = editorProperties;
+            designerFormInput.Palette = kryptonPalette;
+            designerFormInput.ActiveTheme = activeTheme;
+
+            designerForm.Input = designerFormInput;
+
             designerForm.ShowDialog();
+
             ProcessCustomThemes();
-            ChangeTheme(Globals.theme);
+            ChangeTheme(activeTheme);
         }
 
         private void directoryNavigationObjectListView_DoubleClick(object sender, EventArgs e)
@@ -3264,10 +3404,18 @@ namespace pie
         private void codeTemplatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CodeTemplatesForm codeTemplatesForm = new CodeTemplatesForm();
-            codeTemplatesForm.Input = Globals.codeTemplates;
+
+            CodeTemplatesFormInput codeTemplatesFormInput = new CodeTemplatesFormInput();
+            codeTemplatesFormInput.EditorProperties = editorProperties;
+            codeTemplatesFormInput.Palette = kryptonPalette;
+            codeTemplatesFormInput.ActiveTheme = activeTheme;
+            codeTemplatesFormInput.CodeTemplates = codeTemplates;
+
+            codeTemplatesForm.Input = codeTemplatesFormInput;
+
             codeTemplatesForm.ShowDialog();
-            configurationService.WriteToFile("config\\templates.json", codeTemplatesForm.Output);
-            Globals.codeTemplates = codeTemplatesForm.Output;
+
+            ProcessCodeTemplates();
         }
     }
 }
