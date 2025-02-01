@@ -541,9 +541,9 @@
             this.aboutPieToolStripMenuItem.Text = "About pie";
             this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
             // 
-            // buildToolStripMenuItem1
+            // buildCommandToolstripMenu
             // 
-            this.buildCommandToolstripMenu.Name = "buildToolStripMenuItem1";
+            this.buildCommandToolstripMenu.Name = "buildCommandToolstripMenu";
             this.buildCommandToolstripMenu.Size = new System.Drawing.Size(83, 20);
             this.buildCommandToolstripMenu.Text = "Build && Run";
             // 
@@ -640,6 +640,7 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
