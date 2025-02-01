@@ -54,7 +54,7 @@ namespace pie
             }
 
             Output.NotificationButton = NotificationButton.CANCEL;
-            kryptonRichTextBox1.Text = Input.NotificationText;
+            contentRichTextBox.Text = Input.NotificationText;
         }
 
         private void kryptonButton3_Click(object sender, EventArgs e)

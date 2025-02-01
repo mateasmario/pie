@@ -294,13 +294,13 @@ namespace pie.Services
             scintilla.Styles[Style.Sql.Operator].ForeColor = parserColorDictionary["Operator"];
         }
 
-        public void SetLexer(AutocompleteMenu autocompleteMenu, string extension, Scintilla scintilla, ThemeInfo activeTheme)
+        public void SetLexer(AutocompleteMenu autocompleteMenu, string extension, Scintilla scintilla, ThemeInfo activeTheme, List<LanguageMapping> languageMappings, List<LanguageDefinition> languageDefinitions)
         {
-            foreach(LanguageMapping languageMapping in Globals.languageMappings)
+            foreach(LanguageMapping languageMapping in languageMappings)
             {
                 if (languageMapping.Extension.Equals(extension))
                 {
-                    foreach(LanguageDefinition languageDefinition in Globals.languageDefinitions)
+                    foreach(LanguageDefinition languageDefinition in languageDefinitions)
                     {
                         if (languageDefinition.Name.Equals(languageMapping.Language))
                         {

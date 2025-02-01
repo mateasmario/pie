@@ -29,67 +29,67 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GitCommitCredentialsForm));
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonTextBox2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.authorEmailLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.authorNameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.authorEmailTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.authorNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // kryptonButton1
+            // saveButton
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(385, 108);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(76, 25);
-            this.kryptonButton1.TabIndex = 1;
-            this.kryptonButton1.Values.Text = "Save";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            this.saveButton.Location = new System.Drawing.Point(385, 108);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(76, 25);
+            this.saveButton.TabIndex = 1;
+            this.saveButton.Values.Text = "Save";
+            this.saveButton.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
-            // kryptonPanel1
+            // mainPanel
             // 
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.kryptonTextBox2);
-            this.kryptonPanel1.Controls.Add(this.kryptonTextBox1);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(474, 142);
-            this.kryptonPanel1.TabIndex = 2;
+            this.mainPanel.Controls.Add(this.authorEmailLabel);
+            this.mainPanel.Controls.Add(this.authorNameLabel);
+            this.mainPanel.Controls.Add(this.authorEmailTextBox);
+            this.mainPanel.Controls.Add(this.authorNameTextBox);
+            this.mainPanel.Controls.Add(this.saveButton);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(474, 142);
+            this.mainPanel.TabIndex = 2;
             // 
-            // kryptonLabel2
+            // authorEmailLabel
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(9, 55);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(81, 20);
-            this.kryptonLabel2.TabIndex = 5;
-            this.kryptonLabel2.Values.Text = "Author Email";
+            this.authorEmailLabel.Location = new System.Drawing.Point(9, 55);
+            this.authorEmailLabel.Name = "authorEmailLabel";
+            this.authorEmailLabel.Size = new System.Drawing.Size(81, 20);
+            this.authorEmailLabel.TabIndex = 5;
+            this.authorEmailLabel.Values.Text = "Author Email";
             // 
-            // kryptonLabel1
+            // authorNameLabel
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(9, 5);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(84, 20);
-            this.kryptonLabel1.TabIndex = 4;
-            this.kryptonLabel1.Values.Text = "Author Name";
+            this.authorNameLabel.Location = new System.Drawing.Point(9, 5);
+            this.authorNameLabel.Name = "authorNameLabel";
+            this.authorNameLabel.Size = new System.Drawing.Size(84, 20);
+            this.authorNameLabel.TabIndex = 4;
+            this.authorNameLabel.Values.Text = "Author Name";
             // 
-            // kryptonTextBox2
+            // authorEmailTextBox
             // 
-            this.kryptonTextBox2.Location = new System.Drawing.Point(12, 75);
-            this.kryptonTextBox2.Name = "kryptonTextBox2";
-            this.kryptonTextBox2.Size = new System.Drawing.Size(449, 23);
-            this.kryptonTextBox2.TabIndex = 3;
+            this.authorEmailTextBox.Location = new System.Drawing.Point(12, 75);
+            this.authorEmailTextBox.Name = "authorEmailTextBox";
+            this.authorEmailTextBox.Size = new System.Drawing.Size(449, 23);
+            this.authorEmailTextBox.TabIndex = 3;
             // 
-            // kryptonTextBox1
+            // authorNameTextBox
             // 
-            this.kryptonTextBox1.Location = new System.Drawing.Point(12, 25);
-            this.kryptonTextBox1.Name = "kryptonTextBox1";
-            this.kryptonTextBox1.Size = new System.Drawing.Size(449, 23);
-            this.kryptonTextBox1.TabIndex = 2;
+            this.authorNameTextBox.Location = new System.Drawing.Point(12, 25);
+            this.authorNameTextBox.Name = "authorNameTextBox";
+            this.authorNameTextBox.Size = new System.Drawing.Size(449, 23);
+            this.authorNameTextBox.TabIndex = 2;
             // 
             // GitCommitCredentialsForm
             // 
@@ -97,7 +97,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(474, 142);
-            this.Controls.Add(this.kryptonPanel1);
+            this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -106,19 +106,19 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Commit Credentials";
             this.Load += new System.EventHandler(this.GitCommitCredentialsForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
+            this.mainPanel.ResumeLayout(false);
+            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox2;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox authorEmailTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox authorNameTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel authorEmailLabel;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel authorNameLabel;
     }
 }

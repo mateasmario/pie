@@ -114,12 +114,30 @@ namespace pie
         private List<BuildCommand> buildCommands;
         private List<DatabaseConnection> databases;
         private List<CodeTemplate> codeTemplates;
+        private List<Formatter> formatters;
+        private List<LanguageDefinition> languageDefinitions;
+        private List<LanguageMapping> languageMappings;
         private EditorProperties editorProperties;
         private GitCredentials gitCredentials;
 
         private Repository repository;
-
         private ThemeInfo activeTheme;
+
+        private int lastSelectedTabIndex;
+        private int maxLineNumberCharLength;
+        private int lastSelectedIndex;
+        private bool canUpdateUI;
+        private bool firstBrowserTab;
+        private bool deletesLastTab;
+        private bool deletesTab;
+        private bool mouseDown;
+        private Point lastLocation;
+        private Branch selectedBranch;
+        private bool gitTabOpened;
+        private int selectedBranchIndex;
+        private bool doNotTriggerBranchChangeEvent;
+        private bool doNotShowBranchChangeNotification;
+        private bool showGitTabPressed;
 
         public string[] Args;
 
@@ -266,7 +284,7 @@ namespace pie
                         string extension = parsingService.GetFileExtension(tabInfos[i].getOpenedFilePath());
                         themeService.ColorizeTextArea(scintilla, activeTheme);
                         ColorizeAutocompleteMenu(tabInfos[i].getAutocompleteMenu());
-                        scintillaLexerService.SetLexer(tabInfos[i].getAutocompleteMenu(), extension, scintilla, activeTheme);
+                        scintillaLexerService.SetLexer(tabInfos[i].getAutocompleteMenu(), extension, scintilla, activeTheme, languageMappings, languageDefinitions);
                         UpdateNumberMarginWidth(scintilla, true);
                     }
                     else
@@ -284,11 +302,11 @@ namespace pie
                 NavigateToPath(directoryNavigationTextBox.Text);
             }
 
-            Globals.doNotShowBranchChangeNotification = true;
-            Globals.doNotTriggerBranchChangeEvent = true;
+            doNotShowBranchChangeNotification = true;
+            doNotTriggerBranchChangeEvent = true;
             UpdateGitRepositoryInfo();
-            Globals.doNotShowBranchChangeNotification = false;
-            Globals.doNotTriggerBranchChangeEvent = false;
+            doNotShowBranchChangeNotification = false;
+            doNotTriggerBranchChangeEvent = false;
 
             ControlHelper.ResumeDrawing(this);
             this.RedrawNonClient();
@@ -323,7 +341,7 @@ namespace pie
 
             try
             {
-                Globals.formatters = configurationService.LoadLinkLibrariesFromMultipleFiles<Formatter>(
+                formatters = configurationService.LoadLinkLibrariesFromMultipleFiles<Formatter>(
                                     "formatters",
                                     new MethodValidator.Builder()
                                     .WithMethodName("Format")
@@ -639,15 +657,15 @@ namespace pie
 
         private void TextArea_UpdateUI(object sender, UpdateUIEventArgs e)
         {
-            if (Globals.canUpdateUI)
+            if (canUpdateUI)
             {
                 Scintilla TextArea = (Scintilla)sender;
 
-                Globals.lastSelectedIndex = TextArea.CurrentPosition;
+                lastSelectedIndex = TextArea.CurrentPosition;
             }
             else
             {
-                Globals.canUpdateUI = true;
+                canUpdateUI = true;
             }
         }
 
@@ -674,14 +692,14 @@ namespace pie
             // Did the number of characters in the line number display change?
             // i.e. nnn VS nn, or nnnn VS nn, etc...
             var maxLineNumberCharLength = scintilla.Lines.Count.ToString().Length;
-            if (maxLineNumberCharLength == Globals.maxLineNumberCharLength && !updateTheme)
+            if (maxLineNumberCharLength == maxLineNumberCharLength && !updateTheme)
                 return;
 
             // Calculate the width required to display the last line number
             // and include some padding for good measure.
             const int padding = 2;
             scintilla.Margins[0].Width = scintilla.TextWidth(Style.LineNumber, new string('9', maxLineNumberCharLength + 1)) + padding;
-            Globals.maxLineNumberCharLength = maxLineNumberCharLength;
+            maxLineNumberCharLength = maxLineNumberCharLength;
         }
 
         private void TextArea_MouseDown(object sender, MouseEventArgs e)
@@ -693,7 +711,7 @@ namespace pie
                 codeContextMenu.Show(sender);
             }
 
-            Globals.lastSelectedIndex = TextArea.SelectionEnd;
+            lastSelectedIndex = TextArea.SelectionEnd;
         }
 
         private void TextArea_KeyPress(object sender, KeyPressEventArgs e)
@@ -734,7 +752,7 @@ namespace pie
                 ToggleFindReplacePanel(false);
                 directoryNavigationHeaderGroup.Visible = false;
 
-                if (Globals.gitTabOpened)
+                if (gitTabOpened)
                 {
                     for (int i = 0; i < tabControl.Pages.Count; i++)
                     {
@@ -751,15 +769,15 @@ namespace pie
                     kryptonPage.Controls.Add(gitPanel);
                     gitPanel.Show();
                     gitPanel.Dock = DockStyle.Fill;
-                    Globals.gitTabOpened = true;
+                    gitTabOpened = true;
                 }
             }
             else
             {
-                if (Globals.firstBrowserTab)
+                if (firstBrowserTab)
                 {
                     Cef.Initialize(new CefSettings());
-                    Globals.firstBrowserTab = false;
+                    firstBrowserTab = false;
                 }
 
                 tabControl.KryptonContextMenu = renderContextMenu;
@@ -898,7 +916,7 @@ namespace pie
         // [Method] Closes the currently selected tab
         public bool CloseTab()
         {
-            Globals.deletesTab = true;
+            deletesTab = true;
 
             if (tabInfos[tabControl.SelectedIndex].getTabType() == TabType.RENDER_HTML || tabInfos[tabControl.SelectedIndex].getTabType() == TabType.RENDER_MD)
             {
@@ -907,7 +925,7 @@ namespace pie
             }
             else if (tabInfos[tabControl.SelectedIndex].getTabType() == TabType.GIT)
             {
-                Globals.gitTabOpened = false;
+                gitTabOpened = false;
                 CloseTabAfterWarning();
             }
             else if (tabInfos[tabControl.SelectedIndex].getOpenedFileChanges())
@@ -937,7 +955,7 @@ namespace pie
                 UpdateFormTitle(tabControl.SelectedIndex);
             }
 
-            Globals.deletesTab = false;
+            deletesTab = false;
 
             return true;
         }
@@ -948,11 +966,11 @@ namespace pie
 
             if (tabControl.SelectedIndex == tabControl.Pages.Count - 1)
             {
-                Globals.deletesLastTab = true;
+                deletesLastTab = true;
             }
             else
             {
-                Globals.deletesLastTab = false;
+                deletesLastTab = false;
             }
 
             if (tabControl.SelectedIndex >= 0)
@@ -1014,7 +1032,7 @@ namespace pie
                 tabControl.Pages[openedTabIndex].Text = parsingService.GetFileName(chosenPath);
 
                 string extension = parsingService.GetFileExtension(parsingService.GetFileName(tabInfos[openedTabIndex].getOpenedFilePath()));
-                scintillaLexerService.SetLexer(tabInfos[openedTabIndex].getAutocompleteMenu(), extension, TextArea, activeTheme);
+                scintillaLexerService.SetLexer(tabInfos[openedTabIndex].getAutocompleteMenu(), extension, TextArea, activeTheme, languageMappings, languageDefinitions);
                 UpdateFormTitle(tabControl.SelectedIndex);
                 tabInfos[openedTabIndex].setOpenedFileChanges(false);
             }
@@ -1051,7 +1069,7 @@ namespace pie
                 tabControl.Pages[selectedIndex].ToolTipTitle = chosenPath;
 
                 string extension = parsingService.GetFileExtension(parsingService.GetFileName(tabInfos[selectedIndex].getOpenedFilePath()));
-                scintillaLexerService.SetLexer(tabInfos[selectedIndex].getAutocompleteMenu(), extension, TextArea, activeTheme);
+                scintillaLexerService.SetLexer(tabInfos[selectedIndex].getAutocompleteMenu(), extension, TextArea, activeTheme, languageMappings, languageDefinitions);
                 UpdateFormTitle(selectedIndex);
                 tabInfos[selectedIndex].setOpenedFileChanges(false);
             }
@@ -1087,7 +1105,7 @@ namespace pie
 
             string extension = parsingService.GetFileExtension(fileName);
 
-            scintillaLexerService.SetLexer(tabInfos[openedTabIndex].getAutocompleteMenu(), extension, TextArea, activeTheme);
+            scintillaLexerService.SetLexer(tabInfos[openedTabIndex].getAutocompleteMenu(), extension, TextArea, activeTheme, languageMappings, languageDefinitions);
 
             DeactivateBuildAndRunOptions();
             ActivateSpecificBuildAndRunOptions(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
@@ -1236,15 +1254,14 @@ namespace pie
             }
         }
 
-        // [Method] Opens terminal tab control
-        public void ShowTerminalTabControl()
+        public void ToggleTerminalTabControlWithInitialization(bool visible)
         {
             if (terminalTabControl.Pages.Count == 0)
             {
                 NewTerminalTab("cmd.exe", false);
             }
 
-            ToggleTerminalTabControl(!terminalTabControl.Visible);
+            ToggleTerminalTabControl(visible);
         }
 
         public void ToggleTerminalTabControl(bool status)
@@ -1415,7 +1432,7 @@ namespace pie
         {
             try
             {
-                Globals.languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config\\mappings.json");
+                languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config\\mappings.json");
             }
             catch (FileNotFoundException ex)
             {
@@ -1431,7 +1448,7 @@ namespace pie
         {
             try
             {
-                Globals.languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>("config/languages", "json");
+                languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>("config/languages", "json");
             }
             catch (FileNotFoundException)
             {
@@ -1672,7 +1689,7 @@ namespace pie
                 }
                 else if (e.KeyCode == Keys.B && e.Modifiers == Keys.Control)
                 {
-                    ShowTerminalTabControl();
+                    ToggleTerminalTabControlWithInitialization(!terminalTabControl.Visible);
                 }
                 else if (e.KeyCode == Keys.F && e.Modifiers == Keys.Control)
                 {
@@ -1851,7 +1868,7 @@ namespace pie
         // [Event] Triggered when clicking "Show Terminal Tab" from the context menu
         private void kryptonContextMenuItem15_Click(object sender, EventArgs e)
         {
-            ShowTerminalTabControl();
+            ToggleTerminalTabControlWithInitialization(!terminalTabControl.Visible);
         }
 
         // [Event] Triggered when Form is closed
@@ -1873,18 +1890,16 @@ namespace pie
         // [Event] Triggered when clicking "Show Build Tab" from the upper menu
         private void showBuildToolsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowTerminalTabControl();
+            ToggleTerminalTabControlWithInitialization(!terminalTabControl.Visible);
         }
 
         // [Event] Triggered by multiple senders, when building (upper menu -> Build)
         private void BuildCommandTrigger_Click(object sender, EventArgs e)
         {
-            string content = null;
-
             int tag = (sender is ToolStripMenuItem) ? (int)((ToolStripMenuItem)sender).Tag
-                    : (sender is KryptonContextMenuItem) ? (int)((KryptonContextMenuItem)sender).Tag : 0;
+                    : (sender is KryptonContextMenuItem) ? (int)((KryptonContextMenuItem)sender).Tag : -1;
 
-            if (tag > 0) {
+            if (tag >= 0) {
                 if (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
                 {
                     BuildCommand buildCommand = buildCommands[tag];
@@ -1895,6 +1910,7 @@ namespace pie
                     string scriptName = parsingService.GetFileName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                     string command = buildCommand.Command;
                     command = command.Replace("$FILE", scriptName);
+                    ToggleTerminalTabControlWithInitialization(true);
                     NewTerminalTab(command, false);
                 }
                 else
@@ -1907,7 +1923,7 @@ namespace pie
         // [Event] Triggered when a tab is changed
         private void tabControl_SelectedPageChanged(object sender, EventArgs e)
         {
-            int indexToMoveTo = Globals.deletesLastTab ? tabControl.SelectedIndex : (Globals.deletesTab ? tabControl.SelectedIndex - 1 : tabControl.SelectedIndex);
+            int indexToMoveTo = deletesLastTab ? tabControl.SelectedIndex : (deletesTab ? tabControl.SelectedIndex - 1 : tabControl.SelectedIndex);
 
             if (indexToMoveTo >= 0)
             {
@@ -1957,10 +1973,10 @@ namespace pie
                     DeactivateBuildAndRunOptions();
                 }
             }
-            else if (Globals.showGitTabPressed)
+            else if (showGitTabPressed)
             {
                 tabControl.KryptonContextMenu = gitContextMenu;
-                Globals.showGitTabPressed = false;
+                showGitTabPressed = false;
             }
             else
             {
@@ -2023,7 +2039,7 @@ namespace pie
             {
                 if (e.Button == MouseButtons.Right)
                 {
-                    //int index = Globals.lastSelectedTabIndex;
+                    //int index = lastSelectedTabIndex;
                     //tabControl.SelectedIndex = index;
                 }
             }
@@ -2065,12 +2081,12 @@ namespace pie
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
             ClearHighlights(TextArea);
             HighlightWord(findTextBox.Text, TextArea, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
-            Find(TextArea, Globals.lastSelectedIndex, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
+            Find(TextArea, lastSelectedIndex, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
         }
 
         private bool Find(Scintilla scintilla, int indexStart, bool regex, bool matchCase, bool matchWholeWord)
         {
-            Globals.canUpdateUI = false;
+            canUpdateUI = false;
 
             String text = findTextBox.Text;
 
@@ -2106,7 +2122,7 @@ namespace pie
             if ((index = scintilla.SearchInTarget(text)) != -1)
             {
                 scintilla.SetSelection(index, index + scintilla.TargetEnd - scintilla.TargetStart);
-                Globals.lastSelectedIndex = index + scintilla.TargetEnd - scintilla.TargetStart + 1;
+                lastSelectedIndex = index + scintilla.TargetEnd - scintilla.TargetStart + 1;
 
                 scintilla.ScrollCaret();
             }
@@ -2118,7 +2134,7 @@ namespace pie
                     return false;
                 }
 
-                Globals.lastSelectedIndex = 0;
+                lastSelectedIndex = 0;
                 return Find(scintilla, 0, regex, matchCase, matchWholeWord);
             }
 
@@ -2181,16 +2197,16 @@ namespace pie
 
         private void findPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            Globals.mouseDown = true;
-            Globals.lastLocation = e.Location;
+            mouseDown = true;
+            lastLocation = e.Location;
         }
 
         private void findPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (Globals.mouseDown)
+            if (mouseDown)
             {
                 findReplaceHeaderGroup.Location = new Point(
-                    (findReplaceHeaderGroup.Location.X - Globals.lastLocation.X) + e.X, (findReplaceHeaderGroup.Location.Y - Globals.lastLocation.Y) + e.Y);
+                    (findReplaceHeaderGroup.Location.X - lastLocation.X) + e.X, (findReplaceHeaderGroup.Location.Y - lastLocation.Y) + e.Y);
 
                 this.Update();
             }
@@ -2198,13 +2214,13 @@ namespace pie
 
         private void findPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            Globals.mouseDown = false;
+            mouseDown = false;
         }
 
         private bool Replace(Scintilla scintilla, String from, String to)
         {
             HighlightWord(from, scintilla, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
-            bool found = Find(scintilla, Globals.lastSelectedIndex, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
+            bool found = Find(scintilla, lastSelectedIndex, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
 
             if (found)
             {
@@ -2287,7 +2303,7 @@ namespace pie
 
         private void showGitTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Globals.showGitTabPressed = true;
+            showGitTabPressed = true;
             NewTab(TabType.GIT, null);
         }
 
@@ -2321,24 +2337,24 @@ namespace pie
                 {
                     Repository.Init(path);
                     repositoryTextBox.Text = path;
-                    Globals.doNotShowBranchChangeNotification = true;
+                    doNotShowBranchChangeNotification = true;
                     UpdateGitRepositoryInfo();
 
                     if (gitBranchesComboBox.Items.Count > 0)
                     {
-                        gitBranchesComboBox.SelectedIndex = Globals.selectedBranchIndex;
+                        gitBranchesComboBox.SelectedIndex = selectedBranchIndex;
                     }
                 }
             }
             else
             {
                 repositoryTextBox.Text = path;
-                Globals.doNotShowBranchChangeNotification = true;
+                doNotShowBranchChangeNotification = true;
                 UpdateGitRepositoryInfo();
 
                 if (gitBranchesComboBox.Items.Count > 0)
                 {
-                    gitBranchesComboBox.SelectedIndex = Globals.selectedBranchIndex;
+                    gitBranchesComboBox.SelectedIndex = selectedBranchIndex;
                 }
             }
         }
@@ -2394,7 +2410,7 @@ namespace pie
         {
             if (repository != null)
             {
-                Globals.doNotTriggerBranchChangeEvent = true;
+                doNotTriggerBranchChangeEvent = true;
                 UpdateGitRepositoryInfo();
             }
             else
@@ -2496,7 +2512,7 @@ namespace pie
                             repository.Commit(commitText, signature, signature);
                         }).Wait();
 
-                        Globals.doNotShowBranchChangeNotification = true;
+                        doNotShowBranchChangeNotification = true;
                         UpdateGitRepositoryInfo();
                         ShowNotification("Successfully commited.");
                     }
@@ -2602,7 +2618,7 @@ namespace pie
         {
             if (repository != null)
             {
-                var branch = Globals.selectedBranch;
+                var branch = selectedBranch;
 
                 if (true)
                 {
@@ -2645,7 +2661,7 @@ namespace pie
 
                         try
                         {
-                            Globals.doNotShowBranchChangeNotification = true;
+                            doNotShowBranchChangeNotification = true;
 
                             string branchName = gitBranchesComboBox.SelectedItem.ToString();
 
@@ -2656,7 +2672,7 @@ namespace pie
 
                             ShowNotification("Successfully pushed to remote.");
                             UpdateGitRepositoryInfo();
-                            Globals.doNotShowBranchChangeNotification = false;
+                            doNotShowBranchChangeNotification = false;
                         }
                         catch (LibGit2SharpException ex)
                         {
@@ -2685,17 +2701,17 @@ namespace pie
         {
             NotificationYesNoCancelFormOutput notificationYesNoCancelFormOutput = null;
 
-            if (Globals.doNotTriggerBranchChangeEvent)
+            if (doNotTriggerBranchChangeEvent)
             {
-                Globals.doNotTriggerBranchChangeEvent = false;
+                doNotTriggerBranchChangeEvent = false;
             }
             else if (repository != null)
             {
                 int selectedIndex = gitBranchesComboBox.SelectedIndex;
 
-                if (Globals.doNotShowBranchChangeNotification)
+                if (doNotShowBranchChangeNotification)
                 {
-                    Globals.doNotShowBranchChangeNotification = false;
+                    doNotShowBranchChangeNotification = false;
                 }
                 else
                 {
@@ -2708,8 +2724,8 @@ namespace pie
                     {
                         if (branch.FriendlyName == gitBranchesComboBox.Text)
                         {
-                            Globals.selectedBranch = branch;
-                            Globals.selectedBranchIndex = gitBranchesComboBox.SelectedIndex;
+                            selectedBranch = branch;
+                            selectedBranchIndex = gitBranchesComboBox.SelectedIndex;
 
                             CheckoutOptions checkoutOptions = new CheckoutOptions();
                             Branch currentBranch = Commands.Checkout(repository, branch, new CheckoutOptions() { CheckoutModifiers = CheckoutModifiers.Force });
@@ -2722,7 +2738,7 @@ namespace pie
                                 if (localBranchFriendlyName == null)
                                 {
                                     // Remove the "origin/" from remote branch name
-                                    Globals.doNotShowBranchChangeNotification = true;
+                                    doNotShowBranchChangeNotification = true;
                                     var remoteBranch = repository.Branches[gitBranchesComboBox.SelectedItem.ToString()];
                                     var newBranch = repository.CreateBranch(localBranchFriendlyName, remoteBranch.Tip);
                                     repository.Branches.Update(newBranch, b => b.TrackedBranch = remoteBranch.CanonicalName);
@@ -2733,7 +2749,7 @@ namespace pie
                                 {
                                     if (branchName == localBranchFriendlyName)
                                     {
-                                        Globals.doNotShowBranchChangeNotification = true;
+                                        doNotShowBranchChangeNotification = true;
                                         gitBranchesComboBox.SelectedIndex = index;
                                         break;
                                     }
@@ -2748,9 +2764,9 @@ namespace pie
                 }
                 else
                 {
-                    Globals.doNotTriggerBranchChangeEvent = true;
+                    doNotTriggerBranchChangeEvent = true;
                     gitBranchesComboBox.SelectedIndex = selectedIndex;
-                    Globals.doNotTriggerBranchChangeEvent = false;
+                    doNotTriggerBranchChangeEvent = false;
                 }
             }
             else
@@ -3064,21 +3080,21 @@ namespace pie
 
         private void directoryNavigationHeaderGroup_Panel_MouseDown(object sender, MouseEventArgs e)
         {
-            Globals.mouseDown = true;
-            Globals.lastLocation = e.Location;
+            mouseDown = true;
+            lastLocation = e.Location;
         }
 
         private void directoryNavigationHeaderGroup_Panel_MouseUp(object sender, MouseEventArgs e)
         {
-            Globals.mouseDown = false;
+            mouseDown = false;
         }
 
         private void directoryNavigationHeaderGroup_Panel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (Globals.mouseDown)
+            if (mouseDown)
             {
                 directoryNavigationHeaderGroup.Location = new Point(
-                    (directoryNavigationHeaderGroup.Location.X - Globals.lastLocation.X) + e.X, (directoryNavigationHeaderGroup.Location.Y - Globals.lastLocation.Y) + e.Y);
+                    (directoryNavigationHeaderGroup.Location.X - lastLocation.X) + e.X, (directoryNavigationHeaderGroup.Location.Y - lastLocation.Y) + e.Y);
 
                 this.Update();
             }
@@ -3281,6 +3297,7 @@ namespace pie
             formatFormInput.ActiveTheme = activeTheme;
             formatFormInput.Palette = kryptonPalette;
             formatFormInput.EditorProperties = editorProperties;
+            formatFormInput.Formatters = formatters;
 
             formatForm.Input = formatFormInput;
             

@@ -57,8 +57,8 @@ namespace pie.Forms.Theme
             SynchronizeObjectListViewWithTheme();
             themeListView.SetObjects(Input.ThemeInfos);
 
-            kryptonGroupBox1.Visible = false;
-            kryptonGroupBox2.Visible = false;
+            generalAspectsGroupBox.Visible = false;
+            scintillaGroupBox.Visible = false;
         }
 
         private void SynchronizeObjectListViewWithTheme()
@@ -81,8 +81,8 @@ namespace pie.Forms.Theme
 
         private void themeListView_DoubleClick(object sender, EventArgs e)
         {
-            kryptonGroupBox1.Visible = true;
-            kryptonGroupBox2.Visible = true;
+            generalAspectsGroupBox.Visible = true;
+            scintillaGroupBox.Visible = true;
 
             if (themeListView.SelectedItems.Count == 1)
             {
@@ -96,41 +96,41 @@ namespace pie.Forms.Theme
                 }
             }
 
-            kryptonColorButton1.SelectedColor = themeInfoToEdit.Primary;
-            kryptonColorButton3.SelectedColor = themeInfoToEdit.Secondary;
-            kryptonColorButton4.SelectedColor = themeInfoToEdit.Button;
-            kryptonColorButton5.SelectedColor = themeInfoToEdit.ButtonFrame;
-            kryptonColorButton6.SelectedColor = themeInfoToEdit.ButtonHover;
-            kryptonColorButton7.SelectedColor = themeInfoToEdit.Fore;
-            kryptonColorButton8.SelectedColor = themeInfoToEdit.FormBorder;
-            kryptonColorButton9.SelectedColor = themeInfoToEdit.Selection;
-            kryptonColorButton10.SelectedColor = themeInfoToEdit.CaretLineBack;
-            kryptonColorButton11.SelectedColor = themeInfoToEdit.NumberMargin;
-            kryptonColorButton12.SelectedColor = themeInfoToEdit.Folding;
+            primaryColorButton.SelectedColor = themeInfoToEdit.Primary;
+            secondaryColorButton.SelectedColor = themeInfoToEdit.Secondary;
+            buttonColorButton.SelectedColor = themeInfoToEdit.Button;
+            buttonFrameColorButton.SelectedColor = themeInfoToEdit.ButtonFrame;
+            buttonHoverColorButton.SelectedColor = themeInfoToEdit.ButtonHover;
+            foreColorButton.SelectedColor = themeInfoToEdit.Fore;
+            formBorderColorButton.SelectedColor = themeInfoToEdit.FormBorder;
+            selectionColorButton.SelectedColor = themeInfoToEdit.Selection;
+            caretLineBackColorButton.SelectedColor = themeInfoToEdit.CaretLineBack;
+            numberMarginColorButton.SelectedColor = themeInfoToEdit.NumberMargin;
+            foldingColorButton.SelectedColor = themeInfoToEdit.Folding;
 
             if (themeInfoToEdit.IconType == null || themeInfoToEdit.IconType.ToLower().Equals("dark"))
             {
-                kryptonComboBox1.SelectedIndex = 0;
+                iconTypeComboBox.SelectedIndex = 0;
             }
             else
             {
-                kryptonComboBox1.SelectedIndex = 1;
+                iconTypeComboBox.SelectedIndex = 1;
             }
 
-            kryptonColorButton22.SelectedColor = themeInfoToEdit.Comment;
-            kryptonColorButton21.SelectedColor = themeInfoToEdit.CommentLine;
-            kryptonColorButton20.SelectedColor = themeInfoToEdit.CommentBlock;
-            kryptonColorButton19.SelectedColor = themeInfoToEdit.Word;
-            kryptonColorButton18.SelectedColor = themeInfoToEdit.String;
-            kryptonColorButton17.SelectedColor = themeInfoToEdit.Number;
-            kryptonColorButton16.SelectedColor = themeInfoToEdit.Operator;
-            kryptonColorButton15.SelectedColor = themeInfoToEdit.Preprocessor;
-            kryptonColorButton14.SelectedColor = themeInfoToEdit.Triple;
-            kryptonColorButton13.SelectedColor = themeInfoToEdit.Decorator;
-            kryptonColorButton2.SelectedColor = themeInfoToEdit.Attribute;
-            kryptonColorButton23.SelectedColor = themeInfoToEdit.Entity;
-            kryptonColorButton24.SelectedColor = themeInfoToEdit.User1;
-            kryptonColorButton25.SelectedColor = themeInfoToEdit.User2;
+            commentColorButton.SelectedColor = themeInfoToEdit.Comment;
+            commentLineColorButton.SelectedColor = themeInfoToEdit.CommentLine;
+            commentBlockColorButton.SelectedColor = themeInfoToEdit.CommentBlock;
+            wordColorButton.SelectedColor = themeInfoToEdit.Word;
+            stringColorButton.SelectedColor = themeInfoToEdit.String;
+            numberColorButton.SelectedColor = themeInfoToEdit.Number;
+            operatorColorButton.SelectedColor = themeInfoToEdit.Operator;
+            preprocessorColorButton.SelectedColor = themeInfoToEdit.Preprocessor;
+            tripleColorButton.SelectedColor = themeInfoToEdit.Triple;
+            decoratorColorButton.SelectedColor = themeInfoToEdit.Decorator;
+            attributeColorButton.SelectedColor = themeInfoToEdit.Attribute;
+            entityColorButton.SelectedColor = themeInfoToEdit.Entity;
+            user1ColorButton.SelectedColor = themeInfoToEdit.User1;
+            user2ColorButton.SelectedColor = themeInfoToEdit.User2;
         }
 
         private void kryptonColorButton_SelectedColorChanged(object sender, ColorEventArgs e)
@@ -141,7 +141,7 @@ namespace pie.Forms.Theme
 
         private void kryptonComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (kryptonComboBox1.SelectedIndex == 0)
+            if (iconTypeComboBox.SelectedIndex == 0)
             {
                 themeInfoToEdit.IconType = "dark";
             }

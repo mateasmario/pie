@@ -29,101 +29,101 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationYesNoCancelForm));
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonRichTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
-            this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.contentRichTextBox = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
+            this.yesButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.noButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.cancelButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // kryptonPanel1
+            // mainPanel
             // 
-            this.kryptonPanel1.Controls.Add(this.kryptonRichTextBox1);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton3);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton2);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(366, 95);
-            this.kryptonPanel1.TabIndex = 8;
+            this.mainPanel.Controls.Add(this.contentRichTextBox);
+            this.mainPanel.Controls.Add(this.yesButton);
+            this.mainPanel.Controls.Add(this.noButton);
+            this.mainPanel.Controls.Add(this.cancelButton);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(366, 95);
+            this.mainPanel.TabIndex = 8;
             // 
-            // kryptonRichTextBox1
+            // contentRichTextBox
             // 
-            this.kryptonRichTextBox1.Location = new System.Drawing.Point(3, 8);
-            this.kryptonRichTextBox1.Name = "kryptonRichTextBox1";
-            this.kryptonRichTextBox1.ReadOnly = true;
-            this.kryptonRichTextBox1.Size = new System.Drawing.Size(360, 45);
-            this.kryptonRichTextBox1.StateCommon.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.False;
-            this.kryptonRichTextBox1.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.contentRichTextBox.Location = new System.Drawing.Point(3, 8);
+            this.contentRichTextBox.Name = "contentRichTextBox";
+            this.contentRichTextBox.ReadOnly = true;
+            this.contentRichTextBox.Size = new System.Drawing.Size(360, 45);
+            this.contentRichTextBox.StateCommon.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.False;
+            this.contentRichTextBox.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonRichTextBox1.TabIndex = 7;
-            this.kryptonRichTextBox1.Text = "";
+            this.contentRichTextBox.TabIndex = 7;
+            this.contentRichTextBox.Text = "";
             // 
-            // kryptonButton3
+            // yesButton
             // 
-            this.kryptonButton3.Location = new System.Drawing.Point(157, 64);
-            this.kryptonButton3.Name = "kryptonButton3";
-            this.kryptonButton3.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.yesButton.Location = new System.Drawing.Point(157, 64);
+            this.yesButton.Name = "yesButton";
+            this.yesButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton3.Size = new System.Drawing.Size(63, 25);
-            this.kryptonButton3.TabIndex = 6;
-            this.kryptonButton3.Values.Text = "Yes";
-            this.kryptonButton3.Click += new System.EventHandler(this.kryptonButton3_Click);
+            this.yesButton.Size = new System.Drawing.Size(63, 25);
+            this.yesButton.TabIndex = 6;
+            this.yesButton.Values.Text = "Yes";
+            this.yesButton.Click += new System.EventHandler(this.kryptonButton3_Click);
             // 
-            // kryptonButton2
+            // noButton
             // 
-            this.kryptonButton2.Location = new System.Drawing.Point(226, 64);
-            this.kryptonButton2.Name = "kryptonButton2";
-            this.kryptonButton2.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.noButton.Location = new System.Drawing.Point(226, 64);
+            this.noButton.Name = "noButton";
+            this.noButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton2.Size = new System.Drawing.Size(63, 25);
-            this.kryptonButton2.TabIndex = 5;
-            this.kryptonButton2.Values.Text = "No";
-            this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
+            this.noButton.Size = new System.Drawing.Size(63, 25);
+            this.noButton.TabIndex = 5;
+            this.noButton.Values.Text = "No";
+            this.noButton.Click += new System.EventHandler(this.kryptonButton2_Click);
             // 
-            // kryptonButton1
+            // cancelButton
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(295, 64);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.cancelButton.Location = new System.Drawing.Point(295, 64);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton1.Size = new System.Drawing.Size(63, 25);
-            this.kryptonButton1.TabIndex = 4;
-            this.kryptonButton1.Values.Text = "Cancel";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            this.cancelButton.Size = new System.Drawing.Size(63, 25);
+            this.cancelButton.TabIndex = 4;
+            this.cancelButton.Values.Text = "Cancel";
+            this.cancelButton.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
-            // NotificationYesNoCancel
+            // NotificationYesNoCancelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 95);
-            this.Controls.Add(this.kryptonPanel1);
+            this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "NotificationYesNoCancel";
+            this.Name = "NotificationYesNoCancelForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Notification";
             this.Load += new System.EventHandler(this.NotificationYesNoCancel_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
+            this.mainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton3;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox kryptonRichTextBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton yesButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton noButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton cancelButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox contentRichTextBox;
     }
 }

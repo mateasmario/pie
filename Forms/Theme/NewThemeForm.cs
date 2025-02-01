@@ -70,17 +70,17 @@ namespace pie.Forms.Theme
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text.Trim().Length == 0)
+            if (themeNameTextBox.Text.Trim().Length == 0)
             {
                 ShowNotification("Theme name cannot contain whitespaces only.");
             }
-            else if (themeExists(kryptonTextBox1.Text.Trim()))
+            else if (themeExists(themeNameTextBox.Text.Trim()))
             {
                 ShowNotification("Theme with specified name already exists. Please choose another name.");
             }
             else
             {
-                Output.NewThemeName = kryptonTextBox1.Text.Trim();
+                Output.NewThemeName = themeNameTextBox.Text.Trim();
                 this.Close();
             }
         }

@@ -56,16 +56,16 @@ namespace pie.Forms.CodeTemplates
         {
             InitializeComponent();
 
-            indexButton1.Click += kryptonCheckButton_Click;
-            indexButton2.Click += kryptonCheckButton_Click;
-            indexButton4.Click += kryptonCheckButton_Click;
-            indexButton3.Click += kryptonCheckButton_Click;
-            indexButton8.Click += kryptonCheckButton_Click;
-            indexButton7.Click += kryptonCheckButton_Click;
-            indexButton6.Click += kryptonCheckButton_Click;
-            indexButton5.Click += kryptonCheckButton_Click;
-            indexButton0.Click += kryptonCheckButton_Click;
-            indexButton9.Click += kryptonCheckButton_Click;
+            template1CheckButton.Click += kryptonCheckButton_Click;
+            template2CheckButton.Click += kryptonCheckButton_Click;
+            template4CheckButton.Click += kryptonCheckButton_Click;
+            template3CheckButton.Click += kryptonCheckButton_Click;
+            template8CheckButton.Click += kryptonCheckButton_Click;
+            template7CheckButton.Click += kryptonCheckButton_Click;
+            template6CheckButton.Click += kryptonCheckButton_Click;
+            template5CheckButton.Click += kryptonCheckButton_Click;
+            template0CheckButton.Click += kryptonCheckButton_Click;
+            template9CheckButton.Click += kryptonCheckButton_Click;
 
             Output = new CodeTemplatesFormOutput();
         }
@@ -74,16 +74,16 @@ namespace pie.Forms.CodeTemplates
         {
             themeService.SetPaletteToObjects(this, Input.Palette);
 
-            ColorizeButton(indexButton1);
-            ColorizeButton(indexButton2);
-            ColorizeButton(indexButton4);
-            ColorizeButton(indexButton3);
-            ColorizeButton(indexButton8);
-            ColorizeButton(indexButton7);
-            ColorizeButton(indexButton6);
-            ColorizeButton(indexButton5);
-            ColorizeButton(indexButton0);
-            ColorizeButton(indexButton9);
+            ColorizeButton(template1CheckButton);
+            ColorizeButton(template2CheckButton);
+            ColorizeButton(template4CheckButton);
+            ColorizeButton(template3CheckButton);
+            ColorizeButton(template8CheckButton);
+            ColorizeButton(template7CheckButton);
+            ColorizeButton(template6CheckButton);
+            ColorizeButton(template5CheckButton);
+            ColorizeButton(template0CheckButton);
+            ColorizeButton(template9CheckButton);
 
             if (Input.EditorProperties.Glass)
             {
@@ -127,16 +127,16 @@ namespace pie.Forms.CodeTemplates
 
         private void kryptonCheckButton_Click(object sender, EventArgs e)
         {
-            indexButton1.Checked = false;
-            indexButton2.Checked = false;
-            indexButton4.Checked = false;
-            indexButton3.Checked = false;
-            indexButton8.Checked = false;
-            indexButton7.Checked = false;
-            indexButton6.Checked = false;
-            indexButton5.Checked = false;
-            indexButton0.Checked = false;
-            indexButton9.Checked = false;
+            template1CheckButton.Checked = false;
+            template2CheckButton.Checked = false;
+            template4CheckButton.Checked = false;
+            template3CheckButton.Checked = false;
+            template8CheckButton.Checked = false;
+            template7CheckButton.Checked = false;
+            template6CheckButton.Checked = false;
+            template5CheckButton.Checked = false;
+            template0CheckButton.Checked = false;
+            template9CheckButton.Checked = false;
 
             KryptonCheckButton kryptonCheckButton = (KryptonCheckButton)sender;
             kryptonCheckButton.Checked = true;

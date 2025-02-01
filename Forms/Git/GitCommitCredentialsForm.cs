@@ -53,12 +53,12 @@ namespace pie
 
             if (Input.GitCredentials.Name != null)
             {
-                kryptonTextBox1.Text = Input.GitCredentials.Name;
+                authorNameTextBox.Text = Input.GitCredentials.Name;
             }
 
             if (Input.GitCredentials.Email != null)
             {
-                kryptonTextBox2.Text = Input.GitCredentials.Email;
+                authorEmailTextBox.Text = Input.GitCredentials.Email;
             }
         }
 
@@ -78,10 +78,10 @@ namespace pie
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text != "" && kryptonTextBox2.Text != "")
+            if (authorNameTextBox.Text != "" && authorEmailTextBox.Text != "")
             {
-                Input.GitCredentials.Name = kryptonTextBox1.Text;
-                Input.GitCredentials.Email = kryptonTextBox2.Text;
+                Input.GitCredentials.Name = authorNameTextBox.Text;
+                Input.GitCredentials.Email = authorEmailTextBox.Text;
 
                 Output.Saved = true;
 
