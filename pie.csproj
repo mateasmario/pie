@@ -544,7 +544,6 @@
     <Compile Include="Forms\Git\GitPushCredentialsForm.Designer.cs">
       <DependentUpon>GitPushCredentialsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Globals.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
