@@ -1,4 +1,4 @@
-# ![pie](https://i.imgur.com/41INRl7.png) Pie: A General Purpose Code Editor Focused on Simplicity
+# ![pie](https://i.imgur.com/mvR0VQv.png) Pie: A General Purpose Code Editor Focused on Simplicity
 
 ![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie/bug) ![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie/enhancement) ![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie/documentation)
 
