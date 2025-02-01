@@ -17,6 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
+using System.Collections.Generic;
+
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
  * 
@@ -32,5 +34,6 @@ namespace pie.Classes
         public ThemeInfo ActiveTheme { get; set; }
         public KryptonPalette Palette { get; set; }
         public EditorProperties EditorProperties { get; set; }
+        public List<Formatter> Formatters { get; set; }
     }
 }

@@ -63,7 +63,7 @@ namespace pie.Forms.Format
             }
 
             SynchronizeObjectListViewWithTheme();
-            formatOptionsListView.SetObjects(Globals.formatters);
+            formatOptionsListView.SetObjects(Input.Formatters);
 
             kryptonTextBox1.Select();
             kryptonTextBox1.SelectAll();
@@ -103,7 +103,7 @@ namespace pie.Forms.Format
         {
             if (formatOptionsListView.SelectedObjects.Count == 1)
             {
-                Formatter selectedFormatOption = Globals.formatters.Find(formatter => ((Formatter)formatOptionsListView.SelectedObject).Name == formatter.Name);
+                Formatter selectedFormatOption = Input.Formatters.Find(formatter => ((Formatter)formatOptionsListView.SelectedObject).Name == formatter.Name);
                 Output.Text = selectedFormatOption.InvokeMethod(Input.Text);
                 this.Close();
             }
@@ -111,7 +111,7 @@ namespace pie.Forms.Format
 
         private void kryptonTextBox1_TextChanged(object sender, EventArgs e)
         {
-            formatOptionsListView.SetObjects(Globals.formatters.FindAll(x => x.Name.ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()) || Regex.Replace(x.Name, "([A-Z])", " $1", RegexOptions.Compiled).Trim().ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim())));
+            formatOptionsListView.SetObjects(Input.Formatters.FindAll(x => x.Name.ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim()) || Regex.Replace(x.Name, "([A-Z])", " $1", RegexOptions.Compiled).Trim().ToLower().Contains(kryptonTextBox1.Text.ToLower().Trim())));
         }
     }
 }

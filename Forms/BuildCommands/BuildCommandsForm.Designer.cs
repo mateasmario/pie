@@ -32,17 +32,17 @@
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonListBox1 = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.buildCommandsLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.removeButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.addButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.applyButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.buildCommandsListView = new BrightIdeasSoftware.ObjectListView();
             this.BuildCommandNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.kryptonPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
+            this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildCommandsListView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,62 +77,62 @@
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "26EE49FE8BF4430326BBCAF7F39C9913";
             // 
-            // kryptonLabel2
+            // buildCommandsLabel
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(5, 6);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(149, 20);
-            this.kryptonLabel2.TabIndex = 0;
-            this.kryptonLabel2.Values.Text = "Custom Build Commands";
+            this.buildCommandsLabel.Location = new System.Drawing.Point(5, 6);
+            this.buildCommandsLabel.Name = "buildCommandsLabel";
+            this.buildCommandsLabel.Size = new System.Drawing.Size(149, 20);
+            this.buildCommandsLabel.TabIndex = 0;
+            this.buildCommandsLabel.Values.Text = "Custom Build Commands";
             // 
-            // kryptonButton1
+            // removeButton
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(82, 282);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.removeButton.Location = new System.Drawing.Point(82, 282);
+            this.removeButton.Name = "removeButton";
+            this.removeButton.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton1.Size = new System.Drawing.Size(66, 25);
-            this.kryptonButton1.TabIndex = 2;
-            this.kryptonButton1.Values.Text = "Remove";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            this.removeButton.Size = new System.Drawing.Size(66, 25);
+            this.removeButton.TabIndex = 2;
+            this.removeButton.Values.Text = "Remove";
+            this.removeButton.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
-            // kryptonButton2
+            // addButton
             // 
-            this.kryptonButton2.Location = new System.Drawing.Point(10, 282);
-            this.kryptonButton2.Name = "kryptonButton2";
-            this.kryptonButton2.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.addButton.Location = new System.Drawing.Point(10, 282);
+            this.addButton.Name = "addButton";
+            this.addButton.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton2.Size = new System.Drawing.Size(66, 25);
-            this.kryptonButton2.TabIndex = 3;
-            this.kryptonButton2.Values.Text = "Add";
-            this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
+            this.addButton.Size = new System.Drawing.Size(66, 25);
+            this.addButton.TabIndex = 3;
+            this.addButton.Values.Text = "Add";
+            this.addButton.Click += new System.EventHandler(this.kryptonButton2_Click);
             // 
-            // kryptonButton3
+            // applyButton
             // 
-            this.kryptonButton3.Location = new System.Drawing.Point(467, 282);
-            this.kryptonButton3.Name = "kryptonButton3";
-            this.kryptonButton3.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.applyButton.Location = new System.Drawing.Point(467, 282);
+            this.applyButton.Name = "applyButton";
+            this.applyButton.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton3.Size = new System.Drawing.Size(66, 25);
-            this.kryptonButton3.TabIndex = 4;
-            this.kryptonButton3.Values.Text = "Apply";
-            this.kryptonButton3.Click += new System.EventHandler(this.kryptonButton3_Click);
+            this.applyButton.Size = new System.Drawing.Size(66, 25);
+            this.applyButton.TabIndex = 4;
+            this.applyButton.Values.Text = "Apply";
+            this.applyButton.Click += new System.EventHandler(this.kryptonButton3_Click);
             // 
-            // kryptonPanel1
+            // mainPanel
             // 
-            this.kryptonPanel1.Controls.Add(this.buildCommandsListView);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton3);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton2);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(543, 320);
-            this.kryptonPanel1.TabIndex = 6;
+            this.mainPanel.Controls.Add(this.buildCommandsListView);
+            this.mainPanel.Controls.Add(this.applyButton);
+            this.mainPanel.Controls.Add(this.buildCommandsLabel);
+            this.mainPanel.Controls.Add(this.removeButton);
+            this.mainPanel.Controls.Add(this.addButton);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(543, 320);
+            this.mainPanel.TabIndex = 6;
             // 
             // buildCommandsListView
             // 
@@ -164,7 +164,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(543, 320);
-            this.Controls.Add(this.kryptonPanel1);
+            this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -176,9 +176,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.kryptonPage1.ResumeLayout(false);
             this.kryptonPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
+            this.mainPanel.ResumeLayout(false);
+            this.mainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildCommandsListView)).EndInit();
             this.ResumeLayout(false);
 
@@ -188,11 +188,11 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonListBox kryptonListBox1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton3;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel buildCommandsLabel;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton removeButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton addButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton applyButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
         private BrightIdeasSoftware.ObjectListView buildCommandsListView;
         private BrightIdeasSoftware.OLVColumn BuildCommandNameColumn;
     }

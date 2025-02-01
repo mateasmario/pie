@@ -50,7 +50,7 @@ namespace pie
                 this.Opacity = 0.875;
             }
 
-            kryptonRichTextBox1.Text = Input.NotificationText;
+            contentRichTextBox.Text = Input.NotificationText;
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)

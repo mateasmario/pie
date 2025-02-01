@@ -55,7 +55,7 @@ namespace pie.Forms.Databases
                 this.Opacity = 0.875;
             }
 
-            kryptonDataGridView1.DataSource = Input.DataTable;
+            outputDataGridView.DataSource = Input.DataTable;
         }
     }
 }

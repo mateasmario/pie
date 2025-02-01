@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GitSettingsForm));
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.remoteServerPasswordTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.remoteServerUsernameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.remoteServerUsernameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -39,26 +39,26 @@
             this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.authorNameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.authorEmailLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // kryptonPanel1
+            // mainPanel
             // 
-            this.kryptonPanel1.Controls.Add(this.remoteServerPasswordTextBox);
-            this.kryptonPanel1.Controls.Add(this.remoteServerUsernameTextBox);
-            this.kryptonPanel1.Controls.Add(this.remoteServerUsernameLabel);
-            this.kryptonPanel1.Controls.Add(this.remoteServerPasswordLabel);
-            this.kryptonPanel1.Controls.Add(this.authorEmailTextBox);
-            this.kryptonPanel1.Controls.Add(this.authorNameTextBox);
-            this.kryptonPanel1.Controls.Add(this.saveButton);
-            this.kryptonPanel1.Controls.Add(this.authorNameLabel);
-            this.kryptonPanel1.Controls.Add(this.authorEmailLabel);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(411, 254);
-            this.kryptonPanel1.TabIndex = 8;
+            this.mainPanel.Controls.Add(this.remoteServerPasswordTextBox);
+            this.mainPanel.Controls.Add(this.remoteServerUsernameTextBox);
+            this.mainPanel.Controls.Add(this.remoteServerUsernameLabel);
+            this.mainPanel.Controls.Add(this.remoteServerPasswordLabel);
+            this.mainPanel.Controls.Add(this.authorEmailTextBox);
+            this.mainPanel.Controls.Add(this.authorNameTextBox);
+            this.mainPanel.Controls.Add(this.saveButton);
+            this.mainPanel.Controls.Add(this.authorNameLabel);
+            this.mainPanel.Controls.Add(this.authorEmailLabel);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(411, 254);
+            this.mainPanel.TabIndex = 8;
             // 
             // remoteServerPasswordTextBox
             // 
@@ -146,7 +146,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(411, 254);
-            this.Controls.Add(this.kryptonPanel1);
+            this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -155,16 +155,16 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Git Settings";
             this.Load += new System.EventHandler(this.GitSettingsForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
+            this.mainPanel.ResumeLayout(false);
+            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox authorEmailTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox authorNameTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;

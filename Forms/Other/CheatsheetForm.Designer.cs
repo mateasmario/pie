@@ -29,424 +29,424 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheatsheetForm));
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.pictureBox19 = new System.Windows.Forms.PictureBox();
-            this.pictureBox20 = new System.Windows.Forms.PictureBox();
-            this.kryptonLabel9 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.pictureBox17 = new System.Windows.Forms.PictureBox();
-            this.pictureBox18 = new System.Windows.Forms.PictureBox();
-            this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.pictureBox16 = new System.Windows.Forms.PictureBox();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.kryptonLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.kryptonLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.keybind9Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind9Key2PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind9Key1PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind8Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind8Key2PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind8Key1PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind7Key2PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind7Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind7Key3PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind7Key1PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind6Key2PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind6Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind6Key3PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind6Key1PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind5Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind5Key2PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind5Key1PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind4Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind4Key2PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind4Key1PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind3Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind3Key2PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind3Key1PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind2Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind2Key2PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind2Key1PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind1Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind1Key2PictureBox = new System.Windows.Forms.PictureBox();
+            this.keybind1Key1PictureBox = new System.Windows.Forms.PictureBox();
+            this.titleLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
+            this.mainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind9Key2PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind9Key1PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind8Key2PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind8Key1PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind7Key2PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind7Key3PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind7Key1PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind6Key2PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind6Key3PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind6Key1PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind5Key2PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind5Key1PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind4Key2PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind4Key1PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind3Key2PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind3Key1PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind2Key2PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind2Key1PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind1Key2PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind1Key1PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // kryptonPanel1
+            // mainPanel
             // 
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel10);
-            this.kryptonPanel1.Controls.Add(this.pictureBox19);
-            this.kryptonPanel1.Controls.Add(this.pictureBox20);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel9);
-            this.kryptonPanel1.Controls.Add(this.pictureBox17);
-            this.kryptonPanel1.Controls.Add(this.pictureBox18);
-            this.kryptonPanel1.Controls.Add(this.pictureBox14);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel4);
-            this.kryptonPanel1.Controls.Add(this.pictureBox15);
-            this.kryptonPanel1.Controls.Add(this.pictureBox16);
-            this.kryptonPanel1.Controls.Add(this.pictureBox13);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel2);
-            this.kryptonPanel1.Controls.Add(this.pictureBox11);
-            this.kryptonPanel1.Controls.Add(this.pictureBox12);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel8);
-            this.kryptonPanel1.Controls.Add(this.pictureBox9);
-            this.kryptonPanel1.Controls.Add(this.pictureBox10);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel7);
-            this.kryptonPanel1.Controls.Add(this.pictureBox7);
-            this.kryptonPanel1.Controls.Add(this.pictureBox8);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel6);
-            this.kryptonPanel1.Controls.Add(this.pictureBox5);
-            this.kryptonPanel1.Controls.Add(this.pictureBox6);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.pictureBox3);
-            this.kryptonPanel1.Controls.Add(this.pictureBox4);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel5);
-            this.kryptonPanel1.Controls.Add(this.pictureBox2);
-            this.kryptonPanel1.Controls.Add(this.pictureBox1);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel3);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(305, 353);
-            this.kryptonPanel1.TabIndex = 7;
+            this.mainPanel.Controls.Add(this.keybind9Label);
+            this.mainPanel.Controls.Add(this.keybind9Key2PictureBox);
+            this.mainPanel.Controls.Add(this.keybind9Key1PictureBox);
+            this.mainPanel.Controls.Add(this.keybind8Label);
+            this.mainPanel.Controls.Add(this.keybind8Key2PictureBox);
+            this.mainPanel.Controls.Add(this.keybind8Key1PictureBox);
+            this.mainPanel.Controls.Add(this.keybind7Key2PictureBox);
+            this.mainPanel.Controls.Add(this.keybind7Label);
+            this.mainPanel.Controls.Add(this.keybind7Key3PictureBox);
+            this.mainPanel.Controls.Add(this.keybind7Key1PictureBox);
+            this.mainPanel.Controls.Add(this.keybind6Key2PictureBox);
+            this.mainPanel.Controls.Add(this.keybind6Label);
+            this.mainPanel.Controls.Add(this.keybind6Key3PictureBox);
+            this.mainPanel.Controls.Add(this.keybind6Key1PictureBox);
+            this.mainPanel.Controls.Add(this.keybind5Label);
+            this.mainPanel.Controls.Add(this.keybind5Key2PictureBox);
+            this.mainPanel.Controls.Add(this.keybind5Key1PictureBox);
+            this.mainPanel.Controls.Add(this.keybind4Label);
+            this.mainPanel.Controls.Add(this.keybind4Key2PictureBox);
+            this.mainPanel.Controls.Add(this.keybind4Key1PictureBox);
+            this.mainPanel.Controls.Add(this.keybind3Label);
+            this.mainPanel.Controls.Add(this.keybind3Key2PictureBox);
+            this.mainPanel.Controls.Add(this.keybind3Key1PictureBox);
+            this.mainPanel.Controls.Add(this.keybind2Label);
+            this.mainPanel.Controls.Add(this.keybind2Key2PictureBox);
+            this.mainPanel.Controls.Add(this.keybind2Key1PictureBox);
+            this.mainPanel.Controls.Add(this.keybind1Label);
+            this.mainPanel.Controls.Add(this.keybind1Key2PictureBox);
+            this.mainPanel.Controls.Add(this.keybind1Key1PictureBox);
+            this.mainPanel.Controls.Add(this.titleLabel);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(305, 353);
+            this.mainPanel.TabIndex = 7;
             // 
-            // kryptonLabel10
+            // keybind9Label
             // 
-            this.kryptonLabel10.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.kryptonLabel10.Location = new System.Drawing.Point(91, 309);
-            this.kryptonLabel10.Name = "kryptonLabel10";
-            this.kryptonLabel10.Size = new System.Drawing.Size(189, 21);
-            this.kryptonLabel10.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel10.TabIndex = 46;
-            this.kryptonLabel10.Values.Text = "Append Next Line to Selection";
+            this.keybind9Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind9Label.Location = new System.Drawing.Point(91, 309);
+            this.keybind9Label.Name = "keybind9Label";
+            this.keybind9Label.Size = new System.Drawing.Size(189, 21);
+            this.keybind9Label.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybind9Label.TabIndex = 46;
+            this.keybind9Label.Values.Text = "Append Next Line to Selection";
             // 
-            // pictureBox19
+            // keybind9Key2PictureBox
             // 
-            this.pictureBox19.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox19.BackgroundImage = global::pie.Properties.Resources.cursor_down;
-            this.pictureBox19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox19.Location = new System.Drawing.Point(48, 304);
-            this.pictureBox19.Name = "pictureBox19";
-            this.pictureBox19.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox19.TabIndex = 45;
-            this.pictureBox19.TabStop = false;
+            this.keybind9Key2PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind9Key2PictureBox.BackgroundImage = global::pie.Properties.Resources.cursor_down;
+            this.keybind9Key2PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind9Key2PictureBox.Location = new System.Drawing.Point(48, 304);
+            this.keybind9Key2PictureBox.Name = "keybind9Key2PictureBox";
+            this.keybind9Key2PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind9Key2PictureBox.TabIndex = 45;
+            this.keybind9Key2PictureBox.TabStop = false;
             // 
-            // pictureBox20
+            // keybind9Key1PictureBox
             // 
-            this.pictureBox20.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox20.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox20.BackgroundImage")));
-            this.pictureBox20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox20.Location = new System.Drawing.Point(9, 304);
-            this.pictureBox20.Name = "pictureBox20";
-            this.pictureBox20.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox20.TabIndex = 44;
-            this.pictureBox20.TabStop = false;
+            this.keybind9Key1PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind9Key1PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind9Key1PictureBox.BackgroundImage")));
+            this.keybind9Key1PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind9Key1PictureBox.Location = new System.Drawing.Point(9, 304);
+            this.keybind9Key1PictureBox.Name = "keybind9Key1PictureBox";
+            this.keybind9Key1PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind9Key1PictureBox.TabIndex = 44;
+            this.keybind9Key1PictureBox.TabStop = false;
             // 
-            // kryptonLabel9
+            // keybind8Label
             // 
-            this.kryptonLabel9.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.kryptonLabel9.Location = new System.Drawing.Point(91, 277);
-            this.kryptonLabel9.Name = "kryptonLabel9";
-            this.kryptonLabel9.Size = new System.Drawing.Size(213, 21);
-            this.kryptonLabel9.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel9.TabIndex = 43;
-            this.kryptonLabel9.Values.Text = "Append Previous Line to Selection";
+            this.keybind8Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind8Label.Location = new System.Drawing.Point(91, 277);
+            this.keybind8Label.Name = "keybind8Label";
+            this.keybind8Label.Size = new System.Drawing.Size(213, 21);
+            this.keybind8Label.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybind8Label.TabIndex = 43;
+            this.keybind8Label.Values.Text = "Append Previous Line to Selection";
             // 
-            // pictureBox17
+            // keybind8Key2PictureBox
             // 
-            this.pictureBox17.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox17.BackgroundImage = global::pie.Properties.Resources.cursor_up;
-            this.pictureBox17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox17.Location = new System.Drawing.Point(48, 272);
-            this.pictureBox17.Name = "pictureBox17";
-            this.pictureBox17.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox17.TabIndex = 42;
-            this.pictureBox17.TabStop = false;
+            this.keybind8Key2PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind8Key2PictureBox.BackgroundImage = global::pie.Properties.Resources.cursor_up;
+            this.keybind8Key2PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind8Key2PictureBox.Location = new System.Drawing.Point(48, 272);
+            this.keybind8Key2PictureBox.Name = "keybind8Key2PictureBox";
+            this.keybind8Key2PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind8Key2PictureBox.TabIndex = 42;
+            this.keybind8Key2PictureBox.TabStop = false;
             // 
-            // pictureBox18
+            // keybind8Key1PictureBox
             // 
-            this.pictureBox18.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox18.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox18.BackgroundImage")));
-            this.pictureBox18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox18.Location = new System.Drawing.Point(9, 272);
-            this.pictureBox18.Name = "pictureBox18";
-            this.pictureBox18.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox18.TabIndex = 41;
-            this.pictureBox18.TabStop = false;
+            this.keybind8Key1PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind8Key1PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind8Key1PictureBox.BackgroundImage")));
+            this.keybind8Key1PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind8Key1PictureBox.Location = new System.Drawing.Point(9, 272);
+            this.keybind8Key1PictureBox.Name = "keybind8Key1PictureBox";
+            this.keybind8Key1PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind8Key1PictureBox.TabIndex = 41;
+            this.keybind8Key1PictureBox.TabStop = false;
             // 
-            // pictureBox14
+            // keybind7Key2PictureBox
             // 
-            this.pictureBox14.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox14.BackgroundImage")));
-            this.pictureBox14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox14.Location = new System.Drawing.Point(53, 240);
-            this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox14.TabIndex = 40;
-            this.pictureBox14.TabStop = false;
+            this.keybind7Key2PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind7Key2PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind7Key2PictureBox.BackgroundImage")));
+            this.keybind7Key2PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind7Key2PictureBox.Location = new System.Drawing.Point(53, 240);
+            this.keybind7Key2PictureBox.Name = "keybind7Key2PictureBox";
+            this.keybind7Key2PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind7Key2PictureBox.TabIndex = 40;
+            this.keybind7Key2PictureBox.TabStop = false;
             // 
-            // kryptonLabel4
+            // keybind7Label
             // 
-            this.kryptonLabel4.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.kryptonLabel4.Location = new System.Drawing.Point(132, 245);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(114, 21);
-            this.kryptonLabel4.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel4.TabIndex = 39;
-            this.kryptonLabel4.Values.Text = "Jump to Next Tab";
+            this.keybind7Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind7Label.Location = new System.Drawing.Point(132, 245);
+            this.keybind7Label.Name = "keybind7Label";
+            this.keybind7Label.Size = new System.Drawing.Size(114, 21);
+            this.keybind7Label.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybind7Label.TabIndex = 39;
+            this.keybind7Label.Values.Text = "Jump to Next Tab";
             // 
-            // pictureBox15
+            // keybind7Key3PictureBox
             // 
-            this.pictureBox15.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox15.BackgroundImage")));
-            this.pictureBox15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox15.Location = new System.Drawing.Point(92, 240);
-            this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox15.TabIndex = 38;
-            this.pictureBox15.TabStop = false;
+            this.keybind7Key3PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind7Key3PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind7Key3PictureBox.BackgroundImage")));
+            this.keybind7Key3PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind7Key3PictureBox.Location = new System.Drawing.Point(92, 240);
+            this.keybind7Key3PictureBox.Name = "keybind7Key3PictureBox";
+            this.keybind7Key3PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind7Key3PictureBox.TabIndex = 38;
+            this.keybind7Key3PictureBox.TabStop = false;
             // 
-            // pictureBox16
+            // keybind7Key1PictureBox
             // 
-            this.pictureBox16.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox16.BackgroundImage")));
-            this.pictureBox16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox16.Location = new System.Drawing.Point(9, 240);
-            this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox16.TabIndex = 37;
-            this.pictureBox16.TabStop = false;
+            this.keybind7Key1PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind7Key1PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind7Key1PictureBox.BackgroundImage")));
+            this.keybind7Key1PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind7Key1PictureBox.Location = new System.Drawing.Point(9, 240);
+            this.keybind7Key1PictureBox.Name = "keybind7Key1PictureBox";
+            this.keybind7Key1PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind7Key1PictureBox.TabIndex = 37;
+            this.keybind7Key1PictureBox.TabStop = false;
             // 
-            // pictureBox13
+            // keybind6Key2PictureBox
             // 
-            this.pictureBox13.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox13.BackgroundImage")));
-            this.pictureBox13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox13.Location = new System.Drawing.Point(53, 208);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox13.TabIndex = 36;
-            this.pictureBox13.TabStop = false;
+            this.keybind6Key2PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind6Key2PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind6Key2PictureBox.BackgroundImage")));
+            this.keybind6Key2PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind6Key2PictureBox.Location = new System.Drawing.Point(53, 208);
+            this.keybind6Key2PictureBox.Name = "keybind6Key2PictureBox";
+            this.keybind6Key2PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind6Key2PictureBox.TabIndex = 36;
+            this.keybind6Key2PictureBox.TabStop = false;
             // 
-            // kryptonLabel2
+            // keybind6Label
             // 
-            this.kryptonLabel2.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.kryptonLabel2.Location = new System.Drawing.Point(132, 213);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(139, 21);
-            this.kryptonLabel2.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel2.TabIndex = 35;
-            this.kryptonLabel2.Values.Text = "Jump to Previous Tab";
+            this.keybind6Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind6Label.Location = new System.Drawing.Point(132, 213);
+            this.keybind6Label.Name = "keybind6Label";
+            this.keybind6Label.Size = new System.Drawing.Size(139, 21);
+            this.keybind6Label.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybind6Label.TabIndex = 35;
+            this.keybind6Label.Values.Text = "Jump to Previous Tab";
             // 
-            // pictureBox11
+            // keybind6Key3PictureBox
             // 
-            this.pictureBox11.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox11.BackgroundImage")));
-            this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox11.Location = new System.Drawing.Point(92, 208);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox11.TabIndex = 34;
-            this.pictureBox11.TabStop = false;
+            this.keybind6Key3PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind6Key3PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind6Key3PictureBox.BackgroundImage")));
+            this.keybind6Key3PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind6Key3PictureBox.Location = new System.Drawing.Point(92, 208);
+            this.keybind6Key3PictureBox.Name = "keybind6Key3PictureBox";
+            this.keybind6Key3PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind6Key3PictureBox.TabIndex = 34;
+            this.keybind6Key3PictureBox.TabStop = false;
             // 
-            // pictureBox12
+            // keybind6Key1PictureBox
             // 
-            this.pictureBox12.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox12.BackgroundImage")));
-            this.pictureBox12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox12.Location = new System.Drawing.Point(9, 208);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox12.TabIndex = 33;
-            this.pictureBox12.TabStop = false;
+            this.keybind6Key1PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind6Key1PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind6Key1PictureBox.BackgroundImage")));
+            this.keybind6Key1PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind6Key1PictureBox.Location = new System.Drawing.Point(9, 208);
+            this.keybind6Key1PictureBox.Name = "keybind6Key1PictureBox";
+            this.keybind6Key1PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind6Key1PictureBox.TabIndex = 33;
+            this.keybind6Key1PictureBox.TabStop = false;
             // 
-            // kryptonLabel8
+            // keybind5Label
             // 
-            this.kryptonLabel8.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.kryptonLabel8.Location = new System.Drawing.Point(91, 181);
-            this.kryptonLabel8.Name = "kryptonLabel8";
-            this.kryptonLabel8.Size = new System.Drawing.Size(111, 21);
-            this.kryptonLabel8.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel8.TabIndex = 32;
-            this.kryptonLabel8.Values.Text = "Paste Entire Line";
+            this.keybind5Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind5Label.Location = new System.Drawing.Point(91, 181);
+            this.keybind5Label.Name = "keybind5Label";
+            this.keybind5Label.Size = new System.Drawing.Size(111, 21);
+            this.keybind5Label.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybind5Label.TabIndex = 32;
+            this.keybind5Label.Values.Text = "Paste Entire Line";
             // 
-            // pictureBox9
+            // keybind5Key2PictureBox
             // 
-            this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox9.BackgroundImage = global::pie.Properties.Resources.v;
-            this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox9.Location = new System.Drawing.Point(48, 176);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox9.TabIndex = 31;
-            this.pictureBox9.TabStop = false;
+            this.keybind5Key2PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind5Key2PictureBox.BackgroundImage = global::pie.Properties.Resources.v;
+            this.keybind5Key2PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind5Key2PictureBox.Location = new System.Drawing.Point(48, 176);
+            this.keybind5Key2PictureBox.Name = "keybind5Key2PictureBox";
+            this.keybind5Key2PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind5Key2PictureBox.TabIndex = 31;
+            this.keybind5Key2PictureBox.TabStop = false;
             // 
-            // pictureBox10
+            // keybind5Key1PictureBox
             // 
-            this.pictureBox10.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox10.BackgroundImage")));
-            this.pictureBox10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox10.Location = new System.Drawing.Point(9, 176);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox10.TabIndex = 30;
-            this.pictureBox10.TabStop = false;
+            this.keybind5Key1PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind5Key1PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind5Key1PictureBox.BackgroundImage")));
+            this.keybind5Key1PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind5Key1PictureBox.Location = new System.Drawing.Point(9, 176);
+            this.keybind5Key1PictureBox.Name = "keybind5Key1PictureBox";
+            this.keybind5Key1PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind5Key1PictureBox.TabIndex = 30;
+            this.keybind5Key1PictureBox.TabStop = false;
             // 
-            // kryptonLabel7
+            // keybind4Label
             // 
-            this.kryptonLabel7.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.kryptonLabel7.Location = new System.Drawing.Point(91, 149);
-            this.kryptonLabel7.Name = "kryptonLabel7";
-            this.kryptonLabel7.Size = new System.Drawing.Size(97, 21);
-            this.kryptonLabel7.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel7.TabIndex = 29;
-            this.kryptonLabel7.Values.Text = "Cut Entire Line";
+            this.keybind4Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind4Label.Location = new System.Drawing.Point(91, 149);
+            this.keybind4Label.Name = "keybind4Label";
+            this.keybind4Label.Size = new System.Drawing.Size(97, 21);
+            this.keybind4Label.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybind4Label.TabIndex = 29;
+            this.keybind4Label.Values.Text = "Cut Entire Line";
             // 
-            // pictureBox7
+            // keybind4Key2PictureBox
             // 
-            this.pictureBox7.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox7.BackgroundImage = global::pie.Properties.Resources.x;
-            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox7.Location = new System.Drawing.Point(48, 144);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox7.TabIndex = 28;
-            this.pictureBox7.TabStop = false;
+            this.keybind4Key2PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind4Key2PictureBox.BackgroundImage = global::pie.Properties.Resources.x;
+            this.keybind4Key2PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind4Key2PictureBox.Location = new System.Drawing.Point(48, 144);
+            this.keybind4Key2PictureBox.Name = "keybind4Key2PictureBox";
+            this.keybind4Key2PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind4Key2PictureBox.TabIndex = 28;
+            this.keybind4Key2PictureBox.TabStop = false;
             // 
-            // pictureBox8
+            // keybind4Key1PictureBox
             // 
-            this.pictureBox8.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox8.BackgroundImage")));
-            this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox8.Location = new System.Drawing.Point(9, 144);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox8.TabIndex = 27;
-            this.pictureBox8.TabStop = false;
+            this.keybind4Key1PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind4Key1PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind4Key1PictureBox.BackgroundImage")));
+            this.keybind4Key1PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind4Key1PictureBox.Location = new System.Drawing.Point(9, 144);
+            this.keybind4Key1PictureBox.Name = "keybind4Key1PictureBox";
+            this.keybind4Key1PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind4Key1PictureBox.TabIndex = 27;
+            this.keybind4Key1PictureBox.TabStop = false;
             // 
-            // kryptonLabel6
+            // keybind3Label
             // 
-            this.kryptonLabel6.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.kryptonLabel6.Location = new System.Drawing.Point(91, 117);
-            this.kryptonLabel6.Name = "kryptonLabel6";
-            this.kryptonLabel6.Size = new System.Drawing.Size(168, 21);
-            this.kryptonLabel6.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel6.TabIndex = 26;
-            this.kryptonLabel6.Values.Text = "Toggle Directory Navigator";
+            this.keybind3Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind3Label.Location = new System.Drawing.Point(91, 117);
+            this.keybind3Label.Name = "keybind3Label";
+            this.keybind3Label.Size = new System.Drawing.Size(168, 21);
+            this.keybind3Label.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybind3Label.TabIndex = 26;
+            this.keybind3Label.Values.Text = "Toggle Directory Navigator";
             // 
-            // pictureBox5
+            // keybind3Key2PictureBox
             // 
-            this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox5.BackgroundImage = global::pie.Properties.Resources.g;
-            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox5.Location = new System.Drawing.Point(48, 112);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox5.TabIndex = 25;
-            this.pictureBox5.TabStop = false;
+            this.keybind3Key2PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind3Key2PictureBox.BackgroundImage = global::pie.Properties.Resources.g;
+            this.keybind3Key2PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind3Key2PictureBox.Location = new System.Drawing.Point(48, 112);
+            this.keybind3Key2PictureBox.Name = "keybind3Key2PictureBox";
+            this.keybind3Key2PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind3Key2PictureBox.TabIndex = 25;
+            this.keybind3Key2PictureBox.TabStop = false;
             // 
-            // pictureBox6
+            // keybind3Key1PictureBox
             // 
-            this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.BackgroundImage")));
-            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox6.Location = new System.Drawing.Point(9, 112);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox6.TabIndex = 24;
-            this.pictureBox6.TabStop = false;
+            this.keybind3Key1PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind3Key1PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind3Key1PictureBox.BackgroundImage")));
+            this.keybind3Key1PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind3Key1PictureBox.Location = new System.Drawing.Point(9, 112);
+            this.keybind3Key1PictureBox.Name = "keybind3Key1PictureBox";
+            this.keybind3Key1PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind3Key1PictureBox.TabIndex = 24;
+            this.keybind3Key1PictureBox.TabStop = false;
             // 
-            // kryptonLabel1
+            // keybind2Label
             // 
-            this.kryptonLabel1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.kryptonLabel1.Location = new System.Drawing.Point(91, 85);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(132, 21);
-            this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel1.TabIndex = 23;
-            this.kryptonLabel1.Values.Text = "Toggle Terminal Tab";
+            this.keybind2Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind2Label.Location = new System.Drawing.Point(91, 85);
+            this.keybind2Label.Name = "keybind2Label";
+            this.keybind2Label.Size = new System.Drawing.Size(132, 21);
+            this.keybind2Label.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybind2Label.TabIndex = 23;
+            this.keybind2Label.Values.Text = "Toggle Terminal Tab";
             // 
-            // pictureBox3
+            // keybind2Key2PictureBox
             // 
-            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.BackgroundImage = global::pie.Properties.Resources.b;
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox3.Location = new System.Drawing.Point(48, 80);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox3.TabIndex = 22;
-            this.pictureBox3.TabStop = false;
+            this.keybind2Key2PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind2Key2PictureBox.BackgroundImage = global::pie.Properties.Resources.b;
+            this.keybind2Key2PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind2Key2PictureBox.Location = new System.Drawing.Point(48, 80);
+            this.keybind2Key2PictureBox.Name = "keybind2Key2PictureBox";
+            this.keybind2Key2PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind2Key2PictureBox.TabIndex = 22;
+            this.keybind2Key2PictureBox.TabStop = false;
             // 
-            // pictureBox4
+            // keybind2Key1PictureBox
             // 
-            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox4.Location = new System.Drawing.Point(9, 80);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox4.TabIndex = 21;
-            this.pictureBox4.TabStop = false;
+            this.keybind2Key1PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind2Key1PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind2Key1PictureBox.BackgroundImage")));
+            this.keybind2Key1PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind2Key1PictureBox.Location = new System.Drawing.Point(9, 80);
+            this.keybind2Key1PictureBox.Name = "keybind2Key1PictureBox";
+            this.keybind2Key1PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind2Key1PictureBox.TabIndex = 21;
+            this.keybind2Key1PictureBox.TabStop = false;
             // 
-            // kryptonLabel5
+            // keybind1Label
             // 
-            this.kryptonLabel5.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
-            this.kryptonLabel5.Location = new System.Drawing.Point(91, 53);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Size = new System.Drawing.Size(158, 21);
-            this.kryptonLabel5.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel5.TabIndex = 20;
-            this.kryptonLabel5.Values.Text = "Toggle Find and Replace\r\n";
+            this.keybind1Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind1Label.Location = new System.Drawing.Point(91, 53);
+            this.keybind1Label.Name = "keybind1Label";
+            this.keybind1Label.Size = new System.Drawing.Size(158, 21);
+            this.keybind1Label.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybind1Label.TabIndex = 20;
+            this.keybind1Label.Values.Text = "Toggle Find and Replace\r\n";
             // 
-            // pictureBox2
+            // keybind1Key2PictureBox
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.BackgroundImage = global::pie.Properties.Resources.f;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Location = new System.Drawing.Point(48, 48);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
+            this.keybind1Key2PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind1Key2PictureBox.BackgroundImage = global::pie.Properties.Resources.f;
+            this.keybind1Key2PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind1Key2PictureBox.Location = new System.Drawing.Point(48, 48);
+            this.keybind1Key2PictureBox.Name = "keybind1Key2PictureBox";
+            this.keybind1Key2PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind1Key2PictureBox.TabIndex = 9;
+            this.keybind1Key2PictureBox.TabStop = false;
             // 
-            // pictureBox1
+            // keybind1Key1PictureBox
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(9, 48);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(41, 32);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.keybind1Key1PictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.keybind1Key1PictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("keybind1Key1PictureBox.BackgroundImage")));
+            this.keybind1Key1PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.keybind1Key1PictureBox.Location = new System.Drawing.Point(9, 48);
+            this.keybind1Key1PictureBox.Name = "keybind1Key1PictureBox";
+            this.keybind1Key1PictureBox.Size = new System.Drawing.Size(41, 32);
+            this.keybind1Key1PictureBox.TabIndex = 7;
+            this.keybind1Key1PictureBox.TabStop = false;
             // 
-            // kryptonLabel3
+            // titleLabel
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(2, 10);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(103, 29);
-            this.kryptonLabel3.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel3.TabIndex = 5;
-            this.kryptonLabel3.Values.Text = "Keybinds";
+            this.titleLabel.Location = new System.Drawing.Point(2, 10);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(103, 29);
+            this.titleLabel.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.TabIndex = 5;
+            this.titleLabel.Values.Text = "Keybinds";
             // 
             // CheatsheetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(305, 353);
-            this.Controls.Add(this.kryptonPanel1);
+            this.Controls.Add(this.mainPanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -456,65 +456,65 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cheatsheet";
             this.Load += new System.EventHandler(this.CheatsheetForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
+            this.mainPanel.ResumeLayout(false);
+            this.mainPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind9Key2PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind9Key1PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind8Key2PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind8Key1PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind7Key2PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind7Key3PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind7Key1PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind6Key2PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind6Key3PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind6Key1PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind5Key2PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind5Key1PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind4Key2PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind4Key1PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind3Key2PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind3Key1PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind2Key2PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind2Key1PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind1Key2PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.keybind1Key1PictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel8;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel7;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel6;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private System.Windows.Forms.PictureBox pictureBox12;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
-        private System.Windows.Forms.PictureBox pictureBox14;
-        private System.Windows.Forms.PictureBox pictureBox15;
-        private System.Windows.Forms.PictureBox pictureBox16;
-        private System.Windows.Forms.PictureBox pictureBox13;
-        private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel9;
-        private System.Windows.Forms.PictureBox pictureBox17;
-        private System.Windows.Forms.PictureBox pictureBox18;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel10;
-        private System.Windows.Forms.PictureBox pictureBox19;
-        private System.Windows.Forms.PictureBox pictureBox20;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel titleLabel;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind1Label;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind5Label;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind4Label;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind3Label;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind2Label;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind6Label;
+        private System.Windows.Forms.PictureBox keybind6Key1PictureBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind7Label;
+        private System.Windows.Forms.PictureBox keybind7Key2PictureBox;
+        private System.Windows.Forms.PictureBox keybind7Key3PictureBox;
+        private System.Windows.Forms.PictureBox keybind7Key1PictureBox;
+        private System.Windows.Forms.PictureBox keybind6Key2PictureBox;
+        private System.Windows.Forms.PictureBox keybind6Key3PictureBox;
+        private System.Windows.Forms.PictureBox keybind5Key2PictureBox;
+        private System.Windows.Forms.PictureBox keybind5Key1PictureBox;
+        private System.Windows.Forms.PictureBox keybind4Key2PictureBox;
+        private System.Windows.Forms.PictureBox keybind4Key1PictureBox;
+        private System.Windows.Forms.PictureBox keybind3Key2PictureBox;
+        private System.Windows.Forms.PictureBox keybind3Key1PictureBox;
+        private System.Windows.Forms.PictureBox keybind2Key2PictureBox;
+        private System.Windows.Forms.PictureBox keybind2Key1PictureBox;
+        private System.Windows.Forms.PictureBox keybind1Key2PictureBox;
+        private System.Windows.Forms.PictureBox keybind1Key1PictureBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind8Label;
+        private System.Windows.Forms.PictureBox keybind8Key2PictureBox;
+        private System.Windows.Forms.PictureBox keybind8Key1PictureBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind9Label;
+        private System.Windows.Forms.PictureBox keybind9Key2PictureBox;
+        private System.Windows.Forms.PictureBox keybind9Key1PictureBox;
     }
 }

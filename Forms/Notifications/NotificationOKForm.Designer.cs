@@ -29,72 +29,72 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationOKForm));
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonRichTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.contentRichTextBox = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
+            this.okButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // kryptonPanel1
+            // mainPanel
             // 
-            this.kryptonPanel1.Controls.Add(this.kryptonRichTextBox1);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(366, 100);
-            this.kryptonPanel1.TabIndex = 7;
+            this.mainPanel.Controls.Add(this.contentRichTextBox);
+            this.mainPanel.Controls.Add(this.okButton);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(366, 100);
+            this.mainPanel.TabIndex = 7;
             // 
-            // kryptonRichTextBox1
+            // contentRichTextBox
             // 
-            this.kryptonRichTextBox1.Location = new System.Drawing.Point(3, 8);
-            this.kryptonRichTextBox1.Name = "kryptonRichTextBox1";
-            this.kryptonRichTextBox1.ReadOnly = true;
-            this.kryptonRichTextBox1.Size = new System.Drawing.Size(360, 54);
-            this.kryptonRichTextBox1.StateCommon.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.False;
-            this.kryptonRichTextBox1.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.contentRichTextBox.Location = new System.Drawing.Point(3, 8);
+            this.contentRichTextBox.Name = "contentRichTextBox";
+            this.contentRichTextBox.ReadOnly = true;
+            this.contentRichTextBox.Size = new System.Drawing.Size(360, 54);
+            this.contentRichTextBox.StateCommon.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.False;
+            this.contentRichTextBox.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonRichTextBox1.TabIndex = 5;
-            this.kryptonRichTextBox1.Text = "";
+            this.contentRichTextBox.TabIndex = 5;
+            this.contentRichTextBox.Text = "";
             // 
-            // kryptonButton1
+            // okButton
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(295, 68);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.okButton.Location = new System.Drawing.Point(295, 68);
+            this.okButton.Name = "okButton";
+            this.okButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton1.Size = new System.Drawing.Size(63, 25);
-            this.kryptonButton1.TabIndex = 4;
-            this.kryptonButton1.Values.Text = "OK";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            this.okButton.Size = new System.Drawing.Size(63, 25);
+            this.okButton.TabIndex = 4;
+            this.okButton.Values.Text = "OK";
+            this.okButton.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
-            // NotificationOK
+            // NotificationOKForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 100);
-            this.Controls.Add(this.kryptonPanel1);
+            this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "NotificationOK";
+            this.Name = "NotificationOKForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Notification";
             this.Load += new System.EventHandler(this.CustomMessageBox_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
+            this.mainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox kryptonRichTextBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton okButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox contentRichTextBox;
     }
 }

@@ -35,12 +35,12 @@
             this.commandLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.commandTipLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.fileExtensionsTipLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.fileExtensionsRichTextBox = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
             this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // displayNameTextBox
@@ -98,22 +98,22 @@
             this.commandTipLabel.TabIndex = 5;
             this.commandTipLabel.Values.Text = "$FILE can be used as a placeholder for the currently opened file.";
             // 
-            // kryptonPanel1
+            // mainPanel
             // 
-            this.kryptonPanel1.Controls.Add(this.fileExtensionsTipLabel);
-            this.kryptonPanel1.Controls.Add(this.fileExtensionsRichTextBox);
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel5);
-            this.kryptonPanel1.Controls.Add(this.commandTextBox);
-            this.kryptonPanel1.Controls.Add(this.commandTipLabel);
-            this.kryptonPanel1.Controls.Add(this.displayNameTextBox);
-            this.kryptonPanel1.Controls.Add(this.saveButton);
-            this.kryptonPanel1.Controls.Add(this.displayNameLabel);
-            this.kryptonPanel1.Controls.Add(this.commandLabel);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(411, 311);
-            this.kryptonPanel1.TabIndex = 6;
+            this.mainPanel.Controls.Add(this.fileExtensionsTipLabel);
+            this.mainPanel.Controls.Add(this.fileExtensionsRichTextBox);
+            this.mainPanel.Controls.Add(this.kryptonLabel5);
+            this.mainPanel.Controls.Add(this.commandTextBox);
+            this.mainPanel.Controls.Add(this.commandTipLabel);
+            this.mainPanel.Controls.Add(this.displayNameTextBox);
+            this.mainPanel.Controls.Add(this.saveButton);
+            this.mainPanel.Controls.Add(this.displayNameLabel);
+            this.mainPanel.Controls.Add(this.commandLabel);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(411, 311);
+            this.mainPanel.TabIndex = 6;
             // 
             // fileExtensionsTipLabel
             // 
@@ -146,7 +146,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(411, 311);
-            this.Controls.Add(this.kryptonPanel1);
+            this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -156,9 +156,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add / Edit Build Command";
             this.Load += new System.EventHandler(this.AddBuildCommandForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
+            this.mainPanel.ResumeLayout(false);
+            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -171,7 +171,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel commandLabel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel commandTipLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
         private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox fileExtensionsRichTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel fileExtensionsTipLabel;

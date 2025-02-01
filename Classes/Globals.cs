@@ -33,31 +33,10 @@ namespace pie
 {
     public class Globals
     {
-        public static int lastSelectedTabIndex;
-        public static int maxLineNumberCharLength;
-        public static int lastSelectedIndex;
-        public static bool canUpdateUI;
-        public static bool firstBrowserTab;
-        public static bool deletesLastTab;
-        public static bool deletesTab;
-
-        // Find & Replace Panel
-        public static bool mouseDown;
-        public static Point lastLocation;
-
         // Git
-        public static Branch selectedBranch;
-        public static bool gitTabOpened;
-        public static int selectedBranchIndex;
-        public static bool doNotTriggerBranchChangeEvent;
-        public static bool doNotShowBranchChangeNotification;
-        public static bool showGitTabPressed;
+
 
         // Scintilla preferences
-        public static List<LanguageDefinition> languageDefinitions;
-        public static List<LanguageMapping> languageMappings;
 
-        // Format
-        public static List<Formatter> formatters;
     }
 }

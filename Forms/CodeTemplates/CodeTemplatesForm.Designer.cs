@@ -32,16 +32,16 @@
             this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.textAreaPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.placeholderLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.indexButton0 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.indexButton9 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.indexButton8 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.indexButton7 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.indexButton6 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.indexButton5 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.indexButton4 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.indexButton3 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.indexButton2 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.indexButton1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.template0CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.template9CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.template8CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.template7CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.template6CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.template5CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.template4CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.template3CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.template2CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.template1CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.tipLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
@@ -53,16 +53,16 @@
             // mainPanel
             // 
             this.mainPanel.Controls.Add(this.textAreaPanel);
-            this.mainPanel.Controls.Add(this.indexButton0);
-            this.mainPanel.Controls.Add(this.indexButton9);
-            this.mainPanel.Controls.Add(this.indexButton8);
-            this.mainPanel.Controls.Add(this.indexButton7);
-            this.mainPanel.Controls.Add(this.indexButton6);
-            this.mainPanel.Controls.Add(this.indexButton5);
-            this.mainPanel.Controls.Add(this.indexButton4);
-            this.mainPanel.Controls.Add(this.indexButton3);
-            this.mainPanel.Controls.Add(this.indexButton2);
-            this.mainPanel.Controls.Add(this.indexButton1);
+            this.mainPanel.Controls.Add(this.template0CheckButton);
+            this.mainPanel.Controls.Add(this.template9CheckButton);
+            this.mainPanel.Controls.Add(this.template8CheckButton);
+            this.mainPanel.Controls.Add(this.template7CheckButton);
+            this.mainPanel.Controls.Add(this.template6CheckButton);
+            this.mainPanel.Controls.Add(this.template5CheckButton);
+            this.mainPanel.Controls.Add(this.template4CheckButton);
+            this.mainPanel.Controls.Add(this.template3CheckButton);
+            this.mainPanel.Controls.Add(this.template2CheckButton);
+            this.mainPanel.Controls.Add(this.template1CheckButton);
             this.mainPanel.Controls.Add(this.tipLabel);
             this.mainPanel.Controls.Add(this.saveButton);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -87,85 +87,85 @@
             this.placeholderLabel.TabIndex = 0;
             this.placeholderLabel.Values.Text = "Select a hotkey to begin with...";
             // 
-            // indexButton0
+            // template0CheckButton
             // 
-            this.indexButton0.Location = new System.Drawing.Point(346, 12);
-            this.indexButton0.Name = "indexButton0";
-            this.indexButton0.Size = new System.Drawing.Size(35, 25);
-            this.indexButton0.TabIndex = 27;
-            this.indexButton0.Values.Text = "0";
+            this.template0CheckButton.Location = new System.Drawing.Point(346, 12);
+            this.template0CheckButton.Name = "template0CheckButton";
+            this.template0CheckButton.Size = new System.Drawing.Size(35, 25);
+            this.template0CheckButton.TabIndex = 27;
+            this.template0CheckButton.Values.Text = "0";
             // 
-            // indexButton9
+            // template9CheckButton
             // 
-            this.indexButton9.Location = new System.Drawing.Point(311, 12);
-            this.indexButton9.Name = "indexButton9";
-            this.indexButton9.Size = new System.Drawing.Size(35, 25);
-            this.indexButton9.TabIndex = 26;
-            this.indexButton9.Values.Text = "9";
+            this.template9CheckButton.Location = new System.Drawing.Point(311, 12);
+            this.template9CheckButton.Name = "template9CheckButton";
+            this.template9CheckButton.Size = new System.Drawing.Size(35, 25);
+            this.template9CheckButton.TabIndex = 26;
+            this.template9CheckButton.Values.Text = "9";
             // 
-            // indexButton8
+            // template8CheckButton
             // 
-            this.indexButton8.Location = new System.Drawing.Point(276, 12);
-            this.indexButton8.Name = "indexButton8";
-            this.indexButton8.Size = new System.Drawing.Size(35, 25);
-            this.indexButton8.TabIndex = 25;
-            this.indexButton8.Values.Text = "8";
+            this.template8CheckButton.Location = new System.Drawing.Point(276, 12);
+            this.template8CheckButton.Name = "template8CheckButton";
+            this.template8CheckButton.Size = new System.Drawing.Size(35, 25);
+            this.template8CheckButton.TabIndex = 25;
+            this.template8CheckButton.Values.Text = "8";
             // 
-            // indexButton7
+            // template7CheckButton
             // 
-            this.indexButton7.Location = new System.Drawing.Point(241, 12);
-            this.indexButton7.Name = "indexButton7";
-            this.indexButton7.Size = new System.Drawing.Size(35, 25);
-            this.indexButton7.TabIndex = 24;
-            this.indexButton7.Values.Text = "7";
+            this.template7CheckButton.Location = new System.Drawing.Point(241, 12);
+            this.template7CheckButton.Name = "template7CheckButton";
+            this.template7CheckButton.Size = new System.Drawing.Size(35, 25);
+            this.template7CheckButton.TabIndex = 24;
+            this.template7CheckButton.Values.Text = "7";
             // 
-            // indexButton6
+            // template6CheckButton
             // 
-            this.indexButton6.Location = new System.Drawing.Point(206, 12);
-            this.indexButton6.Name = "indexButton6";
-            this.indexButton6.Size = new System.Drawing.Size(35, 25);
-            this.indexButton6.TabIndex = 23;
-            this.indexButton6.Values.Text = "6";
+            this.template6CheckButton.Location = new System.Drawing.Point(206, 12);
+            this.template6CheckButton.Name = "template6CheckButton";
+            this.template6CheckButton.Size = new System.Drawing.Size(35, 25);
+            this.template6CheckButton.TabIndex = 23;
+            this.template6CheckButton.Values.Text = "6";
             // 
-            // indexButton5
+            // template5CheckButton
             // 
-            this.indexButton5.Location = new System.Drawing.Point(171, 12);
-            this.indexButton5.Name = "indexButton5";
-            this.indexButton5.Size = new System.Drawing.Size(35, 25);
-            this.indexButton5.TabIndex = 22;
-            this.indexButton5.Values.Text = "5";
+            this.template5CheckButton.Location = new System.Drawing.Point(171, 12);
+            this.template5CheckButton.Name = "template5CheckButton";
+            this.template5CheckButton.Size = new System.Drawing.Size(35, 25);
+            this.template5CheckButton.TabIndex = 22;
+            this.template5CheckButton.Values.Text = "5";
             // 
-            // indexButton4
+            // template4CheckButton
             // 
-            this.indexButton4.Location = new System.Drawing.Point(136, 12);
-            this.indexButton4.Name = "indexButton4";
-            this.indexButton4.Size = new System.Drawing.Size(35, 25);
-            this.indexButton4.TabIndex = 21;
-            this.indexButton4.Values.Text = "4";
+            this.template4CheckButton.Location = new System.Drawing.Point(136, 12);
+            this.template4CheckButton.Name = "template4CheckButton";
+            this.template4CheckButton.Size = new System.Drawing.Size(35, 25);
+            this.template4CheckButton.TabIndex = 21;
+            this.template4CheckButton.Values.Text = "4";
             // 
-            // indexButton3
+            // template3CheckButton
             // 
-            this.indexButton3.Location = new System.Drawing.Point(101, 12);
-            this.indexButton3.Name = "indexButton3";
-            this.indexButton3.Size = new System.Drawing.Size(35, 25);
-            this.indexButton3.TabIndex = 20;
-            this.indexButton3.Values.Text = "3";
+            this.template3CheckButton.Location = new System.Drawing.Point(101, 12);
+            this.template3CheckButton.Name = "template3CheckButton";
+            this.template3CheckButton.Size = new System.Drawing.Size(35, 25);
+            this.template3CheckButton.TabIndex = 20;
+            this.template3CheckButton.Values.Text = "3";
             // 
-            // indexButton2
+            // template2CheckButton
             // 
-            this.indexButton2.Location = new System.Drawing.Point(66, 12);
-            this.indexButton2.Name = "indexButton2";
-            this.indexButton2.Size = new System.Drawing.Size(35, 25);
-            this.indexButton2.TabIndex = 19;
-            this.indexButton2.Values.Text = "2";
+            this.template2CheckButton.Location = new System.Drawing.Point(66, 12);
+            this.template2CheckButton.Name = "template2CheckButton";
+            this.template2CheckButton.Size = new System.Drawing.Size(35, 25);
+            this.template2CheckButton.TabIndex = 19;
+            this.template2CheckButton.Values.Text = "2";
             // 
-            // indexButton1
+            // template1CheckButton
             // 
-            this.indexButton1.Location = new System.Drawing.Point(31, 12);
-            this.indexButton1.Name = "indexButton1";
-            this.indexButton1.Size = new System.Drawing.Size(35, 25);
-            this.indexButton1.TabIndex = 18;
-            this.indexButton1.Values.Text = "1";
+            this.template1CheckButton.Location = new System.Drawing.Point(31, 12);
+            this.template1CheckButton.Name = "template1CheckButton";
+            this.template1CheckButton.Size = new System.Drawing.Size(35, 25);
+            this.template1CheckButton.TabIndex = 18;
+            this.template1CheckButton.Values.Text = "1";
             // 
             // tipLabel
             // 
@@ -215,18 +215,18 @@
         #endregion
 
         private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton indexButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template1CheckButton;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel tipLabel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton indexButton8;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton indexButton7;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton indexButton6;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton indexButton5;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton indexButton4;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton indexButton3;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton indexButton2;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton indexButton0;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton indexButton9;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template8CheckButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template7CheckButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template6CheckButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template5CheckButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template4CheckButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template3CheckButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template2CheckButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template0CheckButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template9CheckButton;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel textAreaPanel;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel placeholderLabel;
     }

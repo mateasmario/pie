@@ -29,55 +29,55 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewThemeForm));
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.themeNameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.themeNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.createButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // kryptonPanel1
+            // mainPanel
             // 
-            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
-            this.kryptonPanel1.Controls.Add(this.kryptonTextBox1);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(474, 94);
-            this.kryptonPanel1.TabIndex = 4;
+            this.mainPanel.Controls.Add(this.themeNameLabel);
+            this.mainPanel.Controls.Add(this.themeNameTextBox);
+            this.mainPanel.Controls.Add(this.createButton);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(474, 94);
+            this.mainPanel.TabIndex = 4;
             // 
-            // kryptonLabel1
+            // themeNameLabel
             // 
-            this.kryptonLabel1.Location = new System.Drawing.Point(9, 5);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(84, 20);
-            this.kryptonLabel1.TabIndex = 4;
-            this.kryptonLabel1.Values.Text = "Theme Name";
+            this.themeNameLabel.Location = new System.Drawing.Point(9, 5);
+            this.themeNameLabel.Name = "themeNameLabel";
+            this.themeNameLabel.Size = new System.Drawing.Size(84, 20);
+            this.themeNameLabel.TabIndex = 4;
+            this.themeNameLabel.Values.Text = "Theme Name";
             // 
-            // kryptonTextBox1
+            // themeNameTextBox
             // 
-            this.kryptonTextBox1.Location = new System.Drawing.Point(12, 25);
-            this.kryptonTextBox1.Name = "kryptonTextBox1";
-            this.kryptonTextBox1.Size = new System.Drawing.Size(449, 23);
-            this.kryptonTextBox1.TabIndex = 2;
+            this.themeNameTextBox.Location = new System.Drawing.Point(12, 25);
+            this.themeNameTextBox.Name = "themeNameTextBox";
+            this.themeNameTextBox.Size = new System.Drawing.Size(449, 23);
+            this.themeNameTextBox.TabIndex = 2;
             // 
-            // kryptonButton1
+            // createButton
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(385, 59);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(76, 25);
-            this.kryptonButton1.TabIndex = 1;
-            this.kryptonButton1.Values.Text = "Create";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            this.createButton.Location = new System.Drawing.Point(385, 59);
+            this.createButton.Name = "createButton";
+            this.createButton.Size = new System.Drawing.Size(76, 25);
+            this.createButton.TabIndex = 1;
+            this.createButton.Values.Text = "Create";
+            this.createButton.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // NewThemeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(474, 94);
-            this.Controls.Add(this.kryptonPanel1);
+            this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -86,18 +86,18 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Theme";
             this.Load += new System.EventHandler(this.NewThemeForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
+            this.mainPanel.ResumeLayout(false);
+            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel themeNameLabel;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox themeNameTextBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton createButton;
     }
 }

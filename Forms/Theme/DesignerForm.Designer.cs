@@ -29,90 +29,90 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DesignerForm));
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.kryptonColorButton25 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton24 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton23 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton2 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton22 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton13 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton21 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton14 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton20 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton15 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton19 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton16 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton18 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton17 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.kryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonColorButton12 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton11 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton10 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton9 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton8 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton7 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton6 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton5 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton4 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton3 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonColorButton1 = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.scintillaGroupBox = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.user2ColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.user1ColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.entityColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.attributeColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.commentColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.decoratorColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.commentLineColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.tripleColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.commentBlockColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.preprocessorColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.wordColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.operatorColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.stringColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.numberColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.generalAspectsGroupBox = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.iconTypeComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.foldingColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.numberMarginColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.caretLineBackColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.selectionColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.formBorderColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.foreColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.buttonHoverColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.buttonFrameColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.buttonColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.secondaryColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
+            this.primaryColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.themeListView = new BrightIdeasSoftware.ObjectListView();
             this.ThemeNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            this.newThemeButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.deleteThemeButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
+            this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
             this.kryptonPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).BeginInit();
-            this.kryptonGroupBox2.Panel.SuspendLayout();
-            this.kryptonGroupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
-            this.kryptonGroupBox1.Panel.SuspendLayout();
-            this.kryptonGroupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scintillaGroupBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scintillaGroupBox.Panel)).BeginInit();
+            this.scintillaGroupBox.Panel.SuspendLayout();
+            this.scintillaGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.generalAspectsGroupBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.generalAspectsGroupBox.Panel)).BeginInit();
+            this.generalAspectsGroupBox.Panel.SuspendLayout();
+            this.generalAspectsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconTypeComboBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.themeListView)).BeginInit();
             this.SuspendLayout();
             // 
-            // kryptonPanel1
+            // mainPanel
             // 
-            this.kryptonPanel1.Controls.Add(this.kryptonButton3);
-            this.kryptonPanel1.Controls.Add(this.kryptonPanel2);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton2);
-            this.kryptonPanel1.Controls.Add(this.kryptonButton1);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(778, 494);
-            this.kryptonPanel1.TabIndex = 7;
+            this.mainPanel.Controls.Add(this.saveButton);
+            this.mainPanel.Controls.Add(this.kryptonPanel2);
+            this.mainPanel.Controls.Add(this.newThemeButton);
+            this.mainPanel.Controls.Add(this.deleteThemeButton);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(778, 494);
+            this.mainPanel.TabIndex = 7;
             // 
-            // kryptonButton3
+            // saveButton
             // 
-            this.kryptonButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton3.Location = new System.Drawing.Point(3, 5);
-            this.kryptonButton3.Name = "kryptonButton3";
-            this.kryptonButton3.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveButton.Location = new System.Drawing.Point(3, 5);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton3.Size = new System.Drawing.Size(111, 25);
-            this.kryptonButton3.TabIndex = 11;
-            this.kryptonButton3.Values.Text = "Save changes";
-            this.kryptonButton3.Click += new System.EventHandler(this.kryptonButton3_Click);
+            this.saveButton.Size = new System.Drawing.Size(111, 25);
+            this.saveButton.TabIndex = 11;
+            this.saveButton.Values.Text = "Save changes";
+            this.saveButton.Click += new System.EventHandler(this.kryptonButton3_Click);
             // 
             // kryptonPanel2
             // 
             this.kryptonPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonPanel2.Controls.Add(this.kryptonGroupBox2);
-            this.kryptonPanel2.Controls.Add(this.kryptonGroupBox1);
+            this.kryptonPanel2.Controls.Add(this.scintillaGroupBox);
+            this.kryptonPanel2.Controls.Add(this.generalAspectsGroupBox);
             this.kryptonPanel2.Controls.Add(this.kryptonLabel1);
             this.kryptonPanel2.Controls.Add(this.themeListView);
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 36);
@@ -120,373 +120,373 @@
             this.kryptonPanel2.Size = new System.Drawing.Size(778, 458);
             this.kryptonPanel2.TabIndex = 10;
             // 
-            // kryptonGroupBox2
+            // scintillaGroupBox
             // 
-            this.kryptonGroupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.scintillaGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(228, 167);
-            this.kryptonGroupBox2.Name = "kryptonGroupBox2";
+            this.scintillaGroupBox.Location = new System.Drawing.Point(228, 167);
+            this.scintillaGroupBox.Name = "scintillaGroupBox";
             // 
-            // kryptonGroupBox2.Panel
+            // scintillaGroupBox.Panel
             // 
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton25);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton24);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton23);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton2);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton22);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton13);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton21);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton14);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton20);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton15);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton19);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton16);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton18);
-            this.kryptonGroupBox2.Panel.Controls.Add(this.kryptonColorButton17);
-            this.kryptonGroupBox2.Size = new System.Drawing.Size(547, 288);
-            this.kryptonGroupBox2.TabIndex = 9;
-            this.kryptonGroupBox2.Values.Heading = "Scintilla";
+            this.scintillaGroupBox.Panel.Controls.Add(this.user2ColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.user1ColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.entityColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.attributeColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.commentColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.decoratorColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.commentLineColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.tripleColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.commentBlockColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.preprocessorColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.wordColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.operatorColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.stringColorButton);
+            this.scintillaGroupBox.Panel.Controls.Add(this.numberColorButton);
+            this.scintillaGroupBox.Size = new System.Drawing.Size(547, 288);
+            this.scintillaGroupBox.TabIndex = 9;
+            this.scintillaGroupBox.Values.Heading = "Scintilla";
             // 
-            // kryptonColorButton25
+            // user2ColorButton
             // 
-            this.kryptonColorButton25.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.user2ColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton25.Location = new System.Drawing.Point(198, 132);
-            this.kryptonColorButton25.Name = "kryptonColorButton25";
-            this.kryptonColorButton25.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton25.TabIndex = 31;
-            this.kryptonColorButton25.Values.Text = "User2";
-            this.kryptonColorButton25.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.user2ColorButton.Location = new System.Drawing.Point(198, 132);
+            this.user2ColorButton.Name = "user2ColorButton";
+            this.user2ColorButton.Size = new System.Drawing.Size(146, 25);
+            this.user2ColorButton.TabIndex = 31;
+            this.user2ColorButton.Values.Text = "User2";
+            this.user2ColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton24
+            // user1ColorButton
             // 
-            this.kryptonColorButton24.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.user1ColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton24.Location = new System.Drawing.Point(46, 132);
-            this.kryptonColorButton24.Name = "kryptonColorButton24";
-            this.kryptonColorButton24.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton24.TabIndex = 30;
-            this.kryptonColorButton24.Values.Text = "User1";
-            this.kryptonColorButton24.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.user1ColorButton.Location = new System.Drawing.Point(46, 132);
+            this.user1ColorButton.Name = "user1ColorButton";
+            this.user1ColorButton.Size = new System.Drawing.Size(146, 25);
+            this.user1ColorButton.TabIndex = 30;
+            this.user1ColorButton.Values.Text = "User1";
+            this.user1ColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton23
+            // entityColorButton
             // 
-            this.kryptonColorButton23.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.entityColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton23.Location = new System.Drawing.Point(350, 101);
-            this.kryptonColorButton23.Name = "kryptonColorButton23";
-            this.kryptonColorButton23.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton23.TabIndex = 29;
-            this.kryptonColorButton23.Values.Text = "Entity";
-            this.kryptonColorButton23.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.entityColorButton.Location = new System.Drawing.Point(350, 101);
+            this.entityColorButton.Name = "entityColorButton";
+            this.entityColorButton.Size = new System.Drawing.Size(146, 25);
+            this.entityColorButton.TabIndex = 29;
+            this.entityColorButton.Values.Text = "Entity";
+            this.entityColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton2
+            // attributeColorButton
             // 
-            this.kryptonColorButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.attributeColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton2.Location = new System.Drawing.Point(198, 101);
-            this.kryptonColorButton2.Name = "kryptonColorButton2";
-            this.kryptonColorButton2.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton2.TabIndex = 28;
-            this.kryptonColorButton2.Values.Text = "Attribute";
-            this.kryptonColorButton2.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.attributeColorButton.Location = new System.Drawing.Point(198, 101);
+            this.attributeColorButton.Name = "attributeColorButton";
+            this.attributeColorButton.Size = new System.Drawing.Size(146, 25);
+            this.attributeColorButton.TabIndex = 28;
+            this.attributeColorButton.Values.Text = "Attribute";
+            this.attributeColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton22
+            // commentColorButton
             // 
-            this.kryptonColorButton22.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.commentColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton22.Location = new System.Drawing.Point(46, 8);
-            this.kryptonColorButton22.Name = "kryptonColorButton22";
-            this.kryptonColorButton22.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton22.TabIndex = 18;
-            this.kryptonColorButton22.Values.Text = "Comment";
-            this.kryptonColorButton22.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.commentColorButton.Location = new System.Drawing.Point(46, 8);
+            this.commentColorButton.Name = "commentColorButton";
+            this.commentColorButton.Size = new System.Drawing.Size(146, 25);
+            this.commentColorButton.TabIndex = 18;
+            this.commentColorButton.Values.Text = "Comment";
+            this.commentColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton13
+            // decoratorColorButton
             // 
-            this.kryptonColorButton13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.decoratorColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton13.Location = new System.Drawing.Point(46, 101);
-            this.kryptonColorButton13.Name = "kryptonColorButton13";
-            this.kryptonColorButton13.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton13.TabIndex = 27;
-            this.kryptonColorButton13.Values.Text = "Decorator";
-            this.kryptonColorButton13.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.decoratorColorButton.Location = new System.Drawing.Point(46, 101);
+            this.decoratorColorButton.Name = "decoratorColorButton";
+            this.decoratorColorButton.Size = new System.Drawing.Size(146, 25);
+            this.decoratorColorButton.TabIndex = 27;
+            this.decoratorColorButton.Values.Text = "Decorator";
+            this.decoratorColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton21
+            // commentLineColorButton
             // 
-            this.kryptonColorButton21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.commentLineColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton21.Location = new System.Drawing.Point(198, 8);
-            this.kryptonColorButton21.Name = "kryptonColorButton21";
-            this.kryptonColorButton21.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton21.TabIndex = 19;
-            this.kryptonColorButton21.Values.Text = "CommentLine";
-            this.kryptonColorButton21.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.commentLineColorButton.Location = new System.Drawing.Point(198, 8);
+            this.commentLineColorButton.Name = "commentLineColorButton";
+            this.commentLineColorButton.Size = new System.Drawing.Size(146, 25);
+            this.commentLineColorButton.TabIndex = 19;
+            this.commentLineColorButton.Values.Text = "CommentLine";
+            this.commentLineColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton14
+            // tripleColorButton
             // 
-            this.kryptonColorButton14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tripleColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton14.Location = new System.Drawing.Point(350, 70);
-            this.kryptonColorButton14.Name = "kryptonColorButton14";
-            this.kryptonColorButton14.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton14.TabIndex = 26;
-            this.kryptonColorButton14.Values.Text = "Triple";
-            this.kryptonColorButton14.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.tripleColorButton.Location = new System.Drawing.Point(350, 70);
+            this.tripleColorButton.Name = "tripleColorButton";
+            this.tripleColorButton.Size = new System.Drawing.Size(146, 25);
+            this.tripleColorButton.TabIndex = 26;
+            this.tripleColorButton.Values.Text = "Triple";
+            this.tripleColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton20
+            // commentBlockColorButton
             // 
-            this.kryptonColorButton20.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.commentBlockColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton20.Location = new System.Drawing.Point(350, 8);
-            this.kryptonColorButton20.Name = "kryptonColorButton20";
-            this.kryptonColorButton20.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton20.TabIndex = 20;
-            this.kryptonColorButton20.Values.Text = "CommentBlock";
-            this.kryptonColorButton20.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.commentBlockColorButton.Location = new System.Drawing.Point(350, 8);
+            this.commentBlockColorButton.Name = "commentBlockColorButton";
+            this.commentBlockColorButton.Size = new System.Drawing.Size(146, 25);
+            this.commentBlockColorButton.TabIndex = 20;
+            this.commentBlockColorButton.Values.Text = "CommentBlock";
+            this.commentBlockColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton15
+            // preprocessorColorButton
             // 
-            this.kryptonColorButton15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.preprocessorColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton15.Location = new System.Drawing.Point(198, 70);
-            this.kryptonColorButton15.Name = "kryptonColorButton15";
-            this.kryptonColorButton15.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton15.TabIndex = 25;
-            this.kryptonColorButton15.Values.Text = "Preprocessor";
-            this.kryptonColorButton15.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.preprocessorColorButton.Location = new System.Drawing.Point(198, 70);
+            this.preprocessorColorButton.Name = "preprocessorColorButton";
+            this.preprocessorColorButton.Size = new System.Drawing.Size(146, 25);
+            this.preprocessorColorButton.TabIndex = 25;
+            this.preprocessorColorButton.Values.Text = "Preprocessor";
+            this.preprocessorColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton19
+            // wordColorButton
             // 
-            this.kryptonColorButton19.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.wordColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton19.Location = new System.Drawing.Point(46, 39);
-            this.kryptonColorButton19.Name = "kryptonColorButton19";
-            this.kryptonColorButton19.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton19.TabIndex = 21;
-            this.kryptonColorButton19.Values.Text = "Word";
-            this.kryptonColorButton19.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.wordColorButton.Location = new System.Drawing.Point(46, 39);
+            this.wordColorButton.Name = "wordColorButton";
+            this.wordColorButton.Size = new System.Drawing.Size(146, 25);
+            this.wordColorButton.TabIndex = 21;
+            this.wordColorButton.Values.Text = "Word";
+            this.wordColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton16
+            // operatorColorButton
             // 
-            this.kryptonColorButton16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.operatorColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton16.Location = new System.Drawing.Point(46, 70);
-            this.kryptonColorButton16.Name = "kryptonColorButton16";
-            this.kryptonColorButton16.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton16.TabIndex = 24;
-            this.kryptonColorButton16.Values.Text = "Operator";
-            this.kryptonColorButton16.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.operatorColorButton.Location = new System.Drawing.Point(46, 70);
+            this.operatorColorButton.Name = "operatorColorButton";
+            this.operatorColorButton.Size = new System.Drawing.Size(146, 25);
+            this.operatorColorButton.TabIndex = 24;
+            this.operatorColorButton.Values.Text = "Operator";
+            this.operatorColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton18
+            // stringColorButton
             // 
-            this.kryptonColorButton18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.stringColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton18.Location = new System.Drawing.Point(198, 39);
-            this.kryptonColorButton18.Name = "kryptonColorButton18";
-            this.kryptonColorButton18.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton18.TabIndex = 22;
-            this.kryptonColorButton18.Values.Text = "String";
-            this.kryptonColorButton18.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.stringColorButton.Location = new System.Drawing.Point(198, 39);
+            this.stringColorButton.Name = "stringColorButton";
+            this.stringColorButton.Size = new System.Drawing.Size(146, 25);
+            this.stringColorButton.TabIndex = 22;
+            this.stringColorButton.Values.Text = "String";
+            this.stringColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton17
+            // numberColorButton
             // 
-            this.kryptonColorButton17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.numberColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton17.Location = new System.Drawing.Point(350, 39);
-            this.kryptonColorButton17.Name = "kryptonColorButton17";
-            this.kryptonColorButton17.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton17.TabIndex = 23;
-            this.kryptonColorButton17.Values.Text = "Number";
-            this.kryptonColorButton17.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.numberColorButton.Location = new System.Drawing.Point(350, 39);
+            this.numberColorButton.Name = "numberColorButton";
+            this.numberColorButton.Size = new System.Drawing.Size(146, 25);
+            this.numberColorButton.TabIndex = 23;
+            this.numberColorButton.Values.Text = "Number";
+            this.numberColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonGroupBox1
+            // generalAspectsGroupBox
             // 
-            this.kryptonGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.generalAspectsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(228, 3);
-            this.kryptonGroupBox1.Name = "kryptonGroupBox1";
+            this.generalAspectsGroupBox.Location = new System.Drawing.Point(228, 3);
+            this.generalAspectsGroupBox.Name = "generalAspectsGroupBox";
             // 
-            // kryptonGroupBox1.Panel
+            // generalAspectsGroupBox.Panel
             // 
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonComboBox1);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton12);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton11);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton10);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton9);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton8);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton7);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton6);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton5);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton4);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton3);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonColorButton1);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(547, 158);
-            this.kryptonGroupBox1.TabIndex = 8;
-            this.kryptonGroupBox1.Values.Heading = "General Aspects";
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.iconTypeComboBox);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.foldingColorButton);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.numberMarginColorButton);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.caretLineBackColorButton);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.selectionColorButton);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.formBorderColorButton);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.foreColorButton);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.buttonHoverColorButton);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.buttonFrameColorButton);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.buttonColorButton);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.secondaryColorButton);
+            this.generalAspectsGroupBox.Panel.Controls.Add(this.primaryColorButton);
+            this.generalAspectsGroupBox.Size = new System.Drawing.Size(547, 158);
+            this.generalAspectsGroupBox.TabIndex = 8;
+            this.generalAspectsGroupBox.Values.Heading = "General Aspects";
             // 
-            // kryptonComboBox1
+            // iconTypeComboBox
             // 
-            this.kryptonComboBox1.DropDownWidth = 146;
-            this.kryptonComboBox1.Items.AddRange(new object[] {
+            this.iconTypeComboBox.DropDownWidth = 146;
+            this.iconTypeComboBox.Items.AddRange(new object[] {
             "Dark Icons",
             "Light Icons"});
-            this.kryptonComboBox1.Location = new System.Drawing.Point(350, 102);
-            this.kryptonComboBox1.Name = "kryptonComboBox1";
-            this.kryptonComboBox1.Size = new System.Drawing.Size(146, 21);
-            this.kryptonComboBox1.StateNormal.ComboBox.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonComboBox1.TabIndex = 18;
-            this.kryptonComboBox1.Text = "Dark Icons";
-            this.kryptonComboBox1.SelectedIndexChanged += new System.EventHandler(this.kryptonComboBox1_SelectedIndexChanged);
+            this.iconTypeComboBox.Location = new System.Drawing.Point(350, 102);
+            this.iconTypeComboBox.Name = "iconTypeComboBox";
+            this.iconTypeComboBox.Size = new System.Drawing.Size(146, 21);
+            this.iconTypeComboBox.StateNormal.ComboBox.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconTypeComboBox.TabIndex = 18;
+            this.iconTypeComboBox.Text = "Dark Icons";
+            this.iconTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.kryptonComboBox1_SelectedIndexChanged);
             // 
-            // kryptonColorButton12
+            // foldingColorButton
             // 
-            this.kryptonColorButton12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.foldingColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton12.Location = new System.Drawing.Point(198, 100);
-            this.kryptonColorButton12.Name = "kryptonColorButton12";
-            this.kryptonColorButton12.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton12.TabIndex = 17;
-            this.kryptonColorButton12.Values.Text = "Folding";
-            this.kryptonColorButton12.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.foldingColorButton.Location = new System.Drawing.Point(198, 100);
+            this.foldingColorButton.Name = "foldingColorButton";
+            this.foldingColorButton.Size = new System.Drawing.Size(146, 25);
+            this.foldingColorButton.TabIndex = 17;
+            this.foldingColorButton.Values.Text = "Folding";
+            this.foldingColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton11
+            // numberMarginColorButton
             // 
-            this.kryptonColorButton11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.numberMarginColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton11.Location = new System.Drawing.Point(46, 100);
-            this.kryptonColorButton11.Name = "kryptonColorButton11";
-            this.kryptonColorButton11.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton11.TabIndex = 16;
-            this.kryptonColorButton11.Values.Text = "NumberMargin";
-            this.kryptonColorButton11.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.numberMarginColorButton.Location = new System.Drawing.Point(46, 100);
+            this.numberMarginColorButton.Name = "numberMarginColorButton";
+            this.numberMarginColorButton.Size = new System.Drawing.Size(146, 25);
+            this.numberMarginColorButton.TabIndex = 16;
+            this.numberMarginColorButton.Values.Text = "NumberMargin";
+            this.numberMarginColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton10
+            // caretLineBackColorButton
             // 
-            this.kryptonColorButton10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.caretLineBackColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton10.Location = new System.Drawing.Point(350, 69);
-            this.kryptonColorButton10.Name = "kryptonColorButton10";
-            this.kryptonColorButton10.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton10.TabIndex = 15;
-            this.kryptonColorButton10.Values.Text = "CaretLineBack";
-            this.kryptonColorButton10.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.caretLineBackColorButton.Location = new System.Drawing.Point(350, 69);
+            this.caretLineBackColorButton.Name = "caretLineBackColorButton";
+            this.caretLineBackColorButton.Size = new System.Drawing.Size(146, 25);
+            this.caretLineBackColorButton.TabIndex = 15;
+            this.caretLineBackColorButton.Values.Text = "CaretLineBack";
+            this.caretLineBackColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton9
+            // selectionColorButton
             // 
-            this.kryptonColorButton9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.selectionColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton9.Location = new System.Drawing.Point(198, 69);
-            this.kryptonColorButton9.Name = "kryptonColorButton9";
-            this.kryptonColorButton9.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton9.TabIndex = 14;
-            this.kryptonColorButton9.Values.Text = "Selection";
-            this.kryptonColorButton9.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.selectionColorButton.Location = new System.Drawing.Point(198, 69);
+            this.selectionColorButton.Name = "selectionColorButton";
+            this.selectionColorButton.Size = new System.Drawing.Size(146, 25);
+            this.selectionColorButton.TabIndex = 14;
+            this.selectionColorButton.Values.Text = "Selection";
+            this.selectionColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton8
+            // formBorderColorButton
             // 
-            this.kryptonColorButton8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.formBorderColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton8.Location = new System.Drawing.Point(46, 69);
-            this.kryptonColorButton8.Name = "kryptonColorButton8";
-            this.kryptonColorButton8.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton8.TabIndex = 13;
-            this.kryptonColorButton8.Values.Text = "FormBorder";
-            this.kryptonColorButton8.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.formBorderColorButton.Location = new System.Drawing.Point(46, 69);
+            this.formBorderColorButton.Name = "formBorderColorButton";
+            this.formBorderColorButton.Size = new System.Drawing.Size(146, 25);
+            this.formBorderColorButton.TabIndex = 13;
+            this.formBorderColorButton.Values.Text = "FormBorder";
+            this.formBorderColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton7
+            // foreColorButton
             // 
-            this.kryptonColorButton7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.foreColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton7.Location = new System.Drawing.Point(350, 38);
-            this.kryptonColorButton7.Name = "kryptonColorButton7";
-            this.kryptonColorButton7.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton7.TabIndex = 12;
-            this.kryptonColorButton7.Values.Text = "Fore";
-            this.kryptonColorButton7.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.foreColorButton.Location = new System.Drawing.Point(350, 38);
+            this.foreColorButton.Name = "foreColorButton";
+            this.foreColorButton.Size = new System.Drawing.Size(146, 25);
+            this.foreColorButton.TabIndex = 12;
+            this.foreColorButton.Values.Text = "Fore";
+            this.foreColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton6
+            // buttonHoverColorButton
             // 
-            this.kryptonColorButton6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.buttonHoverColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton6.Location = new System.Drawing.Point(198, 38);
-            this.kryptonColorButton6.Name = "kryptonColorButton6";
-            this.kryptonColorButton6.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton6.TabIndex = 11;
-            this.kryptonColorButton6.Values.Text = "ButtonHover";
-            this.kryptonColorButton6.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.buttonHoverColorButton.Location = new System.Drawing.Point(198, 38);
+            this.buttonHoverColorButton.Name = "buttonHoverColorButton";
+            this.buttonHoverColorButton.Size = new System.Drawing.Size(146, 25);
+            this.buttonHoverColorButton.TabIndex = 11;
+            this.buttonHoverColorButton.Values.Text = "ButtonHover";
+            this.buttonHoverColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton5
+            // buttonFrameColorButton
             // 
-            this.kryptonColorButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.buttonFrameColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton5.Location = new System.Drawing.Point(46, 38);
-            this.kryptonColorButton5.Name = "kryptonColorButton5";
-            this.kryptonColorButton5.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton5.TabIndex = 10;
-            this.kryptonColorButton5.Values.Text = "ButtonFrame";
-            this.kryptonColorButton5.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.buttonFrameColorButton.Location = new System.Drawing.Point(46, 38);
+            this.buttonFrameColorButton.Name = "buttonFrameColorButton";
+            this.buttonFrameColorButton.Size = new System.Drawing.Size(146, 25);
+            this.buttonFrameColorButton.TabIndex = 10;
+            this.buttonFrameColorButton.Values.Text = "ButtonFrame";
+            this.buttonFrameColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton4
+            // buttonColorButton
             // 
-            this.kryptonColorButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.buttonColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton4.Location = new System.Drawing.Point(350, 7);
-            this.kryptonColorButton4.Name = "kryptonColorButton4";
-            this.kryptonColorButton4.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton4.TabIndex = 9;
-            this.kryptonColorButton4.Values.Text = "Button";
-            this.kryptonColorButton4.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.buttonColorButton.Location = new System.Drawing.Point(350, 7);
+            this.buttonColorButton.Name = "buttonColorButton";
+            this.buttonColorButton.Size = new System.Drawing.Size(146, 25);
+            this.buttonColorButton.TabIndex = 9;
+            this.buttonColorButton.Values.Text = "Button";
+            this.buttonColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton3
+            // secondaryColorButton
             // 
-            this.kryptonColorButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.secondaryColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton3.Location = new System.Drawing.Point(198, 7);
-            this.kryptonColorButton3.Name = "kryptonColorButton3";
-            this.kryptonColorButton3.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton3.TabIndex = 8;
-            this.kryptonColorButton3.Values.Text = "Secondary";
-            this.kryptonColorButton3.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.secondaryColorButton.Location = new System.Drawing.Point(198, 7);
+            this.secondaryColorButton.Name = "secondaryColorButton";
+            this.secondaryColorButton.Size = new System.Drawing.Size(146, 25);
+            this.secondaryColorButton.TabIndex = 8;
+            this.secondaryColorButton.Values.Text = "Secondary";
+            this.secondaryColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
-            // kryptonColorButton1
+            // primaryColorButton
             // 
-            this.kryptonColorButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.primaryColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonColorButton1.Location = new System.Drawing.Point(46, 7);
-            this.kryptonColorButton1.Name = "kryptonColorButton1";
-            this.kryptonColorButton1.Size = new System.Drawing.Size(146, 25);
-            this.kryptonColorButton1.TabIndex = 7;
-            this.kryptonColorButton1.Values.Text = "Primary";
-            this.kryptonColorButton1.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.primaryColorButton.Location = new System.Drawing.Point(46, 7);
+            this.primaryColorButton.Name = "primaryColorButton";
+            this.primaryColorButton.Size = new System.Drawing.Size(146, 25);
+            this.primaryColorButton.TabIndex = 7;
+            this.primaryColorButton.Values.Text = "Primary";
+            this.primaryColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // kryptonLabel1
             // 
@@ -519,38 +519,38 @@
             this.ThemeNameColumn.AspectName = "Name";
             this.ThemeNameColumn.CellPadding = null;
             // 
-            // kryptonButton2
+            // newThemeButton
             // 
-            this.kryptonButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton2.Location = new System.Drawing.Point(545, 5);
-            this.kryptonButton2.Name = "kryptonButton2";
-            this.kryptonButton2.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.newThemeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.newThemeButton.Location = new System.Drawing.Point(545, 5);
+            this.newThemeButton.Name = "newThemeButton";
+            this.newThemeButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton2.Size = new System.Drawing.Size(111, 25);
-            this.kryptonButton2.TabIndex = 8;
-            this.kryptonButton2.Values.Text = "New Theme";
-            this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
+            this.newThemeButton.Size = new System.Drawing.Size(111, 25);
+            this.newThemeButton.TabIndex = 8;
+            this.newThemeButton.Values.Text = "New Theme";
+            this.newThemeButton.Click += new System.EventHandler(this.kryptonButton2_Click);
             // 
-            // kryptonButton1
+            // deleteThemeButton
             // 
-            this.kryptonButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton1.Location = new System.Drawing.Point(662, 5);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.deleteThemeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteThemeButton.Location = new System.Drawing.Point(662, 5);
+            this.deleteThemeButton.Name = "deleteThemeButton";
+            this.deleteThemeButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton1.Size = new System.Drawing.Size(111, 25);
-            this.kryptonButton1.TabIndex = 7;
-            this.kryptonButton1.Values.Text = "Delete Theme";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            this.deleteThemeButton.Size = new System.Drawing.Size(111, 25);
+            this.deleteThemeButton.TabIndex = 7;
+            this.deleteThemeButton.Values.Text = "Delete Theme";
+            this.deleteThemeButton.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // DesignerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 494);
-            this.Controls.Add(this.kryptonPanel1);
+            this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -559,20 +559,20 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Theme Designer";
             this.Load += new System.EventHandler(this.DesignerForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
+            this.mainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
             this.kryptonPanel2.ResumeLayout(false);
             this.kryptonPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).EndInit();
-            this.kryptonGroupBox2.Panel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).EndInit();
-            this.kryptonGroupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
-            this.kryptonGroupBox1.Panel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
-            this.kryptonGroupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scintillaGroupBox.Panel)).EndInit();
+            this.scintillaGroupBox.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scintillaGroupBox)).EndInit();
+            this.scintillaGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.generalAspectsGroupBox.Panel)).EndInit();
+            this.generalAspectsGroupBox.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.generalAspectsGroupBox)).EndInit();
+            this.generalAspectsGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.iconTypeComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.themeListView)).EndInit();
             this.ResumeLayout(false);
 
@@ -580,41 +580,41 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton newThemeButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton deleteThemeButton;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private BrightIdeasSoftware.ObjectListView themeListView;
         private BrightIdeasSoftware.OLVColumn ThemeNameColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox2;
-        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton12;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton11;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton10;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton9;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton8;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton7;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton6;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton5;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton4;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton3;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton2;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton22;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton13;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton21;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton14;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton20;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton15;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton19;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton16;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton18;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton17;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton25;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton24;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton kryptonColorButton23;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox kryptonComboBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton3;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox scintillaGroupBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox generalAspectsGroupBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton primaryColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton foldingColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton numberMarginColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton caretLineBackColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton selectionColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton formBorderColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton foreColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton buttonHoverColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton buttonFrameColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton buttonColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton secondaryColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton attributeColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton commentColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton decoratorColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton commentLineColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton tripleColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton commentBlockColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton preprocessorColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton wordColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton operatorColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton stringColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton numberColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton user2ColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton user1ColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonColorButton entityColorButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox iconTypeComboBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
     }
 }

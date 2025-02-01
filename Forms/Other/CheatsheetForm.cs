@@ -54,49 +54,49 @@ namespace pie.Forms.Other
 
             if (Input.ActiveTheme.IconType == "dark")
             {
-                pictureBox1.BackgroundImage = Properties.Resources.ctrl_dark;
-                pictureBox4.BackgroundImage = Properties.Resources.ctrl_dark;
-                pictureBox6.BackgroundImage = Properties.Resources.ctrl_dark;
-                pictureBox8.BackgroundImage = Properties.Resources.ctrl_dark;
-                pictureBox10.BackgroundImage = Properties.Resources.ctrl_dark;
-                pictureBox12.BackgroundImage = Properties.Resources.ctrl_dark;
-                pictureBox16.BackgroundImage = Properties.Resources.ctrl_dark;
-                pictureBox13.BackgroundImage = Properties.Resources.alt_dark;
-                pictureBox14.BackgroundImage = Properties.Resources.alt_dark;
-                pictureBox18.BackgroundImage = Properties.Resources.ctrl_dark;
-                pictureBox20.BackgroundImage = Properties.Resources.ctrl_dark;
-                pictureBox2.BackgroundImage = Properties.Resources.f_dark;
-                pictureBox3.BackgroundImage = Properties.Resources.b_dark;
-                pictureBox5.BackgroundImage = Properties.Resources.g_dark;
-                pictureBox7.BackgroundImage = Properties.Resources.x_dark;
-                pictureBox9.BackgroundImage = Properties.Resources.v_dark;
-                pictureBox11.BackgroundImage = Properties.Resources.cursor_left_dark;
-                pictureBox15.BackgroundImage = Properties.Resources.cursor_right_dark;
-                pictureBox17.BackgroundImage = Properties.Resources.cursor_up_dark;
-                pictureBox19.BackgroundImage = Properties.Resources.cursor_down_dark;
+                keybind1Key1PictureBox.BackgroundImage = Properties.Resources.ctrl_dark;
+                keybind2Key1PictureBox.BackgroundImage = Properties.Resources.ctrl_dark;
+                keybind3Key1PictureBox.BackgroundImage = Properties.Resources.ctrl_dark;
+                keybind4Key1PictureBox.BackgroundImage = Properties.Resources.ctrl_dark;
+                keybind5Key1PictureBox.BackgroundImage = Properties.Resources.ctrl_dark;
+                keybind6Key1PictureBox.BackgroundImage = Properties.Resources.ctrl_dark;
+                keybind7Key1PictureBox.BackgroundImage = Properties.Resources.ctrl_dark;
+                keybind6Key2PictureBox.BackgroundImage = Properties.Resources.alt_dark;
+                keybind7Key2PictureBox.BackgroundImage = Properties.Resources.alt_dark;
+                keybind8Key1PictureBox.BackgroundImage = Properties.Resources.ctrl_dark;
+                keybind9Key1PictureBox.BackgroundImage = Properties.Resources.ctrl_dark;
+                keybind1Key2PictureBox.BackgroundImage = Properties.Resources.f_dark;
+                keybind2Key2PictureBox.BackgroundImage = Properties.Resources.b_dark;
+                keybind3Key2PictureBox.BackgroundImage = Properties.Resources.g_dark;
+                keybind4Key2PictureBox.BackgroundImage = Properties.Resources.x_dark;
+                keybind5Key2PictureBox.BackgroundImage = Properties.Resources.v_dark;
+                keybind6Key3PictureBox.BackgroundImage = Properties.Resources.cursor_left_dark;
+                keybind7Key3PictureBox.BackgroundImage = Properties.Resources.cursor_right_dark;
+                keybind8Key2PictureBox.BackgroundImage = Properties.Resources.cursor_up_dark;
+                keybind9Key2PictureBox.BackgroundImage = Properties.Resources.cursor_down_dark;
             }
             else
             {
-                pictureBox1.BackgroundImage = Properties.Resources.ctrl;
-                pictureBox4.BackgroundImage = Properties.Resources.ctrl;
-                pictureBox6.BackgroundImage = Properties.Resources.ctrl;
-                pictureBox8.BackgroundImage = Properties.Resources.ctrl;
-                pictureBox10.BackgroundImage = Properties.Resources.ctrl;
-                pictureBox12.BackgroundImage = Properties.Resources.ctrl;
-                pictureBox16.BackgroundImage = Properties.Resources.ctrl;
-                pictureBox13.BackgroundImage = Properties.Resources.alt;
-                pictureBox14.BackgroundImage = Properties.Resources.alt;
-                pictureBox18.BackgroundImage = Properties.Resources.ctrl;
-                pictureBox20.BackgroundImage = Properties.Resources.ctrl;
-                pictureBox2.BackgroundImage = Properties.Resources.f;
-                pictureBox3.BackgroundImage = Properties.Resources.b;
-                pictureBox5.BackgroundImage = Properties.Resources.g;
-                pictureBox7.BackgroundImage = Properties.Resources.x;
-                pictureBox9.BackgroundImage = Properties.Resources.v;
-                pictureBox11.BackgroundImage = Properties.Resources.cursor_left;
-                pictureBox15.BackgroundImage = Properties.Resources.cursor_right;
-                pictureBox17.BackgroundImage = Properties.Resources.cursor_up;
-                pictureBox19.BackgroundImage = Properties.Resources.cursor_down;
+                keybind1Key1PictureBox.BackgroundImage = Properties.Resources.ctrl;
+                keybind2Key1PictureBox.BackgroundImage = Properties.Resources.ctrl;
+                keybind3Key1PictureBox.BackgroundImage = Properties.Resources.ctrl;
+                keybind4Key1PictureBox.BackgroundImage = Properties.Resources.ctrl;
+                keybind5Key1PictureBox.BackgroundImage = Properties.Resources.ctrl;
+                keybind6Key1PictureBox.BackgroundImage = Properties.Resources.ctrl;
+                keybind7Key1PictureBox.BackgroundImage = Properties.Resources.ctrl;
+                keybind6Key2PictureBox.BackgroundImage = Properties.Resources.alt;
+                keybind7Key2PictureBox.BackgroundImage = Properties.Resources.alt;
+                keybind8Key1PictureBox.BackgroundImage = Properties.Resources.ctrl;
+                keybind9Key1PictureBox.BackgroundImage = Properties.Resources.ctrl;
+                keybind1Key2PictureBox.BackgroundImage = Properties.Resources.f;
+                keybind2Key2PictureBox.BackgroundImage = Properties.Resources.b;
+                keybind3Key2PictureBox.BackgroundImage = Properties.Resources.g;
+                keybind4Key2PictureBox.BackgroundImage = Properties.Resources.x;
+                keybind5Key2PictureBox.BackgroundImage = Properties.Resources.v;
+                keybind6Key3PictureBox.BackgroundImage = Properties.Resources.cursor_left;
+                keybind7Key3PictureBox.BackgroundImage = Properties.Resources.cursor_right;
+                keybind8Key2PictureBox.BackgroundImage = Properties.Resources.cursor_up;
+                keybind9Key2PictureBox.BackgroundImage = Properties.Resources.cursor_down;
             }
 
             ControlHelper.ResumeDrawing(this);

@@ -83,15 +83,15 @@ namespace pie
 
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "")
+            if (repositoryURLTextBox.Text == "" || cloneIntoTextBox.Text == "")
             {
                 ShowNotification("Repository URL and clone location should not be empty.");
             }
-            else if (!Directory.Exists(kryptonTextBox2.Text))
+            else if (!Directory.Exists(cloneIntoTextBox.Text))
             {
                 ShowNotification("Directory does not exist. Create it before cloning a repository.");
             }
-            else if (Directory.GetFiles(kryptonTextBox2.Text).Length > 0 || Directory.GetDirectories(kryptonTextBox2.Text).Length > 0)
+            else if (Directory.GetFiles(cloneIntoTextBox.Text).Length > 0 || Directory.GetDirectories(cloneIntoTextBox.Text).Length > 0)
             {
                 ShowNotification("Specified directory needs to be empty.");
             }
@@ -137,10 +137,10 @@ namespace pie
                 {
                     Task.Run(() =>
                     {
-                        Repository.Clone(kryptonTextBox1.Text, kryptonTextBox2.Text, options);
+                        Repository.Clone(repositoryURLTextBox.Text, cloneIntoTextBox.Text, options);
                     }).Wait();
 
-                    Output.ClonePath = kryptonTextBox2.Text;
+                    Output.ClonePath = cloneIntoTextBox.Text;
                     this.Close();
                 }
                 catch (NameConflictException e)
@@ -162,7 +162,7 @@ namespace pie
 
             if (result == DialogResult.OK)
             {
-                kryptonTextBox2.Text = dialog.SelectedPath;
+                cloneIntoTextBox.Text = dialog.SelectedPath;
             }
         }
     }
