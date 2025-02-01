@@ -96,7 +96,7 @@ namespace pie.Services
             autocompleteMenu.SetAutocompleteItems(keywords);
         }
 
-        public void ConfigureLexer(LanguageDefinition languageDefinition, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
+        public void ConfigureLexer(AutocompleteMenu autocompleteMenu, LanguageDefinition languageDefinition, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
         {
             Lexer lexer = (Lexer)Enum.Parse(typeof(Lexer), languageDefinition.Lexer);
             scintilla.Lexer = lexer;
@@ -106,7 +106,7 @@ namespace pie.Services
                 scintilla.SetKeywords(0, languageDefinition.Keywords);
             }
 
-            SetAutocompleteMenuKeywords(Globals.tabInfos[index].getAutocompleteMenu(), languageDefinition.Keywords.Split(' ').ToList());
+            SetAutocompleteMenuKeywords(autocompleteMenu, languageDefinition.Keywords.Split(' ').ToList());
             EnableFolding(scintilla);
 
             if (languageDefinition.WordChars != null)
@@ -294,7 +294,7 @@ namespace pie.Services
             scintilla.Styles[Style.Sql.Operator].ForeColor = parserColorDictionary["Operator"];
         }
 
-        public void SetLexer(String extension, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
+        public void SetLexer(AutocompleteMenu autocompleteMenu, string extension, Scintilla scintilla, KryptonDockableNavigator tabControl, int index)
         {
             foreach(LanguageMapping languageMapping in Globals.languageMappings)
             {
@@ -304,7 +304,7 @@ namespace pie.Services
                     {
                         if (languageDefinition.Name.Equals(languageMapping.Language))
                         {
-                            ConfigureLexer(languageDefinition, scintilla, tabControl, index);
+                            ConfigureLexer(autocompleteMenu, languageDefinition, scintilla, tabControl, index);
                             return;
                         }
                     }

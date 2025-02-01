@@ -38,7 +38,8 @@ namespace pie.Forms.Databases
         private ConfigurationService configurationService = new ConfigurationService();
         private ThemeService themeService = new ThemeService();
 
-        List<DatabaseConnection> tempDatabases;
+        public bool OutputSaveStatus;
+        private List<DatabaseConnection> tempDatabases;
 
         public DatabasesForm()
         {
@@ -85,7 +86,7 @@ namespace pie.Forms.Databases
                 databasesListView.SetObjects(tempDatabases);
             }
 
-            Globals.closeAfterApplyingChanges = false;
+            OutputSaveStatus = false;
         }
 
         private void kryptonButton2_Click(object sender, EventArgs e)
@@ -206,7 +207,7 @@ namespace pie.Forms.Databases
         {
             configurationService.WriteToFile("config/databases.json", tempDatabases);
 
-            Globals.closeAfterApplyingChanges = true;
+            OutputSaveStatus = true;
 
             this.Close();
         }

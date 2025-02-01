@@ -19,6 +19,9 @@
 
 using System;
 using pie.Services;
+using pie.Classes;
+using pie.Enums;
+using System.Collections.Generic;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -33,22 +36,59 @@ namespace pie
     {
         private ThemeService themeService = new ThemeService();
 
+        public BuildCommand InputBuildCommand;
+        public BuildCommand Output { get; private set; }
+
         public AddBuildCommandForm()
         {
             InitializeComponent();
             themeService.SetPaletteToObjects(this, Globals.kryptonPalette);
         }
 
-        private void kryptonButton1_Click(object sender, EventArgs e)
+        private void saveButton_Click(object sender, EventArgs e)
         {
-            if (kryptonTextBox1.Text == "" || kryptonTextBox2.Text == "")
+            if (displayNameTextBox.Text == "" || commandTextBox.Text == "")
             {
                 MainForm.ShowNotification("Display Name and Command cannot be empty.");
             }
             else
             {
-                Globals.addBuildCommandName = kryptonTextBox1.Text;
-                Globals.addBuildCommandCmd = kryptonTextBox2.Text;
+                Output = new BuildCommand();
+
+                Output.Name = displayNameTextBox.Text;
+                Output.Command = commandTextBox.Text;
+
+                List<string> fileExtensions = new List<string>();
+                fileExtensions.AddRange(fileExtensionsRichTextBox.Text.Split('\n'));
+                fileExtensions.ForEach(extension => extension.Trim());
+
+                string extensions = "";
+                for (int i = 0; i<fileExtensions.Count; i++)
+                {
+                    if (fileExtensions[i].StartsWith("."))
+                    {
+                        if (fileExtensions[i].Length > 1)
+                        {
+                            fileExtensions[i] = fileExtensions[i].Substring(1);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    else if (fileExtensions[i].Trim() == "")
+                    {
+                        continue;
+                    }
+
+                    extensions += fileExtensions[i];
+                    if (i != fileExtensions.Count - 1)
+                    {
+                        extensions += ", ";
+                    }
+                }
+
+                Output.Extensions = extensions;
 
                 this.Close();
             }
@@ -61,13 +101,11 @@ namespace pie
                 this.Opacity = 0.875;
             }
 
-            Globals.addBuildCommandName = null;
-            Globals.addBuildCommandCmd = null;
-
-            if (Globals.buildCommandEditIndex >= 0)
+            if (InputBuildCommand != null)
             {
-                kryptonTextBox1.Text = Globals.buildCommandToEditName;
-                kryptonTextBox2.Text = Globals.buildCommandToEditCmd;
+                displayNameTextBox.Text = InputBuildCommand.Name;
+                commandTextBox.Text = InputBuildCommand.Command;
+                fileExtensionsRichTextBox.Text = InputBuildCommand.Extensions.Replace(',', '\n').Replace(" ", "");
             }
         }
     }

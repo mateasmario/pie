@@ -81,25 +81,28 @@ namespace pie.Forms.CodeTemplates
 
         private void SaveCurrentTemplate()
         {
-            CodeTemplate currentTemplate = Working.Find(codeTemplate => codeTemplate.Index == selectedIndex);
-            string text = ((Scintilla)textAreaPanel.Controls[1]).Text;
-
-            if (text != "")
+            if (selectedIndex >= 0)
             {
-                if (currentTemplate != null)
+                CodeTemplate currentTemplate = Working.Find(codeTemplate => codeTemplate.Index == selectedIndex);
+                string text = ((Scintilla)textAreaPanel.Controls[1]).Text;
+
+                if (text != "")
                 {
-                    currentTemplate.Content = text;
+                    if (currentTemplate != null)
+                    {
+                        currentTemplate.Content = text;
+                    }
+                    else
+                    {
+                        Working.Add(new CodeTemplate(selectedIndex, text));
+                    }
                 }
                 else
                 {
-                    Working.Add(new CodeTemplate(selectedIndex, text));
-                }
-            }
-            else
-            {
-                if (currentTemplate != null)
-                {
-                    Working.Remove(currentTemplate);
+                    if (currentTemplate != null)
+                    {
+                        Working.Remove(currentTemplate);
+                    }
                 }
             }
         }
