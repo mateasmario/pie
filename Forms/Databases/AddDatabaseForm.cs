@@ -45,10 +45,15 @@ namespace pie.Forms.Databases
         {
             InitializeComponent();
 
+            Output = new AddDatabaseFormOutput();
+        }
+
+        private void AddDatabaseForm_Load(object sender, EventArgs e)
+        {
             mysqlCheckButton.StateCommon.Back.Color1 = Input.ActiveTheme.Primary;
             mysqlCheckButton.StateCommon.Back.Color2 = Input.ActiveTheme.Primary;
             mysqlCheckButton.StateCheckedNormal.Back.Color1 = Input.ActiveTheme.Secondary;
-            mysqlCheckButton.StateCheckedNormal.Back.Color2 = Input.ActiveTheme.Secondary;            
+            mysqlCheckButton.StateCheckedNormal.Back.Color2 = Input.ActiveTheme.Secondary;
             mysqlCheckButton.StateCheckedTracking.Back.Color1 = Input.ActiveTheme.Secondary;
             mysqlCheckButton.StateCheckedTracking.Back.Color2 = Input.ActiveTheme.Secondary;
             mysqlCheckButton.StateCheckedPressed.Back.Color1 = Input.ActiveTheme.Secondary;
@@ -97,11 +102,6 @@ namespace pie.Forms.Databases
                 postgresqlCheckButton.Values.Image = Properties.Resources.postgresql_white;
             }
 
-            Output = new AddDatabaseFormOutput();
-        }
-
-        private void AddDatabaseForm_Load(object sender, EventArgs e)
-        {
             themeService.SetPaletteToObjects(this, Input.Palette);
 
             if (Input.EditorProperties.Glass)

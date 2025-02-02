@@ -18,6 +18,7 @@
 */
 
 using System;
+using System.Windows.Forms;
 using pie.Services;
 using pie.Classes;
 
@@ -55,7 +56,14 @@ namespace pie
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (Input.CloseAppOnAck)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                this.Close();
+            }
         }
     }
 }
