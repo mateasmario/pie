@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.ApplicationServices;
+using pie.Classes;
 
 namespace pie
 {
@@ -17,7 +18,25 @@ namespace pie
             //Application.Run(new MainForm());
 
             App myApp = new App();
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             myApp.Run(Environment.GetCommandLineArgs());
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+        {
+            ShowFatalNotification(e.ExceptionObject.ToString());
+        }
+
+        private static void ShowFatalNotification(string text)
+        {
+            NotificationFatalForm notificationFatalForm = new NotificationFatalForm();
+
+            NotificationFatalFormInput notificationFatalFormInput = new NotificationFatalFormInput();
+            notificationFatalFormInput.NotificationText = text;
+
+            notificationFatalForm.Input = notificationFatalFormInput;
+
+            notificationFatalForm.ShowDialog();
         }
     }
 

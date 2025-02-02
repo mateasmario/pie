@@ -123,8 +123,6 @@ namespace pie
         private Repository repository;
         private ThemeInfo activeTheme;
 
-        private int lastSelectedTabIndex;
-        private int maxLineNumberCharLength;
         private int lastSelectedIndex;
         private bool canUpdateUI;
         private bool firstBrowserTab;
@@ -203,58 +201,44 @@ namespace pie
 
         private void ProcessThemes()
         {
-            try
-            {
-                ProcessCustomThemes();
-                SelectedTheme selectedTheme = configurationService.GetObjectFromFile<SelectedTheme>(AppDomain.CurrentDomain.BaseDirectory + "config/theme.json");
+            ProcessCustomThemes();
+            SelectedTheme selectedTheme = configurationService.GetObjectFromFile<SelectedTheme>(AppDomain.CurrentDomain.BaseDirectory + "config/theme.json");
 
-                foreach (ThemeInfo t in themeInfos)
+            foreach (ThemeInfo t in themeInfos)
+            {
+                if (t.Name == selectedTheme.Name)
                 {
-                    if (t.Name == selectedTheme.Name)
-                    {
-                        activeTheme = t;
-                    }
+                    activeTheme = t;
                 }
+            }
 
-                ScintillaLexerService.ResetDictionary(activeTheme);
-            }
-            catch (Exception)
-            {
-               ShowFatalNotification("There was a problem trying to read the active theme configuration file.");
-            }
+            ScintillaLexerService.ResetDictionary(activeTheme);
         }
 
         private void ProcessCustomThemes()
         {
-            if (themeSettingsToolStripMenuItem.DropDownItems.Count > 2)
+            if (themeSettingsToolStripMenuItem.DropDownItems.Count > 0)
             {
-                int removeCount = themeSettingsToolStripMenuItem.DropDownItems.Count - 2;
+                int removeCount = themeSettingsToolStripMenuItem.DropDownItems.Count;
 
                 while (removeCount > 0)
                 {
-                    themeSettingsToolStripMenuItem.DropDownItems.RemoveAt(2);
+                    themeSettingsToolStripMenuItem.DropDownItems.RemoveAt(0);
                     removeCount--;
                 }
             }
 
 
-            try
+            themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>("config\\themes", "json");
+
+            foreach (ThemeInfo themeInfo in themeInfos)
             {
-                themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>("config\\themes", "json");
+                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
+                toolStripMenuItem.Text = themeInfo.Name;
 
-                foreach (ThemeInfo themeInfo in themeInfos)
-                {
-                    ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
-                    toolStripMenuItem.Text = themeInfo.Name;
+                toolStripMenuItem.Click += ToolStripMenuItem_Click1;
 
-                    toolStripMenuItem.Click += ToolStripMenuItem_Click1;
-
-                    themeSettingsToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
-                }
-            }
-            catch (Exception)
-            {
-                ShowFatalNotification("There was a problem trying to read the themes configuration folder.");
+                themeSettingsToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
             }
         }
 
@@ -310,48 +294,33 @@ namespace pie
 
         private void ProcessEditorProperties()
         {
-            try
+            editorProperties = configurationService.GetObjectFromFile<EditorProperties>(AppDomain.CurrentDomain.BaseDirectory + "config/scintilla.json");
+
+            if (editorProperties.Wordwrap)
             {
-                editorProperties = configurationService.GetObjectFromFile<EditorProperties>(AppDomain.CurrentDomain.BaseDirectory + "config/scintilla.json");
-
-                if (editorProperties.Wordwrap)
-                {
-                    wordWrapToolStripMenuItem.Text = "Disable Word Wrap";
-                }
-
-                if (editorProperties.Autosave)
-                {
-                    enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
-                }
-
-                if (editorProperties.Glass)
-                {
-                    glassModeToolStripMenuItem.Text = "Disable Glass Effect";
-                }
-
+                wordWrapToolStripMenuItem.Text = "Disable Word Wrap";
             }
-            catch (Exception)
+
+            if (editorProperties.Autosave)
             {
-               ShowFatalNotification("There was a problem trying to read the editor properties configuration file.");
+                enableAutosaveToolStripMenuItem.Text = "Disable Autosave";
+            }
+
+            if (editorProperties.Glass)
+            {
+                glassModeToolStripMenuItem.Text = "Disable Glass Effect";
             }
         }
 
         private void ProcessFormatterDLLs()
         {
-            try
-            {
-                formatters = configurationService.LoadLinkLibrariesFromMultipleFiles<Formatter>(
-                                    "formatters",
-                                    new MethodValidator.Builder()
-                                    .WithMethodName("Format")
-                                    .WithMethodParameterCount(1)
-                                    .WithMethodReturnType(typeof(string))
-                                    .Build());
-            }
-            catch (Exception)
-            {
-               ShowFatalNotification("There was a problem trying to read the formatters DLL folder.");
-            }
+            formatters = configurationService.LoadLinkLibrariesFromMultipleFiles<Formatter>(
+                                "formatters",
+                                new MethodValidator.Builder()
+                                .WithMethodName("Format")
+                                .WithMethodParameterCount(1)
+                                .WithMethodReturnType(typeof(string))
+                                .Build());
         }
 
         private void SetDynamicDesign()
@@ -1281,22 +1250,7 @@ namespace pie
 
             notificationOkForm.ShowDialog();
         }
-
-        public void ShowFatalNotification(string text)
-        {
-            NotificationOKForm notificationOkForm = new NotificationOKForm();
-
-            NotificationFormInput notificationFormInput = new NotificationFormInput();
-            notificationFormInput.EditorProperties = new EditorProperties();
-            notificationFormInput.Palette = kryptonPalette;
-            notificationFormInput.NotificationText = text;
-            notificationFormInput.CloseAppOnAck = true;
-
-            notificationOkForm.Input = notificationFormInput;
-
-            notificationOkForm.ShowDialog();
-        }
-
+        
         public NotificationYesNoCancelFormOutput ShowYesNoCancelNotification(string text)
         {
             NotificationYesNoCancelForm notificationYesNoCancelForm = new NotificationYesNoCancelForm();
@@ -1402,65 +1356,37 @@ namespace pie
                 }
             }
 
-            try
-            {
-                buildCommands = configurationService.GetArrayFromFile<BuildCommand>("config/build.json");
+            buildCommands = configurationService.GetArrayFromFile<BuildCommand>("config/build.json");
 
-                for (int i = 0; i < buildCommands.Count; i++)
+            for (int i = 0; i < buildCommands.Count; i++)
+            {
+                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
+                toolStripMenuItem.Text = buildCommands[i].Name;
+                toolStripMenuItem.Tag = i;
+                toolStripMenuItem.Click += BuildCommandTrigger_Click;
+                buildCommandToolstripMenu.DropDownItems.Add(toolStripMenuItem);
+
+                if (tabControl.Pages.Count >= 1 && (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() == null || 
+                    !buildCommands[i].Extensions.Contains(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()))))
                 {
-                    ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
-                    toolStripMenuItem.Text = buildCommands[i].Name;
-                    toolStripMenuItem.Tag = i;
-                    toolStripMenuItem.Click += BuildCommandTrigger_Click;
-                    buildCommandToolstripMenu.DropDownItems.Add(toolStripMenuItem);
-
-                    if (tabControl.Pages.Count >= 1 && (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() == null || 
-                        !buildCommands[i].Extensions.Contains(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()))))
-                    {
-                        toolStripMenuItem.Enabled = false;
-                    }
+                    toolStripMenuItem.Enabled = false;
                 }
-            }
-            catch (Exception)
-            {
-                ShowFatalNotification("There was a problem trying to read the build commands configuration file.");
             }
         }
 
         private void ProcessLanguageMappings()
         {
-            try
-            {
-                languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config\\mappings.json");
-            }
-            catch (Exception)
-            {
-               ShowFatalNotification("There was a problem trying to read the language mappings configuration file.");
-            }
+           languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config\\mappings.json");
         }
 
         private void ProcessLanguageDefinitions()
         {
-            try
-            {
-                languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>("config/languages", "json");
-            }
-            catch (Exception)
-            {
-               ShowFatalNotification("There was a problem trying to read the language definitions configuration file.");
-            }
+            languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>("config/languages", "json");
         }
 
         private void ProcessCodeTemplates()
         {
-            try
-            {
-                codeTemplates = configurationService.GetArrayFromFile<CodeTemplate>("config\\templates.json");
-            }
-            catch (Exception)
-            {
-               ShowFatalNotification("There was a problem trying to read the code templates configuration file.");
-            }
+            codeTemplates = configurationService.GetArrayFromFile<CodeTemplate>("config\\templates.json");
         }
 
         // [Event] Form Loading
@@ -3187,14 +3113,7 @@ namespace pie
 
         private void ProcessDatabaseConnections()
         {
-            try
-            {
-                databases = configurationService.GetArrayFromFile<DatabaseConnection>("config/databases.json");
-            }
-            catch (Exception)
-            {
-               ShowFatalNotification("There was a problem trying to read the databases configuration file.");
-            }
+            databases = configurationService.GetArrayFromFile<DatabaseConnection>("config/databases.json");
         }
 
         private void ToolStripMenuItem_Click1(object sender, EventArgs e)
