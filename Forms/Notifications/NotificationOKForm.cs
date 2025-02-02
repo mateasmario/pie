@@ -56,14 +56,7 @@ namespace pie
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            if (Input.CloseAppOnAck)
-            {
-                Application.Exit();
-            }
-            else
-            {
-                this.Close();
-            }
+            this.Close();
         }
     }
 }

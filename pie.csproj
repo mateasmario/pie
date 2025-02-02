@@ -411,6 +411,7 @@
     <Compile Include="Classes\Form IO\Input\AddDatabaseFormInput.cs" />
     <Compile Include="Classes\Form IO\Input\DatabasesFormInput.cs" />
     <Compile Include="Classes\Form IO\Input\GitCloneFormInput.cs" />
+    <Compile Include="Classes\Form IO\Input\NotificationFatalFormInput.cs" />
     <Compile Include="Classes\Form IO\Input\NotificationFormInput.cs" />
     <Compile Include="Classes\Form IO\Input\AboutFormInput.cs" />
     <Compile Include="Classes\Form IO\Input\CheatsheetFormInput.cs" />
@@ -491,6 +492,12 @@
     </Compile>
     <Compile Include="Forms\Git\GitSettingsForm.Designer.cs">
       <DependentUpon>GitSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Notifications\NotificationFatalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Notifications\NotificationFatalForm.Designer.cs">
+      <DependentUpon>NotificationFatalForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Other\AboutForm.cs">
       <SubType>Form</SubType>
@@ -609,6 +616,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Git\GitSettingsForm.resx">
       <DependentUpon>GitSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Notifications\NotificationFatalForm.resx">
+      <DependentUpon>NotificationFatalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Other\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>

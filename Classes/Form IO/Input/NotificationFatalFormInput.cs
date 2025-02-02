@@ -17,19 +17,10 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-/** 
- * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
- * 
- * Copyright (c) 2017 - 2022, Krypton Suite
-*/
-using ComponentFactory.Krypton.Toolkit;
-
 namespace pie.Classes
 {
-    public class NotificationFormInput
+    public class NotificationFatalFormInput
     {
-        public KryptonPalette Palette { get; set; }
-        public EditorProperties EditorProperties { get; set; }
         public string NotificationText { get; set; }
     }
 }
