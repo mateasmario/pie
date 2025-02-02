@@ -31,5 +31,6 @@ namespace pie.Classes
         public KryptonPalette Palette { get; set; }
         public EditorProperties EditorProperties { get; set; }
         public string NotificationText { get; set; }
+        public bool CloseAppOnAck { get; set; }
     }
 }

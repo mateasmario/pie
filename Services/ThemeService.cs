@@ -17,9 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using System.Drawing;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using pie.Classes;
 
 /** 
@@ -42,98 +40,6 @@ namespace pie.Services
 {
     internal class ThemeService
     {
-        public static ThemeInfo lightTheme;
-        public static ThemeInfo darkTheme;
-
-        static ThemeService()
-        {
-            lightTheme = new ThemeInfo();
-            darkTheme = new ThemeInfo();
-
-            lightTheme.Primary = Color.FromArgb(245, 245, 245);
-            lightTheme.Secondary = Color.FromArgb(235, 235, 235);
-            lightTheme.Button = Color.FromArgb(220, 220, 220);
-            lightTheme.ButtonFrame = Color.FromArgb(190, 190, 190);
-            lightTheme.ButtonHover = Color.FromArgb(205, 205, 205);
-            lightTheme.Fore = Color.Black;
-            lightTheme.FormBorder = Color.FromArgb(175, 175, 175);
-            lightTheme.Selection = Color.FromArgb(184, 184, 184);
-            lightTheme.CaretLineBack = Color.FromArgb(230, 230, 230);
-            lightTheme.NumberMargin = Color.FromArgb(225, 225, 225);
-            lightTheme.Folding = Color.FromArgb(235, 235, 235);
-            lightTheme.Comment = Color.FromArgb(180, 180, 180);
-            lightTheme.CommentLine = Color.FromArgb(0, 128, 0);
-            lightTheme.Number = Color.FromArgb(194, 127, 25);
-            lightTheme.Word = Color.FromArgb(50, 125, 168);
-            lightTheme.String = Color.FromArgb(43, 158, 131);
-            lightTheme.Operator = Color.FromArgb(128, 0, 128);
-            lightTheme.Preprocessor = Color.FromArgb(128, 0, 128);
-            lightTheme.Triple = Color.FromArgb(127, 0, 0);
-            lightTheme.CommentBlock = Color.FromArgb(127, 127, 127);
-            lightTheme.Decorator = Color.FromArgb(186, 119, 2);
-            lightTheme.Attribute = Color.FromArgb(128, 0, 128);
-            lightTheme.Entity = Color.FromArgb(128, 0, 128);
-            lightTheme.User1 = Color.FromArgb(128, 128, 128);
-            lightTheme.User2 = Color.FromArgb(255, 0, 128);
-            lightTheme.IconType = "dark";
-            lightTheme.Name = "Light";
-
-            darkTheme.Primary = Color.FromArgb(40, 40, 40);
-            darkTheme.Secondary = Color.FromArgb(50, 50, 50);
-            darkTheme.Button = Color.FromArgb(70, 70, 70);
-            darkTheme.ButtonFrame = Color.FromArgb(100, 100, 100);
-            darkTheme.ButtonHover = Color.FromArgb(85, 85, 85);
-            darkTheme.Fore = Color.White;
-            darkTheme.FormBorder = Color.FromArgb(90, 90, 90);
-            darkTheme.Selection = Color.FromArgb(92, 92, 92);
-            darkTheme.ButtonHover = Color.FromArgb(85, 85, 85);
-            darkTheme.CaretLineBack = Color.FromArgb(50, 50, 50);
-            darkTheme.NumberMargin = Color.FromArgb(46, 46, 46);
-            darkTheme.Folding = Color.FromArgb(50, 50, 50);
-            darkTheme.Comment = Color.FromArgb(192, 192, 192);
-            darkTheme.CommentLine = Color.FromArgb(0, 128, 0);
-            darkTheme.Number = Color.FromArgb(242, 161, 39);
-            darkTheme.Word = Color.FromArgb(60, 170, 232);
-            darkTheme.String = Color.FromArgb(56, 207, 172);
-            darkTheme.Operator = Color.FromArgb(222, 2, 222);
-            darkTheme.Preprocessor = Color.FromArgb(222, 2, 222);
-            darkTheme.Triple = Color.FromArgb(207, 2, 2);
-            darkTheme.CommentBlock = Color.FromArgb(153, 153, 153);
-            darkTheme.Decorator = Color.FromArgb(230, 222, 5);
-            darkTheme.Attribute = Color.FromArgb(222, 2, 222);
-            darkTheme.Entity = Color.FromArgb(222, 2, 222);
-            darkTheme.User1 = Color.FromArgb(128, 128, 128);
-            darkTheme.User2 = Color.FromArgb(255, 0, 128);
-            darkTheme.IconType = "light";
-            darkTheme.Name = "Dark";
-        }
-
-        public ThemeInfo GetThemeInternal(string themeName, List<ThemeInfo> themeInfos)
-        {
-            ThemeInfo themeInfo = null;
-
-            if (themeName == "light")
-            {
-                return lightTheme;
-            }
-            else if (themeName == "dark")
-            {
-                return darkTheme;
-            }
-            else
-            {
-                foreach (ThemeInfo t in themeInfos)
-                {
-                    if (themeInfo.Name == themeName)
-                    {
-                        return themeInfo;
-                    }
-                }
-            }
-
-            return lightTheme;
-        }
-
         public void SetPaletteToTheme(KryptonPalette kryptonPalette, ThemeInfo theme)
         {
             // Common
@@ -261,7 +167,6 @@ namespace pie.Services
             kryptonPalette.ContextMenu.StateNormal.ItemTextStandard.ShortText.Color2 = theme.Fore;
         }
 
-        // [Method] Sets the corresponding theme colors to the code editor's background, text and margins.
         public void ColorizeTextArea(Scintilla TextArea, ThemeInfo theme)
         {
             TextArea.StyleResetDefault();

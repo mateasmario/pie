@@ -105,6 +105,7 @@ namespace pie.Forms.Format
             {
                 Formatter selectedFormatOption = Input.Formatters.Find(formatter => ((Formatter)formatOptionsListView.SelectedObject).Name == formatter.Name);
                 Output.Text = selectedFormatOption.InvokeMethod(Input.Text);
+                Output.Saved = true;
                 this.Close();
             }
         }

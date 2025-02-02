@@ -21,6 +21,7 @@ namespace pie.Classes
 {
     public class FormatFormOutput
     {
-        public string Text { get; set; }   
+        public string Text { get; set; }
+        public bool Saved { get; set; }
     }
 }

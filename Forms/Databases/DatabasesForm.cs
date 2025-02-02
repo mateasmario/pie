@@ -108,6 +108,14 @@ namespace pie.Forms.Databases
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
             AddDatabaseForm addDatabaseForm = new AddDatabaseForm();
+
+            AddDatabaseFormInput addDatabaseFormInput = new AddDatabaseFormInput();
+            addDatabaseFormInput.EditorProperties = Input.EditorProperties;
+            addDatabaseFormInput.Palette = Input.Palette;
+            addDatabaseFormInput.ActiveTheme = Input.ActiveTheme;
+
+            addDatabaseForm.Input = addDatabaseFormInput;
+
             addDatabaseForm.ShowDialog();
 
             if (addDatabaseForm.Output.Database != null)
@@ -179,6 +187,10 @@ namespace pie.Forms.Databases
 
                 AddDatabaseFormInput addDatabaseFormInput = new AddDatabaseFormInput();
                 addDatabaseFormInput.Database = databaseConnection;
+                addDatabaseFormInput.EditorProperties = Input.EditorProperties;
+                addDatabaseFormInput.Palette = Input.Palette;
+                addDatabaseFormInput.ActiveTheme = Input.ActiveTheme;
+
                 addDatabaseForm.Input = addDatabaseFormInput;
 
                 addDatabaseForm.ShowDialog();

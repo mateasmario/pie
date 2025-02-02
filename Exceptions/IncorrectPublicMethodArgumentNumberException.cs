@@ -17,11 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 */
 
-using System;
+using System.Configuration;
 
 namespace pie.Exceptions
 {
-    public class IncorrectPublicMethodArgumentNumberException : Exception
+    public class IncorrectPublicMethodArgumentNumberException : ConfigurationException
     {
     }
 }

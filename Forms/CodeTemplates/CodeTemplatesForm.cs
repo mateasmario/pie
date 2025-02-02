@@ -171,7 +171,7 @@ namespace pie.Forms.CodeTemplates
                 SaveCurrentTemplate();
             }
 
-            selectedIndex = Convert.ToInt32(kryptonCheckButton.Name.Remove(0, 11));
+            selectedIndex = Convert.ToInt32(kryptonCheckButton.Text);
             SyncScintillaWithSelectedTemplate((Scintilla)textAreaPanel.Controls[1]);
 
             saveButton.Enabled = true;

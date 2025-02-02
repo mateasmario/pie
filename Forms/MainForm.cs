@@ -181,6 +181,7 @@ namespace pie
             ProcessGitCredentials();
             ProcessThemes();
             ProcessEditorProperties();
+            ProcessFormatterDLLs();
             ProcessBuildCommands();
             ProcessDatabaseConnections();
             ProcessLanguageMappings();
@@ -207,31 +208,19 @@ namespace pie
                 ProcessCustomThemes();
                 SelectedTheme selectedTheme = configurationService.GetObjectFromFile<SelectedTheme>(AppDomain.CurrentDomain.BaseDirectory + "config/theme.json");
 
-                if (selectedTheme.Name == "Dark")
+                foreach (ThemeInfo t in themeInfos)
                 {
-                    activeTheme = ThemeService.darkTheme;
-                }
-                else if (selectedTheme.Name == "Light")
-                {
-                    activeTheme = ThemeService.lightTheme;
-                }
-                else
-                {
-                    foreach (ThemeInfo t in themeInfos)
+                    if (t.Name == selectedTheme.Name)
                     {
-                        if (t.Name == selectedTheme.Name)
-                        {
-                            activeTheme = t;
-                        }
+                        activeTheme = t;
                     }
                 }
 
                 ScintillaLexerService.ResetDictionary(activeTheme);
             }
-            catch (FileNotFoundException)
+            catch (Exception)
             {
-                activeTheme = ThemeService.lightTheme;
-                configurationService.WriteToFile("config/theme.json", new SelectedTheme("light"));
+               ShowFatalNotification("There was a problem trying to read the active theme configuration file.");
             }
         }
 
@@ -249,16 +238,23 @@ namespace pie
             }
 
 
-            themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>("config\\themes", "json");
-
-            foreach (ThemeInfo themeInfo in themeInfos)
+            try
             {
-                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
-                toolStripMenuItem.Text = themeInfo.Name;
+                themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>("config\\themes", "json");
 
-                toolStripMenuItem.Click += ToolStripMenuItem_Click1;
+                foreach (ThemeInfo themeInfo in themeInfos)
+                {
+                    ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
+                    toolStripMenuItem.Text = themeInfo.Name;
 
-                themeSettingsToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
+                    toolStripMenuItem.Click += ToolStripMenuItem_Click1;
+
+                    themeSettingsToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
+                }
+            }
+            catch (Exception)
+            {
+                ShowFatalNotification("There was a problem trying to read the themes configuration folder.");
             }
         }
 
@@ -334,11 +330,14 @@ namespace pie
                 }
 
             }
-            catch (FileNotFoundException)
+            catch (Exception)
             {
-                configurationService.WriteToFile("config/scintilla.json", new EditorProperties(false, false, false));
+               ShowFatalNotification("There was a problem trying to read the editor properties configuration file.");
             }
+        }
 
+        private void ProcessFormatterDLLs()
+        {
             try
             {
                 formatters = configurationService.LoadLinkLibrariesFromMultipleFiles<Formatter>(
@@ -349,25 +348,9 @@ namespace pie
                                     .WithMethodReturnType(typeof(string))
                                     .Build());
             }
-            catch (IncorrectPublicMethodArgumentNumberException)
+            catch (Exception)
             {
-                ShowNotification("Public method needs to have a single parameter.");
-            }
-            catch (IncorrectPublicMethodArgumentTypeException)
-            {
-                ShowNotification("Public method argument type needs to be string.");
-            }
-            catch (IncorrectPublicMethodCountException)
-            {
-                ShowNotification("Formatter class needs to have a single public method.");
-            }
-            catch (IncorrectPublicMethodNameException)
-            {
-                ShowNotification("Public method name needs to be 'format'.");
-            }
-            catch (IncorrectPublicMethodReturnTypeException)
-            {
-                ShowNotification("Public method return type needs to be string.");
+               ShowFatalNotification("There was a problem trying to read the formatters DLL folder.");
             }
         }
 
@@ -375,12 +358,7 @@ namespace pie
         {
             this.MinimumSize = new Size(1036, 634);
 
-            CustomColorTable customColorTable = new CustomColorTable();
-            customColorTable.InputThemeInfo = activeTheme;
-
-            CustomToolStripRenderer customToolStripRenderer = new CustomToolStripRenderer(customColorTable);
-            customToolStripRenderer.InputThemeInfo = activeTheme;
-            mainMenuStrip.Renderer = customToolStripRenderer;
+            SynchronizeCustomControls();
 
             ResetFindPanelLocation();
             ResetDirectoryPanelLocation();
@@ -407,6 +385,16 @@ namespace pie
             tabControl.AllowPageReorder = false;
 
             replaceTextBox.KeyDown += ReplaceTextBox_KeyDown;
+        }
+
+        private void SynchronizeCustomControls()
+        {
+            CustomColorTable customColorTable = new CustomColorTable();
+            customColorTable.InputThemeInfo = activeTheme;
+
+            CustomToolStripRenderer customToolStripRenderer = new CustomToolStripRenderer(customColorTable);
+            customToolStripRenderer.InputThemeInfo = activeTheme;
+            mainMenuStrip.Renderer = customToolStripRenderer;
         }
 
         private void ProcessCommandLineArguments()
@@ -1294,6 +1282,21 @@ namespace pie
             notificationOkForm.ShowDialog();
         }
 
+        public void ShowFatalNotification(string text)
+        {
+            NotificationOKForm notificationOkForm = new NotificationOKForm();
+
+            NotificationFormInput notificationFormInput = new NotificationFormInput();
+            notificationFormInput.EditorProperties = new EditorProperties();
+            notificationFormInput.Palette = kryptonPalette;
+            notificationFormInput.NotificationText = text;
+            notificationFormInput.CloseAppOnAck = true;
+
+            notificationOkForm.Input = notificationFormInput;
+
+            notificationOkForm.ShowDialog();
+        }
+
         public NotificationYesNoCancelFormOutput ShowYesNoCancelNotification(string text)
         {
             NotificationYesNoCancelForm notificationYesNoCancelForm = new NotificationYesNoCancelForm();
@@ -1418,13 +1421,9 @@ namespace pie
                     }
                 }
             }
-            catch (FileNotFoundException ex)
+            catch (Exception)
             {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/build.json", "[]");
-            }
-            catch (ConfigurationException ex)
-            {
-                ShowNotification("There was an error in reading the build commands. Please check the syntax of the .json configuration.");
+                ShowFatalNotification("There was a problem trying to read the build commands configuration file.");
             }
         }
 
@@ -1434,13 +1433,9 @@ namespace pie
             {
                 languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config\\mappings.json");
             }
-            catch (FileNotFoundException ex)
+            catch (Exception)
             {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/mappings.json", "[]");
-            }
-            catch (ConfigurationException)
-            {
-                ShowNotification("There was an error in reading the language mappings. Please check the syntax of the .json configuration.");
+               ShowFatalNotification("There was a problem trying to read the language mappings configuration file.");
             }
         }
 
@@ -1450,13 +1445,9 @@ namespace pie
             {
                 languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>("config/languages", "json");
             }
-            catch (FileNotFoundException)
+            catch (Exception)
             {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/mappings.json", "[]");
-            }
-            catch (ConfigurationException)
-            {
-                ShowNotification("There was an error in reading the language definitions. Please check the syntax of the .json configuration.");
+               ShowFatalNotification("There was a problem trying to read the language definitions configuration file.");
             }
         }
 
@@ -1466,13 +1457,9 @@ namespace pie
             {
                 codeTemplates = configurationService.GetArrayFromFile<CodeTemplate>("config\\templates.json");
             }
-            catch (FileNotFoundException ex)
+            catch (Exception)
             {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/mappings.json", "[]");
-            }
-            catch (ConfigurationException)
-            {
-                ShowNotification("There was an error in reading the code templates. Please check the syntax of the .json configuration.");
+               ShowFatalNotification("There was a problem trying to read the code templates configuration file.");
             }
         }
 
@@ -3061,6 +3048,8 @@ namespace pie
                 kryptonButton7.Values.Image = Properties.Resources.push_white;
                 kryptonButton11.Values.Image = Properties.Resources.log_white;
             }
+
+            SynchronizeCustomControls();
         }
 
         private void regexCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -3185,6 +3174,8 @@ namespace pie
             databasesFormInput.Palette = kryptonPalette;
             databasesFormInput.EditorProperties = editorProperties;
             databasesFormInput.ActiveTheme = activeTheme;
+            
+            databasesForm.Input = databasesFormInput;
 
             databasesForm.ShowDialog();
 
@@ -3200,24 +3191,10 @@ namespace pie
             {
                 databases = configurationService.GetArrayFromFile<DatabaseConnection>("config/databases.json");
             }
-            catch (FileNotFoundException ex)
+            catch (Exception)
             {
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "config/databases.json", "[]");
+               ShowFatalNotification("There was a problem trying to read the databases configuration file.");
             }
-            catch (ConfigurationException)
-            {
-                ShowNotification("There was an error in reading the database connections. Please check the syntax of the .json configuration.");
-            }
-        }
-
-        private void lightToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ChangeTheme(ThemeService.lightTheme);
-        }
-
-        private void darkToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ChangeTheme(ThemeService.darkTheme);
         }
 
         private void ToolStripMenuItem_Click1(object sender, EventArgs e)
@@ -3303,10 +3280,13 @@ namespace pie
             
             formatForm.ShowDialog();
 
-            int currPos = TextArea.CurrentPosition;
-            TextArea.Text = formatForm.Output.Text;
-            TextArea.SelectionStart = currPos;
-            TextArea.SelectionEnd = currPos;
+            if (formatForm.Output.Saved)
+            {
+                int currPos = TextArea.CurrentPosition;
+                TextArea.Text = formatForm.Output.Text;
+                TextArea.SelectionStart = currPos;
+                TextArea.SelectionEnd = currPos;
+            }
         }
 
         private void glassModeToolStripMenuItem_Click(object sender, EventArgs e)
