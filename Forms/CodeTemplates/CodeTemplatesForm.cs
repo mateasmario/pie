@@ -217,5 +217,11 @@ namespace pie.Forms.CodeTemplates
                 scintilla.Text = "";
             }
         }
+
+        private void CodeTemplatesForm_Resize(object sender, EventArgs e)
+        {
+            buttonPanel.Left = (this.Width - buttonPanel.Width) / 2;
+            placeholderLabel.Left = (this.Width - placeholderLabel.Width) / 2;
+        }
     }
 }
