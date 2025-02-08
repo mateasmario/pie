@@ -130,6 +130,13 @@ namespace pie
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
             AddBuildCommandForm addBuildCommandForm = new AddBuildCommandForm();
+
+            AddBuildCommandFormInput addBuildCommandFormInput = new AddBuildCommandFormInput();
+            addBuildCommandFormInput.EditorProperties = Input.EditorProperties;
+            addBuildCommandFormInput.Palette = Input.Palette;
+
+            addBuildCommandForm.Input = addBuildCommandFormInput;
+
             addBuildCommandForm.ShowDialog();
 
             BuildCommand outputBuildCommand = addBuildCommandForm.Output.BuildCommand;
@@ -184,7 +191,7 @@ namespace pie
 
                 addBuildCommandForm.ShowDialog();
 
-                if (addBuildCommandForm.Output != null)
+                if (addBuildCommandForm.Output != null && addBuildCommandForm.Output.BuildCommand != null)
                 {
                     bool exists = false;
 

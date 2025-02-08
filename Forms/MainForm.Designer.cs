@@ -462,7 +462,7 @@
             // 
             this.showBuildToolsToolStripMenuItem.Image = global::pie.Properties.Resources.terminal;
             this.showBuildToolsToolStripMenuItem.Name = "showBuildToolsToolStripMenuItem";
-            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showBuildToolsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
             this.showBuildToolsToolStripMenuItem.Click += new System.EventHandler(this.showBuildToolsToolStripMenuItem_Click);
             // 
@@ -470,7 +470,7 @@
             // 
             this.showGitTabToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showGitTabToolStripMenuItem.Image")));
             this.showGitTabToolStripMenuItem.Name = "showGitTabToolStripMenuItem";
-            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showGitTabToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.showGitTabToolStripMenuItem.Text = "Show Git Tab";
             this.showGitTabToolStripMenuItem.Click += new System.EventHandler(this.showGitTabToolStripMenuItem_Click);
             // 
@@ -479,14 +479,14 @@
             this.themeSettingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.themeSettingsToolStripMenuItem.Image = global::pie.Properties.Resources.color_wheel;
             this.themeSettingsToolStripMenuItem.Name = "themeSettingsToolStripMenuItem";
-            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.themeSettingsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.themeSettingsToolStripMenuItem.Text = "Themes";
             // 
             // themeDesignerToolStripMenuItem
             // 
             this.themeDesignerToolStripMenuItem.Image = global::pie.Properties.Resources.graphic_designer;
             this.themeDesignerToolStripMenuItem.Name = "themeDesignerToolStripMenuItem";
-            this.themeDesignerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.themeDesignerToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.themeDesignerToolStripMenuItem.Text = "Theme Designer";
             this.themeDesignerToolStripMenuItem.Click += new System.EventHandler(this.themeDesignerToolStripMenuItem_Click);
             // 
@@ -494,7 +494,7 @@
             // 
             this.glassModeToolStripMenuItem.Image = global::pie.Properties.Resources.transparency;
             this.glassModeToolStripMenuItem.Name = "glassModeToolStripMenuItem";
-            this.glassModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.glassModeToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.glassModeToolStripMenuItem.Text = "Enable Glass Effect";
             this.glassModeToolStripMenuItem.Click += new System.EventHandler(this.glassModeToolStripMenuItem_Click);
             // 
@@ -502,7 +502,7 @@
             // 
             this.cheatsheetToolStripMenuItem.Image = global::pie.Properties.Resources.open_book;
             this.cheatsheetToolStripMenuItem.Name = "cheatsheetToolStripMenuItem";
-            this.cheatsheetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cheatsheetToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.cheatsheetToolStripMenuItem.Text = "Cheatsheet";
             this.cheatsheetToolStripMenuItem.Click += new System.EventHandler(this.cheatsheetToolStripMenuItem_Click);
             // 
@@ -510,7 +510,7 @@
             // 
             this.updateToolStripMenuItem.Image = global::pie.Properties.Resources.update;
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.updateToolStripMenuItem.Text = "Update to x";
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
@@ -518,7 +518,7 @@
             // 
             this.aboutPieToolStripMenuItem.Image = global::pie.Properties.Resources.info;
             this.aboutPieToolStripMenuItem.Name = "aboutPieToolStripMenuItem";
-            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutPieToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.aboutPieToolStripMenuItem.Text = "About pie";
             this.aboutPieToolStripMenuItem.Click += new System.EventHandler(this.aboutPieToolStripMenuItem_Click);
             // 
@@ -621,6 +621,7 @@
             this.kryptonRibbon1.RibbonStyles.GroupButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupClusterButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonRibbon1.RibbonStyles.GroupCollapsedButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = null;
             this.kryptonRibbon1.ShowMinimizeButton = false;
             this.kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
