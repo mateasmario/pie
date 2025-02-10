@@ -1090,18 +1090,11 @@ namespace pie
             }
         }
 
-        public void NewTerminalTab(string process, bool beginning)
+        public void NewTerminalTab(string process, int position)
         {
             KryptonPage kryptonPage = new KryptonPage();
 
-            if (beginning)
-            {
-                terminalTabControl.Pages.Insert(0, kryptonPage);
-            }
-            else
-            {
-                terminalTabControl.Pages.Add(kryptonPage);
-            }
+            terminalTabControl.Pages.Insert(position, kryptonPage);
 
             ConEmuControl conEmuControl = new ConEmuControl();
 
@@ -1162,7 +1155,7 @@ namespace pie
 
             if (termCount < 1)
             {
-                NewTerminalTab("cmd.exe", false);
+                NewTerminalTab("cmd.exe", terminalTabControl.Pages.Count);
             }
         }
 
@@ -1215,7 +1208,7 @@ namespace pie
         {
             if (terminalTabControl.Pages.Count == 0)
             {
-                NewTerminalTab("cmd.exe", false);
+                NewTerminalTab("cmd.exe", terminalTabControl.Pages.Count);
             }
 
             ToggleTerminalTabControl(visible);
@@ -1817,14 +1810,24 @@ namespace pie
                 {
                     BuildCommand buildCommand = buildCommands[tag];
 
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.FileName = "cmd.exe";
-
                     string scriptName = parsingService.GetFileName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
                     string command = buildCommand.Command;
                     command = command.Replace("$FILE", scriptName);
                     ToggleTerminalTabControlWithInitialization(true);
-                    NewTerminalTab(command, false);
+
+                    int insertPosition = terminalTabControl.Pages.Count;
+
+                    for(int i = 0; i < terminalTabControl.Pages.Count; i++)
+                    {
+                        if (terminalTabControl.Pages[i].Text.Equals(command))
+                        {
+                            insertPosition = i;
+                            terminalTabControl.Pages.Remove(terminalTabControl.Pages[i]);
+                            break;
+                        }
+                    }
+
+                    NewTerminalTab(command, insertPosition);
                 }
                 else
                 {
@@ -1930,13 +1933,13 @@ namespace pie
         // [Event] Opens a new cmd terminal (accessed via Terminal tab control)
         private void kryptonContextMenuItem16_Click(object sender, EventArgs e)
         {
-            NewTerminalTab("cmd.exe", false);
+            NewTerminalTab("cmd.exe", terminalTabControl.Pages.Count);
         }
 
         // [Event] Opens a new PowerShell terminal (accessed via Terminal tab control)
         private void kryptonContextMenuItem17_Click(object sender, EventArgs e)
         {
-            NewTerminalTab("powershell.exe", false);
+            NewTerminalTab("powershell.exe", terminalTabControl.Pages.Count);
         }
 
         // [Event] Close remaining processes after form gets closed
