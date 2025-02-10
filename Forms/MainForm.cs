@@ -315,7 +315,7 @@ namespace pie
         private void ProcessFormatterDLLs()
         {
             formatters = configurationService.LoadLinkLibrariesFromMultipleFiles<Formatter>(
-                                "formatters",
+                                AppDomain.CurrentDomain.BaseDirectory + "formatters",
                                 new MethodValidator.Builder()
                                 .WithMethodName("Format")
                                 .WithMethodParameterCount(1)

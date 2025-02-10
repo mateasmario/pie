@@ -272,7 +272,7 @@ namespace pie.Services
                     if (parsingService.GetFileExtension(file) == "dll")
                     {
                         Assembly externalAssembly = Assembly.LoadFrom(file);
-                        string className = parsingService.RemoveFileExtension(file).Substring(11);
+                        string className = parsingService.RemoveFileExtension(parsingService.GetFileName(file));
                         Type externalType = externalAssembly.GetType(className);
                         object instance = Activator.CreateInstance(externalType);
 
