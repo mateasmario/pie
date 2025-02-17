@@ -1570,13 +1570,7 @@ namespace pie
                 {
                     StartFind();
                 }
-
-                if (e.Modifiers == Keys.Control)
-                {
-                    e.SuppressKeyPress = true;
-                }
             }
-
 
             if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
             {
@@ -1605,59 +1599,6 @@ namespace pie
                 {
                     ShowDirectoryNavigator();
                 }
-                else if (e.KeyCode == Keys.X && e.Modifiers == Keys.Control)
-                {
-                    Scintilla TextArea = (Scintilla)sender;
-
-                    // If nothing is selected, cut the whole line
-                    if (TextArea.SelectedText.Length == 0)
-                    {
-                        CutLine(TextArea);
-                        e.SuppressKeyPress = true;
-                    }
-                }
-                else if (e.KeyCode == Keys.Down && e.Modifiers == Keys.Control)
-                {
-                    Scintilla TextArea = (Scintilla)sender;
-
-                    if (TextArea.Text.Length > 0)
-                    {
-                        int selectionEnd = TextArea.SelectionEnd;
-
-                        if (selectionEnd < TextArea.Text.Length - 1 && TextArea.Text[selectionEnd] == '\n')
-                        {
-                            selectionEnd++;
-                        }
-
-                        while (selectionEnd < TextArea.Text.Length - 1 && TextArea.Text[selectionEnd] != '\n')
-                        {
-                            selectionEnd++;
-                        }
-
-                        TextArea.SelectionEnd = selectionEnd + 1;
-                    }
-                }
-                else if (e.KeyCode == Keys.Up && e.Modifiers == Keys.Control)
-                {
-                    Scintilla TextArea = (Scintilla)sender;
-
-                    if (TextArea.Text.Length > 0)
-                    {
-                        int selectionStart = TextArea.SelectionStart  - 1;
-
-                        if (selectionStart > 0 && TextArea.Text[selectionStart] == '\n')
-                        {
-                            selectionStart--;
-                        }
-
-                        while (selectionStart > 0 && TextArea.Text[selectionStart] != '\n')
-                        {
-                            selectionStart--;
-                        }
-
-                        TextArea.SelectionStart = selectionStart == 0 ? selectionStart : selectionStart + 1;
-                    }
-                }
                 else if (e.KeyCode.ToString().Length >= 2 && e.KeyCode.ToString()[1] >= '0' && e.KeyCode.ToString()[1] <= '9' && e.Modifiers == Keys.Control)
                 {
                     CodeTemplate codeTemplate = codeTemplates.Find(template => template.Index == Convert.ToInt32(e.KeyCode.ToString().Substring(1, 1)));
@@ -1670,6 +1611,62 @@ namespace pie
                         scintilla.Text = scintilla.Text.Substring(0, scintilla.SelectionEnd) + codeTemplate.Content + scintilla.Text.Substring(scintilla.SelectionEnd);
                         scintilla.SelectionStart = selectionEnd + codeTemplate.Content.Length;
                         scintilla.SelectionEnd = scintilla.SelectionStart;
+                    }
+                }
+                else if (sender is Scintilla)
+                {
+                    if (e.KeyCode == Keys.X && e.Modifiers == Keys.Control)
+                    {
+                        Scintilla TextArea = (Scintilla)sender;
+
+                        // If nothing is selected, cut the whole line
+                        if (TextArea.SelectedText.Length == 0)
+                        {
+                            CutLine(TextArea);
+                            e.SuppressKeyPress = true;
+                        }
+                    }
+                    else if (e.KeyCode == Keys.Down && e.Modifiers == Keys.Control)
+                    {
+                        Scintilla TextArea = (Scintilla)sender;
+
+                        if (TextArea.Text.Length > 0)
+                        {
+                            int selectionEnd = TextArea.SelectionEnd;
+
+                            if (selectionEnd < TextArea.Text.Length - 1 && TextArea.Text[selectionEnd] == '\n')
+                            {
+                                selectionEnd++;
+                            }
+
+                            while (selectionEnd < TextArea.Text.Length - 1 && TextArea.Text[selectionEnd] != '\n')
+                            {
+                                selectionEnd++;
+                            }
+
+                            TextArea.SelectionEnd = selectionEnd + 1;
+                        }
+                    }
+                    else if (e.KeyCode == Keys.Up && e.Modifiers == Keys.Control)
+                    {
+                        Scintilla TextArea = (Scintilla)sender;
+
+                        if (TextArea.Text.Length > 0)
+                        {
+                            int selectionStart = TextArea.SelectionStart - 1;
+
+                            if (selectionStart > 0 && TextArea.Text[selectionStart] == '\n')
+                            {
+                                selectionStart--;
+                            }
+
+                            while (selectionStart > 0 && TextArea.Text[selectionStart] != '\n')
+                            {
+                                selectionStart--;
+                            }
+
+                            TextArea.SelectionStart = selectionStart == 0 ? selectionStart : selectionStart + 1;
+                        }
                     }
                 }
             }
