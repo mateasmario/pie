@@ -1,21 +1,5 @@
-﻿/** Copyright (C) 2023  Mario-Mihai Mateas
- * 
- * This file is part of pie.
- * 
- * pie is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * 
- * along with this program.  If not, see <https://www.gnu.org/licenses/>. 
-*/
+﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 
 using System;
 using System.Collections.Generic;
@@ -217,13 +201,13 @@ namespace pie
 
         private void ProcessCustomThemes()
         {
-            if (themeSettingsToolStripMenuItem.DropDownItems.Count > 0)
+            if (themesToolStripMenuItem.DropDownItems.Count > 0)
             {
-                int removeCount = themeSettingsToolStripMenuItem.DropDownItems.Count;
+                int removeCount = themesToolStripMenuItem.DropDownItems.Count;
 
                 while (removeCount > 0)
                 {
-                    themeSettingsToolStripMenuItem.DropDownItems.RemoveAt(0);
+                    themesToolStripMenuItem.DropDownItems.RemoveAt(0);
                     removeCount--;
                 }
             }
@@ -238,7 +222,7 @@ namespace pie
 
                 toolStripMenuItem.Click += ToolStripMenuItem_Click1;
 
-                themeSettingsToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
+                themesToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
             }
         }
 
@@ -298,7 +282,7 @@ namespace pie
 
             if (editorProperties.Wordwrap)
             {
-                wordWrapToolStripMenuItem.Text = "Disable Word Wrap";
+                enableWordWrapToolStripMenuItem.Text = "Disable Word Wrap";
             }
 
             if (editorProperties.Autosave)
@@ -308,7 +292,7 @@ namespace pie
 
             if (editorProperties.Glass)
             {
-                glassModeToolStripMenuItem.Text = "Disable Glass Effect";
+                enableGlassEffectToolStripMenuItem.Text = "Disable Glass Effect";
             }
         }
 
@@ -1181,7 +1165,7 @@ namespace pie
         {
             FillContextMenu(extension);
 
-            foreach(ToolStripMenuItem toolStripMenuItem in buildCommandToolstripMenu.DropDownItems)
+            foreach(ToolStripMenuItem toolStripMenuItem in buildAndRunToolstripMenuItem.DropDownItems)
             {
                 int buildCommandIndex = (int)toolStripMenuItem.Tag;
                 BuildCommand buildCommand = buildCommands[buildCommandIndex];
@@ -1198,7 +1182,7 @@ namespace pie
             DeleteFileActions();
             RemoveSuggestedActions();
 
-            foreach (ToolStripMenuItem toolStripMenuItem in buildCommandToolstripMenu.DropDownItems)
+            foreach (ToolStripMenuItem toolStripMenuItem in buildAndRunToolstripMenuItem.DropDownItems)
             {
                 toolStripMenuItem.Enabled = false;
             }
@@ -1220,12 +1204,12 @@ namespace pie
 
             if (status)
             {
-                showBuildToolsToolStripMenuItem.Text = "Hide Terminal Tab";
+                showTerminalTabToolStripMenuItem.Text = "Hide Terminal Tab";
                 kryptonContextMenuItem15.Text = "Hide Terminal Tab";
             }
             else
             {
-                showBuildToolsToolStripMenuItem.Text = "Show Terminal Tab";
+                showTerminalTabToolStripMenuItem.Text = "Show Terminal Tab";
                 kryptonContextMenuItem15.Text = "Show Terminal Tab";
             }
         }
@@ -1338,13 +1322,13 @@ namespace pie
 
         private void ProcessBuildCommands()
         {
-            if (buildCommandToolstripMenu.DropDownItems.Count > 0)
+            if (buildAndRunToolstripMenuItem.DropDownItems.Count > 0)
             {
-                int removeCount = buildCommandToolstripMenu.DropDownItems.Count;
+                int removeCount = buildAndRunToolstripMenuItem.DropDownItems.Count;
 
                 while (removeCount > 0)
                 {
-                    buildCommandToolstripMenu.DropDownItems.RemoveAt(0);
+                    buildAndRunToolstripMenuItem.DropDownItems.RemoveAt(0);
                     removeCount--;
                 }
             }
@@ -1357,7 +1341,7 @@ namespace pie
                 toolStripMenuItem.Text = buildCommands[i].Name;
                 toolStripMenuItem.Tag = i;
                 toolStripMenuItem.Click += BuildCommandTrigger_Click;
-                buildCommandToolstripMenu.DropDownItems.Add(toolStripMenuItem);
+                buildAndRunToolstripMenuItem.DropDownItems.Add(toolStripMenuItem);
 
                 if (tabControl.Pages.Count >= 1 && (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() == null || 
                     !buildCommands[i].Extensions.Contains(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()))))
@@ -1453,14 +1437,14 @@ namespace pie
             {
                 kryptonContextMenuItem3.Enabled = false;
 
-                saveFileToolStripMenuItem.Enabled = false;
+                saveToolStripMenuItem.Enabled = false;
                 saveAsToolStripMenuItem.Enabled = false;
             }
             else
             {
                 kryptonContextMenuItem3.Enabled = true;
 
-                saveFileToolStripMenuItem.Enabled = true;
+                saveToolStripMenuItem.Enabled = true;
                 saveAsToolStripMenuItem.Enabled = true;
             }
         }
@@ -1842,7 +1826,7 @@ namespace pie
             {
                 if (tabInfos[indexToMoveTo].getTabType() == TabType.CODE)
                 {
-                    smartFormatterToolStripMenuItem.Enabled = true;
+                    formatToolStripMenuItem.Enabled = true;
 
                     tabControl.KryptonContextMenu = codeContextMenu;
 
@@ -1859,7 +1843,7 @@ namespace pie
                 }
                 else
                 {
-                    smartFormatterToolStripMenuItem.Enabled = false;
+                    formatToolStripMenuItem.Enabled = false;
 
                     if (tabInfos[indexToMoveTo].getTabType() == TabType.GIT)
                     {
@@ -3140,12 +3124,12 @@ namespace pie
                     if (status)
                     {
                         scintilla.WrapMode = WrapMode.Word;
-                        wordWrapToolStripMenuItem.Text = "Disable Word Wrap";
+                        enableWordWrapToolStripMenuItem.Text = "Disable Word Wrap";
                     }
                     else
                     {
                         scintilla.WrapMode = WrapMode.None;
-                        wordWrapToolStripMenuItem.Text = "Enable Word Wrap";
+                        enableWordWrapToolStripMenuItem.Text = "Enable Word Wrap";
                     }
                 }
             }
@@ -3214,12 +3198,12 @@ namespace pie
 
             if (editorProperties.Glass)
             {
-                glassModeToolStripMenuItem.Text = "Disable Glass Effect";
+                enableGlassEffectToolStripMenuItem.Text = "Disable Glass Effect";
                 this.Opacity = 0.90;
             }
             else
             {
-                glassModeToolStripMenuItem.Text = "Enable Glass Effect";
+                enableGlassEffectToolStripMenuItem.Text = "Enable Glass Effect";
                 this.Opacity = 1;
             }
 
