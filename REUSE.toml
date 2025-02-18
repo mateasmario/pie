@@ -1,0 +1,31 @@
+version = 1
+
+[[annotations]]
+path = ["Forms/**/*.Designer.cs", "Forms/**/*.resx"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
+SPDX-License-Identifier = "GPL-3.0-or-later"
+
+[[annotations]]
+path = ["Icons/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
+SPDX-License-Identifier = "GPL-3.0-or-later"
+
+[[annotations]]
+path = ["Properties/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
+SPDX-License-Identifier = "GPL-3.0-or-later"
+
+[[annotations]]
+path = ["Resources/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
+SPDX-License-Identifier = "GPL-3.0-or-later"
+
+[[annotations]]
+path = ["README.md", "pie.ico", "pie.sln", "pie.csproj", "pie.csproj.user", ".gitignore", "App.config", "app.manifest", "packages.config"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
+SPDX-License-Identifier = "GPL-3.0-or-later"
