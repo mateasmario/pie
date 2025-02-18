@@ -1,8 +1,3 @@
-<!-- 
-SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> 
-SPDX-License-Identifier: GPL-3.0-or-later 
--->
-
 # ![pie](https://i.imgur.com/mvR0VQv.png) Pie: A General Purpose Code Editor Focused on Simplicity
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![REUSE status](https://api.reuse.software/badge/github.com/mateasmario/pie)](https://api.reuse.software/info/github.com/mateasmario/pie)
