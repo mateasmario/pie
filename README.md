@@ -22,7 +22,7 @@ The Git interface, that allows a simpler view over the Git repository (compared 
 
 Database connection management for MySQL and PostgreSQL is done through [MySQL Connector/NET](https://github.com/mysql/mysql-connector-net) and [Npgsql](https://github.com/npgsql/npgsql). Microsoft SQL (MSSQL) connections are managed by .NET's vanilla methods and do not require an external package to be installed.
 
-JSON configuration is handled by the [NewtonSoft.Json](https://github.com/JamesNK/Newtonsoft.Json) library, which is so popular that it doesn't require an introduction on this page.
+JSON configuration is handled by the [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) library, which is so popular that it doesn't require an introduction on this page.
 
 ## Features
 
