@@ -1,6 +1,7 @@
 # ![pie](https://i.imgur.com/mvR0VQv.png) Pie: A General Purpose Code Editor Focused on Simplicity
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![GitHub Release](https://img.shields.io/github/v/release/mateasmario/pie)](https://github.com/mateasmario/pie/releases/latest) [![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie)](https://github.com/mateasmario/pie/issues)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![REUSE status](https://api.reuse.software/badge/github.com/mateasmario/pie)](https://api.reuse.software/info/github.com/mateasmario/pie)
+ [![GitHub Release](https://img.shields.io/github/v/release/mateasmario/pie)](https://github.com/mateasmario/pie/releases/latest) [![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie)](https://github.com/mateasmario/pie/issues)
 
 Pie is a tool intended to replace existing code editing software in daily tasks such as scripting and text formatting. It has been designed to aid both beginner and experienced developers, providing a simple user interface that doesn't interfere with the main work area of the individual. 
 
