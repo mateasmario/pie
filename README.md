@@ -2,63 +2,30 @@
 
 ![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie/bug) ![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie/enhancement) ![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie/documentation)
 
-Pie is a combination between a text-editor (like Notepad) and an over-simplified IDE, that allows super-fast modification of code files (or other types of files), whenever you don't feel the need to wait for a big IDE to open. It features integrated tabs, in order to give the user the ability to manipulate multiple files at once, without keeping more than one instance of the app open in the same time.
+Pie is a tool intended to replace existing code editing software in daily tasks such as scripting and text formatting. It has been designed to aid both beginner and experienced developers, providing a simple user interface that doesn't interfere with the main work area of the individual. 
 
-Pie also has several Build, Run & Git shortcuts integrated, making your life easier whenever you feel the urge to run a command through the terminal. In case you still need a terminal, pie also has this option!
+The tool comes packed with the most commonly accessed development tools, while supporting various types of plugins, for those who want to extend its functionality for their specific needs.
 
-![image](https://i.imgur.com/B533oZ0.png)
+## Technologies
 
-## Beautiful design
-pie is built in C# using Microsoft's .NET Winforms technology. The main controls use the **Krypton Suite**, available at: https://github.com/ComponentFactory/Krypton. Without Krypton, pie wouldn't be as awesome as it is now.
+Pie has been built on the [Windows Forms](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/?view=netdesktop-9.0) framework (commonly known as "WinForms") relying on .NET 4.7.2. The reason for not using newer user interface frameworks (such as WPF, WinUI or frameworks based on other languages, such as Electron) is the mature community support that WinForms still has to offer to the wide audience. During the years, developers came with open-source implementations for various features that can be easily integrated within a Windows Forms solution, no longer requiring others to implement them from scratch. As the framework's initial release was in 2002, we can conclude that there are more dependencies available for WinForms than for any other framework on the market.
 
-## Simple, but powerful code editor
-As for the boxes you use in order to write content to a file, these were at the beginning instances of **FastColoredTextBox**, available at: https://github.com/PavelTorgashov/FastColoredTextBox. FastColoredTextbox isn't as advanced as professional editors such as Visual Studio Code or IntelliJ, as it doesn't provide autocomplete features or advanced code highlighting, but it is still better than having none of these features at all. Later, I have upgraded to **ScintilaNET**, a .NET implementation of the well-known Scintilla, available at: https://github.com/jacobslusser/ScintillaNET.
+The text editor relies on [ScintillaNET](https://github.com/jacobslusser/ScintillaNET), a C# wrapper of [Scintilla](https://sourceforge.net/projects/scintilla), a popular text editing engine used by products such as Notepad++. Autocomplete features have been provided by [AutoCompleteMenu-ScintillaNET](https://github.com/Ahmad45123/AutoCompleteMenu-ScintillaNET).
 
-## Code highlights and autocomplete
-pie automatically highlights the code in your files. At this moment, it supports some basic ScintillaNET user-submitted highlights, available on https://github.com/jacobslusser/ScintillaNET/wiki/User-Submitted-Recipes and https://github.com/VPKSoft/ScintillaLexers/.
+The overall design of the application is done through the [Krypton](https://github.com/ComponentFactory/Krypton) library, which offers a set controls that are more customizable than the ones offered by the framework itself. Another custom control offering more than its vanilla counterpart is [ObjectListView](https://objectlistview.sourceforge.net/cs/index.html).
 
-The autocomplete feature is also provided through an implementation of AutocompleteMenu-ScintillaNet (see https://github.com/Ahmad45123/AutoCompleteMenu-ScintillaNET).
+Integrated terminals can also be accessed in Pie, and these are nothing more than instances of [ConEmu](https://github.com/Maximus5/ConEmu), adapted to C# through the [ConEmu-Inside](https://github.com/Maximus5/conemu-inside) library.
 
-![image](https://i.imgur.com/PrC4Gz1.png)
+Integrated web browser instances and the Markdown to HTML converter have been provided by [CefSharp](https://github.com/cefsharp/CefSharp) and [Markdig](https://github.com/xoofx/markdig).
 
-## Switch between themes
-pie allows you to change all of its colors. From syntax highlighting to buttons. It provides you several pre-installed themes, but if you feel creative, you can easily add new themes (or modify the existing ones).
+The Git interface, that allows a simpler view over the Git repository (compared to the classic command line tool), has been implemented using the [Libgit2sharp](https://github.com/libgit2/libgit2) pacakge, which is nothing more than a wrapper over [Libgit2](https://github.com/libgit2/libgit2).
 
-![image](https://i.imgur.com/7gE6UzG.png)
+Database connection management for MySQL and PostgreSQL is done through [MySQL Connector/NET](https://github.com/mysql/mysql-connector-net) and [Npgsql](https://github.com/npgsql/npgsql). Microsoft SQL (MSSQL) connections are managed by .NET's vanilla methods and do not require an external package to be installed.
 
-Each `.json` file added to the `config/themes` directory will be made available in the list of pie themes. `Name.json` will be automatically converted to a new theme called `Name`.
+JSON configuration is handled by the [NewtonSoft.Json](https://github.com/JamesNK/Newtonsoft.Json) library, which is so popular that it doesn't require an introduction on this page.
 
-## Terminal
-A Terminal object is actually an instance of **ConEmu Inside** (GitHub Page: https://github.com/Maximus5/conemu-inside), available at: https://www.nuget.org/packages/ConEmu.Control.WinForms.
+## Features
 
-The terminal tab control can be accessed via `Interface` (or right click somewhere in your editor) -> `Show Terminal Tab`, or `Ctrl` + `B`.
-Right click the tab control (either a tab or the empty slots next to the tab) to open the context menu.
+## Extensions
 
-![image](https://i.imgur.com/5dVZlQZ.png)
-
-## Build, Run, and Git functionalities
-You can use both the terminal or the integrated commands (from `Build`, `Run` and `Git` tabs in the upper menu), in order to run some common commands.
-
-![image](https://i.imgur.com/f7KGSY8.png)
-
-Through the `Build` tab, you are able to compile Java or C source files. You are also able to add your own custom Build commands and specify the currently opened file using the `$FILE` placeholder.
-
-![image](https://i.imgur.com/pPooUzU.png)
-
-The `Run` tab allows you to choose what type of file to run (either interpret a Python/Perl script, run a Java class file or interpret an HTML page). 
-
-pie **doesn't** provide any compilers or interpreters. It tries to run the default commands (`javac`, `java`, `gcc`, `py`, ...), meaning that you already need to have these tools installed on your system. Thus meaning, you won't need to worry that the IDE's build tools is going to wrongly mix up with your already-installed tools.
-
-Finally, the `Show Git Tab` button from the `Interface` tab allows you to manage your Git repository in a professional way, allowing you to keep track of all your changes and easily switch between branches.
-
-![image](https://i.imgur.com/n8hB6Zm.png)
-
-## Execute SQL queries against a database
-
-pie provides you the ability to run simple SQL queries against *MySQL*, *MSSQL* or *PostgreSQL* databases. By navigating to `Preferences` -> `Databases`, you will be provided an option to store all of your database connections.
-
-![image](https://i.imgur.com/SBsnXuE.png)
-
-Such databases can be selected through the context menu in a tab where a `.sql` file has been opened.
-
-![image](https://i.imgur.com/hlGNvtb.png)
+## Other useful links
