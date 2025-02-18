@@ -1,10 +1,16 @@
 # ![pie](https://i.imgur.com/mvR0VQv.png) Pie: A General Purpose Code Editor Focused on Simplicity
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![GitHub Release](https://img.shields.io/github/v/release/mateasmario/pie) ![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![GitHub Release](https://img.shields.io/github/v/release/mateasmario/pie)](https://github.com/mateasmario/pie/releases/latest) [![GitHub Issues or Pull Requests by label](https://img.shields.io/github/issues/mateasmario/pie)](https://github.com/mateasmario/pie/issues)
 
 Pie is a tool intended to replace existing code editing software in daily tasks such as scripting and text formatting. It has been designed to aid both beginner and experienced developers, providing a simple user interface that doesn't interfere with the main work area of the individual. 
 
 The tool comes packed with the most commonly accessed development tools, while supporting various types of plugins, for those who want to extend its functionality for their specific needs.
+
+## Motivation
+
+The motivation was pretty personal in the beginning. Pie was intended to be a full replacement for editors I was then using on a common basis. Available text editors such as Notepad and Notepad++ didn't offer all the tools I needed for my tasks, while integrated development environments such as [Visual Studio](https://visualstudio.microsoft.com/) (including its [Code variant](https://code.visualstudio.com/)) and the [JetBrains bundle](https://www.jetbrains.com/ides/) were just too much for that. Plus, the user interface of state-of-the-art tools became more and more complex, as newer features got integrated, leading to reduced productivity, at least from my point of view. I also provided direct links for the editors mentioned previously, in case you've already decided not to use Pie and stick with something else.
+
+In the meantime, I chose to present Pie as my [diploma project](https://github.com/mateasmario/diploma), and have also published [an article](https://ieeexplore.ieee.org/document/10619920/) at an IEEE conference on how it might increase the productivity of its users.
 
 ## Technologies
 
@@ -24,8 +30,18 @@ Database connection management for MySQL and PostgreSQL is done through [MySQL C
 
 JSON configuration is handled by the [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) library, which is so popular that it doesn't require an introduction on this page.
 
-## Features
+## Extension Points
 
-## Extensions
+Pie features certain extension points, which refer to configuration files and user-defined methods that extend its available functionality. Extension points start from simple theme definitions stored in JSON files that can be configured through an integrated user interface, and can get to defining methods that manipulate text and are stored as Dynamic-Link Libraries (DLLs) inside Pie's configuration folder.
 
-## Other useful links
+Extension points are a great way to offer experienced developers a greater amount of customizability in Pie. These include: defining build commands, associating file extensions with certain lexers, defining keywords for custom languages and creating custom analysis tools.
+
+## Installing and Updating Pie
+
+An installer for Pie is yet to be implemented, but at the moment, one can navigate to the [Releases](https://github.com/mateasmario/pie/releases) section and download the latest release in an archive whose contents should be extracted in a preferred directory. Running the executable should then work smoothly. 
+
+Pie also features an automatic updater, called `PieSync.exe`, which is a console app that extracts the contents of the latest release from GitHub inside the launch directory of the executable. This is why it is **not** recommended to not change the directory structure of the binaries. PieSync can also be run manually, but the editor sends a notification (on launch) whenever a newer release is published, and the update process can be started directly from the application's user interface. It is, however, recommended to explicitly run PieSync when there are errors coming from manually configured JSON files, and Pie cannot resolve them by itself.
+
+## Contribute: Making Pie Better
+
+Interested individuals may also contribute to the continuous improvement of Pie, either by sending feedback (via the [Feedback Form](https://forms.gle/L3mjuyTrYwBSVdYJ9)), by opening issues related to certain bugs or new improvement ideas, or by creating pull requests related to a certain issue. Anything is well appreciated!
