@@ -590,6 +590,11 @@
     <Compile Include="PieSync.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\ParsingService.cs" />
@@ -658,14 +663,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -686,6 +686,10 @@
     <Content Include="icons.ico" />
     <Content Include="pie.ico" />
     <Content Include="pieblue.ico" />
+    <None Include="Resources\folder %281%29 %281%29.png" />
+    <None Include="Resources\copy %281%29 %281%29.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\explorer.png" />
     <None Include="Resources\sync.png" />
     <None Include="Resources\cursor-down.png" />
     <None Include="Resources\cursor-up-dark.png" />
