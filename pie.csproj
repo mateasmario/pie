@@ -194,8 +194,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql, Version=7.0.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>packages\Npgsql.7.0.6\lib\netstandard2.0\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=7.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7">
+      <HintPath>packages\Npgsql.7.0.7\lib\netstandard2.0\Npgsql.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ObjectListView, Version=2.7.1.31255, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>packages\ObjectListView.2.7.1.5\lib\ObjectListView.dll</HintPath>
