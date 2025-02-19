@@ -64,7 +64,14 @@ namespace pie
                             File.Delete(archiveEntry.FullName);
                         }
 
-                        archiveEntry.ExtractToFile(Path.GetFullPath(archiveEntry.FullName));
+                        // Zip Slip handling
+						string destFileName = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, archiveEntry.FullName));
+						
+                        if (!destFileName.StartsWith(System.AppDomain.CurrentDomain.BaseDirectory)) {
+                            throw new Exception("piesync: Archive element entry contain invalid characters. Possible malicious archive.");
+                        }
+                        
+                        archiveEntry.ExtractToFile(archiveEntry.FullName);
                     }
                 }
 
