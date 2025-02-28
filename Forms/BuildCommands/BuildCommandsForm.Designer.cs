@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildCommandsForm));
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonListBox1 = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
-            this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.buildCommandsLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.removeButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.addButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.applyButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
+            this.kryptonListBox1 = new Krypton.Toolkit.KryptonListBox();
+            this.kryptonPage1 = new Krypton.Navigator.KryptonPage();
+            this.buildCommandsLabel = new Krypton.Toolkit.KryptonLabel();
+            this.removeButton = new Krypton.Toolkit.KryptonButton();
+            this.addButton = new Krypton.Toolkit.KryptonButton();
+            this.applyButton = new Krypton.Toolkit.KryptonButton();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
             this.buildCommandsListView = new BrightIdeasSoftware.ObjectListView();
             this.BuildCommandNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
@@ -89,9 +89,9 @@
             // 
             this.removeButton.Location = new System.Drawing.Point(82, 282);
             this.removeButton.Name = "removeButton";
-            this.removeButton.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.removeButton.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.removeButton.Size = new System.Drawing.Size(66, 25);
             this.removeButton.TabIndex = 2;
             this.removeButton.Values.Text = "Remove";
@@ -101,9 +101,9 @@
             // 
             this.addButton.Location = new System.Drawing.Point(10, 282);
             this.addButton.Name = "addButton";
-            this.addButton.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.addButton.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.addButton.Size = new System.Drawing.Size(66, 25);
             this.addButton.TabIndex = 3;
             this.addButton.Values.Text = "Add";
@@ -113,9 +113,9 @@
             // 
             this.applyButton.Location = new System.Drawing.Point(467, 282);
             this.applyButton.Name = "applyButton";
-            this.applyButton.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.applyButton.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.applyButton.Size = new System.Drawing.Size(66, 25);
             this.applyButton.TabIndex = 4;
             this.applyButton.Values.Text = "Apply";
@@ -185,14 +185,14 @@
         }
 
         #endregion
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonListBox kryptonListBox1;
-        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel buildCommandsLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton removeButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton addButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton applyButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private Krypton.Toolkit.KryptonListBox kryptonListBox1;
+        private Krypton.Navigator.KryptonPage kryptonPage1;
+        private Krypton.Toolkit.KryptonLabel buildCommandsLabel;
+        private Krypton.Toolkit.KryptonButton removeButton;
+        private Krypton.Toolkit.KryptonButton addButton;
+        private Krypton.Toolkit.KryptonButton applyButton;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
         private BrightIdeasSoftware.ObjectListView buildCommandsListView;
         private BrightIdeasSoftware.OLVColumn BuildCommandNameColumn;
     }

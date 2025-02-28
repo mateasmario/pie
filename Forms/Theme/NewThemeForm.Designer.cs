@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewThemeForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.themeNameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.themeNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.createButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.themeNameLabel = new Krypton.Toolkit.KryptonLabel();
+            this.themeNameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.createButton = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -95,9 +95,9 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel themeNameLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox themeNameTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton createButton;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonLabel themeNameLabel;
+        private Krypton.Toolkit.KryptonTextBox themeNameTextBox;
+        private Krypton.Toolkit.KryptonButton createButton;
     }
 }

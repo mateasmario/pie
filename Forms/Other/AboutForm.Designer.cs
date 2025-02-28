@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-            this.versionLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.titleLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.descriptionLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.websiteButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.repoButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.versionLabel = new Krypton.Toolkit.KryptonLabel();
+            this.titleLabel = new Krypton.Toolkit.KryptonLabel();
+            this.descriptionLabel = new Krypton.Toolkit.KryptonLabel();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.websiteButton = new Krypton.Toolkit.KryptonButton();
+            this.repoButton = new Krypton.Toolkit.KryptonButton();
             this.iconPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
@@ -43,7 +43,7 @@
             // 
             // versionLabel
             // 
-            this.versionLabel.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.versionLabel.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.versionLabel.Location = new System.Drawing.Point(5, 44);
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(58, 22);
@@ -61,7 +61,7 @@
             // 
             // descriptionLabel
             // 
-            this.descriptionLabel.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.descriptionLabel.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.descriptionLabel.Location = new System.Drawing.Point(5, 70);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.Size = new System.Drawing.Size(349, 118);
@@ -86,9 +86,9 @@
             // 
             this.websiteButton.Location = new System.Drawing.Point(176, 215);
             this.websiteButton.Name = "websiteButton";
-            this.websiteButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.websiteButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.websiteButton.Size = new System.Drawing.Size(165, 25);
             this.websiteButton.TabIndex = 8;
             this.websiteButton.Values.Text = "Author\'s Personal Website";
@@ -98,9 +98,9 @@
             // 
             this.repoButton.Location = new System.Drawing.Point(5, 215);
             this.repoButton.Name = "repoButton";
-            this.repoButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.repoButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.repoButton.Size = new System.Drawing.Size(165, 25);
             this.repoButton.TabIndex = 7;
             this.repoButton.Values.Text = "GitHub Repository";
@@ -141,12 +141,12 @@
         }
 
         #endregion
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel versionLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel titleLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel descriptionLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonLabel versionLabel;
+        private Krypton.Toolkit.KryptonLabel titleLabel;
+        private Krypton.Toolkit.KryptonLabel descriptionLabel;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
         private System.Windows.Forms.PictureBox iconPictureBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton repoButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton websiteButton;
+        private Krypton.Toolkit.KryptonButton repoButton;
+        private Krypton.Toolkit.KryptonButton websiteButton;
     }
 }

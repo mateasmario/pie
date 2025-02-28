@@ -10,13 +10,13 @@ using pie.Services;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie.Forms.Theme
 {
     public partial class NewThemeForm : KryptonForm
     {
-        private ThemeService themeService = new ThemeService();
+        private ThemingService themeService = new ThemingService();
 
         public NewThemeFormInput Input { get; set; }
         public NewThemeFormOutput Output { get; set; }

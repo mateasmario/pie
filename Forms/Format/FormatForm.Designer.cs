@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormatForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.kryptonTextBox1 = new Krypton.Toolkit.KryptonTextBox();
             this.formatOptionsListView = new BrightIdeasSoftware.ObjectListView();
             this.FormatOptionNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.FormatOptionCategoryColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -130,10 +130,10 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
         private BrightIdeasSoftware.ObjectListView formatOptionsListView;
         private BrightIdeasSoftware.OLVColumn FormatOptionNameColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
+        private Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
         private BrightIdeasSoftware.OLVColumn FormatOptionCategoryColumn;
         private BrightIdeasSoftware.OLVColumn FormatOptionDescriptionColumn;
     }

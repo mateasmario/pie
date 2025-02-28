@@ -20,13 +20,13 @@ using BrightIdeasSoftware;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie.Forms.Format
 {
     public partial class FormatForm : KryptonForm
     {
-        private ThemeService themeService = new ThemeService();
+        private ThemingService themeService = new ThemingService();
 
         public FormatFormInput Input { get; set; }
         public FormatFormOutput Output { get; set; }

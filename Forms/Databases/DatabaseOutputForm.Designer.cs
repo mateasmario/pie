@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseOutputForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.outputDataGridView = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.closeButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.outputDataGridView = new Krypton.Toolkit.KryptonDataGridView();
+            this.closeButton = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.outputDataGridView)).BeginInit();
@@ -63,9 +63,9 @@
             // 
             this.closeButton.Location = new System.Drawing.Point(547, 282);
             this.closeButton.Name = "closeButton";
-            this.closeButton.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.closeButton.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.closeButton.Size = new System.Drawing.Size(66, 25);
             this.closeButton.TabIndex = 4;
             this.closeButton.Values.Text = "Close";
@@ -94,8 +94,8 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton closeButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView outputDataGridView;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonButton closeButton;
+        private Krypton.Toolkit.KryptonDataGridView outputDataGridView;
     }
 }

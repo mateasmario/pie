@@ -8,13 +8,13 @@ using System.Collections.Generic;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie.Classes
 {
     public class CodeTemplatesFormInput
     {
-        public KryptonPalette Palette { get; set; }
+        public KryptonCustomPaletteBase Palette { get; set; }
         public EditorProperties EditorProperties { get; set; }
         public List<CodeTemplate> CodeTemplates { get; set; }
         public ThemeInfo ActiveTheme { get; set; }

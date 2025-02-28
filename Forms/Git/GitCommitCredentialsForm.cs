@@ -10,7 +10,7 @@ using pie.Classes;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie
 {
@@ -19,7 +19,7 @@ namespace pie
         public GitCommitCredentialsFormInput Input { get; set; }
         public GitCommitCredentialsFormOutput Output { get; set; }
 
-        private ThemeService themeService = new ThemeService();
+        private ThemingService themeService = new ThemingService();
         public GitCommitCredentialsForm()
         {
             InitializeComponent();

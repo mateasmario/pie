@@ -6,13 +6,13 @@
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie.Classes
 {
     public class NotificationFormInput
     {
-        public KryptonPalette Palette { get; set; }
+        public KryptonCustomPaletteBase Palette { get; set; }
         public EditorProperties EditorProperties { get; set; }
         public string NotificationText { get; set; }
     }

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GitCloneForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.cloneButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.cloneIntoLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.repositoryURLLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.cloneIntoTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.repositoryURLTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.browseButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.cloneButton = new Krypton.Toolkit.KryptonButton();
+            this.cloneIntoLabel = new Krypton.Toolkit.KryptonLabel();
+            this.repositoryURLLabel = new Krypton.Toolkit.KryptonLabel();
+            this.cloneIntoTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.repositoryURLTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.browseButton = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -125,12 +125,12 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton cloneButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel cloneIntoLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel repositoryURLLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox cloneIntoTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox repositoryURLTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton browseButton;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonButton cloneButton;
+        private Krypton.Toolkit.KryptonLabel cloneIntoLabel;
+        private Krypton.Toolkit.KryptonLabel repositoryURLLabel;
+        private Krypton.Toolkit.KryptonTextBox cloneIntoTextBox;
+        private Krypton.Toolkit.KryptonTextBox repositoryURLTextBox;
+        private Krypton.Toolkit.KryptonButton browseButton;
     }
 }

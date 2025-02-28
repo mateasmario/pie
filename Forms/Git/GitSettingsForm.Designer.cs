@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GitSettingsForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.remoteServerPasswordTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.remoteServerUsernameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.remoteServerUsernameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.remoteServerPasswordLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.authorEmailTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.authorNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.authorNameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.authorEmailLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.remoteServerPasswordTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.remoteServerUsernameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.remoteServerUsernameLabel = new Krypton.Toolkit.KryptonLabel();
+            this.remoteServerPasswordLabel = new Krypton.Toolkit.KryptonLabel();
+            this.authorEmailTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.authorNameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.saveButton = new Krypton.Toolkit.KryptonButton();
+            this.authorNameLabel = new Krypton.Toolkit.KryptonLabel();
+            this.authorEmailLabel = new Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -117,9 +117,9 @@
             // 
             this.saveButton.Location = new System.Drawing.Point(324, 219);
             this.saveButton.Name = "saveButton";
-            this.saveButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.saveButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.saveButton.Size = new System.Drawing.Size(79, 25);
             this.saveButton.TabIndex = 4;
             this.saveButton.Values.Text = "Save";
@@ -164,15 +164,15 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox authorEmailTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox authorNameTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel authorNameLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel authorEmailLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox remoteServerPasswordTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox remoteServerUsernameTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel remoteServerUsernameLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel remoteServerPasswordLabel;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonTextBox authorEmailTextBox;
+        private Krypton.Toolkit.KryptonTextBox authorNameTextBox;
+        private Krypton.Toolkit.KryptonButton saveButton;
+        private Krypton.Toolkit.KryptonLabel authorNameLabel;
+        private Krypton.Toolkit.KryptonLabel authorEmailLabel;
+        private Krypton.Toolkit.KryptonTextBox remoteServerPasswordTextBox;
+        private Krypton.Toolkit.KryptonTextBox remoteServerUsernameTextBox;
+        private Krypton.Toolkit.KryptonLabel remoteServerUsernameLabel;
+        private Krypton.Toolkit.KryptonLabel remoteServerPasswordLabel;
     }
 }

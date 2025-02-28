@@ -29,37 +29,37 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheatsheetForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.keybind9Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.keybind9Label = new Krypton.Toolkit.KryptonLabel();
             this.keybind9Key2PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind9Key1PictureBox = new System.Windows.Forms.PictureBox();
-            this.keybind8Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind8Label = new Krypton.Toolkit.KryptonLabel();
             this.keybind8Key2PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind8Key1PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind7Key2PictureBox = new System.Windows.Forms.PictureBox();
-            this.keybind7Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind7Label = new Krypton.Toolkit.KryptonLabel();
             this.keybind7Key3PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind7Key1PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind6Key2PictureBox = new System.Windows.Forms.PictureBox();
-            this.keybind6Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind6Label = new Krypton.Toolkit.KryptonLabel();
             this.keybind6Key3PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind6Key1PictureBox = new System.Windows.Forms.PictureBox();
-            this.keybind5Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind5Label = new Krypton.Toolkit.KryptonLabel();
             this.keybind5Key2PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind5Key1PictureBox = new System.Windows.Forms.PictureBox();
-            this.keybind4Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind4Label = new Krypton.Toolkit.KryptonLabel();
             this.keybind4Key2PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind4Key1PictureBox = new System.Windows.Forms.PictureBox();
-            this.keybind3Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind3Label = new Krypton.Toolkit.KryptonLabel();
             this.keybind3Key2PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind3Key1PictureBox = new System.Windows.Forms.PictureBox();
-            this.keybind2Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind2Label = new Krypton.Toolkit.KryptonLabel();
             this.keybind2Key2PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind2Key1PictureBox = new System.Windows.Forms.PictureBox();
-            this.keybind1Label = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.keybind1Label = new Krypton.Toolkit.KryptonLabel();
             this.keybind1Key2PictureBox = new System.Windows.Forms.PictureBox();
             this.keybind1Key1PictureBox = new System.Windows.Forms.PictureBox();
-            this.titleLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.titleLabel = new Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.keybind9Key2PictureBox)).BeginInit();
@@ -124,7 +124,7 @@
             // 
             // keybind9Label
             // 
-            this.keybind9Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind9Label.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.keybind9Label.Location = new System.Drawing.Point(91, 309);
             this.keybind9Label.Name = "keybind9Label";
             this.keybind9Label.Size = new System.Drawing.Size(189, 21);
@@ -156,7 +156,7 @@
             // 
             // keybind8Label
             // 
-            this.keybind8Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind8Label.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.keybind8Label.Location = new System.Drawing.Point(91, 277);
             this.keybind8Label.Name = "keybind8Label";
             this.keybind8Label.Size = new System.Drawing.Size(213, 21);
@@ -199,7 +199,7 @@
             // 
             // keybind7Label
             // 
-            this.keybind7Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind7Label.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.keybind7Label.Location = new System.Drawing.Point(132, 245);
             this.keybind7Label.Name = "keybind7Label";
             this.keybind7Label.Size = new System.Drawing.Size(114, 21);
@@ -242,7 +242,7 @@
             // 
             // keybind6Label
             // 
-            this.keybind6Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind6Label.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.keybind6Label.Location = new System.Drawing.Point(132, 213);
             this.keybind6Label.Name = "keybind6Label";
             this.keybind6Label.Size = new System.Drawing.Size(139, 21);
@@ -274,7 +274,7 @@
             // 
             // keybind5Label
             // 
-            this.keybind5Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind5Label.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.keybind5Label.Location = new System.Drawing.Point(91, 181);
             this.keybind5Label.Name = "keybind5Label";
             this.keybind5Label.Size = new System.Drawing.Size(111, 21);
@@ -306,7 +306,7 @@
             // 
             // keybind4Label
             // 
-            this.keybind4Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind4Label.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.keybind4Label.Location = new System.Drawing.Point(91, 149);
             this.keybind4Label.Name = "keybind4Label";
             this.keybind4Label.Size = new System.Drawing.Size(97, 21);
@@ -338,7 +338,7 @@
             // 
             // keybind3Label
             // 
-            this.keybind3Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind3Label.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.keybind3Label.Location = new System.Drawing.Point(91, 117);
             this.keybind3Label.Name = "keybind3Label";
             this.keybind3Label.Size = new System.Drawing.Size(168, 21);
@@ -370,7 +370,7 @@
             // 
             // keybind2Label
             // 
-            this.keybind2Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind2Label.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.keybind2Label.Location = new System.Drawing.Point(91, 85);
             this.keybind2Label.Name = "keybind2Label";
             this.keybind2Label.Size = new System.Drawing.Size(132, 21);
@@ -402,7 +402,7 @@
             // 
             // keybind1Label
             // 
-            this.keybind1Label.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.ToolTip;
+            this.keybind1Label.LabelStyle = Krypton.Toolkit.LabelStyle.ToolTip;
             this.keybind1Label.Location = new System.Drawing.Point(91, 53);
             this.keybind1Label.Name = "keybind1Label";
             this.keybind1Label.Size = new System.Drawing.Size(158, 21);
@@ -485,16 +485,16 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel titleLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind1Label;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind5Label;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind4Label;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind3Label;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind2Label;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind6Label;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonLabel titleLabel;
+        private Krypton.Toolkit.KryptonLabel keybind1Label;
+        private Krypton.Toolkit.KryptonLabel keybind5Label;
+        private Krypton.Toolkit.KryptonLabel keybind4Label;
+        private Krypton.Toolkit.KryptonLabel keybind3Label;
+        private Krypton.Toolkit.KryptonLabel keybind2Label;
+        private Krypton.Toolkit.KryptonLabel keybind6Label;
         private System.Windows.Forms.PictureBox keybind6Key1PictureBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind7Label;
+        private Krypton.Toolkit.KryptonLabel keybind7Label;
         private System.Windows.Forms.PictureBox keybind7Key2PictureBox;
         private System.Windows.Forms.PictureBox keybind7Key3PictureBox;
         private System.Windows.Forms.PictureBox keybind7Key1PictureBox;
@@ -510,10 +510,10 @@
         private System.Windows.Forms.PictureBox keybind2Key1PictureBox;
         private System.Windows.Forms.PictureBox keybind1Key2PictureBox;
         private System.Windows.Forms.PictureBox keybind1Key1PictureBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind8Label;
+        private Krypton.Toolkit.KryptonLabel keybind8Label;
         private System.Windows.Forms.PictureBox keybind8Key2PictureBox;
         private System.Windows.Forms.PictureBox keybind8Key1PictureBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel keybind9Label;
+        private Krypton.Toolkit.KryptonLabel keybind9Label;
         private System.Windows.Forms.PictureBox keybind9Key2PictureBox;
         private System.Windows.Forms.PictureBox keybind9Key1PictureBox;
     }

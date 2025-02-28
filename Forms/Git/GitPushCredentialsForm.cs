@@ -10,13 +10,13 @@ using pie.Classes;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie
 {
     public partial class GitPushCredentialsForm : KryptonForm
     {
-        private ThemeService themeService = new ThemeService();
+        private ThemingService themeService = new ThemingService();
         
         public GitPushCredentialsFormInput Input { get; set; }
         public GitPushCredentialsFormOutput Output { get; set; }

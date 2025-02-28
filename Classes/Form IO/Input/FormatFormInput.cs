@@ -8,7 +8,7 @@ using System.Collections.Generic;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie.Classes
 {
@@ -16,7 +16,7 @@ namespace pie.Classes
     {
         public string Text { get; set; }
         public ThemeInfo ActiveTheme { get; set; }
-        public KryptonPalette Palette { get; set; }
+        public KryptonCustomPaletteBase Palette { get; set; }
         public EditorProperties EditorProperties { get; set; }
         public List<Formatter> Formatters { get; set; }
     }
