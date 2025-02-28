@@ -10,13 +10,13 @@ using pie.Classes;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie.Forms.Other
 {
     public partial class CheatsheetForm : KryptonForm 
     {
-        private ThemeService themeService = new ThemeService();
+        private ThemingService themeService = new ThemingService();
 
         public CheatsheetFormInput Input { get; set; }
 

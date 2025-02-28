@@ -20,13 +20,13 @@ using ScintillaNET;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie.Forms.CodeTemplates
 {
     public partial class CodeTemplatesForm : KryptonForm
     {
-        private ThemeService themeService = new ThemeService();
+        private ThemingService themeService = new ThemingService();
         private ConfigurationService configurationService = new ConfigurationService();
 
         public CodeTemplatesFormInput Input { get; set; }

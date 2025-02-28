@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationOKForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.contentRichTextBox = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
-            this.okButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.contentRichTextBox = new Krypton.Toolkit.KryptonRichTextBox();
+            this.okButton = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -52,10 +52,10 @@
             this.contentRichTextBox.Name = "contentRichTextBox";
             this.contentRichTextBox.ReadOnly = true;
             this.contentRichTextBox.Size = new System.Drawing.Size(360, 54);
-            this.contentRichTextBox.StateCommon.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.False;
-            this.contentRichTextBox.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.contentRichTextBox.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.False;
+            this.contentRichTextBox.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.contentRichTextBox.TabIndex = 5;
             this.contentRichTextBox.Text = "";
             // 
@@ -63,9 +63,9 @@
             // 
             this.okButton.Location = new System.Drawing.Point(295, 68);
             this.okButton.Name = "okButton";
-            this.okButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.okButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.okButton.Size = new System.Drawing.Size(63, 25);
             this.okButton.TabIndex = 4;
             this.okButton.Values.Text = "OK";
@@ -93,8 +93,8 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton okButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox contentRichTextBox;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonButton okButton;
+        private Krypton.Toolkit.KryptonRichTextBox contentRichTextBox;
     }
 }

@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GitPushCredentialsForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.remoteServerPasswordLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.remoteServerUsernameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.remoteServerPasswordTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.remoteServerUsernameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.remoteServerPasswordLabel = new Krypton.Toolkit.KryptonLabel();
+            this.remoteServerUsernameLabel = new Krypton.Toolkit.KryptonLabel();
+            this.remoteServerPasswordTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.remoteServerUsernameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.saveButton = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -115,11 +115,11 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel remoteServerPasswordLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel remoteServerUsernameLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox remoteServerPasswordTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox remoteServerUsernameTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonLabel remoteServerPasswordLabel;
+        private Krypton.Toolkit.KryptonLabel remoteServerUsernameLabel;
+        private Krypton.Toolkit.KryptonTextBox remoteServerPasswordTextBox;
+        private Krypton.Toolkit.KryptonTextBox remoteServerUsernameTextBox;
+        private Krypton.Toolkit.KryptonButton saveButton;
     }
 }

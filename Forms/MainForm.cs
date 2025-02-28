@@ -34,8 +34,8 @@ using ScintillaNET;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Navigator;
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
+using Krypton.Navigator;
 
 /** Markdig is used in order to allow users to render their Markdown (.md) code into HTML.
  * 
@@ -88,7 +88,7 @@ namespace pie
     public partial class MainForm : KryptonForm
     {
         private ConfigurationService configurationService = new ConfigurationService();
-        private ThemeService themeService = new ThemeService();
+        private ThemingService themeService = new ThemingService();
         private ParsingService parsingService = new ParsingService();
         private UpdateService updateService = new UpdateService();
         private ScintillaLexerService scintillaLexerService = new ScintillaLexerService();
@@ -258,7 +258,7 @@ namespace pie
                 }
             }
 
-            themeService.SetPaletteToTheme(kryptonPalette, activeTheme);
+            themeService.SetPaletteToTheme(KryptonCustomPaletteBase, activeTheme);
             SynchronizeMainFormComponentsWithTheme();
 
             if (directoryNavigationTextBox.Text != "")
@@ -322,15 +322,14 @@ namespace pie
 
             gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
 
-            themeService.SetPaletteToTheme(kryptonPalette, activeTheme);
+            themeService.SetPaletteToTheme(KryptonCustomPaletteBase, activeTheme);
             SynchronizeMainFormComponentsWithTheme();
 
-            themeService.SetPaletteToObjects(this, kryptonPalette);
-            codeContextMenu.Palette = kryptonPalette;
-            terminalContextMenu.Palette = kryptonPalette;
-            renderContextMenu.Palette = kryptonPalette;
-            gitContextMenu.Palette = kryptonPalette;
-
+            themeService.SetPaletteToObjects(this, KryptonCustomPaletteBase);
+            codeContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
+            terminalContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
+            renderContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
+            gitContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
             terminalTabControl.Hide();
             gitPanel.Hide();
 
@@ -574,7 +573,7 @@ namespace pie
                     DatabaseOutputForm databaseOutputForm = new DatabaseOutputForm();
 
                     DatabaseOutputFormInput databaseOutputFormInput = new DatabaseOutputFormInput();
-                    databaseOutputFormInput.Palette = kryptonPalette;
+                    databaseOutputFormInput.Palette = KryptonCustomPaletteBase;
                     databaseOutputFormInput.EditorProperties = editorProperties;
                     databaseOutputFormInput.DataTable = databaseResult.DataTable;
 
@@ -1220,7 +1219,7 @@ namespace pie
 
             NotificationFormInput notificationFormInput = new NotificationFormInput();
             notificationFormInput.EditorProperties = new EditorProperties();
-            notificationFormInput.Palette = kryptonPalette;
+            notificationFormInput.Palette = KryptonCustomPaletteBase;
             notificationFormInput.NotificationText = text;
 
             notificationOkForm.Input = notificationFormInput;
@@ -1234,7 +1233,7 @@ namespace pie
 
             NotificationFormInput notificationFormInput = new NotificationFormInput();
             notificationFormInput.EditorProperties = new EditorProperties();
-            notificationFormInput.Palette = kryptonPalette;
+            notificationFormInput.Palette = KryptonCustomPaletteBase;
             notificationFormInput.NotificationText = text;
 
             notificationYesNoCancelForm.Input = notificationFormInput;
@@ -1947,7 +1946,7 @@ namespace pie
             BuildCommandsForm buildCommandsForm = new BuildCommandsForm();
 
             BuildCommandsFormInput buildCommandsFormInput = new BuildCommandsFormInput();
-            buildCommandsFormInput.Palette = kryptonPalette;
+            buildCommandsFormInput.Palette = KryptonCustomPaletteBase;
             buildCommandsFormInput.ActiveTheme = activeTheme;
             buildCommandsFormInput.EditorProperties = editorProperties;
             buildCommandsFormInput.BuildCommands = buildCommands;
@@ -2159,7 +2158,7 @@ namespace pie
             AboutForm aboutForm = new AboutForm();
 
             AboutFormInput aboutFormInput = new AboutFormInput();
-            aboutFormInput.Palette = kryptonPalette;
+            aboutFormInput.Palette = KryptonCustomPaletteBase;
             aboutFormInput.EditorProperties = editorProperties;
 
             aboutForm.Input = aboutFormInput;
@@ -2385,7 +2384,7 @@ namespace pie
 
                         GitCommitCredentialsFormInput gitCommitCredentialsFormInput = new GitCommitCredentialsFormInput();
                         gitCommitCredentialsFormInput.GitCredentials = gitCredentials;
-                        gitCommitCredentialsFormInput.Palette = kryptonPalette;
+                        gitCommitCredentialsFormInput.Palette = KryptonCustomPaletteBase;
                         gitCommitCredentialsFormInput.EditorProperties = editorProperties;
 
                         gitCommitCredentialsForm.Input = gitCommitCredentialsFormInput;
@@ -2525,7 +2524,7 @@ namespace pie
 
                         GitPushCredentialsFormInput gitPushCredentialsFormInput = new GitPushCredentialsFormInput();
                         gitPushCredentialsFormInput.GitCredentials = gitCredentials;
-                        gitPushCredentialsFormInput.Palette = kryptonPalette;
+                        gitPushCredentialsFormInput.Palette = KryptonCustomPaletteBase;
                         gitPushCredentialsFormInput.EditorProperties = editorProperties;
 
                         gitPushCredentialsForm.Input = gitPushCredentialsFormInput;
@@ -2678,7 +2677,7 @@ namespace pie
 
             GitSettingsFormInput gitSettingsFormInput = new GitSettingsFormInput();
             gitSettingsFormInput.GitCredentials = gitCredentials;
-            gitSettingsFormInput.Palette = kryptonPalette;
+            gitSettingsFormInput.Palette = KryptonCustomPaletteBase;
             gitSettingsFormInput.EditorProperties = editorProperties;
 
             gitSettingsForm.Input = gitSettingsFormInput;
@@ -2697,7 +2696,7 @@ namespace pie
 
             GitPushCredentialsFormInput gitPushCredentialsFormInput = new GitPushCredentialsFormInput();
             gitPushCredentialsFormInput.GitCredentials = gitCredentials;
-            gitPushCredentialsFormInput.Palette = kryptonPalette;
+            gitPushCredentialsFormInput.Palette = KryptonCustomPaletteBase;
             gitPushCredentialsFormInput.EditorProperties = editorProperties;
 
             gitPushCredentialsForm.Input = gitPushCredentialsFormInput;
@@ -2716,7 +2715,7 @@ namespace pie
 
             GitCloneFormInput gitCloneFormInput = new GitCloneFormInput();
 
-            gitCloneFormInput.Palette = kryptonPalette;
+            gitCloneFormInput.Palette = KryptonCustomPaletteBase;
             gitCloneFormInput.EditorProperties = editorProperties;
             gitCloneFormInput.GitCredentials = gitCredentials;
 
@@ -2745,7 +2744,7 @@ namespace pie
 
                     GitCommitCredentialsFormInput gitCommitCredentialsFormInput = new GitCommitCredentialsFormInput();
                     gitCommitCredentialsFormInput.GitCredentials = gitCredentials;
-                    gitCommitCredentialsFormInput.Palette = kryptonPalette;
+                    gitCommitCredentialsFormInput.Palette = KryptonCustomPaletteBase;
                     gitCommitCredentialsFormInput.EditorProperties = editorProperties;
 
                     gitCommitCredentialsForm.Input = gitCommitCredentialsFormInput;
@@ -2766,7 +2765,7 @@ namespace pie
 
                         GitPushCredentialsFormInput gitPushCredentialsFormInput = new GitPushCredentialsFormInput();
                         gitPushCredentialsFormInput.GitCredentials = gitCredentials;
-                        gitPushCredentialsFormInput.Palette = kryptonPalette;
+                        gitPushCredentialsFormInput.Palette = KryptonCustomPaletteBase;
                         gitPushCredentialsFormInput.EditorProperties = editorProperties;
 
                         gitPushCredentialsForm.Input = gitPushCredentialsFormInput;
@@ -2827,7 +2826,7 @@ namespace pie
                 gitCommitLogFormInput.ActiveTheme = activeTheme;
                 gitCommitLogFormInput.Repository = repository;
                 gitCommitLogFormInput.EditorProperties = editorProperties;
-                gitCommitLogFormInput.Palette = kryptonPalette;
+                gitCommitLogFormInput.Palette = KryptonCustomPaletteBase;
 
                 gitCommitLogForm.Input = gitCommitLogFormInput;
 
@@ -3081,7 +3080,7 @@ namespace pie
 
             DatabasesFormInput databasesFormInput = new DatabasesFormInput();
             databasesFormInput.Databases = databases;
-            databasesFormInput.Palette = kryptonPalette;
+            databasesFormInput.Palette = KryptonCustomPaletteBase;
             databasesFormInput.EditorProperties = editorProperties;
             databasesFormInput.ActiveTheme = activeTheme;
             
@@ -3175,7 +3174,7 @@ namespace pie
             FormatFormInput formatFormInput = new FormatFormInput();
             formatFormInput.Text = TextArea.Text;
             formatFormInput.ActiveTheme = activeTheme;
-            formatFormInput.Palette = kryptonPalette;
+            formatFormInput.Palette = KryptonCustomPaletteBase;
             formatFormInput.EditorProperties = editorProperties;
             formatFormInput.Formatters = formatters;
 
@@ -3215,7 +3214,7 @@ namespace pie
             CheatsheetForm cheatsheetForm = new CheatsheetForm();
 
             CheatsheetFormInput cheatsheetFormInput = new CheatsheetFormInput();
-            cheatsheetFormInput.Palette = kryptonPalette;
+            cheatsheetFormInput.Palette = KryptonCustomPaletteBase;
             cheatsheetFormInput.EditorProperties = editorProperties;
             cheatsheetFormInput.ActiveTheme = activeTheme;
 
@@ -3231,7 +3230,7 @@ namespace pie
             DesignerFormInput designerFormInput = new DesignerFormInput();
             designerFormInput.ThemeInfos = themeInfos;
             designerFormInput.EditorProperties = editorProperties;
-            designerFormInput.Palette = kryptonPalette;
+            designerFormInput.Palette = KryptonCustomPaletteBase;
             designerFormInput.ActiveTheme = activeTheme;
 
             designerForm.Input = designerFormInput;
@@ -3307,7 +3306,7 @@ namespace pie
 
             CodeTemplatesFormInput codeTemplatesFormInput = new CodeTemplatesFormInput();
             codeTemplatesFormInput.EditorProperties = editorProperties;
-            codeTemplatesFormInput.Palette = kryptonPalette;
+            codeTemplatesFormInput.Palette = KryptonCustomPaletteBase;
             codeTemplatesFormInput.ActiveTheme = activeTheme;
             codeTemplatesFormInput.CodeTemplates = codeTemplates;
 

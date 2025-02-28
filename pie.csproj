@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\CefSharp.Common.117.2.20\build\CefSharp.Common.props" Condition="Exists('packages\CefSharp.Common.117.2.20\build\CefSharp.Common.props')" />
+  <Import Project="packages\cef.redist.x86.117.2.2\build\cef.redist.x86.props" Condition="Exists('packages\cef.redist.x86.117.2.2\build\cef.redist.x86.props')" />
+  <Import Project="packages\cef.redist.x64.117.2.2\build\cef.redist.x64.props" Condition="Exists('packages\cef.redist.x64.117.2.2\build\cef.redist.x64.props')" />
   <Import Project="packages/CefSharp.Common.117.2.20/build/CefSharp.Common.props" Condition="Exists('packages/CefSharp.Common.117.2.20/build/CefSharp.Common.props')" />
   <Import Project="packages/cef.redist.x86.117.2.2/build/cef.redist.x86.props" Condition="Exists('packages/cef.redist.x86.117.2.2/build/cef.redist.x86.props')" />
   <Import Project="packages/cef.redist.x64.117.2.2/build/cef.redist.x64.props" Condition="Exists('packages/cef.redist.x64.117.2.2/build/cef.redist.x64.props')" />
   <Import Project="packages\LibGit2Sharp.NativeBinaries.2.0.320\build\net46\LibGit2Sharp.NativeBinaries.props" Condition="Exists('packages\LibGit2Sharp.NativeBinaries.2.0.320\build\net46\LibGit2Sharp.NativeBinaries.props')" />
-  <Import Project="packages\CefSharp.Common.116.0.150\build\CefSharp.Common.props" Condition="Exists('packages\CefSharp.Common.116.0.150\build\CefSharp.Common.props')" />
-  <Import Project="packages\cef.redist.x86.116.0.15\build\cef.redist.x86.props" Condition="Exists('packages\cef.redist.x86.116.0.15\build\cef.redist.x86.props')" />
-  <Import Project="packages\cef.redist.x64.116.0.15\build\cef.redist.x64.props" Condition="Exists('packages\cef.redist.x64.116.0.15\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -71,18 +71,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>08CA56B545852ED548DDE742E62D2EE6CE123ADB</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>pie_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
@@ -103,8 +91,9 @@
       <HintPath>packages\CefSharp.Common.117.2.20\lib\net462\CefSharp.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CefSharp.WinForms, Version=116.0.150.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
-      <HintPath>packages\CefSharp.WinForms.116.0.150\lib\net462\CefSharp.WinForms.dll</HintPath>
+    <Reference Include="CefSharp.WinForms, Version=117.2.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>packages\CefSharp.WinForms.117.2.20\lib\net462\CefSharp.WinForms.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ComponentFactory.Krypton.Docking, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -147,8 +136,20 @@
     <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
       <HintPath>packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
     </Reference>
-    <Reference Include="Krypton.Toolkit">
-      <HintPath>..\tiramisu\packages\Krypton.Toolkit.85.24.8.239\lib\net47\Krypton.Toolkit.dll</HintPath>
+    <Reference Include="Krypton.Docking, Version=90.25.2.55, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>packages\Krypton.Docking.90.25.2.55\lib\net472\Krypton.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton.Navigator, Version=90.25.2.55, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>packages\Krypton.Navigator.90.25.2.55\lib\net472\Krypton.Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton.Ribbon, Version=90.25.2.55, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>packages\Krypton.Ribbon.90.25.2.55\lib\net472\Krypton.Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton.Toolkit, Version=90.25.2.55, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>packages\Krypton.Toolkit.90.25.2.55\lib\net472\Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton.Workspace, Version=90.25.2.55, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>packages\Krypton.Workspace.90.25.2.55\lib\net472\Krypton.Workspace.dll</HintPath>
     </Reference>
     <Reference Include="LibGit2Sharp, Version=0.27.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
       <HintPath>packages\LibGit2Sharp.0.27.2\lib\net472\LibGit2Sharp.dll</HintPath>
@@ -621,7 +622,7 @@
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\ParsingService.cs" />
     <Compile Include="Services\ScintillaLexerService.cs" />
-    <Compile Include="Services\ThemeService.cs" />
+    <Compile Include="Services\ThemingService.cs" />
     <Compile Include="Services\UpdateService.cs" />
     <EmbeddedResource Include="Forms\CodeTemplates\CodeTemplatesForm.resx">
       <DependentUpon>CodeTemplatesForm.cs</DependentUpon>
@@ -949,10 +950,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Scintilla.NET.5.3.2.7\build\scintilla.net.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Scintilla.NET.5.3.2.7\build\scintilla.net.targets'))" />
-    <Error Condition="!Exists('packages\cef.redist.x64.116.0.15\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x64.116.0.15\build\cef.redist.x64.props'))" />
-    <Error Condition="!Exists('packages\cef.redist.x86.116.0.15\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x86.116.0.15\build\cef.redist.x86.props'))" />
-    <Error Condition="!Exists('packages\CefSharp.Common.116.0.150\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.116.0.150\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('packages\CefSharp.Common.116.0.150\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.116.0.150\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('packages\LibGit2Sharp.NativeBinaries.2.0.320\build\net46\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\LibGit2Sharp.NativeBinaries.2.0.320\build\net46\LibGit2Sharp.NativeBinaries.props'))" />
     <Error Condition="!Exists('packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets'))" />
     <Error Condition="!Exists('packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
@@ -960,9 +957,13 @@
     <Error Condition="!Exists('packages/cef.redist.x86.117.2.2/build/cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages/cef.redist.x86.117.2.2/build/cef.redist.x86.props'))" />
     <Error Condition="!Exists('packages/CefSharp.Common.117.2.20/build/CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages/CefSharp.Common.117.2.20/build/CefSharp.Common.props'))" />
     <Error Condition="!Exists('packages/CefSharp.Common.117.2.20/build/CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages/CefSharp.Common.117.2.20/build/CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('packages\cef.redist.x64.117.2.2\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x64.117.2.2\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('packages\cef.redist.x86.117.2.2\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x86.117.2.2\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('packages\CefSharp.Common.117.2.20\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.117.2.20\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('packages\CefSharp.Common.117.2.20\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.117.2.20\build\CefSharp.Common.targets'))" />
   </Target>
-  <Import Project="packages\CefSharp.Common.116.0.150\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.116.0.150\build\CefSharp.Common.targets')" />
   <Import Project="packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets" Condition="Exists('packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets')" />
   <Import Project="packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
   <Import Project="packages/CefSharp.Common.117.2.20/build/CefSharp.Common.targets" Condition="Exists('packages/CefSharp.Common.117.2.20/build/CefSharp.Common.targets')" />
+  <Import Project="packages\CefSharp.Common.117.2.20\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.117.2.20\build\CefSharp.Common.targets')" />
 </Project>

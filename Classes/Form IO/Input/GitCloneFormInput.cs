@@ -6,14 +6,14 @@
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie.Classes
 {
     public class GitCloneFormInput
     {
         public GitCredentials GitCredentials { get; set; }
-        public KryptonPalette Palette { get; set; }
+        public KryptonCustomPaletteBase Palette { get; set; }
         public EditorProperties EditorProperties { get; set; }
     }
 }

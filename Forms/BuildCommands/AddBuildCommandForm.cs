@@ -11,13 +11,13 @@ using System.Collections.Generic;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie
 {
     public partial class AddBuildCommandForm : KryptonForm
     {
-        private ThemeService themeService = new ThemeService();
+        private ThemingService themeService = new ThemingService();
 
         public AddBuildCommandFormInput Input { get; set; }
         public AddBuildCommandFormOutput Output { get; set; }

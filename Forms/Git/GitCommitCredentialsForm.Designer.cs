@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GitCommitCredentialsForm));
-            this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.authorEmailLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.authorNameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.authorEmailTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.authorNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.saveButton = new Krypton.Toolkit.KryptonButton();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.authorEmailLabel = new Krypton.Toolkit.KryptonLabel();
+            this.authorNameLabel = new Krypton.Toolkit.KryptonLabel();
+            this.authorEmailTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.authorNameTextBox = new Krypton.Toolkit.KryptonTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -114,11 +114,11 @@
         }
 
         #endregion
-        private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox authorEmailTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox authorNameTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel authorEmailLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel authorNameLabel;
+        private Krypton.Toolkit.KryptonButton saveButton;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonTextBox authorEmailTextBox;
+        private Krypton.Toolkit.KryptonTextBox authorNameTextBox;
+        private Krypton.Toolkit.KryptonLabel authorEmailLabel;
+        private Krypton.Toolkit.KryptonLabel authorNameLabel;
     }
 }

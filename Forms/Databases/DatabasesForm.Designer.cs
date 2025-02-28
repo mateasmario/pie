@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabasesForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
             this.databasesListView = new BrightIdeasSoftware.ObjectListView();
             this.ConnectionNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.applyButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.databaseConnectionsLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.removeButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.addButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.applyButton = new Krypton.Toolkit.KryptonButton();
+            this.databaseConnectionsLabel = new Krypton.Toolkit.KryptonLabel();
+            this.removeButton = new Krypton.Toolkit.KryptonButton();
+            this.addButton = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.databasesListView)).BeginInit();
@@ -82,9 +82,9 @@
             // 
             this.applyButton.Location = new System.Drawing.Point(467, 282);
             this.applyButton.Name = "applyButton";
-            this.applyButton.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.applyButton.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.applyButton.Size = new System.Drawing.Size(66, 25);
             this.applyButton.TabIndex = 4;
             this.applyButton.Values.Text = "Apply";
@@ -102,9 +102,9 @@
             // 
             this.removeButton.Location = new System.Drawing.Point(82, 282);
             this.removeButton.Name = "removeButton";
-            this.removeButton.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.removeButton.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.removeButton.Size = new System.Drawing.Size(66, 25);
             this.removeButton.TabIndex = 2;
             this.removeButton.Values.Text = "Remove";
@@ -114,9 +114,9 @@
             // 
             this.addButton.Location = new System.Drawing.Point(10, 282);
             this.addButton.Name = "addButton";
-            this.addButton.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.addButton.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.addButton.Size = new System.Drawing.Size(66, 25);
             this.addButton.TabIndex = 3;
             this.addButton.Values.Text = "Add";
@@ -146,12 +146,12 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
         private BrightIdeasSoftware.ObjectListView databasesListView;
         private BrightIdeasSoftware.OLVColumn ConnectionNameColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton applyButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel databaseConnectionsLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton removeButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton addButton;
+        private Krypton.Toolkit.KryptonButton applyButton;
+        private Krypton.Toolkit.KryptonLabel databaseConnectionsLabel;
+        private Krypton.Toolkit.KryptonButton removeButton;
+        private Krypton.Toolkit.KryptonButton addButton;
     }
 }

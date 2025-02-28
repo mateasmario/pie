@@ -29,42 +29,42 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DesignerForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.scintillaGroupBox = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.user2ColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.user1ColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.entityColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.attributeColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.commentColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.decoratorColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.commentLineColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.tripleColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.commentBlockColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.preprocessorColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.wordColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.operatorColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.stringColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.numberColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.generalAspectsGroupBox = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.iconTypeComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.foldingColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.numberMarginColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.caretLineBackColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.selectionColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.formBorderColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.foreColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.buttonHoverColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.buttonFrameColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.buttonColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.secondaryColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.primaryColorButton = new ComponentFactory.Krypton.Toolkit.KryptonColorButton();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.saveButton = new Krypton.Toolkit.KryptonButton();
+            this.kryptonPanel2 = new Krypton.Toolkit.KryptonPanel();
+            this.scintillaGroupBox = new Krypton.Toolkit.KryptonGroupBox();
+            this.user2ColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.user1ColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.entityColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.attributeColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.commentColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.decoratorColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.commentLineColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.tripleColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.commentBlockColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.preprocessorColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.wordColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.operatorColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.stringColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.numberColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.generalAspectsGroupBox = new Krypton.Toolkit.KryptonGroupBox();
+            this.iconTypeComboBox = new Krypton.Toolkit.KryptonComboBox();
+            this.foldingColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.numberMarginColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.caretLineBackColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.selectionColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.formBorderColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.foreColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.buttonHoverColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.buttonFrameColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.buttonColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.secondaryColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.primaryColorButton = new Krypton.Toolkit.KryptonColorButton();
+            this.kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             this.themeListView = new BrightIdeasSoftware.ObjectListView();
             this.ThemeNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.newThemeButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.deleteThemeButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.newThemeButton = new Krypton.Toolkit.KryptonButton();
+            this.deleteThemeButton = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -98,9 +98,9 @@
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.saveButton.Location = new System.Drawing.Point(3, 5);
             this.saveButton.Name = "saveButton";
-            this.saveButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.saveButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.saveButton.Size = new System.Drawing.Size(111, 25);
             this.saveButton.TabIndex = 11;
             this.saveButton.Values.Text = "Save changes";
@@ -158,7 +158,7 @@
             this.user2ColorButton.Size = new System.Drawing.Size(146, 25);
             this.user2ColorButton.TabIndex = 31;
             this.user2ColorButton.Values.Text = "User2";
-            this.user2ColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.user2ColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // user1ColorButton
             // 
@@ -170,7 +170,7 @@
             this.user1ColorButton.Size = new System.Drawing.Size(146, 25);
             this.user1ColorButton.TabIndex = 30;
             this.user1ColorButton.Values.Text = "User1";
-            this.user1ColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.user1ColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // entityColorButton
             // 
@@ -182,7 +182,7 @@
             this.entityColorButton.Size = new System.Drawing.Size(146, 25);
             this.entityColorButton.TabIndex = 29;
             this.entityColorButton.Values.Text = "Entity";
-            this.entityColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.entityColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // attributeColorButton
             // 
@@ -194,7 +194,7 @@
             this.attributeColorButton.Size = new System.Drawing.Size(146, 25);
             this.attributeColorButton.TabIndex = 28;
             this.attributeColorButton.Values.Text = "Attribute";
-            this.attributeColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.attributeColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // commentColorButton
             // 
@@ -206,7 +206,7 @@
             this.commentColorButton.Size = new System.Drawing.Size(146, 25);
             this.commentColorButton.TabIndex = 18;
             this.commentColorButton.Values.Text = "Comment";
-            this.commentColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.commentColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // decoratorColorButton
             // 
@@ -218,7 +218,7 @@
             this.decoratorColorButton.Size = new System.Drawing.Size(146, 25);
             this.decoratorColorButton.TabIndex = 27;
             this.decoratorColorButton.Values.Text = "Decorator";
-            this.decoratorColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.decoratorColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // commentLineColorButton
             // 
@@ -230,7 +230,7 @@
             this.commentLineColorButton.Size = new System.Drawing.Size(146, 25);
             this.commentLineColorButton.TabIndex = 19;
             this.commentLineColorButton.Values.Text = "CommentLine";
-            this.commentLineColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.commentLineColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // tripleColorButton
             // 
@@ -242,7 +242,7 @@
             this.tripleColorButton.Size = new System.Drawing.Size(146, 25);
             this.tripleColorButton.TabIndex = 26;
             this.tripleColorButton.Values.Text = "Triple";
-            this.tripleColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.tripleColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // commentBlockColorButton
             // 
@@ -254,7 +254,7 @@
             this.commentBlockColorButton.Size = new System.Drawing.Size(146, 25);
             this.commentBlockColorButton.TabIndex = 20;
             this.commentBlockColorButton.Values.Text = "CommentBlock";
-            this.commentBlockColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.commentBlockColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // preprocessorColorButton
             // 
@@ -266,7 +266,7 @@
             this.preprocessorColorButton.Size = new System.Drawing.Size(146, 25);
             this.preprocessorColorButton.TabIndex = 25;
             this.preprocessorColorButton.Values.Text = "Preprocessor";
-            this.preprocessorColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.preprocessorColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // wordColorButton
             // 
@@ -278,7 +278,7 @@
             this.wordColorButton.Size = new System.Drawing.Size(146, 25);
             this.wordColorButton.TabIndex = 21;
             this.wordColorButton.Values.Text = "Word";
-            this.wordColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.wordColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // operatorColorButton
             // 
@@ -290,7 +290,7 @@
             this.operatorColorButton.Size = new System.Drawing.Size(146, 25);
             this.operatorColorButton.TabIndex = 24;
             this.operatorColorButton.Values.Text = "Operator";
-            this.operatorColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.operatorColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // stringColorButton
             // 
@@ -302,7 +302,7 @@
             this.stringColorButton.Size = new System.Drawing.Size(146, 25);
             this.stringColorButton.TabIndex = 22;
             this.stringColorButton.Values.Text = "String";
-            this.stringColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.stringColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // numberColorButton
             // 
@@ -314,7 +314,7 @@
             this.numberColorButton.Size = new System.Drawing.Size(146, 25);
             this.numberColorButton.TabIndex = 23;
             this.numberColorButton.Values.Text = "Number";
-            this.numberColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.numberColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // generalAspectsGroupBox
             // 
@@ -366,7 +366,7 @@
             this.foldingColorButton.Size = new System.Drawing.Size(146, 25);
             this.foldingColorButton.TabIndex = 17;
             this.foldingColorButton.Values.Text = "Folding";
-            this.foldingColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.foldingColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // numberMarginColorButton
             // 
@@ -378,7 +378,7 @@
             this.numberMarginColorButton.Size = new System.Drawing.Size(146, 25);
             this.numberMarginColorButton.TabIndex = 16;
             this.numberMarginColorButton.Values.Text = "NumberMargin";
-            this.numberMarginColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.numberMarginColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // caretLineBackColorButton
             // 
@@ -390,7 +390,7 @@
             this.caretLineBackColorButton.Size = new System.Drawing.Size(146, 25);
             this.caretLineBackColorButton.TabIndex = 15;
             this.caretLineBackColorButton.Values.Text = "CaretLineBack";
-            this.caretLineBackColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.caretLineBackColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // selectionColorButton
             // 
@@ -402,7 +402,7 @@
             this.selectionColorButton.Size = new System.Drawing.Size(146, 25);
             this.selectionColorButton.TabIndex = 14;
             this.selectionColorButton.Values.Text = "Selection";
-            this.selectionColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.selectionColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // formBorderColorButton
             // 
@@ -414,7 +414,7 @@
             this.formBorderColorButton.Size = new System.Drawing.Size(146, 25);
             this.formBorderColorButton.TabIndex = 13;
             this.formBorderColorButton.Values.Text = "FormBorder";
-            this.formBorderColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.formBorderColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // foreColorButton
             // 
@@ -426,7 +426,7 @@
             this.foreColorButton.Size = new System.Drawing.Size(146, 25);
             this.foreColorButton.TabIndex = 12;
             this.foreColorButton.Values.Text = "Fore";
-            this.foreColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.foreColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // buttonHoverColorButton
             // 
@@ -438,7 +438,7 @@
             this.buttonHoverColorButton.Size = new System.Drawing.Size(146, 25);
             this.buttonHoverColorButton.TabIndex = 11;
             this.buttonHoverColorButton.Values.Text = "ButtonHover";
-            this.buttonHoverColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.buttonHoverColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // buttonFrameColorButton
             // 
@@ -450,7 +450,7 @@
             this.buttonFrameColorButton.Size = new System.Drawing.Size(146, 25);
             this.buttonFrameColorButton.TabIndex = 10;
             this.buttonFrameColorButton.Values.Text = "ButtonFrame";
-            this.buttonFrameColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.buttonFrameColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // buttonColorButton
             // 
@@ -462,7 +462,7 @@
             this.buttonColorButton.Size = new System.Drawing.Size(146, 25);
             this.buttonColorButton.TabIndex = 9;
             this.buttonColorButton.Values.Text = "Button";
-            this.buttonColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.buttonColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // secondaryColorButton
             // 
@@ -474,7 +474,7 @@
             this.secondaryColorButton.Size = new System.Drawing.Size(146, 25);
             this.secondaryColorButton.TabIndex = 8;
             this.secondaryColorButton.Values.Text = "Secondary";
-            this.secondaryColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.secondaryColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // primaryColorButton
             // 
@@ -486,7 +486,7 @@
             this.primaryColorButton.Size = new System.Drawing.Size(146, 25);
             this.primaryColorButton.TabIndex = 7;
             this.primaryColorButton.Values.Text = "Primary";
-            this.primaryColorButton.SelectedColorChanged += new System.EventHandler<ComponentFactory.Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
+            this.primaryColorButton.SelectedColorChanged += new System.EventHandler<Krypton.Toolkit.ColorEventArgs>(this.kryptonColorButton_SelectedColorChanged);
             // 
             // kryptonLabel1
             // 
@@ -524,9 +524,9 @@
             this.newThemeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.newThemeButton.Location = new System.Drawing.Point(545, 5);
             this.newThemeButton.Name = "newThemeButton";
-            this.newThemeButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.newThemeButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.newThemeButton.Size = new System.Drawing.Size(111, 25);
             this.newThemeButton.TabIndex = 8;
             this.newThemeButton.Values.Text = "New Theme";
@@ -537,9 +537,9 @@
             this.deleteThemeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.deleteThemeButton.Location = new System.Drawing.Point(662, 5);
             this.deleteThemeButton.Name = "deleteThemeButton";
-            this.deleteThemeButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.deleteThemeButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.deleteThemeButton.Size = new System.Drawing.Size(111, 25);
             this.deleteThemeButton.TabIndex = 7;
             this.deleteThemeButton.Values.Text = "Delete Theme";
@@ -580,41 +580,41 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton newThemeButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton deleteThemeButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonButton newThemeButton;
+        private Krypton.Toolkit.KryptonButton deleteThemeButton;
+        private Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private BrightIdeasSoftware.ObjectListView themeListView;
         private BrightIdeasSoftware.OLVColumn ThemeNameColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox scintillaGroupBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox generalAspectsGroupBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton primaryColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton foldingColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton numberMarginColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton caretLineBackColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton selectionColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton formBorderColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton foreColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton buttonHoverColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton buttonFrameColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton buttonColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton secondaryColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton attributeColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton commentColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton decoratorColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton commentLineColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton tripleColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton commentBlockColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton preprocessorColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton wordColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton operatorColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton stringColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton numberColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton user2ColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton user1ColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonColorButton entityColorButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox iconTypeComboBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private Krypton.Toolkit.KryptonGroupBox scintillaGroupBox;
+        private Krypton.Toolkit.KryptonGroupBox generalAspectsGroupBox;
+        private Krypton.Toolkit.KryptonColorButton primaryColorButton;
+        private Krypton.Toolkit.KryptonColorButton foldingColorButton;
+        private Krypton.Toolkit.KryptonColorButton numberMarginColorButton;
+        private Krypton.Toolkit.KryptonColorButton caretLineBackColorButton;
+        private Krypton.Toolkit.KryptonColorButton selectionColorButton;
+        private Krypton.Toolkit.KryptonColorButton formBorderColorButton;
+        private Krypton.Toolkit.KryptonColorButton foreColorButton;
+        private Krypton.Toolkit.KryptonColorButton buttonHoverColorButton;
+        private Krypton.Toolkit.KryptonColorButton buttonFrameColorButton;
+        private Krypton.Toolkit.KryptonColorButton buttonColorButton;
+        private Krypton.Toolkit.KryptonColorButton secondaryColorButton;
+        private Krypton.Toolkit.KryptonColorButton attributeColorButton;
+        private Krypton.Toolkit.KryptonColorButton commentColorButton;
+        private Krypton.Toolkit.KryptonColorButton decoratorColorButton;
+        private Krypton.Toolkit.KryptonColorButton commentLineColorButton;
+        private Krypton.Toolkit.KryptonColorButton tripleColorButton;
+        private Krypton.Toolkit.KryptonColorButton commentBlockColorButton;
+        private Krypton.Toolkit.KryptonColorButton preprocessorColorButton;
+        private Krypton.Toolkit.KryptonColorButton wordColorButton;
+        private Krypton.Toolkit.KryptonColorButton operatorColorButton;
+        private Krypton.Toolkit.KryptonColorButton stringColorButton;
+        private Krypton.Toolkit.KryptonColorButton numberColorButton;
+        private Krypton.Toolkit.KryptonColorButton user2ColorButton;
+        private Krypton.Toolkit.KryptonColorButton user1ColorButton;
+        private Krypton.Toolkit.KryptonColorButton entityColorButton;
+        private Krypton.Toolkit.KryptonComboBox iconTypeComboBox;
+        private Krypton.Toolkit.KryptonButton saveButton;
+        private Krypton.Toolkit.KryptonLabel kryptonLabel1;
     }
 }

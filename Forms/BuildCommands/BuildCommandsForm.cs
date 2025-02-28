@@ -12,14 +12,14 @@ using pie.Services;
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace pie
 {
     public partial class BuildCommandsForm : KryptonForm
     {
         private ConfigurationService configurationService = new ConfigurationService();
-        private ThemeService themeService = new ThemeService();
+        private ThemingService themeService = new ThemingService();
 
         public BuildCommandsFormInput Input { get; set; }
         public BuildCommandsFormOutput Output { get; set; }

@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddBuildCommandForm));
-            this.displayNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.commandTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.displayNameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.commandLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.commandTipLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.fileExtensionsTipLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.fileExtensionsRichTextBox = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.displayNameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.commandTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.displayNameLabel = new Krypton.Toolkit.KryptonLabel();
+            this.commandLabel = new Krypton.Toolkit.KryptonLabel();
+            this.saveButton = new Krypton.Toolkit.KryptonButton();
+            this.commandTipLabel = new Krypton.Toolkit.KryptonLabel();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.fileExtensionsTipLabel = new Krypton.Toolkit.KryptonLabel();
+            this.fileExtensionsRichTextBox = new Krypton.Toolkit.KryptonRichTextBox();
+            this.kryptonLabel5 = new Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -81,9 +81,9 @@
             // 
             this.saveButton.Location = new System.Drawing.Point(324, 278);
             this.saveButton.Name = "saveButton";
-            this.saveButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.saveButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.saveButton.Size = new System.Drawing.Size(79, 25);
             this.saveButton.TabIndex = 3;
             this.saveButton.Values.Text = "Save";
@@ -165,15 +165,15 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox displayNameTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox commandTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel displayNameLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel commandLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel commandTipLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
-        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox fileExtensionsRichTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel fileExtensionsTipLabel;
+        private Krypton.Toolkit.KryptonTextBox displayNameTextBox;
+        private Krypton.Toolkit.KryptonTextBox commandTextBox;
+        private Krypton.Toolkit.KryptonLabel displayNameLabel;
+        private Krypton.Toolkit.KryptonLabel commandLabel;
+        private Krypton.Toolkit.KryptonButton saveButton;
+        private Krypton.Toolkit.KryptonLabel commandTipLabel;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonLabel kryptonLabel5;
+        private Krypton.Toolkit.KryptonRichTextBox fileExtensionsRichTextBox;
+        private Krypton.Toolkit.KryptonLabel fileExtensionsTipLabel;
     }
 }

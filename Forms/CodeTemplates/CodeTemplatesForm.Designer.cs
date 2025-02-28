@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CodeTemplatesForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.textAreaPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.placeholderLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.template0CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.template9CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.template8CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.template7CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.template6CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.template5CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.template4CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.template3CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.template2CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.template1CheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.tipLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.buttonPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.textAreaPanel = new Krypton.Toolkit.KryptonPanel();
+            this.placeholderLabel = new Krypton.Toolkit.KryptonLabel();
+            this.template0CheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.template9CheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.template8CheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.template7CheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.template6CheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.template5CheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.template4CheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.template3CheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.template2CheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.template1CheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.tipLabel = new Krypton.Toolkit.KryptonLabel();
+            this.saveButton = new Krypton.Toolkit.KryptonButton();
+            this.buttonPanel = new Krypton.Toolkit.KryptonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textAreaPanel)).BeginInit();
@@ -177,9 +177,9 @@
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.saveButton.Location = new System.Drawing.Point(324, 376);
             this.saveButton.Name = "saveButton";
-            this.saveButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.saveButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.saveButton.Size = new System.Drawing.Size(79, 25);
             this.saveButton.TabIndex = 8;
             this.saveButton.Values.Text = "Save";
@@ -231,21 +231,21 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template1CheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel tipLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template8CheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template7CheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template6CheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template5CheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template4CheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template3CheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template2CheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template0CheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton template9CheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel textAreaPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel placeholderLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel buttonPanel;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonCheckButton template1CheckButton;
+        private Krypton.Toolkit.KryptonLabel tipLabel;
+        private Krypton.Toolkit.KryptonButton saveButton;
+        private Krypton.Toolkit.KryptonCheckButton template8CheckButton;
+        private Krypton.Toolkit.KryptonCheckButton template7CheckButton;
+        private Krypton.Toolkit.KryptonCheckButton template6CheckButton;
+        private Krypton.Toolkit.KryptonCheckButton template5CheckButton;
+        private Krypton.Toolkit.KryptonCheckButton template4CheckButton;
+        private Krypton.Toolkit.KryptonCheckButton template3CheckButton;
+        private Krypton.Toolkit.KryptonCheckButton template2CheckButton;
+        private Krypton.Toolkit.KryptonCheckButton template0CheckButton;
+        private Krypton.Toolkit.KryptonCheckButton template9CheckButton;
+        private Krypton.Toolkit.KryptonPanel textAreaPanel;
+        private Krypton.Toolkit.KryptonLabel placeholderLabel;
+        private Krypton.Toolkit.KryptonPanel buttonPanel;
     }
 }

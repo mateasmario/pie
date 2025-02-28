@@ -29,27 +29,27 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddDatabaseForm));
-            this.mainPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.postgresqlCheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.mssqlCheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.mysqlCheckButton = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
-            this.typeLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.hostnameTipLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.databaseConnectionNameTipLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.databasePasswordTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.passwordLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.databaseUsernameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.usernameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.testConnectionButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.databaseNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.databaseNameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.databasePortTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.portLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.databaseHostnameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.databaseConnectionNameTextBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.saveButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.databaseConnectionNameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.hostnameLabel = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
+            this.postgresqlCheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.mssqlCheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.mysqlCheckButton = new Krypton.Toolkit.KryptonCheckButton();
+            this.typeLabel = new Krypton.Toolkit.KryptonLabel();
+            this.hostnameTipLabel = new Krypton.Toolkit.KryptonLabel();
+            this.databaseConnectionNameTipLabel = new Krypton.Toolkit.KryptonLabel();
+            this.databasePasswordTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.passwordLabel = new Krypton.Toolkit.KryptonLabel();
+            this.databaseUsernameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.usernameLabel = new Krypton.Toolkit.KryptonLabel();
+            this.testConnectionButton = new Krypton.Toolkit.KryptonButton();
+            this.databaseNameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.databaseNameLabel = new Krypton.Toolkit.KryptonLabel();
+            this.databasePortTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.portLabel = new Krypton.Toolkit.KryptonLabel();
+            this.databaseHostnameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.databaseConnectionNameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            this.saveButton = new Krypton.Toolkit.KryptonButton();
+            this.databaseConnectionNameLabel = new Krypton.Toolkit.KryptonLabel();
+            this.hostnameLabel = new Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -178,9 +178,9 @@
             // 
             this.testConnectionButton.Location = new System.Drawing.Point(208, 376);
             this.testConnectionButton.Name = "testConnectionButton";
-            this.testConnectionButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.testConnectionButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.testConnectionButton.Size = new System.Drawing.Size(110, 25);
             this.testConnectionButton.TabIndex = 7;
             this.testConnectionButton.Values.Text = "Test Connection";
@@ -242,9 +242,9 @@
             // 
             this.saveButton.Location = new System.Drawing.Point(324, 376);
             this.saveButton.Name = "saveButton";
-            this.saveButton.OverrideFocus.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.saveButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.saveButton.Size = new System.Drawing.Size(79, 25);
             this.saveButton.TabIndex = 8;
             this.saveButton.Values.Text = "Save";
@@ -289,26 +289,26 @@
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel mainPanel;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databaseHostnameTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databaseConnectionNameTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton saveButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel databaseConnectionNameLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel hostnameLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databaseNameTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel databaseNameLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databasePortTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel portLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton testConnectionButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databaseUsernameTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel usernameLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox databasePasswordTextBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel passwordLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel databaseConnectionNameTipLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel hostnameTipLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel typeLabel;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton mysqlCheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton mssqlCheckButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton postgresqlCheckButton;
+        private Krypton.Toolkit.KryptonPanel mainPanel;
+        private Krypton.Toolkit.KryptonTextBox databaseHostnameTextBox;
+        private Krypton.Toolkit.KryptonTextBox databaseConnectionNameTextBox;
+        private Krypton.Toolkit.KryptonButton saveButton;
+        private Krypton.Toolkit.KryptonLabel databaseConnectionNameLabel;
+        private Krypton.Toolkit.KryptonLabel hostnameLabel;
+        private Krypton.Toolkit.KryptonTextBox databaseNameTextBox;
+        private Krypton.Toolkit.KryptonLabel databaseNameLabel;
+        private Krypton.Toolkit.KryptonTextBox databasePortTextBox;
+        private Krypton.Toolkit.KryptonLabel portLabel;
+        private Krypton.Toolkit.KryptonButton testConnectionButton;
+        private Krypton.Toolkit.KryptonTextBox databaseUsernameTextBox;
+        private Krypton.Toolkit.KryptonLabel usernameLabel;
+        private Krypton.Toolkit.KryptonTextBox databasePasswordTextBox;
+        private Krypton.Toolkit.KryptonLabel passwordLabel;
+        private Krypton.Toolkit.KryptonLabel databaseConnectionNameTipLabel;
+        private Krypton.Toolkit.KryptonLabel hostnameTipLabel;
+        private Krypton.Toolkit.KryptonLabel typeLabel;
+        private Krypton.Toolkit.KryptonCheckButton mysqlCheckButton;
+        private Krypton.Toolkit.KryptonCheckButton mssqlCheckButton;
+        private Krypton.Toolkit.KryptonCheckButton postgresqlCheckButton;
     }
 }
