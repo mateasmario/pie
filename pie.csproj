@@ -1,26 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\CefSharp.Common.117.2.20\build\CefSharp.Common.props" Condition="Exists('packages\CefSharp.Common.117.2.20\build\CefSharp.Common.props')" />
-  <Import Project="packages\cef.redist.x86.117.2.2\build\cef.redist.x86.props" Condition="Exists('packages\cef.redist.x86.117.2.2\build\cef.redist.x86.props')" />
-  <Import Project="packages\cef.redist.x64.117.2.2\build\cef.redist.x64.props" Condition="Exists('packages\cef.redist.x64.117.2.2\build\cef.redist.x64.props')" />
-  <Import Project="packages/CefSharp.Common.117.2.20/build/CefSharp.Common.props" Condition="Exists('packages/CefSharp.Common.117.2.20/build/CefSharp.Common.props')" />
-  <Import Project="packages/cef.redist.x86.117.2.2/build/cef.redist.x86.props" Condition="Exists('packages/cef.redist.x86.117.2.2/build/cef.redist.x86.props')" />
-  <Import Project="packages/cef.redist.x64.117.2.2/build/cef.redist.x64.props" Condition="Exists('packages/cef.redist.x64.117.2.2/build/cef.redist.x64.props')" />
-  <Import Project="packages\LibGit2Sharp.NativeBinaries.2.0.320\build\net46\LibGit2Sharp.NativeBinaries.props" Condition="Exists('packages\LibGit2Sharp.NativeBinaries.2.0.320\build\net46\LibGit2Sharp.NativeBinaries.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DF7AB167-4F95-4440-85A1-E54545F91796}</ProjectGuid>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>pie</RootNamespace>
-    <AssemblyName>pie</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>E:\pie\</PublishUrl>
     <Install>true</Install>
@@ -40,25 +21,10 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>pie.ico</ApplicationIcon>
@@ -77,24 +43,6 @@
     <StartupObject>pie.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutocompleteMenu-ScintillaNET, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\AutoCompleteMenu-ScintillaNET.2.1.1\lib\net45\AutocompleteMenu-ScintillaNET.dll</HintPath>
-    </Reference>
-    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
-      <HintPath>packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp, Version=117.2.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138">
-      <HintPath>packages\CefSharp.Common.117.2.20\lib\net462\CefSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CefSharp.Core, Version=117.2.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138">
-      <HintPath>packages\CefSharp.Common.117.2.20\lib\net462\CefSharp.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CefSharp.WinForms, Version=117.2.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
-      <HintPath>packages\CefSharp.WinForms.117.2.20\lib\net462\CefSharp.WinForms.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ComponentFactory.Krypton.Docking, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Release\ComponentFactory.Krypton.Docking.dll</HintPath>
@@ -115,83 +63,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Release\ComponentFactory.Krypton.Workspace.dll</HintPath>
     </Reference>
-    <Reference Include="ConEmu.WinForms, Version=1.21.9.5, Culture=neutral, PublicKeyToken=00340228797aafb8, processorArchitecture=MSIL">
-      <HintPath>packages\ConEmu.Control.WinForms.1.21.9.5\lib\net40\ConEmu.WinForms.dll</HintPath>
-    </Reference>
-    <Reference Include="ConsoleControl, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7edd23586f5e297f, processorArchitecture=MSIL">
-      <HintPath>packages\ConsoleControl.1.3.0\lib\net40-client\ConsoleControl.dll</HintPath>
-    </Reference>
-    <Reference Include="ConsoleControlAPI, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7c86b8a36b9c33e2, processorArchitecture=MSIL">
-      <HintPath>packages\ConsoleControlAPI.1.3.0\lib\net40\ConsoleControlAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf, Version=3.21.9.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Protobuf.3.21.9\lib\net45\Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="K4os.Compression.LZ4, Version=1.3.5.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
-      <HintPath>packages\K4os.Compression.LZ4.1.3.5\lib\net462\K4os.Compression.LZ4.dll</HintPath>
-    </Reference>
-    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.3.5.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
-      <HintPath>packages\K4os.Compression.LZ4.Streams.1.3.5\lib\net462\K4os.Compression.LZ4.Streams.dll</HintPath>
-    </Reference>
-    <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
-      <HintPath>packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
-    </Reference>
-    <Reference Include="Krypton.Docking, Version=90.25.2.55, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
-      <HintPath>packages\Krypton.Docking.90.25.2.55\lib\net472\Krypton.Docking.dll</HintPath>
-    </Reference>
-    <Reference Include="Krypton.Navigator, Version=90.25.2.55, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
-      <HintPath>packages\Krypton.Navigator.90.25.2.55\lib\net472\Krypton.Navigator.dll</HintPath>
-    </Reference>
-    <Reference Include="Krypton.Ribbon, Version=90.25.2.55, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
-      <HintPath>packages\Krypton.Ribbon.90.25.2.55\lib\net472\Krypton.Ribbon.dll</HintPath>
-    </Reference>
-    <Reference Include="Krypton.Toolkit, Version=90.25.2.55, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
-      <HintPath>packages\Krypton.Toolkit.90.25.2.55\lib\net472\Krypton.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="Krypton.Workspace, Version=90.25.2.55, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
-      <HintPath>packages\Krypton.Workspace.90.25.2.55\lib\net472\Krypton.Workspace.dll</HintPath>
-    </Reference>
-    <Reference Include="LibGit2Sharp, Version=0.27.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
-      <HintPath>packages\LibGit2Sharp.0.27.2\lib\net472\LibGit2Sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="ListViewPrinter, Version=2.7.1.31255, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\ObjectListView.2.7.1.5\lib\ListViewPrinter.dll</HintPath>
-    </Reference>
-    <Reference Include="Markdig, Version=0.33.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Markdig.0.33.0\lib\net462\Markdig.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.9.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.Cryptography, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-      <HintPath>packages\Microsoft.Bcl.Cryptography.9.0.2\lib\net462\Microsoft.Bcl.Cryptography.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=3.13.8.999, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.13.8\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform, Version=3.13.8.999, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.13.8\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Win32.Registry.AccessControl, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Win32.Registry.AccessControl.7.0.0\lib\net462\Microsoft.Win32.Registry.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Win32.SystemEvents, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Win32.SystemEvents.7.0.0\lib\net462\Microsoft.Win32.SystemEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Data, Version=8.1.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>packages\MySql.Data.8.1.0\lib\net462\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Nevron.Nov.Barcode, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="Nevron.Nov.Chart, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="Nevron.Nov.Diagram, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
@@ -201,508 +72,6 @@
     <Reference Include="Nevron.Nov.Schedule, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="Nevron.Nov.Text, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="Nevron.Nov.WinFormControls, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Npgsql, Version=7.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7">
-      <HintPath>packages\Npgsql.7.0.7\lib\netstandard2.0\Npgsql.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ObjectListView, Version=2.7.1.31255, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
-      <HintPath>packages\ObjectListView.2.7.1.5\lib\ObjectListView.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="Scintilla.NET, Version=5.3.2.7, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Scintilla.NET.5.3.2.7\lib\net45\Scintilla.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="SparkleLibrary, Version=2.7.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\ObjectListView.2.7.1.5\lib\SparkleLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.CodeDom, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-      <HintPath>packages\System.CodeDom.9.0.2\lib\net462\System.CodeDom.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Configuration.ConfigurationManager, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Configuration.ConfigurationManager.7.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.Odbc, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Data.Odbc.7.0.0\lib\net462\System.Data.Odbc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.OleDb, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Data.OleDb.7.0.0\lib\net462\System.Data.OleDb.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Data.SqlClient, Version=4.6.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>packages\System.Data.SqlClient.4.9.0\lib\net462\System.Data.SqlClient.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Design" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.EventLog, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-      <HintPath>packages\System.Diagnostics.EventLog.9.0.2\lib\net462\System.Diagnostics.EventLog.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Diagnostics.PerformanceCounter, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Diagnostics.PerformanceCounter.7.0.0\lib\net462\System.Diagnostics.PerformanceCounter.dll</HintPath>
-    </Reference>
-    <Reference Include="System.DirectoryServices" />
-    <Reference Include="System.DirectoryServices.AccountManagement" />
-    <Reference Include="System.DirectoryServices.Protocols" />
-    <Reference Include="System.Drawing.Common, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Drawing.Common.7.0.0\lib\net462\System.Drawing.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Formats.Asn1, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-      <HintPath>packages\System.Formats.Asn1.9.0.2\lib\net462\System.Formats.Asn1.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.IO.FileSystem.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Packaging, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.IO.Packaging.7.0.0\lib\net462\System.IO.Packaging.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Pipelines, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.IO.Pipelines.9.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Pipes.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.IO.Pipes.AccessControl.5.0.0\lib\net461\System.IO.Pipes.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Ports, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.IO.Ports.7.0.0\lib\net462\System.IO.Ports.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Management" />
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Net.Http.Json.9.0.0\lib\net462\System.Net.Http.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reflection.Context" />
-    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security" />
-    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Cng, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Cryptography.Cng.5.0.0\lib\net47\System.Security.Cryptography.Cng.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Pkcs, Version=9.0.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>packages\System.Security.Cryptography.Pkcs.9.0.2\lib\net462\System.Security.Cryptography.Pkcs.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.ProtectedData, Version=9.0.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>packages\System.Security.Cryptography.ProtectedData.9.0.2\lib\net462\System.Security.Cryptography.ProtectedData.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Xml, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-      <HintPath>packages\System.Security.Cryptography.Xml.9.0.2\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Permissions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Permissions.7.0.0\lib\net462\System.Security.Permissions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Duplex, Version=4.9.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.ServiceModel.Duplex.4.9.0\lib\net461\System.ServiceModel.Duplex.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.Http, Version=4.9.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.ServiceModel.Http.4.9.0\lib\net461\System.ServiceModel.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.NetTcp, Version=4.9.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.ServiceModel.NetTcp.4.9.0\lib\net461\System.ServiceModel.NetTcp.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.Primitives, Version=4.9.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.ServiceModel.Primitives.4.9.0\lib\net461\System.ServiceModel.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.Security, Version=4.9.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.ServiceModel.Security.4.9.0\lib\net461\System.ServiceModel.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.Syndication, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.ServiceModel.Syndication.7.0.0\lib\net462\System.ServiceModel.Syndication.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.ServiceProcess.ServiceController, Version=9.0.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>packages\System.ServiceProcess.ServiceController.9.0.2\lib\net462\System.ServiceProcess.ServiceController.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Speech" />
-    <Reference Include="System.Text.Encoding.CodePages, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Encoding.CodePages.7.0.0\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Encodings.Web.9.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Json.9.0.0\lib\net462\System.Text.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.AccessControl, Version=9.0.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>packages\System.Threading.AccessControl.9.0.2\lib\net462\System.Threading.AccessControl.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Threading.Channels, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Threading.Channels.7.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.Web.Services.Description, Version=4.9.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Web.Services.Description.4.9.0\lib\net461\System.Web.Services.Description.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="ZstdSharp, Version=0.7.1.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
-      <HintPath>packages\ZstdSharp.Port.0.7.1\lib\net461\ZstdSharp.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Classes\Configuration\FileBased\Impl\CodeTemplate.cs" />
-    <Compile Include="Classes\Configuration\FileBased\Impl\EditorProperties.cs" />
-    <Compile Include="Classes\Configuration\FileBased\Impl\SelectedTheme.cs" />
-    <Compile Include="Classes\Configuration\FileBased\DynamicLibraryConfigurationEntity.cs" />
-    <Compile Include="Classes\Configuration\FileBased\MultiFileConfigurationEntity.cs" />
-    <Compile Include="Classes\Configuration\FileBased\ConfigurationEntity.cs" />
-    <Compile Include="Classes\Configuration\FileBased\Impl\Formatter.cs" />
-    <Compile Include="Classes\Configuration\ICloneable.cs" />
-    <Compile Include="Classes\Form IO\Input\AddBuildCommandFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\BuildCommandsFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\CodeTemplatesFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\DatabaseOutputFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\AddDatabaseFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\DatabasesFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\GitCloneFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\NotificationFatalFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\NotificationFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\AboutFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\CheatsheetFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\NewThemeFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\DesignerFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\GitCommitLogFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\GitSettingsFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\GitPushCredentialsFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\GitCommitCredentialsFormInput.cs" />
-    <Compile Include="Classes\Form IO\Input\FormatFormInput.cs" />
-    <Compile Include="Classes\Form IO\Output\BuildCommandsFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\CodeTemplatesFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\GitCloneFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\DatabasesFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\AddDatabaseFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\AddBuildCommandFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\NotificationYesNoCancelFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\NewThemeFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\GitSettingsFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\GitPushCredentialsFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\GitCommitCredentialsFormOutput.cs" />
-    <Compile Include="Classes\Form IO\Output\FormatFormOutput.cs" />
-    <Compile Include="Classes\Helpers\Validators\MethodValidator.cs" />
-    <Compile Include="Classes\TransferObjects\DatabaseResponse.cs" />
-    <Compile Include="Classes\Helpers\ControlHelper.cs" />
-    <Compile Include="Classes\Configuration\FileBased\Impl\DatabaseConnection.cs" />
-    <Compile Include="Classes\Exceptions\Configuration\ConfigurationException.cs" />
-    <Compile Include="Classes\Exceptions\Configuration\Impl\InvalidPropertyNameException.cs" />
-    <Compile Include="Classes\Exceptions\Configuration\Impl\InvalidPropertyTypeException.cs" />
-    <Compile Include="Classes\Configuration\FileBased\Impl\LanguageMapping.cs" />
-    <Compile Include="Classes\Configuration\FileBased\Impl\LanguageProperties.cs" />
-    <Compile Include="Classes\Configuration\FileBased\Impl\LanguageDefinition.cs" />
-    <Compile Include="Classes\TransferObjects\NavigatorFile.cs" />
-    <Compile Include="Classes\TransferObjects\GitCommit.cs" />
-    <Compile Include="Classes\Configuration\UpdateStatus.cs" />
-    <Compile Include="Classes\Configuration\ReleaseInfo.cs" />
-    <Compile Include="Classes\Configuration\FileBased\Impl\ThemeInfo.cs" />
-    <Compile Include="Classes\Helpers\Triple.cs" />
-    <Compile Include="Enums\DatabaseType.cs" />
-    <Compile Include="Enums\FormatOptionCategory.cs" />
-    <Compile Include="Exceptions\IncorrectPublicMethodArgumentTypeException.cs" />
-    <Compile Include="Exceptions\IncorrectPublicMethodCountException.cs" />
-    <Compile Include="Exceptions\IncorrectPublicMethodReturnTypeException.cs" />
-    <Compile Include="Exceptions\IncorrectPublicMethodArgumentNumberException.cs" />
-    <Compile Include="Exceptions\IncorrectPublicMethodNameException.cs" />
-    <Compile Include="Forms\CodeTemplates\CodeTemplatesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CodeTemplates\CodeTemplatesForm.Designer.cs">
-      <DependentUpon>CodeTemplatesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Databases\AddDatabaseForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Databases\AddDatabaseForm.Designer.cs">
-      <DependentUpon>AddDatabaseForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Databases\DatabaseOutputForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Databases\DatabaseOutputForm.Designer.cs">
-      <DependentUpon>DatabaseOutputForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Databases\DatabasesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Databases\DatabasesForm.Designer.cs">
-      <DependentUpon>DatabasesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Format\FormatForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Format\FormatForm.Designer.cs">
-      <DependentUpon>FormatForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Git\GitSettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Git\GitSettingsForm.Designer.cs">
-      <DependentUpon>GitSettingsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Notifications\NotificationFatalForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Notifications\NotificationFatalForm.Designer.cs">
-      <DependentUpon>NotificationFatalForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Other\AboutForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Other\AboutForm.Designer.cs">
-      <DependentUpon>AboutForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\BuildCommands\AddBuildCommandForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\BuildCommands\AddBuildCommandForm.Designer.cs">
-      <DependentUpon>AddBuildCommandForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\Configuration\FileBased\Impl\BuildCommand.cs" />
-    <Compile Include="Classes\Controls\CustomColorTable.cs" />
-    <Compile Include="Classes\Controls\CustomToolStripRenderer.cs" />
-    <Compile Include="Classes\Configuration\FileBased\Impl\GitCredentials.cs" />
-    <Compile Include="Classes\TransferObjects\GitFile.cs" />
-    <Compile Include="Classes\Controls\PieContextMenuHandler.cs" />
-    <Compile Include="Classes\Controls\PieKeyboardHandler.cs" />
-    <Compile Include="Classes\TransferObjects\TabInfo.cs" />
-    <Compile Include="Enums\NotificationButton.cs" />
-    <Compile Include="Forms\Git\GitCloneForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Git\GitCloneForm.Designer.cs">
-      <DependentUpon>GitCloneForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Git\GitCommitLogForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Git\GitCommitLogForm.Designer.cs">
-      <DependentUpon>GitCommitLogForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Notifications\NotificationOKForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Notifications\NotificationOKForm.Designer.cs">
-      <DependentUpon>NotificationOKForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Enums\TabType.cs" />
-    <Compile Include="Forms\Git\GitCommitCredentialsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Git\GitCommitCredentialsForm.Designer.cs">
-      <DependentUpon>GitCommitCredentialsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Git\GitPushCredentialsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Git\GitPushCredentialsForm.Designer.cs">
-      <DependentUpon>GitPushCredentialsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\BuildCommands\BuildCommandsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\BuildCommands\BuildCommandsForm.Designer.cs">
-      <DependentUpon>BuildCommandsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Notifications\NotificationYesNoCancelForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Notifications\NotificationYesNoCancelForm.Designer.cs">
-      <DependentUpon>NotificationYesNoCancelForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Other\CheatsheetForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Other\CheatsheetForm.Designer.cs">
-      <DependentUpon>CheatsheetForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Theme\DesignerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Theme\DesignerForm.Designer.cs">
-      <DependentUpon>DesignerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Theme\NewThemeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Theme\NewThemeForm.Designer.cs">
-      <DependentUpon>NewThemeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PieSync.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Services\ConfigurationService.cs" />
-    <Compile Include="Services\DatabaseService.cs" />
-    <Compile Include="Services\ParsingService.cs" />
-    <Compile Include="Services\ScintillaLexerService.cs" />
-    <Compile Include="Services\ThemingService.cs" />
-    <Compile Include="Services\UpdateService.cs" />
-    <EmbeddedResource Include="Forms\CodeTemplates\CodeTemplatesForm.resx">
-      <DependentUpon>CodeTemplatesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Databases\AddDatabaseForm.resx">
-      <DependentUpon>AddDatabaseForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Databases\DatabaseOutputForm.resx">
-      <DependentUpon>DatabaseOutputForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Databases\DatabasesForm.resx">
-      <DependentUpon>DatabasesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Format\FormatForm.resx">
-      <DependentUpon>FormatForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Git\GitCommitLogForm.resx">
-      <DependentUpon>GitCommitLogForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Git\GitSettingsForm.resx">
-      <DependentUpon>GitSettingsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Notifications\NotificationFatalForm.resx">
-      <DependentUpon>NotificationFatalForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Other\AboutForm.resx">
-      <DependentUpon>AboutForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BuildCommands\AddBuildCommandForm.resx">
-      <DependentUpon>AddBuildCommandForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Git\GitCloneForm.resx">
-      <DependentUpon>GitCloneForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Notifications\NotificationOKForm.resx">
-      <DependentUpon>NotificationOKForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Git\GitCommitCredentialsForm.resx">
-      <DependentUpon>GitCommitCredentialsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Git\GitPushCredentialsForm.resx">
-      <DependentUpon>GitPushCredentialsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BuildCommands\BuildCommandsForm.resx">
-      <DependentUpon>BuildCommandsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Notifications\NotificationYesNoCancelForm.resx">
-      <DependentUpon>NotificationYesNoCancelForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Other\CheatsheetForm.resx">
-      <DependentUpon>CheatsheetForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Theme\DesignerForm.resx">
-      <DependentUpon>DesignerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Theme\NewThemeForm.resx">
-      <DependentUpon>NewThemeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="app.manifest" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
@@ -711,38 +80,8 @@
     <Content Include="pieblue.ico" />
     <None Include="Resources\folder %281%29 %281%29.png" />
     <None Include="Resources\copy %281%29 %281%29.png" />
-    <None Include="Resources\info.png" />
-    <None Include="Resources\explorer.png" />
-    <None Include="Resources\sync.png" />
-    <None Include="Resources\cursor-down.png" />
-    <None Include="Resources\cursor-up-dark.png" />
-    <None Include="Resources\cursor-up.png" />
-    <None Include="Resources\cursor-down-dark.png" />
-    <None Include="Resources\b-dark.png" />
-    <None Include="Resources\alt-dark.png" />
-    <None Include="Resources\x-dark.png" />
-    <None Include="Resources\v-dark.png" />
-    <None Include="Resources\g-dark.png" />
-    <None Include="Resources\f-dark.png" />
-    <None Include="Resources\d-dark.png" />
-    <None Include="Resources\cursor-right-dark.png" />
-    <None Include="Resources\cursor-left-dark.png" />
-    <None Include="Resources\ctrl-dark.png" />
-    <None Include="Resources\d.png" />
-    <None Include="Resources\f.png" />
-    <None Include="Resources\cursor-right.png" />
-    <None Include="Resources\cursor-left.png" />
-    <None Include="Resources\ctrl.png" />
-    <None Include="Resources\b.png" />
-    <None Include="Resources\alt.png" />
-    <None Include="Resources\x.png" />
-    <None Include="Resources\v.png" />
-    <None Include="Resources\g.png" />
     <None Include="Resources\folder %281%29.png" />
     <None Include="Resources\copy %281%29.png" />
-    <None Include="Resources\copy.png" />
-    <None Include="Resources\folder.png" />
-    <None Include="Resources\graphic-designer.png" />
     <None Include="Resources\v_light_theme.png" />
     <None Include="Resources\v_dark_theme.png" />
     <None Include="Resources\g_light_theme.png" />
@@ -757,8 +96,6 @@
     <None Include="Resources\ctrl_dark_theme.png" />
     <None Include="Resources\alt_light_theme.png" />
     <None Include="Resources\alt_dark_theme.png" />
-    <None Include="Resources\open-book.png" />
-    <None Include="Resources\transparency.png" />
     <None Include="Resources\stars.png" />
     <None Include="Resources\smoke.png" />
     <None Include="Resources\magic.png" />
@@ -774,23 +111,6 @@
     <None Include="Resources\logo_small.png" />
     <None Include="Resources\logo1.png" />
     <None Include="Resources\logo.png" />
-    <None Include="Resources\paragraph.png" />
-    <None Include="Resources\push_white.png" />
-    <None Include="Resources\pull_black.png" />
-    <None Include="Resources\log_white.png" />
-    <None Include="Resources\log_black.png" />
-    <None Include="Resources\push_black.png" />
-    <None Include="Resources\pull_white.png" />
-    <None Include="Resources\commit_white.png" />
-    <None Include="Resources\commit_black.png" />
-    <None Include="Resources\refresh_white.png" />
-    <None Include="Resources\refresh_black.png" />
-    <None Include="Resources\mysql_white.png" />
-    <None Include="Resources\mysql_black.png" />
-    <None Include="Resources\microsoft_white.png" />
-    <None Include="Resources\microsoft_black.png" />
-    <None Include="Resources\postgresql_white.png" />
-    <None Include="Resources\postgresql_black.png" />
     <None Include="Resources\mysqldb.png" />
     <None Include="Resources\mysql2.png" />
     <None Include="Resources\pngwing.com %2810%29.png" />
@@ -817,7 +137,6 @@
     <None Include="Resources\62debc4fff3c6e4b8b5de8d3.png" />
     <None Include="Resources\mysql1.png" />
     <None Include="Resources\mysql.png" />
-    <None Include="Resources\gears.png" />
     <None Include="Resources\binary-code.png" />
     <None Include="Resources\database %284%29.png" />
     <None Include="Resources\database %283%29.png" />
@@ -836,7 +155,6 @@
     <None Include="Resources\download %282%29.png" />
     <None Include="Resources\check-mark.png" />
     <None Include="Resources\pull.png" />
-    <None Include="Resources\commit-git.png" />
     <None Include="Resources\refresh %282%29.png" />
     <None Include="Resources\refresh-button %281%29.png" />
     <None Include="Resources\refresh-button.png" />
@@ -850,18 +168,14 @@
     <None Include="Resources\close %287%29.png" />
     <None Include="Resources\unfriend.png" />
     <None Include="Resources\unfriend %281%29.png" />
-    <None Include="Resources\trash-can.png" />
     <None Include="Resources\trash-can %281%29.png" />
     <None Include="Resources\pencil %281%29.png" />
-    <None Include="Resources\pencil.png" />
     <None Include="Resources\pngwing.com %282%29.png" />
     <None Include="Resources\git %285%29.png" />
     <None Include="Resources\git %284%29.png" />
     <None Include="Resources\git %283%29.png" />
     <None Include="Resources\git %282%29.png" />
     <None Include="Resources\Git-Icon-1788C1.png" />
-    <None Include="Resources\day-mode.png" />
-    <None Include="Resources\crescent-moon.png" />
     <None Include="Resources\image %2814%29.png" />
     <None Include="Resources\plus %284%29.png" />
     <None Include="Resources\plus %283%291.png" />
@@ -903,7 +217,6 @@
     <None Include="Resources\plus.png" />
     <None Include="Resources\powershell %281%29.png" />
     <None Include="Resources\merge.png" />
-    <None Include="Resources\running.png" />
     <None Include="Resources\play-button %281%29.png" />
     <None Include="Resources\play.png" />
     <None Include="Resources\imgonline-com-ua-ReplaceColor-8DIhBwz22u8.png" />
@@ -943,27 +256,484 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\Scintilla.NET.5.3.2.7\build\scintilla.net.targets" Condition="Exists('packages\Scintilla.NET.5.3.2.7\build\scintilla.net.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\Scintilla.NET.5.3.2.7\build\scintilla.net.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Scintilla.NET.5.3.2.7\build\scintilla.net.targets'))" />
-    <Error Condition="!Exists('packages\LibGit2Sharp.NativeBinaries.2.0.320\build\net46\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\LibGit2Sharp.NativeBinaries.2.0.320\build\net46\LibGit2Sharp.NativeBinaries.props'))" />
-    <Error Condition="!Exists('packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets'))" />
-    <Error Condition="!Exists('packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
-    <Error Condition="!Exists('packages/cef.redist.x64.117.2.2/build/cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages/cef.redist.x64.117.2.2/build/cef.redist.x64.props'))" />
-    <Error Condition="!Exists('packages/cef.redist.x86.117.2.2/build/cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages/cef.redist.x86.117.2.2/build/cef.redist.x86.props'))" />
-    <Error Condition="!Exists('packages/CefSharp.Common.117.2.20/build/CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages/CefSharp.Common.117.2.20/build/CefSharp.Common.props'))" />
-    <Error Condition="!Exists('packages/CefSharp.Common.117.2.20/build/CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages/CefSharp.Common.117.2.20/build/CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('packages\cef.redist.x64.117.2.2\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x64.117.2.2\build\cef.redist.x64.props'))" />
-    <Error Condition="!Exists('packages\cef.redist.x86.117.2.2\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x86.117.2.2\build\cef.redist.x86.props'))" />
-    <Error Condition="!Exists('packages\CefSharp.Common.117.2.20\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.117.2.20\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('packages\CefSharp.Common.117.2.20\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.117.2.20\build\CefSharp.Common.targets'))" />
-  </Target>
-  <Import Project="packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets" Condition="Exists('packages\ConEmu.Core.21.9.5\build\ConEmu.Core.Targets')" />
-  <Import Project="packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
-  <Import Project="packages/CefSharp.Common.117.2.20/build/CefSharp.Common.targets" Condition="Exists('packages/CefSharp.Common.117.2.20/build/CefSharp.Common.targets')" />
-  <Import Project="packages\CefSharp.Common.117.2.20\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.117.2.20\build\CefSharp.Common.targets')" />
+  <ItemGroup>
+    <PackageReference Include="AutoCompleteMenu-ScintillaNET" Version="2.1.1" />
+    <PackageReference Include="cef.redist.x64" Version="116.0.15" />
+    <PackageReference Include="cef.redist.x86" Version="116.0.15" />
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="133.4.21" />
+    <PackageReference Include="ConEmu.Control.WinForms" Version="1.21.9.5" />
+    <PackageReference Include="ConEmu.Core" Version="21.9.5" />
+    <PackageReference Include="ConsoleControl" Version="1.3.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.21.9" />
+    <PackageReference Include="K4os.Compression.LZ4" Version="1.3.5" />
+    <PackageReference Include="K4os.Compression.LZ4.Streams" Version="1.3.5" />
+    <PackageReference Include="K4os.Hash.xxHash" Version="1.0.8" />
+    <PackageReference Include="Krypton.Docking" Version="90.25.2.55" />
+    <PackageReference Include="Krypton.Navigator" Version="90.25.2.55" />
+    <PackageReference Include="Krypton.Ribbon" Version="90.25.2.55" />
+    <PackageReference Include="Krypton.Toolkit" Version="90.25.2.55" />
+    <PackageReference Include="Krypton.Workspace" Version="90.25.2.55" />
+    <PackageReference Include="LibGit2Sharp" Version="0.27.2" />
+    <PackageReference Include="LibGit2Sharp.NativeBinaries" Version="2.0.320" />
+    <PackageReference Include="Markdig" Version="0.33.0" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Bcl.Cryptography" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.2" />
+    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="3.13.8" />
+    <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+    <PackageReference Include="Microsoft.Win32.Registry.AccessControl" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Win32.SystemEvents" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.2" />
+    <PackageReference Include="MySql.Data" Version="8.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Npgsql" Version="7.0.7" />
+    <PackageReference Include="ObjectListView" Version="2.7.1.5" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="Scintilla.NET" Version="5.3.2.7" />
+    <PackageReference Include="System.CodeDom" Version="9.0.2" />
+    <PackageReference Include="System.Collections.Immutable" Version="9.0.2" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="9.0.2" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="9.0.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.2" />
+    <PackageReference Include="System.Data.Odbc" Version="9.0.2" />
+    <PackageReference Include="System.Data.OleDb" Version="9.0.2" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.2" />
+    <PackageReference Include="System.Diagnostics.EventLog" Version="9.0.2" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.2" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.2" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.2" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.2" />
+    <PackageReference Include="System.Formats.Asn1" Version="9.0.2" />
+    <PackageReference Include="System.IO.Packaging" Version="9.0.2" />
+    <PackageReference Include="System.IO.Pipelines" Version="9.0.2" />
+    <PackageReference Include="System.IO.Ports" Version="9.0.2" />
+    <PackageReference Include="System.Net.Http.Json" Version="9.0.2" />
+    <PackageReference Include="System.Reflection.Context" Version="9.0.2" />
+    <PackageReference Include="System.Reflection.Context" Version="9.0.2" />
+    <PackageReference Include="System.Runtime.Caching" Version="9.0.2" />
+    <PackageReference Include="System.Runtime.Caching" Version="9.0.2" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+    <PackageReference Include="System.Security.AccessControl" Version="6.0.0" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="9.0.2" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="9.0.2" />
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="9.0.2" />
+    <PackageReference Include="System.Security.Permissions" Version="9.0.2" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="6.0.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="8.1.1" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="8.1.1" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.1" />
+    <PackageReference Include="System.ServiceModel.Security" Version="6.0.0" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="9.0.2" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.2" />
+    <PackageReference Include="System.Speech" Version="9.0.2" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.2" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="9.0.2" />
+    <PackageReference Include="System.Text.Json" Version="9.0.2" />
+    <PackageReference Include="System.Threading.AccessControl" Version="9.0.2" />
+    <PackageReference Include="System.Threading.Channels" Version="9.0.2" />
+    <PackageReference Include="System.Web.Services.Description" Version="4.10.0" />
+    <PackageReference Include="ZstdSharp.Port" Version="0.7.1" />
+    <PackageReference Include="System.ServiceModel.Federation" Version="8.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Formatters\AddEmptyRowBetweenEachLine.cs" />
+    <Compile Remove="Formatters\CapitalizeFirstCharacterFromEveryLine.cs" />
+    <Compile Remove="Formatters\ConvertNewlineToComma.cs" />
+    <Compile Remove="Formatters\ConvertNewlineToSpace.cs" />
+    <Compile Remove="Formatters\ConvertTextToLowercase.cs" />
+    <Compile Remove="Formatters\ConvertTextToUppercase.cs" />
+    <Compile Remove="Formatters\DuplicateLines.cs" />
+    <Compile Remove="Formatters\RemoveAllConsecutiveWhitespaces.cs" />
+    <Compile Remove="Formatters\RemoveAllWhitespaces.cs" />
+    <Compile Remove="Formatters\RemoveConsecutiveDuplicates.cs" />
+    <Compile Remove="Formatters\RemoveDuplicateLines.cs" />
+    <Compile Remove="Formatters\RemoveEmptyLines.cs" />
+    <Compile Remove="Formatters\RemoveWhitespaceLines.cs" />
+    <Compile Remove="Formatters\ReverseLineOrder.cs" />
+    <Compile Remove="Formatters\SortLinesAscending.cs" />
+    <Compile Remove="Formatters\SortLinesDescending.cs" />
+    <Compile Remove="Formatters\SwitchLowercaseWithUppercase.cs" />
+    <Compile Remove="Formatters\TrimLines.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.BrowserSubprocess\obj\x64\Release\.NETFramework,Version=v4.6.2.AssemblyAttributes.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.BrowserSubprocess\obj\x86\Release\.NETFramework,Version=v4.6.2.AssemblyAttributes.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.BrowserSubprocess\Program.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.BrowserSubprocess\Program.netcore.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.BrowserSubprocess\Properties\AssemblyInfo.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\BrowserSettings.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\BrowserSettings.netcore.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\BrowserSubprocess\SelfHost.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\Cef.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\CefSettingsBase.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevToolsExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsClient.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsClient.Generated.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsClient.Generated.netcore.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsClient.Partial.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsClientException.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsDomainBase.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsDomainEntityBase.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsDomainErrorResponse.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsDomainEventArgsBase.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsDomainResponseBase.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsErrorEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsMethodResponse.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\DevToolsMethodResponseContext.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\EventProxy.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\Headers.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\IDevToolsClient.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\IEventProxy.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\MemoryDumpConfig.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DevTools\TargetFilter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\DragData.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\Fluent\DownloadHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\Fluent\DownloadHandlerBuilder.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\Fluent\UrlRequestClient.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\Fluent\UrlRequestClientBuilder.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\Initializer.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\ManagedCefBrowserAdapter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\ModuleInitializerAttribute.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\NativeMethodWrapper.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\ObjectFactory.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\obj\Release\.NETFramework,Version=v4.6.2.AssemblyAttributes.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\PostData.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\PostData.netcore.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\PostDataElement.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\PostDataElement.netcore.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\Properties\AssemblyInfo.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\Request.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\Request.netcore.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\RequestContext.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\RequestContext.netcore.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\RequestContextBuilder.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\RequestContextSettings.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\UrlRequest.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\UrlRequest.netcore.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\WebBrowserExtensionsEx.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\WindowInfo.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp.Core\WindowInfo.netcore.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\AsyncExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\BindingOptions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IAuthCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IBeforeDownloadCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\ICallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\ICompletionCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IDeleteCookiesCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IDevToolsMessageObserver.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IDownloadItemCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IFileDialogCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IGetExtensionResourceCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IJavascriptCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IJsDialogCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IMediaAccessCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IPermissionPromptCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IPrintToPdfCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IRequestCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IResolveCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IResourceReadCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IResourceSkipCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IRunContextMenuCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\IRunFileDialogCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\ISelectClientCertificateCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\ISetCookieCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\NoOpCompletionCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\TaskCompletionCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\TaskDeleteCookiesCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\TaskPrintToPdfCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\TaskResolveCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Callback\TaskSetCookieCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\CefCustomScheme.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\CefLibraryHandle.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\CefRuntime.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\CefSharpSettings.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Cookie.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\DefaultApp.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\DependencyChecker.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\DomNode.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\DownloadItem.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\AlphaType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefErrorCode.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefEventFlags.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefFileDialogMode.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefFocusSource.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefJsDialogType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefMenuCommand.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefPdfPrintMarginType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefReturnValue.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefState.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefTerminationStatus.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CefThreadIds.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CertStatus.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\ChannelLayout.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\ColorType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CompositionUnderlineStyle.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\ContextMenuEditState.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\ContextMenuMediaState.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\ContextMenuMediaType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\ContextMenuType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CookiePriority.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CookieSameSite.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\CursorType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\DragOperationsMask.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\FilterStatus.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\KeyEventType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\KeyType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\LogSeverity.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\MediaAccessPermissionType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\MenuItemType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\MouseButtonType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\PaintElementType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\PermissionRequestResult.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\PermissionRequestType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\PointerType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\PostDataElementType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\ReferrerPolicy.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\ResourceType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\SchemeOptions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\SslContentStatus.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\SslVersion.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\TextInputMode.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\TouchEventType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\TransitionType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\UrlRequestFlags.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\UrlRequestStatus.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\ValueType.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Enums\WindowOpenDisposition.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\AddressChangedEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\ConsoleMessageEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\FrameLoadEndEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\FrameLoadStartEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\JavascriptBindingCompleteEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\JavascriptBindingEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\JavascriptBindingMultipleCompleteEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\JavascriptMessageReceivedEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\LoadErrorEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\LoadingStateChangedEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\StatusMessageEventHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Event\TitleChangedEventArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\AccessibilityHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\AudioHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\BrowserProcessHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\ContextMenuHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\CookieAccessFilter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\DialogHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\DisplayHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\DownloadHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\DragHandler .cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\ExtensionHandler .cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\FindHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\FocusHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\FrameHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IAccessibilityHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IAudioHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IBrowserProcessHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IContextMenuHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\ICookieAccessFilter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IDialogHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IDisplayHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IDownloadHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IDragHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IExtensionHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IFindHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IFocusHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IFrameHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IJsDialogHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IKeyboardHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\ILifeSpanHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\ILoadHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IPermissionHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IRenderProcessMessageHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IRequestContextHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IRequestHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IResourceHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\IResourceRequestHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\JsDialogHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\KeyboardHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\LifeSpanHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\LoadHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\PermissionHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\RequestContextHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\RequestHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Handler\ResourceRequestHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IApp.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IBrowser.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IBrowserHost.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IBrowserSettings.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IChromiumWebBrowserBase.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IContextMenuParams.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ICookieManager.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IDomNode.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IDragData.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IExtension.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IFrame.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IImage.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IJavascriptObjectRepository.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IMenuModel.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\BaseTimeConverter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\BrowserRefCounter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\ByteArrayResourceHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\CefSharpArguments.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\CefThread.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\CefTimeUtils.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\CommandLineArgDictionary.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\CommandLineArgsParser.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\ConcurrentMethodRunnerQueue.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\CookieManagerDecorator.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\FileResourceHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\FreezableBase.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\GlobalContextInitialized.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\HeaderNameValueCollection.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\IBaseTimeConverter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\IBrowserAdapter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\IBrowserRefCounter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\IJavascriptCallbackFactory.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\IJavascriptObjectRepositoryInternal.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\IMethodRunnerQueue.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\InitializeAsyncBrowserProcessHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\InMemoryResourceRequestHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\IntPtrExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\IRenderWebBrowser.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\ITaskScheduler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\IWebBrowserInternal.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\JavascriptCallback.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\JavascriptMethod.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\JavascriptObject.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\JavascriptObjectRepository.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\JavascriptProperty.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Json\JsonEnumConverter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Json\JsonEnumConverterFactory.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\MethodInvocation.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\MethodInvocationCompleteArgs.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\MethodInvocationResult.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\MethodParameter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\MethodRunnerQueue.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\MimeTypeMapping.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\NoFocusHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\NoOpBrowserRefCounter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\ParentProcessMonitor.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Partial\ChromiumWebBrowser.Partial.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\PathCheck.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\PendingTaskRepository.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\ReflectionUtils.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\RenderprocessClientFactory.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\StringCheck.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\TaskExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Tasks\LimitedConcurrencyLevelTaskScheduler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Tasks\SyncContextTaskCompletionSource.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\TaskTimeoutExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\TryCallMethodResult.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Wcf\BrowserProcessResponse.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Wcf\BrowserProcessService.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Wcf\BrowserProcessServiceHost.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Wcf\IBrowserProcess.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Wcf\JavascriptCallbackEndpointBehavior.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Wcf\JavascriptCallbackSurrogate.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Internals\Wcf\WcfExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IPopupFeatures.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IPostData.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IPostDataElement.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IRegistration.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IRequest.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IRequestContext.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IResourceRequestHandlerFactory.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IResponse.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IResponseFilter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ISchemeRegistrar.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ISslInfo.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IUrlRequest.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IUrlRequestClient.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IValue.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IWebBrowser.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\IWindowInfo.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\JavascriptBinding\CamelCaseJavascriptNameConverter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\JavascriptBinding\IJavascriptNameConverter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\JavascriptBinding\JavascriptBindingExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\JavascriptBinding\JavascriptBindingSettings.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\JavascriptBinding\LegacyCamelCaseJavascriptNameConverter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\JavascriptException.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\JavascriptIgnoreAttribute.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\JavascriptResponse.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\JavascriptStackFrame.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Lagacy\ResourceHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\LoadUrlAsyncResponse.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ModelBinding\BindingMemberInfo.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ModelBinding\DefaultBinder.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ModelBinding\IAsyncMethodInterceptor.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ModelBinding\IBinder.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ModelBinding\IMethodInterceptor.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ModelBinding\IPropertyInterceptor.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ModelBinding\ModelBindingExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\NavigationEntry.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\obj\Release\.NETFramework,Version=v4.6.2.AssemblyAttributes.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\PdfPrintSettings.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\PostDataExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Preferences\SetPreferenceResponse.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Preferences\SetProxyResponse.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Properties\AssemblyInfo.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ProxyOptions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\RenderProcess\IRenderProcessHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\RenderProcess\IV8Context.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\RenderProcess\V8Exception.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\RequestContextExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ResourceHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ResourceRequestHandlerFactory.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ResourceRequestHandlerFactoryItem.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\ResponseFilter\StreamResponseFilter.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\SchemeHandler\FolderSchemeHandlerFactory.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\SchemeHandler\ISchemeHandlerFactory.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\SchemeHandler\OwinResourceHandler.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\SchemeHandler\OwinSchemeHandlerFactory.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\SslStatus.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\AudioParamaters.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\CompositionUnderline.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\CursorInfo.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\DomRect.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\DraggableRegion.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\KeyEvent.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\MouseEvent.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\Point.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\Range.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\Rect.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\ResolveCallbackResult.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\ScreenInfo.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\Size.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Structs\TouchEvent.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\UrlParts.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\UrlRequestClient.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Visitor\ICookieVisitor.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Visitor\INavigationEntryVisitor.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Visitor\IStringVisitor.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Visitor\TaskCookieVisitor.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Visitor\TaskNavigationEntryVisitor.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Visitor\TaskStringVisitor.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\WaitForNavigationAsyncResponse.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\WaitForSelectorAsyncResponse.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\WebBrowserExtensions.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Web\HtmlString.cs" />
+    <Compile Remove="packages\CefSharp.Common.117.2.20\src\CefSharp\Web\JsonString.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\CefSettings.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\ChromiumWebBrowser.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\ChromiumWebBrowserDesigner.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Experimental\ChromiumRenderWidgetHandleFinder.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Experimental\ChromiumWidgetNativeWindow.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Handler\DisplayHandler.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Handler\LifeSpanHandler.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Handler\LifeSpanHandlerBuilder.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Handler\LoadHandler.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Handler\PopupCreation.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Host\ChromiumHostControl.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Host\ChromiumHostControlBase.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Internals\ControlExtensions.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Internals\DefaultFocusHandler.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Internals\NativeMethods.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Internals\ParentFormMessageInterceptor.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\IWinFormsChromiumWebBrowser.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\IWinFormsWebBrowser.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\obj\Release\net462\.NETFramework,Version=v4.6.2.AssemblyAttributes.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Properties\AssemblyInfo.cs" />
+    <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\WebBrowserExtensions.cs" />
+  </ItemGroup>
 </Project>
