@@ -244,7 +244,7 @@ namespace pie.Services
             {
                 ((KryptonComboBox)control).LocalCustomPalette = palette;
             }
-            
+
             foreach (Control child in control.Controls)
             {
                 SetPaletteToObjects(child, palette);
