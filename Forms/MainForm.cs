@@ -3091,6 +3091,12 @@ namespace pie
             if (databasesForm.Output.Saved)
             {
                 ProcessDatabaseConnections();
+
+                if (tabControl.SelectedIndex != -1 && tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
+                {
+                    DeactivateBuildAndRunOptions();
+                    ActivateSpecificBuildAndRunOptions(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
+                }
             }
         }
 
