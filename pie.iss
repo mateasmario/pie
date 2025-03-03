@@ -35,6 +35,7 @@ OutputBaseFilename=mysetup
 SolidCompression=yes
 WizardStyle=modern
 SetupIconFile=C:\git\pie\pie.ico
+LicenseFile=C:\git\pie\LICENSE
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -45,7 +46,61 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "C:\git\pie\bin\Release\net8.0-windows7.0\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\git\pie\bin\Release\net8.0-windows7.0\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\git\pie\LICENSE"; DestDir: "LICENSE"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+
+[Code]
+function IsDotNetInstalled(): Boolean;
+var
+  installKey: string;
+begin
+  installKey := 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full';
+  Result := RegKeyExists(HKEY_LOCAL_MACHINE, installKey);
+end;
+
+function IsVCRedistInstalled: Boolean;
+var
+  Installed: Boolean;
+begin
+  Installed := RegKeyExists(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64');
+  Result := Installed;
+end;
+
+
+procedure InitializeWizard;
+var
+  ErrorCode: Integer;
+begin
+  if not IsDotNetInstalled then
+  begin
+    if MsgBox('This application requires .NET Framework 9.0. Would you like to install it now?', 
+      mbConfirmation, MB_YESNO) = IDYES then
+    begin
+      ShellExec('open', 'https://dotnet.microsoft.com/en-us/download/dotnet/9.0', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode)
+      Abort;  // Stop installation until .NET is installed
+    end
+    else
+    begin
+      MsgBox('The installation cannot proceed without .NET Framework 9.0.', mbError, MB_OK);
+      Abort;
+    end;
+  end;
+  
+  if not IsVCRedistInstalled then
+  begin
+    if MsgBox('This application requires the Microsoft Visual C++ Redistributable. Install it now?', 
+      mbConfirmation, MB_YESNO) = IDYES then
+    begin
+      ShellExec('open', 'https://aka.ms/vs/17/release/vc_redist.x64.exe', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
+      Abort;  // Stop installation until Visual C++ is installed
+    end
+    else
+    begin
+      MsgBox('The installation cannot proceed without Visual C++ Redistributable.', mbError, MB_OK);
+      Abort;
+    end;
+  end;
+end;
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
