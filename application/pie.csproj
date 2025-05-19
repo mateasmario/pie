@@ -72,6 +72,9 @@
     <Reference Include="Nevron.Nov.Schedule, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="Nevron.Nov.Text, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="Nevron.Nov.WinFormControls, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
+    <Reference Include="plugin">
+      <HintPath>..\plugin\bin\Debug\net8.0\plugin.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
