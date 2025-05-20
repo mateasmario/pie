@@ -16,6 +16,9 @@ using pie.Classes;
  * Copyright (c) 2007 James Newton-King
  */
 using Newtonsoft.Json;
+using pie.Exceptions;
+using System.Linq;
+using pie.Classes.Configuration.FileBased.Impl;
 
 namespace pie.Services
 {
@@ -239,6 +242,76 @@ namespace pie.Services
             }
         }
 
+        public List<T> LoadPluginsFromFolder<T>(string directory) where T : Plugin, new()
+        {
+            List<T> plugins = new List<T>();
+
+            T plugin = null;
+
+            string[] files = null;
+
+            try
+            {
+                files = Directory.GetFiles(directory);
+
+                foreach (string file in files)
+                {
+                    if (parsingService.GetFileExtension(file) == "dll")
+                    {
+                        Assembly externalAssembly = Assembly.LoadFrom(file);
+
+                        if (!CheckIfPluginReferencesBaseDll(externalAssembly))
+                        {
+                            throw new InvalidPluginException("Plugin does not reference base dynamic link library (dll).");
+                        }
+
+                        List<string> classNames = GetClassesImplementingBasePluginInterface(externalAssembly);
+
+                        if (classNames.Count != 1)
+                        {
+                            throw new InvalidPluginException("Plugin must have a single class implementing the base plugin interface.");
+                        }
+
+                        string className = classNames[0];
+                        object instance = Activator.CreateInstance(externalAssembly.GetType(className));
+
+                        plugin = new T();
+                        plugin.Name = className;
+                        plugin.Instance = instance;
+                        plugins.Add(plugin);
+                    }
+                }
+
+                return plugins;
+
+            }
+            catch (DirectoryNotFoundException)
+            {
+                return plugins;
+            }
+        }
+
+        private bool CheckIfPluginReferencesBaseDll(Assembly assembly)
+        {
+            var referencedAssemblies = assembly.GetReferencedAssemblies();
+
+            foreach (var referenced in referencedAssemblies)
+            {
+                if (!referenced.Name.Equals("plugin"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private List<string> GetClassesImplementingBasePluginInterface(Assembly assembly)
+        {
+            return assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract && typeof(IPlugin).IsAssignableFrom(t)).Select(t => t.FullName).ToList();
+        }
+
+        // ToDo: To be replaced with plugin system
         public List<T> LoadLinkLibrariesFromMultipleFiles<T>(string directory, MethodValidator nameValidator) where T : DynamicLibraryConfigurationEntity, new()
         {
             List<T> dlls = new List<T>();

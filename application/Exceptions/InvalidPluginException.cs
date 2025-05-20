@@ -5,10 +5,7 @@ using System.Configuration;
 
 namespace pie.Exceptions
 {
-    public class InvalidPluginException : ConfigurationException
+    public class IncorrectPublicMethodArgumentNumberException
     {
-        public InvalidPluginException(string message) : base(message)
-        {
-        }
     }
 }
