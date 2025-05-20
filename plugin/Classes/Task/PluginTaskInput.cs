@@ -1,9 +1,7 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
-using System.Collections.Generic;
-
-namespace pie.Classes;
+namespace plugin.Classes;
 
 public class Metadata
 {
@@ -17,7 +15,7 @@ public class Tab
     public string Text { get; set; }
 }
 
-public class PluginContext
+public class PluginTaskInput
 {
     public Metadata Metadata { get; set; }
     public List<Tab> Tabs { get; set; }

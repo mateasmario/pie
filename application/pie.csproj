@@ -25,6 +25,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <Configurations>Debug;Release;pie;plugin</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>pie.ico</ApplicationIcon>
@@ -73,7 +74,7 @@
     <Reference Include="Nevron.Nov.Text, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="Nevron.Nov.WinFormControls, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
     <Reference Include="plugin">
-      <HintPath>..\plugin\bin\Debug\net8.0\plugin.dll</HintPath>
+      <HintPath>..\plugin\bin\Release\net8.0\plugin.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -738,5 +739,8 @@
     <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\obj\Release\net462\.NETFramework,Version=v4.6.2.AssemblyAttributes.cs" />
     <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\Properties\AssemblyInfo.cs" />
     <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\WebBrowserExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\plugin\plugin.csproj" />
   </ItemGroup>
 </Project>

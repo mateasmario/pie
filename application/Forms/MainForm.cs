@@ -82,6 +82,8 @@ using BrightIdeasSoftware;
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
+using pie.Classes.Configuration.FileBased.Impl;
+using plugin.Classes;
 
 namespace pie
 {
@@ -99,6 +101,7 @@ namespace pie
         private List<DatabaseConnection> databases;
         private List<CodeTemplate> codeTemplates;
         private List<Formatter> formatters;
+        private List<Plugin> plugins;
         private List<LanguageDefinition> languageDefinitions;
         private List<LanguageMapping> languageMappings;
         private EditorProperties editorProperties;
@@ -164,6 +167,7 @@ namespace pie
             ProcessThemes();
             ProcessEditorProperties();
             ProcessFormatterDLLs();
+            ProcessPlugins():
             ProcessBuildCommands();
             ProcessDatabaseConnections();
             ProcessLanguageMappings();
@@ -305,6 +309,31 @@ namespace pie
                                 .WithMethodParameterCount(1)
                                 .WithMethodReturnType(typeof(string))
                                 .Build());
+        }
+
+        private void ProcessPluginDLLs()
+        {
+            plugins = configurationService.LoadPluginsFromFolder<Plugin>(AppDomain.CurrentDomain.BaseDirectory + "plugins");
+            
+            foreach(Plugin plugin in plugins) {
+                ToolStripMenuItem pluginItem = new ToolStripMenuItem();
+                pluginItem.Text = plugin.Name;
+                pluginsToolStripMenuItem.DropDownItems.Add(pluginItem);
+
+                Dictionary<PluginTask, Func<PluginTaskInput, PluginTaskOutput>> pluginTasks = plugin.GetTasks();
+                foreach(var pluginTask in pluginTasks)
+                {
+                    ToolStripMenuItem taskItem = new ToolStripMenuItem();
+                    taskItem.Text = pluginTask.Key.ToString();
+                    taskItem.Click += TaskItem_Click;
+                    pluginItem.DropDownItems.Add(taskItem);
+                }
+            }
+        }
+
+        private void TaskItem_Click(object sender, EventArgs e)
+        {
+            ShowNotification("Plugin action invoked!");
         }
 
         private void SetDynamicDesign()
