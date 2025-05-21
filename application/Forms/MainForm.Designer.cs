@@ -96,6 +96,7 @@
             gitSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             enableWordWrapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             enableAutosaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             formatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             kryptonRibbon1 = new Krypton.Ribbon.KryptonRibbon();
             findReplaceHeaderGroup = new Krypton.Toolkit.KryptonHeaderGroup();
@@ -137,7 +138,6 @@
             gitStagingAreaListView = new BrightIdeasSoftware.ObjectListView();
             olvColumn1 = new BrightIdeasSoftware.OLVColumn();
             olvColumn2 = new BrightIdeasSoftware.OLVColumn();
-            pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)kryptonRibbon1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)findReplaceHeaderGroup).BeginInit();
@@ -481,7 +481,7 @@
             mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             mainMenuStrip.Name = "mainMenuStrip";
             mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            mainMenuStrip.Size = new System.Drawing.Size(1026, 24);
+            mainMenuStrip.Size = new System.Drawing.Size(1029, 24);
             mainMenuStrip.TabIndex = 1;
             mainMenuStrip.Text = "menuStrip1";
             // 
@@ -539,6 +539,12 @@
             enableAutosaveToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
             enableAutosaveToolStripMenuItem.Text = "Enable Autosave";
             enableAutosaveToolStripMenuItem.Click += enableAutosaveToolStripMenuItem_Click;
+            // 
+            // pluginsToolStripMenuItem
+            // 
+            pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
+            pluginsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            pluginsToolStripMenuItem.Text = "Plugins";
             // 
             // formatToolStripMenuItem
             // 
@@ -619,6 +625,9 @@
             // 
             // KryptonCustomPaletteBase
             // 
+            KryptonCustomPaletteBase.FormStyles.FormCommon.StateCommon.Back.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.None;
+            KryptonCustomPaletteBase.FormStyles.FormCommon.StateCommon.Border.Rounding = 7F;
+            KryptonCustomPaletteBase.HeaderStyles.HeaderForm.StateCommon.Content.Padding = new System.Windows.Forms.Padding(12, 4, -1, -1);
             KryptonCustomPaletteBase.UseThemeFormChromeBorderWidth = Krypton.Toolkit.InheritBool.True;
             // 
             // kryptonPage2
@@ -723,7 +732,7 @@
             tabControl.NavigatorMode = Krypton.Navigator.NavigatorMode.BarTabGroup;
             tabControl.Owner = null;
             tabControl.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
-            tabControl.Size = new System.Drawing.Size(1026, 554);
+            tabControl.Size = new System.Drawing.Size(1029, 446);
             tabControl.StateCommon.Tab.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             tabControl.TabIndex = 2;
             tabControl.Text = "kryptonDockableNavigator1";
@@ -831,11 +840,11 @@
             terminalTabControl.ControlKryptonFormFeatures = false;
             terminalTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             terminalTabControl.KryptonContextMenu = terminalContextMenu;
-            terminalTabControl.Location = new System.Drawing.Point(0, 364);
+            terminalTabControl.Location = new System.Drawing.Point(0, 256);
             terminalTabControl.NavigatorMode = Krypton.Navigator.NavigatorMode.BarTabGroup;
             terminalTabControl.Owner = null;
             terminalTabControl.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
-            terminalTabControl.Size = new System.Drawing.Size(1026, 214);
+            terminalTabControl.Size = new System.Drawing.Size(1029, 214);
             terminalTabControl.StateCommon.Tab.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             terminalTabControl.TabIndex = 3;
             terminalTabControl.Text = "kryptonNavigator1";
@@ -1066,18 +1075,12 @@
             olvColumn2.Text = "Status";
             olvColumn2.Width = 460;
             // 
-            // pluginsToolStripMenuItem
-            // 
-            pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
-            pluginsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            pluginsToolStripMenuItem.Text = "Plugins";
-            // 
             // MainForm
             // 
             AllowDrop = true;
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            ClientSize = new System.Drawing.Size(1026, 578);
+            ClientSize = new System.Drawing.Size(1029, 470);
             Controls.Add(terminalTabControl);
             Controls.Add(directoryNavigationHeaderGroup);
             Controls.Add(gitPanel);

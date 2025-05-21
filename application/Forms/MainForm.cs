@@ -319,10 +319,11 @@ namespace pie
                 pluginsToolStripMenuItem.DropDownItems.Add(pluginItem);
 
                 Dictionary<PluginTask, Func<PluginTaskInput, PluginTaskOutput>> pluginTasks = plugin.GetTasks();
+
                 foreach(var pluginTask in pluginTasks)
                 {
                     ToolStripMenuItem taskItem = new ToolStripMenuItem();
-                    taskItem.Text = pluginTask.Key.ToString();
+                    taskItem.Text = pluginTask.Key.Name;
                     taskItem.Click += TaskItem_Click;
                     pluginItem.DropDownItems.Add(taskItem);
                 }

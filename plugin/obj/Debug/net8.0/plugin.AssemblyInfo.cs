@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("plugin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1aa530fc885d9be910548945ef18ac9390e611a3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7694ede17b75e56c0a73bc599c2737dddcbac98")]
 [assembly: System.Reflection.AssemblyProductAttribute("plugin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("plugin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
