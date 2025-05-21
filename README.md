@@ -33,16 +33,23 @@ JSON configuration is handled by the [Newtonsoft.Json](https://github.com/JamesN
 
 ## Extension Points
 
-Pie features certain extension points, which refer to configuration files and user-defined methods that extend its available functionality. Extension points start from simple theme definitions stored in JSON files that can be configured through an integrated user interface, and can get to defining methods that manipulate text and are stored as Dynamic-Link Libraries (DLLs) inside Pie's configuration folder.
+Pie features certain extension points, some simpler than the others. Extension points refer to configuration files, user-defined methods or even completely functional programs that extend its available functionality.
 
-Extension points are a great way to offer experienced developers a greater amount of customizability in Pie. These include: defining build commands, associating file extensions with certain lexers, defining keywords for custom languages and creating custom analysis tools.
+### Configuration files
+Users are able to modify configuration files stored in JSON format, that contain theme definitions, custom build commands, and even custom language syntax. They can associate build commands with certain file extensions, and also create syntax support for their own programming language. Some configuration data can be modified directly via the user interface and doesn't require manual modification of the files.
+
+### Custom formatting algorithms
+Developers can dive deeper into Pie's extensibility features by creating their own text formatting algorithms, that will be loaded as Dynamic-Link Libraries (DLLs) from Pie's `formatters/` folder. A formatter should consist of a single class file written in C# that implements three methods which are checked when Pie loads the formatters at runtime. Some custom formatter examples can be found [here](https://github.com/bwxor/pie/tree/main/application/Formatters).   
+
+### Plugins
+Last but not least, the highest level of extension is obtained through plugins, which are also DLL files loaded at runtime from the `plugins/` folder. Compared to formatters, plugins require a more intensive amount of development, as they do not limit themselves to a simple method that receives an input and returns an output. An in-depth guide to plugin development for Pie can be found [here](PLUGINS.md).
 
 ## Installing and Updating Pie
 
-An installer for Pie is yet to be implemented, but at the moment, one can navigate to the [Releases](https://github.com/mateasmario/pie/releases) section and download the latest release in an archive whose contents should be extracted in a preferred directory. Running the executable should then work smoothly. 
+An installer for Pie is yet to be implemented, but at the moment, one can navigate to the [Releases](https://github.com/bwxor/pie/releases) section and download the latest release in an archive whose contents should be extracted in a preferred directory. Running the executable should then work smoothly. 
 
 Pie also features an automatic updater, called `PieSync.exe`, which is a console app that extracts the contents of the latest release from GitHub inside the launch directory of the executable. This is why it is **not** recommended to not change the directory structure of the binaries. PieSync can also be run manually, but the editor sends a notification (on launch) whenever a newer release is published, and the update process can be started directly from the application's user interface. It is, however, recommended to explicitly run PieSync when there are errors coming from manually configured JSON files, and Pie cannot resolve them by itself.
 
 ## Contribute: Making Pie Better
 
-Interested individuals may also contribute to the continuous improvement of Pie, either by sending feedback (via the [Feedback Form](https://forms.gle/L3mjuyTrYwBSVdYJ9)), by opening issues related to certain bugs or new improvement ideas, or by creating pull requests related to a certain issue. Anything is well appreciated!
+Interested individuals may also contribute to the continuous improvement of Pie, either by sending feedback (via the [Feedback Form](https://forms.gle/L3mjuyTrYwBSVdYJ9)), by opening issues related to certain bugs or new improvement ideas, or by creating pull requests related to a certain issue. Any contribution is well appreciated and will result in the evolution of Pie over time. You are the one who makes the difference!
