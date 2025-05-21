@@ -83,7 +83,6 @@ using BrightIdeasSoftware;
 using ConEmu.WinForms;
 using plugin.Classes;
 using System.Reflection;
-using Org.BouncyCastle.Bcpg.OpenPgp;
 
 namespace pie
 {
@@ -95,6 +94,7 @@ namespace pie
         private UpdateService updateService = new UpdateService();
         private ScintillaLexerService scintillaLexerService = new ScintillaLexerService();
         private SecureFileService secureFileService = new SecureFileService();
+        private PluginContext pluginContext = new PluginContext();
 
         private List<TabInfo> tabInfos = new List<TabInfo>();
         private List<ThemeInfo> themeInfos;
@@ -349,6 +349,7 @@ namespace pie
 
                             pluginTaskInput.Metadata = ProcessPluginInputMetadata();
                             pluginTaskInput.Tabs = ProcessPluginInputTabs();
+                            pluginTaskInput.Context = pluginContext;
 
                             PluginTaskOutput pluginTaskOutput = plugin.InvokeTask(task.Value, pluginTaskInput);
 

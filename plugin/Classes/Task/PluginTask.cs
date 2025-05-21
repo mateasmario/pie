@@ -3,11 +3,11 @@
 
 namespace plugin.Classes;
 
-public class PluginTask
+public class PluginContext
 {
-    public string Name { get; set; }
-    public PluginTask(string name)
+    public Dictionary<string, object> Map { get; set; }
+    public PluginContext()
     {
-        Name = name;
+        Map = new Dictionary<string, object>();
     }
 }
