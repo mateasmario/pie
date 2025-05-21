@@ -20,7 +20,6 @@ using pie.Forms.Other;
 using pie.Forms.Git;
 using pie.Forms.CodeTemplates;
 using pie.Classes.Configuration.FileBased.Impl;
-using plugin.Classes;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -82,6 +81,8 @@ using BrightIdeasSoftware;
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
+using plugin.Classes;
+using System.Reflection;
 
 namespace pie
 {
@@ -92,6 +93,7 @@ namespace pie
         private ParsingService parsingService = new ParsingService();
         private UpdateService updateService = new UpdateService();
         private ScintillaLexerService scintillaLexerService = new ScintillaLexerService();
+        private SecureFileService secureFileService = new SecureFileService();
 
         private List<TabInfo> tabInfos = new List<TabInfo>();
         private List<ThemeInfo> themeInfos;
@@ -324,6 +326,7 @@ namespace pie
                 {
                     ToolStripMenuItem taskItem = new ToolStripMenuItem();
                     taskItem.Text = pluginTask.Key.Name;
+                    taskItem.Tag = plugin.Name;
                     taskItem.Click += TaskItem_Click;
                     pluginItem.DropDownItems.Add(taskItem);
                 }
@@ -333,20 +336,105 @@ namespace pie
         private void TaskItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem taskItem = (ToolStripMenuItem)sender;
-            ToolStrip pluginItem = taskItem.GetCurrentParent();
 
             foreach(Plugin plugin in plugins) {
-                if (plugin.Name.Equals(pluginItem.Text))
+                if (plugin.Name.Equals(taskItem.Tag))
                 {
                     foreach(var task in plugin.GetTasks())
                     {
                         if (task.Key.Name.Equals(taskItem.Text))
                         {
                             PluginTaskInput pluginTaskInput = new PluginTaskInput();
+
+                            pluginTaskInput.Metadata = ProcessPluginInputMetadata();
+                            pluginTaskInput.Tabs = ProcessPluginInputTabs();
+
                             PluginTaskOutput pluginTaskOutput = plugin.InvokeTask(task.Value, pluginTaskInput);
-                            MessageBox.Show(pluginTaskOutput.Actions.Count.ToString());
+
+                            if (pluginTaskOutput != null && pluginTaskOutput.Actions != null)
+                            {
+                                ExecuteActions(pluginTaskOutput);
+                            }
                         }
                     }
+                }
+            }
+        }
+
+        private Metadata ProcessPluginInputMetadata()
+        {
+            Metadata output = new Metadata();
+
+            output.Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
+
+            return output;
+        }
+
+        private List<Tab> ProcessPluginInputTabs()
+        {
+            List<Tab> output = new List<Tab>();
+
+            for (int i = 0; i < tabInfos.Count; i++)
+            {
+                TabInfo tabInfo = tabInfos[i];
+
+                if (tabInfo.getTabType().Equals(TabType.CODE)) {
+                    Tab tab = new Tab();
+                    tab.IsFileOpened = tabInfo.getOpenedFilePath() != null;
+                    tab.FilePath = tabInfo.getOpenedFilePath();
+                    tab.Text = ((Scintilla)tabControl.Pages[i].Controls[0]).Text;
+                    output.Add(tab);
+                }
+            }
+
+            return output;
+        }
+
+        private void ExecuteActions(PluginTaskOutput pluginTaskOutput)
+        {
+            foreach(PluginAction action in pluginTaskOutput.Actions)
+            {
+                if (action is CreateFileAction)
+                {
+                    CreateFileAction createFileAction = (CreateFileAction)action;
+                    secureFileService.CreateFile(createFileAction.Path, createFileAction.Content);
+                }
+                else if (action is CreateDirectoryAction)
+                {
+                    CreateDirectoryAction createDirectoryAction = (CreateDirectoryAction)action;
+                    secureFileService.CreateDirectory(createDirectoryAction.DirectoryName);
+                }
+                else if (action is ModifyEditorContentAction)
+                {
+                    ModifyEditorContentAction modifyEditorContentAction = (ModifyEditorContentAction)action;
+
+                    int codeIndex = 0;
+
+                    for (int i = 0; i<tabInfos.Count; i++)
+                    {
+                        if (tabInfos.GetType().Equals(TabType.CODE))
+                        {
+                            codeIndex++;
+                            if (codeIndex == modifyEditorContentAction.TabIndex)
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+                    Scintilla scintilla = (Scintilla)tabControl.Pages[codeIndex].Controls[0];
+                    scintilla.Text = modifyEditorContentAction.Content;
+                }
+                else if (action is SelectDirectoryAction)
+                {
+                    SelectDirectoryAction selectDirectoryAction = (SelectDirectoryAction)action;
+                    directoryNavigationTextBox.Text = selectDirectoryAction.Path;
+                    NavigateToPath(selectDirectoryAction.Path);
+                }
+                else if (action is OpenTabAction)
+                {
+                    OpenTabAction openTabAction = (OpenTabAction)action;
+                    NewTab(TabType.CODE, openTabAction.Path);
                 }
             }
         }

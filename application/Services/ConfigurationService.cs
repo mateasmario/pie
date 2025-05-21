@@ -10,7 +10,6 @@ using System.Linq;
 using pie.Classes.ConfigurationEntities;
 using pie.Classes.Exceptions;
 using pie.Classes;
-using pie.Exceptions;
 using pie.Classes.Configuration.FileBased.Impl;
 using plugin.Classes;
 
