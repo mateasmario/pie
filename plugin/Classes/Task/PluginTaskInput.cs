@@ -15,8 +15,18 @@ public class Tab
     public string Text { get; set; }
 }
 
+public class PluginTask
+{
+    public string Name { get; set; }
+    public PluginTask(string name)
+    {
+        Name = name;
+    }
+}
+
 public class PluginTaskInput
 {
     public Metadata Metadata { get; set; }
     public List<Tab> Tabs { get; set; }
+    public PluginContext Context { get; set; }
 }
