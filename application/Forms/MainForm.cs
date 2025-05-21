@@ -17,10 +17,10 @@ using pie.Enums;
 using pie.Forms.Format;
 using pie.Forms.Theme;
 using pie.Forms.Other;
-using pie.Exceptions;
 using pie.Forms.Git;
 using pie.Forms.CodeTemplates;
-using pie.Classes.Exceptions;
+using pie.Classes.Configuration.FileBased.Impl;
+using plugin.Classes;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -82,8 +82,6 @@ using BrightIdeasSoftware;
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
-using pie.Classes.Configuration.FileBased.Impl;
-using plugin.Classes;
 
 namespace pie
 {
@@ -167,7 +165,7 @@ namespace pie
             ProcessThemes();
             ProcessEditorProperties();
             ProcessFormatterDLLs();
-            ProcessPlugins():
+            ProcessPlugins();
             ProcessBuildCommands();
             ProcessDatabaseConnections();
             ProcessLanguageMappings();
@@ -311,7 +309,7 @@ namespace pie
                                 .Build());
         }
 
-        private void ProcessPluginDLLs()
+        private void ProcessPlugins()
         {
             plugins = configurationService.LoadPluginsFromFolder<Plugin>(AppDomain.CurrentDomain.BaseDirectory + "plugins");
             

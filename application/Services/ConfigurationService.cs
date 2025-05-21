@@ -6,9 +6,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Drawing;
+using System.Linq;
 using pie.Classes.ConfigurationEntities;
 using pie.Classes.Exceptions;
 using pie.Classes;
+using pie.Exceptions;
+using pie.Classes.Configuration.FileBased.Impl;
+using plugin.Classes;
 
 /**
  * Used for reading and writing to JSON config files
@@ -16,9 +20,6 @@ using pie.Classes;
  * Copyright (c) 2007 James Newton-King
  */
 using Newtonsoft.Json;
-using pie.Exceptions;
-using System.Linq;
-using pie.Classes.Configuration.FileBased.Impl;
 
 namespace pie.Services
 {
