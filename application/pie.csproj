@@ -74,7 +74,7 @@
     <Reference Include="Nevron.Nov.Text, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="Nevron.Nov.WinFormControls, Version=22.10.19.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
     <Reference Include="plugin">
-      <HintPath>..\plugin\bin\Release\net8.0\plugin.dll</HintPath>
+      <HintPath>..\plugin\bin\Debug\net8.0\plugin.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -742,5 +742,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\plugin\plugin.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\Exceptions\File\" />
   </ItemGroup>
 </Project>

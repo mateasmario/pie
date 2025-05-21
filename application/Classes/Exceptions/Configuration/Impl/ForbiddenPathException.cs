@@ -3,7 +3,10 @@
 
 namespace pie.Classes.Exceptions
 {
-    public class InvalidPropertyNameException : ConfigurationException
+    public class ForbiddenPathException : ConfigurationException
     {
+        public ForbiddenPathException(string message) : base(message)
+        {
+        }
     }
 }
