@@ -332,7 +332,23 @@ namespace pie
 
         private void TaskItem_Click(object sender, EventArgs e)
         {
-            ShowNotification("Plugin action invoked!");
+            ToolStripMenuItem taskItem = (ToolStripMenuItem)sender;
+            ToolStrip pluginItem = taskItem.GetCurrentParent();
+
+            foreach(Plugin plugin in plugins) {
+                if (plugin.Name.Equals(pluginItem.Text))
+                {
+                    foreach(var task in plugin.GetTasks())
+                    {
+                        if (task.Key.Name.Equals(taskItem.Text))
+                        {
+                            PluginTaskInput pluginTaskInput = new PluginTaskInput();
+                            PluginTaskOutput pluginTaskOutput = plugin.InvokeTask(task.Value, pluginTaskInput);
+                            MessageBox.Show(pluginTaskOutput.Actions.Count.ToString());
+                        }
+                    }
+                }
+            }
         }
 
         private void SetDynamicDesign()
