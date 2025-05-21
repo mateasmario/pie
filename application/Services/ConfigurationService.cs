@@ -277,7 +277,7 @@ namespace pie.Services
                         object instance = Activator.CreateInstance(externalAssembly.GetType(className));
 
                         plugin = new T();
-                        plugin.Name = className;
+                        plugin.Name = parsingService.RemoveFileExtension(parsingService.GetFileName(file));
                         plugin.Instance = instance;
                         plugins.Add(plugin);
                     }
