@@ -741,9 +741,6 @@
     <Compile Remove="packages\CefSharp.WinForms.117.2.20\src\CefSharp.WinForms\WebBrowserExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\plugin\plugin.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Classes\Exceptions\File\" />
   </ItemGroup>
 </Project>

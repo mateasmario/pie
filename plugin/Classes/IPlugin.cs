@@ -5,5 +5,6 @@ namespace plugin.Classes;
 
 public interface IPlugin
 {
+    string GetName();
     Dictionary<PluginTask, Func<PluginTaskInput, PluginTaskOutput>> GetTaskDictionary();
 }

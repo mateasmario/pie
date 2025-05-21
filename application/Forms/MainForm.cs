@@ -83,6 +83,7 @@ using BrightIdeasSoftware;
 using ConEmu.WinForms;
 using plugin.Classes;
 using System.Reflection;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 
 namespace pie
 {
@@ -317,7 +318,7 @@ namespace pie
             
             foreach(Plugin plugin in plugins) {
                 ToolStripMenuItem pluginItem = new ToolStripMenuItem();
-                pluginItem.Text = plugin.Name;
+                pluginItem.Text = plugin.GetName();
                 pluginsToolStripMenuItem.DropDownItems.Add(pluginItem);
 
                 Dictionary<PluginTask, Func<PluginTaskInput, PluginTaskOutput>> pluginTasks = plugin.GetTasks();
@@ -434,7 +435,29 @@ namespace pie
                 else if (action is OpenTabAction)
                 {
                     OpenTabAction openTabAction = (OpenTabAction)action;
-                    NewTab(TabType.CODE, openTabAction.Path);
+                    NewTab(TabType.CODE, null);
+                    Open(openTabAction.Path);
+                }
+                else if (action is RunTerminalCommandAction)
+                {
+                    RunTerminalCommandAction runTerminalCommandAction = (RunTerminalCommandAction)action;
+                    ToggleTerminalTabControl(true);
+
+                    string command = runTerminalCommandAction.Command;
+
+                    int insertPosition = terminalTabControl.Pages.Count;
+
+                    for (int i = 0; i < terminalTabControl.Pages.Count; i++)
+                    {
+                        if (terminalTabControl.Pages[i].Text.Equals(command))
+                        {
+                            insertPosition = i;
+                            terminalTabControl.Pages.Remove(terminalTabControl.Pages[i]);
+                            break;
+                        }
+                    }
+
+                    NewTerminalTab(command, terminalTabControl.Pages.Count);
                 }
             }
         }
