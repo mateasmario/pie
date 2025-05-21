@@ -12,6 +12,10 @@ namespace pie.Classes.Configuration.FileBased.Impl
     public class Plugin : MultiFileConfigurationEntity
     {
         public object Instance { get; set; }
+        public string GetName()
+        {
+            return (string)Instance.GetType().GetMethod("GetName").Invoke(Instance, null);
+        }
         public Dictionary<PluginTask, Func<PluginTaskInput, PluginTaskOutput>> GetTasks()
         {
             return (Dictionary <PluginTask, Func <PluginTaskInput, PluginTaskOutput>>) Instance.GetType().GetMethod("GetTaskDictionary").Invoke(Instance, null);

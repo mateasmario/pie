@@ -33,3 +33,8 @@ public class OpenTabAction : PluginAction
 {
     public string Path { get; set; }
 }
+
+public class RunTerminalCommandAction : PluginAction
+{
+    public string Command { get; set; }
+}
