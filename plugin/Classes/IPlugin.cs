@@ -3,7 +3,7 @@
 
 namespace plugin.Classes;
 
-interface IPlugin
+public interface IPlugin
 {
     Dictionary<PluginTask, Func<PluginTaskInput, PluginTaskOutput>> GetTaskDictionary();
 }

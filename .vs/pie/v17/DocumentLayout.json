@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\git\\pie\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\pie.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\pie.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\services\\configurationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\services\\configurationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\classes\\configuration\\filebased\\impl\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\classes\\configuration\\filebased\\impl\\plugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CDFD586-355F-346C-92BF-961D4783A12E}|plugin\\plugin.csproj|c:\\git\\pie\\plugin\\classes\\iplugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CDFD586-355F-346C-92BF-961D4783A12E}|plugin\\plugin.csproj|solutionrelative:plugin\\classes\\iplugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|C:\\git\\pie\\application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,41 +38,66 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "pie",
-              "DocumentMoniker": "C:\\git\\pie\\application\\pie.csproj",
-              "RelativeDocumentMoniker": "application\\pie.csproj",
-              "ToolTip": "C:\\git\\pie\\application\\pie.csproj*",
-              "RelativeToolTip": "application\\pie.csproj*",
-              "ViewState": "AgIAADYAAAAAAAAAAAAvwC0AAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-20T18:05:00.922Z",
+              "DocumentIndex": 3,
+              "Title": "IPlugin.cs",
+              "DocumentMoniker": "C:\\git\\pie\\plugin\\Classes\\IPlugin.cs",
+              "RelativeDocumentMoniker": "plugin\\Classes\\IPlugin.cs",
+              "ToolTip": "C:\\git\\pie\\plugin\\Classes\\IPlugin.cs",
+              "RelativeToolTip": "plugin\\Classes\\IPlugin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T05:52:53.951Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
-              "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
-              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
-              "RelativeToolTip": "application\\Forms\\MainForm.cs",
-              "ViewState": "AgIAAHEAAAAAAAAAAAAQwHsAAAAIAAAAAAAAAA==",
+              "Title": "Plugin.cs",
+              "DocumentMoniker": "C:\\git\\pie\\application\\Classes\\Configuration\\FileBased\\Impl\\Plugin.cs",
+              "RelativeDocumentMoniker": "application\\Classes\\Configuration\\FileBased\\Impl\\Plugin.cs",
+              "ToolTip": "C:\\git\\pie\\application\\Classes\\Configuration\\FileBased\\Impl\\Plugin.cs",
+              "RelativeToolTip": "application\\Classes\\Configuration\\FileBased\\Impl\\Plugin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAABXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T18:01:41.763Z",
+              "WhenOpened": "2025-05-20T18:41:20.32Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
+              "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
+              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
+              "RelativeToolTip": "application\\Forms\\MainForm.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAABAAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T18:40:21.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "MainForm.cs [Design]",
               "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
               "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
               "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs [Design]",
               "RelativeToolTip": "application\\Forms\\MainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T18:01:39.033Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-05-20T18:40:19.162Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ConfigurationService.cs",
+              "DocumentMoniker": "C:\\git\\pie\\application\\Services\\ConfigurationService.cs",
+              "RelativeDocumentMoniker": "application\\Services\\ConfigurationService.cs",
+              "ToolTip": "C:\\git\\pie\\application\\Services\\ConfigurationService.cs",
+              "RelativeToolTip": "application\\Services\\ConfigurationService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T18:09:14.764Z",
+              "EditorCaption": ""
             }
           ]
         }
