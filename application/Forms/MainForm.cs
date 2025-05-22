@@ -1425,7 +1425,7 @@ namespace pie
                 kryptonContextMenuItem12.Text = "Show Directory Navigator";
             }
 
-            splitContainer.Panel1Collapsed = !status;
+            kryptonSplitContainer.Panel1Collapsed = !status;
         }
 
         private void ShowFindReplacePanel()
@@ -1648,67 +1648,7 @@ namespace pie
         // [Generic Event] Used mostly for tab control and actions on opened files. Called by other event listeners
         private void keyDownEvents(object sender, KeyEventArgs e)
         {
-            if (directoryNavigationHeaderGroup.Visible)
-            {
-                if (e.KeyCode == Keys.Down)
-                {
-                    if (directoryNavigationObjectListView.Items.Count > 0)
-                    {
-                        if (directoryNavigationObjectListView.SelectedIndex < directoryNavigationObjectListView.Items.Count - 1)
-                        {
-                            directoryNavigationObjectListView.Focus();
-                            directoryNavigationObjectListView.SelectedIndex++;
-                        }
-                        else if (directoryNavigationObjectListView.SelectedItems.Count == 0)
-                        {
-                            directoryNavigationObjectListView.Focus();
-                            directoryNavigationObjectListView.SelectedIndex = 0;
-                        }
-                    }
-                }
-                else
-                {
-                    if (e.KeyCode == Keys.Enter)
-                    {
-                        if (directoryNavigationObjectListView.SelectedItems.Count == 1)
-                        {
-                            NavigatorFile navigatorFile = (NavigatorFile)directoryNavigationObjectListView.SelectedObject;
-
-                            if (navigatorFile.Type == "File")
-                            {
-                                NewTab(TabType.CODE, null);
-                                bool state = Open(((NavigatorFile)navigatorFile).Path);
-
-                                if (!state)
-                                {
-                                    CloseTab();
-                                }
-                                else
-                                {
-                                    ToggleDirectoryNavigator(false);
-                                }
-                            }
-                            else
-                            {
-                                if (navigatorFile.Path != "..")
-                                {
-                                    NavigateToPath(navigatorFile.Path);
-                                }
-                                else
-                                {
-                                    NavigateToPath(parsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (e.Modifiers == Keys.Control)
-                {
-                    e.SuppressKeyPress = true;
-                }
-            }
-            else if (findReplaceHeaderGroup.Visible)
+            if (findReplaceHeaderGroup.Visible)
             {
                 if (e.KeyCode == Keys.Enter)
                 {
@@ -1884,9 +1824,9 @@ namespace pie
 
         private void ShowDirectoryNavigator()
         {
-            ToggleDirectoryNavigator(splitContainer.Panel1Collapsed);
+            ToggleDirectoryNavigator(kryptonSplitContainer.Panel1Collapsed);
 
-            if (!splitContainer.Panel1Collapsed)
+            if (!kryptonSplitContainer.Panel1Collapsed)
             {
                 directoryNavigationTreeView.Focus();
             }
@@ -3052,23 +2992,6 @@ namespace pie
             gitStagingAreaListView.BackColor = activeTheme.Primary;
             gitStagingAreaListView.ForeColor = activeTheme.Fore;
 
-            directoryNavigationObjectListView.ShowGroups = false;
-            directoryNavigationObjectListView.UseCustomSelectionColors = true;
-            directoryNavigationObjectListView.FullRowSelect = true;
-            directoryNavigationObjectListView.MultiSelect = false;
-            directoryNavigationObjectListView.HeaderStyle = ColumnHeaderStyle.None;
-            directoryNavigationObjectListView.SmallImageList = new ImageList();
-            directoryNavigationObjectListView.SmallImageList.Images.Add("directory", Properties.Resources.folder);
-            olvColumn3.FillsFreeSpace = true;
-            olvColumn3.ImageGetter = new ImageGetterDelegate(NavigationImageGetter);
-
-            directoryNavigationObjectListView.BackColor = activeTheme.Primary;
-            directoryNavigationObjectListView.ForeColor = activeTheme.Fore;
-            directoryNavigationObjectListView.HighlightBackgroundColor = activeTheme.Secondary;
-            directoryNavigationObjectListView.HighlightForegroundColor = activeTheme.Fore;
-            directoryNavigationObjectListView.UnfocusedHighlightBackgroundColor = activeTheme.Secondary;
-            directoryNavigationObjectListView.UnfocusedHighlightForegroundColor = activeTheme.Fore;
-
             var headerstyle = new HeaderFormatStyle();
             headerstyle.Normal.BackColor = activeTheme.Secondary;
             headerstyle.Normal.ForeColor = activeTheme.Fore;
@@ -3423,40 +3346,6 @@ namespace pie
 
             ProcessCustomThemes();
             ChangeTheme(activeTheme);
-        }
-
-        private void directoryNavigationObjectListView_DoubleClick(object sender, EventArgs e)
-        {
-            if (directoryNavigationObjectListView.SelectedItems.Count == 1)
-            {
-                NavigatorFile navigatorFile = (NavigatorFile)directoryNavigationObjectListView.SelectedObject;
-
-                if (navigatorFile.Type == "File")
-                {
-                    NewTab(TabType.CODE, null);
-                    bool state = Open(((NavigatorFile)navigatorFile).Path);
-
-                    if (!state)
-                    {
-                        CloseTab();
-                    }
-                    else
-                    {
-                        ToggleDirectoryNavigator(false);
-                    }
-                }
-                else
-                {
-                    if (navigatorFile.Path != "..")
-                    {
-                        NavigateToPath(navigatorFile.Path);
-                    }
-                    else
-                    {
-                        NavigateToPath(parsingService.GoBackInFilePath(directoryNavigationTextBox.Text));
-                    }
-                }
-            }
         }
 
         private void MainForm_DragEnter(object sender, DragEventArgs e)
