@@ -125,6 +125,7 @@
             olvColumn2 = new BrightIdeasSoftware.OLVColumn();
             kryptonSplitContainer = new Krypton.Toolkit.KryptonSplitContainer();
             directoryNavigationTreeView = new Krypton.Toolkit.KryptonTreeView();
+            directoryImageList = new System.Windows.Forms.ImageList(components);
             tabControl = new Krypton.Docking.KryptonDockableNavigator();
             mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)kryptonRibbon1).BeginInit();
@@ -414,7 +415,7 @@
             mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             mainMenuStrip.Name = "mainMenuStrip";
             mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            mainMenuStrip.Size = new System.Drawing.Size(954, 24);
+            mainMenuStrip.Size = new System.Drawing.Size(878, 24);
             mainMenuStrip.TabIndex = 1;
             mainMenuStrip.Text = "menuStrip1";
             // 
@@ -604,11 +605,11 @@
             terminalTabControl.ControlKryptonFormFeatures = false;
             terminalTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             terminalTabControl.KryptonContextMenu = terminalContextMenu;
-            terminalTabControl.Location = new System.Drawing.Point(0, 256);
+            terminalTabControl.Location = new System.Drawing.Point(0, 177);
             terminalTabControl.NavigatorMode = Krypton.Navigator.NavigatorMode.BarTabGroup;
             terminalTabControl.Owner = null;
             terminalTabControl.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
-            terminalTabControl.Size = new System.Drawing.Size(954, 214);
+            terminalTabControl.Size = new System.Drawing.Size(878, 214);
             terminalTabControl.StateCommon.Tab.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             terminalTabControl.TabIndex = 3;
             terminalTabControl.Text = "kryptonNavigator1";
@@ -854,25 +855,36 @@
             // 
             kryptonSplitContainer.Panel2.Controls.Add(tabControl);
             kryptonSplitContainer.SeparatorStyle = Krypton.Toolkit.SeparatorStyle.HighProfile;
-            kryptonSplitContainer.Size = new System.Drawing.Size(954, 232);
-            kryptonSplitContainer.SplitterDistance = 293;
+            kryptonSplitContainer.Size = new System.Drawing.Size(878, 153);
+            kryptonSplitContainer.SplitterDistance = 259;
             kryptonSplitContainer.SplitterWidth = 3;
             kryptonSplitContainer.TabIndex = 13;
             // 
             // directoryNavigationTreeView
             // 
             directoryNavigationTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            directoryNavigationTreeView.ImageIndex = 0;
+            directoryNavigationTreeView.ImageList = directoryImageList;
             directoryNavigationTreeView.LabelEdit = true;
             directoryNavigationTreeView.LocalCustomPalette = KryptonCustomPaletteBase;
             directoryNavigationTreeView.Location = new System.Drawing.Point(0, 0);
             directoryNavigationTreeView.Name = "directoryNavigationTreeView";
             directoryNavigationTreeView.PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
+            directoryNavigationTreeView.SelectedImageIndex = 0;
             directoryNavigationTreeView.ShowNodeToolTips = true;
-            directoryNavigationTreeView.Size = new System.Drawing.Size(293, 232);
+            directoryNavigationTreeView.Size = new System.Drawing.Size(259, 153);
             directoryNavigationTreeView.TabIndex = 11;
             directoryNavigationTreeView.AfterExpand += directoryNavigationTreeView_AfterExpand;
             directoryNavigationTreeView.DoubleClick += directoryNavigationTreeView_DoubleClick;
             directoryNavigationTreeView.KeyDown += keyDownEvents;
+            // 
+            // directoryImageList
+            // 
+            directoryImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            directoryImageList.ImageStream = (System.Windows.Forms.ImageListStreamer)resources.GetObject("directoryImageList.ImageStream");
+            directoryImageList.TransparentColor = System.Drawing.Color.Transparent;
+            directoryImageList.Images.SetKeyName(0, "file.png");
+            directoryImageList.Images.SetKeyName(1, "folder.png");
             // 
             // tabControl
             // 
@@ -907,7 +919,7 @@
             tabControl.NavigatorMode = Krypton.Navigator.NavigatorMode.BarTabGroup;
             tabControl.Owner = null;
             tabControl.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
-            tabControl.Size = new System.Drawing.Size(658, 232);
+            tabControl.Size = new System.Drawing.Size(616, 153);
             tabControl.StateCommon.Tab.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             tabControl.TabIndex = 2;
             tabControl.Text = "kryptonDockableNavigator1";
@@ -925,7 +937,7 @@
             AllowDrop = true;
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            ClientSize = new System.Drawing.Size(954, 470);
+            ClientSize = new System.Drawing.Size(878, 391);
             Controls.Add(kryptonSplitContainer);
             Controls.Add(terminalTabControl);
             Controls.Add(gitPanel);
@@ -1067,6 +1079,7 @@
         private Krypton.Docking.KryptonDockableNavigator tabControl;
         private Krypton.Toolkit.KryptonTreeView directoryNavigationTreeView;
         private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
+        private System.Windows.Forms.ImageList directoryImageList;
     }
 }
 

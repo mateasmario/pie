@@ -2901,6 +2901,8 @@ namespace pie
             KryptonTreeNode rootNode = new KryptonTreeNode();
             rootNode.Text = "root";
             rootNode.Tag = path;
+            rootNode.ImageKey = "folder.png";
+            rootNode.SelectedImageKey = "folder.png";
             openedFolder = path;
             directoryNavigationTreeView.Nodes.Add(rootNode);
 
@@ -2935,6 +2937,8 @@ namespace pie
                     KryptonTreeNode nodeToAdd = new KryptonTreeNode();
                     nodeToAdd.Text = parsingService.GetFileName(directoryString);
                     nodeToAdd.Tag = directoryString;
+                    nodeToAdd.ImageKey = "folder.png";
+                    nodeToAdd.SelectedImageKey = "folder.png";
 
                     if (Directory.EnumerateFiles(directoryString).Count() > 0 || Directory.EnumerateDirectories(directoryString).Count() > 0)
                     {
@@ -2954,6 +2958,8 @@ namespace pie
                 KryptonTreeNode nodeToAdd = new KryptonTreeNode();
                 nodeToAdd.Text = parsingService.GetFileName(fileString);
                 nodeToAdd.Tag = fileString;
+                nodeToAdd.ImageKey = "file.png";
+                nodeToAdd.SelectedImageKey = "file.png";
                 node.Nodes.Add(nodeToAdd);
             }
         }
