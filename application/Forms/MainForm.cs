@@ -1425,12 +1425,11 @@ namespace pie
                 kryptonContextMenuItem12.Text = "Show Directory Navigator";
             }
 
-            directoryNavigationTreeView.Visible = status;
+            splitContainer.Panel1Collapsed = !status;
         }
 
         private void ShowFindReplacePanel()
         {
-            ToggleDirectoryNavigator(false);
             ToggleFindReplacePanel(!findReplaceHeaderGroup.Visible);
         }
 
@@ -1885,10 +1884,9 @@ namespace pie
 
         private void ShowDirectoryNavigator()
         {
-            //ToggleFindReplacePanel(false);
-            ToggleDirectoryNavigator(!directoryNavigationTreeView.Visible);
+            ToggleDirectoryNavigator(splitContainer.Panel1Collapsed);
 
-            if (directoryNavigationTreeView.Visible)
+            if (!splitContainer.Panel1Collapsed)
             {
                 directoryNavigationTreeView.Focus();
             }
