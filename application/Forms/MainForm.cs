@@ -1485,26 +1485,26 @@ namespace pie
                 this.Opacity = 0.90;
             }
 
-            //try
-            //{
-            //    UpdateStatus updateStatus = updateService.GetUpdateStatus();
+            try
+            {
+                UpdateStatus updateStatus = updateService.GetUpdateStatus();
 
-            //    if (updateStatus.NeedsUpdate)
-            //    {
-            //        ShowNotification("There's a new version available for pie. You can initiate the automatic update process from the Interface menu.");
-            //        updateToolStripMenuItem.Visible = true;
-            //        updateToolStripMenuItem.Text = "Update to " + updateStatus.Version;
-            //    }
-            //    else
-            //    {
-            //        updateToolStripMenuItem.Visible = false;
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    // Update checker may fail due to missing network connection.
-            //    updateToolStripMenuItem.Visible = false;
-            //}
+                if (updateStatus.NeedsUpdate)
+                {
+                    ShowNotification("There's a new version available for pie. You can initiate the automatic update process from the Interface menu.");
+                    updateToolStripMenuItem.Visible = true;
+                    updateToolStripMenuItem.Text = "Update to " + updateStatus.Version;
+                }
+                else
+                {
+                    updateToolStripMenuItem.Visible = false;
+                }
+            }
+            catch (Exception)
+            {
+                // Update checker may fail due to missing network connection.
+                updateToolStripMenuItem.Visible = false;
+            }
         }
 
         private void GitStagingAreaListView_FormatRow(object sender, FormatRowEventArgs e)
