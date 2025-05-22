@@ -83,6 +83,8 @@ using BrightIdeasSoftware;
 using ConEmu.WinForms;
 using plugin.Classes;
 using System.Reflection;
+using Org.BouncyCastle.Asn1.X500;
+using System.Windows.Shapes;
 
 namespace pie
 {
@@ -315,15 +317,16 @@ namespace pie
         private void ProcessPlugins()
         {
             plugins = configurationService.LoadPluginsFromFolder<Plugin>(AppDomain.CurrentDomain.BaseDirectory + "plugins");
-            
-            foreach(Plugin plugin in plugins) {
+
+            foreach (Plugin plugin in plugins)
+            {
                 ToolStripMenuItem pluginItem = new ToolStripMenuItem();
                 pluginItem.Text = plugin.GetName();
                 pluginsToolStripMenuItem.DropDownItems.Add(pluginItem);
 
                 Dictionary<PluginTask, Func<PluginTaskInput, PluginTaskOutput>> pluginTasks = plugin.GetTasks();
 
-                foreach(var pluginTask in pluginTasks)
+                foreach (var pluginTask in pluginTasks)
                 {
                     ToolStripMenuItem taskItem = new ToolStripMenuItem();
                     taskItem.Text = pluginTask.Key.Name;
@@ -338,10 +341,11 @@ namespace pie
         {
             ToolStripMenuItem taskItem = (ToolStripMenuItem)sender;
 
-            foreach(Plugin plugin in plugins) {
+            foreach (Plugin plugin in plugins)
+            {
                 if (plugin.Name.Equals(taskItem.Tag))
                 {
-                    foreach(var task in plugin.GetTasks())
+                    foreach (var task in plugin.GetTasks())
                     {
                         if (task.Key.Name.Equals(taskItem.Text))
                         {
@@ -380,7 +384,8 @@ namespace pie
             {
                 TabInfo tabInfo = tabInfos[i];
 
-                if (tabInfo.getTabType().Equals(TabType.CODE)) {
+                if (tabInfo.getTabType().Equals(TabType.CODE))
+                {
                     Tab tab = new Tab();
                     tab.IsFileOpened = tabInfo.getOpenedFilePath() != null;
                     tab.FilePath = tabInfo.getOpenedFilePath();
@@ -394,7 +399,7 @@ namespace pie
 
         private void ExecuteActions(PluginTaskOutput pluginTaskOutput)
         {
-            foreach(PluginAction action in pluginTaskOutput.Actions)
+            foreach (PluginAction action in pluginTaskOutput.Actions)
             {
                 if (action is CreateFileAction)
                 {
@@ -412,7 +417,7 @@ namespace pie
 
                     int codeIndex = 0;
 
-                    for (int i = 0; i<tabInfos.Count; i++)
+                    for (int i = 0; i < tabInfos.Count; i++)
                     {
                         if (tabInfos.GetType().Equals(TabType.CODE))
                         {
@@ -590,11 +595,11 @@ namespace pie
         // Additional: This is usually triggered when switching between tabs
         private void RemoveSuggestedActions()
         {
-            for(int i = 0; i<codeContextMenu.Items.Count; i++)
+            for (int i = 0; i < codeContextMenu.Items.Count; i++)
             {
                 if (codeContextMenu.Items[i] is KryptonContextMenuHeading && ((KryptonContextMenuHeading)codeContextMenu.Items[i]).Text == "Suggested Actions")
                 {
-                    codeContextMenu.Items.RemoveAt(i+1);
+                    codeContextMenu.Items.RemoveAt(i + 1);
                     codeContextMenu.Items.RemoveAt(i);
                     break;
                 }
@@ -700,7 +705,7 @@ namespace pie
 
         private void SqlCommandTrigger_Click(object sender, EventArgs e)
         {
-            if (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null && 
+            if (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null &&
                 parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()) == "sql")
             {
                 string name = ((KryptonContextMenuItem)sender).Text.Substring(18);
@@ -1320,7 +1325,7 @@ namespace pie
         {
             FillContextMenu(extension);
 
-            foreach(ToolStripMenuItem toolStripMenuItem in buildAndRunToolstripMenuItem.DropDownItems)
+            foreach (ToolStripMenuItem toolStripMenuItem in buildAndRunToolstripMenuItem.DropDownItems)
             {
                 int buildCommandIndex = (int)toolStripMenuItem.Tag;
                 BuildCommand buildCommand = buildCommands[buildCommandIndex];
@@ -1382,7 +1387,7 @@ namespace pie
 
             notificationOkForm.ShowDialog();
         }
-        
+
         public NotificationYesNoCancelFormOutput ShowYesNoCancelNotification(string text)
         {
             NotificationYesNoCancelForm notificationYesNoCancelForm = new NotificationYesNoCancelForm();
@@ -1420,7 +1425,7 @@ namespace pie
                 kryptonContextMenuItem12.Text = "Show Directory Navigator";
             }
 
-            directoryNavigationHeaderGroup.Visible = status;
+            directoryNavigationTreeView.Visible = status;
         }
 
         private void ShowFindReplacePanel()
@@ -1498,7 +1503,7 @@ namespace pie
                 toolStripMenuItem.Click += BuildCommandTrigger_Click;
                 buildAndRunToolstripMenuItem.DropDownItems.Add(toolStripMenuItem);
 
-                if (tabControl.Pages.Count >= 1 && (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() == null || 
+                if (tabControl.Pages.Count >= 1 && (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() == null ||
                     !buildCommands[i].Extensions.Contains(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()))))
                 {
                     toolStripMenuItem.Enabled = false;
@@ -1508,7 +1513,7 @@ namespace pie
 
         private void ProcessLanguageMappings()
         {
-           languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config\\mappings.json");
+            languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config\\mappings.json");
         }
 
         private void ProcessLanguageDefinitions()
@@ -1543,7 +1548,8 @@ namespace pie
                 {
                     updateToolStripMenuItem.Visible = false;
                 }
-            } catch(Exception)
+            }
+            catch (Exception)
             {
                 // Update checker may fail due to missing network connection.
                 updateToolStripMenuItem.Visible = false;
@@ -1879,15 +1885,15 @@ namespace pie
 
         private void ShowDirectoryNavigator()
         {
-            ToggleFindReplacePanel(false);
-            ToggleDirectoryNavigator(!directoryNavigationHeaderGroup.Visible);
+            //ToggleFindReplacePanel(false);
+            ToggleDirectoryNavigator(!directoryNavigationTreeView.Visible);
 
-            if (directoryNavigationHeaderGroup.Visible)
+            if (directoryNavigationTreeView.Visible)
             {
-                directoryNavigationObjectListView.Focus();
+                directoryNavigationTreeView.Focus();
             }
 
-            ResetDirectoryPanelLocation();
+            //ResetDirectoryPanelLocation();
 
             if (directoryNavigationTextBox.Text == "")
             {
@@ -1941,7 +1947,8 @@ namespace pie
             int tag = (sender is ToolStripMenuItem) ? (int)((ToolStripMenuItem)sender).Tag
                     : (sender is KryptonContextMenuItem) ? (int)((KryptonContextMenuItem)sender).Tag : -1;
 
-            if (tag >= 0) {
+            if (tag >= 0)
+            {
                 if (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
                 {
                     BuildCommand buildCommand = buildCommands[tag];
@@ -1953,7 +1960,7 @@ namespace pie
 
                     int insertPosition = terminalTabControl.Pages.Count;
 
-                    for(int i = 0; i < terminalTabControl.Pages.Count; i++)
+                    for (int i = 0; i < terminalTabControl.Pages.Count; i++)
                     {
                         if (terminalTabControl.Pages[i].Text.Equals(command))
                         {
@@ -2108,7 +2115,7 @@ namespace pie
             buildCommandsFormInput.BuildCommands = buildCommands;
 
             buildCommandsForm.Input = buildCommandsFormInput;
-            
+
             buildCommandsForm.ShowDialog();
 
             if (buildCommandsForm.Output.Saved)
@@ -2861,7 +2868,7 @@ namespace pie
 
             if (gitPushCredentialsForm.Output.Saved)
             {
-                configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { gitCredentials } );
+                configurationService.WriteToFile<GitCredentials>("config/git.json", new List<GitCredentials>() { gitCredentials });
             }
         }
 
@@ -3173,16 +3180,26 @@ namespace pie
 
         private void NavigateToPath(string path)
         {
-            directoryNavigationObjectListView.Items.Clear();
+            directoryNavigationTreeView.Nodes.Clear();
 
+            KryptonTreeNode rootNode = new KryptonTreeNode();
+            rootNode.Text = "root";
+            rootNode.Tag = path;
+            directoryNavigationTreeView.Nodes.Add(rootNode);
+
+            AddItemsToDirectory(rootNode);
+        }
+
+        private void AddItemsToDirectory(KryptonTreeNode node)
+        {
             string[] files;
             string[] directories;
 
             try
             {
-                files = Directory.GetFiles(path);
-                directories = Directory.GetDirectories(path);
-                directoryNavigationTextBox.Text = path;
+                files = Directory.GetFiles(node.Tag.ToString());
+                directories = Directory.GetDirectories(node.Tag.ToString());
+                directoryNavigationTextBox.Text = node.Tag.ToString();
             }
             catch (Exception ex)
             {
@@ -3191,29 +3208,36 @@ namespace pie
                 return;
             }
 
-            List<NavigatorFile> fileList = new List<NavigatorFile>();
-
-            NavigatorFile back = new NavigatorFile();
-            back.Path = "..";
-            fileList.Add(back);
+            directories = directories.Where(d => !d.StartsWith("$")).ToArray();
 
             foreach (string directoryString in directories)
             {
-                NavigatorFile file = new NavigatorFile();
-                file.Path = directoryString;
-                file.Type = "Directory";
-                fileList.Add(file);
+                try
+                {
+                    KryptonTreeNode nodeToAdd = new KryptonTreeNode();
+                    nodeToAdd.Text = parsingService.GetFileName(directoryString);
+                    nodeToAdd.Tag = directoryString;
+
+                    if (Directory.EnumerateFiles(directoryString).Count() > 0 || Directory.EnumerateDirectories(directoryString).Count() > 0)
+                    {
+                        KryptonTreeNode dummyNode = new KryptonTreeNode();
+                        dummyNode.Text = "Dummy";
+                        dummyNode.Tag = "Pie:DummyNode";
+                        nodeToAdd.Nodes.Add(dummyNode);
+                    }
+
+                    node.Nodes.Add(nodeToAdd);
+                }
+                catch (Exception ex) { }
             }
 
             foreach (string fileString in files)
             {
-                NavigatorFile file = new NavigatorFile();
-                file.Path = fileString;
-                file.Type = "File";
-                fileList.Add(file);
+                KryptonTreeNode nodeToAdd = new KryptonTreeNode();
+                nodeToAdd.Text = parsingService.GetFileName(fileString);
+                nodeToAdd.Tag = fileString;
+                node.Nodes.Add(nodeToAdd);
             }
-
-            directoryNavigationObjectListView.SetObjects(fileList);
         }
 
         public object NavigationImageGetter(object rowObject)
@@ -3239,7 +3263,7 @@ namespace pie
             databasesFormInput.Palette = KryptonCustomPaletteBase;
             databasesFormInput.EditorProperties = editorProperties;
             databasesFormInput.ActiveTheme = activeTheme;
-            
+
             databasesForm.Input = databasesFormInput;
 
             databasesForm.ShowDialog();
@@ -3341,7 +3365,7 @@ namespace pie
             formatFormInput.Formatters = formatters;
 
             formatForm.Input = formatFormInput;
-            
+
             formatForm.ShowDialog();
 
             if (formatForm.Output.Saved)
@@ -3448,7 +3472,7 @@ namespace pie
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            foreach(string file in files)
+            foreach (string file in files)
             {
                 Console.WriteLine(file);
                 NewTab(TabType.CODE, null);
@@ -3477,6 +3501,13 @@ namespace pie
             codeTemplatesForm.ShowDialog();
 
             ProcessCodeTemplates();
+        }
+
+        private void directoryNavigationTreeView_AfterExpand(object sender, TreeViewEventArgs e)
+        {
+            KryptonTreeNode node = (KryptonTreeNode)e.Node;
+            node.Nodes.Clear();
+            AddItemsToDirectory(node);
         }
     }
 }
