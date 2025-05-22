@@ -83,8 +83,6 @@ using BrightIdeasSoftware;
 using ConEmu.WinForms;
 using plugin.Classes;
 using System.Reflection;
-using Org.BouncyCastle.Asn1.X500;
-using System.Windows.Shapes;
 
 namespace pie
 {
@@ -126,6 +124,8 @@ namespace pie
         private bool doNotTriggerBranchChangeEvent;
         private bool doNotShowBranchChangeNotification;
         private bool showGitTabPressed;
+        private string openedFolder;
+        private FindReplaceForm findReplaceForm = new FindReplaceForm();
 
         public string[] Args;
 
@@ -267,11 +267,6 @@ namespace pie
 
             themeService.SetPaletteToTheme(KryptonCustomPaletteBase, activeTheme);
             SynchronizeMainFormComponentsWithTheme();
-
-            if (directoryNavigationTextBox.Text != "")
-            {
-                NavigateToPath(directoryNavigationTextBox.Text);
-            }
 
             doNotShowBranchChangeNotification = true;
             doNotTriggerBranchChangeEvent = true;
@@ -435,7 +430,6 @@ namespace pie
                 else if (action is SelectDirectoryAction)
                 {
                     SelectDirectoryAction selectDirectoryAction = (SelectDirectoryAction)action;
-                    directoryNavigationTextBox.Text = selectDirectoryAction.Path;
                     NavigateToPath(selectDirectoryAction.Path);
                 }
                 else if (action is OpenTabAction)
@@ -474,9 +468,6 @@ namespace pie
 
             SynchronizeCustomControls();
 
-            ResetFindPanelLocation();
-            ResetDirectoryPanelLocation();
-            findReplaceHeaderGroup.Visible = false;
             ToggleDirectoryNavigator(false);
 
             gitStagingAreaListView.ShowGroups = false;
@@ -496,8 +487,6 @@ namespace pie
 
             tabControl.AllowPageDrag = false;
             tabControl.AllowPageReorder = false;
-
-            replaceTextBox.KeyDown += ReplaceTextBox_KeyDown;
         }
 
         private void SynchronizeCustomControls()
@@ -850,8 +839,6 @@ namespace pie
                 tabControl.KryptonContextMenu = gitContextMenu;
 
                 ToggleTerminalTabControl(false);
-                ToggleFindReplacePanel(false);
-                directoryNavigationHeaderGroup.Visible = false;
 
                 if (gitTabOpened)
                 {
@@ -883,7 +870,6 @@ namespace pie
 
                 tabControl.KryptonContextMenu = renderContextMenu;
                 ToggleTerminalTabControl(false);
-                ToggleFindReplacePanel(false);
                 ToggleDirectoryNavigator(false);
 
                 kryptonPage.Text = parsingService.GetFileName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
@@ -1430,53 +1416,19 @@ namespace pie
 
         private void ShowFindReplacePanel()
         {
-            ToggleFindReplacePanel(!findReplaceHeaderGroup.Visible);
+            ToggleFindReplacePanel();
         }
 
-        private void ToggleFindReplacePanel(bool status)
+        private void ToggleFindReplacePanel()
         {
-            findReplaceHeaderGroup.Visible = status;
-            kryptonContextMenuItem6.Checked = status;
+            FindReplaceFormInput input = new FindReplaceFormInput();
+            input.Palette = KryptonCustomPaletteBase;
+            input.ActiveTheme = activeTheme;
+            input.EditorProperties = editorProperties;
+            input.MainForm = this;
 
-            if (status)
-            {
-                ResetFindPanelLocation();
-                kryptonContextMenuItem6.Text = "Hide Find and Replace";
-                findTextBox.Focus();
-            }
-            else
-            {
-                if (tabControl.SelectedIndex < tabInfos.Count && tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
-                {
-                    Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-                    ClearHighlights(TextArea);
-                }
-
-                kryptonContextMenuItem6.Text = "Show Find and Replace";
-            }
-        }
-
-        private void ToggleFindReplacePanel(bool status, int indexToMoveTo)
-        {
-            findReplaceHeaderGroup.Visible = status;
-            kryptonContextMenuItem6.Checked = status;
-
-            if (status)
-            {
-                ResetFindPanelLocation();
-                kryptonContextMenuItem6.Text = "Hide Find and Replace";
-                findTextBox.Focus();
-            }
-            else
-            {
-                if (indexToMoveTo < tabInfos.Count && tabInfos[indexToMoveTo].getTabType() == TabType.CODE)
-                {
-                    Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-                    ClearHighlights(TextArea);
-                }
-
-                kryptonContextMenuItem6.Text = "Show Find and Replace";
-            }
+            findReplaceForm.Input = input;
+            findReplaceForm.ShowDialog();
         }
 
         private void ProcessBuildCommands()
@@ -1533,26 +1485,26 @@ namespace pie
                 this.Opacity = 0.90;
             }
 
-            try
-            {
-                UpdateStatus updateStatus = updateService.GetUpdateStatus();
+            //try
+            //{
+            //    UpdateStatus updateStatus = updateService.GetUpdateStatus();
 
-                if (updateStatus.NeedsUpdate)
-                {
-                    ShowNotification("There's a new version available for pie. You can initiate the automatic update process from the Interface menu.");
-                    updateToolStripMenuItem.Visible = true;
-                    updateToolStripMenuItem.Text = "Update to " + updateStatus.Version;
-                }
-                else
-                {
-                    updateToolStripMenuItem.Visible = false;
-                }
-            }
-            catch (Exception)
-            {
-                // Update checker may fail due to missing network connection.
-                updateToolStripMenuItem.Visible = false;
-            }
+            //    if (updateStatus.NeedsUpdate)
+            //    {
+            //        ShowNotification("There's a new version available for pie. You can initiate the automatic update process from the Interface menu.");
+            //        updateToolStripMenuItem.Visible = true;
+            //        updateToolStripMenuItem.Text = "Update to " + updateStatus.Version;
+            //    }
+            //    else
+            //    {
+            //        updateToolStripMenuItem.Visible = false;
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    // Update checker may fail due to missing network connection.
+            //    updateToolStripMenuItem.Visible = false;
+            //}
         }
 
         private void GitStagingAreaListView_FormatRow(object sender, FormatRowEventArgs e)
@@ -1568,26 +1520,6 @@ namespace pie
                 e.Item.ForeColor = activeTheme.IconType == "dark" ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
             else
                 e.Item.ForeColor = activeTheme.Fore;
-        }
-
-        private void ReplaceTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-
-                bool status = Replace(TextArea, findTextBox.Text, replaceTextBox.Text);
-
-                if (!status)
-                {
-                    ShowNotification("No occurences found.");
-                }
-            }
-        }
-
-        private void ResetFindPanelLocation()
-        {
-            findReplaceHeaderGroup.Location = new Point((this.Width - findReplaceHeaderGroup.Width) / 2, (this.Height - findReplaceHeaderGroup.Height) / 4);
         }
 
         // [Event] Triggered when a new tab is opened/closed
@@ -1648,14 +1580,6 @@ namespace pie
         // [Generic Event] Used mostly for tab control and actions on opened files. Called by other event listeners
         private void keyDownEvents(object sender, KeyEventArgs e)
         {
-            if (findReplaceHeaderGroup.Visible)
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    StartFind();
-                }
-            }
-
             if (e.KeyCode == Keys.T && e.Modifiers == Keys.Control)
             {
                 NewTab(TabType.CODE, null);
@@ -1831,24 +1755,10 @@ namespace pie
                 directoryNavigationTreeView.Focus();
             }
 
-            //ResetDirectoryPanelLocation();
-
-            if (directoryNavigationTextBox.Text == "")
+            if (openedFolder == null)
             {
-                if (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() != null)
-                {
-                    NavigateToPath(parsingService.GetFolderName(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
-                }
-                else
-                {
-                    NavigateToPath("C:\\");
-                }
+                NavigateToPath("C:\\");
             }
-        }
-
-        private void ResetDirectoryPanelLocation()
-        {
-            directoryNavigationHeaderGroup.Location = new Point((this.Width - directoryNavigationHeaderGroup.Width) / 2, (this.Height - directoryNavigationHeaderGroup.Height) / 4);
         }
 
         // [Event] Triggered when clicking "Show Terminal Tab" from the context menu
@@ -1955,7 +1865,6 @@ namespace pie
                     }
 
                     ToggleTerminalTabControl(false);
-                    ToggleFindReplacePanel(false, indexToMoveTo);
                     ToggleDirectoryNavigator(false);
 
                     if (tabInfos[indexToMoveTo].getTabType() == TabType.GIT)
@@ -2062,32 +1971,19 @@ namespace pie
             }
         }
 
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-            ResetFindPanelLocation();
-            ResetDirectoryPanelLocation();
-        }
-
-        private void kryptonButton1_Click(object sender, EventArgs e)
-        {
-            StartFind();
-        }
-
-        private void StartFind()
+        public void StartFind(string input, bool regex, bool matchCase, bool wholeWord)
         {
             Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
             ClearHighlights(TextArea);
-            HighlightWord(findTextBox.Text, TextArea, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
-            Find(TextArea, lastSelectedIndex, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
+            HighlightWord(input, TextArea, regex, matchCase, wholeWord);
+            Find(input, TextArea, lastSelectedIndex, regex, matchCase, wholeWord);
         }
 
-        private bool Find(Scintilla scintilla, int indexStart, bool regex, bool matchCase, bool matchWholeWord)
+        private bool Find(string input, Scintilla scintilla, int indexStart, bool regex, bool matchCase, bool matchWholeWord)
         {
             canUpdateUI = false;
 
-            String text = findTextBox.Text;
-
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(input))
                 return false;
 
             // Remove all uses of our indicator
@@ -2116,7 +2012,7 @@ namespace pie
 
             int index;
 
-            if ((index = scintilla.SearchInTarget(text)) != -1)
+            if ((index = scintilla.SearchInTarget(input)) != -1)
             {
                 scintilla.SetSelection(index, index + scintilla.TargetEnd - scintilla.TargetStart);
                 lastSelectedIndex = index + scintilla.TargetEnd - scintilla.TargetStart + 1;
@@ -2132,7 +2028,7 @@ namespace pie
                 }
 
                 lastSelectedIndex = 0;
-                return Find(scintilla, 0, regex, matchCase, matchWholeWord);
+                return Find(input, scintilla, 0, regex, matchCase, matchWholeWord);
             }
 
             return true;
@@ -2192,32 +2088,12 @@ namespace pie
             scintilla.IndicatorClearRange(0, scintilla.TextLength);
         }
 
-        private void findPanel_MouseDown(object sender, MouseEventArgs e)
+        public bool Replace(string from, string to, bool regex, bool matchCase, bool wholeWord)
         {
-            mouseDown = true;
-            lastLocation = e.Location;
-        }
+            Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
 
-        private void findPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                findReplaceHeaderGroup.Location = new Point(
-                    (findReplaceHeaderGroup.Location.X - lastLocation.X) + e.X, (findReplaceHeaderGroup.Location.Y - lastLocation.Y) + e.Y);
-
-                this.Update();
-            }
-        }
-
-        private void findPanel_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-
-        private bool Replace(Scintilla scintilla, String from, String to)
-        {
-            HighlightWord(from, scintilla, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
-            bool found = Find(scintilla, lastSelectedIndex, regexCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
+            HighlightWord(from, scintilla, regex, matchCase, wholeWord);
+            bool found = Find(from, scintilla, lastSelectedIndex, regex, matchCase, wholeWord);
 
             if (found)
             {
@@ -2230,28 +2106,14 @@ namespace pie
             }
         }
 
-        private void kryptonButton2_Click(object sender, EventArgs e)
-        {
-            Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-
-            bool status = Replace(TextArea, findTextBox.Text, replaceTextBox.Text);
-        }
-
-        private void ReplaceAll(Scintilla scintilla, String from, String to)
+        public void ReplaceAll(string from, string to, bool regex, bool matchCase, bool wholeWord)
         {
             bool status;
 
             do
             {
-                status = Replace(scintilla, from, to);
+                status = Replace(from, to, regex, matchCase, wholeWord);
             } while (status);
-        }
-
-        private void kryptonButton3_Click(object sender, EventArgs e)
-        {
-            Scintilla TextArea = (Scintilla)tabControl.SelectedPage.Controls[0];
-
-            ReplaceAll(TextArea, findTextBox.Text, replaceTextBox.Text);
         }
 
         private void aboutPieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2970,12 +2832,6 @@ namespace pie
                 }
             }
 
-            // HeaderGroup
-            findReplaceHeaderGroup.StateCommon.Border.Color1 = activeTheme.FormBorder;
-            findReplaceHeaderGroup.StateCommon.Border.Color2 = activeTheme.FormBorder;
-            directoryNavigationHeaderGroup.StateCommon.Border.Color1 = activeTheme.FormBorder;
-            directoryNavigationHeaderGroup.StateCommon.Border.Color2 = activeTheme.FormBorder;
-
             // TabControl
             tabControl.StateCommon.Panel.Color1 = activeTheme.Primary;
             tabControl.StateCommon.Panel.Color2 = activeTheme.Primary;
@@ -3003,15 +2859,6 @@ namespace pie
             headerstyle.Pressed.ForeColor = activeTheme.Fore;
 
             gitStagingAreaListView.HeaderFormatStyle = headerstyle;
-
-            regexCheckBox.StateCommon.ShortText.Color1 = activeTheme.Fore;
-            regexCheckBox.StateCommon.ShortText.Color2 = activeTheme.Fore;
-
-            matchCaseCheckBox.StateCommon.ShortText.Color1 = activeTheme.Fore;
-            matchCaseCheckBox.StateCommon.ShortText.Color2 = activeTheme.Fore;
-
-            matchWholeWordCheckBox.StateCommon.ShortText.Color1 = activeTheme.Fore;
-            matchWholeWordCheckBox.StateCommon.ShortText.Color2 = activeTheme.Fore;
 
             // ComboBox
             gitBranchesComboBox.StateCommon.Item.Back.ColorStyle = PaletteColorStyle.Solid;
@@ -3045,70 +2892,21 @@ namespace pie
             SynchronizeCustomControls();
         }
 
-        private void regexCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            KryptonCheckBox kryptonCheckBox = (KryptonCheckBox)sender;
-
-            if (kryptonCheckBox.Checked)
-            {
-                matchWholeWordCheckBox.Checked = false;
-                matchWholeWordCheckBox.Enabled = false;
-            }
-            else
-            {
-                matchWholeWordCheckBox.Enabled = true;
-            }
-        }
-
-        private void directoryNavigationHeaderGroup_Panel_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-            lastLocation = e.Location;
-        }
-
-        private void directoryNavigationHeaderGroup_Panel_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-
-        private void directoryNavigationHeaderGroup_Panel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                directoryNavigationHeaderGroup.Location = new Point(
-                    (directoryNavigationHeaderGroup.Location.X - lastLocation.X) + e.X, (directoryNavigationHeaderGroup.Location.Y - lastLocation.Y) + e.Y);
-
-                this.Update();
-            }
-        }
-
-        private void kryptonButton12_Click(object sender, EventArgs e)
-        {
-            ChooseFolderForNavigator();
-        }
-
-        private void ChooseFolderForNavigator()
-        {
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-
-            DialogResult dialogResult = folderBrowserDialog.ShowDialog();
-
-            if (dialogResult == DialogResult.OK)
-            {
-                NavigateToPath(folderBrowserDialog.SelectedPath);
-            }
-        }
-
         private void NavigateToPath(string path)
         {
+            ToggleDirectoryNavigator(true);
+
             directoryNavigationTreeView.Nodes.Clear();
 
             KryptonTreeNode rootNode = new KryptonTreeNode();
             rootNode.Text = "root";
             rootNode.Tag = path;
+            openedFolder = path;
             directoryNavigationTreeView.Nodes.Add(rootNode);
 
             AddItemsToDirectory(rootNode);
+
+            rootNode.Expand();
         }
 
         private void AddItemsToDirectory(KryptonTreeNode node)
@@ -3120,12 +2918,11 @@ namespace pie
             {
                 files = Directory.GetFiles(node.Tag.ToString());
                 directories = Directory.GetDirectories(node.Tag.ToString());
-                directoryNavigationTextBox.Text = node.Tag.ToString();
             }
             catch (Exception ex)
             {
                 ShowNotification("An error was encountered while trying to access the given path.");
-                ChooseFolderForNavigator();
+                NavigateToPath("C:\\");
                 return;
             }
 
@@ -3393,8 +3190,47 @@ namespace pie
         private void directoryNavigationTreeView_AfterExpand(object sender, TreeViewEventArgs e)
         {
             KryptonTreeNode node = (KryptonTreeNode)e.Node;
-            node.Nodes.Clear();
-            AddItemsToDirectory(node);
+
+            if (!node.Tag.Equals(openedFolder))
+            {
+                node.Nodes.Clear();
+                AddItemsToDirectory(node);
+            }
+        }
+
+        private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                NavigateToPath(folderBrowserDialog.SelectedPath);
+            }
+        }
+
+        private void directoryNavigationTreeView_DoubleClick(object sender, EventArgs e)
+        {
+            KryptonTreeView kryptonTreeView = (KryptonTreeView)sender;
+
+            if (kryptonTreeView.SelectedNode != null)
+            {
+                string selectedPath = kryptonTreeView.SelectedNode.Tag.ToString();
+
+                if (File.Exists(selectedPath))
+                {
+                    foreach (TabInfo tabInfo in tabInfos)
+                    {
+                        if (tabInfo.getOpenedFilePath() != null && tabInfo.getOpenedFilePath().Equals(selectedPath) && tabInfo.getTabType().Equals(TabType.CODE))
+                        {
+                            tabControl.SelectedIndex = tabInfos.IndexOf(tabInfo);
+                            return;
+                        }
+                    }
+
+                    NewTab(TabType.CODE, null);
+                    Open(selectedPath);
+                }
+            }
         }
     }
 }
