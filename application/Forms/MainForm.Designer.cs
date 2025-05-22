@@ -58,11 +58,6 @@
             kryptonContextMenuItem16 = new Krypton.Toolkit.KryptonContextMenuItem();
             kryptonContextMenuItem17 = new Krypton.Toolkit.KryptonContextMenuItem();
             kryptonContextMenuItem18 = new Krypton.Toolkit.KryptonContextMenuItem();
-            kryptonButton3 = new Krypton.Toolkit.KryptonButton();
-            kryptonButton2 = new Krypton.Toolkit.KryptonButton();
-            replaceTextBox = new Krypton.Toolkit.KryptonTextBox();
-            kryptonButton1 = new Krypton.Toolkit.KryptonButton();
-            findTextBox = new Krypton.Toolkit.KryptonTextBox();
             kryptonContextMenuItem5 = new Krypton.Toolkit.KryptonContextMenuItem();
             renderContextMenu = new Krypton.Toolkit.KryptonContextMenu();
             kryptonContextMenuHeading3 = new Krypton.Toolkit.KryptonContextMenuHeading();
@@ -72,10 +67,10 @@
             kryptonContextMenuHeading8 = new Krypton.Toolkit.KryptonContextMenuHeading();
             kryptonContextMenuItems10 = new Krypton.Toolkit.KryptonContextMenuItems();
             kryptonContextMenuItem10 = new Krypton.Toolkit.KryptonContextMenuItem();
-            kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
             fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             interfaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,10 +94,6 @@
             pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             formatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             kryptonRibbon1 = new Krypton.Ribbon.KryptonRibbon();
-            findReplaceHeaderGroup = new Krypton.Toolkit.KryptonHeaderGroup();
-            matchWholeWordCheckBox = new Krypton.Toolkit.KryptonCheckBox();
-            matchCaseCheckBox = new Krypton.Toolkit.KryptonCheckBox();
-            regexCheckBox = new Krypton.Toolkit.KryptonCheckBox();
             KryptonCustomPaletteBase = new Krypton.Toolkit.KryptonCustomPaletteBase(components);
             kryptonPage2 = new Krypton.Navigator.KryptonPage();
             noRepositoryPanel = new Krypton.Toolkit.KryptonPanel();
@@ -114,9 +105,6 @@
             kryptonContextMenuItems11 = new Krypton.Toolkit.KryptonContextMenuItems();
             kryptonContextMenuItem9 = new Krypton.Toolkit.KryptonContextMenuItem();
             kryptonContextMenuItem11 = new Krypton.Toolkit.KryptonContextMenuItem();
-            directoryNavigationHeaderGroup = new Krypton.Toolkit.KryptonHeaderGroup();
-            kryptonButton12 = new Krypton.Toolkit.KryptonButton();
-            directoryNavigationTextBox = new Krypton.Toolkit.KryptonTextBox();
             terminalTabControl = new Krypton.Navigator.KryptonNavigator();
             kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
             repositoryTextBox = new Krypton.Toolkit.KryptonTextBox();
@@ -140,14 +128,8 @@
             tabControl = new Krypton.Docking.KryptonDockableNavigator();
             mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)kryptonRibbon1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)findReplaceHeaderGroup).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)findReplaceHeaderGroup.Panel).BeginInit();
-            findReplaceHeaderGroup.Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)kryptonPage2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)noRepositoryPanel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)directoryNavigationHeaderGroup).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)directoryNavigationHeaderGroup.Panel).BeginInit();
-            directoryNavigationHeaderGroup.Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)terminalTabControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)kryptonPanel1).BeginInit();
             kryptonPanel1.SuspendLayout();
@@ -265,58 +247,6 @@
             kryptonContextMenuItem18.Text = "Close Current Tab";
             kryptonContextMenuItem18.Click += kryptonContextMenuItem18_Click;
             // 
-            // kryptonButton3
-            // 
-            kryptonButton3.Location = new System.Drawing.Point(372, 88);
-            kryptonButton3.Name = "kryptonButton3";
-            kryptonButton3.Size = new System.Drawing.Size(114, 25);
-            kryptonButton3.TabIndex = 5;
-            kryptonButton3.Values.DropDownArrowColor = System.Drawing.Color.Empty;
-            kryptonButton3.Values.Text = "Replace all";
-            kryptonButton3.Click += kryptonButton3_Click;
-            kryptonButton3.KeyDown += keyDownEvents;
-            // 
-            // kryptonButton2
-            // 
-            kryptonButton2.Location = new System.Drawing.Point(372, 61);
-            kryptonButton2.Name = "kryptonButton2";
-            kryptonButton2.Size = new System.Drawing.Size(114, 25);
-            kryptonButton2.TabIndex = 4;
-            kryptonButton2.Values.DropDownArrowColor = System.Drawing.Color.Empty;
-            kryptonButton2.Values.Text = "Find and Replace";
-            kryptonButton2.Click += kryptonButton2_Click;
-            kryptonButton2.KeyDown += keyDownEvents;
-            // 
-            // replaceTextBox
-            // 
-            replaceTextBox.Location = new System.Drawing.Point(9, 61);
-            replaceTextBox.Name = "replaceTextBox";
-            replaceTextBox.Size = new System.Drawing.Size(358, 23);
-            replaceTextBox.TabIndex = 3;
-            replaceTextBox.Text = "Replace...";
-            replaceTextBox.KeyDown += keyDownEvents;
-            // 
-            // kryptonButton1
-            // 
-            kryptonButton1.Location = new System.Drawing.Point(372, 34);
-            kryptonButton1.Name = "kryptonButton1";
-            kryptonButton1.Size = new System.Drawing.Size(114, 25);
-            kryptonButton1.StateTracking.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            kryptonButton1.TabIndex = 2;
-            kryptonButton1.Values.DropDownArrowColor = System.Drawing.Color.Empty;
-            kryptonButton1.Values.Text = "Find";
-            kryptonButton1.Click += kryptonButton1_Click;
-            kryptonButton1.KeyDown += keyDownEvents;
-            // 
-            // findTextBox
-            // 
-            findTextBox.Location = new System.Drawing.Point(9, 34);
-            findTextBox.Name = "findTextBox";
-            findTextBox.Size = new System.Drawing.Size(358, 23);
-            findTextBox.TabIndex = 0;
-            findTextBox.Text = "Find...";
-            findTextBox.KeyDown += keyDownEvents;
-            // 
             // kryptonContextMenuItem5
             // 
             kryptonContextMenuItem5.Text = "Menu Item";
@@ -356,17 +286,9 @@
             kryptonContextMenuItem10.Text = "Refresh Page";
             kryptonContextMenuItem10.Click += kryptonContextMenuItem10_Click;
             // 
-            // kryptonLabel1
-            // 
-            kryptonLabel1.Location = new System.Drawing.Point(5, 9);
-            kryptonLabel1.Name = "kryptonLabel1";
-            kryptonLabel1.Size = new System.Drawing.Size(104, 20);
-            kryptonLabel1.TabIndex = 7;
-            kryptonLabel1.Values.Text = "Find and Replace";
-            // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, saveToolStripMenuItem, saveAsToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, openFolderToolStripMenuItem, saveToolStripMenuItem, saveAsToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             fileToolStripMenuItem.Text = "File";
@@ -374,28 +296,35 @@
             // newToolStripMenuItem
             // 
             newToolStripMenuItem.Name = "newToolStripMenuItem";
-            newToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            newToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             newToolStripMenuItem.Text = "New";
             newToolStripMenuItem.Click += newFileToolStripMenuItem_Click;
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            openToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             openToolStripMenuItem.Text = "Open...";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
+            // 
+            // openFolderToolStripMenuItem
+            // 
+            openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+            openFolderToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            openFolderToolStripMenuItem.Text = "Open Folder...";
+            openFolderToolStripMenuItem.Click += openFolderToolStripMenuItem_Click;
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            saveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += saveFileToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
             // 
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            saveAsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             saveAsToolStripMenuItem.Text = "Save As...";
             saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
             // 
@@ -485,7 +414,7 @@
             mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             mainMenuStrip.Name = "mainMenuStrip";
             mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            mainMenuStrip.Size = new System.Drawing.Size(992, 24);
+            mainMenuStrip.Size = new System.Drawing.Size(954, 24);
             mainMenuStrip.TabIndex = 1;
             mainMenuStrip.Text = "menuStrip1";
             // 
@@ -570,63 +499,6 @@
             kryptonRibbon1.Size = new System.Drawing.Size(1020, 143);
             kryptonRibbon1.TabIndex = 4;
             // 
-            // findReplaceHeaderGroup
-            // 
-            findReplaceHeaderGroup.HeaderVisiblePrimary = false;
-            findReplaceHeaderGroup.HeaderVisibleSecondary = false;
-            findReplaceHeaderGroup.Location = new System.Drawing.Point(269, 52);
-            // 
-            // 
-            // 
-            findReplaceHeaderGroup.Panel.Controls.Add(matchWholeWordCheckBox);
-            findReplaceHeaderGroup.Panel.Controls.Add(matchCaseCheckBox);
-            findReplaceHeaderGroup.Panel.Controls.Add(regexCheckBox);
-            findReplaceHeaderGroup.Panel.Controls.Add(kryptonLabel1);
-            findReplaceHeaderGroup.Panel.Controls.Add(findTextBox);
-            findReplaceHeaderGroup.Panel.Controls.Add(replaceTextBox);
-            findReplaceHeaderGroup.Panel.Controls.Add(kryptonButton3);
-            findReplaceHeaderGroup.Panel.Controls.Add(kryptonButton2);
-            findReplaceHeaderGroup.Panel.Controls.Add(kryptonButton1);
-            findReplaceHeaderGroup.Panel.MouseDown += findPanel_MouseDown;
-            findReplaceHeaderGroup.Panel.MouseMove += findPanel_MouseMove;
-            findReplaceHeaderGroup.Panel.MouseUp += findPanel_MouseUp;
-            findReplaceHeaderGroup.Size = new System.Drawing.Size(496, 130);
-            findReplaceHeaderGroup.TabIndex = 0;
-            findReplaceHeaderGroup.MouseDown += findPanel_MouseDown;
-            findReplaceHeaderGroup.MouseMove += findPanel_MouseMove;
-            findReplaceHeaderGroup.MouseUp += findPanel_MouseUp;
-            // 
-            // matchWholeWordCheckBox
-            // 
-            matchWholeWordCheckBox.Location = new System.Drawing.Point(232, 89);
-            matchWholeWordCheckBox.Name = "matchWholeWordCheckBox";
-            matchWholeWordCheckBox.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalOffice2003;
-            matchWholeWordCheckBox.Size = new System.Drawing.Size(125, 22);
-            matchWholeWordCheckBox.TabIndex = 10;
-            matchWholeWordCheckBox.Values.Text = "Match whole word";
-            matchWholeWordCheckBox.KeyDown += keyDownEvents;
-            // 
-            // matchCaseCheckBox
-            // 
-            matchCaseCheckBox.Location = new System.Drawing.Point(141, 89);
-            matchCaseCheckBox.Name = "matchCaseCheckBox";
-            matchCaseCheckBox.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalOffice2003;
-            matchCaseCheckBox.Size = new System.Drawing.Size(85, 22);
-            matchCaseCheckBox.TabIndex = 9;
-            matchCaseCheckBox.Values.Text = "Match case";
-            matchCaseCheckBox.KeyDown += keyDownEvents;
-            // 
-            // regexCheckBox
-            // 
-            regexCheckBox.Location = new System.Drawing.Point(9, 89);
-            regexCheckBox.Name = "regexCheckBox";
-            regexCheckBox.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalOffice2003;
-            regexCheckBox.Size = new System.Drawing.Size(126, 22);
-            regexCheckBox.TabIndex = 8;
-            regexCheckBox.Values.Text = "Regular Expression";
-            regexCheckBox.CheckedChanged += regexCheckBox_CheckedChanged;
-            regexCheckBox.KeyDown += keyDownEvents;
-            // 
             // KryptonCustomPaletteBase
             // 
             KryptonCustomPaletteBase.FormStyles.FormCommon.StateCommon.Back.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.None;
@@ -703,48 +575,6 @@
             kryptonContextMenuItem11.Text = "Close Current Tab";
             kryptonContextMenuItem11.Click += kryptonContextMenuItem11_Click;
             // 
-            // directoryNavigationHeaderGroup
-            // 
-            directoryNavigationHeaderGroup.HeaderVisiblePrimary = false;
-            directoryNavigationHeaderGroup.HeaderVisibleSecondary = false;
-            directoryNavigationHeaderGroup.Location = new System.Drawing.Point(225, 50);
-            // 
-            // 
-            // 
-            directoryNavigationHeaderGroup.Panel.Controls.Add(kryptonButton12);
-            directoryNavigationHeaderGroup.Panel.Controls.Add(directoryNavigationTextBox);
-            directoryNavigationHeaderGroup.Panel.MouseDown += directoryNavigationHeaderGroup_Panel_MouseDown;
-            directoryNavigationHeaderGroup.Panel.MouseMove += directoryNavigationHeaderGroup_Panel_MouseMove;
-            directoryNavigationHeaderGroup.Panel.MouseUp += directoryNavigationHeaderGroup_Panel_MouseUp;
-            directoryNavigationHeaderGroup.Size = new System.Drawing.Size(573, 304);
-            directoryNavigationHeaderGroup.TabIndex = 10;
-            // 
-            // kryptonButton12
-            // 
-            kryptonButton12.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            kryptonButton12.LocalCustomPalette = KryptonCustomPaletteBase;
-            kryptonButton12.Location = new System.Drawing.Point(519, 19);
-            kryptonButton12.Name = "kryptonButton12";
-            kryptonButton12.PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
-            kryptonButton12.Size = new System.Drawing.Size(44, 25);
-            kryptonButton12.TabIndex = 4;
-            kryptonButton12.Values.DropDownArrowColor = System.Drawing.Color.Empty;
-            kryptonButton12.Values.Image = Properties.Resources.browse;
-            kryptonButton12.Values.Text = "";
-            kryptonButton12.Click += kryptonButton12_Click;
-            kryptonButton12.KeyDown += keyDownEvents;
-            // 
-            // directoryNavigationTextBox
-            // 
-            directoryNavigationTextBox.Enabled = false;
-            directoryNavigationTextBox.LocalCustomPalette = KryptonCustomPaletteBase;
-            directoryNavigationTextBox.Location = new System.Drawing.Point(8, 19);
-            directoryNavigationTextBox.Name = "directoryNavigationTextBox";
-            directoryNavigationTextBox.PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
-            directoryNavigationTextBox.Size = new System.Drawing.Size(505, 23);
-            directoryNavigationTextBox.TabIndex = 0;
-            directoryNavigationTextBox.KeyDown += keyDownEvents;
-            // 
             // terminalTabControl
             // 
             terminalTabControl.Bar.BarMapExtraText = Krypton.Navigator.MapKryptonPageText.None;
@@ -774,11 +604,11 @@
             terminalTabControl.ControlKryptonFormFeatures = false;
             terminalTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             terminalTabControl.KryptonContextMenu = terminalContextMenu;
-            terminalTabControl.Location = new System.Drawing.Point(0, 274);
+            terminalTabControl.Location = new System.Drawing.Point(0, 256);
             terminalTabControl.NavigatorMode = Krypton.Navigator.NavigatorMode.BarTabGroup;
             terminalTabControl.Owner = null;
             terminalTabControl.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
-            terminalTabControl.Size = new System.Drawing.Size(992, 214);
+            terminalTabControl.Size = new System.Drawing.Size(954, 214);
             terminalTabControl.StateCommon.Tab.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             terminalTabControl.TabIndex = 3;
             terminalTabControl.Text = "kryptonNavigator1";
@@ -1023,23 +853,25 @@
             // 
             // 
             kryptonSplitContainer.Panel2.Controls.Add(tabControl);
-            kryptonSplitContainer.Size = new System.Drawing.Size(992, 250);
-            kryptonSplitContainer.SplitterDistance = 324;
+            kryptonSplitContainer.SeparatorStyle = Krypton.Toolkit.SeparatorStyle.HighProfile;
+            kryptonSplitContainer.Size = new System.Drawing.Size(954, 232);
+            kryptonSplitContainer.SplitterDistance = 293;
+            kryptonSplitContainer.SplitterWidth = 3;
             kryptonSplitContainer.TabIndex = 13;
             // 
             // directoryNavigationTreeView
             // 
             directoryNavigationTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            directoryNavigationTreeView.ItemStyle = Krypton.Toolkit.ButtonStyle.Standalone;
             directoryNavigationTreeView.LabelEdit = true;
             directoryNavigationTreeView.LocalCustomPalette = KryptonCustomPaletteBase;
             directoryNavigationTreeView.Location = new System.Drawing.Point(0, 0);
             directoryNavigationTreeView.Name = "directoryNavigationTreeView";
             directoryNavigationTreeView.PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
             directoryNavigationTreeView.ShowNodeToolTips = true;
-            directoryNavigationTreeView.Size = new System.Drawing.Size(324, 250);
+            directoryNavigationTreeView.Size = new System.Drawing.Size(293, 232);
             directoryNavigationTreeView.TabIndex = 11;
             directoryNavigationTreeView.AfterExpand += directoryNavigationTreeView_AfterExpand;
+            directoryNavigationTreeView.DoubleClick += directoryNavigationTreeView_DoubleClick;
             directoryNavigationTreeView.KeyDown += keyDownEvents;
             // 
             // tabControl
@@ -1075,7 +907,7 @@
             tabControl.NavigatorMode = Krypton.Navigator.NavigatorMode.BarTabGroup;
             tabControl.Owner = null;
             tabControl.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
-            tabControl.Size = new System.Drawing.Size(663, 250);
+            tabControl.Size = new System.Drawing.Size(658, 232);
             tabControl.StateCommon.Tab.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             tabControl.TabIndex = 2;
             tabControl.Text = "kryptonDockableNavigator1";
@@ -1093,12 +925,10 @@
             AllowDrop = true;
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            ClientSize = new System.Drawing.Size(992, 488);
-            Controls.Add(findReplaceHeaderGroup);
+            ClientSize = new System.Drawing.Size(954, 470);
             Controls.Add(kryptonSplitContainer);
             Controls.Add(terminalTabControl);
             Controls.Add(gitPanel);
-            Controls.Add(directoryNavigationHeaderGroup);
             Controls.Add(mainMenuStrip);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = mainMenuStrip;
@@ -1111,20 +941,11 @@
             Load += Form1_Load;
             DragDrop += MainForm_DragDrop;
             DragEnter += MainForm_DragEnter;
-            Resize += MainForm_Resize;
             mainMenuStrip.ResumeLayout(false);
             mainMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)kryptonRibbon1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)findReplaceHeaderGroup.Panel).EndInit();
-            findReplaceHeaderGroup.Panel.ResumeLayout(false);
-            findReplaceHeaderGroup.Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)findReplaceHeaderGroup).EndInit();
             ((System.ComponentModel.ISupportInitialize)kryptonPage2).EndInit();
             ((System.ComponentModel.ISupportInitialize)noRepositoryPanel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)directoryNavigationHeaderGroup.Panel).EndInit();
-            directoryNavigationHeaderGroup.Panel.ResumeLayout(false);
-            directoryNavigationHeaderGroup.Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)directoryNavigationHeaderGroup).EndInit();
             ((System.ComponentModel.ISupportInitialize)terminalTabControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)kryptonPanel1).EndInit();
             kryptonPanel1.ResumeLayout(false);
@@ -1176,11 +997,6 @@
         private Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem16;
         private Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem17;
         private Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem18;
-        private Krypton.Toolkit.KryptonButton kryptonButton1;
-        private Krypton.Toolkit.KryptonTextBox findTextBox;
-        private Krypton.Toolkit.KryptonButton kryptonButton3;
-        private Krypton.Toolkit.KryptonButton kryptonButton2;
-        private Krypton.Toolkit.KryptonTextBox replaceTextBox;
         private Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem5;
         private Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem6;
         private Krypton.Toolkit.KryptonContextMenu renderContextMenu;
@@ -1191,7 +1007,6 @@
         private Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading8;
         private Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems10;
         private Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem10;
-        private Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -1204,7 +1019,6 @@
         private System.Windows.Forms.ToolStripMenuItem buildAndRunToolstripMenuItem;
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private Krypton.Ribbon.KryptonRibbon kryptonRibbon1;
-        private Krypton.Toolkit.KryptonHeaderGroup findReplaceHeaderGroup;
         private Krypton.Toolkit.KryptonCustomPaletteBase KryptonCustomPaletteBase;
         private System.Windows.Forms.ToolStripMenuItem showGitTabToolStripMenuItem;
         private Krypton.Navigator.KryptonPage kryptonPage2;
@@ -1220,9 +1034,6 @@
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildCommandsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gitSettingsToolStripMenuItem;
-        private Krypton.Toolkit.KryptonCheckBox regexCheckBox;
-        private Krypton.Toolkit.KryptonCheckBox matchCaseCheckBox;
-        private Krypton.Toolkit.KryptonCheckBox matchWholeWordCheckBox;
         private Krypton.Toolkit.KryptonContextMenuItem kryptonContextMenuItem12;
         private System.Windows.Forms.ToolStripMenuItem databasesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enableWordWrapToolStripMenuItem;
@@ -1233,9 +1044,6 @@
         private System.Windows.Forms.ToolStripMenuItem themeDesignerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem codeTemplatesToolStripMenuItem;
-        private Krypton.Toolkit.KryptonHeaderGroup directoryNavigationHeaderGroup;
-        private Krypton.Toolkit.KryptonButton kryptonButton12;
-        private Krypton.Toolkit.KryptonTextBox directoryNavigationTextBox;
         private Krypton.Navigator.KryptonNavigator terminalTabControl;
         private Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private Krypton.Toolkit.KryptonTextBox repositoryTextBox;
@@ -1258,6 +1066,7 @@
         private Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer;
         private Krypton.Docking.KryptonDockableNavigator tabControl;
         private Krypton.Toolkit.KryptonTreeView directoryNavigationTreeView;
+        private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
     }
 }
 
