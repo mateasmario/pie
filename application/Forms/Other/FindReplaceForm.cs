@@ -2,14 +2,9 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using pie.Classes;
+using pie.Services;
 
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
@@ -17,8 +12,6 @@ using System.Windows.Forms;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using Krypton.Toolkit;
-using pie.Classes;
-using pie.Services;
 
 namespace pie.Forms.Other
 {
@@ -51,7 +44,23 @@ namespace pie.Forms.Other
         {
             themeService.SetPaletteToObjects(this, Input.Palette);
 
-            ControlHelper.SuspendDrawing(this);
+            regularExpressionCheckBox.StateNormal.ShortText.Color1 = Input.ActiveTheme.Fore;
+            regularExpressionCheckBox.StateNormal.ShortText.Color2 = Input.ActiveTheme.Fore;
+
+            matchCaseCheckBox.StateNormal.ShortText.Color1 = Input.ActiveTheme.Fore;
+            matchCaseCheckBox.StateNormal.ShortText.Color2 = Input.ActiveTheme.Fore;
+
+            matchWholeWordCheckBox.StateNormal.ShortText.Color1 = Input.ActiveTheme.Fore;
+            matchWholeWordCheckBox.StateNormal.ShortText.Color2 = Input.ActiveTheme.Fore;
+
+            regularExpressionCheckBox.StateDisabled.ShortText.Color1 = Input.ActiveTheme.Fore;
+            regularExpressionCheckBox.StateDisabled.ShortText.Color2 = Input.ActiveTheme.Fore;
+
+            matchCaseCheckBox.StateDisabled.ShortText.Color1 = Input.ActiveTheme.Fore;
+            matchCaseCheckBox.StateDisabled.ShortText.Color2 = Input.ActiveTheme.Fore;
+
+            matchWholeWordCheckBox.StateDisabled.ShortText.Color1 = Input.ActiveTheme.Fore;
+            matchWholeWordCheckBox.StateDisabled.ShortText.Color2 = Input.ActiveTheme.Fore;
 
             if (Input.EditorProperties.Glass)
             {
@@ -62,7 +71,8 @@ namespace pie.Forms.Other
                 this.Opacity = 1;
             }
 
-            findTextBox.Focus();
+            this.BringToFront();
+            findTextBox.SelectAll();
         }
 
         private void regularExpressionCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -105,10 +115,14 @@ namespace pie.Forms.Other
             if (e.KeyCode == Keys.Enter)
             {
                 Input.MainForm.StartFind(findTextBox.Text, regularExpressionCheckBox.Checked, matchCaseCheckBox.Checked, matchWholeWordCheckBox.Checked);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
             else if ((e.KeyCode == Keys.F && e.Modifiers == Keys.Control)
                 || e.KeyCode == Keys.Escape)
             {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
                 this.Close();
             }
         }
@@ -137,6 +151,19 @@ namespace pie.Forms.Other
                 || e.KeyCode == Keys.Escape)
             {
                 this.Close();
+            }
+        }
+
+        private void FindReplaceForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Input.MainForm.ClearHighlights();
+        }
+
+        private void findTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
             }
         }
     }

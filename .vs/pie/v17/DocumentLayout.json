@@ -11,8 +11,16 @@
       "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\forms\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\forms\\other\\findreplaceform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\other\\findreplaceform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\services\\themingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\services\\themingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\forms\\other\\findreplaceform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\other\\findreplaceform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +30,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
+              "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
+              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
+              "RelativeToolTip": "application\\Forms\\MainForm.cs",
+              "ViewState": "AgIAAL4HAAAAAAAAAAAuwNAHAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T07:35:42.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ThemingService.cs",
+              "DocumentMoniker": "C:\\git\\pie\\application\\Services\\ThemingService.cs",
+              "RelativeDocumentMoniker": "application\\Services\\ThemingService.cs",
+              "ToolTip": "C:\\git\\pie\\application\\Services\\ThemingService.cs",
+              "RelativeToolTip": "application\\Services\\ThemingService.cs",
+              "ViewState": "AgIAAOQAAAAAAAAAAAAuwPYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T07:22:15.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FindReplaceForm.cs",
+              "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\Other\\FindReplaceForm.cs",
+              "RelativeDocumentMoniker": "application\\Forms\\Other\\FindReplaceForm.cs",
+              "ToolTip": "C:\\git\\pie\\application\\Forms\\Other\\FindReplaceForm.cs",
+              "RelativeToolTip": "application\\Forms\\Other\\FindReplaceForm.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAIwEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T07:20:56.018Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -37,34 +84,20 @@
               "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs [Design]",
               "RelativeToolTip": "application\\Forms\\MainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T05:47:15.882Z",
+              "WhenOpened": "2025-05-24T07:19:26.391Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainForm.Designer.cs",
-              "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\MainForm.Designer.cs",
-              "RelativeDocumentMoniker": "application\\Forms\\MainForm.Designer.cs",
-              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.Designer.cs",
-              "RelativeToolTip": "application\\Forms\\MainForm.Designer.cs",
-              "ViewState": "AgIAAPgDAAAAAAAAAAAuwAoEAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "FindReplaceForm.cs [Design]",
+              "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\Other\\FindReplaceForm.cs",
+              "RelativeDocumentMoniker": "application\\Forms\\Other\\FindReplaceForm.cs",
+              "ToolTip": "C:\\git\\pie\\application\\Forms\\Other\\FindReplaceForm.cs [Design]",
+              "RelativeToolTip": "application\\Forms\\Other\\FindReplaceForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T05:47:11.509Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
-              "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
-              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
-              "RelativeToolTip": "application\\Forms\\MainForm.cs",
-              "ViewState": "AgIAAHIFAAAAAAAAAAAIwIMFAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T05:44:35.904Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-24T07:18:52.999Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

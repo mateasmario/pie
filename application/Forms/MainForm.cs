@@ -6,51 +6,22 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using pie.Classes;
-using pie.Forms.Databases;
-using pie.Services;
-using pie.Enums;
-using pie.Forms.Format;
-using pie.Forms.Theme;
-using pie.Forms.Other;
-using pie.Forms.Git;
-using pie.Forms.CodeTemplates;
 using pie.Classes.Configuration.FileBased.Impl;
+using pie.Enums;
+using pie.Forms.CodeTemplates;
+using pie.Forms.Databases;
+using pie.Forms.Format;
+using pie.Forms.Git;
+using pie.Forms.Other;
+using pie.Forms.Theme;
+using pie.Services;
 using plugin.Classes;
-
-/**
- * ScintillaNET provides the text editors used in pie.
- * 
- * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
-*/
-using ScintillaNET;
-
-/** 
- * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
- * 
- * Copyright (c) 2017 - 2022, Krypton Suite
-*/
-using Krypton.Toolkit;
-using Krypton.Navigator;
-
-/** Markdig is used in order to allow users to render their Markdown (.md) code into HTML.
- * 
- * Copyright (c) 2018-2019, Alexandre Mutel
- */
-using Markdig;
-
-/**
- * CefSharp is used in order to integrate Chromium-Based Web Browsers inside pie.
- * 
- * Copyright © The CefSharp Authors. All rights reserved.
- */
-using CefSharp.WinForms;
-using CefSharp;
 
 /**
  * AutocompleteMenuNS is a namespace that comes from AutoCompleteMenu-ScintillaNet. It is used for various Autocomplete suggestions while writing code.
@@ -60,14 +31,6 @@ using CefSharp;
  * 
  */
 using AutocompleteMenuNS;
-
-/**
- * LibGit2Sharp is used for integrating several advanced Git functionalities into pie.
- * 
- * Copyright (c) LibGit2Sharp contributors
- */
-using LibGit2Sharp;
-
 /**
  * This namespace provides access to the ObjectListView control.
  * Licensed under GNU General Public License (GPL 3.0). For more info, see https://www.gnu.org/licenses/gpl-3.0.html 
@@ -76,13 +39,43 @@ using LibGit2Sharp;
  * Copyright 2006-2016 Bright Ideas Software
  */
 using BrightIdeasSoftware;
-
+/**
+ * CefSharp is used in order to integrate Chromium-Based Web Browsers inside pie.
+ * 
+ * Copyright © The CefSharp Authors. All rights reserved.
+ */
+using CefSharp;
+using CefSharp.WinForms;
 /**
  * ConEmu.Winforms is used for integrating terminal features inside the application.
  * 
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
+/** 
+ * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
+ * 
+ * Copyright (c) 2017 - 2022, Krypton Suite
+*/
+using Krypton.Navigator;
+using Krypton.Toolkit;
+/**
+ * LibGit2Sharp is used for integrating several advanced Git functionalities into pie.
+ * 
+ * Copyright (c) LibGit2Sharp contributors
+ */
+using LibGit2Sharp;
+/** Markdig is used in order to allow users to render their Markdown (.md) code into HTML.
+ * 
+ * Copyright (c) 2018-2019, Alexandre Mutel
+ */
+using Markdig;
+/**
+ * ScintillaNET provides the text editors used in pie.
+ * 
+ * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
+*/
+using ScintillaNET;
 
 namespace pie
 {
@@ -117,16 +110,16 @@ namespace pie
         private bool firstBrowserTab;
         private bool deletesLastTab;
         private bool deletesTab;
-        private bool mouseDown;
-        private Point lastLocation;
         private Branch selectedBranch;
-        private bool gitTabOpened;
         private int selectedBranchIndex;
         private bool doNotTriggerBranchChangeEvent;
         private bool doNotShowBranchChangeNotification;
         private bool showGitTabPressed;
         private string openedFolder;
+        private string openedGitPath;
+        private bool firstDirectoryNavigatorToggle = true;
         private FindReplaceForm findReplaceForm = new FindReplaceForm();
+        private bool isFindReplaceDialogShown;
 
         public string[] Args;
 
@@ -484,7 +477,6 @@ namespace pie
             renderContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
             gitContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
             terminalTabControl.Hide();
-            gitPanel.Hide();
 
             tabControl.AllowPageDrag = false;
             tabControl.AllowPageReorder = false;
@@ -835,32 +827,6 @@ namespace pie
                 kryptonPage.Controls.Add(TextArea);
                 autocompleteMenu = InitializeAutocompleteMenu(TextArea);
             }
-            else if (tabType == TabType.GIT)
-            {
-                tabControl.KryptonContextMenu = gitContextMenu;
-
-                ToggleTerminalTabControl(false);
-
-                if (gitTabOpened)
-                {
-                    for (int i = 0; i < tabControl.Pages.Count; i++)
-                    {
-                        if (tabInfos[i].getTabType() == TabType.GIT)
-                        {
-                            tabControl.SelectedIndex = i;
-                            return;
-                        }
-                    }
-                }
-                else
-                {
-                    kryptonPage.Text = "Git";
-                    kryptonPage.Controls.Add(gitPanel);
-                    gitPanel.Show();
-                    gitPanel.Dock = DockStyle.Fill;
-                    gitTabOpened = true;
-                }
-            }
             else
             {
                 if (firstBrowserTab)
@@ -913,11 +879,7 @@ namespace pie
             tabControl.Pages.Insert(tabControl.SelectedIndex + 1, kryptonPage);
             tabControl.SelectedPage = kryptonPage;
 
-            if (tabType == TabType.GIT)
-            {
-                UpdateFormTitle("Git");
-            }
-            else if (openedFilePath != null)
+            if (openedFilePath != null)
             {
                 UpdateFormTitle(tabControl.SelectedIndex);
             }
@@ -1011,11 +973,6 @@ namespace pie
                 ChromiumWebBrowser chromiumWebBrowser = (ChromiumWebBrowser)tabControl.SelectedPage.Controls[0];
                 CloseTabAfterWarning();
             }
-            else if (tabInfos[tabControl.SelectedIndex].getTabType() == TabType.GIT)
-            {
-                gitTabOpened = false;
-                CloseTabAfterWarning();
-            }
             else if (tabInfos[tabControl.SelectedIndex].getOpenedFileChanges())
             {
                 NotificationYesNoCancelFormOutput notificationYesNoCancelFormOutput = ShowYesNoCancelNotification("Save file before closing it?");
@@ -1066,7 +1023,7 @@ namespace pie
                 TabInfo tabInfo = tabInfos[tabControl.SelectedIndex];
                 tabInfos.RemoveAt(tabControl.SelectedIndex);
 
-                if (tabInfo.getTabType() != TabType.CODE && tabInfo.getTabType() != TabType.GIT)
+                if (tabInfo.getTabType() != TabType.CODE)
                 {
                     selectedKryptonPage.Dispose();
                 }
@@ -1131,6 +1088,11 @@ namespace pie
             {
                 ActivateSpecificBuildAndRunOptions(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
             }
+
+            if (openedGitPath != null)
+            {
+                UpdateGitRepositoryInfo();
+            }
         }
 
         // [Method] Saves text stored in selected tab at a user-specified location
@@ -1145,7 +1107,7 @@ namespace pie
 
             if (saveFileDialog.FileName != "")
             {
-                String chosenPath = saveFileDialog.FileName;
+                string chosenPath = saveFileDialog.FileName;
 
                 TextWriter txt = new StreamWriter(chosenPath);
                 Scintilla TextArea = (Scintilla)tabControl.Pages[selectedIndex].Controls[0];
@@ -1416,8 +1378,9 @@ namespace pie
 
                 kryptonContextMenuItem12.Text = "Show Directory Navigator";
             }
-
+            
             kryptonSplitContainer.Panel1Collapsed = !status;
+
         }
 
         private void ShowFindReplacePanel()
@@ -1427,14 +1390,20 @@ namespace pie
 
         private void ToggleFindReplacePanel()
         {
-            FindReplaceFormInput input = new FindReplaceFormInput();
-            input.Palette = KryptonCustomPaletteBase;
-            input.ActiveTheme = activeTheme;
-            input.EditorProperties = editorProperties;
-            input.MainForm = this;
+            if (!isFindReplaceDialogShown)
+            {
+                isFindReplaceDialogShown = true;
 
-            findReplaceForm.Input = input;
-            findReplaceForm.ShowDialog();
+                FindReplaceFormInput input = new FindReplaceFormInput();
+                input.Palette = KryptonCustomPaletteBase;
+                input.ActiveTheme = activeTheme;
+                input.EditorProperties = editorProperties;
+                input.MainForm = this;
+
+                findReplaceForm.Input = input;
+                findReplaceForm.ShowDialog();
+                isFindReplaceDialogShown = false;
+            }
         }
 
         private void ProcessBuildCommands()
@@ -1517,13 +1486,13 @@ namespace pie
         {
             GitFile gitFile = (GitFile)e.Model;
             if (gitFile.Status == "Ignored")
-                e.Item.ForeColor = activeTheme.IconType == "dark" ? Color.FromArgb(179, 179, 179) : Color.FromArgb(100, 100, 100);
+                e.Item.ForeColor = activeTheme.IconType == "dark" ? Color.FromArgb(100, 100, 100) : Color.FromArgb(179, 179, 179);
             else if (gitFile.Status == "Deleted")
                 e.Item.ForeColor = Color.FromArgb(251, 77, 77);
             else if (gitFile.Status == "New")
-                e.Item.ForeColor = activeTheme.IconType == "dark" ? Color.FromArgb(60, 170, 232) : Color.FromArgb(40, 115, 158);
+                e.Item.ForeColor = activeTheme.IconType == "dark" ? Color.FromArgb(20, 208, 158) : Color.FromArgb(40, 254, 158);
             else if (gitFile.Status == "Modified")
-                e.Item.ForeColor = activeTheme.IconType == "dark" ? Color.FromArgb(255, 199, 87) : Color.FromArgb(224, 165, 45);
+                e.Item.ForeColor = activeTheme.IconType == "dark" ? Color.FromArgb(254, 173, 0) : Color.FromArgb(255, 255, 5);
             else
                 e.Item.ForeColor = activeTheme.Fore;
         }
@@ -1612,6 +1581,8 @@ namespace pie
                 else if (e.KeyCode == Keys.G && e.Modifiers == Keys.Control)
                 {
                     ShowDirectoryNavigator();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
                 }
                 else if (e.KeyCode.ToString().Length >= 2 && e.KeyCode.ToString()[1] >= '0' && e.KeyCode.ToString()[1] <= '9' && e.Modifiers == Keys.Control)
                 {
@@ -1754,6 +1725,11 @@ namespace pie
 
         private void ShowDirectoryNavigator()
         {
+            if (firstDirectoryNavigatorToggle)
+            {
+                ControlHelper.SuspendDrawing(this);
+            }
+
             ToggleDirectoryNavigator(kryptonSplitContainer.Panel1Collapsed);
 
             if (!kryptonSplitContainer.Panel1Collapsed)
@@ -1764,6 +1740,13 @@ namespace pie
             if (openedFolder == null)
             {
                 NavigateToPath("C:\\");
+            }
+
+            if (firstDirectoryNavigatorToggle)
+            {
+                ControlHelper.ResumeDrawing(this);
+                this.RedrawNonClient();
+                firstDirectoryNavigatorToggle = false;
             }
         }
 
@@ -1861,26 +1844,12 @@ namespace pie
                 {
                     formatToolStripMenuItem.Enabled = false;
 
-                    if (tabInfos[indexToMoveTo].getTabType() == TabType.GIT)
-                    {
-                        tabControl.KryptonContextMenu = gitContextMenu;
-                    }
-                    else
-                    {
-                        tabControl.KryptonContextMenu = renderContextMenu;
-                    }
+                    tabControl.KryptonContextMenu = renderContextMenu;
 
                     ToggleTerminalTabControl(false);
                     ToggleDirectoryNavigator(false);
 
-                    if (tabInfos[indexToMoveTo].getTabType() == TabType.GIT)
-                    {
-                        UpdateFormTitle("Git");
-                    }
-                    else
-                    {
-                        UpdateFormTitle(indexToMoveTo);
-                    }
+                    UpdateFormTitle(indexToMoveTo);
 
                     DeactivateBuildAndRunOptions();
                 }
@@ -2029,7 +1998,7 @@ namespace pie
             {
                 if (indexStart == 0)
                 {
-                    ShowNotification("No more occurences found.");
+                    //ShowNotification("No more occurences found.");
                     return false;
                 }
 
@@ -2088,7 +2057,16 @@ namespace pie
             }
         }
 
-        private void ClearHighlights(Scintilla scintilla)
+        public void ClearHighlights()
+        {
+            if (tabInfos[tabControl.SelectedIndex].getTabType().Equals(TabType.CODE))
+            {
+                Scintilla scintilla = (Scintilla)tabControl.SelectedPage.Controls[0];
+                ClearHighlights(scintilla);
+            }
+        }
+
+        public void ClearHighlights(Scintilla scintilla)
         {
             scintilla.IndicatorCurrent = 8;
             scintilla.IndicatorClearRange(0, scintilla.TextLength);
@@ -2166,12 +2144,6 @@ namespace pie
             CloseTab();
         }
 
-        private void showGitTabToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            showGitTabPressed = true;
-            NewTab(TabType.GIT, null);
-        }
-
         private void kryptonButton5_Click(object sender, EventArgs e)
         {
             OpenRepository();
@@ -2201,7 +2173,7 @@ namespace pie
                 if (notificationYesNoCancelFormOutput.NotificationButton == NotificationButton.YES)
                 {
                     Repository.Init(path);
-                    repositoryTextBox.Text = path;
+                    openedGitPath = path;
                     doNotShowBranchChangeNotification = true;
                     UpdateGitRepositoryInfo();
 
@@ -2213,7 +2185,7 @@ namespace pie
             }
             else
             {
-                repositoryTextBox.Text = path;
+                openedGitPath =  path;
                 doNotShowBranchChangeNotification = true;
                 UpdateGitRepositoryInfo();
 
@@ -2226,14 +2198,12 @@ namespace pie
 
         private void UpdateGitRepositoryInfo()
         {
-            string path = repositoryTextBox.Text;
-
-            if (path == "")
+            if (openedGitPath == null)
             {
                 return;
             }
 
-            repository = new Repository(path);
+            repository = new Repository(openedGitPath);
 
             RetrieveGitItemsForCurrentBranch();
 
@@ -2370,16 +2340,28 @@ namespace pie
                     {
                         Signature signature = new Signature(gitCredentials.Name, gitCredentials.Email, DateTime.Now);
 
-                        string commitText = commitMessageRichTextBox.Text;
+                        GitCommitMessageForm gitCommitMessageForm = new GitCommitMessageForm();
 
-                        Task.Run(() =>
+                        GitCommitMessageFormInput gitCommitMessageFormInput = new GitCommitMessageFormInput();
+                        gitCommitMessageFormInput.Palette = KryptonCustomPaletteBase;
+                        gitCommitMessageFormInput.EditorProperties = editorProperties;
+                        gitCommitMessageForm.Input = gitCommitMessageFormInput;
+
+                        gitCommitMessageForm.ShowDialog();
+
+                        string commitText = gitCommitMessageForm.Output.Message;
+
+                        if (!string.IsNullOrEmpty(commitText))
                         {
-                            repository.Commit(commitText, signature, signature);
-                        }).Wait();
+                            Task.Run(() =>
+                            {
+                                repository.Commit(commitText, signature, signature);
+                            }).Wait();
 
-                        doNotShowBranchChangeNotification = true;
-                        UpdateGitRepositoryInfo();
-                        ShowNotification("Successfully commited.");
+                            doNotShowBranchChangeNotification = true;
+                            UpdateGitRepositoryInfo();
+                            ShowNotification("Successfully commited.");
+                        }
                     }
                 }
                 else
@@ -2474,7 +2456,7 @@ namespace pie
                 {
                     string fileName = ((GitFile)gitFile).Name;
                     NewTab(TabType.CODE, null);
-                    Open(repositoryTextBox.Text + "\\" + fileName);
+                    Open(openedGitPath + "\\" + fileName);
                 }
             }
         }
@@ -2913,6 +2895,11 @@ namespace pie
             directoryNavigationTreeView.Nodes.Add(rootNode);
 
             AddItemsToDirectory(rootNode);
+
+            if (Directory.GetDirectories(path).Any(d => parsingService.GetFileName(d).Equals(".git"))) {
+                OpenRepository(path);
+            }
+            
 
             rootNode.Expand();
         }

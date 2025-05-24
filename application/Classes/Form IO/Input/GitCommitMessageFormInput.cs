@@ -10,10 +10,9 @@ using Krypton.Toolkit;
 
 namespace pie.Classes
 {
-    public class GitCloneFormInput
+    public class GitCommitMessageFormInput
     {
         public KryptonCustomPaletteBase Palette { get; set; }
         public EditorProperties EditorProperties { get; set; }
-        public GitCredentials GitCredentials { get; set; }
     }
 }
