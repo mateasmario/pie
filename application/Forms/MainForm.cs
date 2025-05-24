@@ -2432,7 +2432,47 @@ namespace pie
 
         private void KryptonContextMenuItem_Click2(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            GitRollback();
+        }
+
+        private void GitRollback()
+        {
+            if (repository != null)
+            {
+                Commit headCommit = repository.Head.Tip;
+                List<string> paths = new List<string>();
+
+                for (int i = 0; i < gitStagingAreaListView.SelectedObjects.Count; i++)
+                {
+                    paths.Add(((GitFile)gitStagingAreaListView.SelectedObjects[i]).Name);
+                }
+
+                repository.CheckoutPaths("HEAD", paths, new CheckoutOptions { CheckoutModifiers = CheckoutModifiers.Force});
+                doNotShowBranchChangeNotification = true;
+                UpdateGitRepositoryInfo();
+
+                // Files changed (where reverted). They don't need to keep their inconsistent state in the opened code tabs.
+                CloseRevertedGitFiles(paths);
+            }
+            else
+            {
+                ShowNotification("No repository is opened.");
+            }
+        }
+
+        private void CloseRevertedGitFiles(List<string> paths)
+        {
+            foreach (string path in paths)
+            {
+                for (int i = 0; i < tabInfos.Count; i++)
+                {
+                    if (tabInfos[i].getTabType().Equals(TabType.CODE) && tabInfos[i].getOpenedFilePath() != null && tabInfos[i].getOpenedFilePath().Equals(openedGitPath + "\\" + path.Replace("/", "\\")))
+                    {
+                        tabControl.SelectedIndex = i;
+                        CloseTab();
+                    }
+                }
+            }
         }
 
         private void KryptonContextMenuItem_CommitSelectedFiles(object sender, EventArgs e)
@@ -2680,7 +2720,7 @@ namespace pie
 
             if (gitCloneForm.Output.ClonePath != null)
             {
-                OpenRepository(gitCloneForm.Output.ClonePath);
+                NavigateToPath(gitCloneForm.Output.ClonePath);
             }
         }
 
