@@ -244,10 +244,6 @@ namespace pie.Services
             {
                 ((KryptonComboBox)control).LocalCustomPalette = palette;
             }
-            else if (control is KryptonCheckBox)
-            {
-                ((KryptonCheckBox)control).LocalCustomPalette = palette;
-            }
 
 
             foreach (Control child in control.Controls)

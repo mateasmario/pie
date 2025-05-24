@@ -50,7 +50,7 @@
             mainPanel.Location = new System.Drawing.Point(0, 0);
             mainPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new System.Drawing.Size(483, 94);
+            mainPanel.Size = new System.Drawing.Size(484, 96);
             mainPanel.TabIndex = 8;
             // 
             // matchWholeWordCheckBox
@@ -89,6 +89,7 @@
             findTextBox.TabIndex = 1;
             findTextBox.Text = "Find...";
             findTextBox.KeyDown += findTextBox_KeyDown;
+            findTextBox.KeyPress += findTextBox_KeyPress;
             // 
             // replaceTextBox
             // 
@@ -98,6 +99,7 @@
             replaceTextBox.TabIndex = 3;
             replaceTextBox.Text = "Replace...";
             replaceTextBox.KeyDown += replaceTextBox_KeyDown;
+            replaceTextBox.KeyPress += findTextBox_KeyPress;
             // 
             // kryptonButton3
             // 
@@ -137,7 +139,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(483, 94);
+            ClientSize = new System.Drawing.Size(484, 96);
             Controls.Add(findTextBox);
             Controls.Add(replaceTextBox);
             Controls.Add(kryptonButton3);
@@ -150,6 +152,7 @@
             ShowIcon = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Find and Replace";
+            FormClosing += FindReplaceForm_FormClosing;
             Load += FindReplaceForm_Load;
             KeyDown += FindReplaceForm_KeyDown;
             ((System.ComponentModel.ISupportInitialize)mainPanel).EndInit();
