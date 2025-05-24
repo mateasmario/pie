@@ -1091,6 +1091,7 @@ namespace pie
 
             if (openedGitPath != null)
             {
+                doNotShowBranchChangeNotification = true;
                 UpdateGitRepositoryInfo();
             }
         }
@@ -1727,7 +1728,7 @@ namespace pie
         {
             if (firstDirectoryNavigatorToggle)
             {
-                ControlHelper.SuspendDrawing(this);
+                ControlHelper.SuspendDrawing(kryptonSplitContainer);
             }
 
             ToggleDirectoryNavigator(kryptonSplitContainer.Panel1Collapsed);
@@ -1744,7 +1745,7 @@ namespace pie
 
             if (firstDirectoryNavigatorToggle)
             {
-                ControlHelper.ResumeDrawing(this);
+                ControlHelper.ResumeDrawing(kryptonSplitContainer);
                 this.RedrawNonClient();
                 firstDirectoryNavigatorToggle = false;
             }
@@ -2269,25 +2270,18 @@ namespace pie
                 if (item.State == FileStatus.DeletedFromWorkdir)
                 {
                     gitFile.Status = "Deleted";
-                }
-                else if (item.State == FileStatus.Ignored)
-                {
-                    gitFile.Status = "Ignored";
+                    gitFileList.Add(gitFile);
                 }
                 else if (item.State == FileStatus.ModifiedInIndex || item.State == FileStatus.ModifiedInWorkdir)
                 {
                     gitFile.Status = "Modified";
+                    gitFileList.Add(gitFile);
                 }
                 else if (item.State == FileStatus.NewInIndex || item.State == FileStatus.NewInWorkdir)
                 {
                     gitFile.Status = "New";
+                    gitFileList.Add(gitFile);
                 }
-                else
-                {
-                    gitFile.Status = item.State.ToString();
-                }
-
-                gitFileList.Add(gitFile);
             }
 
             gitStagingAreaListView.SetObjects(gitFileList);
@@ -2416,13 +2410,19 @@ namespace pie
                 KryptonContextMenuItem kryptonContextMenuItem = new KryptonContextMenuItem();
                 kryptonContextMenuItem.Text = "Open selected files";
                 kryptonContextMenuItem.Image = Properties.Resources.git;
-                kryptonContextMenuItem.Click += KryptonContextMenuItem_Click;
+                kryptonContextMenuItem.Click += KryptonContextMenuItem_OpenSelectedGitFiles;
                 kryptonContextMenuItems.Items.Add(kryptonContextMenuItem);
 
                 kryptonContextMenuItem = new KryptonContextMenuItem();
                 kryptonContextMenuItem.Text = "Commit selected files";
                 kryptonContextMenuItem.Image = Properties.Resources.git;
-                kryptonContextMenuItem.Click += KryptonContextMenuItem_Click1;
+                kryptonContextMenuItem.Click += KryptonContextMenuItem_CommitSelectedFiles;
+                kryptonContextMenuItems.Items.Add(kryptonContextMenuItem);
+
+                kryptonContextMenuItem = new KryptonContextMenuItem();
+                kryptonContextMenuItem.Text = "Rollback selected files";
+                kryptonContextMenuItem.Image = Properties.Resources.git;
+                kryptonContextMenuItem.Click += KryptonContextMenuItem_Click2;
                 kryptonContextMenuItems.Items.Add(kryptonContextMenuItem);
 
                 gitContextMenu.Items.Add(kryptonContextMenuHeading);
@@ -2430,7 +2430,12 @@ namespace pie
             }
         }
 
-        private void KryptonContextMenuItem_Click1(object sender, EventArgs e)
+        private void KryptonContextMenuItem_Click2(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void KryptonContextMenuItem_CommitSelectedFiles(object sender, EventArgs e)
         {
             string items = "";
 
@@ -2443,7 +2448,7 @@ namespace pie
             GitCommit(items);
         }
 
-        private void KryptonContextMenuItem_Click(object sender, EventArgs e)
+        private void KryptonContextMenuItem_OpenSelectedGitFiles(object sender, EventArgs e)
         {
             OpenSelectedGitFiles();
         }
@@ -2455,8 +2460,7 @@ namespace pie
                 foreach (var gitFile in gitStagingAreaListView.SelectedObjects)
                 {
                     string fileName = ((GitFile)gitFile).Name;
-                    NewTab(TabType.CODE, null);
-                    Open(openedGitPath + "\\" + fileName);
+                    OpenFileIfNotAlreadyOpened(openedGitPath + "\\" + fileName.Replace("/", "\\"));
                 }
             }
         }
@@ -3218,20 +3222,25 @@ namespace pie
             {
                 string selectedPath = kryptonTreeView.SelectedNode.Tag.ToString();
 
-                if (File.Exists(selectedPath))
-                {
-                    foreach (TabInfo tabInfo in tabInfos)
-                    {
-                        if (tabInfo.getOpenedFilePath() != null && tabInfo.getOpenedFilePath().Equals(selectedPath) && tabInfo.getTabType().Equals(TabType.CODE))
-                        {
-                            tabControl.SelectedIndex = tabInfos.IndexOf(tabInfo);
-                            return;
-                        }
-                    }
+                OpenFileIfNotAlreadyOpened(selectedPath);
+            }
+        }
 
-                    NewTab(TabType.CODE, null);
-                    Open(selectedPath);
+        private void OpenFileIfNotAlreadyOpened(string selectedPath)
+        {
+            if (File.Exists(selectedPath))
+            {
+                foreach (TabInfo tabInfo in tabInfos)
+                {
+                    if (tabInfo.getOpenedFilePath() != null && tabInfo.getOpenedFilePath().Equals(selectedPath) && tabInfo.getTabType().Equals(TabType.CODE))
+                    {
+                        tabControl.SelectedIndex = tabInfos.IndexOf(tabInfo);
+                        return;
+                    }
                 }
+
+                NewTab(TabType.CODE, null);
+                Open(selectedPath);
             }
         }
     }
