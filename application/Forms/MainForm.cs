@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Reflection;
 using pie.Classes;
 using pie.Forms.Databases;
 using pie.Services;
@@ -20,6 +21,7 @@ using pie.Forms.Other;
 using pie.Forms.Git;
 using pie.Forms.CodeTemplates;
 using pie.Classes.Configuration.FileBased.Impl;
+using plugin.Classes;
 
 /**
  * ScintillaNET provides the text editors used in pie.
@@ -81,8 +83,6 @@ using BrightIdeasSoftware;
  * Copyright (c) 2021, Maksim Moisiuk <ConEmu.Maximus5@gmail.com>
  */
 using ConEmu.WinForms;
-using plugin.Classes;
-using System.Reflection;
 
 namespace pie
 {
@@ -94,6 +94,7 @@ namespace pie
         private UpdateService updateService = new UpdateService();
         private ScintillaLexerService scintillaLexerService = new ScintillaLexerService();
         private SecureFileService secureFileService = new SecureFileService();
+        private Win32APIService win32APIService = new Win32APIService();
         private PluginContext pluginContext = new PluginContext();
 
         private List<TabInfo> tabInfos = new List<TabInfo>();
@@ -1408,6 +1409,11 @@ namespace pie
             }
             else
             {
+                if (tabControl.Pages.Count > 0 && tabInfos[tabControl.SelectedIndex].getTabType() == TabType.CODE)
+                {
+                    tabControl.Pages[tabControl.SelectedIndex].Controls[0].Focus();
+                }
+
                 kryptonContextMenuItem12.Text = "Show Directory Navigator";
             }
 
@@ -2962,6 +2968,8 @@ namespace pie
                 nodeToAdd.SelectedImageKey = "file.png";
                 node.Nodes.Add(nodeToAdd);
             }
+
+            win32APIService.HideScrollBars(directoryNavigationTreeView);
         }
 
         public object NavigationImageGetter(object rowObject)
@@ -3218,6 +3226,7 @@ namespace pie
         {
             KryptonTreeView kryptonTreeView = (KryptonTreeView)sender;
 
+            win32APIService.HideScrollBars(kryptonTreeView);
             if (kryptonTreeView.SelectedNode != null)
             {
                 string selectedPath = kryptonTreeView.SelectedNode.Tag.ToString();
