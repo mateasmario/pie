@@ -2964,6 +2964,9 @@ namespace pie
                 logButton.Values.Image = Properties.Resources.log_white;
             }
 
+            // KryptonTableLayoutPanel
+            kryptonTableLayoutPanel1.BackColor = activeTheme.Primary;
+
             SynchronizeCustomControls();
         }
 
