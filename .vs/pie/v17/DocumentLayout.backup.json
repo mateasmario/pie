@@ -7,8 +7,8 @@
       "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|C:\\git\\pie\\application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\forms\\git\\newbranchform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\git\\newbranchform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -32,22 +32,23 @@
               "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
               "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
               "RelativeToolTip": "application\\Forms\\MainForm.cs",
-              "ViewState": "AgIAAIkJAAAAAAAAAAAawJoJAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAABQKAAAAAAAAAAAowCIKAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T08:16:20.048Z",
+              "WhenOpened": "2025-05-25T09:26:18.289Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MainForm.cs [Design]",
-              "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
-              "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
-              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs [Design]",
-              "RelativeToolTip": "application\\Forms\\MainForm.cs [Design]",
+              "Title": "NewBranchForm.cs",
+              "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\Git\\NewBranchForm.cs",
+              "RelativeDocumentMoniker": "application\\Forms\\Git\\NewBranchForm.cs",
+              "ToolTip": "C:\\git\\pie\\application\\Forms\\Git\\NewBranchForm.cs",
+              "RelativeToolTip": "application\\Forms\\Git\\NewBranchForm.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAuwEkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T08:15:49.572Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-05-25T09:21:58.728Z",
+              "EditorCaption": ""
             }
           ]
         }

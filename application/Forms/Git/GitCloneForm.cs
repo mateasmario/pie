@@ -135,6 +135,10 @@ namespace pie
                 {
                     ShowNotification(e.Message);
                 }
+                catch (Exception e)
+                {
+                    ShowNotification("Could not clone repository. Check if you have the right permissions and if the repository URL is correct.");
+                }
             }
         }
 
