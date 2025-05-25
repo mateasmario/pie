@@ -3,8 +3,9 @@
 
 namespace pie.Classes
 {
-    public class NewBranchFormOutput
+    public class FormatFormOutput
     {
-        public string BranchName { get; set; }
+        public string Text { get; set; }
+        public bool Saved { get; set; }
     }
 }

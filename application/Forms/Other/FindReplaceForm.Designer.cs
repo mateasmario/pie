@@ -50,7 +50,7 @@
             mainPanel.Location = new System.Drawing.Point(0, 0);
             mainPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new System.Drawing.Size(484, 96);
+            mainPanel.Size = new System.Drawing.Size(484, 103);
             mainPanel.TabIndex = 8;
             // 
             // matchWholeWordCheckBox
@@ -139,7 +139,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(484, 96);
+            ClientSize = new System.Drawing.Size(484, 103);
             Controls.Add(findTextBox);
             Controls.Add(replaceTextBox);
             Controls.Add(kryptonButton3);

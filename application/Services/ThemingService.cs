@@ -244,12 +244,16 @@ namespace pie.Services
             {
                 ((KryptonComboBox)control).LocalCustomPalette = palette;
             }
-
-
-            foreach (Control child in control.Controls)
+            else if (control is KryptonTableLayoutPanel)
             {
-                SetPaletteToObjects(child, palette);
+                ((KryptonTableLayoutPanel)control).Palette = palette;
             }
+
+
+                foreach (Control child in control.Controls)
+                {
+                    SetPaletteToObjects(child, palette);
+                }
         }
     }
 }

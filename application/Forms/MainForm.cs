@@ -116,7 +116,7 @@ namespace pie
         private bool doNotShowBranchChangeNotification;
         private bool showGitTabPressed;
         private string openedFolder;
-        private string openedGitPath;
+        private bool openedGitRepository;
         private bool firstDirectoryNavigatorToggle = true;
         private FindReplaceForm findReplaceForm = new FindReplaceForm();
         private bool isFindReplaceDialogShown;
@@ -1089,7 +1089,7 @@ namespace pie
                 ActivateSpecificBuildAndRunOptions(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
             }
 
-            if (openedGitPath != null)
+            if (openedGitRepository)
             {
                 doNotShowBranchChangeNotification = true;
                 UpdateGitRepositoryInfo();
@@ -1379,7 +1379,7 @@ namespace pie
 
                 kryptonContextMenuItem12.Text = "Show Directory Navigator";
             }
-            
+
             kryptonSplitContainer.Panel1Collapsed = !status;
 
         }
@@ -1401,7 +1401,6 @@ namespace pie
                 input.EditorProperties = editorProperties;
                 input.MainForm = this;
 
-                findReplaceForm.Input = input;
                 findReplaceForm.ShowDialog();
                 isFindReplaceDialogShown = false;
             }
@@ -2173,10 +2172,7 @@ namespace pie
 
                 if (notificationYesNoCancelFormOutput.NotificationButton == NotificationButton.YES)
                 {
-                    Repository.Init(path);
-                    openedGitPath = path;
-                    doNotShowBranchChangeNotification = true;
-                    UpdateGitRepositoryInfo();
+                    InitializeRepository(path);
 
                     if (gitBranchesComboBox.Items.Count > 0)
                     {
@@ -2186,7 +2182,8 @@ namespace pie
             }
             else
             {
-                openedGitPath =  path;
+                openedGitRepository = true;
+                gitTabControl.SelectedIndex = 1;
                 doNotShowBranchChangeNotification = true;
                 UpdateGitRepositoryInfo();
 
@@ -2197,14 +2194,40 @@ namespace pie
             }
         }
 
+        private void InitializeRepository(string path)
+        {
+            try
+            {
+                Repository.Init(path);
+                openedGitRepository = true;
+                gitTabControl.SelectedIndex = 1;
+                doNotShowBranchChangeNotification = true;
+                UpdateGitRepositoryInfo();
+            }
+            catch (Exception)
+            {
+                ShowNotification("Could not initialize repository at the specified path. Please check if you have the necessary permissions.");
+            }
+        }
+
         private void UpdateGitRepositoryInfo()
         {
-            if (openedGitPath == null)
+            if (!openedGitRepository)
             {
                 return;
             }
 
-            repository = new Repository(openedGitPath);
+            try
+            {
+                repository = new Repository(openedFolder);
+            }
+            catch (Exception)
+            {
+                openedGitRepository = false;
+                gitTabControl.SelectedIndex = 0;
+                ShowNotification("Could not open repository at the specified path. Please check if you have the necessary permissions.");
+                return;
+            }
 
             RetrieveGitItemsForCurrentBranch();
 
@@ -2447,12 +2470,19 @@ namespace pie
                     paths.Add(((GitFile)gitStagingAreaListView.SelectedObjects[i]).Name);
                 }
 
-                repository.CheckoutPaths("HEAD", paths, new CheckoutOptions { CheckoutModifiers = CheckoutModifiers.Force});
-                doNotShowBranchChangeNotification = true;
-                UpdateGitRepositoryInfo();
+                try
+                {
+                    repository.CheckoutPaths("HEAD", paths, new CheckoutOptions { CheckoutModifiers = CheckoutModifiers.Force });
+                    doNotShowBranchChangeNotification = true;
+                    UpdateGitRepositoryInfo();
 
-                // Files changed (where reverted). They don't need to keep their inconsistent state in the opened code tabs.
-                CloseRevertedGitFiles(paths);
+                    // Files changed (where reverted). They don't need to keep their inconsistent state in the opened code tabs.
+                    CloseRevertedGitFiles(paths);
+                }
+                catch (Exception)
+                {
+                    ShowNotification("Could not rollback files.");
+                }
             }
             else
             {
@@ -2466,7 +2496,7 @@ namespace pie
             {
                 for (int i = 0; i < tabInfos.Count; i++)
                 {
-                    if (tabInfos[i].getTabType().Equals(TabType.CODE) && tabInfos[i].getOpenedFilePath() != null && tabInfos[i].getOpenedFilePath().Equals(openedGitPath + "\\" + path.Replace("/", "\\")))
+                    if (tabInfos[i].getTabType().Equals(TabType.CODE) && tabInfos[i].getOpenedFilePath() != null && tabInfos[i].getOpenedFilePath().Equals(openedFolder + "\\" + path.Replace("/", "\\")))
                     {
                         tabControl.SelectedIndex = i;
                         CloseTab();
@@ -2500,7 +2530,7 @@ namespace pie
                 foreach (var gitFile in gitStagingAreaListView.SelectedObjects)
                 {
                     string fileName = ((GitFile)gitFile).Name;
-                    OpenFileIfNotAlreadyOpened(openedGitPath + "\\" + fileName.Replace("/", "\\"));
+                    OpenFileIfNotAlreadyOpened(openedFolder + "\\" + fileName.Replace("/", "\\"));
                 }
             }
         }
@@ -2536,6 +2566,12 @@ namespace pie
                     {
                         Remote remote = repository.Network.Remotes["origin"];
 
+                        if (remote == null)
+                        {
+                            ShowNotification("No remote repository exists.");
+                            return;
+                        }
+
                         repository.Branches.Update(repository.Branches[gitBranchesComboBox.SelectedItem.ToString()],
                             b => b.Remote = remote.Name,
                             b => b.UpstreamBranch = repository.Branches[gitBranchesComboBox.SelectedItem.ToString()].CanonicalName);
@@ -2565,7 +2601,7 @@ namespace pie
                             UpdateGitRepositoryInfo();
                             doNotShowBranchChangeNotification = false;
                         }
-                        catch (LibGit2SharpException ex)
+                        catch (Exception ex)
                         {
                             ShowNotification("Authentication failed. If pushing on GitHub, generate an access token (with proper permissions) instead of using the password.");
                         }
@@ -2604,9 +2640,13 @@ namespace pie
                 {
                     doNotShowBranchChangeNotification = false;
                 }
-                else
+                else if (selectedBranchIndex != gitBranchesComboBox.SelectedIndex)
                 {
                     notificationYesNoCancelFormOutput = ShowYesNoCancelNotification("Checking out another branch will discard your current changes. Would you like to continue?");
+                }
+                else
+                {
+                    notificationYesNoCancelFormOutput = new NotificationYesNoCancelFormOutput() { NotificationButton = NotificationButton.YES };
                 }
 
                 if (notificationYesNoCancelFormOutput != null && notificationYesNoCancelFormOutput.NotificationButton == NotificationButton.YES)
@@ -2704,7 +2744,7 @@ namespace pie
             }
         }
 
-        private void kryptonButton9_Click(object sender, EventArgs e)
+        private void CloneRepository()
         {
             GitCloneForm gitCloneForm = new GitCloneForm();
 
@@ -2798,9 +2838,9 @@ namespace pie
                             UpdateGitRepositoryInfo();
                             ShowNotification("Pull successful.");
                         }
-                        catch (LibGit2SharpException ex)
+                        catch (Exception ex)
                         {
-                            ShowNotification(ex.Message);
+                            ShowNotification("There was an error while trying to pull from remote.");
                         }
                     }
                 }
@@ -2879,6 +2919,7 @@ namespace pie
             gitStagingAreaListView.UnfocusedHighlightForegroundColor = activeTheme.Fore;
             gitStagingAreaListView.BackColor = activeTheme.Primary;
             gitStagingAreaListView.ForeColor = activeTheme.Fore;
+            gitStagingAreaListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
 
             var headerstyle = new HeaderFormatStyle();
             headerstyle.Normal.BackColor = activeTheme.Secondary;
@@ -2906,19 +2947,21 @@ namespace pie
             // Git Buttons
             if (activeTheme.IconType == "dark")
             {
-                kryptonButton8.Values.Image = Properties.Resources.refresh_black;
-                kryptonButton6.Values.Image = Properties.Resources.commit_black;
-                kryptonButton10.Values.Image = Properties.Resources.pull_black;
-                kryptonButton7.Values.Image = Properties.Resources.push_black;
-                kryptonButton11.Values.Image = Properties.Resources.log_black;
+                newBranchButton.Values.Image = Properties.Resources.plus_black;
+                refreshStatusButton.Values.Image = Properties.Resources.refresh_black;
+                commitButton.Values.Image = Properties.Resources.commit_black;
+                pullButton.Values.Image = Properties.Resources.pull_black;
+                pushButton.Values.Image = Properties.Resources.push_black;
+                logButton.Values.Image = Properties.Resources.log_black;
             }
             else if (activeTheme.IconType == "light")
             {
-                kryptonButton8.Values.Image = Properties.Resources.refresh_white;
-                kryptonButton6.Values.Image = Properties.Resources.commit_white;
-                kryptonButton10.Values.Image = Properties.Resources.pull_white;
-                kryptonButton7.Values.Image = Properties.Resources.push_white;
-                kryptonButton11.Values.Image = Properties.Resources.log_white;
+                newBranchButton.Values.Image = Properties.Resources.plus_white;
+                refreshStatusButton.Values.Image = Properties.Resources.refresh_white;
+                commitButton.Values.Image = Properties.Resources.commit_white;
+                pullButton.Values.Image = Properties.Resources.pull_white;
+                pushButton.Values.Image = Properties.Resources.push_white;
+                logButton.Values.Image = Properties.Resources.log_white;
             }
 
             SynchronizeCustomControls();
@@ -2940,10 +2983,16 @@ namespace pie
 
             AddItemsToDirectory(rootNode);
 
-            if (Directory.GetDirectories(path).Any(d => parsingService.GetFileName(d).Equals(".git"))) {
+            if (Directory.GetDirectories(path).Any(d => parsingService.GetFileName(d).Equals(".git")))
+            {
                 OpenRepository(path);
             }
-            
+            else
+            {
+                openedGitRepository = false;
+                gitTabControl.SelectedIndex = 0;
+            }
+
 
             rootNode.Expand();
         }
@@ -3282,6 +3331,80 @@ namespace pie
                 NewTab(TabType.CODE, null);
                 Open(selectedPath);
             }
+        }
+
+        private void initializeANewRepoButton_Click_1(object sender, EventArgs e)
+        {
+            InitializeRepository(openedFolder);
+        }
+
+        private void cloneARepoButton_Click(object sender, EventArgs e)
+        {
+            CloneRepository();
+        }
+
+        private int FindBranchIndexWithName(string branchName) {             
+            for (int i = 0; i < gitBranchesComboBox.Items.Count; i++)
+            {
+                if (gitBranchesComboBox.Items[i].ToString().Equals(branchName))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        private void NewBranch()
+        {
+            NewBranchForm newBranchForm = new NewBranchForm();
+
+            NewBranchFormInput newBranchFormInput = new NewBranchFormInput();
+            newBranchFormInput.Palette = KryptonCustomPaletteBase;
+            newBranchFormInput.EditorProperties = editorProperties;
+            newBranchFormInput.ActiveTheme = activeTheme;
+            newBranchForm.Input = newBranchFormInput;
+
+            newBranchForm.ShowDialog();
+
+            if (newBranchForm.Output != null)
+            {
+                if (repository != null)
+                {
+                    if (string.IsNullOrWhiteSpace(newBranchForm.Output.BranchName.Trim()))
+                    {
+                        ShowNotification("Please enter a valid branch name.");
+                        return;
+                    }
+
+                    try
+                    {
+                        Branch newBranch = repository.CreateBranch(newBranchForm.Output.BranchName);
+                        Commands.Checkout(repository, newBranch);
+
+                        UpdateGitRepositoryInfo();
+
+                        selectedBranchIndex = FindBranchIndexWithName(newBranch.FriendlyName);
+                        gitBranchesComboBox.SelectedIndex = selectedBranchIndex;
+                    } catch(NameConflictException ex)
+                    {
+                        ShowNotification("Could not create branch because a reference with that name already exists.");
+                    } catch(Exception ex)
+                    {
+                        ShowNotification("Could not create branch.");
+                    }
+
+                }
+                else
+                {
+                    ShowNotification("No repository opened.");
+                }
+            }
+        }
+
+        private void newBranchButton_Click(object sender, EventArgs e)
+        {
+            NewBranch();
         }
     }
 }
