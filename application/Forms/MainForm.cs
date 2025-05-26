@@ -1,28 +1,6 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using pie.Classes;
-using pie.Classes.Configuration.FileBased.Impl;
-using pie.Enums;
-using pie.Forms.CodeTemplates;
-using pie.Forms.Databases;
-using pie.Forms.Format;
-using pie.Forms.Git;
-using pie.Forms.Other;
-using pie.Forms.Theme;
-using pie.Services;
-using plugin.Classes;
-
 /**
  * AutocompleteMenuNS is a namespace that comes from AutoCompleteMenu-ScintillaNet. It is used for various Autocomplete suggestions while writing code.
  * 
@@ -70,12 +48,34 @@ using LibGit2Sharp;
  * Copyright (c) 2018-2019, Alexandre Mutel
  */
 using Markdig;
+using pie.Classes;
+using pie.Classes.Configuration.FileBased.Impl;
+using pie.Enums;
+using pie.Forms.CodeTemplates;
+using pie.Forms.Databases;
+using pie.Forms.Format;
+using pie.Forms.Git;
+using pie.Forms.Other;
+using pie.Forms.Theme;
+using pie.Services;
+using plugin.Classes;
 /**
  * ScintillaNET provides the text editors used in pie.
  * 
  * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
 */
 using ScintillaNET;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Shapes;
 
 namespace pie
 {
@@ -120,8 +120,14 @@ namespace pie
         private bool firstDirectoryNavigatorToggle = true;
         private FindReplaceForm findReplaceForm = new FindReplaceForm();
         private bool isFindReplaceDialogShown;
+        private bool isCreatingNewFile;
+        private string toEditFileFolder;
+        private bool doNotExpand;
+        private string initialFileName;
 
         public string[] Args;
+
+        #region Overrides
 
         const int WM_CONTEXTMENU = 0x007B;
         protected override void WndProc(ref Message m)
@@ -129,14 +135,14 @@ namespace pie
             if (m.Msg == WM_CONTEXTMENU)
             {
                 m.Result = IntPtr.Zero;
-                //Close();
             }
             else
             {
                 base.WndProc(ref m);
             }
         }
-
+        #endregion
+        #region ParameterProcessing
         public delegate void ProcessParametersDelegate(string[] args);
 
         public void ProcessParameters(string[] args)
@@ -148,14 +154,19 @@ namespace pie
                 Open(args[1].ToString());
             }
         }
-
-
+        #endregion
+        #region Initialization
         public MainForm()
         {
+            /*
+             * Temporal coupling between ProcessCommandLineArguments and the initialization methods.
+             * ProcessCommandLineArguments is called after the configuration data is loaded from files and the dynamic design is set.
+             */
             InitializeComponent();
             GetConfigurationDataFromFiles();
-            SetDynamicDesign();
+            InitializeControls();
             ProcessCommandLineArguments();
+            InitializeContextMenus();
         }
 
         private void GetConfigurationDataFromFiles()
@@ -227,51 +238,6 @@ namespace pie
             }
         }
 
-        public void ChangeTheme(ThemeInfo theme)
-        {
-            ControlHelper.SuspendDrawing(this);
-
-            activeTheme = theme;
-
-            configurationService.WriteToFile("config/theme.json", new SelectedTheme(theme.Name));
-
-            for (int i = 0; i < tabControl.Pages.Count; i++)
-            {
-                if (tabInfos[i].getTabType() == TabType.CODE)
-                {
-                    KryptonPage kryptonPage = tabControl.Pages[i];
-                    Scintilla scintilla = (Scintilla)kryptonPage.Controls[0];
-
-                    ScintillaLexerService.ResetDictionary(activeTheme);
-
-                    if (tabInfos[i].getOpenedFilePath() != null)
-                    {
-                        string extension = parsingService.GetFileExtension(tabInfos[i].getOpenedFilePath());
-                        themeService.ColorizeTextArea(scintilla, activeTheme);
-                        ColorizeAutocompleteMenu(tabInfos[i].getAutocompleteMenu());
-                        scintillaLexerService.SetLexer(tabInfos[i].getAutocompleteMenu(), extension, scintilla, activeTheme, languageMappings, languageDefinitions);
-                        UpdateNumberMarginWidth(scintilla, true);
-                    }
-                    else
-                    {
-                        themeService.ColorizeTextArea(scintilla, activeTheme);
-                    }
-                }
-            }
-
-            themeService.SetPaletteToTheme(KryptonCustomPaletteBase, activeTheme);
-            SynchronizeMainFormComponentsWithTheme();
-
-            doNotShowBranchChangeNotification = true;
-            doNotTriggerBranchChangeEvent = true;
-            UpdateGitRepositoryInfo();
-            doNotShowBranchChangeNotification = false;
-            doNotTriggerBranchChangeEvent = false;
-
-            ControlHelper.ResumeDrawing(this);
-            this.RedrawNonClient();
-        }
-
         private void ProcessEditorProperties()
         {
             editorProperties = configurationService.GetObjectFromFile<EditorProperties>(AppDomain.CurrentDomain.BaseDirectory + "config/scintilla.json");
@@ -325,6 +291,196 @@ namespace pie
                 }
             }
         }
+
+        private void ProcessBuildCommands()
+        {
+            if (buildAndRunToolstripMenuItem.DropDownItems.Count > 0)
+            {
+                int removeCount = buildAndRunToolstripMenuItem.DropDownItems.Count;
+
+                while (removeCount > 0)
+                {
+                    buildAndRunToolstripMenuItem.DropDownItems.RemoveAt(0);
+                    removeCount--;
+                }
+            }
+
+            buildCommands = configurationService.GetArrayFromFile<BuildCommand>("config/build.json");
+
+            for (int i = 0; i < buildCommands.Count; i++)
+            {
+                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
+                toolStripMenuItem.Text = buildCommands[i].Name;
+                toolStripMenuItem.Tag = i;
+                toolStripMenuItem.Click += BuildCommandTrigger_Click;
+                buildAndRunToolstripMenuItem.DropDownItems.Add(toolStripMenuItem);
+
+                if (tabControl.Pages.Count >= 1 && (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() == null ||
+                    !buildCommands[i].Extensions.Contains(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()))))
+                {
+                    toolStripMenuItem.Enabled = false;
+                }
+            }
+        }
+
+        private void ProcessDatabaseConnections()
+        {
+            databases = configurationService.GetArrayFromFile<DatabaseConnection>("config/databases.json");
+        }
+
+        private void ProcessLanguageMappings()
+        {
+            languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config\\mappings.json");
+        }
+
+        private void ProcessLanguageDefinitions()
+        {
+            languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>("config/languages", "json");
+        }
+
+        private void ProcessCodeTemplates()
+        {
+            codeTemplates = configurationService.GetArrayFromFile<CodeTemplate>("config\\templates.json");
+        }
+
+        private void InitializeControls()
+        {
+            this.MinimumSize = new Size(1036, 634);
+
+            ToggleDirectoryNavigator(false);
+
+            gitStagingAreaListView.ShowGroups = false;
+
+            gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
+
+            themeService.SetPaletteToTheme(KryptonCustomPaletteBase, activeTheme);
+            SynchronizeMainFormComponentsWithTheme();
+
+            themeService.SetPaletteToObjects(this, KryptonCustomPaletteBase);
+            codeContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
+            terminalContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
+            renderContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
+            gitContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
+            terminalTabControl.Hide();
+
+            tabControl.AllowPageDrag = false;
+            tabControl.AllowPageReorder = false;
+        }
+
+        private void ProcessCommandLineArguments()
+        {
+            string[] args = Environment.GetCommandLineArgs();
+
+            if (args.Length == 2)
+            {
+                string path = args[1];
+
+                if (File.Exists(path))
+                {
+                    Open(path);
+                }
+                else
+                {
+                    ShowNotification("pie could not open " + path + ". Are you sure the file exists?");
+                    Application.Exit();
+                    return;
+                }
+            }
+            else
+            {
+                NewTab(TabType.CODE, null);
+            }
+        }
+
+        private void InitializeContextMenus()
+        {
+            KryptonContextMenuHeading heading = new KryptonContextMenuHeading();
+
+            heading.Text = "Explorer Actions";
+            directoryContextMenu.Items.Add(heading);
+
+            KryptonContextMenuItems items = new KryptonContextMenuItems();
+
+            KryptonContextMenuItem newFileItem = new KryptonContextMenuItem();
+            newFileItem.Click += NewFileItem_Click;
+            newFileItem.Text = "New File";
+            items.Items.Add(newFileItem);
+
+            KryptonContextMenuItem deleteFileItem = new KryptonContextMenuItem();
+            deleteFileItem.Click += DeleteFileItem_Click;
+            deleteFileItem.Text = "Delete File";
+            items.Items.Add(deleteFileItem);
+
+            KryptonContextMenuItem renameFileItem = new KryptonContextMenuItem();
+            renameFileItem.Click += RenameFileItem_Click;
+            renameFileItem.Text = "Rename File";
+            items.Items.Add(renameFileItem);
+
+            directoryContextMenu.Items.Add(items);
+        }
+
+        private void RenameFileItem_Click(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = directoryNavigationTreeView.SelectedNode;
+
+            initialFileName = selectedNode.Text;
+
+            if (selectedNode == null)
+            {
+                return;
+            }
+
+            KryptonTreeNode castTreeNode = (KryptonTreeNode)selectedNode;
+
+            if (castTreeNode.ImageKey.Equals("folder.png"))
+            {
+                toEditFileFolder = castTreeNode.Tag.ToString();
+            }
+            else
+            {
+                toEditFileFolder = parsingService.GetFolderName(castTreeNode.Tag.ToString());
+            }
+
+            castTreeNode.BeginEdit();
+        }
+
+        private void DeleteFileItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void NewFileItem_Click(object sender, EventArgs e)
+        {
+            doNotExpand = true;
+
+            TreeNode selectedNode = directoryNavigationTreeView.SelectedNode;
+
+            if (selectedNode == null)
+            {
+                selectedNode = directoryNavigationTreeView.Nodes[0]; // Create file as direct child of the root node if no node is selected
+            }
+
+            KryptonTreeNode castTreeNode = (KryptonTreeNode)selectedNode;
+            KryptonTreeNode newFileNode = new KryptonTreeNode();
+            newFileNode.ImageKey = "file.png";
+            castTreeNode.Nodes.Add(newFileNode);
+            castTreeNode.Expand();
+
+            if (castTreeNode.ImageKey.Equals("folder.png"))
+            {
+                toEditFileFolder = castTreeNode.Tag.ToString();
+            }
+            else
+            {
+                toEditFileFolder = parsingService.GetFolderName(castTreeNode.Tag.ToString());
+            }
+
+            isCreatingNewFile = true;
+
+            newFileNode.BeginEdit();
+        }
+
+        #endregion
 
         private void TaskItem_Click(object sender, EventArgs e)
         {
@@ -456,65 +612,49 @@ namespace pie
             }
         }
 
-        private void SetDynamicDesign()
+        public void ChangeTheme(ThemeInfo theme)
         {
-            this.MinimumSize = new Size(1036, 634);
+            ControlHelper.SuspendDrawing(this);
 
-            SynchronizeCustomControls();
+            activeTheme = theme;
 
-            ToggleDirectoryNavigator(false);
+            configurationService.WriteToFile("config/theme.json", new SelectedTheme(theme.Name));
 
-            gitStagingAreaListView.ShowGroups = false;
+            for (int i = 0; i < tabControl.Pages.Count; i++)
+            {
+                if (tabInfos[i].getTabType() == TabType.CODE)
+                {
+                    KryptonPage kryptonPage = tabControl.Pages[i];
+                    Scintilla scintilla = (Scintilla)kryptonPage.Controls[0];
 
-            gitStagingAreaListView.FormatRow += GitStagingAreaListView_FormatRow;
+                    ScintillaLexerService.ResetDictionary(activeTheme);
+
+                    if (tabInfos[i].getOpenedFilePath() != null)
+                    {
+                        string extension = parsingService.GetFileExtension(tabInfos[i].getOpenedFilePath());
+                        themeService.ColorizeTextArea(scintilla, activeTheme);
+                        ColorizeAutocompleteMenu(tabInfos[i].getAutocompleteMenu());
+                        scintillaLexerService.SetLexer(tabInfos[i].getAutocompleteMenu(), extension, scintilla, activeTheme, languageMappings, languageDefinitions);
+                        UpdateNumberMarginWidth(scintilla, true);
+                    }
+                    else
+                    {
+                        themeService.ColorizeTextArea(scintilla, activeTheme);
+                    }
+                }
+            }
 
             themeService.SetPaletteToTheme(KryptonCustomPaletteBase, activeTheme);
             SynchronizeMainFormComponentsWithTheme();
 
-            themeService.SetPaletteToObjects(this, KryptonCustomPaletteBase);
-            codeContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
-            terminalContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
-            renderContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
-            gitContextMenu.LocalCustomPalette = KryptonCustomPaletteBase;
-            terminalTabControl.Hide();
+            doNotShowBranchChangeNotification = true;
+            doNotTriggerBranchChangeEvent = true;
+            UpdateGitRepositoryInfo();
+            doNotShowBranchChangeNotification = false;
+            doNotTriggerBranchChangeEvent = false;
 
-            tabControl.AllowPageDrag = false;
-            tabControl.AllowPageReorder = false;
-        }
-
-        private void SynchronizeCustomControls()
-        {
-            CustomColorTable customColorTable = new CustomColorTable();
-            customColorTable.InputThemeInfo = activeTheme;
-
-            CustomToolStripRenderer customToolStripRenderer = new CustomToolStripRenderer(customColorTable);
-            customToolStripRenderer.InputThemeInfo = activeTheme;
-            mainMenuStrip.Renderer = customToolStripRenderer;
-        }
-
-        private void ProcessCommandLineArguments()
-        {
-            string[] args = Environment.GetCommandLineArgs();
-
-            if (args.Length == 2)
-            {
-                string path = args[1];
-
-                if (File.Exists(path))
-                {
-                    Open(path);
-                }
-                else
-                {
-                    ShowNotification("pie could not open " + path + ". Are you sure the file exists?");
-                    Application.Exit();
-                    return;
-                }
-            }
-            else
-            {
-                NewTab(TabType.CODE, null);
-            }
+            ControlHelper.ResumeDrawing(this);
+            this.RedrawNonClient();
         }
 
         // [Event] Used for automatic indentation in a Scintilla instance
@@ -1404,52 +1544,6 @@ namespace pie
                 findReplaceForm.ShowDialog();
                 isFindReplaceDialogShown = false;
             }
-        }
-
-        private void ProcessBuildCommands()
-        {
-            if (buildAndRunToolstripMenuItem.DropDownItems.Count > 0)
-            {
-                int removeCount = buildAndRunToolstripMenuItem.DropDownItems.Count;
-
-                while (removeCount > 0)
-                {
-                    buildAndRunToolstripMenuItem.DropDownItems.RemoveAt(0);
-                    removeCount--;
-                }
-            }
-
-            buildCommands = configurationService.GetArrayFromFile<BuildCommand>("config/build.json");
-
-            for (int i = 0; i < buildCommands.Count; i++)
-            {
-                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem();
-                toolStripMenuItem.Text = buildCommands[i].Name;
-                toolStripMenuItem.Tag = i;
-                toolStripMenuItem.Click += BuildCommandTrigger_Click;
-                buildAndRunToolstripMenuItem.DropDownItems.Add(toolStripMenuItem);
-
-                if (tabControl.Pages.Count >= 1 && (tabInfos[tabControl.SelectedIndex].getOpenedFilePath() == null ||
-                    !buildCommands[i].Extensions.Contains(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()))))
-                {
-                    toolStripMenuItem.Enabled = false;
-                }
-            }
-        }
-
-        private void ProcessLanguageMappings()
-        {
-            languageMappings = configurationService.GetArrayFromFile<LanguageMapping>("config\\mappings.json");
-        }
-
-        private void ProcessLanguageDefinitions()
-        {
-            languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>("config/languages", "json");
-        }
-
-        private void ProcessCodeTemplates()
-        {
-            codeTemplates = configurationService.GetArrayFromFile<CodeTemplate>("config\\templates.json");
         }
 
         // [Event] Form Loading
@@ -2967,7 +3061,12 @@ namespace pie
             // KryptonTableLayoutPanel
             kryptonTableLayoutPanel1.BackColor = activeTheme.Primary;
 
-            SynchronizeCustomControls();
+            CustomColorTable customColorTable = new CustomColorTable();
+            customColorTable.InputThemeInfo = activeTheme;
+
+            CustomToolStripRenderer customToolStripRenderer = new CustomToolStripRenderer(customColorTable);
+            customToolStripRenderer.InputThemeInfo = activeTheme;
+            mainMenuStrip.Renderer = customToolStripRenderer;
         }
 
         private void NavigateToPath(string path)
@@ -3093,11 +3192,6 @@ namespace pie
                     ActivateSpecificBuildAndRunOptions(parsingService.GetFileExtension(tabInfos[tabControl.SelectedIndex].getOpenedFilePath()));
                 }
             }
-        }
-
-        private void ProcessDatabaseConnections()
-        {
-            databases = configurationService.GetArrayFromFile<DatabaseConnection>("config/databases.json");
         }
 
         private void ToolStripMenuItem_Click1(object sender, EventArgs e)
@@ -3286,6 +3380,12 @@ namespace pie
 
         private void directoryNavigationTreeView_AfterExpand(object sender, TreeViewEventArgs e)
         {
+            if (doNotExpand)
+            {
+                doNotExpand = false;
+                return;
+            }
+
             KryptonTreeNode node = (KryptonTreeNode)e.Node;
 
             if (!node.Tag.Equals(openedFolder))
@@ -3346,7 +3446,8 @@ namespace pie
             CloneRepository();
         }
 
-        private int FindBranchIndexWithName(string branchName) {             
+        private int FindBranchIndexWithName(string branchName)
+        {
             for (int i = 0; i < gitBranchesComboBox.Items.Count; i++)
             {
                 if (gitBranchesComboBox.Items[i].ToString().Equals(branchName))
@@ -3389,10 +3490,12 @@ namespace pie
 
                         selectedBranchIndex = FindBranchIndexWithName(newBranch.FriendlyName);
                         gitBranchesComboBox.SelectedIndex = selectedBranchIndex;
-                    } catch(NameConflictException ex)
+                    }
+                    catch (NameConflictException ex)
                     {
                         ShowNotification("Could not create branch because a reference with that name already exists.");
-                    } catch(Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         ShowNotification("Could not create branch.");
                     }
@@ -3408,6 +3511,76 @@ namespace pie
         private void newBranchButton_Click(object sender, EventArgs e)
         {
             NewBranch();
+        }
+
+        private void directoryNavigationTreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            if (isCreatingNewFile)
+            {
+                try
+                {
+                    isCreatingNewFile = false;
+
+                    string path = toEditFileFolder + "\\" + e.Label;
+
+                    if (File.Exists(path))
+                    {
+                        ShowNotification("A file with the same name already exists.");
+                        e.Node.Remove();
+                        return;
+                    }
+
+                    CreateNewFile(path);
+                    e.Node.Tag = path;
+                }
+                catch (Exception ex)
+                {
+                    ShowNotification("An error occurred while creating the file. Make sure you have the appropiate permissions and a file with the same name doesn't already exist.");
+                    e.Node.Remove();
+                }
+            }
+            else
+            {
+                string path = toEditFileFolder + e.Label;
+
+                if (File.Exists(path))
+                {
+                    ShowNotification("A file with the same name already exists.");
+                    e.Node.EndEdit(true);
+                    e.CancelEdit = true;
+                    return;
+                }
+                
+                RenameFile(e.Node.Tag.ToString(), path);
+            }
+
+            directoryNavigationTreeView.Refresh();
+        }
+
+        private void CreateNewFile(string src)
+        {
+            File.Create(src).Close();
+            doNotShowBranchChangeNotification = true;
+            UpdateGitRepositoryInfo();
+        }
+
+        private void RenameFile(string src, string dest)
+        {
+            File.Move(src, dest);
+            doNotShowBranchChangeNotification = true;
+            UpdateGitRepositoryInfo();
+        }
+
+        private void directoryNavigationTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                TreeNode clickedNode = directoryNavigationTreeView.GetNodeAt(e.X, e.Y);
+                if (clickedNode != null)
+                {
+                    directoryNavigationTreeView.SelectedNode = clickedNode;
+                }
+            }
         }
     }
 }
