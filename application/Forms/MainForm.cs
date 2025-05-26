@@ -121,9 +121,8 @@ namespace pie
         private FindReplaceForm findReplaceForm = new FindReplaceForm();
         private bool isFindReplaceDialogShown;
         private DirNavModificationType dirNavModificationType;
-        private string toEditFileFolder;
+        private string newFolderName;
         private bool doNotExpand;
-        private string initialFileName;
 
         public string[] Args;
 
@@ -444,11 +443,11 @@ namespace pie
 
             if (castTreeNode.ImageKey.Equals("folder.png"))
             {
-                toEditFileFolder = castTreeNode.Tag.ToString();
+                newFolderName = castTreeNode.Tag.ToString();
             }
             else
             {
-                toEditFileFolder = parsingService.GetFolderName(castTreeNode.Tag.ToString());
+                newFolderName = parsingService.GetFolderName(castTreeNode.Tag.ToString());
             }
 
             dirNavModificationType = DirNavModificationType.CREATE_FOLDER;
@@ -460,11 +459,19 @@ namespace pie
         {
             TreeNode selectedNode = directoryNavigationTreeView.SelectedNode;
 
-            initialFileName = selectedNode.Text;
-
             if (selectedNode == null)
             {
                 return;
+            }
+
+
+            foreach (TabInfo tabInfo in tabInfos)
+            {
+                if (selectedNode.Tag.ToString().Equals(tabInfo.getOpenedFilePath()))
+                {
+                    ShowNotification("The file is already opened in Pie. Please close the file before renaming it.");
+                    return;
+                }
             }
 
             KryptonTreeNode castTreeNode = (KryptonTreeNode)selectedNode;
@@ -478,14 +485,15 @@ namespace pie
 
             if (castTreeNode.ImageKey.Equals("folder.png"))
             {
-                toEditFileFolder = castTreeNode.Tag.ToString();
+                newFolderName = castTreeNode.Tag.ToString();
+                dirNavModificationType = DirNavModificationType.RENAME_DIRECTORY;
             }
             else
             {
-                toEditFileFolder = parsingService.GetFolderName(castTreeNode.Tag.ToString());
+                newFolderName = parsingService.GetFolderName(castTreeNode.Tag.ToString());
+                dirNavModificationType = DirNavModificationType.RENAME_FILE;
             }
 
-            dirNavModificationType = DirNavModificationType.RENAME;
 
             castTreeNode.BeginEdit();
         }
@@ -510,8 +518,34 @@ namespace pie
 
             NotificationYesNoCancelFormOutput output = ShowYesNoCancelNotification("Are you sure you want to delete the selected file?");
 
-            if (output.NotificationButton.Equals(NotificationButton.YES)) {
-                DeleteFile(castTreeNode.Tag.ToString());
+            if (output.NotificationButton.Equals(NotificationButton.YES))
+            {
+                string path = castTreeNode.Tag.ToString();
+
+                if (Directory.Exists(path))
+                {
+                    foreach (TabInfo tabInfo in tabInfos)
+                    {
+                        if (tabInfo.getOpenedFilePath() != null && (path+"\\").Equals(parsingService.GetFolderName(tabInfo.getOpenedFilePath())))
+                        {
+                            ShowNotification("A file to be deleted is still opened in Pie. Please close it before proceeding with the deletion.");
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (TabInfo tabInfo in tabInfos)
+                    {
+                        if (path.Equals(tabInfo.getOpenedFilePath()))
+                        {
+                            ShowNotification("A file to be deleted is still opened in Pie. Please close it before proceeding with the deletion.");
+                            return;
+                        }
+                    }
+                }
+
+                DeleteFile(path);
                 castTreeNode.Remove();
                 directoryNavigationTreeView.Refresh();
             }
@@ -538,7 +572,7 @@ namespace pie
                 castTreeNode = (KryptonTreeNode)castTreeNode.Parent;
             }
 
-            toEditFileFolder = castTreeNode.Tag.ToString();
+            newFolderName = castTreeNode.Tag.ToString();
 
             castTreeNode.Nodes.Add(newFileNode);
             castTreeNode.Expand();
@@ -3589,7 +3623,7 @@ namespace pie
                 {
                     dirNavModificationType = DirNavModificationType.NONE;
 
-                    string path = toEditFileFolder + "\\" + e.Label;
+                    string path = newFolderName + "\\" + e.Label;
 
                     if (File.Exists(path))
                     {
@@ -3597,7 +3631,7 @@ namespace pie
                         e.Node.Remove();
                         return;
                     }
-                    else if (string.IsNullOrEmpty(e.Label.Trim()))
+                    else if (e.Label == null || string.IsNullOrEmpty(e.Label.Trim()))
                     {
                         ShowNotification("File name cannot be empty.");
                         e.Node.Remove();
@@ -3619,7 +3653,7 @@ namespace pie
                 {
                     dirNavModificationType = DirNavModificationType.NONE;
 
-                    string path = toEditFileFolder + "\\" + e.Label;
+                    string path = newFolderName + "\\" + e.Label;
 
                     if (Directory.Exists(path))
                     {
@@ -3643,11 +3677,11 @@ namespace pie
                     e.Node.Remove();
                 }
             }
-            else if (dirNavModificationType.Equals(DirNavModificationType.RENAME))
+            else if (dirNavModificationType.Equals(DirNavModificationType.RENAME_FILE))
             {
                 dirNavModificationType = DirNavModificationType.NONE;
 
-                string path = toEditFileFolder + e.Label;
+                string path = newFolderName + e.Label;
 
                 if (File.Exists(path))
                 {
@@ -3663,17 +3697,56 @@ namespace pie
                     e.CancelEdit = true;
                     return;
                 }
-                else if (path.Equals(toEditFileFolder)) {
+                else if (path.Equals(newFolderName))
+                {
                     return;
                 }
 
                 RenameFile(e.Node.Tag.ToString(), path);
                 e.Node.Tag = path;
             }
+            else if (dirNavModificationType.Equals(DirNavModificationType.RENAME_DIRECTORY))
+            {
+                foreach (TabInfo tabInfo in tabInfos)
+                {
+                    if (tabInfo.getOpenedFilePath() != null && (newFolderName + "\\").Equals(parsingService.GetFolderName(tabInfo.getOpenedFilePath())))
+                    {
+                        ShowNotification("Please close all opened files from the directory before renaming it.");
+                        e.CancelEdit = true;
+                        return;
+                    }
+                }
+
+                dirNavModificationType = DirNavModificationType.NONE;
+
+                string path = parsingService.GetFolderName(newFolderName) + e.Label;
+
+                if (Directory.Exists(path))
+                {
+                    ShowNotification("A folder with the same name already exists.");
+                    e.Node.EndEdit(true);
+                    e.CancelEdit = true;
+                    return;
+                }
+                else if (e.Node.Tag.Equals(path) || string.IsNullOrEmpty(e.Label.Trim()))
+                {
+                    ShowNotification("Folder name cannot be empty.");
+                    e.Node.EndEdit(true);
+                    e.CancelEdit = true;
+                    return;
+                }
+                else if (path.Equals(newFolderName))
+                {
+                    return;
+                }
+                RenameDirectory(e.Node.Tag.ToString(), path);
+                e.Node.Tag = path;
+                e.Node.Nodes.Clear();
+                AddItemsToDirectory((KryptonTreeNode)e.Node);
+            }
 
             directoryNavigationTreeView.Refresh();
         }
-
         private void CreateNewFolder(string src)
         {
             Directory.CreateDirectory(src);
@@ -3695,6 +3768,13 @@ namespace pie
             UpdateGitRepositoryInfo();
         }
 
+        private void RenameDirectory(string src, string dest)
+        {
+            Directory.Move(src, dest);
+            doNotShowBranchChangeNotification = true;
+            UpdateGitRepositoryInfo();
+        }
+
         private void directoryNavigationTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Left || e.Button == MouseButtons.Right)
@@ -3712,9 +3792,30 @@ namespace pie
             try
             {
                 File.Delete(path);
-            } catch(Exception)
+                doNotShowBranchChangeNotification = true;
+                UpdateGitRepositoryInfo();
+            }
+            catch (Exception)
             {
                 ShowNotification("Could not delete specified file. Make sure you have the appropiate permissions and the file is not being used by another process.");
+            }
+        }
+
+        private void initializeANewRepoButton_Click(object sender, EventArgs e)
+        {
+            InitializeRepository(openedFolder);
+        }
+
+        private void cloneARepoButton_Click_1(object sender, EventArgs e)
+        {
+            CloneRepository();
+        }
+
+        private void directoryNavigationTreeView_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            if (dirNavModificationType == DirNavModificationType.NONE)
+            {
+                e.CancelEdit = true;
             }
         }
     }

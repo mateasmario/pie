@@ -11,8 +11,8 @@
       "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\enums\\databasetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|c:\\git\\pie\\application\\enums\\dirnavmodificationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8BDDC7F-F3DA-ADA3-D8AF-43EBE7AC210A}|application\\pie.csproj|solutionrelative:application\\enums\\dirnavmodificationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,22 +36,23 @@
               "RelativeDocumentMoniker": "application\\Enums\\DatabaseType.cs",
               "ToolTip": "C:\\git\\pie\\application\\Enums\\DatabaseType.cs",
               "RelativeToolTip": "application\\Enums\\DatabaseType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T13:14:37.685Z",
+              "WhenOpened": "2025-05-26T17:30:05.079Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "MainForm.cs [Design]",
-              "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
-              "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
-              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs [Design]",
-              "RelativeToolTip": "application\\Forms\\MainForm.cs [Design]",
+              "Title": "DirNavModificationType.cs",
+              "DocumentMoniker": "C:\\git\\pie\\application\\Enums\\DirNavModificationType.cs",
+              "RelativeDocumentMoniker": "application\\Enums\\DirNavModificationType.cs",
+              "ToolTip": "C:\\git\\pie\\application\\Enums\\DirNavModificationType.cs",
+              "RelativeToolTip": "application\\Enums\\DirNavModificationType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T13:11:45.035Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-05-26T17:29:57.598Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -61,9 +62,9 @@
               "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
               "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
               "RelativeToolTip": "application\\Forms\\MainForm.cs",
-              "ViewState": "AgIAAOkBAAAAAAAAAAAiwPwBAAANAAAAAAAAAA==",
+              "ViewState": "AgIAABkOAAAAAAAAAAApwDEOAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-25T10:14:23.399Z",
+              "WhenOpened": "2025-05-26T17:10:44.475Z",
               "EditorCaption": ""
             }
           ]
