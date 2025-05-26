@@ -3,7 +3,7 @@
 
 namespace pie.Enums
 {
-    public enum DirNavModificationType { 
-        CREATE_FILE, CREATE_FOLDER, RENAME, NONE
+    public enum DatabaseType { 
+        None, MySQL, MSSQL, PostgreSQL
     }
 }
