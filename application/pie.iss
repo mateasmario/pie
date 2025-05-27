@@ -127,7 +127,7 @@ begin
   else
   begin
     // Debugging output
-    MsgBox('Could not read .NET Host Version from registry path: SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedhost\Version', mbError, MB_OK);
+    MsgBox('Could not read .NET Host Version from registry path: SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedhost\Version.', mbError, MB_OK);
   end;
 end;
 
