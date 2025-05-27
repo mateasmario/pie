@@ -34,8 +34,8 @@ DisableProgramGroupPage=yes
 OutputBaseFilename=mysetup
 SolidCompression=yes
 WizardStyle=modern
-SetupIconFile=C:\git\pie\pie.ico
-LicenseFile=C:\git\pie\LICENSE
+SetupIconFile=C:\git\pie\application\pie.ico
+LicenseFile=C:\git\pie\application\LICENSE
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -44,9 +44,9 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\git\pie\bin\Release\net8.0-windows7.0\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\git\pie\bin\Release\net8.0-windows7.0\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\git\pie\LICENSE"; DestDir: "LICENSE"
+Source: "C:\git\pie\application\bin\Release\net8.0-windows7.0\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\git\pie\application\bin\Release\net8.0-windows7.0\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\git\pie\application\LICENSE"; DestDir: "LICENSE"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Code]
