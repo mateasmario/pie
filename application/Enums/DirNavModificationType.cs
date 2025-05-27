@@ -3,7 +3,8 @@
 
 namespace pie.Enums
 {
-    public enum DirNavModificationType { 
+    public enum DirNavModificationType
+    { 
         CREATE_FILE, CREATE_FOLDER, RENAME_FILE, RENAME_DIRECTORY, NONE
     }
 }

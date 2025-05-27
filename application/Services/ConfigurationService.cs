@@ -30,7 +30,7 @@ namespace pie.Services
         {
             List<T> configurationEntities = new List<T>();
 
-            using (var textReader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + file))
+            using (var textReader = File.OpenText(file))
             {
                 JsonTextReader jsonTextReader = new JsonTextReader(textReader);
 
@@ -74,7 +74,7 @@ namespace pie.Services
 
             try
             {
-                files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + directory);
+                files = Directory.GetFiles(directory);
 
                 foreach (string file in files)
                 {
@@ -376,7 +376,7 @@ namespace pie.Services
 
         public void WriteFilesToDirectory<T>(string directory, List<T> items, string extension) where T : MultiFileConfigurationEntity, new()
         {
-            DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + directory);
+            DirectoryInfo di = new DirectoryInfo(directory);
 
             foreach (FileInfo file in di.GetFiles())
             {
@@ -396,9 +396,9 @@ namespace pie.Services
 
         public void WriteToFile<T>(string file, T configurationEntity) where T : ConfigurationEntity, new()
         {
-            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
+            File.WriteAllText(file, "");
 
-            TextWriter textWriter = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + file);
+            TextWriter textWriter = new StreamWriter(file);
 
             using (JsonWriter writer = new JsonTextWriter(textWriter))
             {
@@ -431,9 +431,9 @@ namespace pie.Services
 
         public void WriteToFile<T>(string file, List<T> configurationEntities) where T : ConfigurationEntity, new()
         {
-            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + file, "");
+            File.WriteAllText(file, "");
 
-            TextWriter textWriter = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + file);
+            TextWriter textWriter = new StreamWriter(file);
 
             using (JsonWriter writer = new JsonTextWriter(textWriter))
             {

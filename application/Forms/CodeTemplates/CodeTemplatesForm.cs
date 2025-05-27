@@ -1,26 +1,25 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
-using System;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Drawing;
-using pie.Services;
-using pie.Classes;
-
-/**
- * ScintillaNET provides the text editors used in pie.
- * 
- * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
-*/
-using ScintillaNET;
-
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using Krypton.Toolkit;
+using pie.Classes;
+using pie.Constants;
+using pie.Services;
+/**
+ * ScintillaNET provides the text editors used in pie.
+ * 
+ * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
+*/
+using ScintillaNET;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace pie.Forms.CodeTemplates
 {
@@ -181,7 +180,7 @@ namespace pie.Forms.CodeTemplates
         {
             SaveCurrentTemplate();
 
-            configurationService.WriteToFile("config\\templates.json", Working);
+            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "templates.json"), Working);
 
             Output.Saved = true;
 

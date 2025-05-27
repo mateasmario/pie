@@ -1,18 +1,18 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using pie.Classes;
-using pie.Services;
-
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using Krypton.Toolkit;
+using pie.Classes;
+using pie.Constants;
+using pie.Services;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace pie
 {
@@ -153,7 +153,7 @@ namespace pie
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            configurationService.WriteToFile("config/build.json", tempCommands);
+            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "build.json"), tempCommands);
 
             Output.Saved = true;
 
