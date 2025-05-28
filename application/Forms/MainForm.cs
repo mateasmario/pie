@@ -471,32 +471,21 @@ namespace pie
             directoryContextMenu.Items.Add(items);
         }
 
+        #endregion
+
         private void NewFolderItem_Click(object sender, EventArgs e)
         {
             doNotExpand = true;
 
-            TreeNode selectedNode = directoryNavigationTreeView.SelectedNode;
+            TreeNode selectedNode = directoryNavigationTreeView.SelectedNode != null ? directoryNavigationTreeView.SelectedNode : directoryNavigationTreeView.Nodes[0]; 
 
-            if (selectedNode == null)
-            {
-                selectedNode = directoryNavigationTreeView.Nodes[0]; // Create file as direct child of the root node if no node is selected
-            }
-
-            KryptonTreeNode castTreeNode = (KryptonTreeNode)selectedNode;
             KryptonTreeNode newFileNode = new KryptonTreeNode();
             newFileNode.ImageKey = "folder.png";
             newFileNode.SelectedImageKey = "folder.png";
-            castTreeNode.Nodes.Add(newFileNode);
-            castTreeNode.Expand();
+            selectedNode.Nodes.Add(newFileNode);
+            selectedNode.Expand();
 
-            if (castTreeNode.ImageKey.Equals("folder.png"))
-            {
-                newFolderName = castTreeNode.Tag.ToString();
-            }
-            else
-            {
-                newFolderName = parsingService.GetFolderName(castTreeNode.Tag.ToString());
-            }
+            newFolderName = selectedNode.ImageKey.Equals("folder.png") ? selectedNode.Tag.ToString() : parsingService.GetFolderName(selectedNode.Tag.ToString());
 
             dirNavModificationType = DirNavModificationType.CREATE_FOLDER;
 
@@ -522,28 +511,26 @@ namespace pie
                 }
             }
 
-            KryptonTreeNode castTreeNode = (KryptonTreeNode)selectedNode;
-
             // if node is root, you cannot rename it
-            if (castTreeNode.Equals(directoryNavigationTreeView.Nodes[0]))
+            if (selectedNode.Equals(directoryNavigationTreeView.Nodes[0]))
             {
                 ShowNotification("You cannot rename the root directory.");
                 return;
             }
 
-            if (castTreeNode.ImageKey.Equals("folder.png"))
+            if (selectedNode.ImageKey.Equals("folder.png"))
             {
-                newFolderName = castTreeNode.Tag.ToString();
+                newFolderName = selectedNode.Tag.ToString();
                 dirNavModificationType = DirNavModificationType.RENAME_DIRECTORY;
             }
             else
             {
-                newFolderName = parsingService.GetFolderName(castTreeNode.Tag.ToString());
+                newFolderName = parsingService.GetFolderName(selectedNode.Tag.ToString());
                 dirNavModificationType = DirNavModificationType.RENAME_FILE;
             }
 
 
-            castTreeNode.BeginEdit();
+            selectedNode.BeginEdit();
         }
 
         private void DeleteFileItem_Click(object sender, EventArgs e)
@@ -555,10 +542,8 @@ namespace pie
                 return;
             }
 
-            KryptonTreeNode castTreeNode = (KryptonTreeNode)selectedNode;
-
             // if node is root, you cannot delete it
-            if (castTreeNode.Equals(directoryNavigationTreeView.Nodes[0]))
+            if (selectedNode.Equals(directoryNavigationTreeView.Nodes[0]))
             {
                 ShowNotification("You cannot delete the root directory.");
                 return;
@@ -568,33 +553,21 @@ namespace pie
 
             if (output.NotificationButton.Equals(NotificationButton.YES))
             {
-                string path = castTreeNode.Tag.ToString();
+                string path = selectedNode.Tag.ToString();
 
-                if (Directory.Exists(path))
+                if (Directory.Exists(path) && IsFileFromDirectoryOpened(path))
                 {
-                    foreach (TabInfo tabInfo in tabInfos)
-                    {
-                        if (tabInfo.getOpenedFilePath() != null && (path+"\\").Equals(parsingService.GetFolderName(tabInfo.getOpenedFilePath())))
-                        {
-                            ShowNotification("A file to be deleted is still opened in Pie. Please close it before proceeding with the deletion.");
-                            return;
-                        }
-                    }
+                    ShowNotification("Please close all opened files from the directory before deleting it.");
+                    return;
                 }
-                else
+                else if (IsFileOpened(path))
                 {
-                    foreach (TabInfo tabInfo in tabInfos)
-                    {
-                        if (path.Equals(tabInfo.getOpenedFilePath()))
-                        {
-                            ShowNotification("A file to be deleted is still opened in Pie. Please close it before proceeding with the deletion.");
-                            return;
-                        }
-                    }
+                    ShowNotification("A file to be deleted is still opened in Pie. Please close it before proceeding with the deletion.");
+                    return;
                 }
 
                 DeleteFile(path);
-                castTreeNode.Remove();
+                selectedNode.Remove();
                 directoryNavigationTreeView.Refresh();
             }
         }
@@ -603,34 +576,52 @@ namespace pie
         {
             doNotExpand = true;
 
-            TreeNode selectedNode = directoryNavigationTreeView.SelectedNode;
+            TreeNode selectedNode = directoryNavigationTreeView.SelectedNode != null ? directoryNavigationTreeView.SelectedNode : directoryNavigationTreeView.Nodes[0]; // Create file as direct child of the root node if no node is selected
 
-            if (selectedNode == null)
-            {
-                selectedNode = directoryNavigationTreeView.Nodes[0]; // Create file as direct child of the root node if no node is selected
-            }
-
-            KryptonTreeNode castTreeNode = (KryptonTreeNode)selectedNode;
             KryptonTreeNode newFileNode = new KryptonTreeNode();
             newFileNode.ImageKey = "file.png";
             newFileNode.SelectedImageKey = "file.png";
 
-            if (castTreeNode.ImageKey.Equals("file.png"))
+            if (selectedNode.ImageKey.Equals("file.png"))
             {
-                castTreeNode = (KryptonTreeNode)castTreeNode.Parent;
+                selectedNode = (KryptonTreeNode)selectedNode.Parent;
             }
 
-            newFolderName = castTreeNode.Tag.ToString();
+            newFolderName = selectedNode.Tag.ToString();
 
-            castTreeNode.Nodes.Add(newFileNode);
-            castTreeNode.Expand();
+            selectedNode.Nodes.Add(newFileNode);
+            selectedNode.Expand();
 
             dirNavModificationType = DirNavModificationType.CREATE_FILE;
 
             newFileNode.BeginEdit();
         }
 
-        #endregion
+        private bool IsFileFromDirectoryOpened(string folderPath)
+        {
+            foreach (TabInfo tabInfo in tabInfos)
+            {
+                if (tabInfo.getOpenedFilePath() != null && (folderPath + "\\").Equals(parsingService.GetFolderName(tabInfo.getOpenedFilePath())))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool IsFileOpened(string filePath)
+        {
+            foreach (TabInfo tabInfo in tabInfos)
+            {
+                if (filePath.Equals(tabInfo.getOpenedFilePath()))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         private void TaskItem_Click(object sender, EventArgs e)
         {
@@ -3755,14 +3746,11 @@ namespace pie
             }
             else if (dirNavModificationType.Equals(DirNavModificationType.RENAME_DIRECTORY))
             {
-                foreach (TabInfo tabInfo in tabInfos)
+                if (IsFileFromDirectoryOpened(newFolderName))
                 {
-                    if (tabInfo.getOpenedFilePath() != null && (newFolderName + "\\").Equals(parsingService.GetFolderName(tabInfo.getOpenedFilePath())))
-                    {
-                        ShowNotification("Please close all opened files from the directory before renaming it.");
-                        e.CancelEdit = true;
-                        return;
-                    }
+                    ShowNotification("Please close all opened files from the directory before renaming it.");
+                    e.CancelEdit = true;
+                    return;
                 }
 
                 dirNavModificationType = DirNavModificationType.NONE;

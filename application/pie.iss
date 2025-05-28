@@ -55,6 +55,8 @@ var
   DotNetVersionString: String;
   major, minor, patch: Integer;
   firstDotPos, secondDotPos, thirdDotPos: Integer;
+  userResponse: Integer;
+  ErrorCode: Integer;
 begin
   Result := False;
 
@@ -65,69 +67,48 @@ begin
     DotNetVersionString) then
   begin
     // Expected format: "8.0.x.y" or "8.0.x"
-    // We need to parse this string to get the patch version.
-
-    // Find the first dot
     firstDotPos := Pos('.', DotNetVersionString);
-    if firstDotPos = 0 then
-    begin
-      // No dots found, invalid version string for our expected format
-      MsgBox('Invalid .NET Host Version string (no first dot): ' + DotNetVersionString, mbError, MB_OK);
-      Exit;
-    end;
+    if firstDotPos = 0 then Exit;
 
-    // Extract major version
     major := StrToIntDef(Copy(DotNetVersionString, 1, firstDotPos - 1), 0);
 
-    // Find the second dot (starting search after the first dot)
     secondDotPos := Pos('.', Copy(DotNetVersionString, firstDotPos + 1, Length(DotNetVersionString)));
     if secondDotPos = 0 then
     begin
-      // Only one dot found (e.g., "8.0"), so minor is the rest, patch is 0
       minor := StrToIntDef(Copy(DotNetVersionString, firstDotPos + 1, Length(DotNetVersionString)), 0);
-      patch := 0; // Patch is 0 if no second dot indicating it
-      thirdDotPos := 0; // No third dot
+      patch := 0;
     end
     else
     begin
-      // Adjust secondDotPos to be relative to the original string
       secondDotPos := firstDotPos + secondDotPos;
-      // Extract minor version
       minor := StrToIntDef(Copy(DotNetVersionString, firstDotPos + 1, secondDotPos - (firstDotPos + 1)), 0);
 
-      // Find the third dot (starting search after the second dot)
       thirdDotPos := Pos('.', Copy(DotNetVersionString, secondDotPos + 1, Length(DotNetVersionString)));
       if thirdDotPos = 0 then
-      begin
-        // No third dot found (e.g., "8.0.13"), patch is the rest
-        patch := StrToIntDef(Copy(DotNetVersionString, secondDotPos + 1, Length(DotNetVersionString)), 0);
-      end
+        patch := StrToIntDef(Copy(DotNetVersionString, secondDotPos + 1, Length(DotNetVersionString)), 0)
       else
       begin
-        // Adjust thirdDotPos to be relative to the original string
         thirdDotPos := secondDotPos + thirdDotPos;
-        // Extract patch number (from second dot to third dot)
         patch := StrToIntDef(Copy(DotNetVersionString, secondDotPos + 1, thirdDotPos - (secondDotPos + 1)), 0);
       end;
     end;
 
-
-    // Debugging output (keep this while testing!)
-    MsgBox('Detected .NET Host Version: ' + DotNetVersionString + #13#10 +
-           'Parsed: Major=' + IntToStr(major) + ', Minor=' + IntToStr(minor) + ', Patch=' + IntToStr(patch) + #13#10 +
-           'Required: Major=8, Minor=0, MinPatch=' + IntToStr(minPatch), mbInformation, MB_OK);
-
-
     // Check if it's .NET 8.0.x and the patch is sufficient
     if (major = 8) and (minor = 0) and (patch >= minPatch) then
-    begin
       Result := True;
-    end;
-  end
-  else
+  end;
+
+  if not Result then
   begin
-    // Debugging output
-    MsgBox('Could not read .NET Host Version from registry path: SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedhost\Version.', mbError, MB_OK);
+    userResponse := MsgBox(
+      '.NET 8.0 with patch version at least ' + IntToStr(minPatch) + ' is required.' + #13#10 +
+      'Would you like to download it now?', 
+      mbConfirmation, MB_YESNO);
+
+    if userResponse = IDYES then
+    begin
+      ShellExec('open', 'https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.410-windows-x64-installer', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
+    end;
   end;
 end;
 
