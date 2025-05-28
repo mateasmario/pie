@@ -1681,6 +1681,7 @@ namespace pie
                 input.ActiveTheme = activeTheme;
                 input.EditorProperties = editorProperties;
                 input.MainForm = this;
+                findReplaceForm.Input = input;
 
                 findReplaceForm.ShowDialog();
                 isFindReplaceDialogShown = false;
