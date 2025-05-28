@@ -97,19 +97,6 @@ begin
     if (major = 8) and (minor = 0) and (patch >= minPatch) then
       Result := True;
   end;
-
-  if not Result then
-  begin
-    userResponse := MsgBox(
-      '.NET 8.0 with patch version at least ' + IntToStr(minPatch) + ' is required.' + #13#10 +
-      'Would you like to download it now?', 
-      mbConfirmation, MB_YESNO);
-
-    if userResponse = IDYES then
-    begin
-      ShellExec('open', 'https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.410-windows-x64-installer', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
-    end;
-  end;
 end;
 
 function IsVCRedistInstalled: Boolean;

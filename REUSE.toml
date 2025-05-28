@@ -4,31 +4,31 @@
 version = 1
 
 [[annotations]]
-path = ["Forms/**/*.Designer.cs", "Forms/**/*.resx"]
+path = ["application/Forms/**/*.Designer.cs", "application/Forms/**/*.resx"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
 SPDX-License-Identifier = "GPL-3.0-or-later"
 
 [[annotations]]
-path = ["Icons/**"]
+path = ["application/Icons/**"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
 SPDX-License-Identifier = "GPL-3.0-or-later"
 
 [[annotations]]
-path = ["Properties/**"]
+path = ["application/Properties/**"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
 SPDX-License-Identifier = "GPL-3.0-or-later"
 
 [[annotations]]
-path = ["Resources/**"]
+path = ["application/Resources/**"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
 SPDX-License-Identifier = "GPL-3.0-or-later"
 
 [[annotations]]
-path = ["README.md", "pie.ico", "pie.sln", "pie.csproj", "pie.csproj.SdkResolver.1981936763.proj", "pie.csproj.user", ".gitignore", "App.config", "app.manifest", "packages.config"]
+path = ["README.md", "application/pie.ico", "application/pie.sln", "application/pie.csproj", "plugin/plugin.csproj",  "application/pie.csproj.SdkResolver.1981936763.proj", "application/pie.csproj.user", "plugin/plugin.csproj.user", ".gitignore", "application/App.config", "application/app.manifest", "application/packages.config"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
 SPDX-License-Identifier = "GPL-3.0-or-later"
