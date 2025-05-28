@@ -46,11 +46,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
@@ -58,8 +62,8 @@
               "Title": "MainForm.cs [Design]",
               "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
               "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
-              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs [Design]*",
-              "RelativeToolTip": "application\\Forms\\MainForm.cs [Design]*",
+              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs [Design]",
+              "RelativeToolTip": "application\\Forms\\MainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-27T20:53:04.328Z",
               "EditorCaption": " [Design]"
@@ -130,9 +134,9 @@
               "Title": "MainForm.cs",
               "DocumentMoniker": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
               "RelativeDocumentMoniker": "application\\Forms\\MainForm.cs",
-              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs*",
-              "RelativeToolTip": "application\\Forms\\MainForm.cs*",
-              "ViewState": "AgIAANIBAAAAAAAAAAAUwN8BAACoAAAAAAAAAA==",
+              "ToolTip": "C:\\git\\pie\\application\\Forms\\MainForm.cs",
+              "RelativeToolTip": "application\\Forms\\MainForm.cs",
+              "ViewState": "AgIAAEcOAAAAAAAAAAAqwGEOAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-26T17:10:44.475Z",
               "EditorCaption": ""
