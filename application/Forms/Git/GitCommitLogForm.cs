@@ -1,13 +1,6 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
-using pie.Classes;
-using pie.Services;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-
 /**
  * This namespace provides access to the ObjectListView control.
  * Licensed under GNU General Public License (GPL 3.0). For more info, see https://www.gnu.org/licenses/gpl-3.0.html 
@@ -16,20 +9,25 @@ using System.Linq;
  * Copyright 2006-2016 Bright Ideas Software
  */
 using BrightIdeasSoftware;
-
-/**
- * LibGit2Sharp is used for integrating several advanced Git functionalities into pie.
- * 
- * Copyright (c) LibGit2Sharp contributors
- */
-using LibGit2Sharp;
-
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using Krypton.Toolkit;
+/**
+ * LibGit2Sharp is used for integrating several advanced Git functionalities into pie.
+ * 
+ * Copyright (c) LibGit2Sharp contributors
+ */
+using LibGit2Sharp;
+using pie.Classes;
+using pie.Services;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace pie
 {
@@ -42,6 +40,17 @@ namespace pie
         public GitCommitLogForm()
         {
             InitializeComponent();
+            DoubleBuffered = true;
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         private void GitCommitLogForm_Load(object sender, EventArgs e)

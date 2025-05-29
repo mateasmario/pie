@@ -4,7 +4,7 @@
 #define MyAppName "pie"
 #define MyAppVersion "1.0.0"
 #define MyAppPublisher "Mario-Mihai Mateaș"
-#define MyAppURL "https://www.docsbymario.com"
+#define MyAppURL "http://bwxor.com"
 #define MyAppExeName "pie.exe"
 
 [Setup]

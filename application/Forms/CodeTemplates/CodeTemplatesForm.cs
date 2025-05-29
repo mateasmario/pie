@@ -38,6 +38,7 @@ namespace pie.Forms.CodeTemplates
         public CodeTemplatesForm()
         {
             InitializeComponent();
+            DoubleBuffered = true;
 
             template1CheckButton.Click += kryptonCheckButton_Click;
             template2CheckButton.Click += kryptonCheckButton_Click;
@@ -51,6 +52,16 @@ namespace pie.Forms.CodeTemplates
             template9CheckButton.Click += kryptonCheckButton_Click;
 
             Output = new CodeTemplatesFormOutput();
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         private void CodeTemplatesForm_Load(object sender, EventArgs e)

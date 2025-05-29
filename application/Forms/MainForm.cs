@@ -162,11 +162,21 @@ namespace pie
              * Temporal coupling between ProcessCommandLineArguments and the initialization methods.
              * ProcessCommandLineArguments is called after the configuration data is loaded from files and the dynamic design is set.
              */
+            EnableDoubleBuffering();
             InitializeComponent();
             GetConfigurationDataFromFiles();
             InitializeControls();
             ProcessCommandLineArguments();
             InitializeContextMenus();
+        }
+
+        private void EnableDoubleBuffering()
+        {
+            DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.UpdateStyles();
         }
 
         private void GetConfigurationDataFromFiles()
@@ -215,6 +225,15 @@ namespace pie
             }
         }
 
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
         private void CopyConfigToAppData(string fileName)
         {
             if (!File.Exists(System.IO.Path.Combine(SpecialFolders.Config, fileName)))

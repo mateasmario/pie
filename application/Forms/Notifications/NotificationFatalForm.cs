@@ -1,16 +1,16 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
-using System;
-using System.Drawing;
-using pie.Classes;
-
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using Krypton.Toolkit;
+using pie.Classes;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace pie
 {
@@ -21,6 +21,7 @@ namespace pie
         public NotificationFatalForm()
         {
             InitializeComponent();
+            DoubleBuffered = true;
 
             okButton.StateCommon.Back.Color1 = Color.FromArgb(240, 0, 0);
             okButton.StateCommon.Back.Color2 = Color.FromArgb(240, 0, 0);
@@ -51,6 +52,16 @@ namespace pie
 
             okButton.StateTracking.Back.ColorStyle = PaletteColorStyle.Solid;
             okButton.StateTracking.Border.ColorStyle = PaletteColorStyle.Solid;
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         private void okButton_Click(object sender, System.EventArgs e)

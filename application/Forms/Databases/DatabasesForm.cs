@@ -29,8 +29,18 @@ namespace pie.Forms.Databases
         public DatabasesForm()
         {
             InitializeComponent();
-
+            DoubleBuffered = true;
             Output = new DatabasesFormOutput();
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         private void DatabasesForm_Load(object sender, EventArgs e)

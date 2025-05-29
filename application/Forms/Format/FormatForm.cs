@@ -1,11 +1,6 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
-using System;
-using System.Text.RegularExpressions;
-using pie.Classes;
-using pie.Services;
-
 /**
  * This namespace provides access to the ObjectListView control.
  * Licensed under GNU General Public License (GPL 3.0). For more info, see https://www.gnu.org/licenses/gpl-3.0.html 
@@ -14,13 +9,17 @@ using pie.Services;
  * Copyright 2006-2016 Bright Ideas Software
  */
 using BrightIdeasSoftware;
-
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using Krypton.Toolkit;
+using pie.Classes;
+using pie.Services;
+using System;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace pie.Forms.Format
 {
@@ -34,7 +33,18 @@ namespace pie.Forms.Format
         public FormatForm()
         {
             InitializeComponent();
+            DoubleBuffered = true;
             Output = new FormatFormOutput();
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         private void FormatForm_Load(object sender, EventArgs e)

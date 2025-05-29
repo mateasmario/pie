@@ -27,6 +27,17 @@ namespace pie.Forms.Theme
         public DesignerForm()
         {
             InitializeComponent();
+            DoubleBuffered = true;
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
         }
 
         private void DesignerForm_Load(object sender, EventArgs e)

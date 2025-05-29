@@ -29,97 +29,107 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GitCloneForm));
-            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
-            this.cloneButton = new Krypton.Toolkit.KryptonButton();
-            this.cloneIntoLabel = new Krypton.Toolkit.KryptonLabel();
-            this.repositoryURLLabel = new Krypton.Toolkit.KryptonLabel();
-            this.cloneIntoTextBox = new Krypton.Toolkit.KryptonTextBox();
-            this.repositoryURLTextBox = new Krypton.Toolkit.KryptonTextBox();
-            this.browseButton = new Krypton.Toolkit.KryptonButton();
-            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
-            this.mainPanel.SuspendLayout();
-            this.SuspendLayout();
+            mainPanel = new Krypton.Toolkit.KryptonPanel();
+            cloneButton = new Krypton.Toolkit.KryptonButton();
+            cloneIntoLabel = new Krypton.Toolkit.KryptonLabel();
+            repositoryURLLabel = new Krypton.Toolkit.KryptonLabel();
+            cloneIntoTextBox = new Krypton.Toolkit.KryptonTextBox();
+            repositoryURLTextBox = new Krypton.Toolkit.KryptonTextBox();
+            browseButton = new Krypton.Toolkit.KryptonButton();
+            ((System.ComponentModel.ISupportInitialize)mainPanel).BeginInit();
+            mainPanel.SuspendLayout();
+            SuspendLayout();
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.cloneButton);
-            this.mainPanel.Controls.Add(this.cloneIntoLabel);
-            this.mainPanel.Controls.Add(this.repositoryURLLabel);
-            this.mainPanel.Controls.Add(this.cloneIntoTextBox);
-            this.mainPanel.Controls.Add(this.repositoryURLTextBox);
-            this.mainPanel.Controls.Add(this.browseButton);
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 0);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(550, 148);
-            this.mainPanel.TabIndex = 3;
+            mainPanel.Controls.Add(cloneButton);
+            mainPanel.Controls.Add(cloneIntoLabel);
+            mainPanel.Controls.Add(repositoryURLLabel);
+            mainPanel.Controls.Add(cloneIntoTextBox);
+            mainPanel.Controls.Add(repositoryURLTextBox);
+            mainPanel.Controls.Add(browseButton);
+            mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            mainPanel.Location = new System.Drawing.Point(0, 0);
+            mainPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mainPanel.Name = "mainPanel";
+            mainPanel.Size = new System.Drawing.Size(637, 171);
+            mainPanel.TabIndex = 3;
             // 
             // cloneButton
             // 
-            this.cloneButton.Location = new System.Drawing.Point(467, 115);
-            this.cloneButton.Name = "cloneButton";
-            this.cloneButton.Size = new System.Drawing.Size(76, 25);
-            this.cloneButton.TabIndex = 6;
-            this.cloneButton.Values.Text = "Clone";
-            this.cloneButton.Click += new System.EventHandler(this.kryptonButton2_Click);
+            cloneButton.Location = new System.Drawing.Point(545, 133);
+            cloneButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cloneButton.Name = "cloneButton";
+            cloneButton.Size = new System.Drawing.Size(89, 29);
+            cloneButton.TabIndex = 6;
+            cloneButton.Values.DropDownArrowColor = System.Drawing.Color.Empty;
+            cloneButton.Values.Text = "Clone";
+            cloneButton.Click += kryptonButton2_Click;
             // 
             // cloneIntoLabel
             // 
-            this.cloneIntoLabel.Location = new System.Drawing.Point(7, 52);
-            this.cloneIntoLabel.Name = "cloneIntoLabel";
-            this.cloneIntoLabel.Size = new System.Drawing.Size(67, 20);
-            this.cloneIntoLabel.TabIndex = 5;
-            this.cloneIntoLabel.Values.Text = "Clone into";
+            cloneIntoLabel.Location = new System.Drawing.Point(8, 60);
+            cloneIntoLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cloneIntoLabel.Name = "cloneIntoLabel";
+            cloneIntoLabel.Size = new System.Drawing.Size(67, 20);
+            cloneIntoLabel.TabIndex = 5;
+            cloneIntoLabel.Values.Text = "Clone into";
             // 
             // repositoryURLLabel
             // 
-            this.repositoryURLLabel.Location = new System.Drawing.Point(7, 5);
-            this.repositoryURLLabel.Name = "repositoryURLLabel";
-            this.repositoryURLLabel.Size = new System.Drawing.Size(94, 20);
-            this.repositoryURLLabel.TabIndex = 4;
-            this.repositoryURLLabel.Values.Text = "Repository URL";
+            repositoryURLLabel.Location = new System.Drawing.Point(8, 6);
+            repositoryURLLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            repositoryURLLabel.Name = "repositoryURLLabel";
+            repositoryURLLabel.Size = new System.Drawing.Size(94, 20);
+            repositoryURLLabel.TabIndex = 4;
+            repositoryURLLabel.Values.Text = "Repository URL";
             // 
             // cloneIntoTextBox
             // 
-            this.cloneIntoTextBox.Location = new System.Drawing.Point(12, 72);
-            this.cloneIntoTextBox.Name = "cloneIntoTextBox";
-            this.cloneIntoTextBox.Size = new System.Drawing.Size(449, 23);
-            this.cloneIntoTextBox.TabIndex = 3;
+            cloneIntoTextBox.Location = new System.Drawing.Point(14, 83);
+            cloneIntoTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cloneIntoTextBox.Name = "cloneIntoTextBox";
+            cloneIntoTextBox.Size = new System.Drawing.Size(524, 23);
+            cloneIntoTextBox.TabIndex = 3;
             // 
             // repositoryURLTextBox
             // 
-            this.repositoryURLTextBox.Location = new System.Drawing.Point(12, 25);
-            this.repositoryURLTextBox.Name = "repositoryURLTextBox";
-            this.repositoryURLTextBox.Size = new System.Drawing.Size(449, 23);
-            this.repositoryURLTextBox.TabIndex = 2;
+            repositoryURLTextBox.Location = new System.Drawing.Point(14, 29);
+            repositoryURLTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            repositoryURLTextBox.Name = "repositoryURLTextBox";
+            repositoryURLTextBox.Size = new System.Drawing.Size(524, 23);
+            repositoryURLTextBox.TabIndex = 2;
             // 
             // browseButton
             // 
-            this.browseButton.Location = new System.Drawing.Point(467, 72);
-            this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(76, 25);
-            this.browseButton.TabIndex = 1;
-            this.browseButton.Values.Text = "Browse";
-            this.browseButton.Click += new System.EventHandler(this.kryptonButton1_Click_1);
+            browseButton.Location = new System.Drawing.Point(545, 83);
+            browseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            browseButton.Name = "browseButton";
+            browseButton.Size = new System.Drawing.Size(89, 29);
+            browseButton.TabIndex = 1;
+            browseButton.Values.DropDownArrowColor = System.Drawing.Color.Empty;
+            browseButton.Values.Text = "Browse";
+            browseButton.Click += kryptonButton1_Click_1;
             // 
             // GitCloneForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 148);
-            this.Controls.Add(this.mainPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "GitCloneForm";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Git Clone";
-            this.Load += new System.EventHandler(this.GitCloneForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
-            this.mainPanel.ResumeLayout(false);
-            this.mainPanel.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(637, 171);
+            Controls.Add(mainPanel);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "GitCloneForm";
+            ShowIcon = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Git Clone";
+            Load += GitCloneForm_Load;
+            ((System.ComponentModel.ISupportInitialize)mainPanel).EndInit();
+            mainPanel.ResumeLayout(false);
+            mainPanel.PerformLayout();
+            ResumeLayout(false);
 
         }
 

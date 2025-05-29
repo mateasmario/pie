@@ -1,17 +1,18 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
-using System;
-using System.Windows.Forms;
-using pie.Classes;
-using pie.Services;
-
 /** 
  * Krypton Suite's Standard Toolkit was often used in order to design the .NET controls found inside this application.
  * 
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using Krypton.Toolkit;
+using pie.Classes;
+using pie.Services;
+using ScintillaNET;
+using System;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace pie.Forms.Other
 {
@@ -38,6 +39,12 @@ namespace pie.Forms.Other
         public FindReplaceForm()
         {
             InitializeComponent();
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            this.BringToFront();
+            base.OnShown(e);
         }
 
         private void FindReplaceForm_Load(object sender, EventArgs e)
