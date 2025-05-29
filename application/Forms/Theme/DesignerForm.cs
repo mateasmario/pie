@@ -12,6 +12,8 @@ using pie.Classes;
  * Copyright (c) 2017 - 2022, Krypton Suite
 */
 using Krypton.Toolkit;
+using System.IO;
+using pie.Constants;
 
 namespace pie.Forms.Theme
 {
@@ -149,7 +151,7 @@ namespace pie.Forms.Theme
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            configurationService.WriteFilesToDirectory("config/themes", Input.ThemeInfos, "json");
+            configurationService.WriteFilesToDirectory(SpecialFolders.Themes, Input.ThemeInfos, "json");
             this.Close();
         }
 
