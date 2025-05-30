@@ -26,7 +26,8 @@ public class PluginTask
 
 public class PluginTaskInput
 {
+    public PluginContext Context { get; set; }
     public Metadata Metadata { get; set; }
     public List<Tab> Tabs { get; set; }
-    public PluginContext Context { get; set; }
+    public string OpenedDirectory { get; set; }
 }

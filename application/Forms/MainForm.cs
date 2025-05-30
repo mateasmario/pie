@@ -487,7 +487,20 @@ namespace pie
             renameFileItem.Text = "Rename File";
             items.Items.Add(renameFileItem);
 
+            KryptonContextMenuItem refreshItem = new KryptonContextMenuItem();
+            refreshItem.Click += RefreshItem_Click;
+            refreshItem.Text = "Refresh";
+            items.Items.Add(refreshItem);
+
             directoryContextMenu.Items.Add(items);
+        }
+
+        private void RefreshItem_Click(object sender, EventArgs e)
+        {
+            if (openedFolder != null)
+            {
+                NavigateToPath(openedFolder);
+            }
         }
 
         #endregion
@@ -656,9 +669,10 @@ namespace pie
                         {
                             PluginTaskInput pluginTaskInput = new PluginTaskInput();
 
+                            pluginTaskInput.Context = pluginContext;
                             pluginTaskInput.Metadata = ProcessPluginInputMetadata();
                             pluginTaskInput.Tabs = ProcessPluginInputTabs();
-                            pluginTaskInput.Context = pluginContext;
+                            pluginTaskInput.OpenedDirectory = openedFolder;
 
                             PluginTaskOutput pluginTaskOutput = plugin.InvokeTask(task.Value, pluginTaskInput);
 
@@ -1501,6 +1515,13 @@ namespace pie
             }
 
             ConEmuSession conEmuSession = conEmuControl.Start(conEmuStartInfo);
+
+            var refreshTimer = new System.Windows.Forms.Timer();
+            refreshTimer.Interval = 100; // ms
+            refreshTimer.Tick += (sender, args) => {
+                conEmuControl.Update();
+            };
+            refreshTimer.Start();
 
             conEmuControl.BackColor = Color.White;
             conEmuControl.ForeColor = Color.Red;
