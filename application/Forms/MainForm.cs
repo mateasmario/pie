@@ -1,6 +1,19 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Shapes;
+
 /**
  * AutocompleteMenuNS is a namespace that comes from AutoCompleteMenu-ScintillaNet. It is used for various Autocomplete suggestions while writing code.
  * 
@@ -66,18 +79,6 @@ using plugin.Classes;
  * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
 */
 using ScintillaNET;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Shapes;
 
 namespace pie
 {
@@ -127,6 +128,7 @@ namespace pie
         private bool doNotExpand;
         private int selectedRepositoryIndex;
         private bool doNotReselect;
+        private bool doNotUpdateDirNav;
 
         public string[] Args;
 
@@ -2518,6 +2520,11 @@ namespace pie
 
         private void UpdateGitRepositoryInfo()
         {
+            UpdateGitRepositoryInfo(true);
+        }
+
+        private void UpdateGitRepositoryInfo(bool updateDirNav)
+        {
             if (!openedGitRepository)
             {
                 return;
@@ -2551,12 +2558,22 @@ namespace pie
 
                 if (selectedBranch != null && branch.FriendlyName == selectedBranch)
                 {
+                    if (!updateDirNav)
+                    {
+                        doNotUpdateDirNav = true;
+                    }
+
                     gitBranchesComboBox.SelectedItem = gitBranchesComboBox.Items[gitBranchesComboBox.Items.Count - 1];
                 }
             }
 
             if (gitBranchesComboBox.Items.Count > 0 && gitBranchesComboBox.SelectedItem == null)
             {
+                if (!updateDirNav)
+                {
+                    doNotUpdateDirNav = true;
+                }
+
                 gitBranchesComboBox.SelectedIndex = 0;
             }
         }
@@ -2778,7 +2795,7 @@ namespace pie
 
                 try
                 {
-                    repository.CheckoutPaths("HEAD", paths, new CheckoutOptions { CheckoutModifiers = CheckoutModifiers.Force });
+                    repository.CheckoutPaths(selectedBranch.FriendlyName, paths, new CheckoutOptions { CheckoutModifiers = CheckoutModifiers.Force });
                     doNotShowBranchChangeNotification = true;
                     UpdateGitRepositoryInfo();
 
@@ -3039,7 +3056,14 @@ namespace pie
                     doNotTriggerBranchChangeEvent = false;
                 }
 
-                NavigateToPath(openedFolder, false);
+                if (doNotUpdateDirNav)
+                {
+                    doNotUpdateDirNav = false;
+                }
+                else
+                {
+                    NavigateToPath(openedFolder, false);
+                }
             }
             else
             {
@@ -3939,28 +3963,42 @@ namespace pie
         {
             Directory.CreateDirectory(src);
             doNotShowBranchChangeNotification = true;
-            UpdateGitRepositoryInfo();
+            UpdateGitRepositoryInfo(false);
         }
 
         private void CreateNewFile(string src)
         {
             File.Create(src).Close();
             doNotShowBranchChangeNotification = true;
-            UpdateGitRepositoryInfo();
+            UpdateGitRepositoryInfo(false);
         }
 
         private void RenameFile(string src, string dest)
         {
             File.Move(src, dest);
             doNotShowBranchChangeNotification = true;
-            UpdateGitRepositoryInfo();
+            UpdateGitRepositoryInfo(false);
         }
 
         private void RenameDirectory(string src, string dest)
         {
             Directory.Move(src, dest);
             doNotShowBranchChangeNotification = true;
-            UpdateGitRepositoryInfo();
+            UpdateGitRepositoryInfo(false);
+        }
+
+        private void DeleteFile(string path)
+        {
+            try
+            {
+                File.Delete(path);
+                doNotShowBranchChangeNotification = true;
+                UpdateGitRepositoryInfo(false);
+            }
+            catch (Exception)
+            {
+                ShowNotification("Could not delete specified file. Make sure you have the appropiate permissions and the file is not being used by another process.");
+            }
         }
 
         private void directoryNavigationTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -3972,20 +4010,6 @@ namespace pie
                 {
                     directoryNavigationTreeView.SelectedNode = clickedNode;
                 }
-            }
-        }
-
-        private void DeleteFile(string path)
-        {
-            try
-            {
-                File.Delete(path);
-                doNotShowBranchChangeNotification = true;
-                UpdateGitRepositoryInfo();
-            }
-            catch (Exception)
-            {
-                ShowNotification("Could not delete specified file. Make sure you have the appropiate permissions and the file is not being used by another process.");
             }
         }
 
