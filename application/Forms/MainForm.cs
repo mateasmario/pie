@@ -73,6 +73,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -124,6 +125,8 @@ namespace pie
         private DirNavModificationType dirNavModificationType;
         private string newFolderName;
         private bool doNotExpand;
+        private int selectedRepositoryIndex;
+        private bool doNotReselect;
 
         public string[] Args;
 
@@ -2466,6 +2469,33 @@ namespace pie
                 if (gitBranchesComboBox.Items.Count > 0)
                 {
                     gitBranchesComboBox.SelectedIndex = selectedBranchIndex;
+
+                    if (selectedBranch == null)
+                    {
+                        foreach (var branch in repository.Branches)
+                        {
+                            if (branch.FriendlyName == gitBranchesComboBox.Text)
+                            {
+                                selectedBranch = branch;
+                                Commands.Checkout(repository, branch);
+                            }
+                        }
+                    }
+                }
+
+                try
+                {
+                    Commands.Fetch(repository, "origin", new string[0], new FetchOptions
+                    {
+                        CredentialsProvider = (_url, _user, _cred) => new UsernamePasswordCredentials
+                        {
+                            Username = gitCredentials.Username,
+                            Password = gitCredentials.Password
+                        }
+                    }, null);
+                } catch(Exception ex)
+                {
+                    // Do nothing, as the repo may not be remote
                 }
             }
         }
@@ -2817,7 +2847,7 @@ namespace pie
             {
                 var branch = selectedBranch;
 
-                if (true)
+                if (repository.Network.Remotes.Any())
                 {
                     if (string.IsNullOrEmpty(gitCredentials.Username) || string.IsNullOrEmpty(gitCredentials.Password))
                     {
@@ -2848,9 +2878,14 @@ namespace pie
                             return;
                         }
 
+                        string branchName = gitBranchesComboBox.SelectedItem.ToString();
+                        Branch remoteBranch = repository.Branches[$"origin/{branchName}"];
+
+                        if (selectedBranch != null && remoteBranch != null && !selectedBranch.IsTracking) {
                         repository.Branches.Update(repository.Branches[gitBranchesComboBox.SelectedItem.ToString()],
                             b => b.Remote = remote.Name,
-                            b => b.UpstreamBranch = repository.Branches[gitBranchesComboBox.SelectedItem.ToString()].CanonicalName);
+                            b => b.UpstreamBranch = remoteBranch.CanonicalName);
+                        }
 
                         // Push the branch to the remote                        
                         var pushOptions = new PushOptions();
@@ -2866,11 +2901,9 @@ namespace pie
                         {
                             doNotShowBranchChangeNotification = true;
 
-                            string branchName = gitBranchesComboBox.SelectedItem.ToString();
-
                             Task.Run(() =>
                             {
-                                repository.Network.Push(repository.Branches[branchName], pushOptions);
+                                repository.Network.Push(remote, $"refs/heads/{branchName}:refs/heads/{branchName}", pushOptions);
                             }).Wait();
 
                             ShowNotification("Successfully pushed to remote.");
@@ -2885,8 +2918,27 @@ namespace pie
                 }
                 else
                 {
-                    ShowNotification("Repository is not remote. Click 'OK' to see how to add the repository on GitHub");
-                    Process.Start("https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-using-git");
+                    GitConnectToRemoteForm gitConnectToRemoteForm = new GitConnectToRemoteForm();
+
+                    GitConnectToRemoteFormInput gitConnectToRemoteFormInput = new GitConnectToRemoteFormInput();
+                    gitConnectToRemoteFormInput.Palette = KryptonCustomPaletteBase;
+                    gitConnectToRemoteFormInput.EditorProperties = editorProperties;
+                    gitConnectToRemoteForm.Input = gitConnectToRemoteFormInput;
+
+                    gitConnectToRemoteForm.ShowDialog();
+
+                    if (gitConnectToRemoteForm.Output != null)
+                    {
+                        try
+                        {
+                            repository.Network.Remotes.Add("origin", gitConnectToRemoteForm.Output.RepositoryUrl);
+                            GitPush();
+                        }
+                        catch (Exception)
+                        {
+                            ShowNotification("There was a problem connecting your repository to remote. Please check the URL and try again.");
+                        }
+                    }
                 }
             }
             else
@@ -2904,14 +2956,18 @@ namespace pie
         {
             NotificationYesNoCancelFormOutput notificationYesNoCancelFormOutput = null;
 
+            if (doNotReselect)
+            {
+                doNotReselect = false;
+                return;
+            }
+
             if (doNotTriggerBranchChangeEvent)
             {
                 doNotTriggerBranchChangeEvent = false;
             }
             else if (repository != null)
             {
-                int selectedIndex = gitBranchesComboBox.SelectedIndex;
-
                 if (doNotShowBranchChangeNotification)
                 {
                     doNotShowBranchChangeNotification = false;
@@ -2931,18 +2987,14 @@ namespace pie
                     {
                         if (branch.FriendlyName == gitBranchesComboBox.Text)
                         {
-                            selectedBranch = branch;
-                            selectedBranchIndex = gitBranchesComboBox.SelectedIndex;
-
-                            CheckoutOptions checkoutOptions = new CheckoutOptions();
-                            Branch currentBranch = Commands.Checkout(repository, branch, new CheckoutOptions() { CheckoutModifiers = CheckoutModifiers.Force });
+                            string branchNameToCheckout;
 
                             if (gitBranchesComboBox.SelectedItem.ToString().StartsWith("origin/"))
                             {
                                 // Check if current local branch already exists
                                 string localBranchFriendlyName = gitBranchesComboBox.SelectedItem.ToString().Remove(0, 7);
 
-                                if (localBranchFriendlyName == null)
+                                if (repository.Branches[localBranchFriendlyName] == null)
                                 {
                                     // Remove the "origin/" from remote branch name
                                     doNotShowBranchChangeNotification = true;
@@ -2952,18 +3004,29 @@ namespace pie
                                 }
 
                                 int index = 0;
-                                foreach (string branchName in gitBranchesComboBox.Items)
+                                foreach (string b in gitBranchesComboBox.Items)
                                 {
-                                    if (branchName == localBranchFriendlyName)
+                                    if (b == localBranchFriendlyName)
                                     {
-                                        doNotShowBranchChangeNotification = true;
+                                        doNotReselect = true;
                                         gitBranchesComboBox.SelectedIndex = index;
                                         break;
                                     }
                                     index++;
                                 }
 
+                                branchNameToCheckout = localBranchFriendlyName;
                             }
+                            else
+                            {
+                                branchNameToCheckout = gitBranchesComboBox.SelectedItem.ToString();
+                            }
+
+                            CheckoutOptions checkoutOptions = new CheckoutOptions();
+                            Branch currentBranch = Commands.Checkout(repository, repository.Branches[branchNameToCheckout], new CheckoutOptions() { CheckoutModifiers = CheckoutModifiers.Force });
+                            selectedBranch = repository.Branches[branchNameToCheckout];
+                            selectedBranchIndex = gitBranchesComboBox.SelectedIndex;
+                            selectedRepositoryIndex = gitBranchesComboBox.SelectedIndex;
                         }
                     }
 
@@ -2972,9 +3035,11 @@ namespace pie
                 else
                 {
                     doNotTriggerBranchChangeEvent = true;
-                    gitBranchesComboBox.SelectedIndex = selectedIndex;
+                    gitBranchesComboBox.SelectedIndex = selectedRepositoryIndex;
                     doNotTriggerBranchChangeEvent = false;
                 }
+
+                NavigateToPath(openedFolder, false);
             }
             else
             {
@@ -3068,58 +3133,96 @@ namespace pie
                         GitPull();
                     }
                 }
-                else
+                else if (string.IsNullOrEmpty(gitCredentials.Username) || string.IsNullOrEmpty(gitCredentials.Password))
                 {
-                    if (string.IsNullOrEmpty(gitCredentials.Username) || string.IsNullOrEmpty(gitCredentials.Password))
+                    GitPushCredentialsForm gitPushCredentialsForm = new GitPushCredentialsForm();
+
+                    GitPushCredentialsFormInput gitPushCredentialsFormInput = new GitPushCredentialsFormInput();
+                    gitPushCredentialsFormInput.GitCredentials = gitCredentials;
+                    gitPushCredentialsFormInput.Palette = KryptonCustomPaletteBase;
+                    gitPushCredentialsFormInput.EditorProperties = editorProperties;
+
+                    gitPushCredentialsForm.Input = gitPushCredentialsFormInput;
+
+                    gitPushCredentialsForm.ShowDialog();
+
+                    if (gitPushCredentialsForm.Output.Saved)
                     {
-                        GitPushCredentialsForm gitPushCredentialsForm = new GitPushCredentialsForm();
-
-                        GitPushCredentialsFormInput gitPushCredentialsFormInput = new GitPushCredentialsFormInput();
-                        gitPushCredentialsFormInput.GitCredentials = gitCredentials;
-                        gitPushCredentialsFormInput.Palette = KryptonCustomPaletteBase;
-                        gitPushCredentialsFormInput.EditorProperties = editorProperties;
-
-                        gitPushCredentialsForm.Input = gitPushCredentialsFormInput;
-
-                        gitPushCredentialsForm.ShowDialog();
-
-                        if (gitPushCredentialsForm.Output.Saved)
-                        {
-                            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
-                            GitPull();
-                        }
+                        configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
+                        GitPull();
                     }
-                    else
+                }
+                else if (!repository.Network.Remotes.Any())
+                {
+                    GitConnectToRemoteForm gitConnectToRemoteForm = new GitConnectToRemoteForm();
+
+                    GitConnectToRemoteFormInput gitConnectToRemoteFormInput = new GitConnectToRemoteFormInput();
+                    gitConnectToRemoteFormInput.Palette = KryptonCustomPaletteBase;
+                    gitConnectToRemoteFormInput.EditorProperties = editorProperties;
+                    gitConnectToRemoteForm.Input = gitConnectToRemoteFormInput;
+
+                    gitConnectToRemoteForm.ShowDialog();
+
+                    if (gitConnectToRemoteForm.Output != null)
                     {
-                        var pullOptions = new PullOptions();
-
-                        pullOptions.FetchOptions = new FetchOptions();
-
-                        pullOptions.FetchOptions.CredentialsProvider = new LibGit2Sharp.Handlers.CredentialsHandler(
-                            (_url, _user, _cred) => new UsernamePasswordCredentials()
-                            {
-                                Username = gitCredentials.Username,
-                                Password = gitCredentials.Password
-                            });
-
-                        Signature signature = new Signature(gitCredentials.Name, gitCredentials.Email, DateTime.Now);
-
                         try
                         {
-                            Task.Run(() =>
-                            {
-                                Commands.Pull(repository, signature, pullOptions);
-                            }).Wait();
-
-                            UpdateGitRepositoryInfo();
-                            ShowNotification("Pull successful.");
+                            repository.Network.Remotes.Add("origin", gitConnectToRemoteForm.Output.RepositoryUrl);
+                            GitPull();
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            ShowNotification("There was an error while trying to pull from remote.");
+                            ShowNotification("There was a problem connecting your repository to remote. Please check the URL and try again.");
                         }
                     }
                 }
+                else 
+                {
+                    var pullOptions = new PullOptions();
+
+                    pullOptions.FetchOptions = new FetchOptions();
+
+                    pullOptions.FetchOptions.CredentialsProvider = new LibGit2Sharp.Handlers.CredentialsHandler(
+                        (_url, _user, _cred) => new UsernamePasswordCredentials()
+                        {
+                            Username = gitCredentials.Username,
+                            Password = gitCredentials.Password
+                        });
+
+                    Signature signature = new Signature(gitCredentials.Name, gitCredentials.Email, DateTime.Now);
+
+                    Remote remote = repository.Network.Remotes["origin"];
+                    string branchName = gitBranchesComboBox.SelectedItem.ToString();
+
+                    var checkoutOptions = new CheckoutOptions();
+
+                    Branch currentBranch = repository.Head;
+                    Branch remoteBranch = repository.Branches[$"origin/{branchName}"];
+
+                    if (currentBranch != null && remoteBranch != null && !currentBranch.IsTracking)
+                    {
+                        repository.Branches.Update(currentBranch,
+                            b => b.UpstreamBranch = remoteBranch.CanonicalName);
+                    }
+
+                    try
+                    {
+                        Task.Run(() =>
+                        {
+                            Commands.Fetch(repository, "origin", new string[0], pullOptions.FetchOptions, null);
+                            repository.Merge(remoteBranch, signature);
+                        }).Wait();
+
+                        UpdateGitRepositoryInfo();
+                        ShowNotification("Pull successful.");
+                        NavigateToPath(openedFolder);
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowNotification("There was an error while trying to pull from remote.");
+                    }
+                }
+                
             }
             else
             {
@@ -3251,7 +3354,7 @@ namespace pie
             mainMenuStrip.Renderer = customToolStripRenderer;
         }
 
-        private void NavigateToPath(string path)
+        private void NavigateToPath(string path, bool openRepository)
         {
             ToggleDirectoryNavigator(true);
 
@@ -3269,7 +3372,10 @@ namespace pie
 
             if (Directory.GetDirectories(path).Any(d => parsingService.GetFileName(d).Equals(".git")))
             {
-                OpenRepository(path);
+                if (openRepository)
+                {
+                    OpenRepository(path);
+                }
             }
             else
             {
@@ -3279,6 +3385,11 @@ namespace pie
 
 
             rootNode.Expand();
+        }
+        
+        private void NavigateToPath(string path)
+        {
+            NavigateToPath(path, true);
         }
 
         private void AddItemsToDirectory(KryptonTreeNode node)
