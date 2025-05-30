@@ -46,12 +46,12 @@
             mainPanel.Location = new System.Drawing.Point(0, 0);
             mainPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new System.Drawing.Size(554, 115);
+            mainPanel.Size = new System.Drawing.Size(456, 109);
             mainPanel.TabIndex = 4;
             // 
             // connectButton
             // 
-            connectButton.Location = new System.Drawing.Point(449, 76);
+            connectButton.Location = new System.Drawing.Point(349, 74);
             connectButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             connectButton.Name = "connectButton";
             connectButton.Size = new System.Drawing.Size(89, 29);
@@ -74,14 +74,14 @@
             repositoryURLTextBox.Location = new System.Drawing.Point(14, 29);
             repositoryURLTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             repositoryURLTextBox.Name = "repositoryURLTextBox";
-            repositoryURLTextBox.Size = new System.Drawing.Size(524, 23);
+            repositoryURLTextBox.Size = new System.Drawing.Size(424, 23);
             repositoryURLTextBox.TabIndex = 2;
             // 
             // GitConnectToRemoteForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(554, 115);
+            ClientSize = new System.Drawing.Size(456, 109);
             Controls.Add(mainPanel);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
