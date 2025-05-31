@@ -8,11 +8,21 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Shapes;
+using pie.Classes;
+using pie.Classes.Configuration.FileBased.Impl;
+using pie.Constants;
+using pie.Enums;
+using pie.Forms.CodeTemplates;
+using pie.Forms.Databases;
+using pie.Forms.Format;
+using pie.Forms.Git;
+using pie.Forms.Other;
+using pie.Forms.Theme;
+using pie.Services;
+using plugin.Classes;
 
 /**
  * AutocompleteMenuNS is a namespace that comes from AutoCompleteMenu-ScintillaNet. It is used for various Autocomplete suggestions while writing code.
@@ -61,18 +71,7 @@ using LibGit2Sharp;
  * Copyright (c) 2018-2019, Alexandre Mutel
  */
 using Markdig;
-using pie.Classes;
-using pie.Classes.Configuration.FileBased.Impl;
-using pie.Constants;
-using pie.Enums;
-using pie.Forms.CodeTemplates;
-using pie.Forms.Databases;
-using pie.Forms.Format;
-using pie.Forms.Git;
-using pie.Forms.Other;
-using pie.Forms.Theme;
-using pie.Services;
-using plugin.Classes;
+
 /**
  * ScintillaNET provides the text editors used in pie.
  * 

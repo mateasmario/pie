@@ -28,7 +28,7 @@ SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
 SPDX-License-Identifier = "GPL-3.0-or-later"
 
 [[annotations]]
-path = ["README.md", "application/pie.ico", "application/pie.sln", "application/pie.csproj", "plugin/plugin.csproj",  "application/pie.csproj.SdkResolver.1981936763.proj", "application/pie.csproj.user", "plugin/plugin.csproj.user", ".gitignore", "application/App.config", "application/app.manifest", "application/packages.config"]
+path = ["README.md", "PLUGINS.md", "application/pie.iss", "pie.sln", "application/pie.ico", "application/pie.csproj", "plugin/plugin.csproj",  "application/pie.csproj.SdkResolver.1981936763.proj", "application/pie.csproj.user", "plugin/plugin.csproj.user", ".gitignore", "application/App.config", "application/app.manifest", "application/packages.config"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2023-2025 Mario-Mihai Mateas"
 SPDX-License-Identifier = "GPL-3.0-or-later"
