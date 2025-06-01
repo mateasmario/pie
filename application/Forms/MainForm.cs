@@ -1048,7 +1048,14 @@ namespace pie
         private void FileActionsItem2_Click(object sender, EventArgs e)
         {
             string path = parsingService.GoBackInFilePath(tabInfos[tabControl.SelectedIndex].getOpenedFilePath());
-            Process.Start(path);
+            Process.Start(
+                new ProcessStartInfo
+                {
+                    FileName = path,
+                    UseShellExecute = true,
+                    Verb = "open"
+                }
+                );
         }
 
         private void FileActionsItem1_Click(object sender, EventArgs e)
