@@ -200,14 +200,14 @@ namespace pie
 
         private void MoveConfigurationFoldersToAppData()
         {
-            if (!Directory.Exists(SpecialFolders.AppData))
+            if (!Directory.Exists(SpecialPaths.AppData))
             {
-                Directory.CreateDirectory(SpecialFolders.AppData);
+                Directory.CreateDirectory(SpecialPaths.AppData);
             }
 
-            if (!Directory.Exists(SpecialFolders.Config))
+            if (!Directory.Exists(SpecialPaths.Config))
             {
-                Directory.CreateDirectory(SpecialFolders.Config);
+                Directory.CreateDirectory(SpecialPaths.Config);
             }
 
             CopyConfigToAppData("git.json");
@@ -218,12 +218,12 @@ namespace pie
             CopyConfigToAppData("mappings.json");
             CopyConfigToAppData("templates.json");
 
-            if (!Directory.Exists(SpecialFolders.Themes))
+            if (!Directory.Exists(SpecialPaths.Themes))
             {
                 CopyDirectoryToAppData("themes");
             }
 
-            if (!Directory.Exists(SpecialFolders.Languages))
+            if (!Directory.Exists(SpecialPaths.Languages))
             {
                 CopyDirectoryToAppData("languages");
             }
@@ -240,16 +240,16 @@ namespace pie
         }
         private void CopyConfigToAppData(string fileName)
         {
-            if (!File.Exists(System.IO.Path.Combine(SpecialFolders.Config, fileName)))
+            if (!File.Exists(System.IO.Path.Combine(SpecialPaths.Config, fileName)))
             {
-                File.Copy(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config", fileName), System.IO.Path.Combine(SpecialFolders.Config, fileName));
+                File.Copy(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config", fileName), System.IO.Path.Combine(SpecialPaths.Config, fileName));
             }
         }
 
         private void CopyDirectoryToAppData(string folderName)
         {
             string oldDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config", folderName);
-            string newDir = System.IO.Path.Combine(SpecialFolders.Config, folderName);
+            string newDir = System.IO.Path.Combine(SpecialPaths.Config, folderName);
             Directory.CreateDirectory(newDir);
 
             //Copy all the files & Replaces any files with the same name
@@ -262,13 +262,13 @@ namespace pie
 
         private void ProcessGitCredentials()
         {
-            gitCredentials = configurationService.GetArrayFromFile<GitCredentials>(System.IO.Path.Combine(SpecialFolders.Config, "git.json"))[0];
+            gitCredentials = configurationService.GetArrayFromFile<GitCredentials>(System.IO.Path.Combine(SpecialPaths.Config, "git.json"))[0];
         }
 
         private void ProcessThemes()
         {
             ProcessCustomThemes();
-            SelectedTheme selectedTheme = configurationService.GetObjectFromFile<SelectedTheme>(System.IO.Path.Combine(SpecialFolders.Config, "theme.json"));
+            SelectedTheme selectedTheme = configurationService.GetObjectFromFile<SelectedTheme>(System.IO.Path.Combine(SpecialPaths.Config, "theme.json"));
 
             foreach (ThemeInfo t in themeInfos)
             {
@@ -295,7 +295,7 @@ namespace pie
             }
 
 
-            themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>(SpecialFolders.Themes, "json");
+            themeInfos = configurationService.GetArrayFromMultipleFiles<ThemeInfo>(SpecialPaths.Themes, "json");
 
             foreach (ThemeInfo themeInfo in themeInfos)
             {
@@ -310,7 +310,7 @@ namespace pie
 
         private void ProcessEditorProperties()
         {
-            editorProperties = configurationService.GetObjectFromFile<EditorProperties>(System.IO.Path.Combine(SpecialFolders.Config, "scintilla.json"));
+            editorProperties = configurationService.GetObjectFromFile<EditorProperties>(System.IO.Path.Combine(SpecialPaths.Config, "scintilla.json"));
 
             if (editorProperties.Wordwrap)
             {
@@ -375,7 +375,7 @@ namespace pie
                 }
             }
 
-            buildCommands = configurationService.GetArrayFromFile<BuildCommand> (System.IO.Path.Combine(SpecialFolders.Config, "build.json"));
+            buildCommands = configurationService.GetArrayFromFile<BuildCommand> (System.IO.Path.Combine(SpecialPaths.Config, "build.json"));
 
             for (int i = 0; i < buildCommands.Count; i++)
             {
@@ -395,22 +395,22 @@ namespace pie
 
         private void ProcessDatabaseConnections()
         {
-            databases = configurationService.GetArrayFromFile<DatabaseConnection>(System.IO.Path.Combine(SpecialFolders.Config, "databases.json"));
+            databases = configurationService.GetArrayFromFile<DatabaseConnection>(System.IO.Path.Combine(SpecialPaths.Config, "databases.json"));
         }
 
         private void ProcessLanguageMappings()
         {
-            languageMappings = configurationService.GetArrayFromFile<LanguageMapping>(System.IO.Path.Combine(SpecialFolders.Config, "mappings.json"));
+            languageMappings = configurationService.GetArrayFromFile<LanguageMapping>(System.IO.Path.Combine(SpecialPaths.Config, "mappings.json"));
         }
 
         private void ProcessLanguageDefinitions()
         {
-            languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>(SpecialFolders.Languages, "json");
+            languageDefinitions = configurationService.GetArrayFromMultipleFiles<LanguageDefinition>(SpecialPaths.Languages, "json");
         }
 
         private void ProcessCodeTemplates()
         {
-            codeTemplates = configurationService.GetArrayFromFile<CodeTemplate>(System.IO.Path.Combine(SpecialFolders.Config, "templates.json"));
+            codeTemplates = configurationService.GetArrayFromFile<CodeTemplate>(System.IO.Path.Combine(SpecialPaths.Config, "templates.json"));
         }
 
         private void InitializeControls()
@@ -796,7 +796,7 @@ namespace pie
 
             activeTheme = theme;
 
-            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "theme.json"), new SelectedTheme(theme.Name));
+            configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "theme.json"), new SelectedTheme(theme.Name));
 
             for (int i = 0; i < tabControl.Pages.Count; i++)
             {
@@ -2678,7 +2678,7 @@ namespace pie
 
                         if (gitCommitCredentialsForm.Output.Saved)
                         {
-                            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
+                            configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
                             GitCommit(items);
                         }
                     }
@@ -2887,7 +2887,7 @@ namespace pie
 
                         if (gitPushCredentialsForm.Output.Saved)
                         {
-                            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
+                            configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
                             GitPush();
                         }
                     }
@@ -3092,7 +3092,7 @@ namespace pie
 
             if (gitSettingsForm.Output.Saved)
             {
-                configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
+                configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
             }
         }
 
@@ -3111,7 +3111,7 @@ namespace pie
 
             if (gitPushCredentialsForm.Output.Saved)
             {
-                configurationService.WriteToFile<GitCredentials>(System.IO.Path.Combine(SpecialFolders.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
+                configurationService.WriteToFile<GitCredentials>(System.IO.Path.Combine(SpecialPaths.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
             }
         }
 
@@ -3159,7 +3159,7 @@ namespace pie
 
                     if (gitCommitCredentialsForm.Output.Saved)
                     {
-                        configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
+                        configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
                         GitPull();
                     }
                 }
@@ -3178,7 +3178,7 @@ namespace pie
 
                     if (gitPushCredentialsForm.Output.Saved)
                     {
-                        configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
+                        configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "git.json"), new List<GitCredentials>() { gitCredentials });
                         GitPull();
                     }
                 }
@@ -3526,7 +3526,7 @@ namespace pie
         {
             editorProperties.Wordwrap = !editorProperties.Wordwrap;
             ToggleWordWrap(editorProperties.Wordwrap);
-            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "scintilla.json"), editorProperties);
+            configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "scintilla.json"), editorProperties);
         }
 
         private void ToggleWordWrap(bool status)
@@ -3566,7 +3566,7 @@ namespace pie
                 enableAutosaveToolStripMenuItem.Text = "Enable Autosave";
             }
 
-            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "scintilla.json"), editorProperties);
+            configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "scintilla.json"), editorProperties);
         }
 
         private void PerformFirstSaveWhenAutosaveTriggered()
@@ -3624,7 +3624,7 @@ namespace pie
                 this.Opacity = 1;
             }
 
-            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "scintilla.json"), editorProperties);
+            configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "scintilla.json"), editorProperties);
         }
 
         private void cheatsheetToolStripMenuItem_Click(object sender, EventArgs e)

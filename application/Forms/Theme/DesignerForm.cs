@@ -151,7 +151,7 @@ namespace pie.Forms.Theme
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            configurationService.WriteFilesToDirectory(SpecialFolders.Themes, Input.ThemeInfos, "json");
+            configurationService.WriteFilesToDirectory(SpecialPaths.Themes, Input.ThemeInfos, "json");
             this.Close();
         }
 

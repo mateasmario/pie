@@ -16,8 +16,6 @@ namespace pie
 {
     public partial class NotificationFatalForm : KryptonForm
     {
-        public NotificationFatalFormInput Input { get; set; }
-
         public NotificationFatalForm()
         {
             InitializeComponent();
@@ -67,11 +65,6 @@ namespace pie
         private void okButton_Click(object sender, System.EventArgs e)
         {
             Environment.Exit(1);
-        }
-
-        private void NotificationFatalForm_Load(object sender, System.EventArgs e)
-        {
-            contentRichTextBox.Text = Input.NotificationText;
         }
 
         private void NotificationFatalForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)

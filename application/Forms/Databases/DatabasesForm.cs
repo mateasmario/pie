@@ -218,7 +218,7 @@ namespace pie.Forms.Databases
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "databases.json"), tempDatabases);
+            configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "databases.json"), tempDatabases);
 
             Output.Saved = true;
 

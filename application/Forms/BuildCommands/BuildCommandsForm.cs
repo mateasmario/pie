@@ -163,7 +163,7 @@ namespace pie
 
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
-            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "build.json"), tempCommands);
+            configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "build.json"), tempCommands);
 
             Output.Saved = true;
 

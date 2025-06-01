@@ -2,9 +2,11 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
 using System;
+using System.IO;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.ApplicationServices;
 using pie.Classes;
+using pie.Constants;
 
 namespace pie
 {
@@ -27,18 +29,13 @@ namespace pie
 
         private static void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
         {
-            ShowFatalNotification(e.ExceptionObject.ToString());
+            File.WriteAllText(SpecialPaths.CrashReport, e.ExceptionObject.ToString());
+            ShowFatalNotification();
         }
 
-        private static void ShowFatalNotification(string text)
+        private static void ShowFatalNotification()
         {
             NotificationFatalForm notificationFatalForm = new NotificationFatalForm();
-
-            NotificationFatalFormInput notificationFatalFormInput = new NotificationFatalFormInput();
-            notificationFatalFormInput.NotificationText = text;
-
-            notificationFatalForm.Input = notificationFatalFormInput;
-
             notificationFatalForm.ShowDialog();
         }
     }

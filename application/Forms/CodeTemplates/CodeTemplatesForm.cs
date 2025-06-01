@@ -191,7 +191,7 @@ namespace pie.Forms.CodeTemplates
         {
             SaveCurrentTemplate();
 
-            configurationService.WriteToFile(System.IO.Path.Combine(SpecialFolders.Config, "templates.json"), Working);
+            configurationService.WriteToFile(System.IO.Path.Combine(SpecialPaths.Config, "templates.json"), Working);
 
             Output.Saved = true;
 

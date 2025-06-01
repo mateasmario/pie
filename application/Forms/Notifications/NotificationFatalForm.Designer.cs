@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationFatalForm));
             mainPanel = new Krypton.Toolkit.KryptonPanel();
             kryptonLabel1 = new Krypton.Toolkit.KryptonLabel();
-            contentRichTextBox = new Krypton.Toolkit.KryptonRichTextBox();
             okButton = new Krypton.Toolkit.KryptonButton();
             titleLabel = new Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)mainPanel).BeginInit();
@@ -41,14 +40,13 @@
             // mainPanel
             // 
             mainPanel.Controls.Add(kryptonLabel1);
-            mainPanel.Controls.Add(contentRichTextBox);
             mainPanel.Controls.Add(okButton);
             mainPanel.Controls.Add(titleLabel);
             mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             mainPanel.Location = new System.Drawing.Point(0, 0);
             mainPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new System.Drawing.Size(355, 291);
+            mainPanel.Size = new System.Drawing.Size(367, 288);
             mainPanel.StateCommon.Color1 = System.Drawing.Color.FromArgb(192, 0, 0);
             mainPanel.StateCommon.Color2 = System.Drawing.Color.FromArgb(192, 0, 0);
             mainPanel.TabIndex = 7;
@@ -58,25 +56,11 @@
             kryptonLabel1.Location = new System.Drawing.Point(4, 50);
             kryptonLabel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             kryptonLabel1.Name = "kryptonLabel1";
-            kryptonLabel1.Size = new System.Drawing.Size(353, 52);
+            kryptonLabel1.Size = new System.Drawing.Size(353, 100);
             kryptonLabel1.StateCommon.ShortText.Color1 = System.Drawing.Color.White;
             kryptonLabel1.StateCommon.ShortText.Color2 = System.Drawing.Color.White;
             kryptonLabel1.TabIndex = 8;
-            kryptonLabel1.Values.Text = "This problem is likely associated with a misconfiguration of Pie.\r\nIf resyncing Pie (via PyeSinc.exe) doesn't fix the problem, feel\r\nfree to open an issue on the GitHub page.";
-            // 
-            // contentRichTextBox
-            // 
-            contentRichTextBox.Location = new System.Drawing.Point(5, 117);
-            contentRichTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            contentRichTextBox.Name = "contentRichTextBox";
-            contentRichTextBox.ReadOnly = true;
-            contentRichTextBox.Size = new System.Drawing.Size(350, 128);
-            contentRichTextBox.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(192, 0, 0);
-            contentRichTextBox.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.False;
-            contentRichTextBox.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            contentRichTextBox.StateCommon.Content.Color1 = System.Drawing.Color.White;
-            contentRichTextBox.TabIndex = 7;
-            contentRichTextBox.Text = "";
+            kryptonLabel1.Values.Text = resources.GetString("kryptonLabel1.Values.Text");
             // 
             // okButton
             // 
@@ -107,7 +91,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(355, 291);
+            ClientSize = new System.Drawing.Size(365, 294);
             ControlBox = false;
             Controls.Add(mainPanel);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -129,7 +113,6 @@
             StateCommon.Header.Content.ShortText.Color2 = System.Drawing.Color.White;
             Text = "Fatal Error";
             FormClosing += NotificationFatalForm_FormClosing;
-            Load += NotificationFatalForm_Load;
             ((System.ComponentModel.ISupportInitialize)mainPanel).EndInit();
             mainPanel.ResumeLayout(false);
             mainPanel.PerformLayout();
@@ -142,7 +125,6 @@
         private Krypton.Toolkit.KryptonPanel mainPanel;
         private Krypton.Toolkit.KryptonLabel titleLabel;
         private Krypton.Toolkit.KryptonButton okButton;
-        private Krypton.Toolkit.KryptonRichTextBox contentRichTextBox;
         private Krypton.Toolkit.KryptonLabel kryptonLabel1;
     }
 }
