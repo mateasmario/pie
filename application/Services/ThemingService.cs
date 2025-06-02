@@ -248,12 +248,16 @@ namespace pie.Services
             {
                 ((KryptonTableLayoutPanel)control).Palette = palette;
             }
+            else if (control is KryptonDataGridView)
+            {
+                ((KryptonDataGridView)control).Palette = palette;
+            }
 
 
-                foreach (Control child in control.Controls)
-                {
-                    SetPaletteToObjects(child, palette);
-                }
+            foreach (Control child in control.Controls)
+            {
+                SetPaletteToObjects(child, palette);
+            }
         }
     }
 }

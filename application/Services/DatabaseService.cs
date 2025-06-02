@@ -185,7 +185,14 @@ namespace pie.Services
                 }
                 catch (NpgsqlException ex)
                 {
-                    return new DatabaseResponse(false, ex.InnerException.Message, null);
+                    if (ex.InnerException != null)
+                    {
+                        return new DatabaseResponse(false, ex.InnerException.Message, null);
+                    }
+                    else
+                    {
+                        return new DatabaseResponse(false, ex.Message, null);
+                    }
                 }
             }
             else
