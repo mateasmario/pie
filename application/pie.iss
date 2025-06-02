@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "pie"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "Beta"
 #define MyAppPublisher "Mario-Mihai Mateaș"
 #define MyAppURL "http://bwxor.com"
 #define MyAppExeName "pie.exe"
