@@ -2924,10 +2924,17 @@ namespace pie
                         {
                             doNotShowBranchChangeNotification = true;
 
-                            Task.Run(() =>
+                            try
                             {
-                                repository.Network.Push(remote, $"refs/heads/{branchName}:refs/heads/{branchName}", pushOptions);
-                            }).Wait();
+                                Task.Run(() =>
+                                {
+                                    repository.Network.Push(remote, $"refs/heads/{branchName}:refs/heads/{branchName}", pushOptions);
+                                }).Wait();
+                            } catch(Exception ex)
+                            {
+                                ShowNotification("Error interacting with the remote repository. Check your credentials or reinitialize the local repository.");
+                                return;
+                            }
 
                             ShowNotification("Successfully pushed to remote.");
                             UpdateGitRepositoryInfo();
