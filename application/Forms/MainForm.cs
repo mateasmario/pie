@@ -1,29 +1,6 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using pie.Classes;
-using pie.Classes.Configuration.FileBased.Impl;
-using pie.Constants;
-using pie.Enums;
-using pie.Forms.CodeTemplates;
-using pie.Forms.Databases;
-using pie.Forms.Format;
-using pie.Forms.Git;
-using pie.Forms.Other;
-using pie.Forms.Theme;
-using pie.Services;
-using plugin.Classes;
-
 /**
  * AutocompleteMenuNS is a namespace that comes from AutoCompleteMenu-ScintillaNet. It is used for various Autocomplete suggestions while writing code.
  * 
@@ -71,13 +48,35 @@ using LibGit2Sharp;
  * Copyright (c) 2018-2019, Alexandre Mutel
  */
 using Markdig;
-
+using Markdig.Extensions.Footnotes;
+using pie.Classes;
+using pie.Classes.Configuration.FileBased.Impl;
+using pie.Constants;
+using pie.Enums;
+using pie.Forms.CodeTemplates;
+using pie.Forms.Databases;
+using pie.Forms.Format;
+using pie.Forms.Git;
+using pie.Forms.Other;
+using pie.Forms.Theme;
+using pie.Services;
+using plugin.Classes;
 /**
  * ScintillaNET provides the text editors used in pie.
  * 
  * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
 */
 using ScintillaNET;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace pie
 {
@@ -503,7 +502,7 @@ namespace pie
         {
             if (openedFolder != null)
             {
-                NavigateToPath(openedFolder);
+                NavigateToPathAndExpand();
             }
         }
 
@@ -3075,7 +3074,7 @@ namespace pie
                 }
                 else
                 {
-                    NavigateToPath(openedFolder, false);
+                    NavigateToPathAndExpand();
                 }
             }
             else
@@ -3419,11 +3418,67 @@ namespace pie
                 openedGitRepository = false;
                 gitTabControl.SelectedIndex = 0;
             }
-
-
-            rootNode.Expand();
         }
-        
+
+        private void FillExpandedNodes(List<KryptonTreeNode> expandedNodes, KryptonTreeNode rootNode)
+        {
+            foreach (KryptonTreeNode node in rootNode.Nodes)
+            {
+                if (node.IsExpanded)
+                {
+                    expandedNodes.Add(node);
+                    FillExpandedNodes(expandedNodes, node);
+                }
+            }
+        }
+
+        private void ExpandRefreshedNodes(List<KryptonTreeNode> expandedNodes, KryptonTreeNode rootNode)
+        {
+            foreach (KryptonTreeNode node in rootNode.Nodes)
+            {
+                int position = GetPositionOfNode(expandedNodes, node);
+
+                if (position != -1)
+                {
+                    expandedNodes.RemoveAt(position);
+                    node.Expand();
+                    ExpandRefreshedNodes(expandedNodes, node);
+                }
+            }
+        }
+
+        private int GetPositionOfNode(List<KryptonTreeNode> expandedNodes, KryptonTreeNode node)
+        {
+            for (int i = 0; i<expandedNodes.Count; i++)
+            {
+                KryptonTreeNode n = expandedNodes[i];
+                
+                if (n.Tag.ToString().Equals(node.Tag.ToString()) && n.Text.ToString().Equals(node.Text.ToString()))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        private void NavigateToPathAndExpand()
+        {
+            bool rootNodeExpanded = directoryNavigationTreeView.Nodes[0].IsExpanded;
+
+            List<KryptonTreeNode> expandedNodes = new List<KryptonTreeNode>();
+            FillExpandedNodes(expandedNodes, (KryptonTreeNode)directoryNavigationTreeView.Nodes[0]);
+
+            NavigateToPath(openedFolder, false);
+
+            if (rootNodeExpanded)
+            {
+                ((KryptonTreeNode)directoryNavigationTreeView.Nodes[0]).Expand();
+            }
+
+            ExpandRefreshedNodes(expandedNodes, (KryptonTreeNode)directoryNavigationTreeView.Nodes[0]);
+        }
+
         private void NavigateToPath(string path)
         {
             NavigateToPath(path, true);
