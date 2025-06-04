@@ -430,7 +430,7 @@
             mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             mainMenuStrip.Name = "mainMenuStrip";
             mainMenuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            mainMenuStrip.Size = new System.Drawing.Size(988, 24);
+            mainMenuStrip.Size = new System.Drawing.Size(992, 24);
             mainMenuStrip.TabIndex = 1;
             mainMenuStrip.Text = "menuStrip1";
             // 
@@ -620,11 +620,11 @@
             terminalTabControl.ControlKryptonFormFeatures = false;
             terminalTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             terminalTabControl.KryptonContextMenu = terminalContextMenu;
-            terminalTabControl.Location = new System.Drawing.Point(0, 264);
+            terminalTabControl.Location = new System.Drawing.Point(0, 288);
             terminalTabControl.NavigatorMode = Krypton.Navigator.NavigatorMode.BarTabGroup;
             terminalTabControl.Owner = null;
             terminalTabControl.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
-            terminalTabControl.Size = new System.Drawing.Size(988, 214);
+            terminalTabControl.Size = new System.Drawing.Size(992, 214);
             terminalTabControl.StateCommon.Tab.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             terminalTabControl.TabIndex = 3;
             terminalTabControl.Text = "kryptonNavigator1";
@@ -736,7 +736,7 @@
             // 
             kryptonSplitContainer.Panel2.Controls.Add(tabControl);
             kryptonSplitContainer.SeparatorStyle = Krypton.Toolkit.SeparatorStyle.HighProfile;
-            kryptonSplitContainer.Size = new System.Drawing.Size(988, 240);
+            kryptonSplitContainer.Size = new System.Drawing.Size(992, 264);
             kryptonSplitContainer.SplitterDistance = 185;
             kryptonSplitContainer.SplitterWidth = 3;
             kryptonSplitContainer.TabIndex = 13;
@@ -774,8 +774,8 @@
             sidebarTabControl.Owner = null;
             sidebarTabControl.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
             sidebarTabControl.Pages.AddRange(new Krypton.Navigator.KryptonPage[] { explorerPage, gitPage });
-            sidebarTabControl.SelectedIndex = 1;
-            sidebarTabControl.Size = new System.Drawing.Size(185, 240);
+            sidebarTabControl.SelectedIndex = 0;
+            sidebarTabControl.Size = new System.Drawing.Size(185, 264);
             sidebarTabControl.StateCommon.Tab.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             sidebarTabControl.TabIndex = 14;
             sidebarTabControl.Text = "sidebarTabControl";
@@ -792,7 +792,7 @@
             explorerPage.LastVisibleSet = true;
             explorerPage.MinimumSize = new System.Drawing.Size(150, 50);
             explorerPage.Name = "explorerPage";
-            explorerPage.Size = new System.Drawing.Size(206, 188);
+            explorerPage.Size = new System.Drawing.Size(183, 237);
             explorerPage.Text = "Explorer";
             explorerPage.ToolTipTitle = "Page ToolTip";
             explorerPage.UniqueName = "d51b93d59f194a90a2d0f602b7566d8d";
@@ -811,7 +811,7 @@
             directoryNavigationTreeView.PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
             directoryNavigationTreeView.SelectedImageIndex = 0;
             directoryNavigationTreeView.ShowNodeToolTips = true;
-            directoryNavigationTreeView.Size = new System.Drawing.Size(206, 188);
+            directoryNavigationTreeView.Size = new System.Drawing.Size(183, 237);
             directoryNavigationTreeView.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.False;
             directoryNavigationTreeView.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.None;
             directoryNavigationTreeView.TabIndex = 11;
@@ -842,7 +842,7 @@
             gitPage.LastVisibleSet = true;
             gitPage.MinimumSize = new System.Drawing.Size(150, 50);
             gitPage.Name = "gitPage";
-            gitPage.Size = new System.Drawing.Size(183, 213);
+            gitPage.Size = new System.Drawing.Size(183, 237);
             gitPage.Text = "Git";
             gitPage.ToolTipTitle = "Page ToolTip";
             gitPage.UniqueName = "b1c0a77797be4a45b28ee1c3283f777c";
@@ -865,8 +865,8 @@
             gitTabControl.Owner = null;
             gitTabControl.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
             gitTabControl.Pages.AddRange(new Krypton.Navigator.KryptonPage[] { kryptonPage1, kryptonPage3 });
-            gitTabControl.SelectedIndex = 1;
-            gitTabControl.Size = new System.Drawing.Size(183, 213);
+            gitTabControl.SelectedIndex = 0;
+            gitTabControl.Size = new System.Drawing.Size(183, 237);
             gitTabControl.TabIndex = 14;
             gitTabControl.Text = "gitTabControl";
             // 
@@ -878,7 +878,7 @@
             kryptonPage1.LastVisibleSet = true;
             kryptonPage1.MinimumSize = new System.Drawing.Size(150, 50);
             kryptonPage1.Name = "kryptonPage1";
-            kryptonPage1.Size = new System.Drawing.Size(204, 186);
+            kryptonPage1.Size = new System.Drawing.Size(181, 235);
             kryptonPage1.Text = "noRepoPage";
             kryptonPage1.ToolTipTitle = "Page ToolTip";
             kryptonPage1.UniqueName = "254088ee5e5748a58eb66e0fe6875d66";
@@ -896,7 +896,7 @@
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            tableLayoutPanel3.Size = new System.Drawing.Size(204, 186);
+            tableLayoutPanel3.Size = new System.Drawing.Size(181, 235);
             tableLayoutPanel3.TabIndex = 16;
             // 
             // tableLayoutPanel8
@@ -912,7 +912,7 @@
             tableLayoutPanel8.RowCount = 2;
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            tableLayoutPanel8.Size = new System.Drawing.Size(198, 105);
+            tableLayoutPanel8.Size = new System.Drawing.Size(175, 135);
             tableLayoutPanel8.TabIndex = 16;
             // 
             // tableLayoutPanel6
@@ -923,12 +923,12 @@
             tableLayoutPanel6.Controls.Add(tableLayoutPanel7, 0, 1);
             tableLayoutPanel6.Controls.Add(tableLayoutPanel1, 0, 0);
             tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Top;
-            tableLayoutPanel6.Location = new System.Drawing.Point(3, 45);
+            tableLayoutPanel6.Location = new System.Drawing.Point(3, 57);
             tableLayoutPanel6.Name = "tableLayoutPanel6";
             tableLayoutPanel6.RowCount = 2;
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel6.Size = new System.Drawing.Size(192, 57);
+            tableLayoutPanel6.Size = new System.Drawing.Size(169, 57);
             tableLayoutPanel6.TabIndex = 19;
             // 
             // tableLayoutPanel7
@@ -943,19 +943,19 @@
             tableLayoutPanel7.Name = "tableLayoutPanel7";
             tableLayoutPanel7.RowCount = 1;
             tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel7.Size = new System.Drawing.Size(186, 23);
+            tableLayoutPanel7.Size = new System.Drawing.Size(163, 23);
             tableLayoutPanel7.TabIndex = 14;
             // 
             // initializeANewRepoButton
             // 
             initializeANewRepoButton.Dock = System.Windows.Forms.DockStyle.Fill;
             initializeANewRepoButton.LocalCustomPalette = KryptonCustomPaletteBase;
-            initializeANewRepoButton.Location = new System.Drawing.Point(30, 3);
+            initializeANewRepoButton.Location = new System.Drawing.Point(27, 3);
             initializeANewRepoButton.MaximumSize = new System.Drawing.Size(0, 23);
             initializeANewRepoButton.MinimumSize = new System.Drawing.Size(0, 23);
             initializeANewRepoButton.Name = "initializeANewRepoButton";
             initializeANewRepoButton.PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
-            initializeANewRepoButton.Size = new System.Drawing.Size(124, 23);
+            initializeANewRepoButton.Size = new System.Drawing.Size(108, 23);
             initializeANewRepoButton.TabIndex = 5;
             initializeANewRepoButton.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             initializeANewRepoButton.Values.Text = "Initialize repository";
@@ -973,19 +973,19 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(186, 22);
+            tableLayoutPanel1.Size = new System.Drawing.Size(163, 22);
             tableLayoutPanel1.TabIndex = 14;
             // 
             // cloneARepoButton
             // 
             cloneARepoButton.Dock = System.Windows.Forms.DockStyle.Fill;
             cloneARepoButton.LocalCustomPalette = KryptonCustomPaletteBase;
-            cloneARepoButton.Location = new System.Drawing.Point(30, 3);
+            cloneARepoButton.Location = new System.Drawing.Point(27, 3);
             cloneARepoButton.MaximumSize = new System.Drawing.Size(0, 23);
             cloneARepoButton.MinimumSize = new System.Drawing.Size(0, 23);
             cloneARepoButton.Name = "cloneARepoButton";
             cloneARepoButton.PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
-            cloneARepoButton.Size = new System.Drawing.Size(124, 23);
+            cloneARepoButton.Size = new System.Drawing.Size(108, 23);
             cloneARepoButton.TabIndex = 6;
             cloneARepoButton.Values.DropDownArrowColor = System.Drawing.Color.Empty;
             cloneARepoButton.Values.Text = "Clone a repository";
@@ -996,7 +996,7 @@
             kryptonLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             kryptonLabel1.Location = new System.Drawing.Point(3, 3);
             kryptonLabel1.Name = "kryptonLabel1";
-            kryptonLabel1.Size = new System.Drawing.Size(192, 36);
+            kryptonLabel1.Size = new System.Drawing.Size(169, 48);
             kryptonLabel1.StateNormal.ShortText.MultiLine = Krypton.Toolkit.InheritBool.True;
             kryptonLabel1.StateNormal.ShortText.MultiLineH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             kryptonLabel1.StateNormal.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
@@ -1014,7 +1014,7 @@
             kryptonPage3.LastVisibleSet = true;
             kryptonPage3.MinimumSize = new System.Drawing.Size(150, 50);
             kryptonPage3.Name = "kryptonPage3";
-            kryptonPage3.Size = new System.Drawing.Size(181, 211);
+            kryptonPage3.Size = new System.Drawing.Size(181, 199);
             kryptonPage3.Text = "repoPage";
             kryptonPage3.ToolTipTitle = "Page ToolTip";
             kryptonPage3.UniqueName = "2bdc0468d0be47eba7301d8299be700f";
@@ -1032,7 +1032,7 @@
             tableLayoutPanel5.RowCount = 1;
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(181, 151);
+            tableLayoutPanel5.Size = new System.Drawing.Size(181, 139);
             tableLayoutPanel5.TabIndex = 14;
             // 
             // kryptonTableLayoutPanel1
@@ -1050,7 +1050,7 @@
             kryptonTableLayoutPanel1.RowCount = 1;
             kryptonTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             kryptonTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            kryptonTableLayoutPanel1.Size = new System.Drawing.Size(175, 145);
+            kryptonTableLayoutPanel1.Size = new System.Drawing.Size(175, 133);
             kryptonTableLayoutPanel1.TabIndex = 20;
             // 
             // gitStagingAreaListView
@@ -1065,7 +1065,7 @@
             gitStagingAreaListView.Name = "gitStagingAreaListView";
             gitStagingAreaListView.SelectColumnsOnRightClick = false;
             gitStagingAreaListView.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None;
-            gitStagingAreaListView.Size = new System.Drawing.Size(169, 139);
+            gitStagingAreaListView.Size = new System.Drawing.Size(169, 127);
             gitStagingAreaListView.TabIndex = 9;
             gitStagingAreaListView.UseCompatibleStateImageBehavior = false;
             gitStagingAreaListView.View = System.Windows.Forms.View.Details;
@@ -1183,7 +1183,7 @@
             tabControl.NavigatorMode = Krypton.Navigator.NavigatorMode.BarTabGroup;
             tabControl.Owner = null;
             tabControl.PageBackStyle = Krypton.Toolkit.PaletteBackStyle.PanelClient;
-            tabControl.Size = new System.Drawing.Size(800, 240);
+            tabControl.Size = new System.Drawing.Size(804, 264);
             tabControl.StateCommon.Tab.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             tabControl.TabIndex = 2;
             tabControl.Text = "kryptonDockableNavigator1";
@@ -1201,7 +1201,7 @@
             AllowDrop = true;
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            ClientSize = new System.Drawing.Size(988, 478);
+            ClientSize = new System.Drawing.Size(992, 502);
             Controls.Add(kryptonSplitContainer);
             Controls.Add(terminalTabControl);
             Controls.Add(mainMenuStrip);

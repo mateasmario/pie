@@ -1,6 +1,17 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
 /**
  * AutocompleteMenuNS is a namespace that comes from AutoCompleteMenu-ScintillaNet. It is used for various Autocomplete suggestions while writing code.
  * 
@@ -48,7 +59,6 @@ using LibGit2Sharp;
  * Copyright (c) 2018-2019, Alexandre Mutel
  */
 using Markdig;
-using Markdig.Extensions.Footnotes;
 using pie.Classes;
 using pie.Classes.Configuration.FileBased.Impl;
 using pie.Constants;
@@ -61,22 +71,14 @@ using pie.Forms.Other;
 using pie.Forms.Theme;
 using pie.Services;
 using plugin.Classes;
+
+
 /**
  * ScintillaNET provides the text editors used in pie.
  * 
  * Copyright (c) 2017, Jacob Slusser, https://github.com/jacobslusser
 */
 using ScintillaNET;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace pie
 {
@@ -127,6 +129,8 @@ namespace pie
         private int selectedRepositoryIndex;
         private bool doNotReselect;
         private bool doNotUpdateDirNav;
+        private bool createFile;
+        private bool createDirectory;
 
         public string[] Args;
 
@@ -476,7 +480,7 @@ namespace pie
             items.Items.Add(newFileItem);
 
             KryptonContextMenuItem newFolderItem = new KryptonContextMenuItem();
-            newFolderItem.Click += NewFolderItem_Click; ;
+            newFolderItem.Click += NewFolderItem_Click;
             newFolderItem.Text = "New Folder";
             items.Items.Add(newFolderItem);
 
@@ -510,13 +514,34 @@ namespace pie
 
         private void NewFolderItem_Click(object sender, EventArgs e)
         {
-            doNotExpand = true;
+            directoryNavigationTreeView.SelectedNode = directoryNavigationTreeView.Nodes[0];
 
+            if (directoryNavigationTreeView.SelectedNode.Nodes.Count > 0 && !directoryNavigationTreeView.SelectedNode.IsExpanded)
+            {
+                createDirectory = true;
+                directoryNavigationTreeView.SelectedNode.Expand();
+            }
+            else
+            {
+                createDirectory = true;
+                CreateFolder();
+                createDirectory = false;
+            }
+        }
+
+        private void CreateFolder()
+        {
             TreeNode selectedNode = directoryNavigationTreeView.SelectedNode != null ? directoryNavigationTreeView.SelectedNode : directoryNavigationTreeView.Nodes[0];
 
             KryptonTreeNode newFileNode = new KryptonTreeNode();
             newFileNode.ImageKey = "folder.png";
             newFileNode.SelectedImageKey = "folder.png";
+
+            if (selectedNode.ImageKey.Equals("file.png"))
+            {
+                selectedNode = (KryptonTreeNode)selectedNode.Parent;
+            }
+
             selectedNode.Nodes.Add(newFileNode);
             selectedNode.Expand();
 
@@ -564,7 +589,6 @@ namespace pie
                 dirNavModificationType = DirNavModificationType.RENAME_FILE;
             }
 
-
             selectedNode.BeginEdit();
         }
 
@@ -601,18 +625,51 @@ namespace pie
                     return;
                 }
 
-                DeleteFile(path);
-                selectedNode.Remove();
+                try
+                {
+                    if (selectedNode.ImageKey.Equals("folder.png"))
+                    {
+                        DeleteFolder(path);
+                    }
+                    else
+                    {
+                        DeleteFile(path);
+                    }
+
+                    selectedNode.Remove();
+                }
+                catch (Exception)
+                {
+                    ShowNotification("Could not delete specified file. Make sure you have the appropiate permissions and the file is not being used by another process.");
+                }
+
                 directoryNavigationTreeView.Refresh();
             }
         }
 
         private void NewFileItem_Click(object sender, EventArgs e)
         {
-            doNotExpand = true;
+            if (directoryNavigationTreeView.SelectedNode == null)
+            {
+                directoryNavigationTreeView.SelectedNode = directoryNavigationTreeView.Nodes[0];
+            }
 
+            if (directoryNavigationTreeView.SelectedNode.Nodes.Count > 0 && !directoryNavigationTreeView.SelectedNode.IsExpanded)
+            {
+                createFile = true;
+                directoryNavigationTreeView.SelectedNode.Expand();
+            }
+            else
+            {
+                createFile = true;
+                CreateFile();
+                createFile = false;
+            }
+        }
+
+        private void CreateFile()
+        {
             TreeNode selectedNode = directoryNavigationTreeView.SelectedNode != null ? directoryNavigationTreeView.SelectedNode : directoryNavigationTreeView.Nodes[0]; // Create file as direct child of the root node if no node is selected
-
             KryptonTreeNode newFileNode = new KryptonTreeNode();
             newFileNode.ImageKey = "file.png";
             newFileNode.SelectedImageKey = "file.png";
@@ -629,6 +686,7 @@ namespace pie
 
             dirNavModificationType = DirNavModificationType.CREATE_FILE;
 
+            Debug.WriteLine("BEGIN EDIT CreateFile");
             newFileNode.BeginEdit();
         }
 
@@ -3784,6 +3842,19 @@ namespace pie
                 node.Nodes.Clear();
                 AddItemsToDirectory(node);
             }
+
+            if (createFile)
+            {
+                createFile = false;
+
+                CreateFile();
+            }
+            else if (createDirectory)
+            {
+                createDirectory = false;
+
+                CreateFolder();
+            }
         }
 
         private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4063,16 +4134,16 @@ namespace pie
 
         private void DeleteFile(string path)
         {
-            try
-            {
-                File.Delete(path);
-                doNotShowBranchChangeNotification = true;
-                UpdateGitRepositoryInfo(false);
-            }
-            catch (Exception)
-            {
-                ShowNotification("Could not delete specified file. Make sure you have the appropiate permissions and the file is not being used by another process.");
-            }
+            File.Delete(path);
+            doNotShowBranchChangeNotification = true;
+            UpdateGitRepositoryInfo(false);
+        }
+
+        private void DeleteFolder(string path)
+        {
+            Directory.Delete(path, true);
+            doNotShowBranchChangeNotification = true;
+            UpdateGitRepositoryInfo(false);
         }
 
         private void directoryNavigationTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
