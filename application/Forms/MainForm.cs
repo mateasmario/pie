@@ -374,7 +374,7 @@ namespace pie
                 }
             }
 
-            buildCommands = configurationService.GetArrayFromFile<BuildCommand> (System.IO.Path.Combine(SpecialPaths.Config, "build.json"));
+            buildCommands = configurationService.GetArrayFromFile<BuildCommand>(System.IO.Path.Combine(SpecialPaths.Config, "build.json"));
 
             for (int i = 0; i < buildCommands.Count; i++)
             {
@@ -512,7 +512,7 @@ namespace pie
         {
             doNotExpand = true;
 
-            TreeNode selectedNode = directoryNavigationTreeView.SelectedNode != null ? directoryNavigationTreeView.SelectedNode : directoryNavigationTreeView.Nodes[0]; 
+            TreeNode selectedNode = directoryNavigationTreeView.SelectedNode != null ? directoryNavigationTreeView.SelectedNode : directoryNavigationTreeView.Nodes[0];
 
             KryptonTreeNode newFileNode = new KryptonTreeNode();
             newFileNode.ImageKey = "folder.png";
@@ -1528,7 +1528,8 @@ namespace pie
 
             var refreshTimer = new System.Windows.Forms.Timer();
             refreshTimer.Interval = 100; // ms
-            refreshTimer.Tick += (sender, args) => {
+            refreshTimer.Tick += (sender, args) =>
+            {
                 conEmuControl.Update();
             };
             refreshTimer.Start();
@@ -2500,7 +2501,8 @@ namespace pie
                             Password = gitCredentials.Password
                         }
                     }, null);
-                } catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     // Do nothing, as the repo may not be remote
                 }
@@ -2903,10 +2905,11 @@ namespace pie
                         string branchName = gitBranchesComboBox.SelectedItem.ToString();
                         Branch remoteBranch = repository.Branches[$"origin/{branchName}"];
 
-                        if (selectedBranch != null && remoteBranch != null && !selectedBranch.IsTracking) {
-                        repository.Branches.Update(repository.Branches[gitBranchesComboBox.SelectedItem.ToString()],
-                            b => b.Remote = remote.Name,
-                            b => b.UpstreamBranch = remoteBranch.CanonicalName);
+                        if (selectedBranch != null && remoteBranch != null && !selectedBranch.IsTracking)
+                        {
+                            repository.Branches.Update(repository.Branches[gitBranchesComboBox.SelectedItem.ToString()],
+                                b => b.Remote = remote.Name,
+                                b => b.UpstreamBranch = remoteBranch.CanonicalName);
                         }
 
                         // Push the branch to the remote                        
@@ -2929,7 +2932,8 @@ namespace pie
                                 {
                                     repository.Network.Push(remote, $"refs/heads/{branchName}:refs/heads/{branchName}", pushOptions);
                                 }).Wait();
-                            } catch(Exception ex)
+                            }
+                            catch (Exception ex)
                             {
                                 ShowNotification("Error interacting with the remote repository. Check your credentials or reinitialize the local repository.");
                                 return;
@@ -3212,7 +3216,7 @@ namespace pie
                         }
                     }
                 }
-                else 
+                else
                 {
                     var pullOptions = new PullOptions();
 
@@ -3258,7 +3262,7 @@ namespace pie
                         ShowNotification("There was an error while trying to pull from remote.");
                     }
                 }
-                
+
             }
             else
             {
@@ -3364,6 +3368,7 @@ namespace pie
             {
                 newBranchButton.Values.Image = Properties.Resources.plus_black;
                 refreshStatusButton.Values.Image = Properties.Resources.refresh_black;
+                mergeButton.Values.Image = Properties.Resources.merge_black;
                 commitButton.Values.Image = Properties.Resources.commit_black;
                 pullButton.Values.Image = Properties.Resources.pull_black;
                 pushButton.Values.Image = Properties.Resources.push_black;
@@ -3373,6 +3378,7 @@ namespace pie
             {
                 newBranchButton.Values.Image = Properties.Resources.plus_white;
                 refreshStatusButton.Values.Image = Properties.Resources.refresh_white;
+                mergeButton.Values.Image = Properties.Resources.merge_white;
                 commitButton.Values.Image = Properties.Resources.commit_white;
                 pullButton.Values.Image = Properties.Resources.pull_white;
                 pushButton.Values.Image = Properties.Resources.push_white;
@@ -3449,10 +3455,10 @@ namespace pie
 
         private int GetPositionOfNode(List<KryptonTreeNode> expandedNodes, KryptonTreeNode node)
         {
-            for (int i = 0; i<expandedNodes.Count; i++)
+            for (int i = 0; i < expandedNodes.Count; i++)
             {
                 KryptonTreeNode n = expandedNodes[i];
-                
+
                 if (n.Tag.ToString().Equals(node.Tag.ToString()) && n.Text.ToString().Equals(node.Text.ToString()))
                 {
                     return i;
@@ -4096,6 +4102,53 @@ namespace pie
             if (dirNavModificationType == DirNavModificationType.NONE)
             {
                 e.CancelEdit = true;
+            }
+        }
+
+        private void mergeButton_Click(object sender, EventArgs e)
+        {
+            GitMergeBranchForm gitMergeBranchForm = new GitMergeBranchForm();
+
+            GitMergeBranchFormInput gitMergeBranchFormInput = new GitMergeBranchFormInput();
+            gitMergeBranchFormInput.Palette = KryptonCustomPaletteBase;
+            gitMergeBranchFormInput.EditorProperties = editorProperties;
+            gitMergeBranchFormInput.Branches = gitBranchesComboBox.Items.Cast<string>().Where(b => !b.StartsWith("origin/")).ToList();
+            gitMergeBranchFormInput.CurrentBranch = selectedBranch.FriendlyName;
+            gitMergeBranchForm.Input = gitMergeBranchFormInput;
+
+            gitMergeBranchForm.ShowDialog();
+
+            if (repository != null)
+            {
+                if (gitMergeBranchForm.Output.SelectedBranch != null)
+                {
+                    try
+                    {
+                        Branch currentBranch = selectedBranch;
+                        Branch branchToMergeInto = repository.Branches[gitMergeBranchForm.Output.SelectedBranch];
+                        Commands.Checkout(repository, branchToMergeInto);
+                        Signature signature = new Signature(gitCredentials.Name, gitCredentials.Email, DateTime.Now);
+                        MergeResult mergeResult = repository.Merge(currentBranch, signature, new MergeOptions());
+
+                        if (mergeResult.Status == MergeStatus.Conflicts)
+                        {
+                            ShowNotification("There are merge conflicts. Please resolve them before proceeding.");
+                        }
+                        else
+                        {
+                            ShowNotification($"Successfully merged branch '{selectedBranch.FriendlyName}' into '{branchToMergeInto.FriendlyName}'.");
+                            UpdateGitRepositoryInfo();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowNotification("An error occurred while merging branches: " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                ShowNotification("No repository opened.");
             }
         }
     }
