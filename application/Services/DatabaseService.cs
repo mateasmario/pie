@@ -1,26 +1,25 @@
 ﻿/* SPDX-FileCopyrightText: 2023-2025 Mario-Mihai Mateas <mateasmario@aol.com> */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 
-using System;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
-using pie.Classes;
-using pie.Enums;
-
+using Krypton.Toolkit;
 /**
  * Used for communication between pie and MySQL Databases
  * 
  * Copyright (c) 2016 Alan Savage
  */
 using MySql.Data.MySqlClient;
-
 /**
  * Used for communication between pie and PostgreSQL Databases
  * 
  * Copyright (c) 2002-2023, Npgsql
  */
 using Npgsql;
+using pie.Classes;
+using pie.Enums;
+using System;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace pie.Services
 {
@@ -69,6 +68,10 @@ namespace pie.Services
             catch (InvalidOperationException ex)
             {
                 return new DatabaseResponse(false, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return new DatabaseResponse(false, "There was an error while trying to connect to the database.");
             }
         }
 
