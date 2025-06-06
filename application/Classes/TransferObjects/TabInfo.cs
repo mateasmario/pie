@@ -20,6 +20,7 @@ namespace pie.Classes
         private bool openedFileChanges;
         private TabType tabType;
         private AutocompleteMenu autocompleteMenu;
+        private bool hasUnsavedSymbol;
 
         public TabInfo(string openedFilePath, bool openedFileChanges, TabType tabType, AutocompleteMenu autocompleteMenu)
         {
@@ -67,6 +68,16 @@ namespace pie.Classes
         public void setAutocompleteMenu(AutocompleteMenu autocompleteMenu)
         {
             this.autocompleteMenu = autocompleteMenu;
+        }
+
+        public bool getHasUnsavedSymbol()
+        {
+            return hasUnsavedSymbol;
+        }
+
+        public void setHasUnsavedSymbol(bool hasUnsavedSymbol)
+        {
+            this.hasUnsavedSymbol = hasUnsavedSymbol;
         }
     }
 }

@@ -514,7 +514,10 @@ namespace pie
 
         private void NewFolderItem_Click(object sender, EventArgs e)
         {
-            directoryNavigationTreeView.SelectedNode = directoryNavigationTreeView.Nodes[0];
+            if (directoryNavigationTreeView.SelectedNode == null)
+            {
+                directoryNavigationTreeView.SelectedNode = directoryNavigationTreeView.Nodes[0]; // Select root node if no node is selected
+            }
 
             if (directoryNavigationTreeView.SelectedNode.Nodes.Count > 0 && !directoryNavigationTreeView.SelectedNode.IsExpanded)
             {
@@ -1150,6 +1153,11 @@ namespace pie
                     Save(tabControl.SelectedIndex);
                 }
             }
+            else if (!tabInfos[tabControl.SelectedIndex].getHasUnsavedSymbol())
+            {
+                tabControl.SelectedPage.Text = "* " + tabControl.SelectedPage.Text;
+                tabInfos[tabControl.SelectedIndex].setHasUnsavedSymbol(true);
+            }
         }
 
         public void UpdateNumberMarginWidth(Scintilla scintilla, bool updateTheme)
@@ -1476,6 +1484,8 @@ namespace pie
                 doNotShowBranchChangeNotification = true;
                 UpdateGitRepositoryInfo();
             }
+
+            tabInfos[tabControl.SelectedIndex].setHasUnsavedSymbol(false);
         }
 
         // [Method] Saves text stored in selected tab at a user-specified location
@@ -1547,6 +1557,7 @@ namespace pie
             if (tabControl.Pages.Count >= 1)
             {
                 tabInfos[tabControl.SelectedIndex].setOpenedFileChanges(false);
+                tabInfos[tabControl.SelectedIndex].setHasUnsavedSymbol(false);
             }
 
             return true;
