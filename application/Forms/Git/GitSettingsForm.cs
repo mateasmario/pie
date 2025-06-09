@@ -67,6 +67,11 @@ namespace pie.Forms.Git
             {
                 remoteServerPasswordTextBox.Text = Input.GitCredentials.Password;
             }
+
+            if (Input.GitCredentials.Proxy != null)
+            {
+                proxyTextBox.Text = Input.GitCredentials.Proxy;
+            }
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
@@ -75,6 +80,7 @@ namespace pie.Forms.Git
             Input.GitCredentials.Email = authorEmailTextBox.Text;
             Input.GitCredentials.Username = remoteServerUsernameTextBox.Text;
             Input.GitCredentials.Password = remoteServerPasswordTextBox.Text;
+            Input.GitCredentials.Proxy = proxyTextBox.Text;
 
             Output.Saved = true;
 

@@ -29,136 +29,175 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GitSettingsForm));
-            this.mainPanel = new Krypton.Toolkit.KryptonPanel();
-            this.remoteServerPasswordTextBox = new Krypton.Toolkit.KryptonTextBox();
-            this.remoteServerUsernameTextBox = new Krypton.Toolkit.KryptonTextBox();
-            this.remoteServerUsernameLabel = new Krypton.Toolkit.KryptonLabel();
-            this.remoteServerPasswordLabel = new Krypton.Toolkit.KryptonLabel();
-            this.authorEmailTextBox = new Krypton.Toolkit.KryptonTextBox();
-            this.authorNameTextBox = new Krypton.Toolkit.KryptonTextBox();
-            this.saveButton = new Krypton.Toolkit.KryptonButton();
-            this.authorNameLabel = new Krypton.Toolkit.KryptonLabel();
-            this.authorEmailLabel = new Krypton.Toolkit.KryptonLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
-            this.mainPanel.SuspendLayout();
-            this.SuspendLayout();
+            mainPanel = new Krypton.Toolkit.KryptonPanel();
+            proxyTipLabel = new Krypton.Toolkit.KryptonLabel();
+            proxyTextBox = new Krypton.Toolkit.KryptonTextBox();
+            proxyLabel = new Krypton.Toolkit.KryptonLabel();
+            remoteServerPasswordTextBox = new Krypton.Toolkit.KryptonTextBox();
+            remoteServerUsernameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            remoteServerUsernameLabel = new Krypton.Toolkit.KryptonLabel();
+            remoteServerPasswordLabel = new Krypton.Toolkit.KryptonLabel();
+            authorEmailTextBox = new Krypton.Toolkit.KryptonTextBox();
+            authorNameTextBox = new Krypton.Toolkit.KryptonTextBox();
+            saveButton = new Krypton.Toolkit.KryptonButton();
+            authorNameLabel = new Krypton.Toolkit.KryptonLabel();
+            authorEmailLabel = new Krypton.Toolkit.KryptonLabel();
+            ((System.ComponentModel.ISupportInitialize)mainPanel).BeginInit();
+            mainPanel.SuspendLayout();
+            SuspendLayout();
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.remoteServerPasswordTextBox);
-            this.mainPanel.Controls.Add(this.remoteServerUsernameTextBox);
-            this.mainPanel.Controls.Add(this.remoteServerUsernameLabel);
-            this.mainPanel.Controls.Add(this.remoteServerPasswordLabel);
-            this.mainPanel.Controls.Add(this.authorEmailTextBox);
-            this.mainPanel.Controls.Add(this.authorNameTextBox);
-            this.mainPanel.Controls.Add(this.saveButton);
-            this.mainPanel.Controls.Add(this.authorNameLabel);
-            this.mainPanel.Controls.Add(this.authorEmailLabel);
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 0);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(411, 254);
-            this.mainPanel.TabIndex = 8;
+            mainPanel.Controls.Add(proxyTipLabel);
+            mainPanel.Controls.Add(proxyTextBox);
+            mainPanel.Controls.Add(proxyLabel);
+            mainPanel.Controls.Add(remoteServerPasswordTextBox);
+            mainPanel.Controls.Add(remoteServerUsernameTextBox);
+            mainPanel.Controls.Add(remoteServerUsernameLabel);
+            mainPanel.Controls.Add(remoteServerPasswordLabel);
+            mainPanel.Controls.Add(authorEmailTextBox);
+            mainPanel.Controls.Add(authorNameTextBox);
+            mainPanel.Controls.Add(saveButton);
+            mainPanel.Controls.Add(authorNameLabel);
+            mainPanel.Controls.Add(authorEmailLabel);
+            mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            mainPanel.Location = new System.Drawing.Point(0, 0);
+            mainPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            mainPanel.Name = "mainPanel";
+            mainPanel.Size = new System.Drawing.Size(480, 366);
+            mainPanel.TabIndex = 8;
+            // 
+            // proxyTipLabel
+            // 
+            proxyTipLabel.Location = new System.Drawing.Point(5, 293);
+            proxyTipLabel.Name = "proxyTipLabel";
+            proxyTipLabel.Size = new System.Drawing.Size(175, 14);
+            proxyTipLabel.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            proxyTipLabel.TabIndex = 22;
+            proxyTipLabel.Values.Text = "Leave empty if no proxy should be used.";
+            // 
+            // proxyTextBox
+            // 
+            proxyTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            proxyTextBox.Location = new System.Drawing.Point(9, 268);
+            proxyTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            proxyTextBox.Name = "proxyTextBox";
+            proxyTextBox.Size = new System.Drawing.Size(461, 23);
+            proxyTextBox.TabIndex = 20;
+            // 
+            // proxyLabel
+            // 
+            proxyLabel.Location = new System.Drawing.Point(5, 244);
+            proxyLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            proxyLabel.Name = "proxyLabel";
+            proxyLabel.Size = new System.Drawing.Size(104, 20);
+            proxyLabel.TabIndex = 21;
+            proxyLabel.Values.Text = "Proxy URL + Port";
             // 
             // remoteServerPasswordTextBox
             // 
-            this.remoteServerPasswordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.remoteServerPasswordTextBox.Location = new System.Drawing.Point(8, 182);
-            this.remoteServerPasswordTextBox.Name = "remoteServerPasswordTextBox";
-            this.remoteServerPasswordTextBox.PasswordChar = '●';
-            this.remoteServerPasswordTextBox.Size = new System.Drawing.Size(394, 23);
-            this.remoteServerPasswordTextBox.TabIndex = 3;
+            remoteServerPasswordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            remoteServerPasswordTextBox.Location = new System.Drawing.Point(9, 210);
+            remoteServerPasswordTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            remoteServerPasswordTextBox.Name = "remoteServerPasswordTextBox";
+            remoteServerPasswordTextBox.PasswordChar = '●';
+            remoteServerPasswordTextBox.Size = new System.Drawing.Size(461, 23);
+            remoteServerPasswordTextBox.TabIndex = 3;
             // 
             // remoteServerUsernameTextBox
             // 
-            this.remoteServerUsernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.remoteServerUsernameTextBox.Location = new System.Drawing.Point(8, 132);
-            this.remoteServerUsernameTextBox.Name = "remoteServerUsernameTextBox";
-            this.remoteServerUsernameTextBox.Size = new System.Drawing.Size(395, 23);
-            this.remoteServerUsernameTextBox.TabIndex = 2;
+            remoteServerUsernameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            remoteServerUsernameTextBox.Location = new System.Drawing.Point(9, 152);
+            remoteServerUsernameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            remoteServerUsernameTextBox.Name = "remoteServerUsernameTextBox";
+            remoteServerUsernameTextBox.Size = new System.Drawing.Size(462, 23);
+            remoteServerUsernameTextBox.TabIndex = 2;
             // 
             // remoteServerUsernameLabel
             // 
-            this.remoteServerUsernameLabel.Location = new System.Drawing.Point(4, 111);
-            this.remoteServerUsernameLabel.Name = "remoteServerUsernameLabel";
-            this.remoteServerUsernameLabel.Size = new System.Drawing.Size(149, 20);
-            this.remoteServerUsernameLabel.TabIndex = 18;
-            this.remoteServerUsernameLabel.Values.Text = "Remote Server Username";
+            remoteServerUsernameLabel.Location = new System.Drawing.Point(5, 128);
+            remoteServerUsernameLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            remoteServerUsernameLabel.Name = "remoteServerUsernameLabel";
+            remoteServerUsernameLabel.Size = new System.Drawing.Size(149, 20);
+            remoteServerUsernameLabel.TabIndex = 18;
+            remoteServerUsernameLabel.Values.Text = "Remote Server Username";
             // 
             // remoteServerPasswordLabel
             // 
-            this.remoteServerPasswordLabel.Location = new System.Drawing.Point(4, 161);
-            this.remoteServerPasswordLabel.Name = "remoteServerPasswordLabel";
-            this.remoteServerPasswordLabel.Size = new System.Drawing.Size(230, 20);
-            this.remoteServerPasswordLabel.TabIndex = 19;
-            this.remoteServerPasswordLabel.Values.Text = "Remote Server Password / Access Token";
+            remoteServerPasswordLabel.Location = new System.Drawing.Point(5, 186);
+            remoteServerPasswordLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            remoteServerPasswordLabel.Name = "remoteServerPasswordLabel";
+            remoteServerPasswordLabel.Size = new System.Drawing.Size(230, 20);
+            remoteServerPasswordLabel.TabIndex = 19;
+            remoteServerPasswordLabel.Values.Text = "Remote Server Password / Access Token";
             // 
             // authorEmailTextBox
             // 
-            this.authorEmailTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.authorEmailTextBox.Location = new System.Drawing.Point(8, 82);
-            this.authorEmailTextBox.Name = "authorEmailTextBox";
-            this.authorEmailTextBox.Size = new System.Drawing.Size(394, 23);
-            this.authorEmailTextBox.TabIndex = 1;
+            authorEmailTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            authorEmailTextBox.Location = new System.Drawing.Point(9, 95);
+            authorEmailTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            authorEmailTextBox.Name = "authorEmailTextBox";
+            authorEmailTextBox.Size = new System.Drawing.Size(461, 23);
+            authorEmailTextBox.TabIndex = 1;
             // 
             // authorNameTextBox
             // 
-            this.authorNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.authorNameTextBox.Location = new System.Drawing.Point(8, 32);
-            this.authorNameTextBox.Name = "authorNameTextBox";
-            this.authorNameTextBox.Size = new System.Drawing.Size(395, 23);
-            this.authorNameTextBox.TabIndex = 0;
+            authorNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            authorNameTextBox.Location = new System.Drawing.Point(9, 37);
+            authorNameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            authorNameTextBox.Name = "authorNameTextBox";
+            authorNameTextBox.Size = new System.Drawing.Size(462, 23);
+            authorNameTextBox.TabIndex = 0;
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(324, 219);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.OverrideFocus.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.saveButton.Size = new System.Drawing.Size(79, 25);
-            this.saveButton.TabIndex = 4;
-            this.saveButton.Values.Text = "Save";
-            this.saveButton.Click += new System.EventHandler(this.kryptonButton1_Click);
+            saveButton.Location = new System.Drawing.Point(378, 330);
+            saveButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            saveButton.Name = "saveButton";
+            saveButton.OverrideFocus.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            saveButton.Size = new System.Drawing.Size(92, 29);
+            saveButton.TabIndex = 4;
+            saveButton.Values.DropDownArrowColor = System.Drawing.Color.Empty;
+            saveButton.Values.Text = "Save";
+            saveButton.Click += kryptonButton1_Click;
             // 
             // authorNameLabel
             // 
-            this.authorNameLabel.Location = new System.Drawing.Point(4, 11);
-            this.authorNameLabel.Name = "authorNameLabel";
-            this.authorNameLabel.Size = new System.Drawing.Size(84, 20);
-            this.authorNameLabel.TabIndex = 2;
-            this.authorNameLabel.Values.Text = "Author Name";
+            authorNameLabel.Location = new System.Drawing.Point(5, 13);
+            authorNameLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            authorNameLabel.Name = "authorNameLabel";
+            authorNameLabel.Size = new System.Drawing.Size(84, 20);
+            authorNameLabel.TabIndex = 2;
+            authorNameLabel.Values.Text = "Author Name";
             // 
             // authorEmailLabel
             // 
-            this.authorEmailLabel.Location = new System.Drawing.Point(4, 61);
-            this.authorEmailLabel.Name = "authorEmailLabel";
-            this.authorEmailLabel.Size = new System.Drawing.Size(81, 20);
-            this.authorEmailLabel.TabIndex = 3;
-            this.authorEmailLabel.Values.Text = "Author Email";
+            authorEmailLabel.Location = new System.Drawing.Point(5, 70);
+            authorEmailLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            authorEmailLabel.Name = "authorEmailLabel";
+            authorEmailLabel.Size = new System.Drawing.Size(81, 20);
+            authorEmailLabel.TabIndex = 3;
+            authorEmailLabel.Values.Text = "Author Email";
             // 
             // GitSettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 254);
-            this.Controls.Add(this.mainPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "GitSettingsForm";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Git Settings";
-            this.Load += new System.EventHandler(this.GitSettingsForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
-            this.mainPanel.ResumeLayout(false);
-            this.mainPanel.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(480, 366);
+            Controls.Add(mainPanel);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "GitSettingsForm";
+            ShowIcon = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Git Settings";
+            Load += GitSettingsForm_Load;
+            ((System.ComponentModel.ISupportInitialize)mainPanel).EndInit();
+            mainPanel.ResumeLayout(false);
+            mainPanel.PerformLayout();
+            ResumeLayout(false);
 
         }
 
@@ -174,5 +213,8 @@
         private Krypton.Toolkit.KryptonTextBox remoteServerUsernameTextBox;
         private Krypton.Toolkit.KryptonLabel remoteServerUsernameLabel;
         private Krypton.Toolkit.KryptonLabel remoteServerPasswordLabel;
+        private Krypton.Toolkit.KryptonTextBox proxyTextBox;
+        private Krypton.Toolkit.KryptonLabel proxyLabel;
+        private Krypton.Toolkit.KryptonLabel proxyTipLabel;
     }
 }

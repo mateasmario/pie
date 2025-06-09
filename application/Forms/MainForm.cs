@@ -3036,6 +3036,8 @@ namespace pie
 
                             try
                             {
+                                ToggleGitProxy();
+
                                 Task.Run(() =>
                                 {
                                     repository.Network.Push(remote, $"refs/heads/{branchName}:refs/heads/{branchName}", pushOptions);
@@ -3072,6 +3074,7 @@ namespace pie
                     {
                         try
                         {
+                            ToggleGitProxy();
                             repository.Network.Remotes.Add("origin", gitConnectToRemoteForm.Output.RepositoryUrl);
                             GitPush();
                         }
@@ -3085,6 +3088,20 @@ namespace pie
             else
             {
                 ShowNotification("No repository opened.");
+            }
+        }
+
+        private void ToggleGitProxy()
+        {
+            if (string.IsNullOrEmpty(gitCredentials.Proxy))
+            {
+                repository.Config.Unset("http.proxy");
+                repository.Config.Unset("https.proxy");
+            }
+            else
+            {
+                repository.Config.Set("http.proxy", gitCredentials.Proxy);
+                repository.Config.Set("https.proxy", gitCredentials.Proxy);
             }
         }
 
@@ -3315,6 +3332,7 @@ namespace pie
                     {
                         try
                         {
+                            ToggleGitProxy();
                             repository.Network.Remotes.Add("origin", gitConnectToRemoteForm.Output.RepositoryUrl);
                             GitPull();
                         }
@@ -3355,6 +3373,8 @@ namespace pie
 
                     try
                     {
+                        ToggleGitProxy();
+
                         Task.Run(() =>
                         {
                             Commands.Fetch(repository, "origin", new string[0], pullOptions.FetchOptions, null);
